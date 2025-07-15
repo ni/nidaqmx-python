@@ -1,7 +1,7 @@
 <%def name="script_property_getter(attribute)">\
 <%
         from codegen.utilities.text_wrappers import docstring_wrap
-        from codegen.utilities.attribute_helpers import get_generic_attribute_function_name, get_generic_attribute_function_type, ATTRIBUTE_WITH_FILE_PATH_TYPE
+        from codegen.utilities.attribute_helpers import get_generic_attribute_function_name, get_generic_attribute_function_type, has_attribute_with_filter, ATTRIBUTE_WITH_FILE_PATH_TYPE
     %>\
     %if attribute.name in ATTRIBUTE_WITH_FILE_PATH_TYPE:
     @property
@@ -19,8 +19,11 @@
 \
 ## Script interpreter call.
 <%
+    has_advanced_timing_filter = has_attribute_with_filter(attribute,"Timing", "Advanced:Timing (Active Device)")
     mapped_func_type = get_generic_attribute_function_type(attribute)
     generic_attribute_func = get_generic_attribute_function_name(attribute) + "_" + mapped_func_type
+    if has_advanced_timing_filter:
+        generic_attribute_func_ex = get_generic_attribute_function_name(attribute) + "_ex" + "_" + mapped_func_type
     object_type = attribute.object_type
     if attribute.has_alternate_constructor:
         object_type = "_" + attribute.object_type + "AlternateConstructor"
@@ -31,6 +34,9 @@
     if attribute.python_class_name == "Watchdog":
         function_call_args.append("\"\"")
     function_call_args.append(hex(attribute.id))
+    if has_advanced_timing_filter:
+        function_call_args_ex = function_call_args.copy()
+        function_call_args_ex.insert(1, "self._active_devs")
 %>
 ## For read/write string attributes in InStream and OutStream, buffer_size is passed as an argument.
 %if attribute.access == "read" or attribute.access == "write":
@@ -45,7 +51,20 @@
     %endif
 %endif
 \
+%if attribute.python_class_name == "Timing":
+    %if has_advanced_timing_filter:
+        if self._active_devs:
+            val = self._interpreter.get_${generic_attribute_func_ex}(${', '.join(function_call_args_ex)})
+        else:
+            val = self._interpreter.get_${generic_attribute_func}(${', '.join(function_call_args)})
+    %else:
+        if self._active_devs:
+            self._raise_device_context_not_supported_error()
         val = self._interpreter.get_${generic_attribute_func}(${', '.join(function_call_args)})
+    %endif
+%else:
+        val = self._interpreter.get_${generic_attribute_func}(${', '.join(function_call_args)})
+%endif
 \
 ## Script return call.
     %if attribute.bitfield_enum is not None:

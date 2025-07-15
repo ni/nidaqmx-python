@@ -289,3 +289,17 @@ def get_generic_attribute_function_type(attribute):
     if attribute.bitfield_enum:
         return mapped_attribute_type.strip("_array")
     return mapped_attribute_type
+
+
+def has_attribute_with_filter(attribute, group_name, filter_name):
+    """Checks if the given attribute in the group has the specified filter name in its lv_filter."""
+    metadata = scrapigen_metadata.attributes
+    group_attributes = metadata.get(group_name)
+    if not group_attributes:
+        return False
+    attribute_data = group_attributes.get(attribute.id)
+    if attribute_data:
+        lv_filter = attribute_data.get("lv_filter")
+        if lv_filter and filter_name in lv_filter:
+            return True
+    return False
