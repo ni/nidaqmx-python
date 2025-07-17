@@ -9,6 +9,7 @@ jobs:
     name: Report test results
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       checks: write
       pull-requests: write
     steps:
