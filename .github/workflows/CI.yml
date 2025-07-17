@@ -29,5 +29,6 @@ jobs:
     needs: [run_unit_tests, run_system_tests]
     if: always()
     permissions:
+      contents: read
       checks: write
       pull-requests: write
