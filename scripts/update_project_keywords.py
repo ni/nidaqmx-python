@@ -1,12 +1,12 @@
 """Update the project keywords to include a list of supported device models."""
 
-import logging
-import pathlib
-import sys
-import os
 import json
-from typing import Any
+import logging
+import os
+import pathlib
 import re
+import sys
+from typing import Any
 
 import click
 import tomlkit
@@ -51,7 +51,7 @@ def main(verbose, quiet):
     keywords = pyproject_toml["tool"]["poetry"]["keywords"]
     # Replace everything after "daq".
     daq_index = keywords.index("daq")
-    new_keywords = keywords[:daq_index + 1] + sorted(supported_products)
+    new_keywords = keywords[: daq_index + 1] + sorted(supported_products)
     pyproject_toml["tool"]["poetry"]["keywords"] = new_keywords
     pyproject_path.write_text(tomlkit.dumps(pyproject_toml), encoding="utf-8")
 
@@ -66,12 +66,18 @@ def _read_device_caps() -> dict[str, Any]:
     assert isinstance(device_caps, dict)
     return device_caps
 
+
 def _get_supported_products(device_caps: dict[str, Any]) -> set[str]:
     supported_products = set()
     for device in device_caps.values():
         product_name: str = device.get("Properties", {}).get("SD_ProductName", "")
         device_label: str = device.get("Properties", {}).get("DeviceLabel", "")
-        if not product_name or not device_label or product_name in ["NI Simulated DAQ Device"] or product_name.startswith("NI Deprecated"):
+        if (
+            not product_name
+            or not device_label
+            or product_name in ["NI Simulated DAQ Device"]
+            or product_name.startswith("NI Deprecated")
+        ):
             continue
         product_name = re.sub(r"\s*\(.*\)$", "", product_name)  # remove qualifiers in parens
         product_name = product_name.removeprefix("NI ")
