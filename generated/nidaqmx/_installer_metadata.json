@@ -1,9 +1,9 @@
 {
     "Windows": [
         {
-            "Version": "25.3.1",
-            "Release": "2025Q2 Patch 1",
-            "Location": "https://download.ni.com/support/nipkg/products/ni-d/ni-daqmx/25.3/online/ni-daqmx_25.3_online.exe",
+            "Version": "25.5.0",
+            "Release": "2025Q3",
+            "Location": "https://download.ni.com/support/nipkg/products/ni-d/ni-daqmx/25.5/online/ni-daqmx_25.5_online.exe",
             "supportedOS": [
                 "Windows 11",
                 "Windows Server 2022 64-bit",
@@ -15,10 +15,10 @@
     ],
     "Linux": [
         {
-            "Version": "25.3.0",
-            "Release": "2025Q2",
+            "Version": "25.5.0",
+            "Release": "2025Q3",
             "_comment": "Location url must be of the format 'https://download.ni.com/support/softlib/MasterRepository/LinuxDrivers<Release>/NILinux<Release>DeviceDrivers.zip'. Any change to the format will require a change in the code.",
-            "Location": "https://download.ni.com/support/softlib/MasterRepository/LinuxDrivers2025Q2/NILinux2025Q2DeviceDrivers.zip",
+            "Location": "https://download.ni.com/support/softlib/MasterRepository/LinuxDrivers2025Q3/NILinux2025Q3DeviceDrivers.zip",
             "supportedOS": [
                 "ubuntu 20.04",
                 "ubuntu 22.04",
