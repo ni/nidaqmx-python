@@ -105,24 +105,24 @@ release (such as version numbers) may be made directly in the release branch.
 section for details. Note that [nidaqmx-python @ readthedocs.io](https://nidaqmx-python.readthedocs.io/en/latest/)
 has been configured to automatically update when the tagged GitHub release has been created. That
 can be verified once that has been completed.
-5. Publish **nidaqmx** to pypi by running:
-   ```sh
-   $ poetry publish --build -u __token__ -p <pypi-token>
-   ```
-   * **Note:** It is easy to accidentally copy a non-displayable character in your PyPI token. It can be useful to
-   bounce it into an editor that strips that.
-6. Create a release on GitHub, attaching the source at the latest commit as follows:
+5. Create a release on GitHub, attaching the source at the latest commit as follows:
    * **Tag:** Create a new tag matching the version being released.
    * **Release Title:** The version being released.
    * **Description:** Contents of the `CHANGELOG.md` for the version being released.
-7. Create a PR to update the version of **nidaqmx**
-   * Update `pyproject.toml` version by running:
-      ```sh
-      $ poetry version [patch|minor|major|<semver>]
-      ```
-      * **Note:** For `<semver>` we prefer to use `0.0.0-devX` style versions rather than the alpha
-      versions you get from use a poetry version bump rule, like `prepatch`.
-   * Add a section to `CHANGELOG.md` for the new version with empty subsections.
+
+   Publishing a release automatically triggers the [publish.yml](./.github/workflows/publish.yml)
+   workflow, which checks and builds the package, requests approval to publish it using the `pypi`
+   deployment environment, publishes the package to PyPI using [Trusted
+   Publishing](https://docs.pypi.org/trusted-publishers/), and creates a PR to update the version of
+   **nidaqmx** in `pyproject.toml`.
+6. GitHub contacts the approvers for the `pypi` deployment environment, who are currently the repo
+   admins. One of them must approve the deployment for the publishing to proceed.
+7. Find the auto-created PR named `chore: Update project version - <branch>`.
+   - If it is waiting for checks to complete, close it and re-open it to work around the issue
+     described in [the `ni/python-actions/update-project-version`
+     docs](https://github.com/ni/python-actions?tab=readme-ov-file#token).
+   - If the new version number is incorrect, update it by posting and committing a suggestion.
+8. Create a PR adding a section to `CHANGELOG.md` for the new version with empty subsections.
 
 # Updating gRPC stubs when the .proto file is modified
 
