@@ -278,14 +278,12 @@ class AnalogSingleChannelReader(ChannelReaderBase):
             read_array,
         )
 
-        waveform = AnalogWaveform(dtype=numpy.double, raw_data=read_array)
-        # Note: read_analog_waveform_ex() uses .NET System.DateTime format, not NI-BTF
+        waveform = AnalogWaveform(dtype=numpy.double, raw_data=read_array, extended_properties=wfm_attr[0])
         waveform.timing = Timing(
             sample_interval_mode=SampleIntervalMode.REGULAR,
             timestamp=_T0_EPOCH + datetime.timedelta(seconds=t0_array[0] * _INT64_WFM_SEC_PER_TICK),
             sample_interval=datetime.timedelta(seconds=dt_array[0] * _INT64_WFM_SEC_PER_TICK),
         )
-        # waveform.extended_properties = wfm_attr[0]
         return waveform
 
 
