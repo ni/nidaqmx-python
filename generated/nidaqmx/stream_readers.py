@@ -9,7 +9,6 @@ from nidaqmx import DaqError
 from nidaqmx.constants import FillMode, READ_ALL_AVAILABLE, WfmAttrType
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.types import PowerMeasurement, CtrFreq, CtrTick, CtrTime, WfmAttrValue
-from nitypes.time import convert_datetime
 from nitypes.waveform import AnalogWaveform, Timing, SampleIntervalMode
 
 __all__ = ['AnalogSingleChannelReader', 'AnalogMultiChannelReader',
@@ -2503,3 +2502,4 @@ class DigitalMultiChannelReader(ChannelReaderBase):
 
         self._interpreter.read_digital_u32(
             self._handle, 1, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
+        
