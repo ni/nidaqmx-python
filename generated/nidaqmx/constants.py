@@ -18,12 +18,8 @@ class ACExcitWireMode(Enum):
 
 
 class ADCTimingMode(Enum):
-    AUTOMATIC = (
-        16097  #: Uses the most appropriate supported timing mode based on the Sample Clock Rate.
-    )
-    HIGH_RESOLUTION = (
-        10195  #: Increases resolution and noise rejection while decreasing conversion rate.
-    )
+    AUTOMATIC = 16097  #: Uses the most appropriate supported timing mode based on the Sample Clock Rate.
+    HIGH_RESOLUTION = 10195  #: Increases resolution and noise rejection while decreasing conversion rate.
     HIGH_SPEED = 14712  #: Increases conversion rate while decreasing resolution.
     BEST_50_HZ_REJECTION = 14713  #: Improves 50 Hz noise rejection while decreasing noise rejection at other frequencies.
     BEST_60_HZ_REJECTION = 14714  #: Improves 60 Hz noise rejection while decreasing noise rejection at other frequencies.
@@ -174,9 +170,7 @@ class ConstrainedGenMode(Enum):
     UNCONSTRAINED = 14708  #: Counter has no restrictions on pulse generation.
     FIXED_HIGH_FREQ = 14709  #: Pulse frequency must be above 7.63 Hz and cannot change while the task runs. In this mode, the duty cycle has 8 bits of resolution.
     FIXED_LOW_FREQ = 14710  #: Pulse frequency must be below 366.21 Hz and cannot change while the task runs. In this mode, the duty cycle has 16 bits of resolution.
-    FIXED_50_PERCENT_DUTY_CYCLE = (
-        14711  #: Pulse duty cycle must be 50 percent. The frequency can change while the task runs.
-    )
+    FIXED_50_PERCENT_DUTY_CYCLE = 14711  #: Pulse duty cycle must be 50 percent. The frequency can change while the task runs.
 
 
 class CountDirection(Enum):
@@ -186,9 +180,7 @@ class CountDirection(Enum):
 
 
 class CounterFrequencyMethod(Enum):
-    LOW_FREQUENCY_1_COUNTER = (
-        10105  #: Use one counter that uses a constant timebase to measure the input signal.
-    )
+    LOW_FREQUENCY_1_COUNTER = 10105  #: Use one counter that uses a constant timebase to measure the input signal.
     HIGH_FREQUENCY_2_COUNTERS = 10157  #: Use two counters, one of which counts pulses of the signal to measure during the specified measurement time.
     LARGE_RANGE_2_COUNTERS = 10205  #: Use one counter to divide the frequency of the input signal to create a lower-frequency signal that the second counter can more easily measure.
     DYNAMIC_AVERAGING = 16065  #: Uses one counter with configuration options to control the amount of averaging or filtering applied to the counter measurements. Set filtering options to balance measurement accuracy and noise versus latency.
@@ -225,9 +217,7 @@ class DataTransferActiveTransferMode(Enum):
 
 
 class DeassertCondition(Enum):
-    ON_BOARD_MEMORY_MORE_THAN_HALF_FULL = (
-        10237  #: Deassert the signal when more than half of the onboard memory of the device fills.
-    )
+    ON_BOARD_MEMORY_MORE_THAN_HALF_FULL = 10237  #: Deassert the signal when more than half of the onboard memory of the device fills.
     ON_BOARD_MEMORY_FULL = 10236  #: Deassert the signal when the onboard memory fills.
     ONBOARD_MEMORY_CUSTOM_THRESHOLD = 12577  #: Deassert the signal when the amount of space available in the onboard memory is below the value specified with **rdy_for_xfer_event_deassert_cond_custom_threshold**.
 
@@ -239,9 +229,7 @@ class DigitalDriveType(Enum):
 
 class DigitalPatternCondition(Enum):
     PATTERN_MATCHES = 10254  #: Trigger when the physical channels match the specified pattern.
-    PATTERN_DOES_NOT_MATCH = (
-        10253  #: Trigger when the physical channels do not match the specified pattern.
-    )
+    PATTERN_DOES_NOT_MATCH = 10253  #: Trigger when the physical channels do not match the specified pattern.
 
 
 class DigitalWidthUnits(Enum):
@@ -366,12 +354,8 @@ class GpsSignalType(Enum):
 
 class HandshakeStartCondition(Enum):
     IMMEDIATE = 10198  #: Device is waiting for space in the FIFO (for acquisition) or waiting for samples (for generation).
-    WAIT_FOR_HANDSHAKE_TRIGGER_ASSERT = (
-        12550  #: Device is waiting for the Handshake Trigger to assert.
-    )
-    WAIT_FOR_HANDSHAKE_TRIGGER_DEASSERT = (
-        12551  #: Device is waiting for the Handshake Trigger to deassert.
-    )
+    WAIT_FOR_HANDSHAKE_TRIGGER_ASSERT = 12550  #: Device is waiting for the Handshake Trigger to assert.
+    WAIT_FOR_HANDSHAKE_TRIGGER_DEASSERT = 12551  #: Device is waiting for the Handshake Trigger to deassert.
 
 
 class IDPinStatus(Enum):
@@ -388,9 +372,7 @@ class Impedance1(Enum):
 
 class InputDataTransferCondition(Enum):
     ON_BOARD_MEMORY_MORE_THAN_HALF_FULL = 10237  #: Transfer data from the device when more than half of the onboard memory of the device fills.
-    ON_BOARD_MEMORY_NOT_EMPTY = (
-        10241  #: Transfer data from the device when there is data in the onboard memory.
-    )
+    ON_BOARD_MEMORY_NOT_EMPTY = 10241  #: Transfer data from the device when there is data in the onboard memory.
     ONBOARD_MEMORY_CUSTOM_THRESHOLD = 12577  #: Transfer data from the device when the number of samples specified with **ai_data_xfer_custom_threshold** are in the device FIFO.
     WHEN_ACQUISITION_COMPLETE = 12546  #: Transfer data when the acquisition is complete.
 
@@ -434,9 +416,7 @@ class LoggingOperation(Enum):
     OPEN = 10437  #: Open an existing TDMS file, and append data to that file. If the file does not exist, NI-DAQmx returns an error.
     OPEN_OR_CREATE = 15846  #: Open an existing TDMS file, and append data to that file. If the file does not exist, NI-DAQmx creates a new TDMS file.
     CREATE_OR_REPLACE = 15847  #: Create a new TDMS file, or replace an existing TDMS file.
-    CREATE = (
-        15848  #: Create a new TDMS file. If the file already exists, NI-DAQmx returns an error.
-    )
+    CREATE = 15848  #: Create a new TDMS file. If the file already exists, NI-DAQmx returns an error.
 
 
 class LogicFamily(Enum):
@@ -468,19 +448,13 @@ class ModulationType(Enum):
 
 class OutputDataTransferCondition(Enum):
     ON_BOARD_MEMORY_EMPTY = 10235  #: Transfer data to the device only when there is no data in the onboard memory of the device.
-    ON_BOARD_MEMORY_HALF_FULL_OR_LESS = (
-        10239  #: Transfer data to the device any time the onboard memory is less than half full.
-    )
-    ON_BOARD_MEMORY_LESS_THAN_FULL = (
-        10242  #: Transfer data to the device any time the onboard memory of the device is not full.
-    )
+    ON_BOARD_MEMORY_HALF_FULL_OR_LESS = 10239  #: Transfer data to the device any time the onboard memory is less than half full.
+    ON_BOARD_MEMORY_LESS_THAN_FULL = 10242  #: Transfer data to the device any time the onboard memory of the device is not full.
 
 
 class OverflowBehavior(Enum):
     STOP_TASK_AND_ERROR = 15862  #: Stop task and return an error.
-    IGNORE_OVERRUNS = (
-        15863  #: NI-DAQmx ignores Sample Clock overruns, and the task continues to run.
-    )
+    IGNORE_OVERRUNS = 15863  #: NI-DAQmx ignores Sample Clock overruns, and the task continues to run.
 
 
 class OverwriteMode(Enum):
@@ -499,12 +473,8 @@ class PowerIdleOutputBehavior(Enum):
 
 
 class PowerOutputState(Enum):
-    CONSTANT_VOLTAGE = (
-        15500  #: Power output is maintaining a constant voltage by adjusting the current.
-    )
-    CONSTANT_CURRENT = (
-        15501  #: Power output is maintaining a constant current by adjusting the voltage.
-    )
+    CONSTANT_VOLTAGE = 15500  #: Power output is maintaining a constant voltage by adjusting the current.
+    CONSTANT_CURRENT = 15501  #: Power output is maintaining a constant current by adjusting the voltage.
     OVERVOLTAGE = 15502  #: Voltage output has exceeded its limit.
     OUTPUT_DISABLED = 15503  #: Power output is disabled.
 
@@ -689,9 +659,7 @@ class Signal(Enum):
     ADV_CMPLT_EVENT = 12492
     AI_HOLD_CMPLT_EVENT = 12493
     COUNTER_OUTPUT_EVENT = 12494  #: Timed Loop executes each time the Counter Output Event occurs.
-    CHANGE_DETECTION_EVENT = (
-        12511  #: Timed Loop executes each time the Change Detection Event occurs.
-    )
+    CHANGE_DETECTION_EVENT = 12511  #: Timed Loop executes each time the Change Detection Event occurs.
     WATCHDOG_TIMER_EXPIRED_EVENT = 12512
     SAMPLE_COMPLETE = 12530  #: Timed Loop executes each time the Sample Complete Event occurs.
 
@@ -717,9 +685,7 @@ class SourceSelection(Enum):
 
 
 class StrainGageBridgeType(Enum):
-    FULL_BRIDGE_I = (
-        10183  #: Four active gages with two pairs subjected to equal and opposite strains.
-    )
+    FULL_BRIDGE_I = 10183  #: Four active gages with two pairs subjected to equal and opposite strains.
     FULL_BRIDGE_II = 10184  #: Four active gages with two aligned with maximum principal strain and two Poisson gages in adjacent arms.
     FULL_BRIDGE_III = 10185  #: Four active gages with two aligned with maximum principal strain and two Poisson gages in opposite arms.
     HALF_BRIDGE_I = 10188  #: Two active gages with one aligned with maximum principal strain and one Poisson gage.
@@ -729,24 +695,14 @@ class StrainGageBridgeType(Enum):
 
 
 class StrainGageRosetteMeasurementType(Enum):
-    PRINCIPAL_STRAIN_1 = (
-        15971  #: The maximum tensile strain coplanar to the surface of the material under stress.
-    )
-    PRINCIPAL_STRAIN_2 = (
-        15972  #: The minimum tensile strain coplanar to the surface of the material under stress.
-    )
-    PRINCIPAL_STRAIN_ANGLE = (
-        15973  #: The angle at which the principal strains of the rosette occur.
-    )
+    PRINCIPAL_STRAIN_1 = 15971  #: The maximum tensile strain coplanar to the surface of the material under stress.
+    PRINCIPAL_STRAIN_2 = 15972  #: The minimum tensile strain coplanar to the surface of the material under stress.
+    PRINCIPAL_STRAIN_ANGLE = 15973  #: The angle at which the principal strains of the rosette occur.
     CARTESIAN_STRAIN_X = 15974  #: The tensile strain coplanar to the surface of the material under stress in the X coordinate direction.
     CARTESIAN_STRAIN_Y = 15975  #: The tensile strain coplanar to the surface of the material under stress in the Y coordinate direction.
     CARTESIAN_SHEAR_STRAIN_XY = 15976  #: The tensile strain coplanar to the surface of the material under stress in the XY coordinate direction.
-    MAX_SHEAR_STRAIN = (
-        15977  #: The maximum strain coplanar to the cross section of the material under stress.
-    )
-    MAX_SHEAR_STRAIN_ANGLE = (
-        15978  #: The angle at which the maximum shear strain of the rosette occurs.
-    )
+    MAX_SHEAR_STRAIN = 15977  #: The maximum strain coplanar to the cross section of the material under stress.
+    MAX_SHEAR_STRAIN_ANGLE = 15978  #: The angle at which the maximum shear strain of the rosette occurs.
 
 
 class StrainGageRosetteType(Enum):
@@ -853,9 +809,7 @@ class TriggerType(Enum):
     ANALOG_WINDOW = 10103  #: Trigger when an analog signal enters or leaves a range of values. The range is in the units of the measurement.
     TIME = 15996  #: Trigger when a specified time is reached.
     NONE = 10230  #: Disable triggering for the task.
-    SOFTWARE = (
-        10292  #: Advance to the next entry in a scan list when you call DAQmxSendSoftwareTrigger().
-    )
+    SOFTWARE = 10292  #: Advance to the next entry in a scan list when you call DAQmxSendSoftwareTrigger().
     ANALOG_LEVEL = 10101  #: Pause the measurement or generation while an analog signal is above or below a level.
     DIGITAL_LEVEL = 10152  #: Pause the measurement or generation while a digital signal is at either a high or low state.
     INTERLOCKED = 12549  #: Use the Handshake Trigger as a control signal for asynchronous handshaking, such as 8255 handshaking.
@@ -933,16 +887,10 @@ class UsageTypeAI(Enum):
     ROSETTE_STRAIN_GAGE = 15980  #: Strain measurement using a rosette strain gage.
     POSITION_LINEAR_LVDT = 10352  #: Position measurement using an LVDT.
     POSITION_ANGULAR_RVDT = 10353  #: Position measurement using an RVDT.
-    POSITION_EDDY_CURRENT_PROX_PROBE = (
-        14835  #: Position measurement using an eddy current proximity probe.
-    )
-    ACCELERATION_ACCELEROMETER_CURRENT_INPUT = (
-        10356  #: Acceleration measurement using an accelerometer.
-    )
+    POSITION_EDDY_CURRENT_PROX_PROBE = 14835  #: Position measurement using an eddy current proximity probe.
+    ACCELERATION_ACCELEROMETER_CURRENT_INPUT = 10356  #: Acceleration measurement using an accelerometer.
     ACCELERATION_CHARGE = 16104  #: Acceleration measurement using a charge-based sensor.
-    ACCELERATION_4_WIRE_DC_VOLTAGE = (
-        16106  #: Acceleration measurement using a 4 wire DC voltage based sensor.
-    )
+    ACCELERATION_4_WIRE_DC_VOLTAGE = 16106  #: Acceleration measurement using a 4 wire DC voltage based sensor.
     VELOCITY_IEPE_SENSOR = 15966  #: Velocity measurement using an IEPE Sensor.
     FORCE_BRIDGE = 15899  #: Force measurement using a bridge-based sensor.
     FORCE_IEPE_SENSOR = 15895  #: Force measurement using an IEPE Sensor.
@@ -966,9 +914,7 @@ class UsageTypeCI(Enum):
     FREQUENCY = 10179  #: Measure the frequency of a digital signal.
     PERIOD = 10256  #: Measure the period of a digital signal.
     PULSE_WIDTH_DIGITAL = 10359  #: Measure the width of a pulse of a digital signal.
-    PULSE_WIDTH_DIGITAL_SEMI_PERIOD = (
-        10289  #: Measure the time between state transitions of a digital signal.
-    )
+    PULSE_WIDTH_DIGITAL_SEMI_PERIOD = 10289  #: Measure the time between state transitions of a digital signal.
     PULSE_FREQ = 15864  #: Pulse measurement, returning the result as frequency and duty cycle.
     PULSE_TIME = 15865  #: Pulse measurement, returning the result as high time and low time.
     PULSE_TICKS = 15866  #: Pulse measurement, returning the result as high ticks and low ticks.
@@ -977,9 +923,7 @@ class UsageTypeCI(Enum):
     POSITION_LINEAR_ENCODER = 10361  #: Linear position measurement using a linear encoder.
     VELOCITY_ANGULAR_ENCODER = 16078  #: Angular velocity measurement using an angular encoder.
     VELOCITY_LINEAR_ENCODER = 16079  #: Linear velocity measurement using a linear encoder.
-    PULSE_WIDTH_DIGITAL_TWO_EDGE_SEPARATION = (
-        10267  #: Measure time between edges of two digital signals.
-    )
+    PULSE_WIDTH_DIGITAL_TWO_EDGE_SEPARATION = 10267  #: Measure time between edges of two digital signals.
     TIME_GPS = 10362  #: Timestamp measurement, synchronizing the counter to a GPS receiver.
 
 
@@ -1036,12 +980,8 @@ class WindowTriggerCondition1(Enum):
 
 
 class WindowTriggerCondition2(Enum):
-    INSIDE_WINDOW = (
-        10199  #: Pause the measurement or generation while the trigger is inside the window.
-    )
-    OUTSIDE_WINDOW = (
-        10251  #: Pause the measurement or generation while the signal is outside the window.
-    )
+    INSIDE_WINDOW = 10199  #: Pause the measurement or generation while the trigger is inside the window.
+    OUTSIDE_WINDOW = 10251  #: Pause the measurement or generation while the signal is outside the window.
 
 
 class WriteBasicTEDSOptions(Enum):
