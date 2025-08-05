@@ -17,5 +17,5 @@ with nidaqmx.Task() as task:
     print(f"Acquired data: {waveform.scaled_data}")
     print(f"Channel name: {waveform.channel_name}")
     print(f"Unit description: {waveform.unit_description}")
-    # print(f"t0: {waveform.timing.start_time}")
-    # print(f"dt: {waveform.timing.sample_interval}")
+    print(f"t0: {waveform.timing.start_time}")
+    print(f"dt: {waveform.timing.sample_interval}")
