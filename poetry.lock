@@ -1725,9 +1725,9 @@ files = [
 hightime = ">=0.2.2"
 numpy = [
     {version = ">=1.22", markers = "implementation_name != \"pypy\" and python_version >= \"3.9\" and python_version < \"3.12\""},
-    {version = ">=1.26", markers = "python_version >= \"3.12\" and python_version < \"3.13\" and implementation_name != \"pypy\""},
     {version = ">=2.1", markers = "python_version >= \"3.10\" and python_version < \"3.11\" and implementation_name == \"pypy\" or python_version >= \"3.13\" and python_version < \"4.0\" and implementation_name != \"pypy\""},
     {version = ">=2.3", markers = "implementation_name == \"pypy\" and python_version >= \"3.11\" and python_version < \"4.0\""},
+    {version = ">=1.26", markers = "python_version >= \"3.12\" and python_version < \"3.13\" and implementation_name != \"pypy\""},
 ]
 typing-extensions = ">=4.13.2"
 
@@ -2948,4 +2948,4 @@ grpc = ["grpcio", "protobuf"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "dcf05a445ab8091446abf5cc9b448dd7a3b110d3e66e952df343c002e7fe8eb8"
+content-hash = "6a2d836e1b24699fe435b1e9f5960e0e78d88706680f1b828703da9183812f15"

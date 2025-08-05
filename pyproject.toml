@@ -37,11 +37,11 @@ packages = [{ include = "nidaqmx", from = "generated" }]
 [tool.poetry.dependencies]
 python = "^3.9"
 numpy = [
-  { version = ">=1.22", python = ">=3.9,<3.12", markers = "implementation_name != 'pypy'" },
-  { version = ">=1.26", python = ">=3.12,<3.13", markers = "implementation_name != 'pypy'" },
-  { version = ">=2.1", python = "^3.13", markers = "implementation_name != 'pypy'" },
-  { version = ">=2.1", python = ">=3.10,<3.11", markers = "implementation_name == 'pypy'" },
-  { version = ">=2.3", python = "^3.11", markers = "implementation_name == 'pypy'" },
+  { version = ">=1.22", python = ">=3.9,<3.12" },
+  { version = ">=1.26", python = ">=3.12,<3.13" },
+  { version = ">=2.1", python = "^3.13" },
+  { version = ">=2.1", python = ">=3.10,<3.11" },
+  { version = ">=2.3", python = "^3.11" },
 ]
 deprecation = ">=2.1"
 grpcio = { version = ">=1.49.0,<2.0", optional = true }
