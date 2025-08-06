@@ -33,6 +33,7 @@ CSetWfmAttrCallbackPtr = ctypes.CFUNCTYPE(
     ctypes.c_void_p,  # callback_data
 )
 
+
 class LibraryEventHandler(BaseEventHandler):
     """Manage the lifetime of a ctypes callback method pointer.
 
@@ -6351,6 +6352,111 @@ class LibraryInterpreter(BaseInterpreter):
             return 'Failed to retrieve error description.'
         return error_buffer.value.decode(lib_importer.encoding)
 
+    def read_analog_waveform_ex(
+        self,
+        task_handle: object,
+        num_samps_per_chan: int,
+        timeout: float,
+        fill_mode: int,
+        t0_array: Optional[numpy.typing.NDArray[numpy.int64]],
+        dt_array: Optional[numpy.typing.NDArray[numpy.int64]],
+        set_wfm_attr_callback: Optional[SetWfmAttrCallback],
+        set_wfm_attr_callback_data: object,
+        read_array: numpy.typing.NDArray[numpy.float64],
+    ) -> Tuple[numpy.typing.NDArray[numpy.float64], int]:
+        """Read an analog waveform with timing and attributes."""
+        assert isinstance(task_handle, TaskHandle)
+        samps_per_chan_read = ctypes.c_int()
+
+        cfunc = lib_importer.windll.DAQmxInternalReadAnalogWaveformEx
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        TaskHandle,
+                        ctypes.c_int,
+                        ctypes.c_double,
+                        ctypes.c_int,
+                        wrapped_ndpointer(dtype=numpy.int64, flags=("C", "W")),
+                        wrapped_ndpointer(dtype=numpy.int64, flags=("C", "W")),
+                        ctypes.c_uint,
+                        CSetWfmAttrCallbackPtr,
+                        ctypes.c_void_p,
+                        wrapped_ndpointer(dtype=numpy.float64, flags=("C", "W")),
+                        ctypes.c_uint,
+                        ctypes.POINTER(ctypes.c_int),
+                        ctypes.POINTER(c_bool32),
+                    ]
+
+        assert (t0_array is None) == (dt_array is None)
+        if t0_array is not None and dt_array is not None:
+            assert t0_array.size == dt_array.size
+
+        error_code = cfunc(
+            task_handle,
+            num_samps_per_chan,
+            timeout,
+            fill_mode,
+            t0_array,
+            dt_array,
+            0 if t0_array is None else t0_array.size,
+            self._get_wfm_attr_callback_ptr(set_wfm_attr_callback),
+            set_wfm_attr_callback_data,
+            read_array,
+            read_array.size,
+            ctypes.byref(samps_per_chan_read),
+            None,
+        )
+        self.check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+        return read_array, samps_per_chan_read.value
+
+    def _get_wfm_attr_value(
+        self, attribute_type: int, value: ctypes.c_void_p, value_size_in_bytes: int
+    ) -> WfmAttrValue:
+        if attribute_type == WfmAttrType.BOOL32.value:
+            assert value_size_in_bytes == 4
+            return ctypes.cast(value, ctypes.POINTER(ctypes.c_int32))[0] != 0
+        elif attribute_type == WfmAttrType.FLOAT64.value:
+            assert value_size_in_bytes == 8
+            return float(ctypes.cast(value, ctypes.POINTER(ctypes.c_double))[0])
+        elif attribute_type == WfmAttrType.INT32.value:
+            assert value_size_in_bytes == 4
+            return int(ctypes.cast(value, ctypes.POINTER(ctypes.c_int32))[0])
+        elif attribute_type == WfmAttrType.STRING.value:
+            value_c_bytes = ctypes.cast(value, ctypes.POINTER(ctypes.c_byte))
+            assert value_c_bytes[value_size_in_bytes - 1] == 0
+            return bytes(value_c_bytes[0 : value_size_in_bytes - 1]).decode(lib_importer.encoding)
+        else:
+            raise ValueError(f"Unsupported attribute type {attribute_type}")
+
+    def _get_wfm_attr_callback_ptr(
+        self, set_wfm_attr_callback: Optional[SetWfmAttrCallback]
+    ) -> ctypes._FuncPointer:
+        if set_wfm_attr_callback is None:
+            return CSetWfmAttrCallbackPtr()
+
+        def _invoke_callback(
+            channel_index: int,
+            attribute_name: bytes,
+            attribute_type: int,
+            value: ctypes.c_void_p,
+            value_size_in_bytes: int,
+            callback_data: object,
+        ) -> int:
+            try:
+                return set_wfm_attr_callback(
+                    channel_index,
+                    attribute_name.decode(lib_importer.encoding),
+                    WfmAttrType(attribute_type),
+                    self._get_wfm_attr_value(attribute_type, value, value_size_in_bytes),
+                    callback_data,
+                )
+            except Exception:
+                _logger.exception("Unhandled exception in set_wfm_attr_callback")
+                return -1
+
+        return CSetWfmAttrCallbackPtr(_invoke_callback)
+
     def read_id_pin_memory(self, device_name, id_pin_name):
         data_length_read = ctypes.c_uint()
         format_code = ctypes.c_uint()
@@ -6496,111 +6602,7 @@ class LibraryInterpreter(BaseInterpreter):
 
             warnings.warn(DaqWarning(error_string, error_code))
 
-    def read_analog_waveform_ex(
-        self,
-        task_handle: object,
-        num_samps_per_chan: int,
-        timeout: float,
-        fill_mode: int,
-        t0_array: Optional[numpy.typing.NDArray[numpy.int64]],
-        dt_array: Optional[numpy.typing.NDArray[numpy.int64]],
-        set_wfm_attr_callback: Optional[SetWfmAttrCallback],
-        set_wfm_attr_callback_data: object,
-        read_array: numpy.typing.NDArray[numpy.float64],
-    ) -> Tuple[numpy.typing.NDArray[numpy.float64], int]:
-        """Read an analog waveform with timing and attributes."""
-        assert isinstance(task_handle, TaskHandle)
-        samps_per_chan_read = ctypes.c_int()
 
-        cfunc = lib_importer.windll.DAQmxInternalReadAnalogWaveformEx
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        TaskHandle,
-                        ctypes.c_int,
-                        ctypes.c_double,
-                        ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.int64, flags=("C", "W")),
-                        wrapped_ndpointer(dtype=numpy.int64, flags=("C", "W")),
-                        ctypes.c_uint,
-                        CSetWfmAttrCallbackPtr,
-                        ctypes.c_void_p,
-                        wrapped_ndpointer(dtype=numpy.float64, flags=("C", "W")),
-                        ctypes.c_uint,
-                        ctypes.POINTER(ctypes.c_int),
-                        ctypes.POINTER(c_bool32),
-                    ]
-
-        assert (t0_array is None) == (dt_array is None)
-        if t0_array is not None and dt_array is not None:
-            assert t0_array.size == dt_array.size
-
-        error_code = cfunc(
-            task_handle,
-            num_samps_per_chan,
-            timeout,
-            fill_mode,
-            t0_array,
-            dt_array,
-            0 if t0_array is None else t0_array.size,
-            self._get_wfm_attr_callback_ptr(set_wfm_attr_callback),
-            set_wfm_attr_callback_data,
-            read_array,
-            read_array.size,
-            ctypes.byref(samps_per_chan_read),
-            None,
-        )
-        self.check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
-        return read_array, samps_per_chan_read.value
-
-    def _get_wfm_attr_value(
-        self, attribute_type: int, value: ctypes.c_void_p, value_size_in_bytes: int
-    ) -> WfmAttrValue:
-        if attribute_type == WfmAttrType.BOOL32.value:
-            assert value_size_in_bytes == 4
-            return ctypes.cast(value, ctypes.POINTER(ctypes.c_int32))[0] != 0
-        elif attribute_type == WfmAttrType.FLOAT64.value:
-            assert value_size_in_bytes == 8
-            return float(ctypes.cast(value, ctypes.POINTER(ctypes.c_double))[0])
-        elif attribute_type == WfmAttrType.INT32.value:
-            assert value_size_in_bytes == 4
-            return int(ctypes.cast(value, ctypes.POINTER(ctypes.c_int32))[0])
-        elif attribute_type == WfmAttrType.STRING.value:
-            value_c_bytes = ctypes.cast(value, ctypes.POINTER(ctypes.c_byte))
-            assert value_c_bytes[value_size_in_bytes - 1] == 0
-            return bytes(value_c_bytes[0 : value_size_in_bytes - 1]).decode(lib_importer.encoding)
-        else:
-            raise ValueError(f"Unsupported attribute type {attribute_type}")
-
-    def _get_wfm_attr_callback_ptr(
-        self, set_wfm_attr_callback: Optional[SetWfmAttrCallback]
-    ) -> ctypes._FuncPointer:
-        if set_wfm_attr_callback is None:
-            return CSetWfmAttrCallbackPtr()
-
-        def _invoke_callback(
-            channel_index: int,
-            attribute_name: bytes,
-            attribute_type: int,
-            value: ctypes.c_void_p,
-            value_size_in_bytes: int,
-            callback_data: object,
-        ) -> int:
-            try:
-                return set_wfm_attr_callback(
-                    channel_index,
-                    attribute_name.decode(lib_importer.encoding),
-                    WfmAttrType(attribute_type),
-                    self._get_wfm_attr_value(attribute_type, value, value_size_in_bytes),
-                    callback_data,
-                )
-            except Exception:
-                _logger.exception("Unhandled exception in set_wfm_attr_callback")
-                return -1
-
-        return CSetWfmAttrCallbackPtr(_invoke_callback)
-    
 def is_string_buffer_too_small(error_code):
     return (
         error_code == DAQmxErrors.BUFFER_TOO_SMALL_FOR_STRING or
