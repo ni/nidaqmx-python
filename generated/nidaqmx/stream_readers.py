@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import datetime
 import math
-from typing import Optional, Tuple, List, Dict
+from typing import List, Dict
 import numpy
 from nidaqmx import DaqError
 

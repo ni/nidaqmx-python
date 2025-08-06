@@ -1,17 +1,23 @@
 from __future__ import annotations
 
-from typing import Optional, Tuple
+import datetime
+import math
+from typing import List, Dict
 import numpy
 from nidaqmx import DaqError
 
-from nidaqmx.constants import FillMode, READ_ALL_AVAILABLE
+from nidaqmx.constants import FillMode, READ_ALL_AVAILABLE, WfmAttrType
 from nidaqmx.error_codes import DAQmxErrors
-from nidaqmx.types import PowerMeasurement, CtrFreq, CtrTick, CtrTime
+from nidaqmx.types import PowerMeasurement, CtrFreq, CtrTick, CtrTime, WfmAttrValue
+from nitypes.waveform import AnalogWaveform, Timing, SampleIntervalMode
 
 __all__ = ['AnalogSingleChannelReader', 'AnalogMultiChannelReader',
            'AnalogUnscaledReader', 'CounterReader',
            'DigitalSingleChannelReader', 'DigitalMultiChannelReader',
            'PowerSingleChannelReader', 'PowerMultiChannelReader', 'PowerBinaryReader']
+
+_INT64_WFM_SEC_PER_TICK = 100e-9
+_T0_EPOCH = datetime.datetime(1, 1, 1, tzinfo=datetime.timezone.utc)
 
 
 class ChannelReaderBase:
@@ -237,6 +243,48 @@ class AnalogSingleChannelReader(ChannelReaderBase):
             Indicates a single floating-point sample from the task.
         """
         return self._interpreter.read_analog_scalar_f64(self._handle, timeout)
+
+    def read_waveform(
+        self, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10
+    ) -> AnalogWaveform[numpy.double]:
+        number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
+            number_of_samples_per_channel
+        )
+
+        t0_array = numpy.full(1, numpy.iinfo(numpy.int64).min, dtype=numpy.int64)
+        dt_array = numpy.full(1, numpy.iinfo(numpy.int64).min, dtype=numpy.int64)
+        read_array = numpy.full(number_of_samples_per_channel, math.inf, dtype=numpy.float64)
+        wfm_attr: List[Dict[str, WfmAttrValue]] = [{}]
+
+        def set_wfm_attr_callback(
+            channel_index: int,
+            attribute_name: str,
+            attribute_type: WfmAttrType,
+            value: WfmAttrValue,
+            callback_data: object,
+        ) -> int:
+            wfm_attr[channel_index][attribute_name] = value
+            return 0
+
+        _, _ = self._interpreter.read_analog_waveform_ex(
+            self._handle,
+            number_of_samples_per_channel,
+            timeout,
+            FillMode.GROUP_BY_CHANNEL.value,
+            t0_array,
+            dt_array,
+            set_wfm_attr_callback,
+            None,
+            read_array,
+        )
+
+        waveform = AnalogWaveform(dtype=numpy.double, raw_data=read_array, extended_properties=wfm_attr[0])
+        waveform.timing = Timing(
+            sample_interval_mode=SampleIntervalMode.REGULAR,
+            timestamp=_T0_EPOCH + datetime.timedelta(seconds=t0_array[0] * _INT64_WFM_SEC_PER_TICK),
+            sample_interval=datetime.timedelta(seconds=dt_array[0] * _INT64_WFM_SEC_PER_TICK),
+        )
+        return waveform
 
 
 class AnalogMultiChannelReader(ChannelReaderBase):
@@ -2452,3 +2500,4 @@ class DigitalMultiChannelReader(ChannelReaderBase):
 
         self._interpreter.read_digital_u32(
             self._handle, 1, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
+        
