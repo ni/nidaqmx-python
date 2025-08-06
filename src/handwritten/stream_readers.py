@@ -253,8 +253,8 @@ class AnalogSingleChannelReader(ChannelReaderBase):
 
         t0_array = numpy.full(1, numpy.iinfo(numpy.int64).min, dtype=numpy.int64)
         dt_array = numpy.full(1, numpy.iinfo(numpy.int64).min, dtype=numpy.int64)
-        read_array = numpy.full(number_of_samples_per_channel, math.inf, dtype=numpy.float64)
-        wfm_attr: List[Dict[str, WfmAttrValue]] = [{}]
+        raw_data = numpy.full(number_of_samples_per_channel, math.inf, dtype=numpy.float64)
+        extended_properties: Dict[str, WfmAttrValue] = {}
 
         def set_wfm_attr_callback(
             channel_index: int,
@@ -263,7 +263,7 @@ class AnalogSingleChannelReader(ChannelReaderBase):
             value: WfmAttrValue,
             callback_data: object,
         ) -> int:
-            wfm_attr[channel_index][attribute_name] = value
+            extended_properties[attribute_name] = value
             return 0
 
         _, _ = self._interpreter.internal_read_analog_waveform_ex(
@@ -275,10 +275,10 @@ class AnalogSingleChannelReader(ChannelReaderBase):
             dt_array,
             set_wfm_attr_callback,
             None,
-            read_array,
+            raw_data,
         )
 
-        waveform = AnalogWaveform(dtype=numpy.double, raw_data=read_array, extended_properties=wfm_attr[0])
+        waveform = AnalogWaveform(dtype=numpy.double, raw_data=raw_data, extended_properties=extended_properties)
         waveform.timing = Timing(
             sample_interval_mode=SampleIntervalMode.REGULAR,
             timestamp=_T0_EPOCH + datetime.timedelta(seconds=t0_array[0] * _INT64_WFM_SEC_PER_TICK),
