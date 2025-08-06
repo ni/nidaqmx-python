@@ -263,6 +263,7 @@ class AnalogSingleChannelReader(ChannelReaderBase):
             value: WfmAttrValue,
             callback_data: object,
         ) -> int:
+            assert channel_index == 0
             extended_properties[attribute_name] = value
             return 0
 
