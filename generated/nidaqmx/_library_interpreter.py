@@ -3,12 +3,10 @@
 from __future__ import annotations
 import ctypes
 import logging
+import numpy
 import platform
 import warnings
-from typing import Optional
-
-import numpy
-from typing import List, Tuple
+from typing import List, Dict, Optional, Tuple
 
 from nidaqmx._base_interpreter import BaseEventHandler, BaseInterpreter
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer, TaskHandle
@@ -6360,9 +6358,8 @@ class LibraryInterpreter(BaseInterpreter):
         fill_mode: int,
         t0_array: Optional[numpy.typing.NDArray[numpy.int64]],
         dt_array: Optional[numpy.typing.NDArray[numpy.int64]],
-        set_wfm_attr_callback: Optional[SetWfmAttrCallback],
-        set_wfm_attr_callback_data: object,
         read_array: numpy.typing.NDArray[numpy.float64],
+        properties_list: List[Dict[str, WfmAttrValue]],
     ) -> Tuple[numpy.typing.NDArray[numpy.float64], int]:
         """Read an analog waveform with timing and attributes."""
         assert isinstance(task_handle, TaskHandle)
@@ -6392,6 +6389,16 @@ class LibraryInterpreter(BaseInterpreter):
         if t0_array is not None and dt_array is not None:
             assert t0_array.size == dt_array.size
 
+        def set_wfm_attr_callback(
+            channel_index: int,
+            attribute_name: str,
+            attribute_type: WfmAttrType,
+            value: WfmAttrValue,
+            callback_data: object,
+        ) -> int:
+            properties_list[channel_index][attribute_name] = value
+            return 0
+
         error_code = cfunc(
             task_handle,
             num_samps_per_chan,
@@ -6401,7 +6408,7 @@ class LibraryInterpreter(BaseInterpreter):
             dt_array,
             0 if t0_array is None else t0_array.size,
             self._get_wfm_attr_callback_ptr(set_wfm_attr_callback),
-            set_wfm_attr_callback_data,
+            None,
             read_array,
             read_array.size,
             ctypes.byref(samps_per_chan_read),

@@ -2,11 +2,11 @@ from __future__ import annotations
 
 import datetime
 import math
-from typing import List, Dict
+from typing import Dict, List
 import numpy
 from nidaqmx import DaqError
 
-from nidaqmx.constants import FillMode, READ_ALL_AVAILABLE, WfmAttrType
+from nidaqmx.constants import FillMode, READ_ALL_AVAILABLE
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.types import PowerMeasurement, CtrFreq, CtrTick, CtrTime, WfmAttrValue
 from nitypes.waveform import AnalogWaveform, Timing, SampleIntervalMode
@@ -282,7 +282,7 @@ class AnalogSingleChannelReader(ChannelReaderBase):
                 if it is unable to.
         Returns:
             AnalogWaveform:
-            
+
             A waveform object containing the acquired samples.
         """
         number_of_samples_per_channel = (
@@ -292,18 +292,7 @@ class AnalogSingleChannelReader(ChannelReaderBase):
         t0_array = numpy.full(1, numpy.iinfo(numpy.int64).min, dtype=numpy.int64)
         dt_array = numpy.full(1, numpy.iinfo(numpy.int64).min, dtype=numpy.int64)
         raw_data = numpy.full(number_of_samples_per_channel, math.inf, dtype=numpy.float64)
-        extended_properties: Dict[str, WfmAttrValue] = {}
-
-        def set_wfm_attr_callback(
-            channel_index: int,
-            attribute_name: str,
-            attribute_type: WfmAttrType,
-            value: WfmAttrValue,
-            callback_data: object,
-        ) -> int:
-            assert channel_index == 0
-            extended_properties[attribute_name] = value
-            return 0
+        properties_list: List[Dict[str, WfmAttrValue]] = [{}]
 
         _, _ = self._interpreter.internal_read_analog_waveform_ex(
             self._handle,
@@ -312,12 +301,11 @@ class AnalogSingleChannelReader(ChannelReaderBase):
             FillMode.GROUP_BY_CHANNEL.value,
             t0_array,
             dt_array,
-            set_wfm_attr_callback,
-            None,
             raw_data,
+            properties_list,
         )
 
-        waveform = AnalogWaveform(dtype=numpy.double, raw_data=raw_data, extended_properties=extended_properties)
+        waveform = AnalogWaveform(dtype=numpy.double, raw_data=raw_data, extended_properties=properties_list[0])
         waveform.timing = Timing(
             sample_interval_mode=SampleIntervalMode.REGULAR,
             timestamp=_T0_EPOCH + datetime.timedelta(seconds=t0_array[0] * _INT64_WFM_SEC_PER_TICK),
