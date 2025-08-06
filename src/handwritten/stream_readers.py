@@ -2500,4 +2500,3 @@ class DigitalMultiChannelReader(ChannelReaderBase):
 
         self._interpreter.read_digital_u32(
             self._handle, 1, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
-        

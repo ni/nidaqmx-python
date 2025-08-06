@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import ctypes
+import datetime
 import math
 
 import numpy
@@ -9,6 +10,7 @@ import pytest
 
 import nidaqmx
 import nidaqmx.system
+from nidaqmx.constants import READ_ALL_AVAILABLE, AcquisitionType
 from nidaqmx.stream_readers import (
     AnalogMultiChannelReader,
     AnalogSingleChannelReader,
@@ -17,6 +19,7 @@ from nidaqmx.stream_readers import (
     PowerMultiChannelReader,
     PowerSingleChannelReader,
 )
+from nitypes.waveform import AnalogWaveform
 
 
 # Simulated DAQ voltage data is a noisy sinewave within the range of the minimum and maximum values
@@ -36,6 +39,22 @@ def _get_voltage_code_offset_for_chan(chan_index: int) -> int:
     return _volts_to_codes(voltage_limits)
 
 
+def _is_timestamp_close_to_now(timestamp: datetime.datetime, tolerance_seconds: float = 1.0) -> bool:
+    """
+    Check if a timestamp is close to the current UTC time within the specified tolerance.
+    
+    Args:
+        timestamp: The timestamp to check
+        tolerance_seconds: Maximum allowed difference in seconds (default: 1.0)
+    
+    Returns:
+        True if the timestamp is within tolerance, False otherwise
+    """
+    current_time = datetime.datetime.now(datetime.timezone.utc)
+    time_diff = abs((timestamp - current_time).total_seconds())
+    return time_diff <= tolerance_seconds
+
+
 VOLTAGE_EPSILON = 1e-3
 VOLTAGE_CODE_EPSILON = round(_volts_to_codes(VOLTAGE_EPSILON))
 
@@ -50,6 +69,21 @@ def ai_single_channel_task(
         min_val=offset,
         max_val=offset + VOLTAGE_EPSILON,
     )
+    return task
+
+
+@pytest.fixture
+def ai_single_channel_task_with_timing(
+    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
+) -> nidaqmx.Task:
+    offset = _get_voltage_offset_for_chan(0)
+    task.ai_channels.add_ai_voltage_chan(
+        sim_6363_device.ai_physical_chans[0].name,
+        min_val=offset,
+        max_val=offset + VOLTAGE_EPSILON,
+    )
+    # Configure timing for waveform reading
+    task.timing.cfg_samp_clk_timing(1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=50)
     return task
 
 
@@ -108,6 +142,24 @@ def test___analog_single_channel_reader___read_many_sample_with_wrong_dtype___ra
         _ = reader.read_many_sample(data, samples_to_read)
 
     assert "float64" in exc_info.value.args[0]
+
+
+@pytest.mark.grpc_skip(reason="read_analog_waveform_ex not implemented in GRPC")
+def test___analog_single_channel_reader___read_waveform___returns_valid_waveform(
+    ai_single_channel_task_with_timing: nidaqmx.Task,
+) -> None:
+    reader = AnalogSingleChannelReader(ai_single_channel_task_with_timing.in_stream)
+    samples_to_read = 10
+
+    waveform = reader.read_waveform(number_of_samples_per_channel=samples_to_read)
+
+    assert isinstance(waveform, AnalogWaveform)
+    expected = _get_voltage_offset_for_chan(0)
+    assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert _is_timestamp_close_to_now(waveform.timing.timestamp)
+    assert waveform.timing.sample_interval == datetime.timedelta(seconds=1/1000)
+    assert waveform.channel_name == ai_single_channel_task_with_timing.ai_channels[0].name
+    assert waveform.unit_description == "Volts"
 
 
 def test___analog_multi_channel_reader___read_one_sample___returns_valid_samples(
