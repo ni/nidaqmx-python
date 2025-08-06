@@ -247,6 +247,44 @@ class AnalogSingleChannelReader(ChannelReaderBase):
     def read_waveform(
         self, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10
     ) -> AnalogWaveform[numpy.double]:
+        """
+        Reads a waveform from a single analog input channel in a task.
+
+        Args:
+            number_of_samples_per_channel (Optional[int]): Specifies the
+                number of samples to read.
+
+                If you set this input to nidaqmx.constants.
+                READ_ALL_AVAILABLE, NI-DAQmx determines how many samples
+                to read based on if the task acquires samples
+                continuously or acquires a finite number of samples.
+
+                If the task acquires samples continuously and you set
+                this input to nidaqmx.constants.READ_ALL_AVAILABLE, this
+                method reads all the samples currently available in the
+                buffer.
+
+                If the task acquires a finite number of samples and you
+                set this input to nidaqmx.constants.READ_ALL_AVAILABLE,
+                the method waits for the task to acquire all requested
+                samples, then reads those samples. If you set the
+                "read_all_avail_samp" property to True, the method reads
+                the samples currently available in the buffer and does
+                not wait for the task to acquire all requested samples.
+            timeout (Optional[float]): Specifies the amount of time in
+                seconds to wait for samples to become available. If the
+                time elapses, the method returns an error and any
+                samples read before the timeout elapsed. The default
+                timeout is 10 seconds. If you set timeout to
+                nidaqmx.constants.WAIT_INFINITELY, the method waits
+                indefinitely. If you set timeout to 0, the method tries
+                once to read the requested samples and returns an error
+                if it is unable to.
+        Returns:
+            AnalogWaveform:
+            
+            A waveform object containing the acquired samples.
+        """
         number_of_samples_per_channel = (
             self._task._calculate_num_samps_per_chan(
                 number_of_samples_per_channel))
