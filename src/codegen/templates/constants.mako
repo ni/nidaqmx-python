@@ -24,3 +24,10 @@ class ${name}(Enum):
 
 
 % endfor
+class WfmAttrType(Enum):
+    """Waveform attribute datatype."""
+
+    BOOL32 = 1
+    FLOAT64 = 2
+    INT32 = 3
+    STRING = 4
