@@ -22,7 +22,7 @@ import logging
 import threading
 import typing
 import warnings
-from typing import Callable, Generic, TypeVar
+from typing import Callable, Generic, Optional, Tuple, TypeVar
 
 import google.protobuf.message
 from google.protobuf.timestamp_pb2 import Timestamp as GrpcTimestamp
@@ -36,6 +36,7 @@ from nidaqmx._stubs import nidaqmx_pb2_grpc as nidaqmx_grpc
 from nidaqmx._stubs import session_pb2 as session_grpc_types
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx._grpc_time import convert_time_to_timestamp, convert_timestamp_to_time
+from nidaqmx.types import SetWfmAttrCallback
 
 _logger = logging.getLogger(__name__)
 
@@ -245,6 +246,19 @@ class GrpcStubInterpreter(BaseInterpreter):
     def internal_get_last_created_chan(self):
         raise NotImplementedError
 
+    def internal_read_analog_waveform_ex(
+        self,
+        task_handle: object,
+        num_samps_per_chan: int,
+        timeout: float,
+        fill_mode: int,
+        t0_array: Optional[numpy.typing.NDArray[numpy.int64]],
+        dt_array: Optional[numpy.typing.NDArray[numpy.int64]],
+        set_wfm_attr_callback: Optional[SetWfmAttrCallback],
+        set_wfm_attr_callback_data: object,
+        read_array: numpy.typing.NDArray[numpy.float64],
+    ) -> Tuple[numpy.typing.NDArray[numpy.float64], int]:
+        raise NotImplementedError
 
 def _assign_numpy_array(numpy_array, grpc_array):
     """

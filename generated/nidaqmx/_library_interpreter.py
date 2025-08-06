@@ -6352,7 +6352,7 @@ class LibraryInterpreter(BaseInterpreter):
             return 'Failed to retrieve error description.'
         return error_buffer.value.decode(lib_importer.encoding)
 
-    def read_analog_waveform_ex(
+    def internal_read_analog_waveform_ex(
         self,
         task_handle: object,
         num_samps_per_chan: int,

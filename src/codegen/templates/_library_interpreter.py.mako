@@ -170,8 +170,8 @@ class LibraryInterpreter(BaseInterpreter):
             return 'Failed to retrieve error description.'
         return error_buffer.value.decode(lib_importer.encoding)
 
-    ## read_analog_waveform_ex has special handling for waveform attributes and callbacks
-    def read_analog_waveform_ex(
+    ## internal_read_analog_waveform_ex has special handling for waveform attributes and callbacks
+    def internal_read_analog_waveform_ex(
         self,
         task_handle: object,
         num_samps_per_chan: int,

@@ -266,7 +266,7 @@ class AnalogSingleChannelReader(ChannelReaderBase):
             wfm_attr[channel_index][attribute_name] = value
             return 0
 
-        _, _ = self._interpreter.read_analog_waveform_ex(
+        _, _ = self._interpreter.internal_read_analog_waveform_ex(
             self._handle,
             number_of_samples_per_channel,
             timeout,

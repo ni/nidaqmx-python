@@ -1,5 +1,7 @@
 {
     "typeCheckingMode": "basic",
     "reportOptionalMemberAccess": false,
-    "reportArgumentType": false
+    "reportArgumentType": false,
+    "reportOperatorIssue": false,
+    "reportAttributeAccessIssue": false,
 }

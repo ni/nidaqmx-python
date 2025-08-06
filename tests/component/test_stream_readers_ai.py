@@ -7,10 +7,11 @@ import math
 import numpy
 import numpy.typing
 import pytest
+from nitypes.waveform import AnalogWaveform
 
 import nidaqmx
 import nidaqmx.system
-from nidaqmx.constants import READ_ALL_AVAILABLE, AcquisitionType
+from nidaqmx.constants import AcquisitionType
 from nidaqmx.stream_readers import (
     AnalogMultiChannelReader,
     AnalogSingleChannelReader,
@@ -19,7 +20,6 @@ from nidaqmx.stream_readers import (
     PowerMultiChannelReader,
     PowerSingleChannelReader,
 )
-from nitypes.waveform import AnalogWaveform
 
 
 # Simulated DAQ voltage data is a noisy sinewave within the range of the minimum and maximum values
@@ -39,17 +39,9 @@ def _get_voltage_code_offset_for_chan(chan_index: int) -> int:
     return _volts_to_codes(voltage_limits)
 
 
-def _is_timestamp_close_to_now(timestamp: datetime.datetime, tolerance_seconds: float = 1.0) -> bool:
-    """
-    Check if a timestamp is close to the current UTC time within the specified tolerance.
-    
-    Args:
-        timestamp: The timestamp to check
-        tolerance_seconds: Maximum allowed difference in seconds (default: 1.0)
-    
-    Returns:
-        True if the timestamp is within tolerance, False otherwise
-    """
+def _is_timestamp_close_to_now(
+    timestamp: datetime.datetime, tolerance_seconds: float = 1.0
+) -> bool:
     current_time = datetime.datetime.now(datetime.timezone.utc)
     time_diff = abs((timestamp - current_time).total_seconds())
     return time_diff <= tolerance_seconds
@@ -144,7 +136,7 @@ def test___analog_single_channel_reader___read_many_sample_with_wrong_dtype___ra
     assert "float64" in exc_info.value.args[0]
 
 
-@pytest.mark.grpc_skip(reason="read_analog_waveform_ex not implemented in GRPC")
+@pytest.mark.grpc_skip(reason="internal_read_analog_waveform_ex not implemented in GRPC")
 def test___analog_single_channel_reader___read_waveform___returns_valid_waveform(
     ai_single_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
@@ -156,8 +148,9 @@ def test___analog_single_channel_reader___read_waveform___returns_valid_waveform
     assert isinstance(waveform, AnalogWaveform)
     expected = _get_voltage_offset_for_chan(0)
     assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert isinstance(waveform.timing.timestamp, datetime.datetime)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
-    assert waveform.timing.sample_interval == datetime.timedelta(seconds=1/1000)
+    assert waveform.timing.sample_interval == datetime.timedelta(seconds=1 / 1000)
     assert waveform.channel_name == ai_single_channel_task_with_timing.ai_channels[0].name
     assert waveform.unit_description == "Volts"
 
