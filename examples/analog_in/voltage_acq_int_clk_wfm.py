@@ -1,4 +1,4 @@
-"""Example of analog input voltage acquisition.
+"""Example of analog input voltage waveform acquisition.
 
 This example demonstrates how to acquire a finite amount
 of data using the DAQ device's internal clock.

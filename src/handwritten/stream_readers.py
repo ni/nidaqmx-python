@@ -247,9 +247,9 @@ class AnalogSingleChannelReader(ChannelReaderBase):
     def read_waveform(
         self, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10
     ) -> AnalogWaveform[numpy.double]:
-        number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
-            number_of_samples_per_channel
-        )
+        number_of_samples_per_channel = (
+            self._task._calculate_num_samps_per_chan(
+                number_of_samples_per_channel))
 
         t0_array = numpy.full(1, numpy.iinfo(numpy.int64).min, dtype=numpy.int64)
         dt_array = numpy.full(1, numpy.iinfo(numpy.int64).min, dtype=numpy.int64)
