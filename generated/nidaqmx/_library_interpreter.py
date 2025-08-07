@@ -29,6 +29,9 @@ if TYPE_CHECKING:
 _logger = logging.getLogger(__name__)
 _was_runtime_environment_set = None
 
+_INT64_WFM_SEC_PER_TICK = 100e-9
+_T0_EPOCH = datetime.datetime(1, 1, 1, tzinfo=datetime.timezone.utc)
+
 # typedef int32 (CVICALLBACK *DAQmxSetWfmAttrCallbackPtr)(uInt32 channelIndex, const char attributeName[], int32 attributeType, const void* value, uInt32 valueSizeInBytes, void *callbackData);  # noqa: W505 - doc line too long
 CSetWfmAttrCallbackPtr = ctypes.CFUNCTYPE(
     ctypes.c_int32,  # return value (error code)
@@ -47,7 +50,6 @@ class WfmAttrType(Enum):
     STRING = 4
 
 SetWfmAttrCallback: TypeAlias = Callable[[int, str, WfmAttrType, ExtendedPropertyValue, object], int]
-
 
 class LibraryEventHandler(BaseEventHandler):
     """Manage the lifetime of a ctypes callback method pointer.
@@ -6435,12 +6437,10 @@ class LibraryInterpreter(BaseInterpreter):
         )
 
     def _get_wfm_datetime(self, t0_value: numpy.int64) -> datetime.datetime:
-        _T0_EPOCH = datetime.datetime(1, 1, 1, tzinfo=datetime.timezone.utc)        
         return _T0_EPOCH + self._get_wfm_timedelta(t0_value)
 
-    def _get_wfm_timedelta(self, value: numpy.int64) -> datetime.timedelta:
-        _INT64_WFM_SEC_PER_TICK = 100e-9        
-        return datetime.timedelta(seconds=value * _INT64_WFM_SEC_PER_TICK)
+    def _get_wfm_timedelta(self, dt_value: numpy.int64) -> datetime.timedelta:
+        return datetime.timedelta(seconds=dt_value * _INT64_WFM_SEC_PER_TICK)
 
     def _get_wfm_attr_value(
         self, attribute_type: int, value: ctypes.c_void_p, value_size_in_bytes: int
