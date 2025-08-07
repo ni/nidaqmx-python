@@ -6405,8 +6405,8 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.POINTER(c_bool32),
                     ]
 
-        t0_array = numpy.full(channel_count, numpy.iinfo(numpy.int64).min, dtype=numpy.int64)
-        dt_array = numpy.full(channel_count, numpy.iinfo(numpy.int64).min, dtype=numpy.int64)
+        t0_array = numpy.full(channel_count, 0, dtype=numpy.int64)
+        dt_array = numpy.full(channel_count, 0, dtype=numpy.int64)
         properties: List[Dict[str, ExtendedPropertyValue]] = [{} for _ in range(channel_count)]
 
         def set_wfm_attr_callback(

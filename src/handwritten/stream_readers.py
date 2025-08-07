@@ -286,7 +286,7 @@ class AnalogSingleChannelReader(ChannelReaderBase):
             self._task._calculate_num_samps_per_chan(
                 number_of_samples_per_channel))
 
-        raw_data = numpy.full(number_of_samples_per_channel, math.inf, dtype=numpy.float64)
+        raw_data = numpy.full(number_of_samples_per_channel, 0.0, dtype=numpy.float64)
 
         timestamps, sample_intervals, properties = self._interpreter.internal_read_analog_waveform_ex(
             self._handle,
