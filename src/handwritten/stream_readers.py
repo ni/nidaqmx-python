@@ -6,7 +6,7 @@ from nidaqmx import DaqError
 from nidaqmx.constants import FillMode, READ_ALL_AVAILABLE
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.types import PowerMeasurement, CtrFreq, CtrTick, CtrTime
-from nitypes.waveform import AnalogWaveform, Timing, SampleIntervalMode
+from nitypes.waveform import AnalogWaveform
 
 __all__ = ['AnalogSingleChannelReader', 'AnalogMultiChannelReader',
            'AnalogUnscaledReader', 'CounterReader',
@@ -245,8 +245,17 @@ class AnalogSingleChannelReader(ChannelReaderBase):
         waveform: AnalogWaveform[numpy.float64] | None = None
     ) -> AnalogWaveform[numpy.float64]:
         """
-        Reads a waveform from a single analog input channel in a task.
+        Reads one or more floating-point samples from a single analog
+        input channel into a waveform.
 
+        This read method optionally accepts a preallocated waveform to hold
+        the samples requested, which can be advantageous for performance and
+        interoperability with NumPy and SciPy.
+
+        Passing in a preallocated waveform is valuable in continuous
+        acquisition scenarios, where the same waveform can be used
+        repeatedly in each call to the method.
+        
         Args:
             number_of_samples_per_channel (Optional[int]): Specifies the
                 number of samples to read.
@@ -294,21 +303,13 @@ class AnalogSingleChannelReader(ChannelReaderBase):
         if waveform is None:
             waveform = AnalogWaveform(raw_data=numpy.zeros(number_of_samples_per_channel, dtype=numpy.float64))
 
-        timestamps, sample_intervals = self._interpreter.internal_read_analog_waveform_ex(
+        self._interpreter.internal_read_analog_waveform_ex(
             self._handle,
-            1, # single channel
             number_of_samples_per_channel,
             timeout,
-            FillMode.GROUP_BY_CHANNEL.value,
-            waveform.raw_data,
-            [waveform.extended_properties]
+            waveform,
         )
 
-        waveform.timing = Timing(
-            sample_interval_mode=SampleIntervalMode.REGULAR,
-            timestamp=timestamps[0],
-            sample_interval=sample_intervals[0],
-        )
         return waveform
 
 

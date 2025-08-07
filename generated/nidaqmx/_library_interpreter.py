@@ -9,24 +9,22 @@ import platform
 import warnings
 import sys
 from enum import Enum
-from typing import Callable, Dict, List, Mapping, Optional, Sequence, Tuple, TYPE_CHECKING
+from typing import Callable, List, Optional, TYPE_CHECKING
 
 from nidaqmx._base_interpreter import BaseEventHandler, BaseInterpreter
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer, TaskHandle
+from nidaqmx.constants import FillMode
 from nidaqmx.error_codes import DAQmxErrors, DAQmxWarnings
 from nidaqmx.errors import DaqError, DaqFunctionNotSupportedError, DaqReadError, DaqWarning, DaqWriteError
 from nidaqmx._lib_time import AbsoluteTime
 from nitypes.waveform.typing import ExtendedPropertyValue
-from nitypes.waveform import ExtendedPropertyDictionary
+from nitypes.waveform import AnalogWaveform, SampleIntervalMode, Timing
 
 if TYPE_CHECKING:
     if sys.version_info >= (3, 10):
         from typing import TypeAlias
     else:
         from typing_extensions import TypeAlias
-
-_INT64_WFM_SEC_PER_TICK = 100e-9
-_T0_EPOCH = datetime.datetime(1, 1, 1, tzinfo=datetime.timezone.utc)
 
 _logger = logging.getLogger(__name__)
 _was_runtime_environment_set = None
@@ -6372,16 +6370,10 @@ class LibraryInterpreter(BaseInterpreter):
     def internal_read_analog_waveform_ex(
         self,
         task_handle: object,
-        channel_count: int,
         num_samps_per_chan: int,
         timeout: float,
-        fill_mode: int,
-        read_array: numpy.typing.NDArray[numpy.float64],
-        properties: Sequence[ExtendedPropertyDictionary]
-    ) -> Tuple[
-        Sequence[datetime.datetime], # The timestamps for each sample, indexed by channel
-        Sequence[datetime.timedelta], # The sample intervals, indexed by channel
-    ]:
+        waveform: AnalogWaveform[numpy.float64]
+    ) -> None:
         """Read an analog waveform with timing and attributes."""
         assert isinstance(task_handle, TaskHandle)
         samps_per_chan_read = ctypes.c_int()
@@ -6406,8 +6398,8 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.POINTER(c_bool32),
                     ]
 
-        t0_array = numpy.zeros(channel_count, dtype=numpy.int64)
-        dt_array = numpy.zeros(channel_count, dtype=numpy.int64)
+        t0_array = numpy.zeros(1, dtype=numpy.int64)
+        dt_array = numpy.zeros(1, dtype=numpy.int64)
 
         def set_wfm_attr_callback(
             channel_index: int,
@@ -6416,30 +6408,39 @@ class LibraryInterpreter(BaseInterpreter):
             value: ExtendedPropertyValue,
             callback_data: object,
         ) -> int:
-            properties[channel_index][attribute_name] = value
+            waveform.extended_properties[attribute_name] = value
             return 0
 
         error_code = cfunc(
             task_handle,
             num_samps_per_chan,
             timeout,
-            fill_mode,
+            FillMode.GROUP_BY_CHANNEL.value,
             t0_array,
             dt_array,
-            0 if t0_array is None else t0_array.size,
+            t0_array.size,
             self._get_wfm_attr_callback_ptr(set_wfm_attr_callback),
             None,
-            read_array,
-            read_array.size,
+            waveform.raw_data,
+            waveform.raw_data.size,
             ctypes.byref(samps_per_chan_read),
             None,
         )
         self.check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
-        timestamps = [_T0_EPOCH + datetime.timedelta(seconds=t0 * _INT64_WFM_SEC_PER_TICK) for t0 in t0_array]
-        sample_intervals = [datetime.timedelta(seconds=dt * _INT64_WFM_SEC_PER_TICK) for dt in dt_array]
+        waveform.timing = Timing(
+            sample_interval_mode=SampleIntervalMode.REGULAR,
+            timestamp=self._get_wfm_datetime(t0_array[0]),
+            sample_interval=self._get_wfm_timedelta(dt_array[0]),
+        )
 
-        return timestamps, sample_intervals
+    def _get_wfm_datetime(self, t0_value: numpy.int64) -> datetime.datetime:
+        _T0_EPOCH = datetime.datetime(1, 1, 1, tzinfo=datetime.timezone.utc)        
+        return _T0_EPOCH + self._get_wfm_timedelta(t0_value)
+
+    def _get_wfm_timedelta(self, value: numpy.int64) -> datetime.timedelta:
+        _INT64_WFM_SEC_PER_TICK = 100e-9        
+        return datetime.timedelta(seconds=value * _INT64_WFM_SEC_PER_TICK)
 
     def _get_wfm_attr_value(
         self, attribute_type: int, value: ctypes.c_void_p, value_size_in_bytes: int
