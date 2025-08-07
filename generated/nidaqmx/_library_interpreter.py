@@ -17,6 +17,7 @@ from nidaqmx.error_codes import DAQmxErrors, DAQmxWarnings
 from nidaqmx.errors import DaqError, DaqFunctionNotSupportedError, DaqReadError, DaqWarning, DaqWriteError
 from nidaqmx._lib_time import AbsoluteTime
 from nitypes.waveform.typing import ExtendedPropertyValue
+from nitypes.waveform import ExtendedPropertyDictionary
 
 if TYPE_CHECKING:
     if sys.version_info >= (3, 10):
@@ -6376,10 +6377,10 @@ class LibraryInterpreter(BaseInterpreter):
         timeout: float,
         fill_mode: int,
         read_array: numpy.typing.NDArray[numpy.float64],
+        properties: Sequence[ExtendedPropertyDictionary]
     ) -> Tuple[
         Sequence[datetime.datetime], # The timestamps for each sample, indexed by channel
         Sequence[datetime.timedelta], # The sample intervals, indexed by channel
-        Sequence[Mapping[str, ExtendedPropertyValue]] # The waveform attributes, indexed by channel
     ]:
         """Read an analog waveform with timing and attributes."""
         assert isinstance(task_handle, TaskHandle)
@@ -6405,9 +6406,8 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.POINTER(c_bool32),
                     ]
 
-        t0_array = numpy.full(channel_count, 0, dtype=numpy.int64)
-        dt_array = numpy.full(channel_count, 0, dtype=numpy.int64)
-        properties: List[Dict[str, ExtendedPropertyValue]] = [{} for _ in range(channel_count)]
+        t0_array = numpy.zeros(channel_count, dtype=numpy.int64)
+        dt_array = numpy.zeros(channel_count, dtype=numpy.int64)
 
         def set_wfm_attr_callback(
             channel_index: int,
@@ -6439,7 +6439,7 @@ class LibraryInterpreter(BaseInterpreter):
         timestamps = [_T0_EPOCH + datetime.timedelta(seconds=t0 * _INT64_WFM_SEC_PER_TICK) for t0 in t0_array]
         sample_intervals = [datetime.timedelta(seconds=dt * _INT64_WFM_SEC_PER_TICK) for dt in dt_array]
 
-        return timestamps, sample_intervals, properties
+        return timestamps, sample_intervals
 
     def _get_wfm_attr_value(
         self, attribute_type: int, value: ctypes.c_void_p, value_size_in_bytes: int

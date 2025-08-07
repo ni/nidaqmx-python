@@ -1,8 +1,5 @@
 from __future__ import annotations
 
-import datetime
-import math
-from typing import Dict, List
 import numpy
 from nidaqmx import DaqError
 
@@ -242,8 +239,11 @@ class AnalogSingleChannelReader(ChannelReaderBase):
         return self._interpreter.read_analog_scalar_f64(self._handle, timeout)
 
     def read_waveform(
-        self, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10
-    ) -> AnalogWaveform[numpy.double]:
+        self, 
+        number_of_samples_per_channel: int = READ_ALL_AVAILABLE, 
+        timeout: int = 10, 
+        waveform: AnalogWaveform[numpy.float64] | None = None
+    ) -> AnalogWaveform[numpy.float64]:
         """
         Reads a waveform from a single analog input channel in a task.
 
@@ -277,6 +277,11 @@ class AnalogSingleChannelReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
+            waveform (Optional[AnalogWaveform]): Specifies an existing
+                AnalogWaveform object to use for reading samples. If
+                provided, the raw_data array of this waveform will be
+                used to store the samples. If not provided, a new
+                AnalogWaveform will be created.
         Returns:
             AnalogWaveform:
 
@@ -286,21 +291,19 @@ class AnalogSingleChannelReader(ChannelReaderBase):
             self._task._calculate_num_samps_per_chan(
                 number_of_samples_per_channel))
 
-        raw_data = numpy.full(number_of_samples_per_channel, 0.0, dtype=numpy.float64)
+        if waveform is None:
+            waveform = AnalogWaveform(raw_data=numpy.zeros(number_of_samples_per_channel, dtype=numpy.float64))
 
-        timestamps, sample_intervals, properties = self._interpreter.internal_read_analog_waveform_ex(
+        timestamps, sample_intervals = self._interpreter.internal_read_analog_waveform_ex(
             self._handle,
             1, # single channel
             number_of_samples_per_channel,
             timeout,
             FillMode.GROUP_BY_CHANNEL.value,
-            raw_data,
+            waveform.raw_data,
+            [waveform.extended_properties]
         )
 
-        waveform = AnalogWaveform(
-            dtype=numpy.double, 
-            raw_data=raw_data, 
-            extended_properties=properties[0])
         waveform.timing = Timing(
             sample_interval_mode=SampleIntervalMode.REGULAR,
             timestamp=timestamps[0],

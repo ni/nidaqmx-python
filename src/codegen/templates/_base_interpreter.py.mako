@@ -15,6 +15,7 @@ import datetime
 import numpy
 from typing import Mapping, Sequence, Tuple
 from nitypes.waveform.typing import ExtendedPropertyValue
+from nitypes.waveform import ExtendedPropertyDictionary
 
 
 class BaseEventHandler(abc.ABC):
@@ -68,9 +69,9 @@ class BaseInterpreter(abc.ABC):
         timeout: float,
         fill_mode: int,
         read_array: numpy.typing.NDArray[numpy.float64],
+        properties: Sequence[ExtendedPropertyDictionary]
     ) -> Tuple[
         Sequence[datetime.datetime], # The timestamps for each sample, indexed by channel
         Sequence[datetime.timedelta], # The sample intervals, indexed by channel
-        Sequence[Mapping[str, ExtendedPropertyValue]] # The waveform attributes, indexed by channel
     ]:
         raise NotImplementedError

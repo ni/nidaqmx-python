@@ -155,6 +155,26 @@ def test___analog_single_channel_reader___read_waveform___returns_valid_waveform
     assert waveform.unit_description == "Volts"
 
 
+@pytest.mark.grpc_skip(reason="internal_read_analog_waveform_ex not implemented in GRPC")
+def test___analog_single_channel_reader___read_waveform_in_place___populates_valid_waveform(
+    ai_single_channel_task_with_timing: nidaqmx.Task,
+) -> None:
+    reader = AnalogSingleChannelReader(ai_single_channel_task_with_timing.in_stream)
+    samples_to_read = 10
+
+    waveform = AnalogWaveform(raw_data=numpy.zeros(samples_to_read, dtype=numpy.float64))
+    reader.read_waveform(number_of_samples_per_channel=samples_to_read, waveform=waveform)
+
+    assert isinstance(waveform, AnalogWaveform)
+    expected = _get_voltage_offset_for_chan(0)
+    assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert isinstance(waveform.timing.timestamp, datetime.datetime)
+    assert _is_timestamp_close_to_now(waveform.timing.timestamp)
+    assert waveform.timing.sample_interval == datetime.timedelta(seconds=1 / 1000)
+    assert waveform.channel_name == ai_single_channel_task_with_timing.ai_channels[0].name
+    assert waveform.unit_description == "Volts"
+
+
 def test___analog_multi_channel_reader___read_one_sample___returns_valid_samples(
     ai_multi_channel_task: nidaqmx.Task,
 ) -> None:

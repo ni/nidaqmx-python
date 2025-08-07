@@ -24,6 +24,7 @@ import threading
 import typing
 import warnings
 from nitypes.waveform.typing import ExtendedPropertyValue
+from nitypes.waveform import ExtendedPropertyDictionary
 from typing import Callable, Generic, Mapping, Sequence, Tuple, TypeVar
 
 import google.protobuf.message
@@ -255,10 +256,10 @@ class GrpcStubInterpreter(BaseInterpreter):
         timeout: float,
         fill_mode: int,
         read_array: numpy.typing.NDArray[numpy.float64],
+        properties: Sequence[ExtendedPropertyDictionary]
     ) -> Tuple[
         Sequence[datetime.datetime], # The timestamps for each sample, indexed by channel
         Sequence[datetime.timedelta], # The sample intervals, indexed by channel
-        Sequence[Mapping[str, ExtendedPropertyValue]] # The waveform attributes, indexed by channel
     ]:
         raise NotImplementedError
 
