@@ -255,7 +255,7 @@ class AnalogSingleChannelReader(ChannelReaderBase):
         Passing in a preallocated waveform is valuable in continuous
         acquisition scenarios, where the same waveform can be used
         repeatedly in each call to the method.
-        
+
         Args:
             number_of_samples_per_channel (Optional[int]): Specifies the
                 number of samples to read.
@@ -287,8 +287,8 @@ class AnalogSingleChannelReader(ChannelReaderBase):
                 once to read the requested samples and returns an error
                 if it is unable to.
             waveform (Optional[AnalogWaveform]): Specifies an existing
-                AnalogWaveform object to use for reading samples. If
-                provided, the raw_data array of this waveform will be
+                AnalogWaveform object to use for reading samples into.
+                If provided, the raw_data array of this waveform will be
                 used to store the samples. If not provided, a new
                 AnalogWaveform will be created.
         Returns:
