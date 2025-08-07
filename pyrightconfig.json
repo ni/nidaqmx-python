@@ -1,7 +1,0 @@
-{
-    "typeCheckingMode": "basic",
-    "reportOptionalMemberAccess": false,
-    "reportArgumentType": false,
-    "reportOperatorIssue": false,
-    "reportAttributeAccessIssue": false,
-}
