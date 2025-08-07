@@ -6436,10 +6436,10 @@ class LibraryInterpreter(BaseInterpreter):
             sample_interval=self._get_wfm_timedelta(dt_array[0]),
         )
 
-    def _get_wfm_datetime(self, t0_value: numpy.int64) -> datetime.datetime:
+    def _get_wfm_datetime(self, t0_value) -> datetime.datetime:
         return _T0_EPOCH + self._get_wfm_timedelta(t0_value)
 
-    def _get_wfm_timedelta(self, dt_value: numpy.int64) -> datetime.timedelta:
+    def _get_wfm_timedelta(self, dt_value) -> datetime.timedelta:
         return datetime.timedelta(seconds=dt_value * _INT64_WFM_SEC_PER_TICK)
 
     def _get_wfm_attr_value(
