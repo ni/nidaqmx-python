@@ -47,6 +47,7 @@ todo_include_todos = False
 
 intersphinx_mapping = {
     "grpc": ("https://grpc.github.io/grpc/python/", None),
+    "nitypes": ("https://nitypes.readthedocs.io/en/latest/", None),
     "numpy": ("https://numpy.org/doc/stable/", None),
     "protobuf": ("https://googleapis.dev/python/protobuf/latest/", None),
     "python": ("https://docs.python.org/3", None),
