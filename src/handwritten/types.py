@@ -1,7 +1,6 @@
 import collections
 import typing
 
-
 # region Task Counter IO namedtuples
 
 CtrFreq = collections.namedtuple(
