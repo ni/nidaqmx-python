@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 import collections
-from typing import NamedTuple
+import typing
 
 
 # region Task Counter IO namedtuples
@@ -60,7 +58,7 @@ CDAQSyncConnection = collections.namedtuple(
 
 # region ID Pin namedtuples
 
-class IDPinContents(NamedTuple):
+class IDPinContents(typing.NamedTuple):
     """IDPinContents represent the contents of the memory connected to the ID pin."""
 
     data: list[int]
