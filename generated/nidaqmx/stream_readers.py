@@ -8,16 +8,13 @@ from nidaqmx import DaqError
 
 from nidaqmx.constants import FillMode, READ_ALL_AVAILABLE
 from nidaqmx.error_codes import DAQmxErrors
-from nidaqmx.types import PowerMeasurement, CtrFreq, CtrTick, CtrTime, WfmAttrValue
+from nidaqmx.types import PowerMeasurement, CtrFreq, CtrTick, CtrTime
 from nitypes.waveform import AnalogWaveform, Timing, SampleIntervalMode
 
 __all__ = ['AnalogSingleChannelReader', 'AnalogMultiChannelReader',
            'AnalogUnscaledReader', 'CounterReader',
            'DigitalSingleChannelReader', 'DigitalMultiChannelReader',
            'PowerSingleChannelReader', 'PowerMultiChannelReader', 'PowerBinaryReader']
-
-_INT64_WFM_SEC_PER_TICK = 100e-9
-_T0_EPOCH = datetime.datetime(1, 1, 1, tzinfo=datetime.timezone.utc)
 
 
 class ChannelReaderBase:
@@ -289,27 +286,25 @@ class AnalogSingleChannelReader(ChannelReaderBase):
             self._task._calculate_num_samps_per_chan(
                 number_of_samples_per_channel))
 
-        t0_array = numpy.full(1, numpy.iinfo(numpy.int64).min, dtype=numpy.int64)
-        dt_array = numpy.full(1, numpy.iinfo(numpy.int64).min, dtype=numpy.int64)
         raw_data = numpy.full(number_of_samples_per_channel, math.inf, dtype=numpy.float64)
-        properties_list: List[Dict[str, WfmAttrValue]] = [{}]
 
-        _, _ = self._interpreter.internal_read_analog_waveform_ex(
+        timestamps, sample_intervals, properties = self._interpreter.internal_read_analog_waveform_ex(
             self._handle,
+            1, # single channel
             number_of_samples_per_channel,
             timeout,
             FillMode.GROUP_BY_CHANNEL.value,
-            t0_array,
-            dt_array,
             raw_data,
-            properties_list,
         )
 
-        waveform = AnalogWaveform(dtype=numpy.double, raw_data=raw_data, extended_properties=properties_list[0])
+        waveform = AnalogWaveform(
+            dtype=numpy.double, 
+            raw_data=raw_data, 
+            extended_properties=properties[0])
         waveform.timing = Timing(
             sample_interval_mode=SampleIntervalMode.REGULAR,
-            timestamp=_T0_EPOCH + datetime.timedelta(seconds=t0_array[0] * _INT64_WFM_SEC_PER_TICK),
-            sample_interval=datetime.timedelta(seconds=dt_array[0] * _INT64_WFM_SEC_PER_TICK),
+            timestamp=timestamps[0],
+            sample_interval=sample_intervals[0],
         )
         return waveform
 

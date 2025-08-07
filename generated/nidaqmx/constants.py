@@ -1026,10 +1026,3 @@ class _TriggerUsageTypes(Enum):
     ARM_START = 32  #: Device supports arm start triggers
 
 
-class WfmAttrType(Enum):
-    """Waveform attribute datatype."""
-
-    BOOL32 = 1
-    FLOAT64 = 2
-    INT32 = 3
-    STRING = 4

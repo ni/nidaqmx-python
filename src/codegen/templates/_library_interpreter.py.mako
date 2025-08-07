@@ -19,20 +19,30 @@
 
 from __future__ import annotations
 import ctypes
+import datetime
 import logging
 import numpy
 import platform
 import warnings
-from typing import List, Dict, Optional, Tuple
+import sys
+from enum import Enum
+from typing import Callable, Dict, List, Mapping, Optional, Sequence, Tuple, TYPE_CHECKING
 
 from nidaqmx._base_interpreter import BaseEventHandler, BaseInterpreter
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer, TaskHandle
-from nidaqmx.constants import WfmAttrType
 from nidaqmx.error_codes import DAQmxErrors, DAQmxWarnings
 from nidaqmx.errors import DaqError, DaqFunctionNotSupportedError, DaqReadError, DaqWarning, DaqWriteError
 from nidaqmx._lib_time import AbsoluteTime
-from nidaqmx.types import SetWfmAttrCallback, WfmAttrValue
+from nitypes.waveform.typing import ExtendedPropertyValue
 
+if TYPE_CHECKING:
+    if sys.version_info >= (3, 10):
+        from typing import TypeAlias
+    else:
+        from typing_extensions import TypeAlias
+
+_INT64_WFM_SEC_PER_TICK = 100e-9
+_T0_EPOCH = datetime.datetime(1, 1, 1, tzinfo=datetime.timezone.utc)
 
 _logger = logging.getLogger(__name__)
 _was_runtime_environment_set = None
@@ -47,6 +57,14 @@ CSetWfmAttrCallbackPtr = ctypes.CFUNCTYPE(
     ctypes.c_uint32,  # value_size_in_bytes
     ctypes.c_void_p,  # callback_data
 )
+
+class WfmAttrType(Enum):
+    BOOL32 = 1
+    FLOAT64 = 2
+    INT32 = 3
+    STRING = 4
+
+SetWfmAttrCallback: TypeAlias = Callable[[int, str, WfmAttrType, ExtendedPropertyValue, object], int]
 
 
 class LibraryEventHandler(BaseEventHandler):
@@ -172,14 +190,16 @@ class LibraryInterpreter(BaseInterpreter):
     def internal_read_analog_waveform_ex(
         self,
         task_handle: object,
+        channel_count: int,
         num_samps_per_chan: int,
         timeout: float,
         fill_mode: int,
-        t0_array: Optional[numpy.typing.NDArray[numpy.int64]],
-        dt_array: Optional[numpy.typing.NDArray[numpy.int64]],
         read_array: numpy.typing.NDArray[numpy.float64],
-        properties_list: List[Dict[str, WfmAttrValue]],
-    ) -> Tuple[numpy.typing.NDArray[numpy.float64], int]:
+    ) -> Tuple[
+        Sequence[datetime.datetime], # The timestamps for each sample, indexed by channel
+        Sequence[datetime.timedelta], # The sample intervals, indexed by channel
+        Sequence[Mapping[str, ExtendedPropertyValue]] # The waveform attributes, indexed by channel
+    ]:
         """Read an analog waveform with timing and attributes."""
         assert isinstance(task_handle, TaskHandle)
         samps_per_chan_read = ctypes.c_int()
@@ -204,18 +224,18 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.POINTER(c_bool32),
                     ]
 
-        assert (t0_array is None) == (dt_array is None)
-        if t0_array is not None and dt_array is not None:
-            assert t0_array.size == dt_array.size
+        t0_array = numpy.full(channel_count, numpy.iinfo(numpy.int64).min, dtype=numpy.int64)
+        dt_array = numpy.full(channel_count, numpy.iinfo(numpy.int64).min, dtype=numpy.int64)
+        properties: List[Dict[str, ExtendedPropertyValue]] = [{} for _ in range(channel_count)]
 
         def set_wfm_attr_callback(
             channel_index: int,
             attribute_name: str,
             attribute_type: WfmAttrType,
-            value: WfmAttrValue,
+            value: ExtendedPropertyValue,
             callback_data: object,
         ) -> int:
-            properties_list[channel_index][attribute_name] = value
+            properties[channel_index][attribute_name] = value
             return 0
 
         error_code = cfunc(
@@ -234,11 +254,15 @@ class LibraryInterpreter(BaseInterpreter):
             None,
         )
         self.check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
-        return read_array, samps_per_chan_read.value
+
+        timestamps = [_T0_EPOCH + datetime.timedelta(seconds=t0 * _INT64_WFM_SEC_PER_TICK) for t0 in t0_array]
+        sample_intervals = [datetime.timedelta(seconds=dt * _INT64_WFM_SEC_PER_TICK) for dt in dt_array]
+
+        return timestamps, sample_intervals, properties
 
     def _get_wfm_attr_value(
         self, attribute_type: int, value: ctypes.c_void_p, value_size_in_bytes: int
-    ) -> WfmAttrValue:
+    ) -> ExtendedPropertyValue:
         if attribute_type == WfmAttrType.BOOL32.value:
             assert value_size_in_bytes == 4
             return ctypes.cast(value, ctypes.POINTER(ctypes.c_int32))[0] != 0

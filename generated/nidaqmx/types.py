@@ -1,16 +1,8 @@
 from __future__ import annotations
 
 import collections
-import sys
-from typing import TYPE_CHECKING, Union, Callable, NamedTuple
+from typing import NamedTuple
 
-from nidaqmx.constants import WfmAttrType
-
-if TYPE_CHECKING:
-    if sys.version_info >= (3, 10):
-        from typing import TypeAlias
-    else:
-        from typing_extensions import TypeAlias
 
 # region Task Counter IO namedtuples
 
@@ -78,13 +70,3 @@ class IDPinContents(NamedTuple):
     """The format code of the binary data."""
 
 # endregion
-
-WfmAttrValue: TypeAlias = Union[bool, float, int, str]
-"""Waveform attribute value."""
-
-SetWfmAttrCallback: TypeAlias = Callable[[int, str, WfmAttrType, WfmAttrValue, object], int]
-"""
-Callback function for retrieving waveform attributes.
-
-Signature: channel_index, attribute_name, attribute_type, value, callback_data -> int (error code)
-"""
