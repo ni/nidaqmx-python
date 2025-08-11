@@ -303,7 +303,7 @@ class AnalogSingleChannelReader(ChannelReaderBase):
         if waveform is None:
             waveform = AnalogWaveform(raw_data=numpy.zeros(number_of_samples_per_channel, dtype=numpy.float64))
 
-        self._interpreter.internal_read_analog_waveform_ex(
+        self._interpreter.read_analog_waveform(
             self._handle,
             number_of_samples_per_channel,
             timeout,

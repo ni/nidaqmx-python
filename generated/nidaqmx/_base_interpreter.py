@@ -1849,10 +1849,10 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def internal_read_analog_waveform_ex(
+    def read_analog_waveform(
         self,
         task_handle: object,
-        num_samps_per_chan: int,
+        number_of_samples_per_channel: int,
         timeout: float,
         waveform: AnalogWaveform[numpy.float64]
     ) -> None:
