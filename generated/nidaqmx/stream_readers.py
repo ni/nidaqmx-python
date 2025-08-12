@@ -302,6 +302,13 @@ class AnalogSingleChannelReader(ChannelReaderBase):
 
         if waveform is None:
             waveform = AnalogWaveform(raw_data=numpy.zeros(number_of_samples_per_channel, dtype=numpy.float64))
+        elif number_of_samples_per_channel > waveform.sample_count:
+            # TODO: AB#3228924 - if allowed by the caller, increase the sample count of the waveform
+            raise DaqError(
+                f'The provided waveform does not have enough space ({waveform.sample_count}) to hold '
+                f'the requested number of samples ({number_of_samples_per_channel}). Please provide a larger '
+                'waveform or adjust the number of samples requested.',
+                DAQmxErrors.READ_BUFFER_TOO_SMALL, task_name=self._task.name)
 
         self._interpreter.read_analog_waveform(
             self._handle,

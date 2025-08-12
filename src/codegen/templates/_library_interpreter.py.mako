@@ -187,7 +187,7 @@ class LibraryInterpreter(BaseInterpreter):
             return 'Failed to retrieve error description.'
         return error_buffer.value.decode(lib_importer.encoding)
 
-    ## internal_read_analog_waveform_ex has special handling for waveform attributes and callbacks
+    ## read_analog_waveform has special handling for waveform attributes and callbacks
     def read_analog_waveform(
         self,
         task_handle: object,
@@ -196,7 +196,7 @@ class LibraryInterpreter(BaseInterpreter):
         waveform: AnalogWaveform[numpy.float64]
     ) -> None:
         """Read an analog waveform with timing and attributes."""
-        timestamps, sample_intervals = self._internal_read_analog_waveform_ex(
+        error_code, samples_read, timestamps, sample_intervals = self._internal_read_analog_waveform_ex(
             task_handle,
             1, # single channel
             number_of_samples_per_channel,
@@ -212,6 +212,9 @@ class LibraryInterpreter(BaseInterpreter):
             sample_interval=sample_intervals[0],
         )
 
+        # TODO: AB#3228924 - if the read was short, set waveform.sample_count before throwing the exception
+        self.check_for_error(error_code, samps_per_chan_read=samples_read)
+
     def _internal_read_analog_waveform_ex(
         self,
         task_handle: object,
@@ -222,6 +225,8 @@ class LibraryInterpreter(BaseInterpreter):
         read_array: numpy.typing.NDArray[numpy.float64],
         properties: Sequence[ExtendedPropertyDictionary]
     ) -> Tuple[
+        int, # error code
+        int, # The number of samples per channel that were read
         Sequence[datetime.datetime], # The timestamps for each sample, indexed by channel
         Sequence[datetime.timedelta], # The sample intervals, indexed by channel
     ]:
@@ -276,12 +281,11 @@ class LibraryInterpreter(BaseInterpreter):
             ctypes.byref(samps_per_chan_read),
             None,
         )
-        self.check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
         timestamps = [_T0_EPOCH + datetime.timedelta(seconds=t0 * _INT64_WFM_SEC_PER_TICK) for t0 in t0_array]
         sample_intervals = [datetime.timedelta(seconds=dt * _INT64_WFM_SEC_PER_TICK) for dt in dt_array]
 
-        return timestamps, sample_intervals
+        return error_code, samps_per_chan_read.value, timestamps, sample_intervals
 
     def _get_wfm_attr_value(
         self, attribute_type: int, value: ctypes.c_void_p, value_size_in_bytes: int
