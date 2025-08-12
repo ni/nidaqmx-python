@@ -2,13 +2,15 @@
 
 from __future__ import annotations
 import ctypes
-import datetime
 import logging
 import numpy
 import platform
 import warnings
 import sys
 from enum import Enum
+from datetime import timezone
+from hightime import datetime as ht_datetime
+from hightime import timedelta as ht_timedelta
 from typing import Callable, List, Optional, Sequence, Tuple, TYPE_CHECKING
 
 from nidaqmx._base_interpreter import BaseEventHandler, BaseInterpreter
@@ -30,7 +32,7 @@ _logger = logging.getLogger(__name__)
 _was_runtime_environment_set = None
 
 _INT64_WFM_SEC_PER_TICK = 100e-9
-_T0_EPOCH = datetime.datetime(1, 1, 1, tzinfo=datetime.timezone.utc)
+_T0_EPOCH = ht_datetime(1, 1, 1, tzinfo=timezone.utc)
 
 # typedef int32 (CVICALLBACK *DAQmxSetWfmAttrCallbackPtr)(uInt32 channelIndex, const char attributeName[], int32 attributeType, const void* value, uInt32 valueSizeInBytes, void *callbackData);  # noqa: W505 - doc line too long
 CSetWfmAttrCallbackPtr = ctypes.CFUNCTYPE(
@@ -6408,8 +6410,8 @@ class LibraryInterpreter(BaseInterpreter):
     ) -> Tuple[
         int, # error code
         int, # The number of samples per channel that were read
-        Sequence[datetime.datetime], # The timestamps for each sample, indexed by channel
-        Sequence[datetime.timedelta], # The sample intervals, indexed by channel
+        Sequence[ht_datetime], # The timestamps for each sample, indexed by channel
+        Sequence[ht_timedelta], # The sample intervals, indexed by channel
     ]:
         assert isinstance(task_handle, TaskHandle)
         samps_per_chan_read = ctypes.c_int()
@@ -6463,8 +6465,8 @@ class LibraryInterpreter(BaseInterpreter):
             None,
         )
 
-        timestamps = [_T0_EPOCH + datetime.timedelta(seconds=t0 * _INT64_WFM_SEC_PER_TICK) for t0 in t0_array]
-        sample_intervals = [datetime.timedelta(seconds=dt * _INT64_WFM_SEC_PER_TICK) for dt in dt_array]
+        timestamps = [_T0_EPOCH + ht_timedelta(seconds=t0 * _INT64_WFM_SEC_PER_TICK) for t0 in t0_array]
+        sample_intervals = [ht_timedelta(seconds=dt * _INT64_WFM_SEC_PER_TICK) for dt in dt_array]
 
         return error_code, samps_per_chan_read.value, timestamps, sample_intervals
 
