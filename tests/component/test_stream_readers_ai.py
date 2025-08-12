@@ -3,6 +3,7 @@ from __future__ import annotations
 import ctypes
 import math
 from datetime import timezone
+from typing import Callable
 
 import numpy
 import numpy.typing
@@ -91,7 +92,7 @@ def ai_single_channel_task_with_high_rate(
         max_val=offset + VOLTAGE_EPSILON,
     )
     task.timing.cfg_samp_clk_timing(
-        rate=2_000_000, sample_mode=AcquisitionType.FINITE, samps_per_chan=50
+        rate=10_000_000, sample_mode=AcquisitionType.FINITE, samps_per_chan=50
     )
     return task
 
@@ -214,6 +215,39 @@ def test___analog_single_channel_reader___read_waveform_in_place___populates_val
 
 
 @pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
+def test___analog_single_channel_reader___reuse_waveform_in_place___overwrites_data_timing_and_attributes(
+    generate_task: Callable[[], nidaqmx.Task], sim_6363_device: nidaqmx.system.Device
+) -> None:
+    def _make_single_channel_reader(chan_index, offset, rate):
+        task = generate_task()
+        task.ai_channels.add_ai_voltage_chan(
+            sim_6363_device.ai_physical_chans[chan_index].name,
+            min_val=offset,
+            max_val=offset + VOLTAGE_EPSILON,
+        )
+        task.timing.cfg_samp_clk_timing(rate, sample_mode=AcquisitionType.FINITE, samps_per_chan=10)
+        return AnalogSingleChannelReader(task.in_stream)
+
+    reader0 = _make_single_channel_reader(chan_index=0, offset=0, rate=1000.0)
+    reader1 = _make_single_channel_reader(chan_index=1, offset=1, rate=2000.0)
+    waveform = AnalogWaveform(raw_data=numpy.zeros(10, dtype=numpy.float64))
+
+    reader0.read_waveform(number_of_samples_per_channel=10, waveform=waveform)
+    timestamp1 = waveform.timing.timestamp
+    assert waveform.scaled_data == pytest.approx(0, abs=VOLTAGE_EPSILON)
+    assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
+    assert waveform.channel_name == "nidaqmxMultithreadingTester1/ai0"
+
+    reader1.read_waveform(number_of_samples_per_channel=10, waveform=waveform)
+    timestamp2 = waveform.timing.timestamp
+    assert waveform.scaled_data == pytest.approx(1, abs=VOLTAGE_EPSILON)
+    assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 2000)
+    assert waveform.channel_name == "nidaqmxMultithreadingTester1/ai1"
+
+    assert timestamp2 > timestamp1
+
+
+@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
 def test___analog_single_channel_reader___read_into_undersized_waveform___throws_exception(
     ai_single_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
@@ -242,7 +276,7 @@ def test___analog_single_channel_reader___read_waveform_high_sample_rate___retur
     assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
     assert isinstance(waveform.timing.timestamp, ht_datetime)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
-    assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 2_000_000)
+    assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 10_000_000)
     assert waveform.channel_name == ai_single_channel_task_with_high_rate.ai_channels[0].name
     assert waveform.unit_description == "Volts"
     assert waveform.sample_count == samples_to_read
