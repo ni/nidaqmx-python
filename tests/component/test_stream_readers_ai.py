@@ -236,13 +236,13 @@ def test___analog_single_channel_reader___reuse_waveform_in_place___overwrites_d
     timestamp1 = waveform.timing.timestamp
     assert waveform.scaled_data == pytest.approx(0, abs=VOLTAGE_EPSILON)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
-    assert waveform.channel_name == "nidaqmxMultithreadingTester1/ai0"
+    assert waveform.channel_name == f"{sim_6363_device.name}/ai0"
 
     reader1.read_waveform(number_of_samples_per_channel=10, waveform=waveform)
     timestamp2 = waveform.timing.timestamp
     assert waveform.scaled_data == pytest.approx(1, abs=VOLTAGE_EPSILON)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 2000)
-    assert waveform.channel_name == "nidaqmxMultithreadingTester1/ai1"
+    assert waveform.channel_name == f"{sim_6363_device.name}/ai1"
 
     assert timestamp2 > timestamp1
 
