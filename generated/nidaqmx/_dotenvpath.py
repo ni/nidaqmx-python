@@ -41,11 +41,11 @@ def _get_script_or_exe_path() -> Path | None:
 
 def _get_caller_path() -> Path | None:
     """Get the path of the module calling into nidaqmx-python, if possible."""
-    nims_path = _get_nims_path()
+    package_path = _get_package_path()
     for frame, _ in traceback.walk_stack(inspect.currentframe()):
         if frame.f_code.co_filename:
             module_path = Path(frame.f_code.co_filename)
-            if _exists(module_path) and not module_path.is_relative_to(nims_path):
+            if _exists(module_path) and not module_path.is_relative_to(package_path):
                 return module_path
 
     return None
@@ -66,8 +66,8 @@ else:
         return os.path.exists(path)
 
 
-def _get_nims_path() -> Path:
+def _get_package_path() -> Path:
     """Get the path of the nidaqmx package."""
-    nims_module = sys.modules["nidaqmx"]
-    assert nims_module.__file__ and nims_module.__file__.endswith("__init__.py")
-    return Path(nims_module.__file__).parent
+    nidaqmx_module = sys.modules[__package__]
+    assert nidaqmx_module.__file__ and nidaqmx_module.__file__.endswith("__init__.py")
+    return Path(nidaqmx_module.__file__).parent

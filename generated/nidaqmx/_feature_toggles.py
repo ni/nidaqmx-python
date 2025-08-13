@@ -4,10 +4,11 @@ from __future__ import annotations
 
 import functools
 import sys
-from decouple import AutoConfig
+from decouple import AutoConfig, Undefined, undefined
 from enum import Enum
 from typing import TYPE_CHECKING, Callable, TypeVar
 from nidaqmx._dotenvpath import get_dotenv_search_path
+from nidaqmx.errors import FeatureNotSupportedError
 
 if TYPE_CHECKING:
     if sys.version_info >= (3, 10):
@@ -26,6 +27,14 @@ if TYPE_CHECKING:
 _PREFIX = "NIDAQMX"
 
 _config = AutoConfig(str(get_dotenv_search_path()))
+
+if TYPE_CHECKING:
+    # Work around decouple's lack of type hints.
+    def _config(
+        option: str,
+        default: _T | Undefined = undefined,
+        cast: Callable[[str], _T] | Undefined = undefined,
+    ) -> _T: ...
 
 # Based on the recipe at https://docs.python.org/3/howto/enum.html
 class _OrderedEnum(Enum):
@@ -80,10 +89,6 @@ def get_code_readiness_level() -> CodeReadiness:
     mark.
     """
     return _CODE_READINESS_LEVEL
-
-
-class FeatureNotSupportedError(Exception):
-    """The feature is not supported at the current code readiness level."""
 
 
 class FeatureToggle:
