@@ -4,10 +4,10 @@ from __future__ import annotations
 
 import functools
 import sys
+from decouple import AutoConfig
 from enum import Enum
 from typing import TYPE_CHECKING, Callable, TypeVar
-
-from nidaqmx._configuration import _PREFIX, _config
+from nidaqmx._dotenvpath import get_dotenv_search_path
 
 if TYPE_CHECKING:
     if sys.version_info >= (3, 10):
@@ -23,6 +23,9 @@ if TYPE_CHECKING:
     _P = ParamSpec("_P")
     _T = TypeVar("_T")
 
+_PREFIX = "NIDAQMX"
+
+_config = AutoConfig(str(get_dotenv_search_path()))
 
 # Based on the recipe at https://docs.python.org/3/howto/enum.html
 class _OrderedEnum(Enum):
