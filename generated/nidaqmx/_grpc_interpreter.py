@@ -5,6 +5,7 @@ import logging
 import threading
 import typing
 import warnings
+from nitypes.waveform import AnalogWaveform
 from typing import Callable, Generic, TypeVar
 
 import google.protobuf.message
@@ -3600,6 +3601,14 @@ class GrpcStubInterpreter(BaseInterpreter):
     def internal_get_last_created_chan(self):
         raise NotImplementedError
 
+    def read_analog_waveform(
+        self,
+        task_handle: object,
+        number_of_samples_per_channel: int,
+        timeout: float,
+        waveform: AnalogWaveform[numpy.float64]
+    ) -> None:
+        raise NotImplementedError
 
 def _assign_numpy_array(numpy_array, grpc_array):
     """

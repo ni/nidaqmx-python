@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-from typing import Optional, Tuple
 import numpy
 from nidaqmx import DaqError
 
 from nidaqmx.constants import FillMode, READ_ALL_AVAILABLE
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.types import PowerMeasurement, CtrFreq, CtrTick, CtrTime
+from nitypes.waveform import AnalogWaveform
 
 __all__ = ['AnalogSingleChannelReader', 'AnalogMultiChannelReader',
            'AnalogUnscaledReader', 'CounterReader',
@@ -237,6 +237,87 @@ class AnalogSingleChannelReader(ChannelReaderBase):
             Indicates a single floating-point sample from the task.
         """
         return self._interpreter.read_analog_scalar_f64(self._handle, timeout)
+
+    def read_waveform(
+        self, 
+        number_of_samples_per_channel: int = READ_ALL_AVAILABLE, 
+        timeout: int = 10, 
+        waveform: AnalogWaveform[numpy.float64] | None = None
+    ) -> AnalogWaveform[numpy.float64]:
+        """
+        Reads one or more floating-point samples from a single analog
+        input channel into a waveform.
+
+        This read method optionally accepts a preallocated waveform to hold
+        the samples requested, which can be advantageous for performance and
+        interoperability with NumPy and SciPy.
+
+        Passing in a preallocated waveform is valuable in continuous
+        acquisition scenarios, where the same waveform can be used
+        repeatedly in each call to the method.
+
+        Args:
+            number_of_samples_per_channel (Optional[int]): Specifies the
+                number of samples to read.
+
+                If you set this input to nidaqmx.constants.
+                READ_ALL_AVAILABLE, NI-DAQmx determines how many samples
+                to read based on if the task acquires samples
+                continuously or acquires a finite number of samples.
+
+                If the task acquires samples continuously and you set
+                this input to nidaqmx.constants.READ_ALL_AVAILABLE, this
+                method reads all the samples currently available in the
+                buffer.
+
+                If the task acquires a finite number of samples and you
+                set this input to nidaqmx.constants.READ_ALL_AVAILABLE,
+                the method waits for the task to acquire all requested
+                samples, then reads those samples. If you set the
+                "read_all_avail_samp" property to True, the method reads
+                the samples currently available in the buffer and does
+                not wait for the task to acquire all requested samples.
+            timeout (Optional[float]): Specifies the amount of time in
+                seconds to wait for samples to become available. If the
+                time elapses, the method returns an error and any
+                samples read before the timeout elapsed. The default
+                timeout is 10 seconds. If you set timeout to
+                nidaqmx.constants.WAIT_INFINITELY, the method waits
+                indefinitely. If you set timeout to 0, the method tries
+                once to read the requested samples and returns an error
+                if it is unable to.
+            waveform (Optional[AnalogWaveform]): Specifies an existing
+                AnalogWaveform object to use for reading samples into.
+                If provided, the raw_data array of this waveform will be
+                used to store the samples. If not provided, a new
+                AnalogWaveform will be created.
+        Returns:
+            AnalogWaveform:
+
+            A waveform object containing the acquired samples.
+        """
+        number_of_samples_per_channel = (
+            self._task._calculate_num_samps_per_chan(
+                number_of_samples_per_channel))
+
+        if waveform is None:
+            waveform = AnalogWaveform(raw_data=numpy.zeros(number_of_samples_per_channel, dtype=numpy.float64))
+        elif number_of_samples_per_channel > waveform.sample_count:
+            # TODO: AB#3228924 - if allowed by the caller, increase the sample count of the waveform
+            raise DaqError(
+                f'The provided waveform does not have enough space ({waveform.sample_count}) to hold '
+                f'the requested number of samples ({number_of_samples_per_channel}). Please provide a larger '
+                'waveform or adjust the number of samples requested.',
+                DAQmxErrors.READ_BUFFER_TOO_SMALL, task_name=self._task.name)
+
+        self._interpreter.read_analog_waveform(
+            self._handle,
+            number_of_samples_per_channel,
+            timeout,
+            waveform,
+        )
+
+        return waveform
 
 
 class AnalogMultiChannelReader(ChannelReaderBase):
