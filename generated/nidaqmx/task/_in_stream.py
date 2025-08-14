@@ -11,8 +11,8 @@ from nidaqmx.task.channels import Channel
 from nidaqmx.utils import unflatten_channel_string
 from nidaqmx.constants import (
     AcquisitionType, LoggingMode, LoggingOperation, OverwriteMode,
-    READ_ALL_AVAILABLE, ReadRelativeTo, WaitMode, WaveformAttributeModes)
-
+    READ_ALL_AVAILABLE, ReadRelativeTo, WaitMode)
+from nidaqmx.constants import WaveformAttributeMode
 
 class InStream:
     """
@@ -29,7 +29,7 @@ class InStream:
         self._handle = task._handle
         self._interpreter = interpreter
         self._timeout = 10.0
-        self._waveform_attribute_mode = WaveformAttributeModes.TIMING | WaveformAttributeModes.EXTENDED_PROPERTIES
+        self._waveform_attribute_mode = WaveformAttributeMode.TIMING | WaveformAttributeMode.EXTENDED_PROPERTIES
 
         super().__init__()
 
@@ -979,22 +979,6 @@ class InStream:
     def wait_mode(self):
         self._interpreter.reset_read_attribute(self._handle, 0x2232)
 
-    @property
-    def waveform_attribute_mode(self):
-        """
-        :class:`nidaqmx.constants.WaveformAttributeModes`: Specifies which waveform attributes to include when reading waveform data.
-        """
-        return self._waveform_attribute_mode
-
-    @waveform_attribute_mode.setter
-    def waveform_attribute_mode(self, val):
-        self._waveform_attribute_mode = val
-
-    @waveform_attribute_mode.deleter
-    def waveform_attribute_mode(self):
-        default_mode = WaveformAttributeModes.TIMING | WaveformAttributeModes.EXTENDED_PROPERTIES
-        self._waveform_attribute_mode = default_mode
- 
     def get_channels_buffer_size(self):
         channel_names = self._task.channel_names
         total_size = sum(len(name) + 2 for name in channel_names) + 1
@@ -1280,3 +1264,18 @@ class InStream:
     def over_write(self):
         del self.overwrite
 
+
+    @property
+    def waveform_attribute_mode(self):
+        """
+        :class:`nidaqmx.constants.WaveformAttributeMode`: Specifies the type of information returned from waveform reads.
+        """
+        return self._waveform_attribute_mode
+
+    @waveform_attribute_mode.setter
+    def waveform_attribute_mode(self, val):
+        self._waveform_attribute_mode = val
+
+    @waveform_attribute_mode.deleter
+    def waveform_attribute_mode(self):
+        self._waveform_attribute_mode = WaveformAttributeMode.TIMING | WaveformAttributeMode.EXTENDED_PROPERTIES

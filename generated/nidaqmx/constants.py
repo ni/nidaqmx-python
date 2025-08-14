@@ -1026,7 +1026,8 @@ class _TriggerUsageTypes(Enum):
     ARM_START = 32  #: Device supports arm start triggers
 
 
-class WaveformAttributeModes(Flag):
+class WaveformAttributeMode(Flag):
     NONE = 0
     TIMING = 1
     EXTENDED_PROPERTIES = 2
+

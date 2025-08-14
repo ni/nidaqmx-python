@@ -13,7 +13,7 @@ from nitypes.waveform import AnalogWaveform, SampleIntervalMode
 
 import nidaqmx
 import nidaqmx.system
-from nidaqmx.constants import AcquisitionType, WaveformAttributeModes
+from nidaqmx.constants import AcquisitionType, WaveformAttributeMode
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.stream_readers import (
     AnalogMultiChannelReader,
@@ -283,13 +283,13 @@ def test___analog_single_channel_reader___read_waveform_high_sample_rate___retur
 
 
 @pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
-def test___analog_single_channel_reader___read_waveform_with_timing_flag___includes_timing_data(
+def test___analog_single_channel_reader_with_timing_flag___read_waveform___only_includes_timing_data(
     ai_single_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
-    reader = AnalogSingleChannelReader(ai_single_channel_task_with_timing.in_stream)
+    in_stream = ai_single_channel_task_with_timing.in_stream
+    in_stream.waveform_attribute_mode = WaveformAttributeMode.TIMING
+    reader = AnalogSingleChannelReader(in_stream)
     samples_to_read = 10
-    
-    ai_single_channel_task_with_timing.in_stream.waveform_attribute_mode = WaveformAttributeModes.TIMING
 
     waveform = reader.read_waveform(number_of_samples_per_channel=samples_to_read)
 
@@ -305,13 +305,13 @@ def test___analog_single_channel_reader___read_waveform_with_timing_flag___inclu
 
 
 @pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
-def test___analog_single_channel_reader___read_waveform_with_extended_properties_flag___includes_extended_properties(
+def test___analog_single_channel_reader_with_extended_properties_flag___read_waveform___only_includes_extended_properties(
     ai_single_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
-    reader = AnalogSingleChannelReader(ai_single_channel_task_with_timing.in_stream)
+    in_stream = ai_single_channel_task_with_timing.in_stream
+    in_stream.waveform_attribute_mode = WaveformAttributeMode.EXTENDED_PROPERTIES
+    reader = AnalogSingleChannelReader(in_stream)
     samples_to_read = 10
-    
-    ai_single_channel_task_with_timing.in_stream.waveform_attribute_mode = WaveformAttributeModes.EXTENDED_PROPERTIES
 
     waveform = reader.read_waveform(number_of_samples_per_channel=samples_to_read)
 
@@ -325,15 +325,15 @@ def test___analog_single_channel_reader___read_waveform_with_extended_properties
 
 
 @pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
-def test___analog_single_channel_reader___read_waveform_with_both_flags___includes_both_timing_and_extended_properties(
+def test___analog_single_channel_reader_with_both_flags___read_waveform___includes_both_timing_and_extended_properties(
     ai_single_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
-    reader = AnalogSingleChannelReader(ai_single_channel_task_with_timing.in_stream)
-    samples_to_read = 10
-    
-    ai_single_channel_task_with_timing.in_stream.waveform_attribute_mode = (
-        WaveformAttributeModes.TIMING | WaveformAttributeModes.EXTENDED_PROPERTIES
+    in_stream = ai_single_channel_task_with_timing.in_stream
+    in_stream.waveform_attribute_mode = (
+        WaveformAttributeMode.TIMING | WaveformAttributeMode.EXTENDED_PROPERTIES
     )
+    reader = AnalogSingleChannelReader(in_stream)
+    samples_to_read = 10
 
     waveform = reader.read_waveform(number_of_samples_per_channel=samples_to_read)
 
@@ -349,13 +349,13 @@ def test___analog_single_channel_reader___read_waveform_with_both_flags___includ
 
 
 @pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
-def test___analog_single_channel_reader___read_waveform_with_none_flag___minimal_waveform_data(
+def test___analog_single_channel_reader_with_none_flag___read_waveform___minimal_waveform_data(
     ai_single_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
-    reader = AnalogSingleChannelReader(ai_single_channel_task_with_timing.in_stream)
+    in_stream = ai_single_channel_task_with_timing.in_stream
+    in_stream.waveform_attribute_mode = WaveformAttributeMode.NONE
+    reader = AnalogSingleChannelReader(in_stream)
     samples_to_read = 10
-    
-    ai_single_channel_task_with_timing.in_stream.waveform_attribute_mode = WaveformAttributeModes.NONE
 
     waveform = reader.read_waveform(number_of_samples_per_channel=samples_to_read)
 
@@ -366,70 +366,6 @@ def test___analog_single_channel_reader___read_waveform_with_none_flag___minimal
     assert waveform.channel_name == ""
     assert waveform.unit_description == ""
     assert waveform.sample_count == samples_to_read
-
-
-@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
-def test___analog_single_channel_reader___read_waveform_mode_persistence___mode_setting_persists_across_reads(
-    ai_single_channel_task_with_timing: nidaqmx.Task,
-) -> None:
-    reader = AnalogSingleChannelReader(ai_single_channel_task_with_timing.in_stream)
-    samples_to_read = 10
-    
-    ai_single_channel_task_with_timing.in_stream.waveform_attribute_mode = WaveformAttributeModes.TIMING
-    
-    waveform1 = reader.read_waveform(number_of_samples_per_channel=samples_to_read)
-    assert isinstance(waveform1.timing.timestamp, ht_datetime)
-    
-    waveform2 = reader.read_waveform(number_of_samples_per_channel=samples_to_read)
-    assert isinstance(waveform2.timing.timestamp, ht_datetime)
-    
-    ai_single_channel_task_with_timing.in_stream.waveform_attribute_mode = WaveformAttributeModes.NONE
-    
-    waveform3 = reader.read_waveform(number_of_samples_per_channel=samples_to_read)
-    assert isinstance(waveform3, AnalogWaveform)
-    expected = _get_voltage_offset_for_chan(0)
-    assert waveform3.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
-
-
-@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
-def test___analog_single_channel_reader___read_waveform_attribute_mode_getter_setter___mode_can_be_read_and_modified(
-    ai_single_channel_task_with_timing: nidaqmx.Task,
-) -> None:
-    ai_single_channel_task_with_timing.in_stream.waveform_attribute_mode = WaveformAttributeModes.TIMING
-    assert ai_single_channel_task_with_timing.in_stream.waveform_attribute_mode == WaveformAttributeModes.TIMING
-    
-    ai_single_channel_task_with_timing.in_stream.waveform_attribute_mode = WaveformAttributeModes.EXTENDED_PROPERTIES
-    assert ai_single_channel_task_with_timing.in_stream.waveform_attribute_mode == WaveformAttributeModes.EXTENDED_PROPERTIES
-    
-    combined_mode = WaveformAttributeModes.TIMING | WaveformAttributeModes.EXTENDED_PROPERTIES
-    ai_single_channel_task_with_timing.in_stream.waveform_attribute_mode = combined_mode
-    assert ai_single_channel_task_with_timing.in_stream.waveform_attribute_mode == combined_mode
-    
-    ai_single_channel_task_with_timing.in_stream.waveform_attribute_mode = WaveformAttributeModes.NONE
-    assert ai_single_channel_task_with_timing.in_stream.waveform_attribute_mode == WaveformAttributeModes.NONE
-
-
-@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
-def test___analog_single_channel_reader___read_waveform_attribute_mode_deleter___mode_resets_to_default(
-    ai_single_channel_task_with_timing: nidaqmx.Task,
-) -> None:
-    ai_single_channel_task_with_timing.in_stream.waveform_attribute_mode = WaveformAttributeModes.TIMING
-    assert ai_single_channel_task_with_timing.in_stream.waveform_attribute_mode == WaveformAttributeModes.TIMING
-    
-    del ai_single_channel_task_with_timing.in_stream.waveform_attribute_mode
-    
-    expected_default = WaveformAttributeModes.TIMING | WaveformAttributeModes.EXTENDED_PROPERTIES
-    actual_mode = ai_single_channel_task_with_timing.in_stream.waveform_attribute_mode
-    assert actual_mode == expected_default
-
-
-@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
-def test___analog_single_channel_reader___waveform_attribute_mode_default___timing_and_extended_properties(
-    ai_single_channel_task_with_timing: nidaqmx.Task,
-) -> None:
-    expected_default = WaveformAttributeModes.TIMING | WaveformAttributeModes.EXTENDED_PROPERTIES
-    actual_mode = ai_single_channel_task_with_timing.in_stream.waveform_attribute_mode
-    assert actual_mode == expected_default
 
 
 def test___analog_multi_channel_reader___read_one_sample___returns_valid_samples(

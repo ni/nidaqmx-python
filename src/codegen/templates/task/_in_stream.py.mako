@@ -17,7 +17,7 @@ from nidaqmx.task.channels import Channel
 from nidaqmx.utils import unflatten_channel_string
 from nidaqmx.constants import (
     ${', '.join([c for c in enums_used]) | wrap(4, 4)})
-from nidaqmx.constants import WaveformAttributeModes
+from nidaqmx.constants import WaveformAttributeMode
 
 class InStream:
     """
@@ -34,7 +34,7 @@ class InStream:
         self._handle = task._handle
         self._interpreter = interpreter
         self._timeout = 10.0
-        self._waveform_attribute_mode = WaveformAttributeModes.TIMING | WaveformAttributeModes.EXTENDED_PROPERTIES
+        self._waveform_attribute_mode = WaveformAttributeMode.TIMING | WaveformAttributeMode.EXTENDED_PROPERTIES
 
         super().__init__()
 
@@ -356,7 +356,7 @@ ${deprecated_template.script_deprecated_property(attributes)}\
     @property
     def waveform_attribute_mode(self):
         """
-        :class:`nidaqmx.constants.WaveformAttributeModes`: Specifies which waveform attributes to include when reading waveform data.
+        :class:`nidaqmx.constants.WaveformAttributeMode`: Specifies the type of information returned from waveform reads.
         """
         return self._waveform_attribute_mode
 
@@ -366,5 +366,4 @@ ${deprecated_template.script_deprecated_property(attributes)}\
 
     @waveform_attribute_mode.deleter
     def waveform_attribute_mode(self):
-        default_mode = WaveformAttributeModes.TIMING | WaveformAttributeModes.EXTENDED_PROPERTIES
-        self._waveform_attribute_mode = default_mode
+        self._waveform_attribute_mode = WaveformAttributeMode.TIMING | WaveformAttributeMode.EXTENDED_PROPERTIES

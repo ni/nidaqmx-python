@@ -24,7 +24,8 @@ class ${name}(Enum):
 
 
 % endfor
-class WaveformAttributeModes(Flag):
+class WaveformAttributeMode(Flag):
     NONE = 0
     TIMING = 1
     EXTENDED_PROPERTIES = 2
+
