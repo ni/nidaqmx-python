@@ -40,7 +40,7 @@ def _get_script_or_exe_path() -> Path | None:
 
 
 def _get_caller_path() -> Path | None:
-    """Get the path of the module calling into nidaqmx-python, if possible."""
+    """Get the path of the module calling into this package, if possible."""
     package_path = _get_package_path()
     for frame, _ in traceback.walk_stack(inspect.currentframe()):
         if frame.f_code.co_filename:
@@ -67,7 +67,7 @@ else:
 
 
 def _get_package_path() -> Path:
-    """Get the path of the nidaqmx package."""
-    nidaqmx_module = sys.modules[__package__]
-    assert nidaqmx_module.__file__ and nidaqmx_module.__file__.endswith("__init__.py")
-    return Path(nidaqmx_module.__file__).parent
+    """Get the path of this package."""
+    module = sys.modules[__package__]
+    assert module.__file__ and module.__file__.endswith("__init__.py")
+    return Path(module.__file__).parent
