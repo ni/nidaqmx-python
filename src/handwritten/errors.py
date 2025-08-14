@@ -200,3 +200,7 @@ class RpcError(Error):
         except Exception:
             rpc_error = str(self.rpc_code)
         super().__init__(rpc_error + ": " + self.description)
+
+
+class FeatureNotSupportedError(Exception):
+    """The feature is not supported at the current code readiness level."""

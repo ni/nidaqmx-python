@@ -11,7 +11,12 @@ from typing import TYPE_CHECKING, Callable, Generator
 import pytest
 
 import nidaqmx.system
+from nidaqmx import _feature_toggles
 from nidaqmx._base_interpreter import BaseInterpreter
+from nidaqmx._feature_toggles import (
+    CodeReadiness,
+    FeatureToggle,
+)
 from nidaqmx.constants import ProductCategory, UsageTypeAI
 
 try:
@@ -715,3 +720,34 @@ def thermistor_iex_teds_file_path(teds_assets_directory: pathlib.Path) -> pathli
 def thermistor_vex_teds_file_path(teds_assets_directory: pathlib.Path) -> pathlib.Path:
     """Returns a TEDS file path."""
     return teds_assets_directory / "ThermistorVex.ted"
+
+
+@pytest.fixture
+def feature_toggles(monkeypatch: pytest.MonkeyPatch, request: pytest.FixtureRequest) -> None:
+    """Test fixture that disables or enables feature toggles."""
+    for mark in request.node.iter_markers():
+        if mark.name in ["disable_feature_toggle", "enable_feature_toggle"]:
+            feature_toggle = mark.args[0]
+            assert isinstance(feature_toggle, FeatureToggle)
+            monkeypatch.setattr(
+                feature_toggle, "_is_enabled_override", mark.name == "enable_feature_toggle"
+            )
+        elif mark.name == "use_code_readiness":
+            code_readiness = mark.args[0]
+            assert isinstance(code_readiness, CodeReadiness)
+            monkeypatch.setattr(_feature_toggles, "_CODE_READINESS_LEVEL", code_readiness)
+
+
+def pytest_collection_modifyitems(items: list[pytest.Item]) -> None:
+    """Hook to inject fixtures based on marks."""
+    # By default, all features are enabled when running tests.
+    _feature_toggles._CODE_READINESS_LEVEL = CodeReadiness.PROTOTYPE
+
+    for item in items:
+        if (
+            item.get_closest_marker("disable_feature_toggle")
+            or item.get_closest_marker("enable_feature_toggle")
+            or item.get_closest_marker("use_code_readiness")
+        ):
+            assert hasattr(item, "fixturenames")
+            item.fixturenames.append("feature_toggles")

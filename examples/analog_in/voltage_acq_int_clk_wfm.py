@@ -4,9 +4,13 @@ This example demonstrates how to acquire a finite amount
 of data using the DAQ device's internal clock.
 """
 
-import nidaqmx
-from nidaqmx.constants import AcquisitionType, READ_ALL_AVAILABLE
-from nidaqmx.stream_readers import AnalogSingleChannelReader
+import os
+
+os.environ["NIDAQMX_ENABLE_WAVEFORM_SUPPORT"] = "1"
+
+import nidaqmx  # noqa: E402 # Must import after setting environment variable
+from nidaqmx.constants import AcquisitionType, READ_ALL_AVAILABLE  # noqa: E402
+from nidaqmx.stream_readers import AnalogSingleChannelReader  # noqa: E402
 
 with nidaqmx.Task() as task:
     task.ai_channels.add_ai_voltage_chan("Dev1/ai0")

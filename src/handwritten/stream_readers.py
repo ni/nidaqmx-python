@@ -3,6 +3,7 @@ from __future__ import annotations
 import numpy
 from nidaqmx import DaqError
 
+from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, requires_feature
 from nidaqmx.constants import FillMode, READ_ALL_AVAILABLE
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.types import PowerMeasurement, CtrFreq, CtrTick, CtrTime
@@ -238,6 +239,7 @@ class AnalogSingleChannelReader(ChannelReaderBase):
         """
         return self._interpreter.read_analog_scalar_f64(self._handle, timeout)
 
+    @requires_feature(WAVEFORM_SUPPORT)
     def read_waveform(
         self, 
         number_of_samples_per_channel: int = READ_ALL_AVAILABLE, 
