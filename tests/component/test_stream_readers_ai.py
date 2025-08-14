@@ -309,14 +309,15 @@ def test___analog_single_channel_reader_with_timing_flag___read_waveform___only_
     waveform = reader.read_waveform(number_of_samples_per_channel=samples_to_read)
 
     assert isinstance(waveform, AnalogWaveform)
+    assert waveform.sample_count == samples_to_read
     expected = _get_voltage_offset_for_chan(0)
     assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
     assert isinstance(waveform.timing.timestamp, ht_datetime)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
+    assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.channel_name == ""
     assert waveform.unit_description == ""
-    assert waveform.sample_count == samples_to_read
 
 
 @pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
@@ -331,12 +332,12 @@ def test___analog_single_channel_reader_with_extended_properties_flag___read_wav
     waveform = reader.read_waveform(number_of_samples_per_channel=samples_to_read)
 
     assert isinstance(waveform, AnalogWaveform)
+    assert waveform.sample_count == samples_to_read
     expected = _get_voltage_offset_for_chan(0)
     assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.NONE
     assert waveform.channel_name == ai_single_channel_task_with_timing.ai_channels[0].name
     assert waveform.unit_description == "Volts"
-    assert waveform.sample_count == samples_to_read
 
 
 @pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
@@ -353,14 +354,15 @@ def test___analog_single_channel_reader_with_both_flags___read_waveform___includ
     waveform = reader.read_waveform(number_of_samples_per_channel=samples_to_read)
 
     assert isinstance(waveform, AnalogWaveform)
+    assert waveform.sample_count == samples_to_read
     expected = _get_voltage_offset_for_chan(0)
     assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
     assert isinstance(waveform.timing.timestamp, ht_datetime)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
+    assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.channel_name == ai_single_channel_task_with_timing.ai_channels[0].name
     assert waveform.unit_description == "Volts"
-    assert waveform.sample_count == samples_to_read
 
 
 @pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
@@ -375,12 +377,12 @@ def test___analog_single_channel_reader_with_none_flag___read_waveform___minimal
     waveform = reader.read_waveform(number_of_samples_per_channel=samples_to_read)
 
     assert isinstance(waveform, AnalogWaveform)
+    assert waveform.sample_count == samples_to_read
     expected = _get_voltage_offset_for_chan(0)
     assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.NONE
     assert waveform.channel_name == ""
     assert waveform.unit_description == ""
-    assert waveform.sample_count == samples_to_read
 
 
 def test___analog_multi_channel_reader___read_one_sample___returns_valid_samples(
