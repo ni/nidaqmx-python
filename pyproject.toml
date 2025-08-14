@@ -134,6 +134,9 @@ markers = [
   "grpc_session_name: specifies GrpcSessionOptions.session_name.",
   "grpc_session_initialization_behavior: specifies GrpcSessionOptions.initialization_behavior.",
   "temporary_grpc_channel(options=...): specifies that the test uses a separate gRPC channel.",
+  "disable_feature_toggle: specifies a feature toggle to disable for the test function/module.",
+  "enable_feature_toggle: specifies a feature toggle to enable for the test function/module.",
+  "use_code_readiness: specifies a code readiness level to use for the test function/module.",
 ]
 
 [build-system]
@@ -172,10 +175,12 @@ warn_unused_ignores = false
 
 [tool.pyright]
 typeCheckingMode = "basic"
-reportOptionalMemberAccess = false
 reportArgumentType = false
-reportOperatorIssue = false
 reportAttributeAccessIssue = false
+reportInvalidTypeForm = false
+reportOperatorIssue = false
+reportOptionalMemberAccess = false
+reportReturnType = false
 
 [tool.bandit]
 skips = [

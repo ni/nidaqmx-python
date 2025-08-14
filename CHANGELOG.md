@@ -32,7 +32,7 @@ All notable changes to this project will be documented in this file.
     * ...
 
 * ### Major Changes
-    * (IN PROGRESS) Added support for reading and writing Waveform data. 
+    * (IN PROGRESS behind "WAVEFORM_SUPPORT" feature toggle) Added support for reading and writing Waveform data. 
 
 * ### Known Issues
     * ...

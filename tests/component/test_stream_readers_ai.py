@@ -13,6 +13,7 @@ from nitypes.waveform import AnalogWaveform
 
 import nidaqmx
 import nidaqmx.system
+from nidaqmx._feature_toggles import FeatureNotSupportedError, WAVEFORM_SUPPORT
 from nidaqmx.constants import AcquisitionType
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.stream_readers import (
@@ -152,6 +153,20 @@ def test___analog_single_channel_reader___read_many_sample_with_wrong_dtype___ra
         _ = reader.read_many_sample(data, samples_to_read)
 
     assert "float64" in exc_info.value.args[0]
+
+
+@pytest.mark.disable_feature_toggle(WAVEFORM_SUPPORT)
+def test___analog_single_channel_reader___read_waveform_feature_disabled___raises_feature_not_supported_error(
+    ai_single_channel_task_with_timing: nidaqmx.Task,
+) -> None:
+    reader = AnalogSingleChannelReader(ai_single_channel_task_with_timing.in_stream)
+
+    with pytest.raises(FeatureNotSupportedError) as exc_info:
+        reader.read_waveform()
+
+    error_message = str(exc_info.value)
+    assert "WAVEFORM_SUPPORT feature is not supported" in error_message
+    assert "NIDAQMX_ENABLE_WAVEFORM_SUPPORT" in error_message
 
 
 @pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
