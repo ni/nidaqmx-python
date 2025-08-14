@@ -17,7 +17,7 @@ from nidaqmx.task.channels import Channel
 from nidaqmx.utils import unflatten_channel_string
 from nidaqmx.constants import (
     ${', '.join([c for c in enums_used]) | wrap(4, 4)})
-
+from nidaqmx.constants import WaveformAttributeModes
 
 class InStream:
     """
@@ -27,13 +27,14 @@ class InStream:
     used in conjunction with reader classes to read samples from an
     NI-DAQmx task.
     """
-    __slots__ = ('_task', '_handle', '_interpreter', '_timeout')
+    __slots__ = ('_task', '_handle', '_interpreter', '_timeout', '_waveform_attribute_mode')
 
     def __init__(self, task, interpreter):
         self._task = task
         self._handle = task._handle
         self._interpreter = interpreter
         self._timeout = 10.0
+        self._waveform_attribute_mode = WaveformAttributeModes.TIMING | WaveformAttributeModes.EXTENDED_PROPERTIES
 
         super().__init__()
 
@@ -351,3 +352,19 @@ ${property_template.script_property(attribute)}\
 
 <%namespace name="deprecated_template" file="/property_deprecated_template.py.mako"/>\
 ${deprecated_template.script_deprecated_property(attributes)}\
+
+    @property
+    def waveform_attribute_mode(self):
+        """
+        :class:`nidaqmx.constants.WaveformAttributeModes`: Specifies which waveform attributes to include when reading waveform data.
+        """
+        return self._waveform_attribute_mode
+
+    @waveform_attribute_mode.setter
+    def waveform_attribute_mode(self, val):
+        self._waveform_attribute_mode = val
+
+    @waveform_attribute_mode.deleter
+    def waveform_attribute_mode(self):
+        default_mode = WaveformAttributeModes.TIMING | WaveformAttributeModes.EXTENDED_PROPERTIES
+        self._waveform_attribute_mode = default_mode

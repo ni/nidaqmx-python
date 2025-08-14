@@ -15,7 +15,7 @@ from typing import Callable, List, Optional, Sequence, Tuple, TYPE_CHECKING
 
 from nidaqmx._base_interpreter import BaseEventHandler, BaseInterpreter
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer, TaskHandle
-from nidaqmx.constants import FillMode
+from nidaqmx.constants import FillMode, WaveformAttributeModes
 from nidaqmx.error_codes import DAQmxErrors, DAQmxWarnings
 from nidaqmx.errors import DaqError, DaqFunctionNotSupportedError, DaqReadError, DaqWarning, DaqWriteError
 from nidaqmx._lib_time import AbsoluteTime
@@ -6376,7 +6376,8 @@ class LibraryInterpreter(BaseInterpreter):
         task_handle: object,
         number_of_samples_per_channel: int,
         timeout: float,
-        waveform: AnalogWaveform[numpy.float64]
+        waveform: AnalogWaveform[numpy.float64],
+        waveform_attribute_mode: WaveformAttributeModes
     ) -> None:
         """Read an analog waveform with timing and attributes."""
         error_code, samples_read, timestamps, sample_intervals = self._internal_read_analog_waveform_ex(
@@ -6386,14 +6387,16 @@ class LibraryInterpreter(BaseInterpreter):
             timeout,
             FillMode.GROUP_BY_CHANNEL.value,
             waveform.raw_data,
-            [waveform.extended_properties]
+            [waveform.extended_properties],
+            waveform_attribute_mode
         )
 
-        waveform.timing = Timing(
-            sample_interval_mode=SampleIntervalMode.REGULAR,
-            timestamp=timestamps[0],
-            sample_interval=sample_intervals[0],
-        )
+        if WaveformAttributeModes.TIMING in waveform_attribute_mode:
+            waveform.timing = Timing(
+                sample_interval_mode=SampleIntervalMode.REGULAR,
+                timestamp=timestamps[0],
+                sample_interval=sample_intervals[0],
+            )
 
         # TODO: AB#3228924 - if the read was short, set waveform.sample_count before throwing the exception
         self.check_for_error(error_code, samps_per_chan_read=samples_read)
@@ -6406,7 +6409,8 @@ class LibraryInterpreter(BaseInterpreter):
         timeout: float,
         fill_mode: int,
         read_array: numpy.typing.NDArray[numpy.float64],
-        properties: Sequence[ExtendedPropertyDictionary]
+        properties: Sequence[ExtendedPropertyDictionary],
+        waveform_attribute_mode: WaveformAttributeModes
     ) -> Tuple[
         int, # error code
         int, # The number of samples per channel that were read
@@ -6446,7 +6450,8 @@ class LibraryInterpreter(BaseInterpreter):
             value: ExtendedPropertyValue,
             callback_data: object,
         ) -> int:
-            properties[channel_index][attribute_name] = value
+            if WaveformAttributeModes.EXTENDED_PROPERTIES in waveform_attribute_mode:
+                properties[channel_index][attribute_name] = value
             return 0
 
         error_code = cfunc(
