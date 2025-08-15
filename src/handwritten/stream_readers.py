@@ -510,12 +510,11 @@ class AnalogMultiChannelReader(ChannelReaderBase):
             A list of waveform objects containing the acquired samples,
             one for each channel in the task.
         """
+        number_of_channels = self._in_stream.num_chans
         number_of_samples_per_channel = (
             self._task._calculate_num_samps_per_chan(
                 number_of_samples_per_channel))
 
-        channels_to_read = self._in_stream.channels_to_read
-        number_of_channels = len(channels_to_read.channel_names)
 
         if waveforms is None:
             waveforms = [

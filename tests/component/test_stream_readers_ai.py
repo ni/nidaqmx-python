@@ -69,17 +69,13 @@ def ai_single_channel_task(
 
 @pytest.fixture
 def ai_single_channel_task_with_timing(
-    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
+    ai_single_channel_task: nidaqmx.Task,
 ) -> nidaqmx.Task:
-    offset = _get_voltage_offset_for_chan(0)
-    task.ai_channels.add_ai_voltage_chan(
-        sim_6363_device.ai_physical_chans[0].name,
-        min_val=offset,
-        max_val=offset + VOLTAGE_EPSILON,
-    )
     # Configure timing for waveform reading
-    task.timing.cfg_samp_clk_timing(1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=50)
-    return task
+    ai_single_channel_task.timing.cfg_samp_clk_timing(
+        1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=50
+    )
+    return ai_single_channel_task
 
 
 @pytest.fixture
@@ -119,23 +115,13 @@ def ai_multi_channel_task(
 
 @pytest.fixture
 def ai_multi_channel_task_with_timing(
-    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
+    ai_multi_channel_task: nidaqmx.Task,
 ) -> nidaqmx.Task:
-    for chan_index in range(3):
-        offset = _get_voltage_offset_for_chan(chan_index)
-        chan = task.ai_channels.add_ai_voltage_chan(
-            sim_6363_device.ai_physical_chans[chan_index].name,
-            min_val=offset,
-            # min and max must be different, so add a small epsilon
-            max_val=offset + VOLTAGE_EPSILON,
-        )
-        # forcing the maximum range for binary read scaling to be predictable
-        chan.ai_rng_high = 10
-        chan.ai_rng_low = -10
-
     # Configure timing for waveform reading
-    task.timing.cfg_samp_clk_timing(1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=50)
-    return task
+    ai_multi_channel_task.timing.cfg_samp_clk_timing(
+        1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=50
+    )
+    return ai_multi_channel_task
 
 
 def test___analog_single_channel_reader___read_one_sample___returns_valid_samples(
