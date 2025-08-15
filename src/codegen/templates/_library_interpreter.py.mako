@@ -28,7 +28,7 @@ from enum import Enum
 from datetime import timezone
 from hightime import datetime as ht_datetime
 from hightime import timedelta as ht_timedelta
-from typing import Callable, List, Optional, Sequence, Tuple, TYPE_CHECKING
+from typing import Callable, List, MutableSequence, Optional, Sequence, Tuple, TYPE_CHECKING
 
 from nidaqmx._base_interpreter import BaseEventHandler, BaseInterpreter
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer, TaskHandle
@@ -199,18 +199,31 @@ class LibraryInterpreter(BaseInterpreter):
         waveform_attribute_mode: WaveformAttributeMode
     ) -> None:
         """Read an analog waveform with timing and attributes."""
-        error_code, samples_read, timestamps, sample_intervals = self._internal_read_analog_waveform_ex(
+        if WaveformAttributeMode.EXTENDED_PROPERTIES in waveform_attribute_mode:
+            properties = [waveform.extended_properties]
+        else:
+            properties = None
+
+        if WaveformAttributeMode.TIMING in waveform_attribute_mode:
+            timestamps = [None]
+            sample_intervals = [None]
+        else:
+            timestamps = None
+            sample_intervals = None
+
+        error_code, samples_read = self._internal_read_analog_waveform_ex(
             task_handle,
             1, # single channel
             number_of_samples_per_channel,
             timeout,
             FillMode.GROUP_BY_CHANNEL.value,
             waveform.raw_data,
-            [waveform.extended_properties],
-            waveform_attribute_mode
+            properties,
+            timestamps,
+            sample_intervals,
         )
 
-        if WaveformAttributeMode.TIMING in waveform_attribute_mode:
+        if timestamps is not None and sample_intervals is not None:
             waveform.timing = Timing(
                 sample_interval_mode=SampleIntervalMode.REGULAR,
                 timestamp=timestamps[0],
@@ -228,16 +241,39 @@ class LibraryInterpreter(BaseInterpreter):
         timeout: float,
         fill_mode: int,
         read_array: numpy.typing.NDArray[numpy.float64],
-        properties: Sequence[ExtendedPropertyDictionary],
-        waveform_attribute_mode: WaveformAttributeMode
+        properties: Sequence[ExtendedPropertyDictionary] | None,
+        timestamps: MutableSequence[ht_datetime] | None,
+        sample_intervals: MutableSequence[ht_timedelta] | None,
     ) -> Tuple[
         int, # error code
         int, # The number of samples per channel that were read
-        Sequence[ht_datetime], # The timestamps for each sample, indexed by channel
-        Sequence[ht_timedelta], # The sample intervals, indexed by channel
     ]:
         assert isinstance(task_handle, TaskHandle)
         samps_per_chan_read = ctypes.c_int()
+
+        if properties is not None:
+            def set_wfm_attr_callback(
+                channel_index: int,
+                attribute_name: str,
+                attribute_type: WfmAttrType,
+                value: ExtendedPropertyValue,
+                callback_data: object,
+            ) -> int:
+                properties[channel_index][attribute_name] = value
+                return 0
+            wfm_attr_callback = self._get_wfm_attr_callback_ptr(set_wfm_attr_callback)
+        else:
+            wfm_attr_callback = CSetWfmAttrCallbackPtr()
+
+        if timestamps is not None:
+            t0_array = numpy.zeros(channel_count, dtype=numpy.int64)
+        else:
+            t0_array = None
+
+        if sample_intervals is not None:
+            dt_array = numpy.zeros(channel_count, dtype=numpy.int64)
+        else:
+            dt_array = None
 
         cfunc = lib_importer.windll.DAQmxInternalReadAnalogWaveformEx
         if cfunc.argtypes is None:
@@ -259,20 +295,6 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.POINTER(c_bool32),
                     ]
 
-        t0_array = numpy.zeros(channel_count, dtype=numpy.int64)
-        dt_array = numpy.zeros(channel_count, dtype=numpy.int64)
-
-        def set_wfm_attr_callback(
-            channel_index: int,
-            attribute_name: str,
-            attribute_type: WfmAttrType,
-            value: ExtendedPropertyValue,
-            callback_data: object,
-        ) -> int:
-            if WaveformAttributeMode.EXTENDED_PROPERTIES in waveform_attribute_mode:
-                properties[channel_index][attribute_name] = value
-            return 0
-
         error_code = cfunc(
             task_handle,
             number_of_samples_per_channel,
@@ -281,7 +303,7 @@ class LibraryInterpreter(BaseInterpreter):
             t0_array,
             dt_array,
             0 if t0_array is None else t0_array.size,
-            self._get_wfm_attr_callback_ptr(set_wfm_attr_callback),
+            wfm_attr_callback,
             None,
             read_array,
             read_array.size,
@@ -289,10 +311,13 @@ class LibraryInterpreter(BaseInterpreter):
             None,
         )
 
-        timestamps = [_T0_EPOCH + ht_timedelta(seconds=t0 * _INT64_WFM_SEC_PER_TICK) for t0 in t0_array]
-        sample_intervals = [ht_timedelta(seconds=dt * _INT64_WFM_SEC_PER_TICK) for dt in dt_array]
+        if timestamps is not None and t0_array is not None:
+            timestamps[:] = [_T0_EPOCH + ht_timedelta(seconds=t0 * _INT64_WFM_SEC_PER_TICK) for t0 in t0_array]
 
-        return error_code, samps_per_chan_read.value, timestamps, sample_intervals
+        if sample_intervals is not None and dt_array is not None:
+            sample_intervals[:] = [ht_timedelta(seconds=dt * _INT64_WFM_SEC_PER_TICK) for dt in dt_array]
+
+        return error_code, samps_per_chan_read.value
 
     def _get_wfm_attr_value(
         self, attribute_type: int, value: ctypes.c_void_p, value_size_in_bytes: int
@@ -314,11 +339,8 @@ class LibraryInterpreter(BaseInterpreter):
             raise ValueError(f"Unsupported attribute type {attribute_type}")
 
     def _get_wfm_attr_callback_ptr(
-        self, set_wfm_attr_callback: Optional[SetWfmAttrCallback]
+        self, set_wfm_attr_callback: SetWfmAttrCallback
     ) -> ctypes._FuncPointer:
-        if set_wfm_attr_callback is None:
-            return CSetWfmAttrCallbackPtr()
-
         def _invoke_callback(
             channel_index: int,
             attribute_name: bytes,
