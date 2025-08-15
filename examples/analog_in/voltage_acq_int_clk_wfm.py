@@ -9,7 +9,7 @@ import os
 os.environ["NIDAQMX_ENABLE_WAVEFORM_SUPPORT"] = "1"
 
 import nidaqmx  # noqa: E402 # Must import after setting environment variable
-from nidaqmx.constants import READ_ALL_AVAILABLE, AcquisitionType  # noqa: E402
+from nidaqmx.constants import AcquisitionType, READ_ALL_AVAILABLE  # noqa: E402
 from nidaqmx.stream_readers import AnalogSingleChannelReader  # noqa: E402
 
 with nidaqmx.Task() as task:
