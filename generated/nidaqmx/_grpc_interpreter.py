@@ -6,7 +6,7 @@ import threading
 import typing
 import warnings
 from nitypes.waveform import AnalogWaveform
-from typing import Callable, Generic, TypeVar
+from typing import Callable, Generic, Sequence, TypeVar
 
 import google.protobuf.message
 from google.protobuf.timestamp_pb2 import Timestamp as GrpcTimestamp
@@ -3607,6 +3607,15 @@ class GrpcStubInterpreter(BaseInterpreter):
         number_of_samples_per_channel: int,
         timeout: float,
         waveform: AnalogWaveform[numpy.float64]
+    ) -> None:
+        raise NotImplementedError
+
+    def read_analog_waveforms(
+        self,
+        task_handle: object,
+        number_of_samples_per_channel: int,
+        timeout: float,
+        waveforms: Sequence[AnalogWaveform[numpy.float64]]
     ) -> None:
         raise NotImplementedError
 
