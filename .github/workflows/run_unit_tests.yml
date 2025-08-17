@@ -11,10 +11,13 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "pypy3.10", "pypy3.11"]
       # Fail-fast skews the pass/fail ratio and seems to make pytest produce
       # incomplete JUnit XML results.
       fail-fast: false
+    env:
+      install-opts: ${{ startsWith('pypy', matrix.python-version) && '' || '--extras grpc' }}
+      pytest-opts: ${{ startsWith('pypy', matrix.python-version) && '-k "not grpc"' || '' }}
     steps:
       - name: Check out repo
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -25,9 +28,42 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Set up Poetry
         uses: ni/python-actions/setup-poetry@5286c12d65d90b2ea738bd57d452dc4366497581 # v0.4.1
-      - name: Restore cached virtualenv (main only)
-        uses: actions/cache/restore@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
-        id: restore-nidaqmx-main-only
+      - name: Cache virtualenv (with test dependencies)
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        with:
+          path: .venv
+          key: nidaqmx-with-test-${{ runner.os }}-py${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('poetry.lock') }}
+      - name: Install test dependencies
+        run: poetry install --only main,test ${{ env.install-opts }}
+      - name: Run unit tests
+        run: poetry run pytest -v --cov=generated/nidaqmx --junitxml=test_results/unit-${{ matrix.os }}-py${{ matrix.python-version }}.xml tests/unit ${{ env.pytest-opts }}
+      - name: Upload test results
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: test_results_unit_${{ matrix.os }}_py${{ matrix.python-version }}
+          path: test_results/*.xml
+        if: always()
+  test_installdriver:
+    name: Test installdriver
+    runs-on:
+      - ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ["3.9", "3.13"]
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: ni/python-actions/setup-python@5286c12d65d90b2ea738bd57d452dc4366497581 # v0.4.1
+        id: setup-python
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Set up Poetry
+        uses: ni/python-actions/setup-poetry@5286c12d65d90b2ea738bd57d452dc4366497581 # v0.4.1
+      - name: Cache virtualenv (main only)
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        id: cache-nidaqmx-main-only
         with:
           path: .venv
           key: nidaqmx-main-only-${{ runner.os }}-py${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('poetry.lock') }}
@@ -37,24 +73,3 @@ jobs:
           poetry install --only main
       - name: check installdriver subcommand can be invoked
         run: poetry run nidaqmx installdriver --help
-      - name: Save cached virtualenv (main only)
-        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
-        if: steps.restore-nidaqmx-main-only.outputs.cache-hit != 'true'
-        with:
-          path: .venv
-          key: ${{ steps.restore-nidaqmx-main-only.outputs.cache-primary-key }}
-      - name: Cache virtualenv (with dev dependencies)
-        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
-        with:
-          path: .venv
-          key: nidaqmx-with-dev-${{ runner.os }}-py${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('poetry.lock') }}
-      - name: Install dev dependencies
-        run: poetry install
-      - name: Run unit tests
-        run: poetry run pytest -v --cov=generated/nidaqmx --junitxml=test_results/unit-${{ matrix.os }}-py${{ matrix.python-version }}.xml tests/unit
-      - name: Upload test results
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-        with:
-          name: test_results_unit_${{ matrix.os }}_py${{ matrix.python-version }}
-          path: test_results/*.xml
-        if: always()
