@@ -33,6 +33,14 @@ All notable changes to this project will be documented in this file.
 
 * ### Major Changes
     * (IN PROGRESS behind "WAVEFORM_SUPPORT" feature toggle) Added support for reading and writing Waveform data. 
+    * Simplify `numpy` and `click` version constraints.
+        * `nidaqmx` supports a wider range of Python versions than `numpy` and `click`, so testing
+          `nidaqmx` against its oldest supported Python version (currently 3.9) requires downgrading
+          to older versions of `numpy` and `click`.
+        * Previously, these testing-specific version constraints leaked into to the `nidaqmx`
+          distribution package and affected clients. Adding PyPy-specific constraints exacerbated
+          this problem. Now, the distribution package specifies only a lower bound for the `numpy`
+          and `click` versions.
 
 * ### Known Issues
     * ...
