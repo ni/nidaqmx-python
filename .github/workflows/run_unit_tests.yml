@@ -16,7 +16,7 @@ jobs:
       # incomplete JUnit XML results.
       fail-fast: false
     env:
-      install-opts: ${{ startsWith(matrix.python-version, 'pypy') && '' || '--extras grpc' }}
+      install-opts: ${{ !startsWith(matrix.python-version, 'pypy') && '--extras grpc' || '' }}
       pytest-opts: ${{ startsWith(matrix.python-version, 'pypy') && '-k "not grpc"' || '' }}
     steps:
       - name: Check out repo
