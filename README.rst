@@ -55,7 +55,9 @@ system.
 Python Version Support
 ----------------------
 
-**nidaqmx** supports CPython 3.9+ and PyPy3.
+**nidaqmx** supports CPython 3.9+.
+
+**nidaqmx** supports PyPy3 for non-gRPC use cases.
 
 Installation
 ============

@@ -41,6 +41,7 @@ All notable changes to this project will be documented in this file.
           distribution package and affected clients. Adding PyPy-specific constraints exacerbated
           this problem. Now, the distribution package specifies only a lower bound for the `numpy`
           and `click` versions.
+    * Clarify PyPy support and enable unit testing with PyPy.
 
 * ### Known Issues
     * ...
