@@ -158,3 +158,25 @@ def test___analog_multi_channel___read_waveform_many_samples___returns_waveforms
         expected = _get_voltage_offset_for_chan(chan_index)
         assert waveform.sample_count == samples_to_read
         assert waveform.raw_data[0] == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+
+
+@pytest.mark.xfail(
+    reason="Task.read_waveform doesn't handle short reads yet - TODO: AB#3228924",
+    raises=AssertionError,
+)
+@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
+def test___analog_multi_channel_finite___read_waveform_too_many_samples___returns_waveforms_with_correct_number_of_samples(
+    ai_multi_channel_task: nidaqmx.Task,
+) -> None:
+    samples_to_read = 100
+    samples_available = 50
+
+    waveforms = ai_multi_channel_task.read_waveform(samples_to_read)
+
+    assert isinstance(waveforms, list)
+    assert len(waveforms) == ai_multi_channel_task.number_of_channels
+    assert all(isinstance(waveform, AnalogWaveform) for waveform in waveforms)
+    for chan_index, waveform in enumerate(waveforms):
+        expected = _get_voltage_offset_for_chan(chan_index)
+        assert waveform.sample_count == samples_available
+        assert waveform.raw_data[0] == pytest.approx(expected, abs=VOLTAGE_EPSILON)
