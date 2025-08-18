@@ -213,7 +213,6 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code, samples_read = self._internal_read_analog_waveform_ex(
             task_handle,
-            1, # single channel
             number_of_samples_per_channel,
             timeout,
             FillMode.GROUP_BY_CHANNEL.value,
@@ -270,7 +269,6 @@ class LibraryInterpreter(BaseInterpreter):
     def _internal_read_analog_waveform_ex(
         self,
         task_handle: object,
-        channel_count: int,
         number_of_samples_per_channel: int,
         timeout: float,
         fill_mode: int,
@@ -284,20 +282,6 @@ class LibraryInterpreter(BaseInterpreter):
     ]:
         assert isinstance(task_handle, TaskHandle)
         samps_per_chan_read = ctypes.c_int()
-
-        if properties is not None:
-            def set_wfm_attr_callback(
-                channel_index: int,
-                attribute_name: str,
-                attribute_type: WfmAttrType,
-                value: ExtendedPropertyValue,
-                callback_data: object,
-            ) -> int:
-                properties[channel_index][attribute_name] = value
-                return 0
-            wfm_attr_callback = self._get_wfm_attr_callback_ptr(set_wfm_attr_callback)
-        else:
-            wfm_attr_callback = CSetWfmAttrCallbackPtr()
 
         cfunc = lib_importer.windll.DAQmxInternalReadAnalogWaveformEx
         if cfunc.argtypes is None:
@@ -327,7 +311,7 @@ class LibraryInterpreter(BaseInterpreter):
             t0_array,
             dt_array,
             0 if t0_array is None else t0_array.size,
-            wfm_attr_callback,
+            self._get_wfm_attr_callback(properties),
             None,
             read_array,
             read_array.size,
@@ -357,20 +341,6 @@ class LibraryInterpreter(BaseInterpreter):
         assert channel_count > 0
         array_size = read_arrays[0].size
         assert all(read_array.size == array_size for read_array in read_arrays)
-
-        if properties is not None:
-            def set_wfm_attr_callback(
-                channel_index: int,
-                attribute_name: str,
-                attribute_type: WfmAttrType,
-                value: ExtendedPropertyValue,
-                callback_data: object,
-            ) -> int:
-                properties[channel_index][attribute_name] = value
-                return 0
-            wfm_attr_callback = self._get_wfm_attr_callback_ptr(set_wfm_attr_callback)
-        else:
-            wfm_attr_callback = CSetWfmAttrCallbackPtr()
 
         cfunc = lib_importer.windll.DAQmxInternalReadAnalogWaveformPerChan
         if cfunc.argtypes is None:
@@ -403,7 +373,7 @@ class LibraryInterpreter(BaseInterpreter):
             t0_array,
             dt_array,
             0 if t0_array is None else t0_array.size,
-            wfm_attr_callback,
+            self._get_wfm_attr_callback(properties),
             None,
             read_array_ptrs,
             channel_count,
@@ -415,6 +385,20 @@ class LibraryInterpreter(BaseInterpreter):
 
         return error_code, samps_per_chan_read.value
 
+    def _get_wfm_attr_callback(self, properties):
+        if properties is not None:
+            def set_wfm_attr_callback(
+                channel_index: int,
+                attribute_name: str,
+                attribute_type: WfmAttrType,
+                value: ExtendedPropertyValue,
+                callback_data: object,
+            ) -> int:
+                properties[channel_index][attribute_name] = value
+                return 0
+            return self._get_wfm_attr_callback_ptr(set_wfm_attr_callback)
+        else:
+            return CSetWfmAttrCallbackPtr()
 
     def _get_wfm_attr_value(
         self, attribute_type: int, value: ctypes.c_void_p, value_size_in_bytes: int
