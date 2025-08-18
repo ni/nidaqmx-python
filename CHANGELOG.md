@@ -38,9 +38,12 @@ All notable changes to this project will be documented in this file.
           `nidaqmx` against its oldest supported Python version (currently 3.9) requires downgrading
           to older versions of `numpy` and `click`.
         * Previously, these testing-specific version constraints leaked into to the `nidaqmx`
-          distribution package and affected clients. Adding PyPy-specific constraints exacerbated
-          this problem. Now, the distribution package specifies only a lower bound for the `numpy`
-          and `click` versions.
+          distribution package and affected clients. Adding PyPy-specific markers exacerbated
+          this problem by requiring clients to specify the same markers.
+        * `numpy` 2.0.x is the last version that supports Python 3.9, and it crashes with Python
+          3.13, so the `nidaqmx` distribution package specifies two `numpy` version constraints:
+          one for Python 3.9-3.12 (numpy>=1.22) and one for Python 3.13+ (numpy>=2.1).
+        * The `nidaqmx` distribution package now specifies only a lower bound for `click`.
     * Clarify PyPy support and enable unit testing with PyPy.
 
 * ### Known Issues
