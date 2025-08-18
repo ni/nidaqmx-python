@@ -6419,7 +6419,8 @@ class LibraryInterpreter(BaseInterpreter):
         task_handle: object,
         number_of_samples_per_channel: int,
         timeout: float,
-        waveforms: Sequence[AnalogWaveform[numpy.float64]]
+        waveforms: Sequence[AnalogWaveform[numpy.float64]],
+        waveform_attribute_mode: WaveformAttributeMode
     ) -> None:
         """Read a set of analog waveforms with timing and attributes. All of the waveforms must be the same size."""
         error_code, samples_read, timestamps, sample_intervals = self.internal_read_analog_waveform_per_chan(

@@ -2,8 +2,8 @@
 import abc
 import numpy
 from nitypes.waveform import AnalogWaveform
-from nidaqmx.constants import WaveformAttributeMode
 from typing import Sequence
+from nidaqmx.constants import WaveformAttributeMode
 
 
 class BaseEventHandler(abc.ABC):
