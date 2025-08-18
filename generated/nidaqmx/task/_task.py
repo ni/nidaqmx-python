@@ -3,9 +3,9 @@ from __future__ import annotations
 import threading
 import warnings
 from enum import Enum
-from typing import List, Tuple, Union
 
 import numpy
+from nitypes.waveform import AnalogWaveform
 from nidaqmx import utils
 from nidaqmx.task.channels._channel import Channel
 from nidaqmx.task._export_signals import ExportSignals
@@ -767,6 +767,115 @@ class Task:
                     PowerMeasurement(voltage=v, current=i)
                     for v, i in zip(voltages, currents)
                 ][:samples_read]
+
+    def read_waveform(self, number_of_samples_per_channel=READ_ALL_AVAILABLE,
+             timeout=10.0):
+        """
+        Reads samples from the task or virtual channels you specify, and returns them as waveforms.
+
+        This read method is dynamic, and is capable of inferring an appropriate
+        return type based on these factors:
+        - The channel type of the task.
+        - The number of channels to read.
+        - The number of samples per channel.
+
+        The data type of the samples returned is independently determined by
+        the channel type of the task.
+
+        If you do not set the number of samples per channel, this method
+        reads all available data for each channel.
+
+        Args:
+            number_of_samples_per_channel (Optional[int]): Specifies the
+                number of samples to read. If this input is not set,
+                it defaults to nidaqmx.constants.READ_ALL_AVAILABLE.
+
+                If this input is nidaqmx.constants.READ_ALL_AVAILABLE, 
+                NI-DAQmx determines how many samples
+                to read based on if the task acquires samples
+                continuously or acquires a finite number of samples.
+
+                If the task acquires samples continuously and you set
+                this input to nidaqmx.constants.READ_ALL_AVAILABLE, this
+                method reads all the samples currently available in the
+                buffer.
+
+                If the task acquires a finite number of samples and you
+                set this input to nidaqmx.constants.READ_ALL_AVAILABLE,
+                the method waits for the task to acquire all requested
+                samples, then reads those samples. If you set the
+                "read_all_avail_samp" property to True, the method reads
+                the samples currently available in the buffer and does
+                not wait for the task to acquire all requested samples.
+            timeout (Optional[float]): Specifies the amount of time in
+                seconds to wait for samples to become available. If the
+                time elapses, the method returns an error and any
+                samples read before the timeout elapsed. The default
+                timeout is 10 seconds. If you set timeout to
+                nidaqmx.constants.WAIT_INFINITELY, the method waits
+                indefinitely. If you set timeout to 0, the method tries
+                once to read the requested samples and returns an error
+                if it is unable to.
+        Returns:
+            dynamic:
+
+            The samples requested in the form of a waveform (for a single channel)
+            or a list of waveforms (for multiple channels).
+            See method docstring for more info.
+
+            NI-DAQmx scales the data to the units of the measurement,
+            including any custom scaling you apply to the channels. Use a
+            DAQmx Create Channel method to specify these units.
+
+        Example:
+            >>> task = Task()
+            >>> task.ai_channels.add_ai_voltage_chan('Dev1/ai0')
+            >>> data = task.read_waveform()
+            >>> type(data)
+            <type 'AnalogWaveform'>
+        """
+        channels_to_read = self.in_stream.channels_to_read
+        number_of_channels = len(channels_to_read.channel_names)
+        read_chan_type = channels_to_read.chan_type
+
+        number_of_samples_per_channel = self._calculate_num_samps_per_chan(
+            number_of_samples_per_channel)
+
+        if read_chan_type == ChannelType.ANALOG_INPUT:
+            if number_of_channels == 1:
+                waveform = AnalogWaveform(raw_data=numpy.zeros(number_of_samples_per_channel, dtype=numpy.float64))
+                self._interpreter.read_analog_waveform(
+                    self._handle,
+                    number_of_samples_per_channel,
+                    timeout,
+                    waveform,
+                    self._in_stream.waveform_attribute_mode,
+                )
+                return waveform
+            else:
+                waveforms = [
+                    AnalogWaveform(raw_data=numpy.zeros(number_of_samples_per_channel, dtype=numpy.float64))
+                    for _ in range(number_of_channels)
+                ]
+                self._interpreter.read_analog_waveforms(
+                    self._handle,
+                    number_of_samples_per_channel,
+                    timeout,
+                    waveforms,
+                    self._in_stream.waveform_attribute_mode,
+                )
+                return waveforms
+
+        elif (read_chan_type == ChannelType.DIGITAL_INPUT or
+                read_chan_type == ChannelType.DIGITAL_OUTPUT):
+            raise NotImplementedError("Digital input/output reading is not implemented yet.")
+
+        else:
+            raise DaqError(
+                'Read failed, because there are no channels in this task from '
+                'which data can be read.',
+                DAQmxErrors.READ_NO_INPUT_CHANS_IN_TASK,
+                task_name=self.name)
 
     def register_done_event(self, callback_method):
         """

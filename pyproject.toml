@@ -181,6 +181,7 @@ reportArgumentType = false
 reportAttributeAccessIssue = false
 reportInvalidTypeForm = false
 reportOperatorIssue = false
+reportOptionalIterable = false
 reportOptionalMemberAccess = false
 reportReturnType = false
 
