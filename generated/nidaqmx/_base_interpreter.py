@@ -3,6 +3,7 @@ import abc
 import numpy
 from nitypes.waveform import AnalogWaveform
 from nidaqmx.constants import WaveformAttributeMode
+from typing import Sequence
 
 
 class BaseEventHandler(abc.ABC):
@@ -1856,6 +1857,17 @@ class BaseInterpreter(abc.ABC):
         number_of_samples_per_channel: int,
         timeout: float,
         waveform: AnalogWaveform[numpy.float64],
+        waveform_attribute_mode: WaveformAttributeMode
+    ) -> None:
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def read_analog_waveforms(
+        self,
+        task_handle: object,
+        number_of_samples_per_channel: int,
+        timeout: float,
+        waveforms: Sequence[AnalogWaveform[numpy.float64]],
         waveform_attribute_mode: WaveformAttributeMode
     ) -> None:
         raise NotImplementedError

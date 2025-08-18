@@ -20,6 +20,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - name: Set up Python ${{ matrix.python-version }}
         uses: ni/python-actions/setup-python@5286c12d65d90b2ea738bd57d452dc4366497581 # v0.4.1
+        id: setup-python
         with:
           python-version: ${{ matrix.python-version }}
       - name: Set up Poetry
@@ -29,7 +30,7 @@ jobs:
         id: restore-nidaqmx-main-only
         with:
           path: .venv
-          key: nidaqmx-main-only-${{ runner.os }}-py${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
+          key: nidaqmx-main-only-${{ runner.os }}-py${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('poetry.lock') }}
       - name: Install main package dependencies
         run: |
           python -m pip install --upgrade pip
@@ -46,7 +47,7 @@ jobs:
         uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         with:
           path: .venv
-          key: nidaqmx-with-dev-${{ runner.os }}-py${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
+          key: nidaqmx-with-dev-${{ runner.os }}-py${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('poetry.lock') }}
       - name: Install dev dependencies
         run: poetry install
       - name: Run unit tests
