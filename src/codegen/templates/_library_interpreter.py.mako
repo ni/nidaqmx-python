@@ -452,10 +452,10 @@ class LibraryInterpreter(BaseInterpreter):
     ) -> None:
         for i, waveform in enumerate(waveforms):
             waveform.timing = Timing(
-                    sample_interval_mode=SampleIntervalMode.REGULAR,
-                    timestamp=_T0_EPOCH + ht_timedelta(seconds=t0_array[i] * _INT64_WFM_SEC_PER_TICK),
-                    sample_interval=ht_timedelta(seconds=dt_array[i] * _INT64_WFM_SEC_PER_TICK),
-                )
+                sample_interval_mode=SampleIntervalMode.REGULAR,
+                timestamp=_T0_EPOCH + ht_timedelta(seconds=t0_array[i] * _INT64_WFM_SEC_PER_TICK),
+                sample_interval=ht_timedelta(seconds=dt_array[i] * _INT64_WFM_SEC_PER_TICK),
+            )
 
     ## DAQmxReadIDPinMemory returns the size if given a null pointer.
     ## So, we read 1st time to get the size, then read 2nd time to get the data.

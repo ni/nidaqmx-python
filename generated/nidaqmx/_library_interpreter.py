@@ -6632,10 +6632,10 @@ class LibraryInterpreter(BaseInterpreter):
     ) -> None:
         for i, waveform in enumerate(waveforms):
             waveform.timing = Timing(
-                    sample_interval_mode=SampleIntervalMode.REGULAR,
-                    timestamp=_T0_EPOCH + ht_timedelta(seconds=t0_array[i] * _INT64_WFM_SEC_PER_TICK),
-                    sample_interval=ht_timedelta(seconds=dt_array[i] * _INT64_WFM_SEC_PER_TICK),
-                )
+                sample_interval_mode=SampleIntervalMode.REGULAR,
+                timestamp=_T0_EPOCH + ht_timedelta(seconds=t0_array[i] * _INT64_WFM_SEC_PER_TICK),
+                sample_interval=ht_timedelta(seconds=dt_array[i] * _INT64_WFM_SEC_PER_TICK),
+            )
 
     def read_id_pin_memory(self, device_name, id_pin_name):
         data_length_read = ctypes.c_uint()
