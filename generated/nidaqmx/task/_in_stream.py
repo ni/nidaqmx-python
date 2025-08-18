@@ -12,7 +12,7 @@ from nidaqmx.utils import unflatten_channel_string
 from nidaqmx.constants import (
     AcquisitionType, LoggingMode, LoggingOperation, OverwriteMode,
     READ_ALL_AVAILABLE, ReadRelativeTo, WaitMode)
-
+from nidaqmx.constants import WaveformAttributeMode
 
 class InStream:
     """
@@ -22,13 +22,14 @@ class InStream:
     used in conjunction with reader classes to read samples from an
     NI-DAQmx task.
     """
-    __slots__ = ('_task', '_handle', '_interpreter', '_timeout')
+    __slots__ = ('_task', '_handle', '_interpreter', '_timeout', '_waveform_attribute_mode')
 
     def __init__(self, task, interpreter):
         self._task = task
         self._handle = task._handle
         self._interpreter = interpreter
         self._timeout = 10.0
+        self._waveform_attribute_mode = WaveformAttributeMode.TIMING | WaveformAttributeMode.EXTENDED_PROPERTIES
 
         super().__init__()
 
@@ -1263,3 +1264,18 @@ class InStream:
     def over_write(self):
         del self.overwrite
 
+
+    @property
+    def waveform_attribute_mode(self):
+        """
+        :class:`nidaqmx.constants.WaveformAttributeMode`: Specifies the type of information returned from waveform reads.
+        """
+        return self._waveform_attribute_mode
+
+    @waveform_attribute_mode.setter
+    def waveform_attribute_mode(self, val):
+        self._waveform_attribute_mode = val
+
+    @waveform_attribute_mode.deleter
+    def waveform_attribute_mode(self):
+        self._waveform_attribute_mode = WaveformAttributeMode.TIMING | WaveformAttributeMode.EXTENDED_PROPERTIES

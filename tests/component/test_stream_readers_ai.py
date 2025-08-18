@@ -9,12 +9,12 @@ import numpy
 import numpy.typing
 import pytest
 from hightime import datetime as ht_datetime, timedelta as ht_timedelta
-from nitypes.waveform import AnalogWaveform
+from nitypes.waveform import AnalogWaveform, SampleIntervalMode
 
 import nidaqmx
 import nidaqmx.system
 from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
-from nidaqmx.constants import AcquisitionType
+from nidaqmx.constants import AcquisitionType, WaveformAttributeMode
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.stream_readers import (
     AnalogMultiChannelReader,
@@ -304,6 +304,94 @@ def test___analog_single_channel_reader___read_waveform_high_sample_rate___retur
     assert waveform.sample_count == samples_to_read
 
 
+@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
+def test___analog_single_channel_reader_with_timing_flag___read_waveform___only_includes_timing_data(
+    ai_single_channel_task_with_timing: nidaqmx.Task,
+) -> None:
+    in_stream = ai_single_channel_task_with_timing.in_stream
+    in_stream.waveform_attribute_mode = WaveformAttributeMode.TIMING
+    reader = AnalogSingleChannelReader(in_stream)
+    samples_to_read = 10
+
+    waveform = reader.read_waveform(number_of_samples_per_channel=samples_to_read)
+
+    assert isinstance(waveform, AnalogWaveform)
+    assert waveform.sample_count == samples_to_read
+    expected = _get_voltage_offset_for_chan(0)
+    assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert isinstance(waveform.timing.timestamp, ht_datetime)
+    assert _is_timestamp_close_to_now(waveform.timing.timestamp)
+    assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
+    assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
+    assert waveform.channel_name == ""
+    assert waveform.unit_description == ""
+
+
+@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
+def test___analog_single_channel_reader_with_extended_properties_flag___read_waveform___only_includes_extended_properties(
+    ai_single_channel_task_with_timing: nidaqmx.Task,
+) -> None:
+    in_stream = ai_single_channel_task_with_timing.in_stream
+    in_stream.waveform_attribute_mode = WaveformAttributeMode.EXTENDED_PROPERTIES
+    reader = AnalogSingleChannelReader(in_stream)
+    samples_to_read = 10
+
+    waveform = reader.read_waveform(number_of_samples_per_channel=samples_to_read)
+
+    assert isinstance(waveform, AnalogWaveform)
+    assert waveform.sample_count == samples_to_read
+    expected = _get_voltage_offset_for_chan(0)
+    assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert waveform.timing.sample_interval_mode == SampleIntervalMode.NONE
+    assert waveform.channel_name == ai_single_channel_task_with_timing.ai_channels[0].name
+    assert waveform.unit_description == "Volts"
+
+
+@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
+def test___analog_single_channel_reader_with_both_flags___read_waveform___includes_both_timing_and_extended_properties(
+    ai_single_channel_task_with_timing: nidaqmx.Task,
+) -> None:
+    in_stream = ai_single_channel_task_with_timing.in_stream
+    in_stream.waveform_attribute_mode = (
+        WaveformAttributeMode.TIMING | WaveformAttributeMode.EXTENDED_PROPERTIES
+    )
+    reader = AnalogSingleChannelReader(in_stream)
+    samples_to_read = 10
+
+    waveform = reader.read_waveform(number_of_samples_per_channel=samples_to_read)
+
+    assert isinstance(waveform, AnalogWaveform)
+    assert waveform.sample_count == samples_to_read
+    expected = _get_voltage_offset_for_chan(0)
+    assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert isinstance(waveform.timing.timestamp, ht_datetime)
+    assert _is_timestamp_close_to_now(waveform.timing.timestamp)
+    assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
+    assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
+    assert waveform.channel_name == ai_single_channel_task_with_timing.ai_channels[0].name
+    assert waveform.unit_description == "Volts"
+
+
+@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
+def test___analog_single_channel_reader_with_none_flag___read_waveform___minimal_waveform_data(
+    ai_single_channel_task_with_timing: nidaqmx.Task,
+) -> None:
+    in_stream = ai_single_channel_task_with_timing.in_stream
+    in_stream.waveform_attribute_mode = WaveformAttributeMode.NONE
+    reader = AnalogSingleChannelReader(in_stream)
+    samples_to_read = 10
+
+    waveform = reader.read_waveform(number_of_samples_per_channel=samples_to_read)
+
+    assert isinstance(waveform, AnalogWaveform)
+    assert waveform.sample_count == samples_to_read
+    expected = _get_voltage_offset_for_chan(0)
+    assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert waveform.timing.sample_interval_mode == SampleIntervalMode.NONE
+    assert waveform.channel_name == ""
+    assert waveform.unit_description == ""
+
+
 def test___analog_multi_channel_reader___read_one_sample___returns_valid_samples(
     ai_multi_channel_task: nidaqmx.Task,
 ) -> None:
@@ -493,6 +581,118 @@ def test___analog_multi_channel_reader___read_with_wrong_number_of_waveforms___t
 
     assert exc_info.value.error_code == DAQmxErrors.MISMATCHED_INPUT_ARRAY_SIZES
     assert "does not match the number of channels" in exc_info.value.args[0]
+
+
+@pytest.mark.grpc_skip(reason="read_analog_waveforms not implemented in GRPC")
+def test___analog_multi_channel_reader_with_timing_flag___read_waveforms___only_includes_timing_data(
+    ai_multi_channel_task_with_timing: nidaqmx.Task,
+) -> None:
+    in_stream = ai_multi_channel_task_with_timing.in_stream
+    in_stream.waveform_attribute_mode = WaveformAttributeMode.TIMING
+    reader = AnalogMultiChannelReader(in_stream)
+    num_channels = ai_multi_channel_task_with_timing.number_of_channels
+    samples_to_read = 10
+
+    waveforms = reader.read_waveforms(number_of_samples_per_channel=samples_to_read)
+
+    assert num_channels == 3
+    assert isinstance(waveforms, list)
+    assert len(waveforms) == num_channels
+    for chan_index, waveform in enumerate(waveforms):
+        assert isinstance(waveform, AnalogWaveform)
+        expected = _get_voltage_offset_for_chan(chan_index)
+        assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+        assert isinstance(waveform.timing.timestamp, ht_datetime)
+        assert _is_timestamp_close_to_now(waveform.timing.timestamp)
+        assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
+        assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
+        assert waveform.channel_name == ""
+        assert waveform.unit_description == ""
+        assert waveform.sample_count == samples_to_read
+
+
+@pytest.mark.grpc_skip(reason="read_analog_waveforms not implemented in GRPC")
+def test___analog_multi_channel_reader_with_extended_properties_flag___read_waveforms___only_includes_extended_properties(
+    ai_multi_channel_task_with_timing: nidaqmx.Task,
+) -> None:
+    in_stream = ai_multi_channel_task_with_timing.in_stream
+    in_stream.waveform_attribute_mode = WaveformAttributeMode.EXTENDED_PROPERTIES
+    reader = AnalogMultiChannelReader(in_stream)
+    num_channels = ai_multi_channel_task_with_timing.number_of_channels
+    samples_to_read = 10
+
+    waveforms = reader.read_waveforms(number_of_samples_per_channel=samples_to_read)
+
+    assert num_channels == 3
+    assert isinstance(waveforms, list)
+    assert len(waveforms) == num_channels
+    for chan_index, waveform in enumerate(waveforms):
+        assert isinstance(waveform, AnalogWaveform)
+        expected = _get_voltage_offset_for_chan(chan_index)
+        assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+        assert waveform.timing.sample_interval_mode == SampleIntervalMode.NONE
+        assert (
+            waveform.channel_name == ai_multi_channel_task_with_timing.ai_channels[chan_index].name
+        )
+        assert waveform.unit_description == "Volts"
+        assert waveform.sample_count == samples_to_read
+
+
+@pytest.mark.grpc_skip(reason="read_analog_waveforms not implemented in GRPC")
+def test___analog_multi_channel_reader_with_both_flags___read_waveforms___includes_both_timing_and_extended_properties(
+    ai_multi_channel_task_with_timing: nidaqmx.Task,
+) -> None:
+    in_stream = ai_multi_channel_task_with_timing.in_stream
+    in_stream.waveform_attribute_mode = (
+        WaveformAttributeMode.TIMING | WaveformAttributeMode.EXTENDED_PROPERTIES
+    )
+    reader = AnalogMultiChannelReader(in_stream)
+    num_channels = ai_multi_channel_task_with_timing.number_of_channels
+    samples_to_read = 10
+
+    waveforms = reader.read_waveforms(number_of_samples_per_channel=samples_to_read)
+
+    assert num_channels == 3
+    assert isinstance(waveforms, list)
+    assert len(waveforms) == num_channels
+    for chan_index, waveform in enumerate(waveforms):
+        assert isinstance(waveform, AnalogWaveform)
+        expected = _get_voltage_offset_for_chan(chan_index)
+        assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+        assert isinstance(waveform.timing.timestamp, ht_datetime)
+        assert _is_timestamp_close_to_now(waveform.timing.timestamp)
+        assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
+        assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
+        assert (
+            waveform.channel_name == ai_multi_channel_task_with_timing.ai_channels[chan_index].name
+        )
+        assert waveform.unit_description == "Volts"
+        assert waveform.sample_count == samples_to_read
+
+
+@pytest.mark.grpc_skip(reason="read_analog_waveforms not implemented in GRPC")
+def test___analog_multi_channel_reader_with_none_flag___read_waveforms___minimal_waveform_data(
+    ai_multi_channel_task_with_timing: nidaqmx.Task,
+) -> None:
+    in_stream = ai_multi_channel_task_with_timing.in_stream
+    in_stream.waveform_attribute_mode = WaveformAttributeMode.NONE
+    reader = AnalogMultiChannelReader(in_stream)
+    num_channels = ai_multi_channel_task_with_timing.number_of_channels
+    samples_to_read = 10
+
+    waveforms = reader.read_waveforms(number_of_samples_per_channel=samples_to_read)
+
+    assert num_channels == 3
+    assert isinstance(waveforms, list)
+    assert len(waveforms) == num_channels
+    for chan_index, waveform in enumerate(waveforms):
+        assert isinstance(waveform, AnalogWaveform)
+        expected = _get_voltage_offset_for_chan(chan_index)
+        assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+        assert waveform.timing.sample_interval_mode == SampleIntervalMode.NONE
+        assert waveform.channel_name == ""
+        assert waveform.unit_description == ""
+        assert waveform.sample_count == samples_to_read
 
 
 def test___analog_unscaled_reader___read_int16___returns_valid_samples(

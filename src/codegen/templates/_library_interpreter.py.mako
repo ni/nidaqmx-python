@@ -28,11 +28,11 @@ from enum import Enum
 from datetime import timezone
 from hightime import datetime as ht_datetime
 from hightime import timedelta as ht_timedelta
-from typing import Callable, List, Optional, Sequence, Tuple, TYPE_CHECKING
+from typing import Callable, List, MutableSequence, Optional, Sequence, Tuple, TYPE_CHECKING
 
 from nidaqmx._base_interpreter import BaseEventHandler, BaseInterpreter
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer, TaskHandle
-from nidaqmx.constants import FillMode
+from nidaqmx.constants import FillMode, WaveformAttributeMode
 from nidaqmx.error_codes import DAQmxErrors, DAQmxWarnings
 from nidaqmx.errors import DaqError, DaqFunctionNotSupportedError, DaqReadError, DaqWarning, DaqWriteError
 from nidaqmx._lib_time import AbsoluteTime
@@ -195,24 +195,35 @@ class LibraryInterpreter(BaseInterpreter):
         task_handle: object,
         number_of_samples_per_channel: int,
         timeout: float,
-        waveform: AnalogWaveform[numpy.float64]
+        waveform: AnalogWaveform[numpy.float64],
+        waveform_attribute_mode: WaveformAttributeMode
     ) -> None:
         """Read an analog waveform with timing and attributes."""
-        error_code, samples_read, timestamps, sample_intervals = self._internal_read_analog_waveform_ex(
+        if WaveformAttributeMode.EXTENDED_PROPERTIES in waveform_attribute_mode:
+            properties = [waveform.extended_properties]
+        else:
+            properties = None
+
+        if WaveformAttributeMode.TIMING in waveform_attribute_mode:
+            t0_array = numpy.zeros(1, dtype=numpy.int64)
+            dt_array = numpy.zeros(1, dtype=numpy.int64)
+        else:
+            t0_array = None
+            dt_array = None
+
+        error_code, samples_read = self._internal_read_analog_waveform_ex(
             task_handle,
-            1, # single channel
             number_of_samples_per_channel,
             timeout,
             FillMode.GROUP_BY_CHANNEL.value,
             waveform.raw_data,
-            [waveform.extended_properties]
+            properties,
+            t0_array,
+            dt_array,
         )
 
-        waveform.timing = Timing(
-            sample_interval_mode=SampleIntervalMode.REGULAR,
-            timestamp=timestamps[0],
-            sample_interval=sample_intervals[0],
-        )
+        if t0_array is not None and dt_array is not None:
+            self._set_waveform_timings([waveform], t0_array, dt_array)
 
         # TODO: AB#3228924 - if the read was short, set waveform.sample_count before throwing the exception
         self.check_for_error(error_code, samps_per_chan_read=samples_read)
@@ -223,23 +234,34 @@ class LibraryInterpreter(BaseInterpreter):
         task_handle: object,
         number_of_samples_per_channel: int,
         timeout: float,
-        waveforms: Sequence[AnalogWaveform[numpy.float64]]
+        waveforms: Sequence[AnalogWaveform[numpy.float64]],
+        waveform_attribute_mode: WaveformAttributeMode
     ) -> None:
         """Read a set of analog waveforms with timing and attributes. All of the waveforms must be the same size."""
-        error_code, samples_read, timestamps, sample_intervals = self.internal_read_analog_waveform_per_chan(
+        if WaveformAttributeMode.EXTENDED_PROPERTIES in waveform_attribute_mode:
+            properties = [waveform.extended_properties for waveform in waveforms]
+        else:
+            properties = None
+
+        if WaveformAttributeMode.TIMING in waveform_attribute_mode:
+            t0_array = numpy.zeros(len(waveforms), dtype=numpy.int64)
+            dt_array = numpy.zeros(len(waveforms), dtype=numpy.int64)
+        else:
+            t0_array = None
+            dt_array = None
+
+        error_code, samples_read = self.internal_read_analog_waveform_per_chan(
             task_handle,
             number_of_samples_per_channel,
             timeout,
             [waveform.raw_data for waveform in waveforms],
-            [waveform.extended_properties for waveform in waveforms]
+            properties,
+            t0_array,
+            dt_array,
         )
 
-        for i, waveform in enumerate(waveforms):
-            waveform.timing = Timing(
-                sample_interval_mode=SampleIntervalMode.REGULAR,
-                timestamp=timestamps[i],
-                sample_interval=sample_intervals[i],
-            )
+        if t0_array is not None and dt_array is not None:
+            self._set_waveform_timings(waveforms, t0_array, dt_array)
 
         # TODO: AB#3228924 - if the read was short, set waveform.sample_count before throwing the exception
         self.check_for_error(error_code, samps_per_chan_read=samples_read)
@@ -247,17 +269,16 @@ class LibraryInterpreter(BaseInterpreter):
     def _internal_read_analog_waveform_ex(
         self,
         task_handle: object,
-        channel_count: int,
         number_of_samples_per_channel: int,
         timeout: float,
         fill_mode: int,
         read_array: numpy.typing.NDArray[numpy.float64],
-        properties: Sequence[ExtendedPropertyDictionary]
+        properties: Sequence[ExtendedPropertyDictionary] | None,
+        t0_array: numpy.typing.NDArray[numpy.int64] | None,
+        dt_array: numpy.typing.NDArray[numpy.int64] | None,
     ) -> Tuple[
         int, # error code
         int, # The number of samples per channel that were read
-        Sequence[ht_datetime], # The timestamps for each sample, indexed by channel
-        Sequence[ht_timedelta], # The sample intervals, indexed by channel
     ]:
         assert isinstance(task_handle, TaskHandle)
         samps_per_chan_read = ctypes.c_int()
@@ -282,19 +303,6 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.POINTER(c_bool32),
                     ]
 
-        t0_array = numpy.zeros(channel_count, dtype=numpy.int64)
-        dt_array = numpy.zeros(channel_count, dtype=numpy.int64)
-
-        def set_wfm_attr_callback(
-            channel_index: int,
-            attribute_name: str,
-            attribute_type: WfmAttrType,
-            value: ExtendedPropertyValue,
-            callback_data: object,
-        ) -> int:
-            properties[channel_index][attribute_name] = value
-            return 0
-
         error_code = cfunc(
             task_handle,
             number_of_samples_per_channel,
@@ -303,7 +311,7 @@ class LibraryInterpreter(BaseInterpreter):
             t0_array,
             dt_array,
             0 if t0_array is None else t0_array.size,
-            self._get_wfm_attr_callback_ptr(set_wfm_attr_callback),
+            self._get_wfm_attr_callback(properties),
             None,
             read_array,
             read_array.size,
@@ -311,10 +319,7 @@ class LibraryInterpreter(BaseInterpreter):
             None,
         )
 
-        timestamps = [_T0_EPOCH + ht_timedelta(seconds=t0 * _INT64_WFM_SEC_PER_TICK) for t0 in t0_array]
-        sample_intervals = [ht_timedelta(seconds=dt * _INT64_WFM_SEC_PER_TICK) for dt in dt_array]
-
-        return error_code, samps_per_chan_read.value, timestamps, sample_intervals
+        return error_code, samps_per_chan_read.value
 
     def internal_read_analog_waveform_per_chan(
         self,
@@ -322,12 +327,12 @@ class LibraryInterpreter(BaseInterpreter):
         num_samps_per_chan: int,
         timeout: float,
         read_arrays: Sequence[numpy.typing.NDArray[numpy.float64]],
-        properties: Sequence[ExtendedPropertyDictionary]
+        properties: Sequence[ExtendedPropertyDictionary] | None,
+        t0_array: numpy.typing.NDArray[numpy.int64] | None,
+        dt_array: numpy.typing.NDArray[numpy.int64] | None,
     ) -> Tuple[
         int, # error code
         int, # The number of samples per channel that were read
-        Sequence[ht_datetime], # The timestamps for each sample, indexed by channel
-        Sequence[ht_timedelta], # The sample intervals, indexed by channel
     ]:
         assert isinstance(task_handle, TaskHandle)
         samps_per_chan_read = ctypes.c_int()
@@ -357,22 +362,9 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.POINTER(c_bool32),
                     ]
 
-        t0_array = numpy.zeros(channel_count, dtype=numpy.int64)
-        dt_array = numpy.zeros(channel_count, dtype=numpy.int64)
-
         read_array_ptrs = (ctypes.POINTER(ctypes.c_double) * channel_count)()
         for i, read_array in enumerate(read_arrays):
             read_array_ptrs[i] = read_array.ctypes.data_as(ctypes.POINTER(ctypes.c_double))
-
-        def set_wfm_attr_callback(
-            channel_index: int,
-            attribute_name: str,
-            attribute_type: WfmAttrType,
-            value: ExtendedPropertyValue,
-            callback_data: object,
-        ) -> int:
-            properties[channel_index][attribute_name] = value
-            return 0
 
         error_code = cfunc(
             task_handle,
@@ -381,7 +373,7 @@ class LibraryInterpreter(BaseInterpreter):
             t0_array,
             dt_array,
             0 if t0_array is None else t0_array.size,
-            self._get_wfm_attr_callback_ptr(set_wfm_attr_callback),
+            self._get_wfm_attr_callback(properties),
             None,
             read_array_ptrs,
             channel_count,
@@ -391,11 +383,22 @@ class LibraryInterpreter(BaseInterpreter):
         )
         self.check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
-        timestamps = [_T0_EPOCH + ht_timedelta(seconds=t0 * _INT64_WFM_SEC_PER_TICK) for t0 in t0_array]
-        sample_intervals = [ht_timedelta(seconds=dt * _INT64_WFM_SEC_PER_TICK) for dt in dt_array]
+        return error_code, samps_per_chan_read.value
 
-        return error_code, samps_per_chan_read.value, timestamps, sample_intervals
-
+    def _get_wfm_attr_callback(self, properties):
+        if properties is not None:
+            def set_wfm_attr_callback(
+                channel_index: int,
+                attribute_name: str,
+                attribute_type: WfmAttrType,
+                value: ExtendedPropertyValue,
+                callback_data: object,
+            ) -> int:
+                properties[channel_index][attribute_name] = value
+                return 0
+            return self._get_wfm_attr_callback_ptr(set_wfm_attr_callback)
+        else:
+            return CSetWfmAttrCallbackPtr()
 
     def _get_wfm_attr_value(
         self, attribute_type: int, value: ctypes.c_void_p, value_size_in_bytes: int
@@ -417,11 +420,8 @@ class LibraryInterpreter(BaseInterpreter):
             raise ValueError(f"Unsupported attribute type {attribute_type}")
 
     def _get_wfm_attr_callback_ptr(
-        self, set_wfm_attr_callback: Optional[SetWfmAttrCallback]
+        self, set_wfm_attr_callback: SetWfmAttrCallback
     ) -> ctypes._FuncPointer:
-        if set_wfm_attr_callback is None:
-            return CSetWfmAttrCallbackPtr()
-
         def _invoke_callback(
             channel_index: int,
             attribute_name: bytes,
@@ -443,6 +443,19 @@ class LibraryInterpreter(BaseInterpreter):
                 return -1
 
         return CSetWfmAttrCallbackPtr(_invoke_callback)
+
+    def _set_waveform_timings(
+        self, 
+        waveforms: Sequence[AnalogWaveform[numpy.float64]], 
+        t0_array: numpy.typing.NDArray[numpy.int64], 
+        dt_array: numpy.typing.NDArray[numpy.int64]
+    ) -> None:
+        for i, waveform in enumerate(waveforms):
+            waveform.timing = Timing(
+                sample_interval_mode=SampleIntervalMode.REGULAR,
+                timestamp=_T0_EPOCH + ht_timedelta(seconds=t0_array[i] * _INT64_WFM_SEC_PER_TICK),
+                sample_interval=ht_timedelta(seconds=dt_array[i] * _INT64_WFM_SEC_PER_TICK),
+            )
 
     ## DAQmxReadIDPinMemory returns the size if given a null pointer.
     ## So, we read 1st time to get the size, then read 2nd time to get the data.

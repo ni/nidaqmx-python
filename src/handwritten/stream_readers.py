@@ -317,6 +317,7 @@ class AnalogSingleChannelReader(ChannelReaderBase):
             number_of_samples_per_channel,
             timeout,
             waveform,
+            self._in_stream.waveform_attribute_mode,
         )
 
         return waveform
@@ -543,6 +544,7 @@ class AnalogMultiChannelReader(ChannelReaderBase):
             number_of_samples_per_channel,
             timeout,
             waveforms,
+            self._in_stream.waveform_attribute_mode,
         )
 
         return waveforms
