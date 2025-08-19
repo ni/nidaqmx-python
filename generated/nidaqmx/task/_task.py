@@ -7,6 +7,7 @@ from enum import Enum
 import numpy
 from nitypes.waveform import AnalogWaveform
 from nidaqmx import utils
+from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, requires_feature
 from nidaqmx.task.channels._channel import Channel
 from nidaqmx.task._export_signals import ExportSignals
 from nidaqmx.task._in_stream import InStream
@@ -516,6 +517,7 @@ class Task:
 
         This read method is dynamic, and is capable of inferring an appropriate
         return type based on these factors:
+
         - The channel type of the task.
         - The number of channels to read.
         - The number of samples per channel.
@@ -768,6 +770,7 @@ class Task:
                     for v, i in zip(voltages, currents)
                 ][:samples_read]
 
+    @requires_feature(WAVEFORM_SUPPORT)
     def read_waveform(self, number_of_samples_per_channel=READ_ALL_AVAILABLE,
              timeout=10.0):
         """
@@ -775,6 +778,7 @@ class Task:
 
         This read method is dynamic, and is capable of inferring an appropriate
         return type based on these factors:
+
         - The channel type of the task.
         - The number of channels to read.
         - The number of samples per channel.
@@ -843,7 +847,7 @@ class Task:
 
         if read_chan_type == ChannelType.ANALOG_INPUT:
             if number_of_channels == 1:
-                waveform = AnalogWaveform(raw_data=numpy.zeros(number_of_samples_per_channel, dtype=numpy.float64))
+                waveform = AnalogWaveform(number_of_samples_per_channel)
                 self._interpreter.read_analog_waveform(
                     self._handle,
                     number_of_samples_per_channel,
@@ -854,7 +858,7 @@ class Task:
                 return waveform
             else:
                 waveforms = [
-                    AnalogWaveform(raw_data=numpy.zeros(number_of_samples_per_channel, dtype=numpy.float64))
+                    AnalogWaveform(number_of_samples_per_channel)
                     for _ in range(number_of_channels)
                 ]
                 self._interpreter.read_analog_waveforms(
