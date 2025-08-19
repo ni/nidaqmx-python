@@ -7,7 +7,7 @@ from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, requires_feature
 from nidaqmx.constants import FillMode, READ_ALL_AVAILABLE
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.types import PowerMeasurement, CtrFreq, CtrTick, CtrTime
-from nitypes.waveform import AnalogWaveform
+from nitypes.waveform import AnalogWaveform, DigitalWaveform
 
 __all__ = ['AnalogSingleChannelReader', 'AnalogMultiChannelReader',
            'AnalogUnscaledReader', 'CounterReader',
@@ -2164,6 +2164,88 @@ class DigitalSingleChannelReader(ChannelReaderBase):
             task.
         """
         return self._interpreter.read_digital_scalar_u32(self._handle, timeout)
+
+    @requires_feature(WAVEFORM_SUPPORT)
+    def read_waveform(
+        self,
+        number_of_samples_per_channel: int = READ_ALL_AVAILABLE,
+        timeout: float = 10.0,
+        waveform: DigitalWaveform[numpy.uint8] | None = None
+    ) -> DigitalWaveform[numpy.uint8]:
+        """
+        Reads one or more digital samples from a single digital input
+        channel into a waveform.
+
+        This read method optionally accepts a preallocated waveform to hold
+        the samples requested, which can be advantageous for performance and
+        interoperability with NumPy and SciPy.
+
+        Passing in a preallocated waveform is valuable in continuous
+        acquisition scenarios, where the same waveform can be used
+        repeatedly in each call to the method.
+
+        Args:
+            number_of_samples_per_channel (Optional[int]): Specifies the
+                number of samples to read.
+
+                If you set this input to nidaqmx.constants.
+                READ_ALL_AVAILABLE, NI-DAQmx determines how many samples
+                to read based on if the task acquires samples
+                continuously or acquires a finite number of samples.
+
+                If the task acquires samples continuously and you set
+                this input to nidaqmx.constants.READ_ALL_AVAILABLE, this
+                method reads all the samples currently available in the
+                buffer.
+
+                If the task acquires a finite number of samples and you
+                set this input to nidaqmx.constants.READ_ALL_AVAILABLE,
+                the method waits for the task to acquire all requested
+                samples, then reads those samples. If you set the
+                "read_all_avail_samp" property to True, the method reads
+                the samples currently available in the buffer and does
+                not wait for the task to acquire all requested samples.
+            timeout (Optional[float]): Specifies the amount of time in
+                seconds to wait for samples to become available. If the
+                time elapses, the method returns an error and any
+                samples read before the timeout elapsed. The default
+                timeout is 10 seconds. If you set timeout to
+                nidaqmx.constants.WAIT_INFINITELY, the method waits
+                indefinitely. If you set timeout to 0, the method tries
+                once to read the requested samples and returns an error
+                if it is unable to.
+            waveform (Optional[DigitalWaveform[numpy.uint8]]): Specifies a
+                preallocated DigitalWaveform object to hold the samples
+                requested. If you do not specify this input, this method
+                creates and returns a DigitalWaveform object.
+
+                Passing in a preallocated waveform is valuable in
+                continuous acquisition scenarios, where the same waveform
+                can be used repeatedly in each call to the method.
+
+        Returns:
+            DigitalWaveform[numpy.uint8]:
+
+            A DigitalWaveform object containing the requested samples and
+            timing information (depending on the stream's waveform_attribute_mode).
+        """
+        if waveform is None:
+            if number_of_samples_per_channel == READ_ALL_AVAILABLE:
+                samples_to_allocate = self._task.timing.samp_quant_samp_per_chan
+            else:
+                samples_to_allocate = number_of_samples_per_channel
+            
+            waveform = DigitalWaveform(data=numpy.zeros(samples_to_allocate, dtype=numpy.uint8))
+
+        self._interpreter.read_digital_waveform(
+            self._handle, 
+            number_of_samples_per_channel, 
+            timeout, 
+            waveform, 
+            self._in_stream.waveform_attribute_mode
+        )
+
+        return waveform
 
 
 class DigitalMultiChannelReader(ChannelReaderBase):

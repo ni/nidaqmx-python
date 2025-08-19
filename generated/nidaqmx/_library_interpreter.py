@@ -20,7 +20,7 @@ from nidaqmx.error_codes import DAQmxErrors, DAQmxWarnings
 from nidaqmx.errors import DaqError, DaqFunctionNotSupportedError, DaqReadError, DaqWarning, DaqWriteError
 from nidaqmx._lib_time import AbsoluteTime
 from nitypes.waveform.typing import ExtendedPropertyValue
-from nitypes.waveform import AnalogWaveform, SampleIntervalMode, Timing, ExtendedPropertyDictionary
+from nitypes.waveform import AnalogWaveform, DigitalWaveform, SampleIntervalMode, Timing, ExtendedPropertyDictionary
 
 if TYPE_CHECKING:
     if sys.version_info >= (3, 10):
@@ -6626,7 +6626,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     def _set_waveform_timings(
         self, 
-        waveforms: Sequence[AnalogWaveform[numpy.float64]], 
+        waveforms, 
         t0_array: numpy.typing.NDArray[numpy.int64], 
         dt_array: numpy.typing.NDArray[numpy.int64]
     ) -> None:
@@ -6636,6 +6636,106 @@ class LibraryInterpreter(BaseInterpreter):
                 timestamp=_T0_EPOCH + ht_timedelta(seconds=t0_array[i] * _INT64_WFM_SEC_PER_TICK),
                 sample_interval=ht_timedelta(seconds=dt_array[i] * _INT64_WFM_SEC_PER_TICK),
             )
+
+    def read_digital_waveform(
+        self,
+        task_handle: object,
+        number_of_samples_per_channel: int,
+        timeout: float,
+        waveform: DigitalWaveform[numpy.uint8],
+        waveform_attribute_mode: WaveformAttributeMode
+    ) -> None:
+        """Read a digital waveform with timing and attributes."""
+        if WaveformAttributeMode.EXTENDED_PROPERTIES in waveform_attribute_mode:
+            properties = [waveform.extended_properties]
+        else:
+            properties = None
+
+        if WaveformAttributeMode.TIMING in waveform_attribute_mode:
+            t0_array = numpy.zeros(1, dtype=numpy.int64)
+            dt_array = numpy.zeros(1, dtype=numpy.int64)
+        else:
+            t0_array = None
+            dt_array = None
+
+        error_code, samples_read = self._internal_read_digital_waveform(
+            task_handle,
+            number_of_samples_per_channel,
+            timeout,
+            FillMode.GROUP_BY_CHANNEL.value,
+            waveform.data,
+            properties,
+            t0_array,
+            dt_array,
+        )
+
+        if t0_array is not None and dt_array is not None:
+            self._set_waveform_timings([waveform], t0_array, dt_array)
+
+        # TODO: AB#3228924 - if the read was short, set waveform.sample_count before throwing the exception
+        self.check_for_error(error_code, samps_per_chan_read=samples_read)
+
+    def _internal_read_digital_waveform(
+        self,
+        task_handle: object,
+        number_of_samples_per_channel: int,
+        timeout: float,
+        fill_mode: int,
+        read_array: numpy.typing.NDArray[numpy.uint8],
+        properties: Sequence[ExtendedPropertyDictionary] | None,
+        t0_array: numpy.typing.NDArray[numpy.int64] | None,
+        dt_array: numpy.typing.NDArray[numpy.int64] | None,
+    ) -> Tuple[
+        int, # error code
+        int, # The number of samples per channel that were read
+    ]:
+        assert isinstance(task_handle, TaskHandle)
+        samps_per_chan_read = ctypes.c_int()
+        num_bytes_per_samp = ctypes.c_int()
+
+        cfunc = lib_importer.windll.DAQmxInternalReadDigitalWaveform
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        TaskHandle,
+                        ctypes.c_int,
+                        ctypes.c_double,
+                        ctypes.c_int,
+                        wrapped_ndpointer(dtype=numpy.int64, flags=("C", "W")),
+                        wrapped_ndpointer(dtype=numpy.int64, flags=("C", "W")),
+                        ctypes.c_uint,
+                        CSetWfmAttrCallbackPtr,
+                        ctypes.c_void_p,
+                        wrapped_ndpointer(dtype=numpy.uint8, flags=("C", "W")),
+                        ctypes.c_uint,
+                        ctypes.POINTER(ctypes.c_int),
+                        ctypes.POINTER(ctypes.c_int),
+                        wrapped_ndpointer(dtype=numpy.uint32, flags=("C", "W")),
+                        ctypes.c_uint,
+                        ctypes.POINTER(c_bool32),
+                    ]
+
+        error_code = cfunc(
+            task_handle,
+            number_of_samples_per_channel,
+            timeout,
+            fill_mode,
+            t0_array,
+            dt_array,
+            0 if t0_array is None else t0_array.size,
+            self._get_wfm_attr_callback(properties),
+            None,
+            read_array,
+            read_array.size,
+            ctypes.byref(samps_per_chan_read),
+            ctypes.byref(num_bytes_per_samp),
+            None,
+            0,
+            None,
+        )
+
+        return error_code, samps_per_chan_read.value
 
     def read_id_pin_memory(self, device_name, id_pin_name):
         data_length_read = ctypes.c_uint()
