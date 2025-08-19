@@ -303,7 +303,7 @@ class AnalogSingleChannelReader(ChannelReaderBase):
                 number_of_samples_per_channel))
 
         if waveform is None:
-            waveform = AnalogWaveform(raw_data=numpy.zeros(number_of_samples_per_channel, dtype=numpy.float64))
+            waveform = AnalogWaveform(number_of_samples_per_channel)
         elif number_of_samples_per_channel > waveform.sample_count:
             # TODO: AB#3228924 - if allowed by the caller, increase the sample count of the waveform
             raise DaqError(
@@ -518,7 +518,7 @@ class AnalogMultiChannelReader(ChannelReaderBase):
 
         if waveforms is None:
             waveforms = [
-                AnalogWaveform(raw_data=numpy.zeros(number_of_samples_per_channel, dtype=numpy.float64))
+                AnalogWaveform(number_of_samples_per_channel)
                 for _ in range(number_of_channels)
             ]
         else:
