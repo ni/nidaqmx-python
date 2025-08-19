@@ -2723,7 +2723,7 @@ class DigitalMultiChannelReader(ChannelReaderBase):
         self,
         number_of_samples_per_channel: int = READ_ALL_AVAILABLE,
         timeout: int = 10,
-        waveforms: list[AnalogWaveform[numpy.uint8]] | None = None
+        waveforms: list[DigitalWaveform[numpy.uint8]] | None = None
     ) -> list[DigitalWaveform[numpy.uint8]]:
         """
         Reads one or more samples from one or more digital

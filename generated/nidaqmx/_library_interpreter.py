@@ -6682,7 +6682,7 @@ class LibraryInterpreter(BaseInterpreter):
         number_of_samples_per_channel: int,
         timeout: float,
         waveform_attribute_mode: WaveformAttributeMode,
-        waveforms: Sequence[DigitalWaveform[numpy.uint8]] | None = None
+        waveforms: Sequence[DigitalWaveform[numpy.uint8]] | None = None,
     ) -> Sequence[DigitalWaveform[numpy.uint8]]:
         """Read a digital waveform with timing and attributes."""
         read_array = numpy.zeros((channel_count, number_of_samples_per_channel), dtype=numpy.uint8)

@@ -98,7 +98,7 @@ class BaseInterpreter(abc.ABC):
         channel_count: int,
         number_of_samples_per_channel: int,
         timeout: float,
-        waveforms: Sequence[DigitalWaveform[numpy.uint8]] | None = None
         waveform_attribute_mode: WaveformAttributeMode,
+        waveforms: Sequence[DigitalWaveform[numpy.uint8]] | None = None,
     ) -> Sequence[DigitalWaveform[numpy.uint8]]:
         raise NotImplementedError

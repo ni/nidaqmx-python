@@ -1137,6 +1137,5 @@ def assert_digital_waveform_data(waveform, chan_index, samples_to_read=50):
     for sample_num in range(samples_to_read):
         bit_value = (sample_num >> chan_index) & 1
         expected_data.append(bit_value)
-        
-    assert actual_data == expected_data
 
+    assert actual_data == expected_data
