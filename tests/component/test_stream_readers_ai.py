@@ -222,7 +222,7 @@ def test___analog_single_channel_reader___read_waveform_in_place___populates_val
     reader = AnalogSingleChannelReader(ai_single_channel_task_with_timing.in_stream)
     samples_to_read = 10
 
-    waveform = AnalogWaveform(raw_data=numpy.zeros(samples_to_read, dtype=numpy.float64))
+    waveform = AnalogWaveform(samples_to_read)
     reader.read_waveform(number_of_samples_per_channel=samples_to_read, waveform=waveform)
 
     assert isinstance(waveform, AnalogWaveform)
@@ -252,7 +252,7 @@ def test___analog_single_channel_reader___reuse_waveform_in_place___overwrites_d
 
     reader0 = _make_single_channel_reader(chan_index=0, offset=0, rate=1000.0)
     reader1 = _make_single_channel_reader(chan_index=1, offset=1, rate=2000.0)
-    waveform = AnalogWaveform(raw_data=numpy.zeros(10, dtype=numpy.float64))
+    waveform = AnalogWaveform(10)
 
     reader0.read_waveform(number_of_samples_per_channel=10, waveform=waveform)
     timestamp1 = waveform.timing.timestamp
@@ -276,7 +276,7 @@ def test___analog_single_channel_reader___read_into_undersized_waveform___throws
     reader = AnalogSingleChannelReader(ai_single_channel_task_with_timing.in_stream)
     samples_to_read = 10
 
-    waveform = AnalogWaveform(raw_data=numpy.zeros(samples_to_read - 1, dtype=numpy.float64))
+    waveform = AnalogWaveform(samples_to_read - 1)
     with pytest.raises(DaqError) as exc_info:
         reader.read_waveform(number_of_samples_per_channel=samples_to_read, waveform=waveform)
 
@@ -523,9 +523,9 @@ def test___analog_multi_channel_reader___read_waveforms_in_place___populates_val
     samples_to_read = 10
 
     waveforms = [
-        AnalogWaveform(raw_data=numpy.zeros(samples_to_read, dtype=numpy.float64)),
-        AnalogWaveform(raw_data=numpy.zeros(samples_to_read, dtype=numpy.float64)),
-        AnalogWaveform(raw_data=numpy.zeros(samples_to_read, dtype=numpy.float64)),
+        AnalogWaveform(samples_to_read),
+        AnalogWaveform(samples_to_read),
+        AnalogWaveform(samples_to_read),
     ]
     reader.read_waveforms(number_of_samples_per_channel=samples_to_read, waveforms=waveforms)
 
@@ -554,9 +554,9 @@ def test___analog_multi_channel_reader___read_into_undersized_waveforms___throws
     samples_to_read = 10
 
     waveforms = [
-        AnalogWaveform(raw_data=numpy.zeros(samples_to_read, dtype=numpy.float64)),
-        AnalogWaveform(raw_data=numpy.zeros(samples_to_read - 1, dtype=numpy.float64)),
-        AnalogWaveform(raw_data=numpy.zeros(samples_to_read, dtype=numpy.float64)),
+        AnalogWaveform(samples_to_read),
+        AnalogWaveform(samples_to_read - 1),
+        AnalogWaveform(samples_to_read),
     ]
     with pytest.raises(DaqError) as exc_info:
         reader.read_waveforms(number_of_samples_per_channel=samples_to_read, waveforms=waveforms)
@@ -573,8 +573,8 @@ def test___analog_multi_channel_reader___read_with_wrong_number_of_waveforms___t
     samples_to_read = 10
 
     waveforms = [
-        AnalogWaveform(raw_data=numpy.zeros(samples_to_read, dtype=numpy.float64)),
-        AnalogWaveform(raw_data=numpy.zeros(samples_to_read, dtype=numpy.float64)),
+        AnalogWaveform(samples_to_read),
+        AnalogWaveform(samples_to_read),
     ]
     with pytest.raises(DaqError) as exc_info:
         reader.read_waveforms(number_of_samples_per_channel=samples_to_read, waveforms=waveforms)
