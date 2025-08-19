@@ -1130,6 +1130,21 @@ def test___digital_multi_channel_reader_with_none_flag___read_waveforms___minima
 
 
 def assert_digital_waveform_data(waveform, chan_index, samples_to_read=50):
+    """Validates digital waveform data against expected test pattern.
+
+    The expected data pattern treats each sample number as a binary counter,
+    where each digital channel corresponds to a different bit position:
+    - Channel 0 represents bit 0 (LSB) - alternates every sample: 0,1,0,1,0,1...
+    - Channel 1 represents bit 1 - alternates every 2 samples: 0,0,1,1,0,0,1,1...
+    - Channel 2 represents bit 2 - alternates every 4 samples: 0,0,0,0,1,1,1,1...
+    - And so on for higher channels
+
+    For example, with sample numbers 0-7:
+    Sample: 0  1  2  3  4  5  6  7
+    Chan 0: 0  1  0  1  0  1  0  1  (bit 0)
+    Chan 1: 0  0  1  1  0  0  1  1  (bit 1)
+    Chan 2: 0  0  0  0  1  1  1  1  (bit 2)
+    """
     assert waveform.data.dtype == numpy.uint8
     assert len(waveform.data) == samples_to_read
     actual_data = [int(sample[0]) for sample in waveform.data]

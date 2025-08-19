@@ -2228,13 +2228,12 @@ class DigitalSingleChannelReader(ChannelReaderBase):
             A DigitalWaveform object containing the requested samples and
             timing information (depending on the stream's waveform_attribute_mode).
         """
+        number_of_samples_per_channel = (
+            self._task._calculate_num_samps_per_chan(
+                number_of_samples_per_channel))
+        
         if waveform is None:
-            if number_of_samples_per_channel == READ_ALL_AVAILABLE:
-                samples_to_allocate = self._task.timing.samp_quant_samp_per_chan
-            else:
-                samples_to_allocate = number_of_samples_per_channel
-            
-            waveform = DigitalWaveform(samples_to_allocate)
+            waveform = DigitalWaveform(number_of_samples_per_channel)
 
         self._interpreter.read_digital_waveform(
             self._handle, 
