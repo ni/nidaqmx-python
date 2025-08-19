@@ -516,7 +516,6 @@ class AnalogMultiChannelReader(ChannelReaderBase):
             self._task._calculate_num_samps_per_chan(
                 number_of_samples_per_channel))
 
-
         if waveforms is None:
             waveforms = [
                 AnalogWaveform(raw_data=numpy.zeros(number_of_samples_per_channel, dtype=numpy.float64))
@@ -2235,7 +2234,7 @@ class DigitalSingleChannelReader(ChannelReaderBase):
             else:
                 samples_to_allocate = number_of_samples_per_channel
             
-            waveform = DigitalWaveform(data=numpy.zeros(samples_to_allocate, dtype=numpy.uint8))
+            waveform = DigitalWaveform(samples_to_allocate)
 
         self._interpreter.read_digital_waveform(
             self._handle, 
@@ -2717,3 +2716,92 @@ class DigitalMultiChannelReader(ChannelReaderBase):
 
         self._interpreter.read_digital_u32(
             self._handle, 1, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
+        
+        
+    @requires_feature(WAVEFORM_SUPPORT)
+    def read_waveforms(
+        self,
+        number_of_samples_per_channel: int = READ_ALL_AVAILABLE,
+        timeout: int = 10,
+        waveforms: list[AnalogWaveform[numpy.uint8]] | None = None
+    ) -> list[DigitalWaveform[numpy.uint8]]:
+        """
+        Reads one or more samples from one or more digital
+        input channels into a list of waveforms.
+
+        Args:
+            number_of_samples_per_channel (Optional[int]): Specifies the
+                number of samples to read.
+
+                If you set this input to nidaqmx.constants.
+                READ_ALL_AVAILABLE, NI-DAQmx determines how many samples
+                to read based on if the task acquires samples
+                continuously or acquires a finite number of samples.
+
+                If the task acquires samples continuously and you set
+                this input to nidaqmx.constants.READ_ALL_AVAILABLE, this
+                method reads all the samples currently available in the
+                buffer.
+
+                If the task acquires a finite number of samples and you
+                set this input to nidaqmx.constants.READ_ALL_AVAILABLE,
+                the method waits for the task to acquire all requested
+                samples, then reads those samples. If you set the
+                "read_all_avail_samp" property to True, the method reads
+                the samples currently available in the buffer and does
+                not wait for the task to acquire all requested samples.
+            timeout (Optional[float]): Specifies the amount of time in
+                seconds to wait for samples to become available. If the
+                time elapses, the method returns an error and any
+                samples read before the timeout elapsed. The default
+                timeout is 10 seconds. If you set timeout to
+                nidaqmx.constants.WAIT_INFINITELY, the method waits
+                indefinitely. If you set timeout to 0, the method tries
+                once to read the requested samples and returns an error
+                if it is unable to.                
+            waveforms (Optional[list[DigitalWaveform]]): Specifies an existing
+                list of DigitalWaveform objects to use for reading samples into.
+                The list must contain one waveform
+                for each channel in the task. If not provided, new
+                DigitalWaveform objects will be created.
+                Note that there is not a performance benefit to providing
+                existing waveform objects, since the data will have to be
+                copied into them regardless.
+        Returns:
+            list[DigitalWaveform]:
+
+            A list of waveform objects containing the acquired samples,
+            one for each channel in the task.
+        """
+        number_of_channels = self._in_stream.num_chans
+        number_of_samples_per_channel = (
+            self._task._calculate_num_samps_per_chan(
+                number_of_samples_per_channel))
+
+        if waveforms is not None:
+            if len(waveforms) != number_of_channels:
+                raise DaqError(
+                    f'The number of waveforms provided ({len(waveforms)}) does not match '
+                    f'the number of channels in the task ({number_of_channels}). Please provide '
+                    'one waveform for each channel.',
+                    DAQmxErrors.MISMATCHED_INPUT_ARRAY_SIZES, task_name=self._task.name)
+
+            for i, waveform in enumerate(waveforms):
+                if number_of_samples_per_channel > waveform.sample_count:
+                    # TODO: AB#3228924 - if allowed by the caller, increase the sample count of the waveform
+                    raise DaqError(
+                        f'The waveform at index {i} does not have enough space ({waveform.sample_count}) to hold '
+                        f'the requested number of samples ({number_of_samples_per_channel}). Please provide larger '
+                        'waveforms or adjust the number of samples requested.',
+                        DAQmxErrors.READ_BUFFER_TOO_SMALL, task_name=self._task.name)
+
+        waveforms = self._interpreter.read_digital_waveforms(
+            self._handle,
+            number_of_channels,
+            number_of_samples_per_channel,
+            timeout,
+            self._in_stream.waveform_attribute_mode,
+            waveforms
+        )
+
+        return waveforms

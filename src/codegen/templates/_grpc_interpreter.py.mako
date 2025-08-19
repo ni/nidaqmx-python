@@ -277,6 +277,17 @@ class GrpcStubInterpreter(BaseInterpreter):
     ) -> None:
         raise NotImplementedError
 
+    def read_digital_waveforms(
+        self,
+        task_handle: object,
+        channel_count: int,
+        number_of_samples_per_channel: int,
+        timeout: float,
+        waveforms: Sequence[DigitalWaveform[numpy.uint8]] | None = None
+        waveform_attribute_mode: WaveformAttributeMode,
+    ) -> Sequence[DigitalWaveform[numpy.uint8]]:
+        raise NotImplementedError
+
 def _assign_numpy_array(numpy_array, grpc_array):
     """
     Assigns grpc array to numpy array maintaining the original shape.

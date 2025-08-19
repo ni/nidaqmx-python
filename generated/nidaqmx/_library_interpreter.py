@@ -6675,6 +6675,63 @@ class LibraryInterpreter(BaseInterpreter):
         # TODO: AB#3228924 - if the read was short, set waveform.sample_count before throwing the exception
         self.check_for_error(error_code, samps_per_chan_read=samples_read)
 
+    def read_digital_waveforms(
+        self,
+        task_handle: object,
+        channel_count: int,
+        number_of_samples_per_channel: int,
+        timeout: float,
+        waveform_attribute_mode: WaveformAttributeMode,
+        waveforms: Sequence[DigitalWaveform[numpy.uint8]] | None = None
+    ) -> Sequence[DigitalWaveform[numpy.uint8]]:
+        """Read a digital waveform with timing and attributes."""
+        read_array = numpy.zeros((channel_count, number_of_samples_per_channel), dtype=numpy.uint8)
+
+        if WaveformAttributeMode.EXTENDED_PROPERTIES in waveform_attribute_mode:
+            if waveforms is not None:
+                properties = [waveform.extended_properties for waveform in waveforms]
+            else:
+                properties = [ExtendedPropertyDictionary() for _ in range(channel_count)]
+        else:
+            properties = None
+
+        if WaveformAttributeMode.TIMING in waveform_attribute_mode:
+            t0_array = numpy.zeros(channel_count, dtype=numpy.int64)
+            dt_array = numpy.zeros(channel_count, dtype=numpy.int64)
+        else:
+            t0_array = None
+            dt_array = None
+
+        error_code, samples_read = self._internal_read_digital_waveform(
+            task_handle,
+            number_of_samples_per_channel,
+            timeout,
+            FillMode.GROUP_BY_CHANNEL.value,
+            read_array,
+            properties,
+            t0_array,
+            dt_array,
+        )
+
+        if waveforms is not None:
+            for i, waveform in enumerate(waveforms):
+                waveform.data[:] = read_array[i, :].reshape(-1, 1)
+        else:
+            waveforms = []
+            for i in range(channel_count):
+                waveform = DigitalWaveform(
+                    data=read_array[i, :],
+                    extended_properties=properties[i] if properties else None)
+                waveforms.append(waveform)
+
+        if t0_array is not None and dt_array is not None:
+            self._set_waveform_timings(waveforms, t0_array, dt_array)
+
+        # TODO: AB#3228924 - if the read was short, set waveform.sample_count before throwing the exception
+        self.check_for_error(error_code, samps_per_chan_read=samples_read)
+
+        return waveforms
+
     def _internal_read_digital_waveform(
         self,
         task_handle: object,
