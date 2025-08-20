@@ -873,7 +873,9 @@ class Task:
         elif (read_chan_type == ChannelType.DIGITAL_INPUT or
                 read_chan_type == ChannelType.DIGITAL_OUTPUT):
             if number_of_channels == 1:
-                digital_waveform = DigitalWaveform(number_of_samples_per_channel)
+                digital_waveform = DigitalWaveform(
+                    number_of_samples_per_channel,
+                    self.in_stream.di_num_booleans_per_chan)
                 self._interpreter.read_digital_waveform(
                     self._handle,
                     number_of_samples_per_channel,
@@ -887,6 +889,7 @@ class Task:
                     self._handle,
                     number_of_channels,
                     number_of_samples_per_channel,
+                    self.in_stream.di_num_booleans_per_chan,
                     timeout,
                     self._in_stream.waveform_attribute_mode,
                 )

@@ -2233,7 +2233,9 @@ class DigitalSingleChannelReader(ChannelReaderBase):
                 number_of_samples_per_channel))
         
         if waveform is None:
-            waveform = DigitalWaveform(number_of_samples_per_channel)
+            waveform = DigitalWaveform(
+                number_of_samples_per_channel,
+                self._in_stream.di_num_booleans_per_chan)
 
         self._interpreter.read_digital_waveform(
             self._handle, 
@@ -2798,6 +2800,7 @@ class DigitalMultiChannelReader(ChannelReaderBase):
             self._handle,
             number_of_channels,
             number_of_samples_per_channel,
+            self._in_stream.di_num_booleans_per_chan,
             timeout,
             self._in_stream.waveform_attribute_mode,
             waveforms

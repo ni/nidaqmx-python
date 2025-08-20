@@ -92,11 +92,12 @@ class BaseInterpreter(abc.ABC):
     ) -> None:
         raise NotImplementedError
 
-    def read_digital_waveforms(
+     def read_digital_waveforms(
         self,
         task_handle: object,
         channel_count: int,
-        number_of_samples_per_channel: int,
+        sample_count: int,
+        signal_count: int,
         timeout: float,
         waveform_attribute_mode: WaveformAttributeMode,
         waveforms: Sequence[DigitalWaveform[numpy.uint8]] | None = None,

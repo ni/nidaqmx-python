@@ -14,7 +14,6 @@ from nidaqmx.constants import (  # noqa: E402
     AcquisitionType,
     LineGrouping,
 )
-from nidaqmx.stream_readers import DigitalSingleChannelReader  # noqa: E402
 
 with nidaqmx.Task() as task:
     task.di_channels.add_di_chan(
@@ -23,8 +22,8 @@ with nidaqmx.Task() as task:
     task.timing.cfg_samp_clk_timing(1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=50)
 
     waveform = task.read_waveform(READ_ALL_AVAILABLE)
-    binary_string = "".join(str(int(sample[0])) for sample in waveform.data)
-    print(f"Acquired data: {binary_string}")
+    print("Acquired data:")
+    print(waveform.data)
     print(f"Channel name: {waveform.channel_name}")
     print(f"t0: {waveform.timing.start_time}")
     print(f"dt: {waveform.timing.sample_interval}")

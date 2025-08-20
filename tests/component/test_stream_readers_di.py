@@ -59,6 +59,43 @@ def di_multi_channel_multi_line_task(
     )
     return task
 
+@pytest.fixture
+def di_single_line_task_with_timing(
+    di_single_line_task: nidaqmx.Task
+) -> nidaqmx.Task:
+    di_single_line_task.timing.cfg_samp_clk_timing(
+        rate=1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=50)
+    return di_single_line_task
+
+
+@pytest.fixture
+def di_single_line_task_with_high_rate(
+    di_single_line_task: nidaqmx.Task
+) -> nidaqmx.Task:
+    di_single_line_task.timing.cfg_samp_clk_timing(
+        rate=10_000_000, sample_mode=AcquisitionType.FINITE, samps_per_chan=50
+    )
+    return di_single_line_task
+
+
+@pytest.fixture
+def di_single_channel_multi_line_task_with_timing(
+    di_single_channel_multi_line_task: nidaqmx.Task
+) -> nidaqmx.Task:
+    di_single_channel_multi_line_task.timing.cfg_samp_clk_timing(
+        rate=1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=50)
+    return di_single_channel_multi_line_task
+
+
+@pytest.fixture
+def di_multi_channel_multi_line_task_with_timing(
+    di_multi_channel_multi_line_task: nidaqmx.Task,
+) -> nidaqmx.Task:
+    di_multi_channel_multi_line_task.timing.cfg_samp_clk_timing(
+        rate=1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=50
+    )
+    return di_multi_channel_multi_line_task
+
 
 @pytest.fixture
 def di_single_channel_port_byte_task(
@@ -151,39 +188,6 @@ def di_multi_channel_port_uint32_task(
     )
     return task
 
-
-@pytest.fixture
-def di_single_channel_task_with_timing(
-    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
-) -> nidaqmx.Task:
-    task.di_channels.add_di_chan(
-        sim_6363_device.di_lines[0].name, line_grouping=LineGrouping.CHAN_FOR_ALL_LINES
-    )
-    task.timing.cfg_samp_clk_timing(1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=50)
-    return task
-
-
-@pytest.fixture
-def di_single_channel_task_with_high_rate(
-    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
-) -> nidaqmx.Task:
-    task.di_channels.add_di_chan(
-        sim_6363_device.di_lines[0].name, line_grouping=LineGrouping.CHAN_FOR_ALL_LINES
-    )
-    task.timing.cfg_samp_clk_timing(
-        rate=10_000_000, sample_mode=AcquisitionType.FINITE, samps_per_chan=50
-    )
-    return task
-
-
-@pytest.fixture
-def di_multi_channel_task_with_timing(
-    di_multi_channel_multi_line_task: nidaqmx.Task,
-) -> nidaqmx.Task:
-    di_multi_channel_multi_line_task.timing.cfg_samp_clk_timing(
-        1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=50
-    )
-    return di_multi_channel_multi_line_task
 
 
 def _get_num_lines_in_task(task: nidaqmx.Task) -> int:
@@ -682,10 +686,10 @@ def test___digital_multi_channel_reader___read_many_sample_port_uint32_with_wron
 
 
 @pytest.mark.disable_feature_toggle(WAVEFORM_SUPPORT)
-def test___digital_single_channel_reader___read_waveform_feature_disabled___raises_feature_not_supported_error(
-    di_single_channel_task_with_timing: nidaqmx.Task,
+def test___digital_single_line_reader___read_waveform_feature_disabled___raises_feature_not_supported_error(
+    di_single_line_task_with_timing: nidaqmx.Task,
 ) -> None:
-    reader = DigitalSingleChannelReader(di_single_channel_task_with_timing.in_stream)
+    reader = DigitalSingleChannelReader(di_single_line_task_with_timing.in_stream)
 
     with pytest.raises(FeatureNotSupportedError) as exc_info:
         reader.read_waveform()
@@ -696,10 +700,10 @@ def test___digital_single_channel_reader___read_waveform_feature_disabled___rais
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
-def test___digital_single_channel_reader___read_waveform___returns_valid_waveform(
-    di_single_channel_task_with_timing: nidaqmx.Task,
+def test___digital_single_line_reader___read_waveform___returns_valid_waveform(
+    di_single_line_task_with_timing: nidaqmx.Task,
 ) -> None:
-    reader = DigitalSingleChannelReader(di_single_channel_task_with_timing.in_stream)
+    reader = DigitalSingleChannelReader(di_single_line_task_with_timing.in_stream)
     samples_to_read = 10
 
     waveform = reader.read_waveform(samples_to_read)
@@ -710,14 +714,31 @@ def test___digital_single_channel_reader___read_waveform___returns_valid_wavefor
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
-    assert waveform.channel_name == di_single_channel_task_with_timing.di_channels[0].name
+    assert waveform.channel_name == di_single_line_task_with_timing.di_channels[0].name
+
+@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
+def test___digital_single_channel_multi_line_reader___read_waveform___returns_valid_waveform(
+    di_single_channel_multi_line_task_with_timing: nidaqmx.Task,
+) -> None:
+    reader = DigitalSingleChannelReader(di_single_channel_multi_line_task_with_timing.in_stream)
+    samples_to_read = 10
+
+    waveform = reader.read_waveform(samples_to_read)
+
+    assert isinstance(waveform, DigitalWaveform)
+    assert_digital_waveform_data(waveform, 0, samples_to_read)
+    assert isinstance(waveform.timing.timestamp, ht_datetime)
+    assert _is_timestamp_close_to_now(waveform.timing.timestamp)
+    assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
+    assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
+    assert waveform.channel_name == di_single_channel_multi_line_task_with_timing.di_channels[0].name
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
-def test___digital_single_channel_reader___read_waveform_no_args___returns_valid_waveform(
-    di_single_channel_task_with_timing: nidaqmx.Task,
+def test___digital_single_line_reader___read_waveform_no_args___returns_valid_waveform(
+    di_single_line_task_with_timing: nidaqmx.Task,
 ) -> None:
-    reader = DigitalSingleChannelReader(di_single_channel_task_with_timing.in_stream)
+    reader = DigitalSingleChannelReader(di_single_line_task_with_timing.in_stream)
 
     waveform = reader.read_waveform()
 
@@ -727,14 +748,30 @@ def test___digital_single_channel_reader___read_waveform_no_args___returns_valid
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
-    assert waveform.channel_name == di_single_channel_task_with_timing.di_channels[0].name
+    assert waveform.channel_name == di_single_line_task_with_timing.di_channels[0].name
+
+@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
+def test___digital_single_channel_multi_line_reader___read_waveform_no_args___returns_valid_waveform(
+    di_single_channel_multi_line_task_with_timing: nidaqmx.Task,
+) -> None:
+    reader = DigitalSingleChannelReader(di_single_channel_multi_line_task_with_timing.in_stream)
+
+    waveform = reader.read_waveform()
+
+    assert isinstance(waveform, DigitalWaveform)
+    assert_digital_waveform_data(waveform, 0)
+    assert isinstance(waveform.timing.timestamp, ht_datetime)
+    assert _is_timestamp_close_to_now(waveform.timing.timestamp)
+    assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
+    assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
+    assert waveform.channel_name == di_single_channel_multi_line_task_with_timing.di_channels[0].name
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
-def test___digital_single_channel_reader___read_waveform_in_place___returns_valid_waveform(
-    di_single_channel_task_with_timing: nidaqmx.Task,
+def test___digital_single_line_reader___read_waveform_in_place___returns_valid_waveform(
+    di_single_line_task_with_timing: nidaqmx.Task,
 ) -> None:
-    reader = DigitalSingleChannelReader(di_single_channel_task_with_timing.in_stream)
+    reader = DigitalSingleChannelReader(di_single_line_task_with_timing.in_stream)
     user_waveform = DigitalWaveform(50)
 
     waveform = reader.read_waveform(waveform=user_waveform)
@@ -744,14 +781,31 @@ def test___digital_single_channel_reader___read_waveform_in_place___returns_vali
     assert waveform.timing.timestamp is not None
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
-    assert waveform.channel_name == di_single_channel_task_with_timing.di_channels[0].name
+    assert waveform.channel_name == di_single_line_task_with_timing.di_channels[0].name
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
-def test___digital_single_channel_reader___reuse_waveform_in_place___overwrites_data_timing_and_attributes(
+def test___digital_single_channel_multi_line_reader___read_waveform_in_place___returns_valid_waveform(
+    di_single_channel_multi_line_task_with_timing: nidaqmx.Task,
+) -> None:
+    reader = DigitalSingleChannelReader(di_single_channel_multi_line_task_with_timing.in_stream)
+    user_waveform = DigitalWaveform(sample_count=50, signal_count=8)
+
+    waveform = reader.read_waveform(waveform=user_waveform)
+
+    assert waveform is user_waveform
+    assert_digital_waveform_data(waveform, 0)
+    assert waveform.timing.timestamp is not None
+    assert _is_timestamp_close_to_now(waveform.timing.timestamp)
+    assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
+    assert waveform.channel_name == di_single_channel_multi_line_task_with_timing.di_channels[0].name
+
+
+@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
+def test___digital_single_line_reader___reuse_waveform_in_place___overwrites_data_timing_and_attributes(
     generate_task: Callable[[], nidaqmx.Task], sim_6363_device: nidaqmx.system.Device
 ) -> None:
-    def _make_single_channel_reader(chan_index, rate):
+    def _make_single_line_reader(chan_index, rate):
         task = generate_task()
         task.di_channels.add_di_chan(
             sim_6363_device.di_lines[chan_index].name,
@@ -760,20 +814,20 @@ def test___digital_single_channel_reader___reuse_waveform_in_place___overwrites_
         task.timing.cfg_samp_clk_timing(rate, sample_mode=AcquisitionType.FINITE, samps_per_chan=10)
         return DigitalSingleChannelReader(task.in_stream)
 
-    samples_to_read = 10
-    reader0 = _make_single_channel_reader(chan_index=0, rate=1000.0)
-    reader1 = _make_single_channel_reader(chan_index=1, rate=2000.0)
-    waveform = DigitalWaveform(samples_to_read)
+    sample_count = 10
+    reader0 = _make_single_line_reader(chan_index=0, rate=1000.0)
+    reader1 = _make_single_line_reader(chan_index=1, rate=2000.0)
+    waveform = DigitalWaveform(sample_count)
 
-    reader0.read_waveform(number_of_samples_per_channel=samples_to_read, waveform=waveform)
+    reader0.read_waveform(number_of_samples_per_channel=sample_count, waveform=waveform)
     timestamp1 = waveform.timing.timestamp
-    assert_digital_waveform_data(waveform, 0, samples_to_read)
+    assert_digital_waveform_data(waveform, 0, sample_count)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.channel_name == sim_6363_device.di_lines[0].name
 
-    reader1.read_waveform(number_of_samples_per_channel=samples_to_read, waveform=waveform)
+    reader1.read_waveform(number_of_samples_per_channel=sample_count, waveform=waveform)
     timestamp2 = waveform.timing.timestamp
-    assert_digital_waveform_data(waveform, 1, samples_to_read)
+    assert_digital_waveform_data(waveform, 1, sample_count)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 2000)
     assert waveform.channel_name == sim_6363_device.di_lines[1].name
 
@@ -781,10 +835,44 @@ def test___digital_single_channel_reader___reuse_waveform_in_place___overwrites_
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
-def test___digital_single_channel_reader___read_into_undersized_waveform___throws_exception(
-    di_single_channel_task_with_timing: nidaqmx.Task,
+def test___digital_single_channel_multi_line_reader___reuse_waveform_in_place___overwrites_data_timing_and_attributes(
+    generate_task: Callable[[], nidaqmx.Task], sim_6363_device: nidaqmx.system.Device
 ) -> None:
-    reader = DigitalSingleChannelReader(di_single_channel_task_with_timing.in_stream)
+    def _make_single_channel_multi_line_reader(lines_start, lines_end, rate):
+        task = generate_task()
+        task.di_channels.add_di_chan(
+            flatten_channel_string(sim_6363_device.di_lines.channel_names[lines_start:lines_end]),
+            line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+        )
+        task.timing.cfg_samp_clk_timing(rate, sample_mode=AcquisitionType.FINITE, samps_per_chan=10)
+        return DigitalSingleChannelReader(task.in_stream)
+
+    sample_count = 10
+    signal_count = 4
+    reader0 = _make_single_channel_multi_line_reader(lines_start=0, lines_end=4, rate=1000.0)
+    reader1 = _make_single_channel_multi_line_reader(lines_start=4, lines_end=8, rate=2000.0)
+    waveform = DigitalWaveform(sample_count, signal_count=signal_count)
+
+    reader0.read_waveform(number_of_samples_per_channel=sample_count, waveform=waveform)
+    timestamp1 = waveform.timing.timestamp
+    assert_digital_waveform_data(waveform, 0, sample_count)
+    assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
+    assert waveform.channel_name == f"{sim_6363_device.di_lines[0].name}..."
+
+    reader1.read_waveform(number_of_samples_per_channel=sample_count, waveform=waveform)
+    timestamp2 = waveform.timing.timestamp
+    assert_digital_waveform_data(waveform, 4, sample_count)
+    assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 2000)
+    assert waveform.channel_name == f"{sim_6363_device.di_lines[4].name}..."
+
+    assert timestamp2 > timestamp1
+
+
+@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
+def test___digital_single_line_reader___read_into_undersized_waveform___throws_exception(
+    di_single_line_task_with_timing: nidaqmx.Task,
+) -> None:
+    reader = DigitalSingleChannelReader(di_single_line_task_with_timing.in_stream)
     samples_to_read = 10
 
     waveform = DigitalWaveform(samples_to_read - 1)
@@ -796,10 +884,10 @@ def test___digital_single_channel_reader___read_into_undersized_waveform___throw
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
-def test___digital_single_channel_reader___read_waveform_high_sample_rate___returns_correct_sample_interval(
-    di_single_channel_task_with_high_rate: nidaqmx.Task,
+def test___digital_single_line_reader___read_waveform_high_sample_rate___returns_correct_sample_interval(
+    di_single_line_task_with_high_rate: nidaqmx.Task,
 ) -> None:
-    reader = DigitalSingleChannelReader(di_single_channel_task_with_high_rate.in_stream)
+    reader = DigitalSingleChannelReader(di_single_line_task_with_high_rate.in_stream)
     samples_to_read = 50
 
     waveform = reader.read_waveform(number_of_samples_per_channel=samples_to_read)
@@ -810,14 +898,14 @@ def test___digital_single_channel_reader___read_waveform_high_sample_rate___retu
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 10_000_000)
     assert waveform.sample_count == samples_to_read
-    assert waveform.channel_name == di_single_channel_task_with_high_rate.di_channels[0].name
+    assert waveform.channel_name == di_single_line_task_with_high_rate.di_channels[0].name
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
-def test___digital_single_channel_reader_with_timing_flag___read_waveform___only_includes_timing_data(
-    di_single_channel_task_with_timing: nidaqmx.Task,
+def test___digital_single_line_reader_with_timing_flag___read_waveform___only_includes_timing_data(
+    di_single_line_task_with_timing: nidaqmx.Task,
 ) -> None:
-    in_stream = di_single_channel_task_with_timing.in_stream
+    in_stream = di_single_line_task_with_timing.in_stream
     in_stream.waveform_attribute_mode = WaveformAttributeMode.TIMING
     reader = DigitalSingleChannelReader(in_stream)
 
@@ -833,10 +921,10 @@ def test___digital_single_channel_reader_with_timing_flag___read_waveform___only
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
-def test___digital_single_channel_reader_with_extended_properties_flag___read_waveform___only_includes_extended_properties(
-    di_single_channel_task_with_timing: nidaqmx.Task,
+def test___digital_single_line_reader_with_extended_properties_flag___read_waveform___only_includes_extended_properties(
+    di_single_line_task_with_timing: nidaqmx.Task,
 ) -> None:
-    in_stream = di_single_channel_task_with_timing.in_stream
+    in_stream = di_single_line_task_with_timing.in_stream
     in_stream.waveform_attribute_mode = WaveformAttributeMode.EXTENDED_PROPERTIES
     reader = DigitalSingleChannelReader(in_stream)
 
@@ -845,14 +933,14 @@ def test___digital_single_channel_reader_with_extended_properties_flag___read_wa
     assert isinstance(waveform, DigitalWaveform)
     assert_digital_waveform_data(waveform, 0)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.NONE
-    assert waveform.channel_name == di_single_channel_task_with_timing.di_channels[0].name
+    assert waveform.channel_name == di_single_line_task_with_timing.di_channels[0].name
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
-def test___digital_single_channel_reader_with_both_flags___read_waveform___includes_both_timing_and_extended_properties(
-    di_single_channel_task_with_timing: nidaqmx.Task,
+def test___digital_single_line_reader_with_both_flags___read_waveform___includes_both_timing_and_extended_properties(
+    di_single_line_task_with_timing: nidaqmx.Task,
 ) -> None:
-    in_stream = di_single_channel_task_with_timing.in_stream
+    in_stream = di_single_line_task_with_timing.in_stream
     in_stream.waveform_attribute_mode = (
         WaveformAttributeMode.TIMING | WaveformAttributeMode.EXTENDED_PROPERTIES
     )
@@ -866,14 +954,14 @@ def test___digital_single_channel_reader_with_both_flags___read_waveform___inclu
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
-    assert waveform.channel_name == di_single_channel_task_with_timing.di_channels[0].name
+    assert waveform.channel_name == di_single_line_task_with_timing.di_channels[0].name
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
-def test___digital_single_channel_reader_with_none_flag___read_waveform___minimal_waveform_data(
-    di_single_channel_task_with_timing: nidaqmx.Task,
+def test___digital_single_line_reader_with_none_flag___read_waveform___minimal_waveform_data(
+    di_single_line_task_with_timing: nidaqmx.Task,
 ) -> None:
-    in_stream = di_single_channel_task_with_timing.in_stream
+    in_stream = di_single_line_task_with_timing.in_stream
     in_stream.waveform_attribute_mode = WaveformAttributeMode.NONE
     reader = DigitalSingleChannelReader(in_stream)
 
@@ -886,10 +974,10 @@ def test___digital_single_channel_reader_with_none_flag___read_waveform___minima
 
 
 @pytest.mark.disable_feature_toggle(WAVEFORM_SUPPORT)
-def test___digital_multi_channel_reader___read_waveforms_feature_disabled___raises_feature_not_supported_error(
-    di_multi_channel_task_with_timing: nidaqmx.Task,
+def test___digital_multi_channel_multi_line_reader___read_waveforms_feature_disabled___raises_feature_not_supported_error(
+    di_multi_channel_multi_line_task_with_timing: nidaqmx.Task,
 ) -> None:
-    reader = DigitalMultiChannelReader(di_multi_channel_task_with_timing.in_stream)
+    reader = DigitalMultiChannelReader(di_multi_channel_multi_line_task_with_timing.in_stream)
 
     with pytest.raises(FeatureNotSupportedError) as exc_info:
         reader.read_waveforms()
@@ -900,11 +988,11 @@ def test___digital_multi_channel_reader___read_waveforms_feature_disabled___rais
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveforms not implemented in GRPC")
-def test___digital_multi_channel_reader___read_waveforms___returns_valid_waveforms(
-    di_multi_channel_task_with_timing: nidaqmx.Task,
+def test___digital_multi_channel_multi_line_reader___read_waveforms___returns_valid_waveforms(
+    di_multi_channel_multi_line_task_with_timing: nidaqmx.Task,
 ) -> None:
-    reader = DigitalMultiChannelReader(di_multi_channel_task_with_timing.in_stream)
-    num_channels = di_multi_channel_task_with_timing.number_of_channels
+    reader = DigitalMultiChannelReader(di_multi_channel_multi_line_task_with_timing.in_stream)
+    num_channels = di_multi_channel_multi_line_task_with_timing.number_of_channels
     samples_to_read = 10
 
     waveforms = reader.read_waveforms(number_of_samples_per_channel=samples_to_read)
@@ -919,17 +1007,17 @@ def test___digital_multi_channel_reader___read_waveforms___returns_valid_wavefor
         assert _is_timestamp_close_to_now(waveform.timing.timestamp)
         assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
         assert (
-            waveform.channel_name == di_multi_channel_task_with_timing.ai_channels[chan_index].name
+            waveform.channel_name == di_multi_channel_multi_line_task_with_timing.ai_channels[chan_index].name
         )
         assert waveform.sample_count == samples_to_read
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveforms not implemented in GRPC")
-def test___digital_multi_channel_reader___read_waveforms_no_args___returns_valid_waveforms(
-    di_multi_channel_task_with_timing: nidaqmx.Task,
+def test___digital_multi_channel_multi_line_reader___read_waveforms_no_args___returns_valid_waveforms(
+    di_multi_channel_multi_line_task_with_timing: nidaqmx.Task,
 ) -> None:
-    reader = DigitalMultiChannelReader(di_multi_channel_task_with_timing.in_stream)
-    num_channels = di_multi_channel_task_with_timing.number_of_channels
+    reader = DigitalMultiChannelReader(di_multi_channel_multi_line_task_with_timing.in_stream)
+    num_channels = di_multi_channel_multi_line_task_with_timing.number_of_channels
 
     waveforms = reader.read_waveforms()
 
@@ -943,17 +1031,17 @@ def test___digital_multi_channel_reader___read_waveforms_no_args___returns_valid
         assert _is_timestamp_close_to_now(waveform.timing.timestamp)
         assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
         assert (
-            waveform.channel_name == di_multi_channel_task_with_timing.ai_channels[chan_index].name
+            waveform.channel_name == di_multi_channel_multi_line_task_with_timing.ai_channels[chan_index].name
         )
         assert waveform.sample_count == 50
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveforms not implemented in GRPC")
-def test___digital_multi_channel_reader___read_waveforms_in_place___populates_valid_waveforms(
-    di_multi_channel_task_with_timing: nidaqmx.Task,
+def test___digital_multi_channel_multi_line_reader___read_waveforms_in_place___populates_valid_waveforms(
+    di_multi_channel_multi_line_task_with_timing: nidaqmx.Task,
 ) -> None:
-    reader = DigitalMultiChannelReader(di_multi_channel_task_with_timing.in_stream)
-    num_channels = di_multi_channel_task_with_timing.number_of_channels
+    reader = DigitalMultiChannelReader(di_multi_channel_multi_line_task_with_timing.in_stream)
+    num_channels = di_multi_channel_multi_line_task_with_timing.number_of_channels
     samples_to_read = 10
 
     waveforms = [
@@ -978,16 +1066,16 @@ def test___digital_multi_channel_reader___read_waveforms_in_place___populates_va
         assert _is_timestamp_close_to_now(waveform.timing.timestamp)
         assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
         assert (
-            waveform.channel_name == di_multi_channel_task_with_timing.ai_channels[chan_index].name
+            waveform.channel_name == di_multi_channel_multi_line_task_with_timing.ai_channels[chan_index].name
         )
         assert waveform.sample_count == samples_to_read
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveforms not implemented in GRPC")
-def test___digital_multi_channel_reader___read_into_undersized_waveforms___throws_exception(
-    di_multi_channel_task_with_timing: nidaqmx.Task,
+def test___digital_multi_channel_multi_line_reader___read_into_undersized_waveforms___throws_exception(
+    di_multi_channel_multi_line_task_with_timing: nidaqmx.Task,
 ) -> None:
-    reader = DigitalMultiChannelReader(di_multi_channel_task_with_timing.in_stream)
+    reader = DigitalMultiChannelReader(di_multi_channel_multi_line_task_with_timing.in_stream)
     samples_to_read = 10
 
     waveforms = [
@@ -1008,10 +1096,10 @@ def test___digital_multi_channel_reader___read_into_undersized_waveforms___throw
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveforms not implemented in GRPC")
-def test___digital_multi_channel_reader___read_with_wrong_number_of_waveforms___throws_exception(
-    di_multi_channel_task_with_timing: nidaqmx.Task,
+def test___digital_multi_channel_multi_line_reader___read_with_wrong_number_of_waveforms___throws_exception(
+    di_multi_channel_multi_line_task_with_timing: nidaqmx.Task,
 ) -> None:
-    reader = DigitalMultiChannelReader(di_multi_channel_task_with_timing.in_stream)
+    reader = DigitalMultiChannelReader(di_multi_channel_multi_line_task_with_timing.in_stream)
     samples_to_read = 10
 
     waveforms = [
@@ -1026,13 +1114,13 @@ def test___digital_multi_channel_reader___read_with_wrong_number_of_waveforms___
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveforms not implemented in GRPC")
-def test___digital_multi_channel_reader_with_timing_flag___read_waveforms___only_includes_timing_data(
-    di_multi_channel_task_with_timing: nidaqmx.Task,
+def test___digital_multi_channel_multi_line_reader_with_timing_flag___read_waveforms___only_includes_timing_data(
+    di_multi_channel_multi_line_task_with_timing: nidaqmx.Task,
 ) -> None:
-    in_stream = di_multi_channel_task_with_timing.in_stream
+    in_stream = di_multi_channel_multi_line_task_with_timing.in_stream
     in_stream.waveform_attribute_mode = WaveformAttributeMode.TIMING
     reader = DigitalMultiChannelReader(in_stream)
-    num_channels = di_multi_channel_task_with_timing.number_of_channels
+    num_channels = di_multi_channel_multi_line_task_with_timing.number_of_channels
     samples_to_read = 10
 
     waveforms = reader.read_waveforms(number_of_samples_per_channel=samples_to_read)
@@ -1052,13 +1140,13 @@ def test___digital_multi_channel_reader_with_timing_flag___read_waveforms___only
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveforms not implemented in GRPC")
-def test___digital_multi_channel_reader_with_extended_properties_flag___read_waveforms___only_includes_extended_properties(
-    di_multi_channel_task_with_timing: nidaqmx.Task,
+def test___digital_multi_channel_multi_line_reader_with_extended_properties_flag___read_waveforms___only_includes_extended_properties(
+    di_multi_channel_multi_line_task_with_timing: nidaqmx.Task,
 ) -> None:
-    in_stream = di_multi_channel_task_with_timing.in_stream
+    in_stream = di_multi_channel_multi_line_task_with_timing.in_stream
     in_stream.waveform_attribute_mode = WaveformAttributeMode.EXTENDED_PROPERTIES
     reader = DigitalMultiChannelReader(in_stream)
-    num_channels = di_multi_channel_task_with_timing.number_of_channels
+    num_channels = di_multi_channel_multi_line_task_with_timing.number_of_channels
     samples_to_read = 10
 
     waveforms = reader.read_waveforms(number_of_samples_per_channel=samples_to_read)
@@ -1071,21 +1159,21 @@ def test___digital_multi_channel_reader_with_extended_properties_flag___read_wav
         assert_digital_waveform_data(waveform, chan_index, samples_to_read)
         assert waveform.timing.sample_interval_mode == SampleIntervalMode.NONE
         assert (
-            waveform.channel_name == di_multi_channel_task_with_timing.ai_channels[chan_index].name
+            waveform.channel_name == di_multi_channel_multi_line_task_with_timing.ai_channels[chan_index].name
         )
         assert waveform.sample_count == samples_to_read
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveforms not implemented in GRPC")
-def test___digital_multi_channel_reader_with_both_flags___read_waveforms___includes_both_timing_and_extended_properties(
-    di_multi_channel_task_with_timing: nidaqmx.Task,
+def test___digital_multi_channel_multi_line_reader_with_both_flags___read_waveforms___includes_both_timing_and_extended_properties(
+    di_multi_channel_multi_line_task_with_timing: nidaqmx.Task,
 ) -> None:
-    in_stream = di_multi_channel_task_with_timing.in_stream
+    in_stream = di_multi_channel_multi_line_task_with_timing.in_stream
     in_stream.waveform_attribute_mode = (
         WaveformAttributeMode.TIMING | WaveformAttributeMode.EXTENDED_PROPERTIES
     )
     reader = DigitalMultiChannelReader(in_stream)
-    num_channels = di_multi_channel_task_with_timing.number_of_channels
+    num_channels = di_multi_channel_multi_line_task_with_timing.number_of_channels
     samples_to_read = 10
 
     waveforms = reader.read_waveforms(number_of_samples_per_channel=samples_to_read)
@@ -1101,19 +1189,19 @@ def test___digital_multi_channel_reader_with_both_flags___read_waveforms___inclu
         assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
         assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
         assert (
-            waveform.channel_name == di_multi_channel_task_with_timing.ai_channels[chan_index].name
+            waveform.channel_name == di_multi_channel_multi_line_task_with_timing.ai_channels[chan_index].name
         )
         assert waveform.sample_count == samples_to_read
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveforms not implemented in GRPC")
-def test___digital_multi_channel_reader_with_none_flag___read_waveforms___minimal_waveform_data(
-    di_multi_channel_task_with_timing: nidaqmx.Task,
+def test___digital_multi_channel_multi_line_reader_with_none_flag___read_waveforms___minimal_waveform_data(
+    di_multi_channel_multi_line_task_with_timing: nidaqmx.Task,
 ) -> None:
-    in_stream = di_multi_channel_task_with_timing.in_stream
+    in_stream = di_multi_channel_multi_line_task_with_timing.in_stream
     in_stream.waveform_attribute_mode = WaveformAttributeMode.NONE
     reader = DigitalMultiChannelReader(in_stream)
-    num_channels = di_multi_channel_task_with_timing.number_of_channels
+    num_channels = di_multi_channel_multi_line_task_with_timing.number_of_channels
     samples_to_read = 10
 
     waveforms = reader.read_waveforms(number_of_samples_per_channel=samples_to_read)
