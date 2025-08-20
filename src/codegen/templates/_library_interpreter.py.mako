@@ -500,14 +500,16 @@ class LibraryInterpreter(BaseInterpreter):
         self,
         task_handle: object,
         channel_count: int,
-        sample_count: int,
-        signal_count: int,
+        number_of_samples_per_channel: int,
+        number_of_signals_per_sample: int,
         timeout: float,
         waveform_attribute_mode: WaveformAttributeMode,
         waveforms: Sequence[DigitalWaveform[numpy.uint8]] | None = None,
     ) -> Sequence[DigitalWaveform[numpy.uint8]]:
         """Read a digital waveform with timing and attributes."""
-        read_array = numpy.zeros((channel_count, sample_count, signal_count), dtype=numpy.uint8)
+        read_array = numpy.zeros(
+            (channel_count, number_of_samples_per_channel, number_of_signals_per_sample),
+            dtype=numpy.uint8)
 
         if WaveformAttributeMode.EXTENDED_PROPERTIES in waveform_attribute_mode:
             if waveforms is not None:
@@ -526,7 +528,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code, samples_read = self._internal_read_digital_waveform(
             task_handle,
-            sample_count,
+            number_of_samples_per_channel,
             timeout,
             FillMode.GROUP_BY_CHANNEL.value,
             read_array,
@@ -543,8 +545,8 @@ class LibraryInterpreter(BaseInterpreter):
             for i in range(channel_count):
                 waveform = DigitalWaveform.from_lines(
                     array=read_array[i, :],
-                    sample_count=sample_count,
-                    signal_count=signal_count,
+                    sample_count=number_of_samples_per_channel,
+                    signal_count=number_of_signals_per_sample,
                     extended_properties=properties[i] if properties else None)
                 waveforms.append(waveform)
 
