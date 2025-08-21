@@ -167,9 +167,10 @@ def test___analog_single_channel_reader___read_waveform_feature_disabled___raise
     ai_single_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
     reader = AnalogSingleChannelReader(ai_single_channel_task_with_timing.in_stream)
+    waveform = AnalogWaveform[numpy.float64](50)
 
     with pytest.raises(FeatureNotSupportedError) as exc_info:
-        reader.read_waveform()
+        reader.read_waveform(waveform)
 
     error_message = str(exc_info.value)
     assert "WAVEFORM_SUPPORT feature is not supported" in error_message
@@ -182,9 +183,11 @@ def test___analog_single_channel_reader___read_waveform___returns_valid_waveform
 ) -> None:
     reader = AnalogSingleChannelReader(ai_single_channel_task_with_timing.in_stream)
     samples_to_read = 10
+    waveform = AnalogWaveform[numpy.float64](samples_to_read)
 
-    waveform = reader.read_waveform(number_of_samples_per_channel=samples_to_read)
+    samples_read = reader.read_waveform(waveform, samples_to_read)
 
+    assert samples_read == samples_to_read
     assert isinstance(waveform, AnalogWaveform)
     expected = _get_voltage_offset_for_chan(0)
     assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
@@ -201,9 +204,11 @@ def test___analog_single_channel_reader___read_waveform_no_args___returns_valid_
     ai_single_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
     reader = AnalogSingleChannelReader(ai_single_channel_task_with_timing.in_stream)
+    waveform = AnalogWaveform[numpy.float64](50)
 
-    waveform = reader.read_waveform()
+    samples_read = reader.read_waveform(waveform)
 
+    assert samples_read == 50
     assert isinstance(waveform, AnalogWaveform)
     expected = _get_voltage_offset_for_chan(0)
     assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
@@ -223,8 +228,9 @@ def test___analog_single_channel_reader___read_waveform_in_place___populates_val
     samples_to_read = 10
 
     waveform = AnalogWaveform(samples_to_read)
-    reader.read_waveform(number_of_samples_per_channel=samples_to_read, waveform=waveform)
+    samples_read = reader.read_waveform(waveform, samples_to_read)
 
+    assert samples_read == samples_to_read
     assert isinstance(waveform, AnalogWaveform)
     expected = _get_voltage_offset_for_chan(0)
     assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
@@ -254,13 +260,13 @@ def test___analog_single_channel_reader___reuse_waveform_in_place___overwrites_d
     reader1 = _make_single_channel_reader(chan_index=1, offset=1, rate=2000.0)
     waveform = AnalogWaveform(10)
 
-    reader0.read_waveform(number_of_samples_per_channel=10, waveform=waveform)
+    reader0.read_waveform(waveform, 10)
     timestamp1 = waveform.timing.timestamp
     assert waveform.scaled_data == pytest.approx(0, abs=VOLTAGE_EPSILON)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.channel_name == f"{sim_6363_device.name}/ai0"
 
-    reader1.read_waveform(number_of_samples_per_channel=10, waveform=waveform)
+    reader1.read_waveform(waveform, 10)
     timestamp2 = waveform.timing.timestamp
     assert waveform.scaled_data == pytest.approx(1, abs=VOLTAGE_EPSILON)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 2000)
@@ -278,7 +284,7 @@ def test___analog_single_channel_reader___read_into_undersized_waveform___throws
 
     waveform = AnalogWaveform(samples_to_read - 1)
     with pytest.raises(DaqError) as exc_info:
-        reader.read_waveform(number_of_samples_per_channel=samples_to_read, waveform=waveform)
+        reader.read_waveform(waveform, samples_to_read)
 
     assert exc_info.value.error_code == DAQmxErrors.READ_BUFFER_TOO_SMALL
     assert exc_info.value.args[0].startswith("The provided waveform does not have enough space")
@@ -290,9 +296,11 @@ def test___analog_single_channel_reader___read_waveform_high_sample_rate___retur
 ) -> None:
     reader = AnalogSingleChannelReader(ai_single_channel_task_with_high_rate.in_stream)
     samples_to_read = 50
+    waveform = AnalogWaveform[numpy.float64](samples_to_read)
 
-    waveform = reader.read_waveform(number_of_samples_per_channel=samples_to_read)
+    samples_read = reader.read_waveform(waveform, samples_to_read)
 
+    assert samples_read == samples_to_read
     assert isinstance(waveform, AnalogWaveform)
     expected = _get_voltage_offset_for_chan(0)
     assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
@@ -312,9 +320,11 @@ def test___analog_single_channel_reader_with_timing_flag___read_waveform___only_
     in_stream.waveform_attribute_mode = WaveformAttributeMode.TIMING
     reader = AnalogSingleChannelReader(in_stream)
     samples_to_read = 10
+    waveform = AnalogWaveform[numpy.float64](samples_to_read)
 
-    waveform = reader.read_waveform(number_of_samples_per_channel=samples_to_read)
+    samples_read = reader.read_waveform(waveform, samples_to_read)
 
+    assert samples_read == samples_to_read
     assert isinstance(waveform, AnalogWaveform)
     assert waveform.sample_count == samples_to_read
     expected = _get_voltage_offset_for_chan(0)
@@ -335,9 +345,11 @@ def test___analog_single_channel_reader_with_extended_properties_flag___read_wav
     in_stream.waveform_attribute_mode = WaveformAttributeMode.EXTENDED_PROPERTIES
     reader = AnalogSingleChannelReader(in_stream)
     samples_to_read = 10
+    waveform = AnalogWaveform[numpy.float64](samples_to_read)
 
-    waveform = reader.read_waveform(number_of_samples_per_channel=samples_to_read)
+    samples_read = reader.read_waveform(waveform, samples_to_read)
 
+    assert samples_read == samples_to_read
     assert isinstance(waveform, AnalogWaveform)
     assert waveform.sample_count == samples_to_read
     expected = _get_voltage_offset_for_chan(0)
@@ -357,9 +369,11 @@ def test___analog_single_channel_reader_with_both_flags___read_waveform___includ
     )
     reader = AnalogSingleChannelReader(in_stream)
     samples_to_read = 10
+    waveform = AnalogWaveform[numpy.float64](samples_to_read)
 
-    waveform = reader.read_waveform(number_of_samples_per_channel=samples_to_read)
+    samples_read = reader.read_waveform(waveform, samples_to_read)
 
+    assert samples_read == samples_to_read
     assert isinstance(waveform, AnalogWaveform)
     assert waveform.sample_count == samples_to_read
     expected = _get_voltage_offset_for_chan(0)
@@ -380,9 +394,11 @@ def test___analog_single_channel_reader_with_none_flag___read_waveform___minimal
     in_stream.waveform_attribute_mode = WaveformAttributeMode.NONE
     reader = AnalogSingleChannelReader(in_stream)
     samples_to_read = 10
+    waveform = AnalogWaveform[numpy.float64](samples_to_read)
 
-    waveform = reader.read_waveform(number_of_samples_per_channel=samples_to_read)
+    samples_read = reader.read_waveform(waveform, samples_to_read)
 
+    assert samples_read == samples_to_read
     assert isinstance(waveform, AnalogWaveform)
     assert waveform.sample_count == samples_to_read
     expected = _get_voltage_offset_for_chan(0)
@@ -452,9 +468,12 @@ def test___analog_multi_channel_reader___read_waveforms_feature_disabled___raise
     ai_multi_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
     reader = AnalogMultiChannelReader(ai_multi_channel_task_with_timing.in_stream)
+    num_channels = ai_multi_channel_task_with_timing.number_of_channels
+    samples_to_read = 10
+    waveforms = [AnalogWaveform[numpy.float64](samples_to_read) for _ in range(num_channels)]
 
     with pytest.raises(FeatureNotSupportedError) as exc_info:
-        reader.read_waveforms()
+        reader.read_waveforms(waveforms)
 
     error_message = str(exc_info.value)
     assert "WAVEFORM_SUPPORT feature is not supported" in error_message
@@ -468,9 +487,11 @@ def test___analog_multi_channel_reader___read_waveforms___returns_valid_waveform
     reader = AnalogMultiChannelReader(ai_multi_channel_task_with_timing.in_stream)
     num_channels = ai_multi_channel_task_with_timing.number_of_channels
     samples_to_read = 10
+    waveforms = [AnalogWaveform[numpy.float64](samples_to_read) for _ in range(num_channels)]
 
-    waveforms = reader.read_waveforms(number_of_samples_per_channel=samples_to_read)
+    samples_read = reader.read_waveforms(waveforms, samples_to_read)
 
+    assert samples_read == samples_to_read
     assert num_channels == 3
     assert isinstance(waveforms, list)
     assert len(waveforms) == num_channels
@@ -494,9 +515,11 @@ def test___analog_multi_channel_reader___read_waveforms_no_args___returns_valid_
 ) -> None:
     reader = AnalogMultiChannelReader(ai_multi_channel_task_with_timing.in_stream)
     num_channels = ai_multi_channel_task_with_timing.number_of_channels
+    waveforms = [AnalogWaveform[numpy.float64](50) for _ in range(num_channels)]
 
-    waveforms = reader.read_waveforms()
+    samples_read = reader.read_waveforms(waveforms)
 
+    assert samples_read == 50
     assert num_channels == 3
     assert isinstance(waveforms, list)
     assert len(waveforms) == num_channels
@@ -527,8 +550,9 @@ def test___analog_multi_channel_reader___read_waveforms_in_place___populates_val
         AnalogWaveform(samples_to_read),
         AnalogWaveform(samples_to_read),
     ]
-    reader.read_waveforms(number_of_samples_per_channel=samples_to_read, waveforms=waveforms)
+    samples_read = reader.read_waveforms(waveforms, samples_to_read)
 
+    assert samples_read == samples_to_read
     assert num_channels == 3
     assert isinstance(waveforms, list)
     assert len(waveforms) == num_channels
@@ -559,7 +583,7 @@ def test___analog_multi_channel_reader___read_into_undersized_waveforms___throws
         AnalogWaveform(samples_to_read),
     ]
     with pytest.raises(DaqError) as exc_info:
-        reader.read_waveforms(number_of_samples_per_channel=samples_to_read, waveforms=waveforms)
+        reader.read_waveforms(waveforms, samples_to_read)
 
     assert exc_info.value.error_code == DAQmxErrors.READ_BUFFER_TOO_SMALL
     assert exc_info.value.args[0].startswith("The waveform at index 1 does not have enough space")
@@ -577,7 +601,7 @@ def test___analog_multi_channel_reader___read_with_wrong_number_of_waveforms___t
         AnalogWaveform(samples_to_read),
     ]
     with pytest.raises(DaqError) as exc_info:
-        reader.read_waveforms(number_of_samples_per_channel=samples_to_read, waveforms=waveforms)
+        reader.read_waveforms(waveforms, samples_to_read)
 
     assert exc_info.value.error_code == DAQmxErrors.MISMATCHED_INPUT_ARRAY_SIZES
     assert "does not match the number of channels" in exc_info.value.args[0]
@@ -592,9 +616,11 @@ def test___analog_multi_channel_reader_with_timing_flag___read_waveforms___only_
     reader = AnalogMultiChannelReader(in_stream)
     num_channels = ai_multi_channel_task_with_timing.number_of_channels
     samples_to_read = 10
+    waveforms = [AnalogWaveform[numpy.float64](samples_to_read) for _ in range(num_channels)]
 
-    waveforms = reader.read_waveforms(number_of_samples_per_channel=samples_to_read)
+    samples_read = reader.read_waveforms(waveforms, samples_to_read)
 
+    assert samples_read == samples_to_read
     assert num_channels == 3
     assert isinstance(waveforms, list)
     assert len(waveforms) == num_channels
@@ -620,9 +646,11 @@ def test___analog_multi_channel_reader_with_extended_properties_flag___read_wave
     reader = AnalogMultiChannelReader(in_stream)
     num_channels = ai_multi_channel_task_with_timing.number_of_channels
     samples_to_read = 10
+    waveforms = [AnalogWaveform[numpy.float64](samples_to_read) for _ in range(num_channels)]
 
-    waveforms = reader.read_waveforms(number_of_samples_per_channel=samples_to_read)
+    samples_read = reader.read_waveforms(waveforms, samples_to_read)
 
+    assert samples_read == samples_to_read
     assert num_channels == 3
     assert isinstance(waveforms, list)
     assert len(waveforms) == num_channels
@@ -649,9 +677,11 @@ def test___analog_multi_channel_reader_with_both_flags___read_waveforms___includ
     reader = AnalogMultiChannelReader(in_stream)
     num_channels = ai_multi_channel_task_with_timing.number_of_channels
     samples_to_read = 10
+    waveforms = [AnalogWaveform[numpy.float64](samples_to_read) for _ in range(num_channels)]
 
-    waveforms = reader.read_waveforms(number_of_samples_per_channel=samples_to_read)
+    samples_read = reader.read_waveforms(waveforms, samples_to_read)
 
+    assert samples_read == samples_to_read
     assert num_channels == 3
     assert isinstance(waveforms, list)
     assert len(waveforms) == num_channels
@@ -679,9 +709,11 @@ def test___analog_multi_channel_reader_with_none_flag___read_waveforms___minimal
     reader = AnalogMultiChannelReader(in_stream)
     num_channels = ai_multi_channel_task_with_timing.number_of_channels
     samples_to_read = 10
+    waveforms = [AnalogWaveform[numpy.float64](samples_to_read) for _ in range(num_channels)]
 
-    waveforms = reader.read_waveforms(number_of_samples_per_channel=samples_to_read)
+    samples_read = reader.read_waveforms(waveforms, samples_to_read)
 
+    assert samples_read == samples_to_read
     assert num_channels == 3
     assert isinstance(waveforms, list)
     assert len(waveforms) == num_channels

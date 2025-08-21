@@ -3609,7 +3609,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         timeout: float,
         waveform: AnalogWaveform[numpy.float64],
         waveform_attribute_mode: WaveformAttributeMode
-    ) -> None:
+    ) -> int:
         raise NotImplementedError
 
     def read_analog_waveforms(
@@ -3619,7 +3619,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         timeout: float,
         waveforms: Sequence[AnalogWaveform[numpy.float64]],
         waveform_attribute_mode: WaveformAttributeMode
-    ) -> None:
+    ) -> int:
         raise NotImplementedError
 
     def read_digital_waveform(
@@ -3629,7 +3629,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         timeout: float,
         waveform: DigitalWaveform[numpy.uint8],
         waveform_attribute_mode: WaveformAttributeMode
-    ) -> None:
+    ) -> int:
         raise NotImplementedError
 
     def read_digital_waveforms(
@@ -3639,9 +3639,9 @@ class GrpcStubInterpreter(BaseInterpreter):
         number_of_samples_per_channel: int,
         number_of_signals_per_sample: int,
         timeout: float,
+        waveforms: Sequence[DigitalWaveform[numpy.uint8]],
         waveform_attribute_mode: WaveformAttributeMode,
-        waveforms: Sequence[DigitalWaveform[numpy.uint8]] | None = None,
-    ) -> Sequence[DigitalWaveform[numpy.uint8]]:
+    ) -> int:
         raise NotImplementedError
 
 def _assign_numpy_array(numpy_array, grpc_array):

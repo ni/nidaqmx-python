@@ -718,9 +718,10 @@ def test___digital_single_line_reader___read_waveform_feature_disabled___raises_
     di_single_line_timing_task: nidaqmx.Task,
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_line_timing_task.in_stream)
+    waveform = DigitalWaveform(50)
 
     with pytest.raises(FeatureNotSupportedError) as exc_info:
-        reader.read_waveform()
+        reader.read_waveform(waveform)
 
     error_message = str(exc_info.value)
     assert "WAVEFORM_SUPPORT feature is not supported" in error_message
@@ -733,9 +734,11 @@ def test___digital_single_line_reader___read_waveform___returns_valid_waveform(
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_line_timing_task.in_stream)
     samples_to_read = 10
+    waveform = DigitalWaveform(samples_to_read)
 
-    waveform = reader.read_waveform(samples_to_read)
+    samples_read = reader.read_waveform(waveform, samples_to_read)
 
+    assert samples_read == samples_to_read
     assert _get_waveform_data(waveform) == _get_expected_digital_data(1, samples_to_read)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
@@ -750,9 +753,11 @@ def test___digital_single_channel_multi_line_reader___read_waveform___returns_va
     reader = DigitalSingleChannelReader(di_single_channel_multi_line_timing_task.in_stream)
     samples_to_read = 10
     num_lines = _get_num_lines_in_task(di_single_channel_multi_line_timing_task)
+    waveform = DigitalWaveform(samples_to_read, num_lines)
 
-    waveform = reader.read_waveform(samples_to_read)
+    samples_read = reader.read_waveform(waveform, samples_to_read)
 
+    assert samples_read == samples_to_read
     assert _get_waveform_data(waveform) == _get_expected_digital_data(num_lines, samples_to_read)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
@@ -765,9 +770,11 @@ def test___digital_single_line_reader___read_waveform_no_args___returns_valid_wa
     di_single_line_timing_task: nidaqmx.Task,
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_line_timing_task.in_stream)
+    waveform = DigitalWaveform(50)
 
-    waveform = reader.read_waveform()
+    samples_read = reader.read_waveform(waveform)
 
+    assert samples_read == 50
     assert _get_waveform_data(waveform) == _get_expected_digital_data(1, 50)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
@@ -781,9 +788,11 @@ def test___digital_single_channel_multi_line_reader___read_waveform_no_args___re
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_channel_multi_line_timing_task.in_stream)
     num_lines = _get_num_lines_in_task(di_single_channel_multi_line_timing_task)
+    waveform = DigitalWaveform(50, num_lines)
 
-    waveform = reader.read_waveform()
+    samples_read = reader.read_waveform(waveform)
 
+    assert samples_read == 50
     assert _get_waveform_data(waveform) == _get_expected_digital_data(num_lines, 50)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
@@ -796,11 +805,11 @@ def test___digital_single_line_reader___read_waveform_in_place___returns_valid_w
     di_single_line_timing_task: nidaqmx.Task,
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_line_timing_task.in_stream)
-    user_waveform = DigitalWaveform(50)
+    waveform = DigitalWaveform(50)
 
-    waveform = reader.read_waveform(waveform=user_waveform)
+    samples_read = reader.read_waveform(waveform)
 
-    assert waveform is user_waveform
+    assert samples_read == 50
     assert _get_waveform_data(waveform) == _get_expected_digital_data(1, 50)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
@@ -813,11 +822,11 @@ def test___digital_single_channel_multi_line_reader___read_waveform_in_place___r
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_channel_multi_line_timing_task.in_stream)
     num_lines = _get_num_lines_in_task(di_single_channel_multi_line_timing_task)
-    user_waveform = DigitalWaveform(sample_count=50, signal_count=8)
+    waveform = DigitalWaveform(sample_count=50, signal_count=8)
 
-    waveform = reader.read_waveform(waveform=user_waveform)
+    samples_read = reader.read_waveform(waveform)
 
-    assert waveform is user_waveform
+    assert samples_read == 50
     assert _get_waveform_data(waveform) == _get_expected_digital_data(num_lines, 50)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
@@ -842,13 +851,13 @@ def test___digital_single_line_reader___reuse_waveform_in_place___overwrites_dat
     reader1 = _make_single_line_reader(chan_index=1, rate=2000.0)
     waveform = DigitalWaveform(sample_count)
 
-    reader0.read_waveform(number_of_samples_per_channel=sample_count, waveform=waveform)
+    reader0.read_waveform(waveform, sample_count)
     timestamp0 = waveform.timing.timestamp
     assert _get_waveform_data(waveform) == _get_expected_data_for_line(sample_count, 0)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.channel_name == sim_6363_device.di_lines[0].name
 
-    reader1.read_waveform(number_of_samples_per_channel=sample_count, waveform=waveform)
+    reader1.read_waveform(waveform, sample_count)
     timestamp1 = waveform.timing.timestamp
     assert _get_waveform_data(waveform) == _get_expected_data_for_line(sample_count, 1)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 2000)
@@ -878,13 +887,13 @@ def test___digital_single_channel_multi_line_reader___reuse_waveform_in_place___
     reader1 = _make_single_channel_multi_line_reader(lines_start=1, rate=2000.0)
     waveform = DigitalWaveform(sample_count, signal_count)
 
-    reader0.read_waveform(number_of_samples_per_channel=sample_count, waveform=waveform)
+    reader0.read_waveform(waveform, sample_count)
     timestamp0 = waveform.timing.timestamp
     assert _get_waveform_data(waveform) == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.channel_name == f"{sim_6363_device.di_lines[0].name}..."
 
-    reader1.read_waveform(number_of_samples_per_channel=sample_count, waveform=waveform)
+    reader1.read_waveform(waveform, sample_count)
     timestamp1 = waveform.timing.timestamp
     assert _get_waveform_data(waveform) == [0, 0, 1, 1, 2, 2, 3, 3, 4, 4]
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 2000)
@@ -902,7 +911,7 @@ def test___digital_single_line_reader___read_into_undersized_waveform___throws_e
 
     waveform = DigitalWaveform(samples_to_read - 1)
     with pytest.raises(DaqError) as exc_info:
-        reader.read_waveform(number_of_samples_per_channel=samples_to_read, waveform=waveform)
+        reader.read_waveform(waveform, samples_to_read)
 
     assert exc_info.value.error_code == DAQmxErrors.READ_BUFFER_TOO_SMALL
     assert exc_info.value.args[0].startswith("Buffer is too small to fit read data.")
@@ -914,9 +923,11 @@ def test___digital_single_line_reader___read_waveform_high_sample_rate___returns
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_line_high_rate_task.in_stream)
     samples_to_read = 50
+    waveform = DigitalWaveform(samples_to_read)
 
-    waveform = reader.read_waveform(number_of_samples_per_channel=samples_to_read)
+    samples_read = reader.read_waveform(waveform, samples_to_read)
 
+    assert samples_read == samples_to_read
     assert _get_waveform_data(waveform) == _get_expected_digital_data(1, 50)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 10_000_000)
@@ -931,9 +942,11 @@ def test___digital_single_line_reader_with_timing_flag___read_waveform___only_in
     in_stream = di_single_line_timing_task.in_stream
     in_stream.waveform_attribute_mode = WaveformAttributeMode.TIMING
     reader = DigitalSingleChannelReader(in_stream)
+    waveform = DigitalWaveform(50)
 
-    waveform = reader.read_waveform()
+    samples_read = reader.read_waveform(waveform)
 
+    assert samples_read == 50
     assert _get_waveform_data(waveform) == _get_expected_digital_data(1, 50)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
@@ -948,9 +961,11 @@ def test___digital_single_line_reader_with_extended_properties_flag___read_wavef
     in_stream = di_single_line_timing_task.in_stream
     in_stream.waveform_attribute_mode = WaveformAttributeMode.EXTENDED_PROPERTIES
     reader = DigitalSingleChannelReader(in_stream)
+    waveform = DigitalWaveform(50)
 
-    waveform = reader.read_waveform()
+    samples_read = reader.read_waveform(waveform)
 
+    assert samples_read == 50
     assert _get_waveform_data(waveform) == _get_expected_digital_data(1, 50)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.NONE
     assert waveform.channel_name == di_single_line_timing_task.di_channels[0].name
@@ -965,9 +980,11 @@ def test___digital_single_line_reader_with_both_flags___read_waveform___includes
         WaveformAttributeMode.TIMING | WaveformAttributeMode.EXTENDED_PROPERTIES
     )
     reader = DigitalSingleChannelReader(in_stream)
+    waveform = DigitalWaveform(50)
 
-    waveform = reader.read_waveform()
+    samples_read = reader.read_waveform(waveform)
 
+    assert samples_read == 50
     assert _get_waveform_data(waveform) == _get_expected_digital_data(1, 50)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
@@ -982,9 +999,11 @@ def test___digital_single_line_reader_with_none_flag___read_waveform___minimal_w
     in_stream = di_single_line_timing_task.in_stream
     in_stream.waveform_attribute_mode = WaveformAttributeMode.NONE
     reader = DigitalSingleChannelReader(in_stream)
+    waveform = DigitalWaveform(50)
 
-    waveform = reader.read_waveform()
+    samples_read = reader.read_waveform(waveform)
 
+    assert samples_read == 50
     assert _get_waveform_data(waveform) == _get_expected_digital_data(1, 50)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.NONE
     assert waveform.channel_name == ""
@@ -1001,9 +1020,11 @@ def test___digital_single_channel_port_uint32_reader___read_waveform___returns_v
     reader = DigitalSingleChannelReader(di_single_channel_port_uint32_timing_task.in_stream)
     num_lines = _get_num_lines_in_task(di_single_channel_port_uint32_timing_task)
     samples_to_read = 10
+    waveform = DigitalWaveform(samples_to_read, num_lines)
 
-    waveform = reader.read_waveform(samples_to_read)
+    samples_read = reader.read_waveform(waveform, samples_to_read)
 
+    assert samples_read == 50
     assert _get_waveform_data(waveform) == _get_expected_digital_data(num_lines, samples_to_read)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
@@ -1016,9 +1037,10 @@ def test___digital_multi_channel_multi_line_reader___read_waveforms_feature_disa
     di_multi_chan_multi_line_timing_task: nidaqmx.Task,
 ) -> None:
     reader = DigitalMultiChannelReader(di_multi_chan_multi_line_timing_task.in_stream)
+    waveforms = [DigitalWaveform(50) for _ in range(8)]
 
     with pytest.raises(FeatureNotSupportedError) as exc_info:
-        reader.read_waveforms()
+        reader.read_waveforms(waveforms)
 
     error_message = str(exc_info.value)
     assert "WAVEFORM_SUPPORT feature is not supported" in error_message
@@ -1033,9 +1055,11 @@ def test___digital_multi_channel_multi_line_reader___read_waveforms___returns_va
     num_channels = di_multi_chan_multi_line_timing_task.number_of_channels
     num_lines = _get_num_lines_in_task(di_multi_chan_multi_line_timing_task)
     samples_to_read = 10
+    waveforms = [DigitalWaveform(samples_to_read) for _ in range(num_channels)]
 
-    waveforms = reader.read_waveforms(number_of_samples_per_channel=samples_to_read)
+    samples_read = reader.read_waveforms(waveforms, samples_to_read)
 
+    assert samples_read == samples_to_read
     assert num_channels == 8
     assert num_lines == 8
     assert isinstance(waveforms, list)
@@ -1055,9 +1079,11 @@ def test___digital_multi_channel_multi_line_reader___read_waveforms_no_args___re
     reader = DigitalMultiChannelReader(di_multi_chan_multi_line_timing_task.in_stream)
     num_channels = di_multi_chan_multi_line_timing_task.number_of_channels
     num_lines = _get_num_lines_in_task(di_multi_chan_multi_line_timing_task)
+    waveforms = [DigitalWaveform(50) for _ in range(num_channels)]
 
-    waveforms = reader.read_waveforms()
+    samples_read = reader.read_waveforms(waveforms)
 
+    assert samples_read == 50
     assert num_channels == 8
     assert num_lines == 8
     assert isinstance(waveforms, list)
@@ -1089,8 +1115,9 @@ def test___digital_multi_channel_multi_line_reader___read_waveforms_in_place___p
         DigitalWaveform(samples_to_read),
         DigitalWaveform(samples_to_read),
     ]
-    reader.read_waveforms(number_of_samples_per_channel=samples_to_read, waveforms=waveforms)
+    samples_read = reader.read_waveforms(waveforms, samples_to_read)
 
+    assert samples_read == samples_to_read
     assert num_channels == 8
     assert num_lines == 8
     assert isinstance(waveforms, list)
@@ -1124,14 +1151,14 @@ def test___digital_multi_channel_multi_line_reader___reuse_waveform_in_place___o
     reader1 = _make_multi_channel_multi_line_reader(lines_start=1, rate=2000.0)
     waveforms = [DigitalWaveform(sample_count) for _ in range(num_channels)]
 
-    reader0.read_waveforms(number_of_samples_per_channel=sample_count, waveforms=waveforms)
+    reader0.read_waveforms(waveforms, sample_count)
     timestamps0 = [wf.timing.timestamp for wf in waveforms]
     for chan, waveform in enumerate(waveforms):
         assert _get_waveform_data(waveform) == _get_expected_data_for_line(sample_count, chan)
         assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
         assert waveform.channel_name == sim_6363_device.di_lines[chan].name
 
-    reader1.read_waveforms(number_of_samples_per_channel=sample_count, waveforms=waveforms)
+    reader1.read_waveforms(waveforms, sample_count)
     timestamps1 = [wf.timing.timestamp for wf in waveforms]
     for chan, waveform in enumerate(waveforms):
         assert _get_waveform_data(waveform) == _get_expected_data_for_line(sample_count, chan + 1)
@@ -1160,7 +1187,7 @@ def test___digital_multi_channel_multi_line_reader___read_into_undersized_wavefo
         DigitalWaveform(samples_to_read),
     ]
     with pytest.raises(DaqError) as exc_info:
-        reader.read_waveforms(number_of_samples_per_channel=samples_to_read, waveforms=waveforms)
+        reader.read_waveforms(waveforms, samples_to_read)
 
     assert exc_info.value.error_code == DAQmxErrors.READ_BUFFER_TOO_SMALL
     assert exc_info.value.args[0].startswith("The waveform at index 1 does not have enough space")
@@ -1178,7 +1205,7 @@ def test___digital_multi_channel_multi_line_reader___read_with_wrong_number_of_w
         DigitalWaveform(samples_to_read),
     ]
     with pytest.raises(DaqError) as exc_info:
-        reader.read_waveforms(number_of_samples_per_channel=samples_to_read, waveforms=waveforms)
+        reader.read_waveforms(waveforms, samples_to_read)
 
     assert exc_info.value.error_code == DAQmxErrors.MISMATCHED_INPUT_ARRAY_SIZES
     assert "does not match the number of channels" in exc_info.value.args[0]
@@ -1194,9 +1221,11 @@ def test___digital_multi_channel_multi_line_reader_with_timing_flag___read_wavef
     num_channels = di_multi_chan_multi_line_timing_task.number_of_channels
     num_lines = _get_num_lines_in_task(di_multi_chan_multi_line_timing_task)
     samples_to_read = 10
+    waveforms = [DigitalWaveform(samples_to_read) for _ in range(num_channels)]
 
-    waveforms = reader.read_waveforms(number_of_samples_per_channel=samples_to_read)
+    samples_read = reader.read_waveforms(waveforms, samples_to_read)
 
+    assert samples_read == samples_to_read
     assert num_channels == 8
     assert num_lines == 8
     assert isinstance(waveforms, list)
@@ -1220,9 +1249,11 @@ def test___digital_multi_channel_multi_line_reader_with_extended_properties_flag
     num_channels = di_multi_chan_multi_line_timing_task.number_of_channels
     num_lines = _get_num_lines_in_task(di_multi_chan_multi_line_timing_task)
     samples_to_read = 10
+    waveforms = [DigitalWaveform(samples_to_read) for _ in range(num_channels)]
 
-    waveforms = reader.read_waveforms(number_of_samples_per_channel=samples_to_read)
+    samples_read = reader.read_waveforms(waveforms, samples_to_read)
 
+    assert samples_read == samples_to_read
     assert num_channels == 8
     assert num_lines == 8
     assert isinstance(waveforms, list)
@@ -1246,9 +1277,11 @@ def test___digital_multi_channel_multi_line_reader_with_both_flags___read_wavefo
     num_channels = di_multi_chan_multi_line_timing_task.number_of_channels
     num_lines = _get_num_lines_in_task(di_multi_chan_multi_line_timing_task)
     samples_to_read = 10
+    waveforms = [DigitalWaveform(samples_to_read) for _ in range(num_channels)]
 
-    waveforms = reader.read_waveforms(number_of_samples_per_channel=samples_to_read)
+    samples_read = reader.read_waveforms(waveforms, samples_to_read)
 
+    assert samples_read == samples_to_read
     assert num_channels == 8
     assert num_lines == 8
     assert isinstance(waveforms, list)
@@ -1272,9 +1305,11 @@ def test___digital_multi_channel_multi_line_reader_with_none_flag___read_wavefor
     num_channels = di_multi_chan_multi_line_timing_task.number_of_channels
     num_lines = _get_num_lines_in_task(di_multi_chan_multi_line_timing_task)
     samples_to_read = 10
+    waveforms = [DigitalWaveform(samples_to_read) for _ in range(num_channels)]
 
-    waveforms = reader.read_waveforms(number_of_samples_per_channel=samples_to_read)
+    samples_read = reader.read_waveforms(waveforms, samples_to_read)
 
+    assert samples_read == samples_to_read
     assert num_channels == 8
     assert num_lines == 8
     assert isinstance(waveforms, list)

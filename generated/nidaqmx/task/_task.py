@@ -847,17 +847,17 @@ class Task:
 
         if read_chan_type == ChannelType.ANALOG_INPUT:
             if number_of_channels == 1:
-                waveform = AnalogWaveform(number_of_samples_per_channel)
+                analog_waveform = AnalogWaveform(number_of_samples_per_channel)
                 self._interpreter.read_analog_waveform(
                     self._handle,
                     number_of_samples_per_channel,
                     timeout,
-                    waveform,
+                    analog_waveform,
                     self._in_stream.waveform_attribute_mode,
                 )
-                return waveform
+                return analog_waveform
             else:
-                waveforms = [
+                analog_waveforms = [
                     AnalogWaveform(number_of_samples_per_channel)
                     for _ in range(number_of_channels)
                 ]
@@ -865,10 +865,10 @@ class Task:
                     self._handle,
                     number_of_samples_per_channel,
                     timeout,
-                    waveforms,
+                    analog_waveforms,
                     self._in_stream.waveform_attribute_mode,
                 )
-                return waveforms
+                return analog_waveforms
 
         elif (read_chan_type == ChannelType.DIGITAL_INPUT or
                 read_chan_type == ChannelType.DIGITAL_OUTPUT):
@@ -885,14 +885,23 @@ class Task:
                 )
                 return digital_waveform
             else:
-                return self._interpreter.read_digital_waveforms(
+                digital_waveforms = [
+                    DigitalWaveform(
+                        number_of_samples_per_channel,
+                        self.in_stream.di_num_booleans_per_chan
+                    )
+                    for _ in range(number_of_channels)
+                ]
+                self._interpreter.read_digital_waveforms(
                     self._handle,
                     number_of_channels,
                     number_of_samples_per_channel,
                     self.in_stream.di_num_booleans_per_chan,
                     timeout,
+                    digital_waveforms,
                     self._in_stream.waveform_attribute_mode,
                 )
+                return digital_waveforms
 
         else:
             raise DaqError(

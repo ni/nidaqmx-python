@@ -197,7 +197,7 @@ class LibraryInterpreter(BaseInterpreter):
         timeout: float,
         waveform: AnalogWaveform[numpy.float64],
         waveform_attribute_mode: WaveformAttributeMode
-    ) -> None:
+    ) -> int:
         """Read an analog waveform with timing and attributes."""
         if WaveformAttributeMode.EXTENDED_PROPERTIES in waveform_attribute_mode:
             properties = [waveform.extended_properties]
@@ -227,6 +227,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         # TODO: AB#3228924 - if the read was short, set waveform.sample_count before throwing the exception
         self.check_for_error(error_code, samps_per_chan_read=samples_read)
+        return samples_read
 
     ## read_analog_waveforms has special handling for waveform attributes and callbacks
     def read_analog_waveforms(
@@ -236,7 +237,7 @@ class LibraryInterpreter(BaseInterpreter):
         timeout: float,
         waveforms: Sequence[AnalogWaveform[numpy.float64]],
         waveform_attribute_mode: WaveformAttributeMode
-    ) -> None:
+    ) -> int:
         """Read a set of analog waveforms with timing and attributes. All of the waveforms must be the same size."""
         if WaveformAttributeMode.EXTENDED_PROPERTIES in waveform_attribute_mode:
             properties = [waveform.extended_properties for waveform in waveforms]
@@ -250,7 +251,7 @@ class LibraryInterpreter(BaseInterpreter):
             t0_array = None
             dt_array = None
 
-        error_code, samples_read = self.internal_read_analog_waveform_per_chan(
+        error_code, samples_read = self._internal_read_analog_waveform_per_chan(
             task_handle,
             number_of_samples_per_channel,
             timeout,
@@ -265,6 +266,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         # TODO: AB#3228924 - if the read was short, set waveform.sample_count before throwing the exception
         self.check_for_error(error_code, samps_per_chan_read=samples_read)
+        return samples_read
 
     def _internal_read_analog_waveform_ex(
         self,
@@ -321,7 +323,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         return error_code, samps_per_chan_read.value
 
-    def internal_read_analog_waveform_per_chan(
+    def _internal_read_analog_waveform_per_chan(
         self,
         task_handle: object,
         num_samps_per_chan: int,
@@ -465,7 +467,7 @@ class LibraryInterpreter(BaseInterpreter):
         timeout: float,
         waveform: DigitalWaveform[numpy.uint8],
         waveform_attribute_mode: WaveformAttributeMode
-    ) -> None:
+    ) -> int:
         """Read a digital waveform with timing and attributes."""
         if WaveformAttributeMode.EXTENDED_PROPERTIES in waveform_attribute_mode:
             properties = [waveform.extended_properties]
@@ -495,6 +497,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         # TODO: AB#3228924 - if the read was short, set waveform.sample_count before throwing the exception
         self.check_for_error(error_code, samps_per_chan_read=samples_read)
+        return samples_read
 
     def read_digital_waveforms(
         self,
@@ -503,19 +506,12 @@ class LibraryInterpreter(BaseInterpreter):
         number_of_samples_per_channel: int,
         number_of_signals_per_sample: int,
         timeout: float,
+        waveforms: Sequence[DigitalWaveform[numpy.uint8]],
         waveform_attribute_mode: WaveformAttributeMode,
-        waveforms: Sequence[DigitalWaveform[numpy.uint8]] | None = None,
-    ) -> Sequence[DigitalWaveform[numpy.uint8]]:
+    ) -> int:
         """Read a digital waveform with timing and attributes."""
-        read_array = numpy.zeros(
-            (channel_count, number_of_samples_per_channel, number_of_signals_per_sample),
-            dtype=numpy.uint8)
-
         if WaveformAttributeMode.EXTENDED_PROPERTIES in waveform_attribute_mode:
-            if waveforms is not None:
-                properties = [waveform.extended_properties for waveform in waveforms]
-            else:
-                properties = [ExtendedPropertyDictionary() for _ in range(channel_count)]
+            properties = [waveform.extended_properties for waveform in waveforms]
         else:
             properties = None
 
@@ -525,6 +521,12 @@ class LibraryInterpreter(BaseInterpreter):
         else:
             t0_array = None
             dt_array = None
+
+        # Since there's no DAQmxInternalReadDigitalWaveformPerChan, we have to allocate a
+        # temporary contiguous array to read the data from multiple channels into.
+        read_array = numpy.zeros(
+            (channel_count, number_of_samples_per_channel, number_of_signals_per_sample),
+            dtype=numpy.uint8)
 
         error_code, samples_read = self._internal_read_digital_waveform(
             task_handle,
@@ -537,26 +539,15 @@ class LibraryInterpreter(BaseInterpreter):
             dt_array,
         )
 
-        if waveforms is not None:
-            for i, waveform in enumerate(waveforms):
-                waveform.data[:] = read_array[i, :]
-        else:
-            waveforms = []
-            for i in range(channel_count):
-                waveform = DigitalWaveform.from_lines(
-                    array=read_array[i, :],
-                    sample_count=number_of_samples_per_channel,
-                    signal_count=number_of_signals_per_sample,
-                    extended_properties=properties[i] if properties else None)
-                waveforms.append(waveform)
+        for i, waveform in enumerate(waveforms):
+            waveform.data[:] = read_array[i, :]
 
         if t0_array is not None and dt_array is not None:
             self._set_waveform_timings(waveforms, t0_array, dt_array)
 
         # TODO: AB#3228924 - if the read was short, set waveform.sample_count before throwing the exception
         self.check_for_error(error_code, samps_per_chan_read=samples_read)
-
-        return waveforms
+        return samples_read
 
     def _internal_read_digital_waveform(
         self,
