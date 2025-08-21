@@ -11,7 +11,7 @@ from enum import Enum
 from datetime import timezone
 from hightime import datetime as ht_datetime
 from hightime import timedelta as ht_timedelta
-from typing import Callable, List, MutableSequence, Optional, Sequence, Tuple, TYPE_CHECKING
+from typing import Callable, List, Sequence, Tuple, TYPE_CHECKING, Union
 
 from nidaqmx._base_interpreter import BaseEventHandler, BaseInterpreter
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer, TaskHandle
@@ -6626,7 +6626,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     def _set_waveform_timings(
         self, 
-        waveforms, 
+        waveforms: Sequence[Union[AnalogWaveform[numpy.float64], DigitalWaveform[numpy.uint8]]], 
         t0_array: numpy.typing.NDArray[numpy.int64], 
         dt_array: numpy.typing.NDArray[numpy.int64]
     ) -> None:

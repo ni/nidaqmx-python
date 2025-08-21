@@ -210,9 +210,9 @@ def _get_expected_data_for_line(num_samples: int, line_number: int) -> list[int]
     data = []
     # Simulated digital signals "count" from 0 in binary within each group of 8 lines.
     # Each line represents a bit in the binary representation of the sample number.
-    # - line 0 represents bit 0 (LSB) - alternates every sample: 0,1,0,1,0,1...
-    # - line 1 represents bit 1 - alternates every 2 samples: 0,0,1,1,0,0,1,1...
-    # - line 2 represents bit 2 - alternates every 4 samples: 0,0,0,0,1,1,1,1...
+    # - line 0 represents bit 0 (LSB) - alternates every sample: 0,1,0,1,0,1,0,1...
+    # - line 1 represents bit 1 - alternates every 2 samples:    0,0,1,1,0,0,1,1...
+    # - line 2 represents bit 2 - alternates every 4 samples:    0,0,0,0,1,1,1,1...
     line_number %= 8
     for sample_num in range(num_samples):
         bit_value = (sample_num >> line_number) & 1
@@ -843,18 +843,18 @@ def test___digital_single_line_reader___reuse_waveform_in_place___overwrites_dat
     waveform = DigitalWaveform(sample_count)
 
     reader0.read_waveform(number_of_samples_per_channel=sample_count, waveform=waveform)
-    timestamp1 = waveform.timing.timestamp
+    timestamp0 = waveform.timing.timestamp
     assert _get_waveform_data(waveform) == _get_expected_data_for_line(sample_count, 0)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.channel_name == sim_6363_device.di_lines[0].name
 
     reader1.read_waveform(number_of_samples_per_channel=sample_count, waveform=waveform)
-    timestamp2 = waveform.timing.timestamp
+    timestamp1 = waveform.timing.timestamp
     assert _get_waveform_data(waveform) == _get_expected_data_for_line(sample_count, 1)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 2000)
     assert waveform.channel_name == sim_6363_device.di_lines[1].name
 
-    assert timestamp2 > timestamp1
+    assert timestamp1 > timestamp0
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
@@ -879,18 +879,18 @@ def test___digital_single_channel_multi_line_reader___reuse_waveform_in_place___
     waveform = DigitalWaveform(sample_count, signal_count)
 
     reader0.read_waveform(number_of_samples_per_channel=sample_count, waveform=waveform)
-    timestamp1 = waveform.timing.timestamp
+    timestamp0 = waveform.timing.timestamp
     assert _get_waveform_data(waveform) == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.channel_name == f"{sim_6363_device.di_lines[0].name}..."
 
     reader1.read_waveform(number_of_samples_per_channel=sample_count, waveform=waveform)
-    timestamp2 = waveform.timing.timestamp
+    timestamp1 = waveform.timing.timestamp
     assert _get_waveform_data(waveform) == [0, 0, 1, 1, 2, 2, 3, 3, 4, 4]
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 2000)
     assert waveform.channel_name == f"{sim_6363_device.di_lines[1].name}..."
 
-    assert timestamp2 > timestamp1
+    assert timestamp1 > timestamp0
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
@@ -1101,6 +1101,45 @@ def test___digital_multi_channel_multi_line_reader___read_waveforms_in_place___p
         assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
         assert waveform.channel_name == di_multi_chan_multi_line_timing_task.di_channels[chan].name
         assert waveform.sample_count == samples_to_read
+
+
+@pytest.mark.grpc_skip(reason="read_digital_waveforms not implemented in GRPC")
+def test___digital_multi_channel_multi_line_reader___reuse_waveform_in_place___overwrites_data_timing_and_attributes(
+    generate_task: Callable[[], nidaqmx.Task], sim_6363_device: nidaqmx.system.Device
+) -> None:
+    def _make_multi_channel_multi_line_reader(lines_start, rate):
+        task = generate_task()
+        task.di_channels.add_di_chan(
+            flatten_channel_string(
+                sim_6363_device.di_lines.channel_names[lines_start : lines_start + 4]
+            ),
+            line_grouping=LineGrouping.CHAN_PER_LINE,
+        )
+        task.timing.cfg_samp_clk_timing(rate, sample_mode=AcquisitionType.FINITE, samps_per_chan=10)
+        return DigitalMultiChannelReader(task.in_stream)
+
+    sample_count = 10
+    num_channels = 4
+    reader0 = _make_multi_channel_multi_line_reader(lines_start=0, rate=1000.0)
+    reader1 = _make_multi_channel_multi_line_reader(lines_start=1, rate=2000.0)
+    waveforms = [DigitalWaveform(sample_count) for _ in range(num_channels)]
+
+    reader0.read_waveforms(number_of_samples_per_channel=sample_count, waveforms=waveforms)
+    timestamps0 = [wf.timing.timestamp for wf in waveforms]
+    for chan, waveform in enumerate(waveforms):
+        assert _get_waveform_data(waveform) == _get_expected_data_for_line(sample_count, chan)
+        assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
+        assert waveform.channel_name == sim_6363_device.di_lines[chan].name
+
+    reader1.read_waveforms(number_of_samples_per_channel=sample_count, waveforms=waveforms)
+    timestamps1 = [wf.timing.timestamp for wf in waveforms]
+    for chan, waveform in enumerate(waveforms):
+        assert _get_waveform_data(waveform) == _get_expected_data_for_line(sample_count, chan + 1)
+        assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 2000)
+        assert waveform.channel_name == sim_6363_device.di_lines[chan + 1].name
+
+    for ts0, ts1 in zip(timestamps0, timestamps1):
+        assert ts1 > ts0
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveforms not implemented in GRPC")
