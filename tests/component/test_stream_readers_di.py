@@ -1105,16 +1105,7 @@ def test___digital_multi_channel_multi_line_reader___read_waveforms_in_place___p
     num_lines = _get_num_lines_in_task(di_multi_chan_multi_line_timing_task)
     samples_to_read = 10
 
-    waveforms = [
-        DigitalWaveform(samples_to_read),
-        DigitalWaveform(samples_to_read),
-        DigitalWaveform(samples_to_read),
-        DigitalWaveform(samples_to_read),
-        DigitalWaveform(samples_to_read),
-        DigitalWaveform(samples_to_read),
-        DigitalWaveform(samples_to_read),
-        DigitalWaveform(samples_to_read),
-    ]
+    waveforms = [DigitalWaveform(samples_to_read) for _ in range(num_channels)]
     samples_read = reader.read_waveforms(waveforms, samples_to_read)
 
     assert samples_read == samples_to_read
@@ -1174,18 +1165,10 @@ def test___digital_multi_channel_multi_line_reader___read_into_undersized_wavefo
     di_multi_chan_multi_line_timing_task: nidaqmx.Task,
 ) -> None:
     reader = DigitalMultiChannelReader(di_multi_chan_multi_line_timing_task.in_stream)
+    num_channels = di_multi_chan_multi_line_timing_task.number_of_channels
     samples_to_read = 10
 
-    waveforms = [
-        DigitalWaveform(samples_to_read),
-        DigitalWaveform(samples_to_read - 1),
-        DigitalWaveform(samples_to_read),
-        DigitalWaveform(samples_to_read),
-        DigitalWaveform(samples_to_read),
-        DigitalWaveform(samples_to_read),
-        DigitalWaveform(samples_to_read),
-        DigitalWaveform(samples_to_read),
-    ]
+    waveforms = [DigitalWaveform(samples_to_read - 1) for _ in range(num_channels)]
     with pytest.raises(DaqError) as exc_info:
         reader.read_waveforms(waveforms, samples_to_read)
 
@@ -1198,12 +1181,10 @@ def test___digital_multi_channel_multi_line_reader___read_with_wrong_number_of_w
     di_multi_chan_multi_line_timing_task: nidaqmx.Task,
 ) -> None:
     reader = DigitalMultiChannelReader(di_multi_chan_multi_line_timing_task.in_stream)
+    num_channels = di_multi_chan_multi_line_timing_task.number_of_channels
     samples_to_read = 10
 
-    waveforms = [
-        DigitalWaveform(samples_to_read),
-        DigitalWaveform(samples_to_read),
-    ]
+    waveforms = [DigitalWaveform(samples_to_read) for _ in range(num_channels - 1)]
     with pytest.raises(DaqError) as exc_info:
         reader.read_waveforms(waveforms, samples_to_read)
 
