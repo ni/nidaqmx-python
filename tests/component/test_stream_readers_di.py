@@ -1173,7 +1173,7 @@ def test___digital_multi_channel_multi_line_reader___read_into_undersized_wavefo
         reader.read_waveforms(waveforms, samples_to_read)
 
     assert exc_info.value.error_code == DAQmxErrors.READ_BUFFER_TOO_SMALL
-    assert exc_info.value.args[0].startswith("The waveform at index 1 does not have enough space")
+    assert exc_info.value.args[0].startswith("The waveform at index 0 does not have enough space")
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveforms not implemented in GRPC")
