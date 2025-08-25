@@ -1739,22 +1739,20 @@ toml = ">=0.10.1"
 
 [[package]]
 name = "nitypes"
-version = "0.1.0.dev6"
+version = "0.1.0.dev9"
 description = "Data types for NI Python APIs"
 optional = false
 python-versions = "<4.0,>=3.9"
 files = [
-    {file = "nitypes-0.1.0.dev6-py3-none-any.whl", hash = "sha256:44ecc849d4a26137919a5406cbb103281d965102d0061682a939d58668de44ea"},
-    {file = "nitypes-0.1.0.dev6.tar.gz", hash = "sha256:37ae3494ecaa98d866ebe3c27898c21961c4f47082cfb7a921dc842debd74526"},
+    {file = "nitypes-0.1.0.dev9-py3-none-any.whl", hash = "sha256:1e2928f9a2c57f289f5743433299e09d151ab4951bacffbf67238093a82c3f67"},
+    {file = "nitypes-0.1.0.dev9.tar.gz", hash = "sha256:bc36861cc4a5ff0cfe74050afeed82bcdd652fc4de36860cd43492beee388b5d"},
 ]
 
 [package.dependencies]
 hightime = ">=0.2.2"
 numpy = [
-    {version = ">=2.1", markers = "python_version >= \"3.10\" and python_version < \"3.11\" and implementation_name == \"pypy\" or python_version >= \"3.13\" and python_version < \"4.0\" and implementation_name != \"pypy\""},
-    {version = ">=1.26", markers = "python_version >= \"3.12\" and python_version < \"3.13\" and implementation_name != \"pypy\""},
-    {version = ">=2.3", markers = "implementation_name == \"pypy\" and python_version >= \"3.11\" and python_version < \"4.0\""},
-    {version = ">=1.22", markers = "implementation_name != \"pypy\" and python_version >= \"3.9\" and python_version < \"3.12\""},
+    {version = ">=1.22", markers = "python_version >= \"3.9\" and python_version < \"3.13\""},
+    {version = ">=2.1", markers = "python_version >= \"3.13\" and python_version < \"4.0\""},
 ]
 typing-extensions = ">=4.13.2"
 
@@ -2975,4 +2973,4 @@ grpc = ["grpcio", "protobuf"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "77509e9ae0471e50a399611107d5cbed7b2594edce41384aa4ea568fbeb804fc"
+content-hash = "8006d684051dae98d7d776ede3223e7c701c056378428efa5e6569bfd4ca9c36"
