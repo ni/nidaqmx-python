@@ -490,6 +490,7 @@ class LibraryInterpreter(BaseInterpreter):
             properties,
             t0_array,
             dt_array,
+            None,
         )
 
         if t0_array is not None and dt_array is not None:
@@ -528,6 +529,8 @@ class LibraryInterpreter(BaseInterpreter):
             (channel_count, number_of_samples_per_channel, number_of_signals_per_sample),
             dtype=numpy.uint8)
 
+        bytes_per_chan_array = numpy.zeros(channel_count, dtype=numpy.uint32)
+
         error_code, samples_read = self._internal_read_digital_waveform(
             task_handle,
             number_of_samples_per_channel,
@@ -537,10 +540,15 @@ class LibraryInterpreter(BaseInterpreter):
             properties,
             t0_array,
             dt_array,
+            bytes_per_chan_array,
         )
 
         for i, waveform in enumerate(waveforms):
-            waveform.data[:] = read_array[i, :]
+            waveform_signals = waveform.data.shape[1]
+            channel_signals = bytes_per_chan_array[i]
+            if waveform_signals != channel_signals:
+                raise ValueError(f"waveforms[{i}].data has {waveform_signals} signals, but expected {channel_signals}")
+            waveform.data[:] = read_array[i, :, :channel_signals]
 
         if t0_array is not None and dt_array is not None:
             self._set_waveform_timings(waveforms, t0_array, dt_array)
@@ -548,6 +556,63 @@ class LibraryInterpreter(BaseInterpreter):
         # TODO: AB#3228924 - if the read was short, set waveform.sample_count before throwing the exception
         self.check_for_error(error_code, samps_per_chan_read=samples_read)
         return samples_read
+
+    def read_new_digital_waveforms(
+        self,
+        task_handle: object,
+        channel_count: int,
+        number_of_samples_per_channel: int,
+        number_of_signals_per_sample: int,
+        timeout: float,
+        waveform_attribute_mode: WaveformAttributeMode,
+    ) -> Sequence[DigitalWaveform[numpy.uint8]]:
+        """Read a digital waveform with timing and attributes."""
+        if WaveformAttributeMode.EXTENDED_PROPERTIES in waveform_attribute_mode:
+            properties = [ExtendedPropertyDictionary() for _ in range(channel_count)]
+        else:
+            properties = None
+
+        if WaveformAttributeMode.TIMING in waveform_attribute_mode:
+            t0_array = numpy.zeros(channel_count, dtype=numpy.int64)
+            dt_array = numpy.zeros(channel_count, dtype=numpy.int64)
+        else:
+            t0_array = None
+            dt_array = None
+
+        read_array = numpy.zeros(
+            (channel_count, number_of_samples_per_channel, number_of_signals_per_sample),
+            dtype=numpy.uint8)
+
+        bytes_per_chan_array = numpy.zeros(channel_count, dtype=numpy.uint32)
+
+        error_code, samples_read = self._internal_read_digital_waveform(
+            task_handle,
+            number_of_samples_per_channel,
+            timeout,
+            FillMode.GROUP_BY_CHANNEL.value,
+            read_array,
+            properties,
+            t0_array,
+            dt_array,
+            bytes_per_chan_array,
+        )
+
+        waveforms = []
+        for i in range(channel_count):
+            signal_count = bytes_per_chan_array[i]
+            waveform = DigitalWaveform.from_lines(
+                array=read_array[i, :, :signal_count],
+                copy=False,
+                sample_count=samples_read,
+                signal_count=signal_count,
+                extended_properties=properties[i] if properties else None)
+            waveforms.append(waveform)
+
+        if t0_array is not None and dt_array is not None:
+            self._set_waveform_timings(waveforms, t0_array, dt_array)
+
+        self.check_for_error(error_code, samps_per_chan_read=samples_read)
+        return waveforms
 
     def _internal_read_digital_waveform(
         self,
@@ -559,6 +624,7 @@ class LibraryInterpreter(BaseInterpreter):
         properties: Sequence[ExtendedPropertyDictionary] | None,
         t0_array: numpy.typing.NDArray[numpy.int64] | None,
         dt_array: numpy.typing.NDArray[numpy.int64] | None,
+        bytes_per_chan_array: numpy.typing.NDArray[numpy.uint32] | None = None,
     ) -> Tuple[
         int, # error code
         int, # The number of samples per channel that were read
@@ -601,11 +667,11 @@ class LibraryInterpreter(BaseInterpreter):
             self._get_wfm_attr_callback(properties),
             None,
             read_array,
-            read_array.size,
+            0 if read_array is None else read_array.size,
             ctypes.byref(samps_per_chan_read),
             ctypes.byref(num_bytes_per_samp),
-            None,
-            0,
+            bytes_per_chan_array,
+            0 if bytes_per_chan_array is None else bytes_per_chan_array.size,
             None,
         )
 

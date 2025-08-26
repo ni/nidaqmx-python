@@ -885,23 +885,14 @@ class Task:
                 )
                 return digital_waveform
             else:
-                digital_waveforms = [
-                    DigitalWaveform(
-                        number_of_samples_per_channel,
-                        self.in_stream.di_num_booleans_per_chan
-                    )
-                    for _ in range(number_of_channels)
-                ]
-                self._interpreter.read_digital_waveforms(
+                return self._interpreter.read_new_digital_waveforms(
                     self._handle,
                     number_of_channels,
                     number_of_samples_per_channel,
                     self.in_stream.di_num_booleans_per_chan,
                     timeout,
-                    digital_waveforms,
                     self._in_stream.waveform_attribute_mode,
                 )
-                return digital_waveforms
 
         else:
             raise DaqError(

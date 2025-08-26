@@ -33,6 +33,28 @@ def di_multi_channel_timing_task(
     return task
 
 
+@pytest.fixture
+def di_multi_chan_diff_lines_timing_task(
+    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
+) -> nidaqmx.Task:
+    task.di_channels.add_di_chan(
+        flatten_channel_string(sim_6363_device.di_lines.channel_names[0:1]),
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    task.di_channels.add_di_chan(
+        flatten_channel_string(sim_6363_device.di_lines.channel_names[1:3]),
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    task.di_channels.add_di_chan(
+        flatten_channel_string(sim_6363_device.di_lines.channel_names[3:7]),
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    task.timing.cfg_samp_clk_timing(
+        rate=1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=50
+    )
+    return task
+
+
 def _get_expected_data_for_line(num_samples: int, line_number: int) -> list[int]:
     data = []
     # Simulated digital signals "count" from 0 in binary within each group of 8 lines.
@@ -174,3 +196,24 @@ def test___digital_multi_channel___read_waveform_too_many_samples___returns_wave
     for chan, waveform in enumerate(waveforms):
         assert waveform.sample_count == samples_available
         assert _get_waveform_data(waveform) == _get_expected_data_for_line(samples_available, chan)
+
+
+@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
+def test___digital_multi_channel___read_waveform_different_lines___returns_valid_waveforms(
+    di_multi_chan_diff_lines_timing_task: nidaqmx.Task,
+) -> None:
+    num_channels = di_multi_chan_diff_lines_timing_task.number_of_channels
+    samples_to_read = 10
+
+    waveforms = di_multi_chan_diff_lines_timing_task.read_waveform(samples_to_read)
+
+    assert isinstance(waveforms, list)
+    assert len(waveforms) == num_channels
+    assert num_channels == 3
+    assert all(isinstance(waveform, DigitalWaveform) for waveform in waveforms)
+    assert _get_waveform_data(waveforms[0]) == [0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+    assert waveforms[0].channel_name == di_multi_chan_diff_lines_timing_task.di_channels[0].name
+    assert _get_waveform_data(waveforms[1]) == [0, 0, 1, 1, 2, 2, 3, 3, 0, 0]
+    assert waveforms[1].channel_name == di_multi_chan_diff_lines_timing_task.di_channels[1].name
+    assert _get_waveform_data(waveforms[2]) == [0, 0, 0, 0, 0, 0, 0, 0, 1, 1]
+    assert waveforms[2].channel_name == di_multi_chan_diff_lines_timing_task.di_channels[2].name
