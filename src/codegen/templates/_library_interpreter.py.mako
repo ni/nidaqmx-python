@@ -602,8 +602,6 @@ class LibraryInterpreter(BaseInterpreter):
             signal_count = bytes_per_chan_array[i]
             waveform = DigitalWaveform(
                 sample_count=samples_read,
-                signal_count=signal_count,
-                dtype=numpy.uint8,
                 data=read_array[i, :, :signal_count],
                 copy_extended_properties=False,
                 extended_properties=properties[i] if properties else None)
