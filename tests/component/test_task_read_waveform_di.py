@@ -22,6 +22,19 @@ def di_single_channel_timing_task(
 
 
 @pytest.fixture
+def di_single_chan_lines_and_port_task(
+    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
+) -> nidaqmx.Task:
+    task.di_channels.add_di_chan(
+        flatten_channel_string(
+            sim_6363_device.di_lines.channel_names[0:3] + [sim_6363_device.di_ports[1].name]
+        ),
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    return task
+
+
+@pytest.fixture
 def di_multi_channel_timing_task(
     task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
 ) -> nidaqmx.Task:
@@ -152,6 +165,35 @@ def test___digital_single_channel___read_waveform_too_many_samples___returns_wav
     assert isinstance(waveform, DigitalWaveform)
     assert waveform.sample_count == samples_available
     assert _get_waveform_data(waveform) == _get_expected_data_for_line(samples_available, 0)
+
+
+@pytest.mark.grpc_skip(reason="read_digital_waveforms not implemented in GRPC")
+def test___digital_single_channel___read_waveform_lines_and_port___returns_valid_waveform(
+    di_single_chan_lines_and_port_task: nidaqmx.Task,
+    sim_6363_device: nidaqmx.system.Device,
+) -> None:
+    samples_to_read = 10
+
+    waveform = di_single_chan_lines_and_port_task.read_waveform(samples_to_read)
+
+    # Note, the data on the port's waveform is MSB instead of LSB because of bug AB#3178052
+    # When that bug is fixed, these asserts should be updated
+    assert _get_waveform_data(waveform) == [0, 1025, 514, 1539, 260, 1285, 774, 1799, 128, 1153]
+    assert waveform.sample_count == samples_to_read
+    assert waveform.channel_name == di_single_chan_lines_and_port_task.di_channels[0].name
+    assert waveform._get_signal_names() == [
+        sim_6363_device.di_lines[0].name,
+        sim_6363_device.di_lines[1].name,
+        sim_6363_device.di_lines[2].name,
+        sim_6363_device.di_lines[39].name,
+        sim_6363_device.di_lines[38].name,
+        sim_6363_device.di_lines[37].name,
+        sim_6363_device.di_lines[36].name,
+        sim_6363_device.di_lines[35].name,
+        sim_6363_device.di_lines[34].name,
+        sim_6363_device.di_lines[33].name,
+        sim_6363_device.di_lines[32].name,
+    ]
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
