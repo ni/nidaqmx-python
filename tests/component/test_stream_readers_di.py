@@ -113,6 +113,29 @@ def di_multi_chan_diff_lines_timing_task(
 
 
 @pytest.fixture
+def di_multi_chan_lines_and_port_task(
+    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
+) -> nidaqmx.Task:
+    task.di_channels.add_di_chan(
+        flatten_channel_string(sim_6363_device.di_lines.channel_names[0:1]),
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    task.di_channels.add_di_chan(
+        flatten_channel_string(sim_6363_device.di_lines.channel_names[1:3]),
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    task.di_channels.add_di_chan(
+        flatten_channel_string(sim_6363_device.di_lines.channel_names[3:7]),
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    task.di_channels.add_di_chan(
+        sim_6363_device.di_ports[1].name,
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    return task
+
+
+@pytest.fixture
 def di_single_channel_port_byte_task(
     task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
 ) -> nidaqmx.Task:
@@ -1097,6 +1120,7 @@ def test___digital_multi_channel_multi_line_reader___read_waveforms___returns_va
 @pytest.mark.grpc_skip(reason="read_digital_waveforms not implemented in GRPC")
 def test___digital_multi_channel_different_lines_reader___read_waveforms___returns_valid_waveforms(
     di_multi_chan_diff_lines_timing_task: nidaqmx.Task,
+    sim_6363_device: nidaqmx.system.Device,
 ) -> None:
     reader = DigitalMultiChannelReader(di_multi_chan_diff_lines_timing_task.in_stream)
     num_channels = di_multi_chan_diff_lines_timing_task.number_of_channels
@@ -1117,19 +1141,98 @@ def test___digital_multi_channel_different_lines_reader___read_waveforms___retur
     assert len(waveforms) == num_channels
     assert _get_waveform_data(waveforms[0]) == [0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
     assert _is_timestamp_close_to_now(waveforms[0].timing.timestamp)
+    assert waveforms[0].sample_count == samples_to_read
     assert waveforms[0].timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveforms[0].channel_name == di_multi_chan_diff_lines_timing_task.di_channels[0].name
-    assert waveforms[0].sample_count == samples_to_read
+    assert waveforms[0]._get_signal_names() == [
+        sim_6363_device.di_lines[0].name,
+    ]
     assert _get_waveform_data(waveforms[1]) == [0, 0, 1, 1, 2, 2, 3, 3, 0, 0]
     assert _is_timestamp_close_to_now(waveforms[1].timing.timestamp)
+    assert waveforms[1].sample_count == samples_to_read
     assert waveforms[1].timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveforms[1].channel_name == di_multi_chan_diff_lines_timing_task.di_channels[1].name
-    assert waveforms[1].sample_count == samples_to_read
+    assert waveforms[1]._get_signal_names() == [
+        sim_6363_device.di_lines[1].name,
+        sim_6363_device.di_lines[2].name,
+    ]
     assert _get_waveform_data(waveforms[2]) == [0, 0, 0, 0, 0, 0, 0, 0, 1, 1]
     assert _is_timestamp_close_to_now(waveforms[2].timing.timestamp)
+    assert waveforms[2].sample_count == samples_to_read
     assert waveforms[2].timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveforms[2].channel_name == di_multi_chan_diff_lines_timing_task.di_channels[2].name
+    assert waveforms[2]._get_signal_names() == [
+        sim_6363_device.di_lines[3].name,
+        sim_6363_device.di_lines[4].name,
+        sim_6363_device.di_lines[5].name,
+        sim_6363_device.di_lines[6].name,
+    ]
+
+
+@pytest.mark.grpc_skip(reason="read_digital_waveforms not implemented in GRPC")
+def test___digital_multi_channel_lines_and_port_reader___read_waveforms___returns_valid_waveforms(
+    di_multi_chan_lines_and_port_task: nidaqmx.Task,
+    sim_6363_device: nidaqmx.system.Device,
+) -> None:
+    reader = DigitalMultiChannelReader(di_multi_chan_lines_and_port_task.in_stream)
+    num_channels = di_multi_chan_lines_and_port_task.number_of_channels
+    num_lines = _get_num_lines_in_task(di_multi_chan_lines_and_port_task)
+    samples_to_read = 10
+    waveforms = [
+        DigitalWaveform(samples_to_read, 1),
+        DigitalWaveform(samples_to_read, 2),
+        DigitalWaveform(samples_to_read, 4),
+        DigitalWaveform(samples_to_read, 8),
+    ]
+
+    samples_read = reader.read_waveforms(waveforms, samples_to_read)
+
+    assert samples_read == samples_to_read
+    assert num_channels == 4
+    assert num_lines == 15
+    assert isinstance(waveforms, list)
+    assert len(waveforms) == num_channels
+    assert _get_waveform_data(waveforms[0]) == [0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+    assert _is_timestamp_close_to_now(waveforms[0].timing.timestamp)
+    assert waveforms[0].sample_count == samples_to_read
+    assert waveforms[0].channel_name == di_multi_chan_lines_and_port_task.di_channels[0].name
+    assert waveforms[0]._get_signal_names() == [
+        sim_6363_device.di_lines[0].name,
+    ]
+    assert _get_waveform_data(waveforms[1]) == [0, 0, 1, 1, 2, 2, 3, 3, 0, 0]
+    assert _is_timestamp_close_to_now(waveforms[1].timing.timestamp)
+    assert waveforms[1].sample_count == samples_to_read
+    assert waveforms[1].channel_name == di_multi_chan_lines_and_port_task.di_channels[1].name
+    assert waveforms[1]._get_signal_names() == [
+        sim_6363_device.di_lines[1].name,
+        sim_6363_device.di_lines[2].name,
+    ]
+    assert _get_waveform_data(waveforms[2]) == [0, 0, 0, 0, 0, 0, 0, 0, 1, 1]
+    assert _is_timestamp_close_to_now(waveforms[2].timing.timestamp)
     assert waveforms[2].sample_count == samples_to_read
+    assert waveforms[2].channel_name == di_multi_chan_lines_and_port_task.di_channels[2].name
+    assert waveforms[2]._get_signal_names() == [
+        sim_6363_device.di_lines[3].name,
+        sim_6363_device.di_lines[4].name,
+        sim_6363_device.di_lines[5].name,
+        sim_6363_device.di_lines[6].name,
+    ]
+    # Note, the data on the port's waveform is MSB instead of LSB because of bug AB#3178052
+    # When that bug is fixed, these asserts should be updated
+    assert _get_waveform_data(waveforms[3]) == [0, 128, 64, 192, 32, 160, 96, 224, 16, 144]
+    assert _is_timestamp_close_to_now(waveforms[3].timing.timestamp)
+    assert waveforms[3].sample_count == samples_to_read
+    assert waveforms[3].channel_name == di_multi_chan_lines_and_port_task.di_channels[3].name
+    assert waveforms[3]._get_signal_names() == [
+        sim_6363_device.di_lines[39].name,
+        sim_6363_device.di_lines[38].name,
+        sim_6363_device.di_lines[37].name,
+        sim_6363_device.di_lines[36].name,
+        sim_6363_device.di_lines[35].name,
+        sim_6363_device.di_lines[34].name,
+        sim_6363_device.di_lines[33].name,
+        sim_6363_device.di_lines[32].name,
+    ]
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveforms not implemented in GRPC")
