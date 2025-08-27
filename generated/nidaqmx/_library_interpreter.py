@@ -6779,11 +6779,12 @@ class LibraryInterpreter(BaseInterpreter):
         waveforms = []
         for i in range(channel_count):
             signal_count = bytes_per_chan_array[i]
-            waveform = DigitalWaveform.from_lines(
-                array=read_array[i, :, :signal_count],
-                copy=False,
+            waveform = DigitalWaveform(
                 sample_count=samples_read,
                 signal_count=signal_count,
+                dtype=numpy.uint8,
+                data=read_array[i, :, :signal_count],
+                copy_extended_properties=False,
                 extended_properties=properties[i] if properties else None)
             waveforms.append(waveform)
 
@@ -6846,7 +6847,7 @@ class LibraryInterpreter(BaseInterpreter):
             self._get_wfm_attr_callback(properties),
             None,
             read_array,
-            0 if read_array is None else read_array.size,
+            read_array.size,
             ctypes.byref(samps_per_chan_read),
             ctypes.byref(num_bytes_per_samp),
             bytes_per_chan_array,
