@@ -5,7 +5,7 @@ import warnings
 from enum import Enum
 
 import numpy
-from nitypes.waveform import AnalogWaveform
+from nitypes.waveform import AnalogWaveform, DigitalWaveform
 from nidaqmx import utils
 from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, requires_feature
 from nidaqmx.task.channels._channel import Channel
@@ -847,17 +847,17 @@ class Task:
 
         if read_chan_type == ChannelType.ANALOG_INPUT:
             if number_of_channels == 1:
-                waveform = AnalogWaveform(number_of_samples_per_channel)
+                analog_waveform = AnalogWaveform(number_of_samples_per_channel)
                 self._interpreter.read_analog_waveform(
                     self._handle,
                     number_of_samples_per_channel,
                     timeout,
-                    waveform,
+                    analog_waveform,
                     self._in_stream.waveform_attribute_mode,
                 )
-                return waveform
+                return analog_waveform
             else:
-                waveforms = [
+                analog_waveforms = [
                     AnalogWaveform(number_of_samples_per_channel)
                     for _ in range(number_of_channels)
                 ]
@@ -865,14 +865,34 @@ class Task:
                     self._handle,
                     number_of_samples_per_channel,
                     timeout,
-                    waveforms,
+                    analog_waveforms,
                     self._in_stream.waveform_attribute_mode,
                 )
-                return waveforms
+                return analog_waveforms
 
         elif (read_chan_type == ChannelType.DIGITAL_INPUT or
                 read_chan_type == ChannelType.DIGITAL_OUTPUT):
-            raise NotImplementedError("Digital input/output reading is not implemented yet.")
+            if number_of_channels == 1:
+                digital_waveform = DigitalWaveform(
+                    number_of_samples_per_channel,
+                    self.in_stream.di_num_booleans_per_chan)
+                self._interpreter.read_digital_waveform(
+                    self._handle,
+                    number_of_samples_per_channel,
+                    timeout,
+                    digital_waveform,
+                    self._in_stream.waveform_attribute_mode,
+                )
+                return digital_waveform
+            else:
+                return self._interpreter.read_new_digital_waveforms(
+                    self._handle,
+                    number_of_channels,
+                    number_of_samples_per_channel,
+                    self.in_stream.di_num_booleans_per_chan,
+                    timeout,
+                    self._in_stream.waveform_attribute_mode,
+                )
 
         else:
             raise DaqError(

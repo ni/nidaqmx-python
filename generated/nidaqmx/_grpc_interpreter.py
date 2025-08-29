@@ -5,7 +5,7 @@ import logging
 import threading
 import typing
 import warnings
-from nitypes.waveform import AnalogWaveform
+from nitypes.waveform import AnalogWaveform, DigitalWaveform
 from typing import Callable, Generic, Sequence, TypeVar
 
 import google.protobuf.message
@@ -3609,7 +3609,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         timeout: float,
         waveform: AnalogWaveform[numpy.float64],
         waveform_attribute_mode: WaveformAttributeMode
-    ) -> None:
+    ) -> int:
         raise NotImplementedError
 
     def read_analog_waveforms(
@@ -3619,7 +3619,40 @@ class GrpcStubInterpreter(BaseInterpreter):
         timeout: float,
         waveforms: Sequence[AnalogWaveform[numpy.float64]],
         waveform_attribute_mode: WaveformAttributeMode
-    ) -> None:
+    ) -> int:
+        raise NotImplementedError
+
+    def read_digital_waveform(
+        self,
+        task_handle: object,
+        number_of_samples_per_channel: int,
+        timeout: float,
+        waveform: DigitalWaveform[numpy.uint8],
+        waveform_attribute_mode: WaveformAttributeMode
+    ) -> int:
+        raise NotImplementedError
+
+    def read_digital_waveforms(
+        self,
+        task_handle: object,
+        channel_count: int,
+        number_of_samples_per_channel: int,
+        number_of_signals_per_sample: int,
+        timeout: float,
+        waveforms: Sequence[DigitalWaveform[numpy.uint8]],
+        waveform_attribute_mode: WaveformAttributeMode,
+    ) -> int:
+        raise NotImplementedError
+
+    def read_new_digital_waveforms(
+        self,
+        task_handle: object,
+        channel_count: int,
+        number_of_samples_per_channel: int,
+        number_of_signals_per_sample: int,
+        timeout: float,
+        waveform_attribute_mode: WaveformAttributeMode,
+    ) -> Sequence[DigitalWaveform[numpy.uint8]]:
         raise NotImplementedError
 
 def _assign_numpy_array(numpy_array, grpc_array):
