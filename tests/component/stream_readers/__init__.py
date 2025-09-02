@@ -1,0 +1,1 @@
+"""Stream readers test module."""
