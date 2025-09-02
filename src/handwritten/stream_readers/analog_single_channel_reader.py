@@ -8,7 +8,7 @@ from nidaqmx.constants import FillMode, READ_ALL_AVAILABLE
 from nidaqmx.error_codes import DAQmxErrors
 from nitypes.waveform import AnalogWaveform
 
-from _channel_reader_base import ChannelReaderBase
+from ._channel_reader_base import ChannelReaderBase
 
 
 class AnalogSingleChannelReader(ChannelReaderBase):
