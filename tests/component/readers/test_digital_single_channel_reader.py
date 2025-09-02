@@ -16,7 +16,7 @@ from nidaqmx.constants import AcquisitionType, LineGrouping, WaveformAttributeMo
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.stream_readers import DaqError, DigitalSingleChannelReader
 from nidaqmx.utils import flatten_channel_string
-from ..conftest import (
+from .conftest import (
     _bool_array_to_int,
     _get_expected_data_for_line,
     _get_expected_digital_data,

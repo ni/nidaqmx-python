@@ -298,6 +298,18 @@ def di_single_channel_multi_line_timing_task(
 
 
 @pytest.fixture
+def di_single_channel_timing_task(
+    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
+) -> nidaqmx.Task:
+    """Configure timing for a single-channel digital input task."""
+    task.di_channels.add_di_chan(
+        sim_6363_device.di_lines[0].name, line_grouping=LineGrouping.CHAN_FOR_ALL_LINES
+    )
+    task.timing.cfg_samp_clk_timing(1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=50)
+    return task
+
+
+@pytest.fixture
 def di_single_chan_lines_and_port_task(
     task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
 ) -> nidaqmx.Task:
@@ -499,4 +511,17 @@ def di_multi_channel_port_uint32_task(
         sim_6363_device.di_ports[2].name,
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
     )
+    return task
+
+
+@pytest.fixture
+def di_multi_channel_timing_task(
+    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
+) -> nidaqmx.Task:
+    """Configure timing for a multi-channel digital input task."""
+    task.di_channels.add_di_chan(
+        flatten_channel_string(sim_6363_device.di_lines.channel_names[:8]),
+        line_grouping=LineGrouping.CHAN_PER_LINE,
+    )
+    task.timing.cfg_samp_clk_timing(1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=50)
     return task
