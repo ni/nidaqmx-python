@@ -80,7 +80,7 @@ machine.
 To build the documentation install the optional docs packages and run sphinx. For example:
 
 ```sh
-$ poetry install -E docs
+$ poetry install --with docs
 $ poetry run sphinx-build -b html docs docs\_build
 ```
 
