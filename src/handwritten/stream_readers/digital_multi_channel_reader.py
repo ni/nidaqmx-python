@@ -490,7 +490,7 @@ class DigitalMultiChannelReader(ChannelReaderBase):
         timeout: int = 10,
     ) -> list[DigitalWaveform[numpy.uint8]]:
         """
-        Reads one or more samples from one or more digitalz
+        Reads one or more samples from one or more digital
         input channels into a list of waveforms.
 
         Args:  
