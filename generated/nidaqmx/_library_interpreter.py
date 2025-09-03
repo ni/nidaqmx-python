@@ -6406,7 +6406,7 @@ class LibraryInterpreter(BaseInterpreter):
         if t0_array is not None and dt_array is not None:
             self._set_waveform_timings([waveform], t0_array, dt_array)
 
-        # TODO: AB#3228924 - if the read was short, set waveform.sample_count before throwing the exception
+        waveform.sample_count = samples_read
         self.check_for_error(error_code, samps_per_chan_read=samples_read)
         return samples_read
 
@@ -6444,7 +6444,9 @@ class LibraryInterpreter(BaseInterpreter):
         if t0_array is not None and dt_array is not None:
             self._set_waveform_timings(waveforms, t0_array, dt_array)
 
-        # TODO: AB#3228924 - if the read was short, set waveform.sample_count before throwing the exception
+        for waveform in waveforms:
+            waveform.sample_count = samples_read
+            
         self.check_for_error(error_code, samps_per_chan_read=samples_read)
         return samples_read
 
@@ -6675,7 +6677,7 @@ class LibraryInterpreter(BaseInterpreter):
         if t0_array is not None and dt_array is not None:
             self._set_waveform_timings([waveform], t0_array, dt_array)
 
-        # TODO: AB#3228924 - if the read was short, set waveform.sample_count before throwing the exception
+        waveform.sample_count = samples_read
         self.check_for_error(error_code, samps_per_chan_read=samples_read)
         return samples_read
 
@@ -6705,7 +6707,7 @@ class LibraryInterpreter(BaseInterpreter):
         # Since there's no DAQmxInternalReadDigitalWaveformPerChan, we have to allocate a
         # temporary contiguous array to read the data from multiple channels into.
         read_array = numpy.zeros(
-            (channel_count, number_of_samples_per_channel, number_of_signals_per_sample),
+            channel_count * number_of_samples_per_channel * number_of_signals_per_sample,
             dtype=numpy.uint8)
 
         bytes_per_chan_array = numpy.zeros(channel_count, dtype=numpy.uint32)
@@ -6722,17 +6724,20 @@ class LibraryInterpreter(BaseInterpreter):
             bytes_per_chan_array,
         )
 
+        channel_array_length = channel_count * samples_read * number_of_signals_per_sample
+        channel_array = read_array[:channel_array_length].reshape(
+            channel_count, samples_read, number_of_signals_per_sample)
+
         for i, waveform in enumerate(waveforms):
-            waveform_signals = waveform.data.shape[1]
-            channel_signals = bytes_per_chan_array[i]
-            if waveform_signals != channel_signals:
-                raise ValueError(f"waveforms[{i}].data has {waveform_signals} signals, but expected {channel_signals}")
-            waveform.data[:] = read_array[i, :, :channel_signals]
+            waveform_signal_count = waveform.data.shape[1]
+            channel_signal_count = bytes_per_chan_array[i]
+            if waveform_signal_count != channel_signal_count:
+                raise ValueError(f"waveforms[{i}].data has {waveform_signal_count} signals, but expected {channel_signal_count}")
+            waveform.data[:] = channel_array[i, :, :channel_signal_count]
 
         if t0_array is not None and dt_array is not None:
             self._set_waveform_timings(waveforms, t0_array, dt_array)
 
-        # TODO: AB#3228924 - if the read was short, set waveform.sample_count before throwing the exception
         self.check_for_error(error_code, samps_per_chan_read=samples_read)
         return samples_read
 
@@ -6759,7 +6764,7 @@ class LibraryInterpreter(BaseInterpreter):
             dt_array = None
 
         read_array = numpy.zeros(
-            (channel_count, number_of_samples_per_channel, number_of_signals_per_sample),
+            channel_count * number_of_samples_per_channel * number_of_signals_per_sample,
             dtype=numpy.uint8)
 
         bytes_per_chan_array = numpy.zeros(channel_count, dtype=numpy.uint32)
@@ -6776,12 +6781,16 @@ class LibraryInterpreter(BaseInterpreter):
             bytes_per_chan_array,
         )
 
+        channel_array_length = channel_count * samples_read * number_of_signals_per_sample
+        channel_array = read_array[:channel_array_length].reshape(
+            channel_count, samples_read, number_of_signals_per_sample)
+
         waveforms = []
         for i in range(channel_count):
-            signal_count = bytes_per_chan_array[i]
+            channel_signal_count = bytes_per_chan_array[i]
             waveform = DigitalWaveform(
                 sample_count=samples_read,
-                data=read_array[i, :, :signal_count],
+                data=channel_array[i, :, :channel_signal_count],
                 copy_extended_properties=False,
                 extended_properties=properties[i] if properties else None)
             waveforms.append(waveform)
