@@ -1,120 +1,14 @@
 from __future__ import annotations
 
-import numpy
 import pytest
 from nitypes.waveform import DigitalWaveform
 
 import nidaqmx
 import nidaqmx.system
-from nidaqmx.constants import AcquisitionType, LineGrouping
-from nidaqmx.utils import flatten_channel_string
-
-
-@pytest.fixture
-def di_single_channel_timing_task(
-    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
-) -> nidaqmx.Task:
-    task.di_channels.add_di_chan(
-        sim_6363_device.di_lines[0].name, line_grouping=LineGrouping.CHAN_FOR_ALL_LINES
-    )
-    task.timing.cfg_samp_clk_timing(1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=50)
-    return task
-
-
-@pytest.fixture
-def di_single_chan_lines_and_port_task(
-    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
-) -> nidaqmx.Task:
-    task.di_channels.add_di_chan(
-        flatten_channel_string(
-            sim_6363_device.di_lines.channel_names[0:3] + [sim_6363_device.di_ports[1].name]
-        ),
-        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
-    )
-    return task
-
-
-@pytest.fixture
-def di_multi_channel_timing_task(
-    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
-) -> nidaqmx.Task:
-    task.di_channels.add_di_chan(
-        flatten_channel_string(sim_6363_device.di_lines.channel_names[:8]),
-        line_grouping=LineGrouping.CHAN_PER_LINE,
-    )
-    task.timing.cfg_samp_clk_timing(1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=50)
-    return task
-
-
-@pytest.fixture
-def di_multi_chan_diff_lines_timing_task(
-    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
-) -> nidaqmx.Task:
-    task.di_channels.add_di_chan(
-        flatten_channel_string(sim_6363_device.di_lines.channel_names[0:1]),
-        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
-    )
-    task.di_channels.add_di_chan(
-        flatten_channel_string(sim_6363_device.di_lines.channel_names[1:3]),
-        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
-    )
-    task.di_channels.add_di_chan(
-        flatten_channel_string(sim_6363_device.di_lines.channel_names[3:7]),
-        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
-    )
-    task.timing.cfg_samp_clk_timing(
-        rate=1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=50
-    )
-    return task
-
-
-@pytest.fixture
-def di_multi_chan_lines_and_port_task(
-    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
-) -> nidaqmx.Task:
-    task.di_channels.add_di_chan(
-        flatten_channel_string(sim_6363_device.di_lines.channel_names[0:1]),
-        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
-    )
-    task.di_channels.add_di_chan(
-        flatten_channel_string(sim_6363_device.di_lines.channel_names[1:3]),
-        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
-    )
-    task.di_channels.add_di_chan(
-        flatten_channel_string(sim_6363_device.di_lines.channel_names[3:7]),
-        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
-    )
-    task.di_channels.add_di_chan(
-        sim_6363_device.di_ports[1].name,
-        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
-    )
-    return task
-
-
-def _get_expected_data_for_line(num_samples: int, line_number: int) -> list[int]:
-    data = []
-    # Simulated digital signals "count" from 0 in binary within each group of 8 lines.
-    # Each line represents a bit in the binary representation of the sample number.
-    # - line 0 represents bit 0 (LSB) - alternates every sample: 0,1,0,1,0,1,0,1...
-    # - line 1 represents bit 1 - alternates every 2 samples:    0,0,1,1,0,0,1,1...
-    # - line 2 represents bit 2 - alternates every 4 samples:    0,0,0,0,1,1,1,1...
-    line_number %= 8
-    for sample_num in range(num_samples):
-        bit_value = (sample_num >> line_number) & 1
-        data.append(bit_value)
-    return data
-
-
-def _bool_array_to_int(bool_array: numpy.typing.NDArray[numpy.bool_]) -> int:
-    result = 0
-    # Simulated data is little-endian
-    for bit in bool_array[::-1]:
-        result = (result << 1) | int(bit)
-    return result
-
-
-def _get_waveform_data(waveform: DigitalWaveform) -> list[int]:
-    return [_bool_array_to_int(sample) for sample in waveform.data]
+from .conftest import (
+    _get_expected_data_for_line,
+    _get_waveform_data,
+)
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
