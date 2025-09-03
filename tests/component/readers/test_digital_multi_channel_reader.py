@@ -12,7 +12,12 @@ from nitypes.waveform import DigitalWaveform, SampleIntervalMode
 import nidaqmx
 import nidaqmx.system
 from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
-from nidaqmx.constants import AcquisitionType, LineGrouping, WaveformAttributeMode
+from nidaqmx.constants import (
+    AcquisitionType,
+    LineGrouping,
+    ReallocationPolicy,
+    WaveformAttributeMode,
+)
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.stream_readers import DaqError, DigitalMultiChannelReader
 from nidaqmx.utils import flatten_channel_string
@@ -588,6 +593,33 @@ def test___digital_multi_channel_multi_line_reader___read_into_undersized_wavefo
 
     assert exc_info.value.error_code == DAQmxErrors.READ_BUFFER_TOO_SMALL
     assert exc_info.value.args[0].startswith("The waveform at index 0 does not have enough space")
+
+
+@pytest.mark.grpc_skip(reason="read_digital_waveforms not implemented in GRPC")
+def test___digital_multi_channel_multi_line_reader_with_to_grow___read_into_undersized_waveforms___returns_valid_waveforms(
+    di_multi_chan_multi_line_timing_task: nidaqmx.Task,
+) -> None:
+    in_stream = di_multi_chan_multi_line_timing_task.in_stream
+    in_stream.reallocation_policy = ReallocationPolicy.TO_GROW
+    reader = DigitalMultiChannelReader(di_multi_chan_multi_line_timing_task.in_stream)
+    num_channels = di_multi_chan_multi_line_timing_task.number_of_channels
+    num_lines = _get_num_lines_in_task(di_multi_chan_multi_line_timing_task)
+    samples_to_read = 10
+
+    waveforms = [DigitalWaveform(samples_to_read - 1) for _ in range(num_channels)]
+    samples_read = reader.read_waveforms(waveforms, samples_to_read)
+
+    assert samples_read == samples_to_read
+    assert num_channels == 8
+    assert num_lines == 8
+    assert isinstance(waveforms, list)
+    assert len(waveforms) == num_channels
+    for chan, waveform in enumerate(waveforms):
+        assert _get_waveform_data(waveform) == _get_expected_data_for_line(samples_to_read, chan)
+        assert _is_timestamp_close_to_now(waveform.timing.timestamp)
+        assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
+        assert waveform.channel_name == di_multi_chan_multi_line_timing_task.di_channels[chan].name
+        assert waveform.sample_count == samples_to_read
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveforms not implemented in GRPC")

@@ -12,7 +12,12 @@ from nitypes.waveform import DigitalWaveform, SampleIntervalMode
 import nidaqmx
 import nidaqmx.system
 from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
-from nidaqmx.constants import AcquisitionType, LineGrouping, WaveformAttributeMode
+from nidaqmx.constants import (
+    AcquisitionType,
+    LineGrouping,
+    ReallocationPolicy,
+    WaveformAttributeMode,
+)
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.stream_readers import DaqError, DigitalSingleChannelReader
 from nidaqmx.utils import flatten_channel_string
@@ -393,7 +398,29 @@ def test___digital_single_line_reader___read_into_undersized_waveform___throws_e
         reader.read_waveform(waveform, samples_to_read)
 
     assert exc_info.value.error_code == DAQmxErrors.READ_BUFFER_TOO_SMALL
-    assert exc_info.value.args[0].startswith("Buffer is too small to fit read data.")
+    assert exc_info.value.args[0].startswith(
+        "The waveform does not have enough space (9) to hold the requested number of samples (10)."
+    )
+
+
+@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
+def test___digital_single_line_reader_with_to_grow___read_into_undersized_waveform___returns_valid_waveform(
+    di_single_line_timing_task: nidaqmx.Task,
+) -> None:
+    in_stream = di_single_line_timing_task.in_stream
+    in_stream.reallocation_policy = ReallocationPolicy.TO_GROW
+    reader = DigitalSingleChannelReader(di_single_line_timing_task.in_stream)
+    samples_to_read = 10
+
+    waveform = DigitalWaveform(samples_to_read - 1)
+    samples_read = reader.read_waveform(waveform, samples_to_read)
+
+    assert samples_read == samples_to_read
+    assert _get_waveform_data(waveform) == _get_expected_digital_data(1, samples_to_read)
+    assert _is_timestamp_close_to_now(waveform.timing.timestamp)
+    assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
+    assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
+    assert waveform.channel_name == di_single_line_timing_task.di_channels[0].name
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")

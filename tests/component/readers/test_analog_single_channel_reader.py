@@ -12,7 +12,7 @@ from nitypes.waveform import AnalogWaveform, SampleIntervalMode
 import nidaqmx
 import nidaqmx.system
 from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
-from nidaqmx.constants import AcquisitionType, WaveformAttributeMode
+from nidaqmx.constants import AcquisitionType, ReallocationPolicy, WaveformAttributeMode
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.stream_readers import AnalogSingleChannelReader, DaqError
 from .conftest import (
@@ -186,6 +186,30 @@ def test___analog_single_channel_reader___read_into_undersized_waveform___throws
 
     assert exc_info.value.error_code == DAQmxErrors.READ_BUFFER_TOO_SMALL
     assert exc_info.value.args[0].startswith("The provided waveform does not have enough space")
+
+
+@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
+def test___analog_single_channel_reader_with_to_grow___read_into_undersized_waveform___returns_valid_waveform(
+    ai_single_channel_task_with_timing: nidaqmx.Task,
+) -> None:
+    in_stream = ai_single_channel_task_with_timing.in_stream
+    in_stream.reallocation_policy = ReallocationPolicy.TO_GROW
+    reader = AnalogSingleChannelReader(ai_single_channel_task_with_timing.in_stream)
+    samples_to_read = 10
+
+    waveform = AnalogWaveform(samples_to_read - 1)
+    samples_read = reader.read_waveform(waveform, samples_to_read)
+
+    assert samples_read == samples_to_read
+    assert isinstance(waveform, AnalogWaveform)
+    expected = _get_voltage_offset_for_chan(0)
+    assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert isinstance(waveform.timing.timestamp, ht_datetime)
+    assert _is_timestamp_close_to_now(waveform.timing.timestamp)
+    assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
+    assert waveform.channel_name == ai_single_channel_task_with_timing.ai_channels[0].name
+    assert waveform.units == "Volts"
+    assert waveform.sample_count == samples_to_read
 
 
 @pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
