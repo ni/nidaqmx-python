@@ -24,6 +24,11 @@ class ${name}(Enum):
 
 
 % endfor
+class ReallocationPolicy(Enum):
+    DO_NOT_REALLOCATE = 0  #: Do not reallocate waveforms.
+    TO_GROW = 1  #: Reallocate waveforms to grow when needed.
+
+
 class WaveformAttributeMode(Flag):
     NONE = 0
     TIMING = 1
