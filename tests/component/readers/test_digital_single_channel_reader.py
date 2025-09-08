@@ -407,13 +407,11 @@ def test___digital_single_line_reader___read_into_undersized_waveform___throws_e
 def test___digital_single_line_reader_with_to_grow___read_into_undersized_waveform___returns_valid_waveform(
     di_single_line_timing_task: nidaqmx.Task,
 ) -> None:
-    in_stream = di_single_line_timing_task.in_stream
-    in_stream.reallocation_policy = ReallocationPolicy.TO_GROW
     reader = DigitalSingleChannelReader(di_single_line_timing_task.in_stream)
     samples_to_read = 10
 
     waveform = DigitalWaveform(samples_to_read - 1)
-    samples_read = reader.read_waveform(waveform, samples_to_read)
+    samples_read = reader.read_waveform(waveform, samples_to_read, ReallocationPolicy.TO_GROW)
 
     assert samples_read == samples_to_read
     assert _get_waveform_data(waveform) == _get_expected_digital_data(1, samples_to_read)

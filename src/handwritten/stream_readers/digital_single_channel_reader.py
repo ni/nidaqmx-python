@@ -390,6 +390,7 @@ class DigitalSingleChannelReader(ChannelReaderBase):
         self,
         waveform: DigitalWaveform[numpy.uint8],
         number_of_samples_per_channel: int = READ_ALL_AVAILABLE,
+        reallocation_policy: ReallocationPolicy = ReallocationPolicy.DO_NOT_REALLOCATE,
         timeout: float = 10.0,
     ) -> int:
         """
@@ -420,6 +421,9 @@ class DigitalSingleChannelReader(ChannelReaderBase):
                 "read_all_avail_samp" property to True, the method reads
                 the samples currently available in the buffer and does
                 not wait for the task to acquire all requested samples.
+            reallocation_policy (Optional[ReallocationPolicy]): Specifies
+                the reallocation policy to use when the read yields more
+                samples than the current capacity of the waveform.
             timeout (Optional[float]): Specifies the amount of time in
                 seconds to wait for samples to become available. If the
                 time elapses, the method returns an error and any
@@ -441,7 +445,7 @@ class DigitalSingleChannelReader(ChannelReaderBase):
                 number_of_samples_per_channel))
         
         if number_of_samples_per_channel > waveform.sample_count:
-            if self._in_stream.reallocation_policy == ReallocationPolicy.TO_GROW:
+            if reallocation_policy == ReallocationPolicy.TO_GROW:
                 waveform.capacity = number_of_samples_per_channel
                 waveform.sample_count = number_of_samples_per_channel
             else:

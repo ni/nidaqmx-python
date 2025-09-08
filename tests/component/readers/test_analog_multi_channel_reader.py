@@ -205,8 +205,6 @@ def test___analog_multi_channel_reader___read_into_undersized_waveforms___throws
 def test___analog_multi_channel_reader_with_to_grow___read_into_undersized_waveforms___returns_valid_waveforms(
     ai_multi_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
-    in_stream = ai_multi_channel_task_with_timing.in_stream
-    in_stream.reallocation_policy = ReallocationPolicy.TO_GROW
     reader = AnalogMultiChannelReader(ai_multi_channel_task_with_timing.in_stream)
     num_channels = ai_multi_channel_task_with_timing.number_of_channels
     samples_to_read = 10
@@ -216,7 +214,7 @@ def test___analog_multi_channel_reader_with_to_grow___read_into_undersized_wavef
         AnalogWaveform(samples_to_read - 1),
         AnalogWaveform(samples_to_read - 5),
     ]
-    samples_read = reader.read_waveforms(waveforms, samples_to_read)
+    samples_read = reader.read_waveforms(waveforms, samples_to_read, ReallocationPolicy.TO_GROW)
 
     assert samples_read == samples_to_read
     assert num_channels == 3

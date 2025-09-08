@@ -192,13 +192,11 @@ def test___analog_single_channel_reader___read_into_undersized_waveform___throws
 def test___analog_single_channel_reader_with_to_grow___read_into_undersized_waveform___returns_valid_waveform(
     ai_single_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
-    in_stream = ai_single_channel_task_with_timing.in_stream
-    in_stream.reallocation_policy = ReallocationPolicy.TO_GROW
     reader = AnalogSingleChannelReader(ai_single_channel_task_with_timing.in_stream)
     samples_to_read = 10
 
     waveform = AnalogWaveform(samples_to_read - 1)
-    samples_read = reader.read_waveform(waveform, samples_to_read)
+    samples_read = reader.read_waveform(waveform, samples_to_read, ReallocationPolicy.TO_GROW)
 
     assert samples_read == samples_to_read
     assert isinstance(waveform, AnalogWaveform)

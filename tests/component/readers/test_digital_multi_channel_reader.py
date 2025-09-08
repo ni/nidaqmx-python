@@ -599,15 +599,13 @@ def test___digital_multi_channel_multi_line_reader___read_into_undersized_wavefo
 def test___digital_multi_channel_multi_line_reader_with_to_grow___read_into_undersized_waveforms___returns_valid_waveforms(
     di_multi_chan_multi_line_timing_task: nidaqmx.Task,
 ) -> None:
-    in_stream = di_multi_chan_multi_line_timing_task.in_stream
-    in_stream.reallocation_policy = ReallocationPolicy.TO_GROW
     reader = DigitalMultiChannelReader(di_multi_chan_multi_line_timing_task.in_stream)
     num_channels = di_multi_chan_multi_line_timing_task.number_of_channels
     num_lines = _get_num_lines_in_task(di_multi_chan_multi_line_timing_task)
     samples_to_read = 10
 
     waveforms = [DigitalWaveform(samples_to_read - 1) for _ in range(num_channels)]
-    samples_read = reader.read_waveforms(waveforms, samples_to_read)
+    samples_read = reader.read_waveforms(waveforms, samples_to_read, ReallocationPolicy.TO_GROW)
 
     assert samples_read == samples_to_read
     assert num_channels == 8

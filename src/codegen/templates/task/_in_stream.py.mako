@@ -17,7 +17,7 @@ from nidaqmx.task.channels import Channel
 from nidaqmx.utils import unflatten_channel_string
 from nidaqmx.constants import (
     ${', '.join([c for c in enums_used]) | wrap(4, 4)})
-from nidaqmx.constants import ReallocationPolicy, WaveformAttributeMode
+from nidaqmx.constants import WaveformAttributeMode
 
 class InStream:
     """
@@ -34,7 +34,6 @@ class InStream:
         self._handle = task._handle
         self._interpreter = interpreter
         self._timeout = 10.0
-        self._reallocation_policy = ReallocationPolicy.DO_NOT_REALLOCATE
         self._waveform_attribute_mode = WaveformAttributeMode.TIMING | WaveformAttributeMode.EXTENDED_PROPERTIES
 
         super().__init__()
@@ -353,26 +352,6 @@ ${property_template.script_property(attribute)}\
 
 <%namespace name="deprecated_template" file="/property_deprecated_template.py.mako"/>\
 ${deprecated_template.script_deprecated_property(attributes)}\
-
-    @property
-    def reallocation_policy(self):
-        """
-        :class:`nidaqmx.constants.ReallocationPolicy`: Specifies the
-            reallocation policy for waveforms. When set to
-            **ReallocationPolicy.DO_NOT_REALLOCATE**, the waveform will
-            not be reallocated. When set to
-            **ReallocationPolicy.TO_GROW**, the waveform can be
-            reallocated to accommodate more data.
-        """
-        return self._reallocation_policy
-
-    @reallocation_policy.setter
-    def reallocation_policy(self, val):
-        self._reallocation_policy = val
-
-    @reallocation_policy.deleter
-    def reallocation_policy(self):
-        self._reallocation_policy = ReallocationPolicy.DO_NOT_REALLOCATE
 
     @property
     def waveform_attribute_mode(self):
