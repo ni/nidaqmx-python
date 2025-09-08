@@ -174,16 +174,17 @@ class AnalogSingleChannelReader(ChannelReaderBase):
             self._task._calculate_num_samps_per_chan(
                 number_of_samples_per_channel))
 
-        if number_of_samples_per_channel > waveform.sample_count:
+        if number_of_samples_per_channel > waveform.capacity:
             if reallocation_policy == ReallocationPolicy.TO_GROW:
                 waveform.capacity = number_of_samples_per_channel
-                waveform.sample_count = number_of_samples_per_channel
             else:
                 raise DaqError(
-                    f'The provided waveform does not have enough space ({waveform.sample_count}) to hold '
+                    f'The provided waveform does not have enough space ({waveform.capacity}) to hold '
                     f'the requested number of samples ({number_of_samples_per_channel}). Please provide a larger '
                     'waveform or adjust the number of samples requested.',
-                    DAQmxErrors.READ_BUFFER_TOO_SMALL, task_name=self._task.name)
+                DAQmxErrors.READ_BUFFER_TOO_SMALL, task_name=self._task.name)
+
+        waveform.sample_count = number_of_samples_per_channel
 
         return self._interpreter.read_analog_waveform(
             self._handle,

@@ -15,7 +15,7 @@ from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
 from nidaqmx.constants import AcquisitionType, ReallocationPolicy, WaveformAttributeMode
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.stream_readers import AnalogSingleChannelReader, DaqError
-from .conftest import (
+from tests.component.readers.conftest import (
     VOLTAGE_EPSILON,
     _get_voltage_offset_for_chan,
     _is_timestamp_close_to_now,
@@ -189,7 +189,7 @@ def test___analog_single_channel_reader___read_into_undersized_waveform___throws
 
 
 @pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
-def test___analog_single_channel_reader_with_to_grow___read_into_undersized_waveform___returns_valid_waveform(
+def test___analog_single_channel_reader___read_into_undersized_waveform_with_to_grow___returns_valid_waveform(
     ai_single_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
     reader = AnalogSingleChannelReader(ai_single_channel_task_with_timing.in_stream)
@@ -208,6 +208,43 @@ def test___analog_single_channel_reader_with_to_grow___read_into_undersized_wave
     assert waveform.channel_name == ai_single_channel_task_with_timing.ai_channels[0].name
     assert waveform.units == "Volts"
     assert waveform.sample_count == samples_to_read
+
+
+@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
+def test___analog_single_channel_reader___reuse_waveform_in_place_with_different_sample_counts___populates_valid_waveforms(
+    generate_task: Callable[[], nidaqmx.Task], sim_6363_device: nidaqmx.system.Device
+) -> None:
+    def _make_single_channel_reader(chan_index, offset, samps_per_chan):
+        task = generate_task()
+        task.ai_channels.add_ai_voltage_chan(
+            sim_6363_device.ai_physical_chans[chan_index].name,
+            min_val=offset,
+            max_val=offset + VOLTAGE_EPSILON,
+        )
+        task.timing.cfg_samp_clk_timing(
+            1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=samps_per_chan
+        )
+        return AnalogSingleChannelReader(task.in_stream)
+
+    reader0 = _make_single_channel_reader(chan_index=0, offset=0, samps_per_chan=5)
+    reader1 = _make_single_channel_reader(chan_index=1, offset=1, samps_per_chan=10)
+    reader2 = _make_single_channel_reader(chan_index=2, offset=2, samps_per_chan=15)
+    waveform = AnalogWaveform(10)
+
+    reader0.read_waveform(waveform, 5)
+    assert waveform.sample_count == 5
+    assert waveform.scaled_data == pytest.approx(0, abs=VOLTAGE_EPSILON)
+    assert waveform.channel_name == f"{sim_6363_device.name}/ai0"
+
+    reader1.read_waveform(waveform, 10)
+    assert waveform.sample_count == 10
+    assert waveform.scaled_data == pytest.approx(1, abs=VOLTAGE_EPSILON)
+    assert waveform.channel_name == f"{sim_6363_device.name}/ai1"
+
+    reader2.read_waveform(waveform, 15, ReallocationPolicy.TO_GROW)
+    assert waveform.sample_count == 15
+    assert waveform.scaled_data == pytest.approx(2, abs=VOLTAGE_EPSILON)
+    assert waveform.channel_name == f"{sim_6363_device.name}/ai2"
 
 
 @pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")

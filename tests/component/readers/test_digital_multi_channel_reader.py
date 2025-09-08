@@ -21,7 +21,7 @@ from nidaqmx.constants import (
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.stream_readers import DaqError, DigitalMultiChannelReader
 from nidaqmx.utils import flatten_channel_string
-from .conftest import (
+from tests.component.readers.conftest import (
     _bool_array_to_int,
     _get_expected_data_for_line,
     _get_expected_digital_data,
@@ -596,7 +596,7 @@ def test___digital_multi_channel_multi_line_reader___read_into_undersized_wavefo
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveforms not implemented in GRPC")
-def test___digital_multi_channel_multi_line_reader_with_to_grow___read_into_undersized_waveforms___returns_valid_waveforms(
+def test___digital_multi_channel_multi_line_reader___read_into_undersized_waveforms_with_to_grow___returns_valid_waveforms(
     di_multi_chan_multi_line_timing_task: nidaqmx.Task,
 ) -> None:
     reader = DigitalMultiChannelReader(di_multi_chan_multi_line_timing_task.in_stream)
@@ -618,6 +618,58 @@ def test___digital_multi_channel_multi_line_reader_with_to_grow___read_into_unde
         assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
         assert waveform.channel_name == di_multi_chan_multi_line_timing_task.di_channels[chan].name
         assert waveform.sample_count == samples_to_read
+
+
+@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
+def test___digital_multi_channel_reader___reuse_waveform_in_place_with_different_sample_counts___populates_valid_waveforms(
+    generate_task: Callable[[], nidaqmx.Task], sim_6363_device: nidaqmx.system.Device
+) -> None:
+    def _make_multi_channel_reader(chan_a_index, chan_b_index, samps_per_chan):
+        task = generate_task()
+        task.di_channels.add_di_chan(
+            sim_6363_device.di_lines[chan_a_index].name,
+            line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+        )
+        task.di_channels.add_di_chan(
+            sim_6363_device.di_lines[chan_b_index].name,
+            line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+        )
+        task.timing.cfg_samp_clk_timing(
+            1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=samps_per_chan
+        )
+        return DigitalMultiChannelReader(task.in_stream)
+
+    reader0 = _make_multi_channel_reader(chan_a_index=0, chan_b_index=1, samps_per_chan=5)
+    reader1 = _make_multi_channel_reader(chan_a_index=2, chan_b_index=3, samps_per_chan=10)
+    reader2 = _make_multi_channel_reader(chan_a_index=4, chan_b_index=5, samps_per_chan=15)
+    waveforms = [
+        DigitalWaveform(10),
+        DigitalWaveform(10),
+    ]
+
+    reader0.read_waveforms(waveforms, 5)
+    assert waveforms[0].sample_count == 5
+    assert _get_waveform_data(waveforms[0]) == _get_expected_data_for_line(5, 0)
+    assert waveforms[0].channel_name == f"{sim_6363_device.name}/port0/line0"
+    assert waveforms[1].sample_count == 5
+    assert _get_waveform_data(waveforms[1]) == _get_expected_data_for_line(5, 1)
+    assert waveforms[1].channel_name == f"{sim_6363_device.name}/port0/line1"
+
+    reader1.read_waveforms(waveforms, 10)
+    assert waveforms[0].sample_count == 10
+    assert _get_waveform_data(waveforms[0]) == _get_expected_data_for_line(10, 2)
+    assert waveforms[0].channel_name == f"{sim_6363_device.name}/port0/line2"
+    assert waveforms[1].sample_count == 10
+    assert _get_waveform_data(waveforms[1]) == _get_expected_data_for_line(10, 3)
+    assert waveforms[1].channel_name == f"{sim_6363_device.name}/port0/line3"
+
+    reader2.read_waveforms(waveforms, 15, ReallocationPolicy.TO_GROW)
+    assert waveforms[0].sample_count == 15
+    assert _get_waveform_data(waveforms[0]) == _get_expected_data_for_line(15, 4)
+    assert waveforms[0].channel_name == f"{sim_6363_device.name}/port0/line4"
+    assert waveforms[1].sample_count == 15
+    assert _get_waveform_data(waveforms[1]) == _get_expected_data_for_line(15, 5)
+    assert waveforms[1].channel_name == f"{sim_6363_device.name}/port0/line5"
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveforms not implemented in GRPC")

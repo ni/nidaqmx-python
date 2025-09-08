@@ -21,7 +21,7 @@ from nidaqmx.constants import (
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.stream_readers import DaqError, DigitalSingleChannelReader
 from nidaqmx.utils import flatten_channel_string
-from .conftest import (
+from tests.component.readers.conftest import (
     _bool_array_to_int,
     _get_expected_data_for_line,
     _get_expected_digital_data,
@@ -404,7 +404,7 @@ def test___digital_single_line_reader___read_into_undersized_waveform___throws_e
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
-def test___digital_single_line_reader_with_to_grow___read_into_undersized_waveform___returns_valid_waveform(
+def test___digital_single_line_reader___read_into_undersized_waveform_with_to_grow___returns_valid_waveform(
     di_single_line_timing_task: nidaqmx.Task,
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_line_timing_task.in_stream)
@@ -419,6 +419,41 @@ def test___digital_single_line_reader_with_to_grow___read_into_undersized_wavefo
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
     assert waveform.channel_name == di_single_line_timing_task.di_channels[0].name
+
+
+@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
+def test___digital_single_channel_reader___reuse_waveform_in_place_with_different_sample_counts___populates_valid_waveforms(
+    generate_task: Callable[[], nidaqmx.Task], sim_6363_device: nidaqmx.system.Device
+) -> None:
+    def _make_single_channel_reader(chan_index, samps_per_chan):
+        task = generate_task()
+        task.di_channels.add_di_chan(
+            sim_6363_device.di_lines[chan_index].name, line_grouping=LineGrouping.CHAN_FOR_ALL_LINES
+        )
+        task.timing.cfg_samp_clk_timing(
+            1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=samps_per_chan
+        )
+        return DigitalSingleChannelReader(task.in_stream)
+
+    reader0 = _make_single_channel_reader(chan_index=0, samps_per_chan=5)
+    reader1 = _make_single_channel_reader(chan_index=1, samps_per_chan=10)
+    reader2 = _make_single_channel_reader(chan_index=2, samps_per_chan=15)
+    waveform = DigitalWaveform(10)
+
+    reader0.read_waveform(waveform, 5)
+    assert waveform.sample_count == 5
+    assert _get_waveform_data(waveform) == _get_expected_data_for_line(5, 0)
+    assert waveform.channel_name == f"{sim_6363_device.name}/port0/line0"
+
+    reader1.read_waveform(waveform, 10)
+    assert waveform.sample_count == 10
+    assert _get_waveform_data(waveform) == _get_expected_data_for_line(10, 1)
+    assert waveform.channel_name == f"{sim_6363_device.name}/port0/line1"
+
+    reader2.read_waveform(waveform, 15, ReallocationPolicy.TO_GROW)
+    assert waveform.sample_count == 15
+    assert _get_waveform_data(waveform) == _get_expected_data_for_line(15, 2)
+    assert waveform.channel_name == f"{sim_6363_device.name}/port0/line2"
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")

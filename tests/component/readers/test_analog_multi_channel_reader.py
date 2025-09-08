@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import ctypes
 import math
+from typing import Callable
 
 import numpy
 import pytest
@@ -10,10 +11,10 @@ from nitypes.waveform import AnalogWaveform, SampleIntervalMode
 
 import nidaqmx
 from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
-from nidaqmx.constants import ReallocationPolicy, WaveformAttributeMode
+from nidaqmx.constants import AcquisitionType, ReallocationPolicy, WaveformAttributeMode
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.stream_readers import AnalogMultiChannelReader, DaqError
-from .conftest import (
+from tests.component.readers.conftest import (
     VOLTAGE_EPSILON,
     _get_voltage_offset_for_chan,
     _is_timestamp_close_to_now,
@@ -202,7 +203,7 @@ def test___analog_multi_channel_reader___read_into_undersized_waveforms___throws
 
 
 @pytest.mark.grpc_skip(reason="read_analog_waveforms not implemented in GRPC")
-def test___analog_multi_channel_reader_with_to_grow___read_into_undersized_waveforms___returns_valid_waveforms(
+def test___analog_multi_channel_reader___read_into_undersized_waveforms_with_to_grow___returns_valid_waveforms(
     ai_multi_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
     reader = AnalogMultiChannelReader(ai_multi_channel_task_with_timing.in_stream)
@@ -232,6 +233,60 @@ def test___analog_multi_channel_reader_with_to_grow___read_into_undersized_wavef
         )
         assert waveform.units == "Volts"
         assert waveform.sample_count == samples_to_read
+
+
+@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
+def test___analog_multi_channel_reader___reuse_waveform_in_place_with_different_sample_counts___populates_valid_waveforms(
+    generate_task: Callable[[], nidaqmx.Task], sim_6363_device: nidaqmx.system.Device
+) -> None:
+    def _make_multi_channel_reader(chan_a_index, chan_b_index, samps_per_chan):
+        task = generate_task()
+        task.ai_channels.add_ai_voltage_chan(
+            sim_6363_device.ai_physical_chans[chan_a_index].name,
+            min_val=chan_a_index,
+            max_val=chan_a_index + VOLTAGE_EPSILON,
+        )
+        task.ai_channels.add_ai_voltage_chan(
+            sim_6363_device.ai_physical_chans[chan_b_index].name,
+            min_val=chan_b_index,
+            max_val=chan_b_index + VOLTAGE_EPSILON,
+        )
+        task.timing.cfg_samp_clk_timing(
+            1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=samps_per_chan
+        )
+        return AnalogMultiChannelReader(task.in_stream)
+
+    reader0 = _make_multi_channel_reader(chan_a_index=0, chan_b_index=1, samps_per_chan=5)
+    reader1 = _make_multi_channel_reader(chan_a_index=2, chan_b_index=3, samps_per_chan=10)
+    reader2 = _make_multi_channel_reader(chan_a_index=4, chan_b_index=5, samps_per_chan=15)
+    waveforms = [
+        AnalogWaveform(10),
+        AnalogWaveform(10),
+    ]
+
+    reader0.read_waveforms(waveforms, 5)
+    assert waveforms[0].sample_count == 5
+    assert waveforms[0].scaled_data == pytest.approx(0, abs=VOLTAGE_EPSILON)
+    assert waveforms[0].channel_name == f"{sim_6363_device.name}/ai0"
+    assert waveforms[1].sample_count == 5
+    assert waveforms[1].scaled_data == pytest.approx(1, abs=VOLTAGE_EPSILON)
+    assert waveforms[1].channel_name == f"{sim_6363_device.name}/ai1"
+
+    reader1.read_waveforms(waveforms, 10)
+    assert waveforms[0].sample_count == 10
+    assert waveforms[0].scaled_data == pytest.approx(2, abs=VOLTAGE_EPSILON)
+    assert waveforms[0].channel_name == f"{sim_6363_device.name}/ai2"
+    assert waveforms[1].sample_count == 10
+    assert waveforms[1].scaled_data == pytest.approx(3, abs=VOLTAGE_EPSILON)
+    assert waveforms[1].channel_name == f"{sim_6363_device.name}/ai3"
+
+    reader2.read_waveforms(waveforms, 15, ReallocationPolicy.TO_GROW)
+    assert waveforms[0].sample_count == 15
+    assert waveforms[0].scaled_data == pytest.approx(4, abs=VOLTAGE_EPSILON)
+    assert waveforms[0].channel_name == f"{sim_6363_device.name}/ai4"
+    assert waveforms[1].sample_count == 15
+    assert waveforms[1].scaled_data == pytest.approx(5, abs=VOLTAGE_EPSILON)
+    assert waveforms[1].channel_name == f"{sim_6363_device.name}/ai5"
 
 
 @pytest.mark.grpc_skip(reason="read_analog_waveforms not implemented in GRPC")
