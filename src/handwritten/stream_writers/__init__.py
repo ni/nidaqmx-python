@@ -12,6 +12,7 @@ from ._analog_unscaled_writer import AnalogUnscaledWriter
 from ._counter_writer import CounterWriter
 from ._digital_single_channel_writer import DigitalSingleChannelWriter
 from ._digital_multi_channel_writer import DigitalMultiChannelWriter
+from ._channel_writer_base import AUTO_START_UNSET
 
 __all__ = [
     'AnalogSingleChannelWriter', 
@@ -19,4 +20,5 @@ __all__ = [
     'AnalogUnscaledWriter', 
     'CounterWriter',
     'DigitalSingleChannelWriter', 
-    'DigitalMultiChannelWriter']
+    'DigitalMultiChannelWriter',
+    'AUTO_START_UNSET']
