@@ -15,7 +15,7 @@ from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
 from nidaqmx.constants import AcquisitionType, WaveformAttributeMode
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.stream_readers import AnalogSingleChannelReader, DaqError
-from ..conftest import (
+from tests.component.conftest import (
     VOLTAGE_EPSILON,
     _get_voltage_offset_for_chan,
     _is_timestamp_close_to_now,

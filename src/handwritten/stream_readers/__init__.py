@@ -8,13 +8,13 @@ from __future__ import annotations
 
 from nidaqmx import DaqError
 
-from ._analog_single_channel_reader import AnalogSingleChannelReader
-from ._analog_multi_channel_reader import AnalogMultiChannelReader
-from ._analog_unscaled_reader import AnalogUnscaledReader
-from ._counter_reader import CounterReader
-from ._digital_single_channel_reader import DigitalSingleChannelReader
-from ._digital_multi_channel_reader import DigitalMultiChannelReader
-from ._power_readers import (
+from nidaqmx.stream_readers._analog_single_channel_reader import AnalogSingleChannelReader
+from nidaqmx.stream_readers._analog_multi_channel_reader import AnalogMultiChannelReader
+from nidaqmx.stream_readers._analog_unscaled_reader import AnalogUnscaledReader
+from nidaqmx.stream_readers._counter_reader import CounterReader
+from nidaqmx.stream_readers._digital_single_channel_reader import DigitalSingleChannelReader
+from nidaqmx.stream_readers._digital_multi_channel_reader import DigitalMultiChannelReader
+from nidaqmx.stream_readers._power_readers import (
     PowerSingleChannelReader,
     PowerMultiChannelReader,
     PowerBinaryReader,

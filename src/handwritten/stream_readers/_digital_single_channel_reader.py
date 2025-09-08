@@ -6,7 +6,7 @@ from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, requires_feature
 from nidaqmx.constants import FillMode, READ_ALL_AVAILABLE
 from nitypes.waveform import DigitalWaveform
 
-from ._channel_reader_base import ChannelReaderBase
+from nidaqmx.stream_readers._channel_reader_base import ChannelReaderBase
 
 
 class DigitalSingleChannelReader(ChannelReaderBase):

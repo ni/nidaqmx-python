@@ -3,7 +3,7 @@ from __future__ import annotations
 from nidaqmx.constants import FillMode, READ_ALL_AVAILABLE
 from nidaqmx.types import CtrFreq, CtrTick, CtrTime
 
-from ._channel_reader_base import ChannelReaderBase
+from nidaqmx.stream_readers._channel_reader_base import ChannelReaderBase
 
 
 class CounterReader(ChannelReaderBase):

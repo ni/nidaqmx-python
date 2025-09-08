@@ -1,6 +1,6 @@
 from nidaqmx.constants import FillMode
 
-from ._channel_writer_base import ChannelWriterBase, AUTO_START_UNSET
+from nidaqmx.stream_writers._channel_writer_base import ChannelWriterBase, AUTO_START_UNSET
 
 
 class CounterWriter(ChannelWriterBase):
