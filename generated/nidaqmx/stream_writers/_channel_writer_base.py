@@ -3,12 +3,13 @@ from nidaqmx.error_codes import DAQmxErrors
 
 
 class UnsetAutoStartSentinel:
-    pass
+    """Sentinel class for unset auto_start parameter."""
+    
+    def __init__(self):
+        raise RuntimeError("Cannot instantiate UnsetAutoStartSentinel. Use AUTO_START_UNSET instead.")
 
 
-AUTO_START_UNSET = UnsetAutoStartSentinel()
-
-del UnsetAutoStartSentinel
+AUTO_START_UNSET = object.__new__(UnsetAutoStartSentinel)
 
 
 class ChannelWriterBase:
