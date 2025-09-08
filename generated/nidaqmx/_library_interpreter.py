@@ -6716,7 +6716,7 @@ class LibraryInterpreter(BaseInterpreter):
             task_handle,
             number_of_samples_per_channel,
             timeout,
-            FillMode.GROUP_BY_SCAN_NUMBER.value,
+            FillMode.GROUP_BY_SCAN_NUMBER.value, # GROUP_BY_SCAN_NUMBER handles short reads better than GROUP_BY_CHANNEL
             read_array,
             properties,
             t0_array,
@@ -6760,7 +6760,7 @@ class LibraryInterpreter(BaseInterpreter):
             dt_array = None
 
         read_array = numpy.zeros(
-            channel_count * number_of_samples_per_channel * number_of_signals_per_sample,
+            (number_of_samples_per_channel, channel_count, number_of_signals_per_sample),
             dtype=numpy.uint8)
 
         bytes_per_chan_array = numpy.zeros(channel_count, dtype=numpy.uint32)
@@ -6769,7 +6769,7 @@ class LibraryInterpreter(BaseInterpreter):
             task_handle,
             number_of_samples_per_channel,
             timeout,
-            FillMode.GROUP_BY_CHANNEL.value,
+            FillMode.GROUP_BY_SCAN_NUMBER.value, # GROUP_BY_SCAN_NUMBER handles short reads better than GROUP_BY_CHANNEL
             read_array,
             properties,
             t0_array,
@@ -6777,16 +6777,12 @@ class LibraryInterpreter(BaseInterpreter):
             bytes_per_chan_array,
         )
 
-        channel_array_length = channel_count * samples_read * number_of_signals_per_sample
-        channel_array = read_array[:channel_array_length].reshape(
-            channel_count, samples_read, number_of_signals_per_sample)
-
         waveforms = []
         for i in range(channel_count):
             channel_signal_count = bytes_per_chan_array[i]
             waveform = DigitalWaveform(
                 sample_count=samples_read,
-                data=channel_array[i, :, :channel_signal_count],
+                data=read_array[:, i, :channel_signal_count],
                 copy_extended_properties=False,
                 extended_properties=properties[i] if properties else None)
             waveforms.append(waveform)
