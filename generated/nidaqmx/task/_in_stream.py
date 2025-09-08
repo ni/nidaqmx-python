@@ -22,7 +22,7 @@ class InStream:
     used in conjunction with reader classes to read samples from an
     NI-DAQmx task.
     """
-    __slots__ = ('_task', '_handle', '_interpreter', '_timeout', '_reallocation_policy', '_waveform_attribute_mode')
+    __slots__ = ('_task', '_handle', '_interpreter', '_timeout', '_waveform_attribute_mode')
 
     def __init__(self, task, interpreter):
         self._task = task
