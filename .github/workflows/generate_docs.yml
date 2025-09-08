@@ -10,7 +10,7 @@ jobs:
       - ubuntu-latest
     steps:
       - name: Check out repo
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
       - name: Set up Python
         uses: ni/python-actions/setup-python@f0276f7f58868ec0d0d1a86377287c9e6fe0c6e7 # v0.5.0
         id: setup-python
