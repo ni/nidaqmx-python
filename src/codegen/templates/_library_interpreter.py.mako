@@ -528,7 +528,7 @@ class LibraryInterpreter(BaseInterpreter):
         # Since there's no DAQmxInternalReadDigitalWaveformPerChan, we have to allocate a
         # temporary contiguous array to read the data from multiple channels into.
         read_array = numpy.zeros(
-            channel_count * number_of_samples_per_channel * number_of_signals_per_sample,
+            (number_of_samples_per_channel, channel_count, number_of_signals_per_sample),
             dtype=numpy.uint8)
 
         bytes_per_chan_array = numpy.zeros(channel_count, dtype=numpy.uint32)
@@ -537,7 +537,7 @@ class LibraryInterpreter(BaseInterpreter):
             task_handle,
             number_of_samples_per_channel,
             timeout,
-            FillMode.GROUP_BY_CHANNEL.value,
+            FillMode.GROUP_BY_SCAN_NUMBER.value,
             read_array,
             properties,
             t0_array,
@@ -545,16 +545,12 @@ class LibraryInterpreter(BaseInterpreter):
             bytes_per_chan_array,
         )
 
-        channel_array_length = channel_count * samples_read * number_of_signals_per_sample
-        channel_array = read_array[:channel_array_length].reshape(
-            channel_count, samples_read, number_of_signals_per_sample)
-
         for i, waveform in enumerate(waveforms):
             waveform_signal_count = waveform.data.shape[1]
             channel_signal_count = bytes_per_chan_array[i]
             if waveform_signal_count != channel_signal_count:
                 raise ValueError(f"waveforms[{i}].data has {waveform_signal_count} signals, but expected {channel_signal_count}")
-            waveform.data[:] = channel_array[i, :, :channel_signal_count]
+            waveform.data[:] = read_array[:, i, :channel_signal_count]
 
         if t0_array is not None and dt_array is not None:
             self._set_waveform_timings(waveforms, t0_array, dt_array)
