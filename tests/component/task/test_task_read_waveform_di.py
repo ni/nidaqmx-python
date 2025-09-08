@@ -5,7 +5,7 @@ from nitypes.waveform import DigitalWaveform
 
 import nidaqmx
 import nidaqmx.system
-from .conftest import (
+from ..conftest import (
     _get_expected_data_for_line,
     _get_waveform_data,
 )

@@ -4,7 +4,7 @@ import pytest
 from nitypes.waveform import AnalogWaveform
 
 import nidaqmx
-from .conftest import (
+from ..conftest import (
     VOLTAGE_EPSILON,
     _get_voltage_offset_for_chan,
 )

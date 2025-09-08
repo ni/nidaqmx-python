@@ -4,7 +4,7 @@ import pytest
 
 import nidaqmx
 from nidaqmx.constants import AcquisitionType
-from .conftest import (
+from ..conftest import (
     POWER_EPSILON,
     VOLTAGE_EPSILON,
     _assert_equal_2d,

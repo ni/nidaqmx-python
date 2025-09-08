@@ -13,7 +13,7 @@ from nidaqmx.stream_readers import (
     PowerMultiChannelReader,
     PowerSingleChannelReader,
 )
-from .conftest import (
+from ..conftest import (
     POWER_BINARY_EPSILON,
     POWER_EPSILON,
     _get_current_code_setpoint_for_chan,
