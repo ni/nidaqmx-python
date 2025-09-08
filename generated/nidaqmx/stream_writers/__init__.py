@@ -12,7 +12,7 @@ from nidaqmx.stream_writers._analog_unscaled_writer import AnalogUnscaledWriter
 from nidaqmx.stream_writers._counter_writer import CounterWriter
 from nidaqmx.stream_writers._digital_single_channel_writer import DigitalSingleChannelWriter
 from nidaqmx.stream_writers._digital_multi_channel_writer import DigitalMultiChannelWriter
-from nidaqmx.stream_writers._channel_writer_base import AUTO_START_UNSET
+from nidaqmx.stream_writers._channel_writer_base import UnsetAutoStartSentinel, AUTO_START_UNSET
 
 __all__ = [
     'AnalogSingleChannelWriter', 
@@ -21,4 +21,5 @@ __all__ = [
     'CounterWriter',
     'DigitalSingleChannelWriter', 
     'DigitalMultiChannelWriter',
+    'UnsetAutoStartSentinel',
     'AUTO_START_UNSET']
