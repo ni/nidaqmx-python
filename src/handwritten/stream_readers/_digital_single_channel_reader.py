@@ -453,9 +453,7 @@ class DigitalSingleChannelReader(ChannelReaderBase):
                     f'the requested number of samples ({number_of_samples_per_channel}). Please '
                     'provide a larger waveform or adjust the number of samples requested.',
                     DAQmxErrors.READ_BUFFER_TOO_SMALL, task_name=self._task.name)
-            
-        waveform.sample_count = number_of_samples_per_channel
-                
+    
         return self._interpreter.read_digital_waveform(
             self._handle, 
             number_of_samples_per_channel, 

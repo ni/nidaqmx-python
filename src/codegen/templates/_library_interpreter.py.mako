@@ -211,6 +211,8 @@ class LibraryInterpreter(BaseInterpreter):
             t0_array = None
             dt_array = None
 
+        waveform.sample_count = number_of_samples_per_channel
+
         error_code, samples_read = self._internal_read_analog_waveform_ex(
             task_handle,
             number_of_samples_per_channel,
@@ -222,10 +224,11 @@ class LibraryInterpreter(BaseInterpreter):
             dt_array,
         )
 
+        waveform.sample_count = samples_read
+
         if t0_array is not None and dt_array is not None:
             self._set_waveform_timings([waveform], t0_array, dt_array)
 
-        waveform.sample_count = samples_read
         self.check_for_error(error_code, samps_per_chan_read=samples_read)
         return samples_read
 
@@ -251,6 +254,9 @@ class LibraryInterpreter(BaseInterpreter):
             t0_array = None
             dt_array = None
 
+        for waveform in waveforms:
+            waveform.sample_count = number_of_samples_per_channel
+
         error_code, samples_read = self._internal_read_analog_waveform_per_chan(
             task_handle,
             number_of_samples_per_channel,
@@ -261,12 +267,12 @@ class LibraryInterpreter(BaseInterpreter):
             dt_array,
         )
 
-        if t0_array is not None and dt_array is not None:
-            self._set_waveform_timings(waveforms, t0_array, dt_array)
-
         for waveform in waveforms:
             waveform.sample_count = samples_read
             
+        if t0_array is not None and dt_array is not None:
+            self._set_waveform_timings(waveforms, t0_array, dt_array)
+
         self.check_for_error(error_code, samps_per_chan_read=samples_read)
         return samples_read
 
@@ -483,6 +489,8 @@ class LibraryInterpreter(BaseInterpreter):
             t0_array = None
             dt_array = None
 
+        waveform.sample_count = number_of_samples_per_channel
+
         error_code, samples_read = self._internal_read_digital_waveform(
             task_handle,
             number_of_samples_per_channel,
@@ -495,10 +503,11 @@ class LibraryInterpreter(BaseInterpreter):
             None,
         )
 
+        waveform.sample_count = samples_read
+        
         if t0_array is not None and dt_array is not None:
             self._set_waveform_timings([waveform], t0_array, dt_array)
 
-        waveform.sample_count = samples_read
         self.check_for_error(error_code, samps_per_chan_read=samples_read)
         return samples_read
 
@@ -545,7 +554,8 @@ class LibraryInterpreter(BaseInterpreter):
             bytes_per_chan_array,
         )
 
-        for i, waveform in enumerate(waveforms):
+        for i, waveform in enumerate(waveforms):        
+            waveform.sample_count = samples_read
             waveform_signal_count = waveform.data.shape[1]
             channel_signal_count = bytes_per_chan_array[i]
             if waveform_signal_count != channel_signal_count:
