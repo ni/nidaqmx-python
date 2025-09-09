@@ -644,7 +644,7 @@ def test___digital_multi_channel_reader___reuse_waveform_in_place_with_different
     reader2 = _make_multi_channel_reader(chan_a_index=4, chan_b_index=5, samps_per_chan=15)
     waveforms = [
         DigitalWaveform(10),
-        DigitalWaveform(10),
+        DigitalWaveform(10, start_index=3, capacity=13),
     ]
 
     reader0.read_waveforms(waveforms, 5)

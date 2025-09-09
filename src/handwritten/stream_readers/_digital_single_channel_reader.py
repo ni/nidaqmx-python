@@ -444,12 +444,12 @@ class DigitalSingleChannelReader(ChannelReaderBase):
             self._task._calculate_num_samps_per_chan(
                 number_of_samples_per_channel))
         
-        if number_of_samples_per_channel > waveform.capacity:
+        if waveform._start_index + number_of_samples_per_channel > waveform.capacity:
             if reallocation_policy == ReallocationPolicy.TO_GROW:
-                waveform.capacity = number_of_samples_per_channel
+                waveform.capacity = waveform._start_index + number_of_samples_per_channel
             else:
                 raise DaqError(
-                    f'The waveform does not have enough space ({waveform.capacity}) to hold '
+                    f'The waveform does not have enough space ({waveform.capacity - waveform._start_index}) to hold '
                     f'the requested number of samples ({number_of_samples_per_channel}). Please '
                     'provide a larger waveform or adjust the number of samples requested.',
                     DAQmxErrors.READ_BUFFER_TOO_SMALL, task_name=self._task.name)

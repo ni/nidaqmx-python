@@ -229,7 +229,7 @@ def test___analog_single_channel_reader___reuse_waveform_in_place_with_different
     reader0 = _make_single_channel_reader(chan_index=0, offset=0, samps_per_chan=5)
     reader1 = _make_single_channel_reader(chan_index=1, offset=1, samps_per_chan=10)
     reader2 = _make_single_channel_reader(chan_index=2, offset=2, samps_per_chan=15)
-    waveform = AnalogWaveform(10)
+    waveform = AnalogWaveform(10, start_index=3, capacity=13)
 
     reader0.read_waveform(waveform, 5)
     assert waveform.sample_count == 5
