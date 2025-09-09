@@ -4,7 +4,7 @@ import numpy
 from nidaqmx import DaqError
 
 from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, requires_feature
-from nidaqmx.constants import FillMode, READ_ALL_AVAILABLE
+from nidaqmx.constants import FillMode, READ_ALL_AVAILABLE, ReallocationPolicy
 from nidaqmx.error_codes import DAQmxErrors
 from nitypes.waveform import AnalogWaveform
 
@@ -115,6 +115,7 @@ class AnalogSingleChannelReader(ChannelReaderBase):
         self, 
         waveform: AnalogWaveform[numpy.float64],
         number_of_samples_per_channel: int = READ_ALL_AVAILABLE, 
+        reallocation_policy: ReallocationPolicy = ReallocationPolicy.TO_GROW,
         timeout: int = 10, 
     ) -> int:
         """
@@ -152,6 +153,9 @@ class AnalogSingleChannelReader(ChannelReaderBase):
                 "read_all_avail_samp" property to True, the method reads
                 the samples currently available in the buffer and does
                 not wait for the task to acquire all requested samples.
+            reallocation_policy (Optional[ReallocationPolicy]): Specifies
+                the reallocation policy to use when the read yields more
+                samples than the current capacity of the waveform.
             timeout (Optional[float]): Specifies the amount of time in
                 seconds to wait for samples to become available. If the
                 time elapses, the method returns an error and any
@@ -170,12 +174,14 @@ class AnalogSingleChannelReader(ChannelReaderBase):
             self._task._calculate_num_samps_per_chan(
                 number_of_samples_per_channel))
 
-        if number_of_samples_per_channel > waveform.sample_count:
-            # TODO: AB#3228924 - if allowed by the caller, increase the sample count of the waveform
-            raise DaqError(
-                f'The provided waveform does not have enough space ({waveform.sample_count}) to hold '
-                f'the requested number of samples ({number_of_samples_per_channel}). Please provide a larger '
-                'waveform or adjust the number of samples requested.',
+        if waveform._start_index + number_of_samples_per_channel > waveform.capacity:
+            if reallocation_policy == ReallocationPolicy.TO_GROW:
+                waveform.capacity = waveform._start_index + number_of_samples_per_channel
+            else:
+                raise DaqError(
+                    f'The provided waveform does not have enough space ({waveform.capacity - waveform._start_index}) to hold '
+                    f'the requested number of samples ({number_of_samples_per_channel}). Please provide a larger '
+                    'waveform or adjust the number of samples requested.',
                 DAQmxErrors.READ_BUFFER_TOO_SMALL, task_name=self._task.name)
 
         return self._interpreter.read_analog_waveform(
