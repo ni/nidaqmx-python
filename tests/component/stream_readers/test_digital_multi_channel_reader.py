@@ -580,7 +580,7 @@ def test___digital_multi_channel_multi_line_reader___reuse_waveform_in_place___o
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveforms not implemented in GRPC")
-def test___digital_multi_channel_multi_line_reader___read_into_undersized_waveforms___throws_exception(
+def test___digital_multi_channel_multi_line_reader___read_into_undersized_waveforms_without_reallocation___throws_exception(
     di_multi_chan_multi_line_timing_task: nidaqmx.Task,
 ) -> None:
     reader = DigitalMultiChannelReader(di_multi_chan_multi_line_timing_task.in_stream)
@@ -589,14 +589,14 @@ def test___digital_multi_channel_multi_line_reader___read_into_undersized_wavefo
 
     waveforms = [DigitalWaveform(samples_to_read - 1) for _ in range(num_channels)]
     with pytest.raises(DaqError) as exc_info:
-        reader.read_waveforms(waveforms, samples_to_read)
+        reader.read_waveforms(waveforms, samples_to_read, ReallocationPolicy.DO_NOT_REALLOCATE)
 
     assert exc_info.value.error_code == DAQmxErrors.READ_BUFFER_TOO_SMALL
     assert exc_info.value.args[0].startswith("The waveform at index 0 does not have enough space")
 
 
 @pytest.mark.grpc_skip(reason="read_digital_waveforms not implemented in GRPC")
-def test___digital_multi_channel_multi_line_reader___read_into_undersized_waveforms_with_to_grow___returns_valid_waveforms(
+def test___digital_multi_channel_multi_line_reader___read_into_undersized_waveforms___returns_valid_waveforms(
     di_multi_chan_multi_line_timing_task: nidaqmx.Task,
 ) -> None:
     reader = DigitalMultiChannelReader(di_multi_chan_multi_line_timing_task.in_stream)
@@ -605,7 +605,7 @@ def test___digital_multi_channel_multi_line_reader___read_into_undersized_wavefo
     samples_to_read = 10
 
     waveforms = [DigitalWaveform(samples_to_read - 1) for _ in range(num_channels)]
-    samples_read = reader.read_waveforms(waveforms, samples_to_read, ReallocationPolicy.TO_GROW)
+    samples_read = reader.read_waveforms(waveforms, samples_to_read)
 
     assert samples_read == samples_to_read
     assert num_channels == 8
@@ -663,7 +663,7 @@ def test___digital_multi_channel_reader___reuse_waveform_in_place_with_different
     assert _get_waveform_data(waveforms[1]) == _get_expected_data_for_line(10, 3)
     assert waveforms[1].channel_name == f"{sim_6363_device.name}/port0/line3"
 
-    reader2.read_waveforms(waveforms, 15, ReallocationPolicy.TO_GROW)
+    reader2.read_waveforms(waveforms, 15)
     assert waveforms[0].sample_count == 15
     assert _get_waveform_data(waveforms[0]) == _get_expected_data_for_line(15, 4)
     assert waveforms[0].channel_name == f"{sim_6363_device.name}/port0/line4"

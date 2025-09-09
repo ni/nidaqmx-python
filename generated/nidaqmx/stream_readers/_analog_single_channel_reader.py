@@ -115,7 +115,7 @@ class AnalogSingleChannelReader(ChannelReaderBase):
         self, 
         waveform: AnalogWaveform[numpy.float64],
         number_of_samples_per_channel: int = READ_ALL_AVAILABLE, 
-        reallocation_policy: ReallocationPolicy = ReallocationPolicy.DO_NOT_REALLOCATE,
+        reallocation_policy: ReallocationPolicy = ReallocationPolicy.TO_GROW,
         timeout: int = 10, 
     ) -> int:
         """

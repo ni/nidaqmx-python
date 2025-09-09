@@ -487,7 +487,7 @@ class DigitalMultiChannelReader(ChannelReaderBase):
         self,
         waveforms: list[DigitalWaveform[numpy.uint8]],
         number_of_samples_per_channel: int = READ_ALL_AVAILABLE,
-        reallocation_policy: ReallocationPolicy = ReallocationPolicy.DO_NOT_REALLOCATE,
+        reallocation_policy: ReallocationPolicy = ReallocationPolicy.TO_GROW,
         timeout: int = 10,
     ) -> list[DigitalWaveform[numpy.uint8]]:
         """

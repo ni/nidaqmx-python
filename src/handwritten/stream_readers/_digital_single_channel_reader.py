@@ -390,7 +390,7 @@ class DigitalSingleChannelReader(ChannelReaderBase):
         self,
         waveform: DigitalWaveform[numpy.uint8],
         number_of_samples_per_channel: int = READ_ALL_AVAILABLE,
-        reallocation_policy: ReallocationPolicy = ReallocationPolicy.DO_NOT_REALLOCATE,
+        reallocation_policy: ReallocationPolicy = ReallocationPolicy.TO_GROW,
         timeout: float = 10.0,
     ) -> int:
         """

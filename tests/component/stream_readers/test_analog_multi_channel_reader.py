@@ -184,7 +184,7 @@ def test___analog_multi_channel_reader___read_waveforms_in_place___populates_val
 
 
 @pytest.mark.grpc_skip(reason="read_analog_waveforms not implemented in GRPC")
-def test___analog_multi_channel_reader___read_into_undersized_waveforms___throws_exception(
+def test___analog_multi_channel_reader___read_into_undersized_waveforms_without_reallocation___throws_exception(
     ai_multi_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
     reader = AnalogMultiChannelReader(ai_multi_channel_task_with_timing.in_stream)
@@ -196,14 +196,14 @@ def test___analog_multi_channel_reader___read_into_undersized_waveforms___throws
         AnalogWaveform(samples_to_read - 5),
     ]
     with pytest.raises(DaqError) as exc_info:
-        reader.read_waveforms(waveforms, samples_to_read)
+        reader.read_waveforms(waveforms, samples_to_read, ReallocationPolicy.DO_NOT_REALLOCATE)
 
     assert exc_info.value.error_code == DAQmxErrors.READ_BUFFER_TOO_SMALL
     assert exc_info.value.args[0].startswith("The waveform at index 1 does not have enough space")
 
 
 @pytest.mark.grpc_skip(reason="read_analog_waveforms not implemented in GRPC")
-def test___analog_multi_channel_reader___read_into_undersized_waveforms_with_to_grow___returns_valid_waveforms(
+def test___analog_multi_channel_reader___read_into_undersized_waveforms___returns_valid_waveforms(
     ai_multi_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
     reader = AnalogMultiChannelReader(ai_multi_channel_task_with_timing.in_stream)
@@ -215,7 +215,7 @@ def test___analog_multi_channel_reader___read_into_undersized_waveforms_with_to_
         AnalogWaveform(samples_to_read - 1),
         AnalogWaveform(samples_to_read - 5),
     ]
-    samples_read = reader.read_waveforms(waveforms, samples_to_read, ReallocationPolicy.TO_GROW)
+    samples_read = reader.read_waveforms(waveforms, samples_to_read)
 
     assert samples_read == samples_to_read
     assert num_channels == 3
@@ -280,7 +280,7 @@ def test___analog_multi_channel_reader___reuse_waveform_in_place_with_different_
     assert waveforms[1].scaled_data == pytest.approx(3, abs=VOLTAGE_EPSILON)
     assert waveforms[1].channel_name == f"{sim_6363_device.name}/ai3"
 
-    reader2.read_waveforms(waveforms, 15, ReallocationPolicy.TO_GROW)
+    reader2.read_waveforms(waveforms, 15)
     assert waveforms[0].sample_count == 15
     assert waveforms[0].scaled_data == pytest.approx(4, abs=VOLTAGE_EPSILON)
     assert waveforms[0].channel_name == f"{sim_6363_device.name}/ai4"
