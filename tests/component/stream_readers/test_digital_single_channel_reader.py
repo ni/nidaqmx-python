@@ -19,8 +19,8 @@ from nidaqmx.utils import flatten_channel_string
 from tests.component.conftest import (
     _bool_array_to_int,
     _get_expected_data_for_line,
-    _get_expected_digital_data,
-    _get_num_lines_in_task,
+    _get_digital_data,
+    _get_num_di_lines_in_task,
     _get_waveform_data,
     _is_timestamp_close_to_now,
     _read_and_copy,
@@ -31,19 +31,19 @@ def test___digital_single_channel_reader___read_one_sample_one_line___returns_va
     di_single_line_task: nidaqmx.Task,
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_line_task.in_stream)
-    num_lines = _get_num_lines_in_task(di_single_line_task)
+    num_lines = _get_num_di_lines_in_task(di_single_line_task)
     samples_to_read = 256
 
     data = [reader.read_one_sample_one_line() for _ in range(samples_to_read)]
 
-    assert data == _get_expected_digital_data(num_lines, samples_to_read)
+    assert data == _get_digital_data(num_lines, samples_to_read)
 
 
 def test___digital_single_channel_reader___read_one_sample_multi_line___returns_valid_samples(
     di_single_channel_multi_line_task: nidaqmx.Task,
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_channel_multi_line_task.in_stream)
-    num_lines = _get_num_lines_in_task(di_single_channel_multi_line_task)
+    num_lines = _get_num_di_lines_in_task(di_single_channel_multi_line_task)
     samples_to_read = 256
     sample = numpy.full(num_lines, False, dtype=numpy.bool_)
 
@@ -51,7 +51,7 @@ def test___digital_single_channel_reader___read_one_sample_multi_line___returns_
         _read_and_copy(reader.read_one_sample_multi_line, sample) for _ in range(samples_to_read)
     ]
 
-    assert [_bool_array_to_int(sample) for sample in data] == _get_expected_digital_data(
+    assert [_bool_array_to_int(sample) for sample in data] == _get_digital_data(
         num_lines, samples_to_read
     )
 
@@ -60,7 +60,7 @@ def test___digital_single_channel_reader___read_one_sample_multi_line_with_wrong
     di_single_channel_multi_line_task: nidaqmx.Task,
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_channel_multi_line_task.in_stream)
-    num_lines = _get_num_lines_in_task(di_single_channel_multi_line_task)
+    num_lines = _get_num_di_lines_in_task(di_single_channel_multi_line_task)
     data = numpy.full(num_lines, math.inf, dtype=numpy.float64)
 
     with pytest.raises((ctypes.ArgumentError, TypeError)) as exc_info:
@@ -73,43 +73,43 @@ def test___digital_single_channel_reader___read_one_sample_port_byte___returns_v
     di_single_channel_port_byte_task: nidaqmx.Task,
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_channel_port_byte_task.in_stream)
-    num_lines = _get_num_lines_in_task(di_single_channel_port_byte_task)
+    num_lines = _get_num_di_lines_in_task(di_single_channel_port_byte_task)
     samples_to_read = 256
 
     data = [reader.read_one_sample_port_byte() for _ in range(samples_to_read)]
 
-    assert data == _get_expected_digital_data(num_lines, samples_to_read)
+    assert data == _get_digital_data(num_lines, samples_to_read)
 
 
 def test___digital_single_channel_reader___read_one_sample_port_uint16___returns_valid_samples(
     di_single_channel_port_uint16_task: nidaqmx.Task,
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_channel_port_uint16_task.in_stream)
-    num_lines = _get_num_lines_in_task(di_single_channel_port_uint16_task)
+    num_lines = _get_num_di_lines_in_task(di_single_channel_port_uint16_task)
     samples_to_read = 256
 
     data = [reader.read_one_sample_port_uint16() for _ in range(samples_to_read)]
 
-    assert data == _get_expected_digital_data(num_lines, samples_to_read)
+    assert data == _get_digital_data(num_lines, samples_to_read)
 
 
 def test___digital_single_channel_reader___read_one_sample_port_uint32___returns_valid_samples(
     di_single_channel_port_uint32_task: nidaqmx.Task,
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_channel_port_uint32_task.in_stream)
-    num_lines = _get_num_lines_in_task(di_single_channel_port_uint32_task)
+    num_lines = _get_num_di_lines_in_task(di_single_channel_port_uint32_task)
     samples_to_read = 256
 
     data = [reader.read_one_sample_port_uint32() for _ in range(samples_to_read)]
 
-    assert data == _get_expected_digital_data(num_lines, samples_to_read)
+    assert data == _get_digital_data(num_lines, samples_to_read)
 
 
 def test___digital_single_channel_reader___read_many_sample_port_byte___returns_valid_samples(
     di_single_channel_port_byte_task: nidaqmx.Task,
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_channel_port_byte_task.in_stream)
-    num_lines = _get_num_lines_in_task(di_single_channel_port_byte_task)
+    num_lines = _get_num_di_lines_in_task(di_single_channel_port_byte_task)
     samples_to_read = 256
     data = numpy.full(samples_to_read, numpy.iinfo(numpy.uint8).min, dtype=numpy.uint8)
 
@@ -118,7 +118,7 @@ def test___digital_single_channel_reader___read_many_sample_port_byte___returns_
     )
 
     assert samples_read == samples_to_read
-    assert data.tolist() == _get_expected_digital_data(num_lines, samples_to_read)
+    assert data.tolist() == _get_digital_data(num_lines, samples_to_read)
 
 
 def test___digital_single_channel_reader___read_many_sample_port_byte_with_wrong_dtype___raises_error_with_correct_dtype(
@@ -138,7 +138,7 @@ def test___digital_single_channel_reader___read_many_sample_port_uint16___return
     di_single_channel_port_uint16_task: nidaqmx.Task,
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_channel_port_uint16_task.in_stream)
-    num_lines = _get_num_lines_in_task(di_single_channel_port_uint16_task)
+    num_lines = _get_num_di_lines_in_task(di_single_channel_port_uint16_task)
     samples_to_read = 256
     data = numpy.full(samples_to_read, numpy.iinfo(numpy.uint16).min, dtype=numpy.uint16)
 
@@ -147,7 +147,7 @@ def test___digital_single_channel_reader___read_many_sample_port_uint16___return
     )
 
     assert samples_read == samples_to_read
-    assert data.tolist() == _get_expected_digital_data(num_lines, samples_to_read)
+    assert data.tolist() == _get_digital_data(num_lines, samples_to_read)
 
 
 def test___digital_single_channel_reader___read_many_sample_port_uint16_with_wrong_dtype___raises_error_with_correct_dtype(
@@ -167,7 +167,7 @@ def test___digital_single_channel_reader___read_many_sample_port_uint32___return
     di_single_channel_port_uint32_task: nidaqmx.Task,
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_channel_port_uint32_task.in_stream)
-    num_lines = _get_num_lines_in_task(di_single_channel_port_uint32_task)
+    num_lines = _get_num_di_lines_in_task(di_single_channel_port_uint32_task)
     samples_to_read = 256
     data = numpy.full(samples_to_read, numpy.iinfo(numpy.uint32).min, dtype=numpy.uint32)
 
@@ -176,7 +176,7 @@ def test___digital_single_channel_reader___read_many_sample_port_uint32___return
     )
 
     assert samples_read == samples_to_read
-    assert data.tolist() == _get_expected_digital_data(num_lines, samples_to_read)
+    assert data.tolist() == _get_digital_data(num_lines, samples_to_read)
 
 
 def test___digital_single_channel_reader___read_many_sample_port_uint32_with_wrong_dtype___raises_error_with_correct_dtype(
@@ -218,7 +218,7 @@ def test___digital_single_line_reader___read_waveform___returns_valid_waveform(
     samples_read = reader.read_waveform(waveform, samples_to_read)
 
     assert samples_read == samples_to_read
-    assert _get_waveform_data(waveform) == _get_expected_digital_data(1, samples_to_read)
+    assert _get_waveform_data(waveform) == _get_digital_data(1, samples_to_read)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
@@ -231,13 +231,13 @@ def test___digital_single_channel_multi_line_reader___read_waveform___returns_va
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_channel_multi_line_timing_task.in_stream)
     samples_to_read = 10
-    num_lines = _get_num_lines_in_task(di_single_channel_multi_line_timing_task)
+    num_lines = _get_num_di_lines_in_task(di_single_channel_multi_line_timing_task)
     waveform = DigitalWaveform(samples_to_read, num_lines)
 
     samples_read = reader.read_waveform(waveform, samples_to_read)
 
     assert samples_read == samples_to_read
-    assert _get_waveform_data(waveform) == _get_expected_digital_data(num_lines, samples_to_read)
+    assert _get_waveform_data(waveform) == _get_digital_data(num_lines, samples_to_read)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
@@ -254,7 +254,7 @@ def test___digital_single_line_reader___read_waveform_no_args___returns_valid_wa
     samples_read = reader.read_waveform(waveform)
 
     assert samples_read == 50
-    assert _get_waveform_data(waveform) == _get_expected_digital_data(1, 50)
+    assert _get_waveform_data(waveform) == _get_digital_data(1, 50)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
@@ -266,13 +266,13 @@ def test___digital_single_channel_multi_line_reader___read_waveform_no_args___re
     di_single_channel_multi_line_timing_task: nidaqmx.Task,
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_channel_multi_line_timing_task.in_stream)
-    num_lines = _get_num_lines_in_task(di_single_channel_multi_line_timing_task)
+    num_lines = _get_num_di_lines_in_task(di_single_channel_multi_line_timing_task)
     waveform = DigitalWaveform(50, num_lines)
 
     samples_read = reader.read_waveform(waveform)
 
     assert samples_read == 50
-    assert _get_waveform_data(waveform) == _get_expected_digital_data(num_lines, 50)
+    assert _get_waveform_data(waveform) == _get_digital_data(num_lines, 50)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
@@ -289,7 +289,7 @@ def test___digital_single_line_reader___read_waveform_in_place___returns_valid_w
     samples_read = reader.read_waveform(waveform)
 
     assert samples_read == 50
-    assert _get_waveform_data(waveform) == _get_expected_digital_data(1, 50)
+    assert _get_waveform_data(waveform) == _get_digital_data(1, 50)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.channel_name == di_single_line_timing_task.di_channels[0].name
@@ -300,13 +300,13 @@ def test___digital_single_channel_multi_line_reader___read_waveform_in_place___r
     di_single_channel_multi_line_timing_task: nidaqmx.Task,
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_channel_multi_line_timing_task.in_stream)
-    num_lines = _get_num_lines_in_task(di_single_channel_multi_line_timing_task)
+    num_lines = _get_num_di_lines_in_task(di_single_channel_multi_line_timing_task)
     waveform = DigitalWaveform(sample_count=50, signal_count=8)
 
     samples_read = reader.read_waveform(waveform)
 
     assert samples_read == 50
-    assert _get_waveform_data(waveform) == _get_expected_digital_data(num_lines, 50)
+    assert _get_waveform_data(waveform) == _get_digital_data(num_lines, 50)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.channel_name == di_single_channel_multi_line_timing_task.di_channels[0].name
@@ -407,7 +407,7 @@ def test___digital_single_line_reader___read_waveform_high_sample_rate___returns
     samples_read = reader.read_waveform(waveform, samples_to_read)
 
     assert samples_read == samples_to_read
-    assert _get_waveform_data(waveform) == _get_expected_digital_data(1, 50)
+    assert _get_waveform_data(waveform) == _get_digital_data(1, 50)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 10_000_000)
     assert waveform.sample_count == samples_to_read
@@ -426,7 +426,7 @@ def test___digital_single_line_reader_with_timing_flag___read_waveform___only_in
     samples_read = reader.read_waveform(waveform)
 
     assert samples_read == 50
-    assert _get_waveform_data(waveform) == _get_expected_digital_data(1, 50)
+    assert _get_waveform_data(waveform) == _get_digital_data(1, 50)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
@@ -445,7 +445,7 @@ def test___digital_single_line_reader_with_extended_properties_flag___read_wavef
     samples_read = reader.read_waveform(waveform)
 
     assert samples_read == 50
-    assert _get_waveform_data(waveform) == _get_expected_digital_data(1, 50)
+    assert _get_waveform_data(waveform) == _get_digital_data(1, 50)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.NONE
     assert waveform.channel_name == di_single_line_timing_task.di_channels[0].name
 
@@ -464,7 +464,7 @@ def test___digital_single_line_reader_with_both_flags___read_waveform___includes
     samples_read = reader.read_waveform(waveform)
 
     assert samples_read == 50
-    assert _get_waveform_data(waveform) == _get_expected_digital_data(1, 50)
+    assert _get_waveform_data(waveform) == _get_digital_data(1, 50)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
@@ -483,7 +483,7 @@ def test___digital_single_line_reader_with_none_flag___read_waveform___minimal_w
     samples_read = reader.read_waveform(waveform)
 
     assert samples_read == 50
-    assert _get_waveform_data(waveform) == _get_expected_digital_data(1, 50)
+    assert _get_waveform_data(waveform) == _get_digital_data(1, 50)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.NONE
     assert waveform.channel_name == ""
 
@@ -497,14 +497,14 @@ def test___digital_single_channel_port_uint32_reader___read_waveform___returns_v
     di_single_channel_port_uint32_timing_task: nidaqmx.Task,
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_channel_port_uint32_timing_task.in_stream)
-    num_lines = _get_num_lines_in_task(di_single_channel_port_uint32_timing_task)
+    num_lines = _get_num_di_lines_in_task(di_single_channel_port_uint32_timing_task)
     samples_to_read = 10
     waveform = DigitalWaveform(samples_to_read, num_lines)
 
     samples_read = reader.read_waveform(waveform, samples_to_read)
 
     assert samples_read == 50
-    assert _get_waveform_data(waveform) == _get_expected_digital_data(num_lines, samples_to_read)
+    assert _get_waveform_data(waveform) == _get_digital_data(num_lines, samples_to_read)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
@@ -517,7 +517,7 @@ def test___digital_single_channel_lines_and_port___read_waveform___returns_valid
     sim_6363_device: nidaqmx.system.Device,
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_chan_lines_and_port_task.in_stream)
-    num_lines = _get_num_lines_in_task(di_single_chan_lines_and_port_task)
+    num_lines = _get_num_di_lines_in_task(di_single_chan_lines_and_port_task)
     samples_to_read = 10
     waveform = DigitalWaveform(samples_to_read, num_lines)
 
