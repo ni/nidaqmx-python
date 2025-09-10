@@ -43,10 +43,6 @@ def test___digital_single_channel___read_waveform_many_sample___returns_waveform
     assert _get_waveform_data(waveform) == _get_expected_data_for_line(samples_to_read, 0)
 
 
-@pytest.mark.xfail(
-    reason="Task.read_waveform doesn't handle short reads yet - TODO: AB#3228924",
-    raises=AssertionError,
-)
 @pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
 def test___digital_single_channel___read_waveform_too_many_samples___returns_waveform_with_correct_number_of_samples(
     di_single_channel_timing_task: nidaqmx.Task,
@@ -136,21 +132,18 @@ def test___digital_multi_channel___read_waveform_many_samples___returns_waveform
         assert _get_waveform_data(waveform) == _get_expected_data_for_line(10, chan_index)
 
 
-@pytest.mark.xfail(
-    reason="Task.read_waveform doesn't handle short reads yet - TODO: AB#3228924",
-    raises=AssertionError,
-)
 @pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
 def test___digital_multi_channel___read_waveform_too_many_samples___returns_waveforms_with_correct_number_of_samples(
     di_multi_channel_timing_task: nidaqmx.Task,
 ) -> None:
+    num_channels = di_multi_channel_timing_task.number_of_channels
     samples_to_read = 100
     samples_available = 50
 
     waveforms = di_multi_channel_timing_task.read_waveform(samples_to_read)
 
     assert isinstance(waveforms, list)
-    assert len(waveforms) == di_multi_channel_timing_task.number_of_channels
+    assert len(waveforms) == num_channels
     assert all(isinstance(waveform, DigitalWaveform) for waveform in waveforms)
     for chan, waveform in enumerate(waveforms):
         assert waveform.sample_count == samples_available
