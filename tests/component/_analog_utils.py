@@ -55,6 +55,7 @@ def _assert_equal_2d(data: list[list[float]], expected: list[list[float]], abs: 
     for i in range(len(data)):
         assert data[i] == pytest.approx(expected[i], abs=abs)
 
+
 # NOTE: We use simulated signals for AI validation, so we can be fairly strict here.
 AI_VOLTAGE_EPSILON = 1e-3
 
