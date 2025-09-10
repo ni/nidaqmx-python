@@ -22,7 +22,7 @@ from tests.component._utils import _is_timestamp_close_to_now
 
 def test___analog_multi_channel_reader___read_one_sample___returns_valid_samples(
     ai_multi_channel_task: nidaqmx.Task,
-) -> None: 
+) -> None:
     reader = AnalogMultiChannelReader(ai_multi_channel_task.in_stream)
     num_channels = ai_multi_channel_task.number_of_channels
     data = numpy.full(num_channels, math.inf, dtype=numpy.float64)
@@ -224,7 +224,7 @@ def test___analog_multi_channel_reader_with_timing_flag___read_waveforms___only_
     ai_multi_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
     in_stream = ai_multi_channel_task_with_timing.in_stream
-    in_stream.waveform_attribute_mode = WaveformAttributeMode.TIMING
+    in_stream.waveform_attribute_mode = WaveformAttributeMode.TIMINGz
     reader = AnalogMultiChannelReader(in_stream)
     num_channels = ai_multi_channel_task_with_timing.number_of_channels
     samples_to_read = 10
