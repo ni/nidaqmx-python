@@ -10,6 +10,7 @@ from hightime import datetime as ht_datetime, timedelta as ht_timedelta
 from nitypes.waveform import AnalogWaveform, SampleIntervalMode
 
 import nidaqmx
+import nidaqmx.system
 from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
 from nidaqmx.constants import AcquisitionType, ReallocationPolicy, WaveformAttributeMode
 from nidaqmx.error_codes import DAQmxErrors
