@@ -22,7 +22,7 @@ from tests.component._utils import _is_timestamp_close_to_now
 
 def test___analog_multi_channel_reader___read_one_sample___returns_valid_samples(
     ai_multi_channel_task: nidaqmx.Task,
-) -> None:
+) -> None: 
     reader = AnalogMultiChannelReader(ai_multi_channel_task.in_stream)
     num_channels = ai_multi_channel_task.number_of_channels
     data = numpy.full(num_channels, math.inf, dtype=numpy.float64)
