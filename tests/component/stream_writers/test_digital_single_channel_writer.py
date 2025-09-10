@@ -8,7 +8,7 @@ import pytest
 
 import nidaqmx
 from nidaqmx.stream_writers import DigitalSingleChannelWriter
-from tests.component.conftest import (
+from tests.component._digital_utils import (
     _get_digital_data,
     _get_num_do_lines_in_task,
     _int_to_bool_array,

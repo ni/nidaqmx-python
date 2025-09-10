@@ -11,7 +11,7 @@ import nidaqmx
 import nidaqmx.system
 from nidaqmx.constants import LineGrouping
 from nidaqmx.stream_writers import DigitalMultiChannelWriter
-from tests.component.conftest import (
+from tests.component._digital_utils import (
     _get_digital_data,
     _get_digital_port_data_for_sample,
     _get_digital_port_data_port_major,

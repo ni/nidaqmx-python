@@ -16,7 +16,7 @@ from nidaqmx.constants import AcquisitionType, LineGrouping, WaveformAttributeMo
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.stream_readers import DaqError, DigitalMultiChannelReader
 from nidaqmx.utils import flatten_channel_string
-from tests.component.conftest import (
+from tests.component._digital_utils import (
     _bool_array_to_int,
     _get_expected_data_for_line,
     _get_digital_data,
@@ -24,9 +24,9 @@ from tests.component.conftest import (
     _get_expected_digital_port_data_sample_major,
     _get_num_di_lines_in_task,
     _get_waveform_data,
-    _is_timestamp_close_to_now,
     _read_and_copy,
 )
+from tests.component._utils import _is_timestamp_close_to_now
 
 
 def test___digital_multi_channel_reader___read_one_sample_one_line___returns_valid_samples(

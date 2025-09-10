@@ -7,9 +7,9 @@ import pytest
 
 import nidaqmx
 from nidaqmx.stream_writers import AnalogSingleChannelWriter
-from tests.component.conftest import (
+from tests.component._analog_utils import (
     _get_expected_voltage_for_chan,
-    VOLTAGE_EPSILON,
+    AO_VOLTAGE_EPSILON,
 )
 
 
@@ -22,7 +22,7 @@ def test___analog_single_channel_writer___write_one_sample___updates_output(
 
     writer.write_one_sample(expected)
 
-    assert ai_single_channel_loopback_task.read() == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert ai_single_channel_loopback_task.read() == pytest.approx(expected, abs=AO_VOLTAGE_EPSILON)
 
 
 def test___analog_single_channel_writer___write_many_sample___updates_output(
@@ -38,7 +38,7 @@ def test___analog_single_channel_writer___write_many_sample___updates_output(
     samples_written = writer.write_many_sample(data)
 
     assert samples_written == samples_to_write
-    assert ai_single_channel_loopback_task.read() == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert ai_single_channel_loopback_task.read() == pytest.approx(expected, abs=AO_VOLTAGE_EPSILON)
 
 
 def test___analog_single_channel_writer___write_many_sample_with_wrong_dtype___raises_error_with_correct_dtype(

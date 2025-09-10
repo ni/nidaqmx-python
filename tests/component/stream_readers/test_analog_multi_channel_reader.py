@@ -13,11 +13,11 @@ from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
 from nidaqmx.constants import WaveformAttributeMode
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.stream_readers import AnalogMultiChannelReader, DaqError
-from tests.component.conftest import (
-    VOLTAGE_EPSILON,
+from tests.component._analog_utils import (
+    AI_VOLTAGE_EPSILON,
     _get_voltage_offset_for_chan,
-    _is_timestamp_close_to_now,
 )
+from tests.component._utils import _is_timestamp_close_to_now
 
 
 def test___analog_multi_channel_reader___read_one_sample___returns_valid_samples(
@@ -30,7 +30,7 @@ def test___analog_multi_channel_reader___read_one_sample___returns_valid_samples
     reader.read_one_sample(data)
 
     expected = [_get_voltage_offset_for_chan(chan_index) for chan_index in range(num_channels)]
-    assert data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
 
 
 def test___analog_multi_channel_reader___read_one_sample_with_wrong_dtype___raises_error_with_correct_dtype(
@@ -58,7 +58,7 @@ def test___analog_multi_channel_reader___read_many_sample___returns_valid_sample
 
     assert samples_read == samples_to_read
     expected_vals = [_get_voltage_offset_for_chan(chan_index) for chan_index in range(num_channels)]
-    assert data == pytest.approx(expected_vals, abs=VOLTAGE_EPSILON)
+    assert data == pytest.approx(expected_vals, abs=AI_VOLTAGE_EPSILON)
 
 
 def test___analog_multi_channel_reader___read_many_sample_with_wrong_dtype___raises_error_with_correct_dtype(
@@ -110,7 +110,7 @@ def test___analog_multi_channel_reader___read_waveforms___returns_valid_waveform
     for chan_index, waveform in enumerate(waveforms):
         assert isinstance(waveform, AnalogWaveform)
         expected = _get_voltage_offset_for_chan(chan_index)
-        assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+        assert waveform.scaled_data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
         assert isinstance(waveform.timing.timestamp, ht_datetime)
         assert _is_timestamp_close_to_now(waveform.timing.timestamp)
         assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
@@ -138,7 +138,7 @@ def test___analog_multi_channel_reader___read_waveforms_no_args___returns_valid_
     for chan_index, waveform in enumerate(waveforms):
         assert isinstance(waveform, AnalogWaveform)
         expected = _get_voltage_offset_for_chan(chan_index)
-        assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+        assert waveform.scaled_data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
         assert isinstance(waveform.timing.timestamp, ht_datetime)
         assert _is_timestamp_close_to_now(waveform.timing.timestamp)
         assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
@@ -171,7 +171,7 @@ def test___analog_multi_channel_reader___read_waveforms_in_place___populates_val
     for chan_index, waveform in enumerate(waveforms):
         assert isinstance(waveform, AnalogWaveform)
         expected = _get_voltage_offset_for_chan(chan_index)
-        assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+        assert waveform.scaled_data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
         assert isinstance(waveform.timing.timestamp, ht_datetime)
         assert _is_timestamp_close_to_now(waveform.timing.timestamp)
         assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
@@ -239,7 +239,7 @@ def test___analog_multi_channel_reader_with_timing_flag___read_waveforms___only_
     for chan_index, waveform in enumerate(waveforms):
         assert isinstance(waveform, AnalogWaveform)
         expected = _get_voltage_offset_for_chan(chan_index)
-        assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+        assert waveform.scaled_data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
         assert isinstance(waveform.timing.timestamp, ht_datetime)
         assert _is_timestamp_close_to_now(waveform.timing.timestamp)
         assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
@@ -269,7 +269,7 @@ def test___analog_multi_channel_reader_with_extended_properties_flag___read_wave
     for chan_index, waveform in enumerate(waveforms):
         assert isinstance(waveform, AnalogWaveform)
         expected = _get_voltage_offset_for_chan(chan_index)
-        assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+        assert waveform.scaled_data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
         assert waveform.timing.sample_interval_mode == SampleIntervalMode.NONE
         assert (
             waveform.channel_name == ai_multi_channel_task_with_timing.ai_channels[chan_index].name
@@ -300,7 +300,7 @@ def test___analog_multi_channel_reader_with_both_flags___read_waveforms___includ
     for chan_index, waveform in enumerate(waveforms):
         assert isinstance(waveform, AnalogWaveform)
         expected = _get_voltage_offset_for_chan(chan_index)
-        assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+        assert waveform.scaled_data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
         assert isinstance(waveform.timing.timestamp, ht_datetime)
         assert _is_timestamp_close_to_now(waveform.timing.timestamp)
         assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
@@ -332,7 +332,7 @@ def test___analog_multi_channel_reader_with_none_flag___read_waveforms___minimal
     for chan_index, waveform in enumerate(waveforms):
         assert isinstance(waveform, AnalogWaveform)
         expected = _get_voltage_offset_for_chan(chan_index)
-        assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+        assert waveform.scaled_data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
         assert waveform.timing.sample_interval_mode == SampleIntervalMode.NONE
         assert waveform.channel_name == ""
         assert waveform.units == ""

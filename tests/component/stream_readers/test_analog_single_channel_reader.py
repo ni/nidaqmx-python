@@ -15,11 +15,11 @@ from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
 from nidaqmx.constants import AcquisitionType, WaveformAttributeMode
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.stream_readers import AnalogSingleChannelReader, DaqError
-from tests.component.conftest import (
-    VOLTAGE_EPSILON,
+from tests.component._analog_utils import (
+    AI_VOLTAGE_EPSILON,
     _get_voltage_offset_for_chan,
-    _is_timestamp_close_to_now,
 )
+from tests.component._utils import _is_timestamp_close_to_now
 
 
 def test___analog_single_channel_reader___read_one_sample___returns_valid_samples(
@@ -30,7 +30,7 @@ def test___analog_single_channel_reader___read_one_sample___returns_valid_sample
     data = reader.read_one_sample()
 
     expected = _get_voltage_offset_for_chan(0)
-    assert data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
 
 
 def test___analog_single_channel_reader___read_many_sample___returns_valid_samples(
@@ -44,7 +44,7 @@ def test___analog_single_channel_reader___read_many_sample___returns_valid_sampl
 
     assert samples_read == samples_to_read
     expected = _get_voltage_offset_for_chan(0)
-    assert data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
 
 
 def test___analog_single_channel_reader___read_many_sample_with_wrong_dtype___raises_error_with_correct_dtype(
@@ -88,7 +88,7 @@ def test___analog_single_channel_reader___read_waveform___returns_valid_waveform
     assert samples_read == samples_to_read
     assert isinstance(waveform, AnalogWaveform)
     expected = _get_voltage_offset_for_chan(0)
-    assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert waveform.scaled_data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
     assert isinstance(waveform.timing.timestamp, ht_datetime)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
@@ -109,7 +109,7 @@ def test___analog_single_channel_reader___read_waveform_no_args___returns_valid_
     assert samples_read == 50
     assert isinstance(waveform, AnalogWaveform)
     expected = _get_voltage_offset_for_chan(0)
-    assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert waveform.scaled_data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
     assert isinstance(waveform.timing.timestamp, ht_datetime)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
@@ -131,7 +131,7 @@ def test___analog_single_channel_reader___read_waveform_in_place___populates_val
     assert samples_read == samples_to_read
     assert isinstance(waveform, AnalogWaveform)
     expected = _get_voltage_offset_for_chan(0)
-    assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert waveform.scaled_data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
     assert isinstance(waveform.timing.timestamp, ht_datetime)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
@@ -149,7 +149,7 @@ def test___analog_single_channel_reader___reuse_waveform_in_place___overwrites_d
         task.ai_channels.add_ai_voltage_chan(
             sim_6363_device.ai_physical_chans[chan_index].name,
             min_val=offset,
-            max_val=offset + VOLTAGE_EPSILON,
+            max_val=offset + AI_VOLTAGE_EPSILON,
         )
         task.timing.cfg_samp_clk_timing(rate, sample_mode=AcquisitionType.FINITE, samps_per_chan=10)
         return AnalogSingleChannelReader(task.in_stream)
@@ -160,13 +160,13 @@ def test___analog_single_channel_reader___reuse_waveform_in_place___overwrites_d
 
     reader0.read_waveform(waveform, 10)
     timestamp1 = waveform.timing.timestamp
-    assert waveform.scaled_data == pytest.approx(0, abs=VOLTAGE_EPSILON)
+    assert waveform.scaled_data == pytest.approx(0, abs=AI_VOLTAGE_EPSILON)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.channel_name == f"{sim_6363_device.name}/ai0"
 
     reader1.read_waveform(waveform, 10)
     timestamp2 = waveform.timing.timestamp
-    assert waveform.scaled_data == pytest.approx(1, abs=VOLTAGE_EPSILON)
+    assert waveform.scaled_data == pytest.approx(1, abs=AI_VOLTAGE_EPSILON)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 2000)
     assert waveform.channel_name == f"{sim_6363_device.name}/ai1"
 
@@ -201,7 +201,7 @@ def test___analog_single_channel_reader___read_waveform_high_sample_rate___retur
     assert samples_read == samples_to_read
     assert isinstance(waveform, AnalogWaveform)
     expected = _get_voltage_offset_for_chan(0)
-    assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert waveform.scaled_data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
     assert isinstance(waveform.timing.timestamp, ht_datetime)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 10_000_000)
@@ -226,7 +226,7 @@ def test___analog_single_channel_reader_with_timing_flag___read_waveform___only_
     assert isinstance(waveform, AnalogWaveform)
     assert waveform.sample_count == samples_to_read
     expected = _get_voltage_offset_for_chan(0)
-    assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert waveform.scaled_data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
     assert isinstance(waveform.timing.timestamp, ht_datetime)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
@@ -251,7 +251,7 @@ def test___analog_single_channel_reader_with_extended_properties_flag___read_wav
     assert isinstance(waveform, AnalogWaveform)
     assert waveform.sample_count == samples_to_read
     expected = _get_voltage_offset_for_chan(0)
-    assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert waveform.scaled_data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.NONE
     assert waveform.channel_name == ai_single_channel_task_with_timing.ai_channels[0].name
     assert waveform.units == "Volts"
@@ -275,7 +275,7 @@ def test___analog_single_channel_reader_with_both_flags___read_waveform___includ
     assert isinstance(waveform, AnalogWaveform)
     assert waveform.sample_count == samples_to_read
     expected = _get_voltage_offset_for_chan(0)
-    assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert waveform.scaled_data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
     assert isinstance(waveform.timing.timestamp, ht_datetime)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
@@ -300,7 +300,7 @@ def test___analog_single_channel_reader_with_none_flag___read_waveform___minimal
     assert isinstance(waveform, AnalogWaveform)
     assert waveform.sample_count == samples_to_read
     expected = _get_voltage_offset_for_chan(0)
-    assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert waveform.scaled_data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.NONE
     assert waveform.channel_name == ""
     assert waveform.units == ""

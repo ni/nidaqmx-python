@@ -7,10 +7,10 @@ import pytest
 
 import nidaqmx
 from nidaqmx.stream_writers import AnalogUnscaledWriter
-from tests.component.conftest import (
+from tests.component._analog_utils import (
+    RAW_VOLTAGE_EPSILON,
     _get_expected_voltage_for_chan,
     _volts_to_codes,
-    VOLTAGE_EPSILON_FOR_RAW,
 )
 
 
@@ -37,9 +37,7 @@ def test___analog_unscaled_writer___write_int16___updates_output(
     samples_written = writer.write_int16(data)
 
     assert samples_written == samples_to_write
-    assert ai_multi_channel_loopback_task.read() == pytest.approx(
-        expected, abs=VOLTAGE_EPSILON_FOR_RAW
-    )
+    assert ai_multi_channel_loopback_task.read() == pytest.approx(expected, abs=RAW_VOLTAGE_EPSILON)
 
 
 def test___analog_unscaled_writer___write_int16_with_wrong_dtype___raises_error_with_correct_dtype(
@@ -79,9 +77,7 @@ def test___analog_unscaled_writer___write_int32___updates_output(
     samples_written = writer.write_int32(data)
 
     assert samples_written == samples_to_write
-    assert ai_multi_channel_loopback_task.read() == pytest.approx(
-        expected, abs=VOLTAGE_EPSILON_FOR_RAW
-    )
+    assert ai_multi_channel_loopback_task.read() == pytest.approx(expected, abs=RAW_VOLTAGE_EPSILON)
 
 
 def test___analog_unscaled_writer___write_int32_with_wrong_dtype___raises_error_with_correct_dtype(
@@ -121,9 +117,7 @@ def test___analog_unscaled_writer___write_uint16___updates_output(
     samples_written = writer.write_uint16(data)
 
     assert samples_written == samples_to_write
-    assert ai_multi_channel_loopback_task.read() == pytest.approx(
-        expected, abs=VOLTAGE_EPSILON_FOR_RAW
-    )
+    assert ai_multi_channel_loopback_task.read() == pytest.approx(expected, abs=RAW_VOLTAGE_EPSILON)
 
 
 def test___analog_unscaled_writer___write_uint16_with_wrong_dtype___raises_error_with_correct_dtype(
@@ -163,9 +157,7 @@ def test___analog_unscaled_writer___write_uint32___updates_output(
     samples_written = writer.write_uint32(data)
 
     assert samples_written == samples_to_write
-    assert ai_multi_channel_loopback_task.read() == pytest.approx(
-        expected, abs=VOLTAGE_EPSILON_FOR_RAW
-    )
+    assert ai_multi_channel_loopback_task.read() == pytest.approx(expected, abs=RAW_VOLTAGE_EPSILON)
 
 
 def test___analog_unscaled_writer___write_uint32_with_wrong_dtype___raises_error_with_correct_dtype(
