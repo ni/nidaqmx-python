@@ -224,7 +224,7 @@ def test___analog_multi_channel_reader_with_timing_flag___read_waveforms___only_
     ai_multi_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
     in_stream = ai_multi_channel_task_with_timing.in_stream
-    in_stream.waveform_attribute_mode = WaveformAttributeMode.TIMINGz
+    in_stream.waveform_attribute_mode = WaveformAttributeMode.TIMING
     reader = AnalogMultiChannelReader(in_stream)
     num_channels = ai_multi_channel_task_with_timing.number_of_channels
     samples_to_read = 10
