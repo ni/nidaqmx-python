@@ -1739,13 +1739,13 @@ toml = ">=0.10.1"
 
 [[package]]
 name = "nitypes"
-version = "0.1.0.dev9"
+version = "0.1.0.dev10"
 description = "Data types for NI Python APIs"
 optional = false
 python-versions = "<4.0,>=3.9"
 files = [
-    {file = "nitypes-0.1.0.dev9-py3-none-any.whl", hash = "sha256:1e2928f9a2c57f289f5743433299e09d151ab4951bacffbf67238093a82c3f67"},
-    {file = "nitypes-0.1.0.dev9.tar.gz", hash = "sha256:bc36861cc4a5ff0cfe74050afeed82bcdd652fc4de36860cd43492beee388b5d"},
+    {file = "nitypes-0.1.0.dev10-py3-none-any.whl", hash = "sha256:c4f097ffdeaf05697a7752a1e2b712760b28e84a4f6f446b4b7b76b349927490"},
+    {file = "nitypes-0.1.0.dev10.tar.gz", hash = "sha256:e319ebbdefca63db8e879b9f119cc4f76a086c550931dea2be0e33e9c10e9d9f"},
 ]
 
 [package.dependencies]
@@ -1754,7 +1754,6 @@ numpy = [
     {version = ">=1.22", markers = "python_version >= \"3.9\" and python_version < \"3.13\""},
     {version = ">=2.1", markers = "python_version >= \"3.13\" and python_version < \"4.0\""},
 ]
-typing-extensions = ">=4.13.2"
 
 [[package]]
 name = "nptdms"
@@ -2973,4 +2972,4 @@ grpc = ["grpcio", "protobuf"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "8006d684051dae98d7d776ede3223e7c701c056378428efa5e6569bfd4ca9c36"
+content-hash = "6ffa32681a088a5c50e1bcfe4197a3f45cc695143f011cfaca089b03b6738df6"

@@ -50,7 +50,8 @@ python-decouple = ">=3.8"
 click = ">=8.0.0"
 distro = { version = ">=1.9.0", platform = "linux" }
 requests = ">=2.25.0"
-nitypes = {version=">=0.1.0dev9", allow-prereleases=true}
+typing_extensions = { version = ">=4.0.0" }
+nitypes = {version=">=0.1.0dev10", allow-prereleases=true}
 
 [tool.poetry.extras]
 grpc = ["grpcio", "protobuf"]
