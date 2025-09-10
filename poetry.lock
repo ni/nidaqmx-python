@@ -2972,4 +2972,4 @@ grpc = ["grpcio", "protobuf"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "d19293f2cedc75b2001b325764a8a319d8b181ed55c4c2332b63cf72a1be38b8"
+content-hash = "6ffa32681a088a5c50e1bcfe4197a3f45cc695143f011cfaca089b03b6738df6"
