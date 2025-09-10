@@ -214,12 +214,12 @@ class AnalogMultiChannelReader(ChannelReaderBase):
                 DAQmxErrors.MISMATCHED_INPUT_ARRAY_SIZES, task_name=self._task.name)
         
         for i, waveform in enumerate(waveforms):
-            if waveform._start_index + number_of_samples_per_channel > waveform.capacity:
+            if waveform.start_index + number_of_samples_per_channel > waveform.capacity:
                 if reallocation_policy == ReallocationPolicy.TO_GROW:
-                    waveform.capacity = waveform._start_index + number_of_samples_per_channel
+                    waveform.capacity = waveform.start_index + number_of_samples_per_channel
                 else:
                     raise DaqError(
-                        f'The waveform at index {i} does not have enough space ({waveform.capacity - waveform._start_index}) to hold '
+                        f'The waveform at index {i} does not have enough space ({waveform.capacity - waveform.start_index}) to hold '
                         f'the requested number of samples ({number_of_samples_per_channel}). Please provide larger '
                         'waveforms or adjust the number of samples requested.',
                         DAQmxErrors.READ_BUFFER_TOO_SMALL, task_name=self._task.name)
