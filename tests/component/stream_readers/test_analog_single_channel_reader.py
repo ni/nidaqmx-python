@@ -201,7 +201,7 @@ def test___analog_single_channel_reader___read_into_undersized_waveform___return
     assert samples_read == samples_to_read
     assert isinstance(waveform, AnalogWaveform)
     expected = _get_voltage_offset_for_chan(0)
-    assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert waveform.scaled_data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
     assert isinstance(waveform.timing.timestamp, ht_datetime)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
@@ -219,7 +219,7 @@ def test___analog_single_channel_reader___reuse_waveform_in_place_with_different
         task.ai_channels.add_ai_voltage_chan(
             sim_6363_device.ai_physical_chans[chan_index].name,
             min_val=offset,
-            max_val=offset + VOLTAGE_EPSILON,
+            max_val=offset + AI_VOLTAGE_EPSILON,
         )
         task.timing.cfg_samp_clk_timing(
             1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=samps_per_chan
@@ -233,17 +233,17 @@ def test___analog_single_channel_reader___reuse_waveform_in_place_with_different
 
     reader0.read_waveform(waveform, 5)
     assert waveform.sample_count == 5
-    assert waveform.scaled_data == pytest.approx(0, abs=VOLTAGE_EPSILON)
+    assert waveform.scaled_data == pytest.approx(0, abs=AI_VOLTAGE_EPSILON)
     assert waveform.channel_name == f"{sim_6363_device.name}/ai0"
 
     reader1.read_waveform(waveform, 10)
     assert waveform.sample_count == 10
-    assert waveform.scaled_data == pytest.approx(1, abs=VOLTAGE_EPSILON)
+    assert waveform.scaled_data == pytest.approx(1, abs=AI_VOLTAGE_EPSILON)
     assert waveform.channel_name == f"{sim_6363_device.name}/ai1"
 
     reader2.read_waveform(waveform, 15)
     assert waveform.sample_count == 15
-    assert waveform.scaled_data == pytest.approx(2, abs=VOLTAGE_EPSILON)
+    assert waveform.scaled_data == pytest.approx(2, abs=AI_VOLTAGE_EPSILON)
     assert waveform.channel_name == f"{sim_6363_device.name}/ai2"
 
 

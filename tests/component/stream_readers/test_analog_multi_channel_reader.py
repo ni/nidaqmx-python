@@ -224,7 +224,7 @@ def test___analog_multi_channel_reader___read_into_undersized_waveforms___return
     for chan_index, waveform in enumerate(waveforms):
         assert isinstance(waveform, AnalogWaveform)
         expected = _get_voltage_offset_for_chan(chan_index)
-        assert waveform.scaled_data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+        assert waveform.scaled_data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
         assert isinstance(waveform.timing.timestamp, ht_datetime)
         assert _is_timestamp_close_to_now(waveform.timing.timestamp)
         assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
@@ -244,12 +244,12 @@ def test___analog_multi_channel_reader___reuse_waveform_in_place_with_different_
         task.ai_channels.add_ai_voltage_chan(
             sim_6363_device.ai_physical_chans[chan_a_index].name,
             min_val=chan_a_index,
-            max_val=chan_a_index + VOLTAGE_EPSILON,
+            max_val=chan_a_index + AI_VOLTAGE_EPSILON,
         )
         task.ai_channels.add_ai_voltage_chan(
             sim_6363_device.ai_physical_chans[chan_b_index].name,
             min_val=chan_b_index,
-            max_val=chan_b_index + VOLTAGE_EPSILON,
+            max_val=chan_b_index + AI_VOLTAGE_EPSILON,
         )
         task.timing.cfg_samp_clk_timing(
             1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=samps_per_chan
@@ -266,26 +266,26 @@ def test___analog_multi_channel_reader___reuse_waveform_in_place_with_different_
 
     reader0.read_waveforms(waveforms, 5)
     assert waveforms[0].sample_count == 5
-    assert waveforms[0].scaled_data == pytest.approx(0, abs=VOLTAGE_EPSILON)
+    assert waveforms[0].scaled_data == pytest.approx(0, abs=AI_VOLTAGE_EPSILON)
     assert waveforms[0].channel_name == f"{sim_6363_device.name}/ai0"
     assert waveforms[1].sample_count == 5
-    assert waveforms[1].scaled_data == pytest.approx(1, abs=VOLTAGE_EPSILON)
+    assert waveforms[1].scaled_data == pytest.approx(1, abs=AI_VOLTAGE_EPSILON)
     assert waveforms[1].channel_name == f"{sim_6363_device.name}/ai1"
 
     reader1.read_waveforms(waveforms, 10)
     assert waveforms[0].sample_count == 10
-    assert waveforms[0].scaled_data == pytest.approx(2, abs=VOLTAGE_EPSILON)
+    assert waveforms[0].scaled_data == pytest.approx(2, abs=AI_VOLTAGE_EPSILON)
     assert waveforms[0].channel_name == f"{sim_6363_device.name}/ai2"
     assert waveforms[1].sample_count == 10
-    assert waveforms[1].scaled_data == pytest.approx(3, abs=VOLTAGE_EPSILON)
+    assert waveforms[1].scaled_data == pytest.approx(3, abs=AI_VOLTAGE_EPSILON)
     assert waveforms[1].channel_name == f"{sim_6363_device.name}/ai3"
 
     reader2.read_waveforms(waveforms, 15)
     assert waveforms[0].sample_count == 15
-    assert waveforms[0].scaled_data == pytest.approx(4, abs=VOLTAGE_EPSILON)
+    assert waveforms[0].scaled_data == pytest.approx(4, abs=AI_VOLTAGE_EPSILON)
     assert waveforms[0].channel_name == f"{sim_6363_device.name}/ai4"
     assert waveforms[1].sample_count == 15
-    assert waveforms[1].scaled_data == pytest.approx(5, abs=VOLTAGE_EPSILON)
+    assert waveforms[1].scaled_data == pytest.approx(5, abs=AI_VOLTAGE_EPSILON)
     assert waveforms[1].channel_name == f"{sim_6363_device.name}/ai5"
 
 

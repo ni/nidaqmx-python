@@ -414,7 +414,7 @@ def test___digital_single_line_reader___read_into_undersized_waveform___returns_
     samples_read = reader.read_waveform(waveform, samples_to_read)
 
     assert samples_read == samples_to_read
-    assert _get_waveform_data(waveform) == _get_expected_digital_data(1, samples_to_read)
+    assert _get_waveform_data(waveform) == _get_digital_data(1, samples_to_read)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR

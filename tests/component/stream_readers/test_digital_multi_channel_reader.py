@@ -601,7 +601,7 @@ def test___digital_multi_channel_multi_line_reader___read_into_undersized_wavefo
 ) -> None:
     reader = DigitalMultiChannelReader(di_multi_chan_multi_line_timing_task.in_stream)
     num_channels = di_multi_chan_multi_line_timing_task.number_of_channels
-    num_lines = _get_num_lines_in_task(di_multi_chan_multi_line_timing_task)
+    num_lines = _get_num_di_lines_in_task(di_multi_chan_multi_line_timing_task)
     samples_to_read = 10
 
     waveforms = [DigitalWaveform(samples_to_read - 1) for _ in range(num_channels)]
