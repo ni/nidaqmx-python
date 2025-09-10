@@ -21,30 +21,30 @@ from nidaqmx.constants import (
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.stream_readers import DaqError, DigitalMultiChannelReader
 from nidaqmx.utils import flatten_channel_string
-from tests.component.conftest import (
+from tests.component._digital_utils import (
     _bool_array_to_int,
     _get_expected_data_for_line,
-    _get_expected_digital_data,
+    _get_digital_data,
     _get_expected_digital_port_data_port_major,
     _get_expected_digital_port_data_sample_major,
-    _get_num_lines_in_task,
+    _get_num_di_lines_in_task,
     _get_waveform_data,
-    _is_timestamp_close_to_now,
     _read_and_copy,
 )
+from tests.component._utils import _is_timestamp_close_to_now
 
 
 def test___digital_multi_channel_reader___read_one_sample_one_line___returns_valid_samples(
     di_single_line_task: nidaqmx.Task,
 ) -> None:
     reader = DigitalMultiChannelReader(di_single_line_task.in_stream)
-    num_lines = _get_num_lines_in_task(di_single_line_task)
+    num_lines = _get_num_di_lines_in_task(di_single_line_task)
     samples_to_read = 256
     sample = numpy.full(num_lines, False, dtype=numpy.bool_)
 
     data = [_read_and_copy(reader.read_one_sample_one_line, sample) for _ in range(samples_to_read)]
 
-    assert [_bool_array_to_int(sample) for sample in data] == _get_expected_digital_data(
+    assert [_bool_array_to_int(sample) for sample in data] == _get_digital_data(
         num_lines, samples_to_read
     )
 
@@ -53,7 +53,7 @@ def test___digital_multi_channel_reader___read_one_sample_one_line_with_wrong_dt
     di_single_line_task: nidaqmx.Task,
 ) -> None:
     reader = DigitalMultiChannelReader(di_single_line_task.in_stream)
-    num_lines = _get_num_lines_in_task(di_single_line_task)
+    num_lines = _get_num_di_lines_in_task(di_single_line_task)
     data = numpy.full(num_lines, math.inf, dtype=numpy.float64)
 
     with pytest.raises((ctypes.ArgumentError, TypeError)) as exc_info:
@@ -74,7 +74,7 @@ def test___digital_multi_channel_reader___read_one_sample_multi_line___returns_v
         _read_and_copy(reader.read_one_sample_multi_line, sample) for _ in range(samples_to_read)
     ]
 
-    assert [_bool_array_to_int(sample[:, 0]) for sample in data] == _get_expected_digital_data(
+    assert [_bool_array_to_int(sample[:, 0]) for sample in data] == _get_digital_data(
         num_channels, samples_to_read
     )
 
@@ -333,7 +333,7 @@ def test___digital_multi_channel_multi_line_reader___read_waveforms___returns_va
 ) -> None:
     reader = DigitalMultiChannelReader(di_multi_chan_multi_line_timing_task.in_stream)
     num_channels = di_multi_chan_multi_line_timing_task.number_of_channels
-    num_lines = _get_num_lines_in_task(di_multi_chan_multi_line_timing_task)
+    num_lines = _get_num_di_lines_in_task(di_multi_chan_multi_line_timing_task)
     samples_to_read = 10
     waveforms = [DigitalWaveform(samples_to_read) for _ in range(num_channels)]
 
@@ -359,7 +359,7 @@ def test___digital_multi_channel_different_lines_reader___read_waveforms___retur
 ) -> None:
     reader = DigitalMultiChannelReader(di_multi_chan_diff_lines_timing_task.in_stream)
     num_channels = di_multi_chan_diff_lines_timing_task.number_of_channels
-    num_lines = _get_num_lines_in_task(di_multi_chan_diff_lines_timing_task)
+    num_lines = _get_num_di_lines_in_task(di_multi_chan_diff_lines_timing_task)
     samples_to_read = 10
     waveforms = [
         DigitalWaveform(samples_to_read, 1),
@@ -411,7 +411,7 @@ def test___digital_multi_channel_lines_and_port_reader___read_waveforms___return
 ) -> None:
     reader = DigitalMultiChannelReader(di_multi_chan_lines_and_port_task.in_stream)
     num_channels = di_multi_chan_lines_and_port_task.number_of_channels
-    num_lines = _get_num_lines_in_task(di_multi_chan_lines_and_port_task)
+    num_lines = _get_num_di_lines_in_task(di_multi_chan_lines_and_port_task)
     samples_to_read = 10
     waveforms = [
         DigitalWaveform(samples_to_read, 1),
@@ -497,7 +497,7 @@ def test___digital_multi_channel_multi_line_reader___read_waveforms_no_args___re
 ) -> None:
     reader = DigitalMultiChannelReader(di_multi_chan_multi_line_timing_task.in_stream)
     num_channels = di_multi_chan_multi_line_timing_task.number_of_channels
-    num_lines = _get_num_lines_in_task(di_multi_chan_multi_line_timing_task)
+    num_lines = _get_num_di_lines_in_task(di_multi_chan_multi_line_timing_task)
     waveforms = [DigitalWaveform(50) for _ in range(num_channels)]
 
     samples_read = reader.read_waveforms(waveforms)
@@ -521,7 +521,7 @@ def test___digital_multi_channel_multi_line_reader___read_waveforms_in_place___p
 ) -> None:
     reader = DigitalMultiChannelReader(di_multi_chan_multi_line_timing_task.in_stream)
     num_channels = di_multi_chan_multi_line_timing_task.number_of_channels
-    num_lines = _get_num_lines_in_task(di_multi_chan_multi_line_timing_task)
+    num_lines = _get_num_di_lines_in_task(di_multi_chan_multi_line_timing_task)
     samples_to_read = 10
 
     waveforms = [DigitalWaveform(samples_to_read) for _ in range(num_channels)]
@@ -601,7 +601,7 @@ def test___digital_multi_channel_multi_line_reader___read_into_undersized_wavefo
 ) -> None:
     reader = DigitalMultiChannelReader(di_multi_chan_multi_line_timing_task.in_stream)
     num_channels = di_multi_chan_multi_line_timing_task.number_of_channels
-    num_lines = _get_num_lines_in_task(di_multi_chan_multi_line_timing_task)
+    num_lines = _get_num_di_lines_in_task(di_multi_chan_multi_line_timing_task)
     samples_to_read = 10
 
     waveforms = [DigitalWaveform(samples_to_read - 1) for _ in range(num_channels)]
@@ -696,7 +696,7 @@ def test___digital_multi_channel_multi_line_reader_with_timing_flag___read_wavef
     in_stream.waveform_attribute_mode = WaveformAttributeMode.TIMING
     reader = DigitalMultiChannelReader(in_stream)
     num_channels = di_multi_chan_multi_line_timing_task.number_of_channels
-    num_lines = _get_num_lines_in_task(di_multi_chan_multi_line_timing_task)
+    num_lines = _get_num_di_lines_in_task(di_multi_chan_multi_line_timing_task)
     samples_to_read = 10
     waveforms = [DigitalWaveform(samples_to_read) for _ in range(num_channels)]
 
@@ -724,7 +724,7 @@ def test___digital_multi_channel_multi_line_reader_with_extended_properties_flag
     in_stream.waveform_attribute_mode = WaveformAttributeMode.EXTENDED_PROPERTIES
     reader = DigitalMultiChannelReader(in_stream)
     num_channels = di_multi_chan_multi_line_timing_task.number_of_channels
-    num_lines = _get_num_lines_in_task(di_multi_chan_multi_line_timing_task)
+    num_lines = _get_num_di_lines_in_task(di_multi_chan_multi_line_timing_task)
     samples_to_read = 10
     waveforms = [DigitalWaveform(samples_to_read) for _ in range(num_channels)]
 
@@ -752,7 +752,7 @@ def test___digital_multi_channel_multi_line_reader_with_both_flags___read_wavefo
     )
     reader = DigitalMultiChannelReader(in_stream)
     num_channels = di_multi_chan_multi_line_timing_task.number_of_channels
-    num_lines = _get_num_lines_in_task(di_multi_chan_multi_line_timing_task)
+    num_lines = _get_num_di_lines_in_task(di_multi_chan_multi_line_timing_task)
     samples_to_read = 10
     waveforms = [DigitalWaveform(samples_to_read) for _ in range(num_channels)]
 
@@ -780,7 +780,7 @@ def test___digital_multi_channel_multi_line_reader_with_none_flag___read_wavefor
     in_stream.waveform_attribute_mode = WaveformAttributeMode.NONE
     reader = DigitalMultiChannelReader(in_stream)
     num_channels = di_multi_chan_multi_line_timing_task.number_of_channels
-    num_lines = _get_num_lines_in_task(di_multi_chan_multi_line_timing_task)
+    num_lines = _get_num_di_lines_in_task(di_multi_chan_multi_line_timing_task)
     samples_to_read = 10
     waveforms = [DigitalWaveform(samples_to_read) for _ in range(num_channels)]
 

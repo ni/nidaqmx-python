@@ -8,7 +8,7 @@ import pytest
 
 import nidaqmx
 from nidaqmx.stream_readers import AnalogUnscaledReader
-from tests.component.conftest import (
+from tests.component._analog_utils import (
     VOLTAGE_CODE_EPSILON,
     _get_voltage_code_offset_for_chan,
 )

@@ -4,9 +4,9 @@ import pytest
 
 import nidaqmx
 from nidaqmx.constants import AcquisitionType
-from tests.component.conftest import (
+from tests.component._analog_utils import (
     POWER_EPSILON,
-    VOLTAGE_EPSILON,
+    AI_VOLTAGE_EPSILON,
     _assert_equal_2d,
     _get_current_setpoint_for_chan,
     _get_voltage_offset_for_chan,
@@ -20,7 +20,7 @@ def test___analog_single_channel___read_unset_samples___returns_valid_scalar(
     data = ai_single_channel_task.read()
 
     expected = _get_voltage_offset_for_chan(0)
-    assert data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
 
 
 def test___analog_single_channel___read_one_sample___returns_valid_1d_samples(
@@ -29,7 +29,7 @@ def test___analog_single_channel___read_one_sample___returns_valid_1d_samples(
     data = ai_single_channel_task.read(1)
 
     expected = [_get_voltage_offset_for_chan(0)]
-    assert data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
 
 
 def test___analog_single_channel___read_many_sample___returns_valid_1d_samples(
@@ -40,7 +40,7 @@ def test___analog_single_channel___read_many_sample___returns_valid_1d_samples(
     data = ai_single_channel_task.read(samples_to_read)
 
     expected = [_get_voltage_offset_for_chan(0) for _ in range(samples_to_read)]
-    assert data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
 
 
 def test___analog_single_channel_finite___read_too_many_sample___returns_valid_1d_samples_truncated(
@@ -55,7 +55,7 @@ def test___analog_single_channel_finite___read_too_many_sample___returns_valid_1
     data = ai_single_channel_task.read(samples_to_read)
 
     expected = [_get_voltage_offset_for_chan(0) for _ in range(samples_to_acquire)]
-    assert data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
 
 
 def test___analog_multi_channel___read_unset_samples___returns_1d_channels(
@@ -66,7 +66,7 @@ def test___analog_multi_channel___read_unset_samples___returns_1d_channels(
     data = ai_multi_channel_task.read()
 
     expected = [_get_voltage_offset_for_chan(chan_index) for chan_index in range(num_channels)]
-    assert data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
 
 
 def test___analog_multi_channel___read_one_sample___returns_valid_2d_channels_samples(
@@ -77,7 +77,7 @@ def test___analog_multi_channel___read_one_sample___returns_valid_2d_channels_sa
     data = ai_multi_channel_task.read(1)
 
     expected = [[_get_voltage_offset_for_chan(chan_index)] for chan_index in range(num_channels)]
-    _assert_equal_2d(data, expected, abs=VOLTAGE_EPSILON)
+    _assert_equal_2d(data, expected, abs=AI_VOLTAGE_EPSILON)
 
 
 def test___analog_multi_channel___read_many_sample___returns_valid_2d_channels_samples(
@@ -92,7 +92,7 @@ def test___analog_multi_channel___read_many_sample___returns_valid_2d_channels_s
         [_get_voltage_offset_for_chan(chan_index) for _ in range(samples_to_read)]
         for chan_index in range(num_channels)
     ]
-    _assert_equal_2d(data, expected, abs=VOLTAGE_EPSILON)
+    _assert_equal_2d(data, expected, abs=AI_VOLTAGE_EPSILON)
 
 
 @pytest.mark.xfail(
@@ -115,7 +115,7 @@ def test___analog_multi_channel_finite___read_too_many_sample___returns_valid_2d
         [_get_voltage_offset_for_chan(chan_index) for _ in range(samples_to_acquire)]
         for chan_index in range(num_channels)
     ]
-    _assert_equal_2d(data, expected, abs=VOLTAGE_EPSILON)
+    _assert_equal_2d(data, expected, abs=AI_VOLTAGE_EPSILON)
 
 
 def test___power_single_channel___read_unset_samples___returns_valid_scalar(

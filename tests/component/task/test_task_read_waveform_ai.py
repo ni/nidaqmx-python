@@ -4,8 +4,8 @@ import pytest
 from nitypes.waveform import AnalogWaveform
 
 import nidaqmx
-from tests.component.conftest import (
-    VOLTAGE_EPSILON,
+from tests.component._analog_utils import (
+    AI_VOLTAGE_EPSILON,
     _get_voltage_offset_for_chan,
 )
 
@@ -19,7 +19,7 @@ def test___analog_single_channel___read_waveform___returns_valid_waveform(
     assert isinstance(waveform, AnalogWaveform)
     expected = _get_voltage_offset_for_chan(0)
     assert waveform.sample_count == 50
-    assert waveform.raw_data[0] == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert waveform.raw_data[0] == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
 
 
 @pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
@@ -31,7 +31,7 @@ def test___analog_single_channel___read_waveform_one_sample___returns_waveform_w
     assert isinstance(waveform, AnalogWaveform)
     expected = _get_voltage_offset_for_chan(0)
     assert waveform.sample_count == 1
-    assert waveform.raw_data[0] == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert waveform.raw_data[0] == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
 
 
 @pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
@@ -45,7 +45,7 @@ def test___analog_single_channel___read_waveform_many_sample___returns_waveform_
     assert isinstance(waveform, AnalogWaveform)
     expected = _get_voltage_offset_for_chan(0)
     assert waveform.sample_count == samples_to_read
-    assert waveform.raw_data[0] == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert waveform.raw_data[0] == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
 
 
 @pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
@@ -60,7 +60,7 @@ def test___analog_single_channel_finite___read_waveform_too_many_samples___retur
     assert isinstance(waveform, AnalogWaveform)
     expected = _get_voltage_offset_for_chan(0)
     assert waveform.sample_count == samples_available
-    assert waveform.raw_data[0] == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert waveform.raw_data[0] == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
 
 
 @pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
@@ -77,7 +77,7 @@ def test___analog_multi_channel___read_waveform___returns_valid_waveforms(
     for chan_index, waveform in enumerate(waveforms):
         expected = _get_voltage_offset_for_chan(chan_index)
         assert waveform.sample_count == 50
-        assert waveform.raw_data[0] == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+        assert waveform.raw_data[0] == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
 
 
 @pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
@@ -94,7 +94,7 @@ def test___analog_multi_channel___read_waveform_one_sample___returns_waveforms_w
     for chan_index, waveform in enumerate(waveforms):
         expected = _get_voltage_offset_for_chan(chan_index)
         assert waveform.sample_count == 1
-        assert waveform.raw_data[0] == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+        assert waveform.raw_data[0] == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
 
 
 @pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
@@ -112,7 +112,7 @@ def test___analog_multi_channel___read_waveform_many_samples___returns_waveforms
     for chan_index, waveform in enumerate(waveforms):
         expected = _get_voltage_offset_for_chan(chan_index)
         assert waveform.sample_count == samples_to_read
-        assert waveform.raw_data[0] == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+        assert waveform.raw_data[0] == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
 
 
 @pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
@@ -130,4 +130,4 @@ def test___analog_multi_channel_finite___read_waveform_too_many_samples___return
     for chan_index, waveform in enumerate(waveforms):
         expected = _get_voltage_offset_for_chan(chan_index)
         assert waveform.sample_count == samples_available
-        assert waveform.raw_data[0] == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+        assert waveform.raw_data[0] == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
