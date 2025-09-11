@@ -34,7 +34,6 @@ def test___analog_single_channel_writer___write_many_sample___updates_output(
     writer = AnalogSingleChannelWriter(ao_single_channel_task.out_stream)
     samples_to_write = 10
     expected = _get_expected_voltage_for_chan(0)
-    # sweep up to the expected value, the only one we'll validate
     data = numpy.linspace(0.0, expected, num=samples_to_write, dtype=numpy.float64)
 
     samples_written = writer.write_many_sample(data)
@@ -64,7 +63,6 @@ def test___analog_single_channel_reader___read_waveform_feature_disabled___raise
     writer = AnalogSingleChannelWriter(ao_single_channel_task.out_stream)
     samples_to_write = 10
     expected = _get_expected_voltage_for_chan(0)
-    # sweep up to the expected value, the only one we'll validate
     waveform = AnalogWaveform.from_array_1d(
         numpy.linspace(0.0, expected, num=samples_to_write, dtype=numpy.float64)
     )
@@ -85,7 +83,6 @@ def test___analog_single_channel_writer___write_waveform___updates_output(
     writer = AnalogSingleChannelWriter(ao_single_channel_task.out_stream)
     samples_to_write = 10
     expected = _get_expected_voltage_for_chan(0)
-    # sweep up to the expected value, the only one we'll validate
     waveform = AnalogWaveform.from_array_1d(
         numpy.linspace(0.0, expected, num=samples_to_write, dtype=numpy.float64)
     )

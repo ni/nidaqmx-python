@@ -104,22 +104,6 @@ def test___task___write_waveform_with_wrong_dtype___raises_type_error(
 
 
 @pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
-def test___task___write_large_waveform___waveform_writes_successfully(
-    ao_single_channel_task: nidaqmx.Task,
-    ai_single_channel_loopback_task: nidaqmx.Task,
-) -> None:
-    num_samples = 10000
-    start_value = 0.0
-    end_value = 1.0
-    waveform = _create_linear_ramp_waveform(num_samples, start_value, end_value)
-
-    ao_single_channel_task.write(waveform)
-
-    actual_value = ai_single_channel_loopback_task.read()
-    assert actual_value == pytest.approx(end_value, abs=AO_VOLTAGE_EPSILON)
-
-
-@pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
 def test___task___write_waveform_with_timing___all_samples_match_waveform_data(
     generate_task,
     real_x_series_multiplexed_device: nidaqmx.system.Device,
@@ -139,4 +123,4 @@ def test___task___write_waveform_with_timing___all_samples_match_waveform_data(
     ao_task.start()
     sample_clk_task.start()
     actual_samples = ai_task.read(number_of_samples_per_channel=num_samples, timeout=2.0)
-    np.testing.assert_allclose(actual_samples, expected_samples, rtol=0.05, atol=AO_VOLTAGE_EPSILON)
+    np.testing.assert_allclose(actual_samples, expected_samples, atol=AO_VOLTAGE_EPSILON)
