@@ -1240,6 +1240,7 @@ class Task:
           sample for multiple channels.
         - List of lists/2D numpy.ndarray: Multiple samples for multiple
           channels.
+        - AnalogWaveform: Waveform data for a single analog output channel.
 
         The data type of the samples passed in must be appropriate for
         the channel type of the task.
@@ -1268,6 +1269,9 @@ class Task:
                 The data you write must be in the units of the
                 generation, including any custom scales. Use the DAQmx
                 Create Channel methods to specify these units.
+                
+                For analog output channels, this can be an AnalogWaveform
+                object for single-channel waveform writes.
             auto_start (Optional[bool]): Specifies if this method
                 automatically starts the task if you did not explicitly
                 start it with the DAQmx Start Task method.
@@ -1300,7 +1304,10 @@ class Task:
 
         element = None
         if number_of_channels == 1:
-            if isinstance(data, list):
+            if isinstance(data, AnalogWaveform):
+                number_of_samples_per_channel = data.sample_count
+                element = None  # No single element for waveforms
+            elif isinstance(data, list):
                 if isinstance(data[0], list):
                     self._raise_invalid_write_num_chans_error(
                         number_of_channels, len(data))
@@ -1321,7 +1328,14 @@ class Task:
                 element = data
 
         else:
-            if isinstance(data, list):
+            if isinstance(data, AnalogWaveform):
+                raise DaqError(
+                    'Write failed, because waveform data is only supported for single-channel tasks.\n\n'
+                    'Number of Channels in Task: {}\n'
+                    'For multi-channel waveform writes, use a list of waveforms (not yet implemented).'
+                    .format(number_of_channels),
+                    DAQmxErrors.WRITE_NUM_CHANS_MISMATCH, task_name=self.name)
+            elif isinstance(data, list):
                 if len(data) != number_of_channels:
                     self._raise_invalid_write_num_chans_error(
                         number_of_channels, len(data))
@@ -1356,10 +1370,19 @@ class Task:
                 auto_start = True
 
         if write_chan_type == ChannelType.ANALOG_OUTPUT:
-            data = numpy.asarray(data, dtype=numpy.float64)
-            return self._interpreter.write_analog_f64(
-                self._handle, number_of_samples_per_channel, auto_start,
-                timeout, FillMode.GROUP_BY_CHANNEL.value, data)
+            if isinstance(data, AnalogWaveform):
+                # Handle single channel waveform
+                if number_of_channels != 1:
+                    self._raise_invalid_write_num_chans_error(
+                        number_of_channels, 1)
+                return self._interpreter.write_analog_waveform(
+                    self._handle, data, auto_start, timeout)
+            else:
+                # Handle regular array data
+                data = numpy.asarray(data, dtype=numpy.float64)
+                return self._interpreter.write_analog_f64(
+                    self._handle, number_of_samples_per_channel, auto_start,
+                    timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
         elif write_chan_type == ChannelType.DIGITAL_OUTPUT:
             if self.out_stream.do_num_booleans_per_chan == 1:
@@ -1392,6 +1415,11 @@ class Task:
                     auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
         elif write_chan_type == ChannelType.COUNTER_OUTPUT:
+            if isinstance(data, AnalogWaveform):
+                raise DaqError(
+                    'Write failed, because waveform data is not supported for counter output channels.',
+                    DAQmxErrors.UNKNOWN, task_name=self.name)
+            
             output_type = channels_to_write.co_output_type
 
             if number_of_samples_per_channel == 1:

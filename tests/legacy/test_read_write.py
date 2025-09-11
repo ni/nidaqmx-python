@@ -19,6 +19,7 @@ from nidaqmx.constants import (
     TriggerType,
 )
 from nidaqmx.utils import flatten_channel_string
+from nitypes.waveform import AnalogWaveform
 from tests.helpers import POWER_ABS_EPSILON, generate_random_seed
 
 
@@ -283,6 +284,116 @@ class TestAnalogReadWrite(TestDAQmxIOBase):
         values_read = read_task.read(number_of_samples_per_channel=number_of_samples, timeout=2)
 
         numpy.testing.assert_allclose(values_read, values_to_test, rtol=0.05, atol=0.005)
+
+
+class TestAnalogWaveformReadWrite(TestDAQmxIOBase):
+    """Contains a collection of pytest tests.
+
+    These validate the analog waveform Read and Write functions in the NI-DAQmx Python API.
+    These tests use only a single X Series device by utilizing the internal
+    loopback routes on the device.
+    """
+
+    @pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
+    @pytest.mark.parametrize("seed", [generate_random_seed()])
+    def test_1_chan_waveform_write_read(self, generate_task, real_x_series_device, seed):
+        """Test to validate writing and reading waveform data."""
+        # Reset the pseudorandom number generator with seed.
+        random.seed(seed)
+        
+        # Select a random loopback channel pair on the device.
+        loopback_channel_pairs = self._get_analog_loopback_channels(real_x_series_device)
+        loopback_channel_pair = random.choice(loopback_channel_pairs)
+
+        number_of_samples = random.randint(20, 100)
+        sample_rate = random.uniform(1000, 5000)
+
+        write_task = generate_task()
+        read_task = generate_task()
+        sample_clk_task = generate_task()
+
+        # Use a counter output pulse train task as the sample clock source
+        # for both the AI and AO tasks.
+        sample_clk_task.co_channels.add_co_pulse_chan_freq(
+            f"{real_x_series_device.name}/ctr0", freq=sample_rate, idle_state=Level.LOW
+        )
+        sample_clk_task.timing.cfg_implicit_timing(samps_per_chan=number_of_samples)
+        sample_clk_task.control(TaskMode.TASK_COMMIT)
+
+        samp_clk_terminal = f"/{real_x_series_device.name}/Ctr0InternalOutput"
+
+        write_task.ao_channels.add_ao_voltage_chan(
+            loopback_channel_pair.output_channel, max_val=10, min_val=-10
+        )
+        write_task.timing.cfg_samp_clk_timing(
+            sample_rate,
+            source=samp_clk_terminal,
+            active_edge=Edge.RISING,
+            samps_per_chan=number_of_samples,
+        )
+
+        read_task.ai_channels.add_ai_voltage_chan(
+            loopback_channel_pair.input_channel, max_val=10, min_val=-10
+        )
+        read_task.timing.cfg_samp_clk_timing(
+            sample_rate,
+            source=samp_clk_terminal,
+            active_edge=Edge.FALLING,
+            samps_per_chan=number_of_samples,
+        )
+
+        # Generate random sample data for the waveform.
+        samples = numpy.array([random.uniform(-10, 10) for _ in range(number_of_samples)], dtype=numpy.float64)
+        
+        # Create an AnalogWaveform with the sample data.
+        waveform = AnalogWaveform.from_array_1d(samples)
+
+        # Write the waveform
+        write_task.write(waveform)
+
+        # Start the read and write tasks before starting the sample clock
+        # source task.
+        read_task.start()
+        write_task.start()
+        sample_clk_task.start()
+
+        values_read = read_task.read(number_of_samples_per_channel=number_of_samples, timeout=2)
+
+        # Verify that the read values match the waveform samples
+        numpy.testing.assert_allclose(values_read, samples, rtol=0.05, atol=0.005)
+
+    @pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
+    @pytest.mark.parametrize("seed", [generate_random_seed()])
+    def test_waveform_error_handling(self, generate_task, real_x_series_device, seed):
+        """Test error handling for waveform write operations."""
+        # Reset the pseudorandom number generator with seed.
+        random.seed(seed)
+        
+        # Select multiple loopback channel pairs for multi-channel test
+        loopback_channel_pairs = self._get_analog_loopback_channels(real_x_series_device)
+        
+        if len(loopback_channel_pairs) < 2:
+            pytest.skip("Need at least 2 analog channels for multi-channel waveform error test")
+        
+        channels_to_test = random.sample(loopback_channel_pairs, 2)
+        write_task = generate_task()
+        
+        write_task.ao_channels.add_ao_voltage_chan(
+            flatten_channel_string([c.output_channel for c in channels_to_test]),
+            max_val=10,
+            min_val=-10,
+        )
+
+        # Create a single-channel waveform
+        samples = numpy.array([1.0, 2.0, 3.0], dtype=numpy.float64)
+        waveform = AnalogWaveform.from_array_1d(samples)
+
+        # This should raise an error because we have multiple channels but a single-channel waveform
+        with pytest.raises(nidaqmx.errors.DaqError) as exc_info:
+            write_task.write(waveform)
+        
+        # Verify the error message mentions the channel count mismatch
+        assert "multi-channel" in str(exc_info.value).lower()
 
 
 class TestDigitalReadWrite(TestDAQmxIOBase):
