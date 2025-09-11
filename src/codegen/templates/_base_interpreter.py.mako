@@ -118,3 +118,13 @@ class BaseInterpreter(abc.ABC):
         waveform_attribute_mode: WaveformAttributeMode,
     ) -> Sequence[DigitalWaveform[numpy.uint8]]:
         raise NotImplementedError
+
+    @abc.abstractmethod
+    def write_analog_waveform(
+        self,
+        task_handle: object,
+        waveform: AnalogWaveform[numpy.float64],
+        auto_start: bool,
+        timeout: float
+    ) -> int:
+        raise NotImplementedError

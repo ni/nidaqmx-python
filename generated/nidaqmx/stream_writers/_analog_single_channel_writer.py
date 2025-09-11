@@ -125,6 +125,6 @@ class AnalogSingleChannelWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else False)
 
-        return self._interpreter.write_waveform(
+        return self._interpreter.write_analog_waveform(
             self._handle, waveform, auto_start, timeout)
     

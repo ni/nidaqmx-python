@@ -3654,6 +3654,15 @@ class GrpcStubInterpreter(BaseInterpreter):
         waveform_attribute_mode: WaveformAttributeMode,
     ) -> Sequence[DigitalWaveform[numpy.uint8]]:
         raise NotImplementedError
+        
+    def write_analog_waveform(
+        self,
+        task_handle: object,
+        waveform: AnalogWaveform[numpy.float64],
+        auto_start: bool,
+        timeout: float
+    ) -> int:
+        raise NotImplementedError
 
 def _assign_numpy_array(numpy_array, grpc_array):
     """

@@ -6967,6 +6967,79 @@ class LibraryInterpreter(BaseInterpreter):
 
         return read_array, samples_read.value, number_of_bytes_per_sample.value
 
+    def write_analog_waveform(
+        self,
+        task_handle: object,
+        waveform: AnalogWaveform[numpy.float64],
+        auto_start: bool,
+        timeout: float
+    ) -> int:
+        """Write an analog waveform."""
+        if waveform.raw_data.dtype != numpy.float64:
+            raise TypeError(f"waveform.raw_data must have dtype numpy.float64, got {waveform.raw_data.dtype}")
+
+        error_code, samples_written = self._internal_write_analog_waveform_per_chan(
+            task_handle,
+            waveform.sample_count,
+            auto_start,
+            timeout,
+            [waveform.raw_data],
+        )
+
+        self.check_for_error(error_code, samps_per_chan_written=samples_written)
+        return samples_written
+
+    def _internal_write_analog_waveform_per_chan(
+        self,
+        task_handle: object,
+        num_samps_per_chan: int,
+        auto_start: bool,
+        timeout: float,
+        write_arrays: Sequence[numpy.typing.NDArray[numpy.float64]],
+    ) -> Tuple[
+        int, # error code
+        int, # The number of samples per channel that were written
+    ]:
+        assert isinstance(task_handle, TaskHandle)
+        samps_per_chan_written = ctypes.c_int()
+
+        channel_count = len(write_arrays)
+        assert channel_count > 0
+        array_size = write_arrays[0].size
+        assert all(write_array.size == array_size for write_array in write_arrays)
+
+        cfunc = lib_importer.windll.DAQmxInternalWriteAnalogWaveformPerChan
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        TaskHandle,
+                        ctypes.c_int,
+                        c_bool32,
+                        ctypes.c_double,
+                        ctypes.POINTER(ctypes.POINTER(ctypes.c_double)),
+                        ctypes.c_uint,
+                        ctypes.POINTER(ctypes.c_int),
+                        ctypes.POINTER(c_bool32),
+                    ]
+
+        write_array_ptrs = (ctypes.POINTER(ctypes.c_double) * channel_count)()
+        for i, write_array in enumerate(write_arrays):
+            write_array_ptrs[i] = write_array.ctypes.data_as(ctypes.POINTER(ctypes.c_double))
+
+        error_code = cfunc(
+            task_handle,
+            num_samps_per_chan,
+            auto_start,
+            timeout,
+            write_array_ptrs,
+            channel_count,
+            ctypes.byref(samps_per_chan_written),
+            None,
+        )
+
+        return error_code, samps_per_chan_written.value
+
     def write_raw(
             self, task_handle, num_samps_per_chan, auto_start, timeout, numpy_array):
         samps_per_chan_written = ctypes.c_int()

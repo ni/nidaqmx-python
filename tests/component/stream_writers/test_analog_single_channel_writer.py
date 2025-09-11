@@ -4,13 +4,14 @@ import ctypes
 
 import numpy
 import pytest
+from nitypes.waveform import AnalogWaveform
 
 import nidaqmx
+from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
 from nidaqmx.stream_writers import AnalogSingleChannelWriter
-from nitypes.waveform import AnalogWaveform
 from tests.component._analog_utils import (
-    _get_expected_voltage_for_chan,
     AO_VOLTAGE_EPSILON,
+    _get_expected_voltage_for_chan,
 )
 
 
@@ -56,6 +57,27 @@ def test___analog_single_channel_writer___write_many_sample_with_wrong_dtype___r
     assert "float64" in exc_info.value.args[0]
 
 
+@pytest.mark.disable_feature_toggle(WAVEFORM_SUPPORT)
+def test___analog_single_channel_reader___read_waveform_feature_disabled___raises_feature_not_supported_error(
+    ao_single_channel_task: nidaqmx.Task,
+) -> None:
+    writer = AnalogSingleChannelWriter(ao_single_channel_task.out_stream)
+    samples_to_write = 10
+    expected = _get_expected_voltage_for_chan(0)
+    # sweep up to the expected value, the only one we'll validate
+    waveform = AnalogWaveform.from_array_1d(
+        numpy.linspace(0.0, expected, num=samples_to_write, dtype=numpy.float64)
+    )
+
+    with pytest.raises(FeatureNotSupportedError) as exc_info:
+        writer.write_waveform(waveform)
+
+    error_message = str(exc_info.value)
+    assert "WAVEFORM_SUPPORT feature is not supported" in error_message
+    assert "NIDAQMX_ENABLE_WAVEFORM_SUPPORT" in error_message
+
+
+@pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
 def test___analog_single_channel_writer___write_waveform___updates_output(
     ao_single_channel_task: nidaqmx.Task,
     ai_single_channel_loopback_task: nidaqmx.Task,
@@ -64,8 +86,9 @@ def test___analog_single_channel_writer___write_waveform___updates_output(
     samples_to_write = 10
     expected = _get_expected_voltage_for_chan(0)
     # sweep up to the expected value, the only one we'll validate
-    waveform = AnalogWaveform(
-        numpy.linspace(0.0, expected, num=samples_to_write, dtype=numpy.float64))
+    waveform = AnalogWaveform.from_array_1d(
+        numpy.linspace(0.0, expected, num=samples_to_write, dtype=numpy.float64)
+    )
 
     samples_written = writer.write_waveform(waveform)
 
@@ -73,16 +96,18 @@ def test___analog_single_channel_writer___write_waveform___updates_output(
     assert ai_single_channel_loopback_task.read() == pytest.approx(expected, abs=AO_VOLTAGE_EPSILON)
 
 
+@pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
 def test___analog_single_channel_writer___write_waveform_with_wrong_dtype___raises_error_with_correct_dtype(
     ao_single_channel_task: nidaqmx.Task,
 ) -> None:
     writer = AnalogSingleChannelWriter(ao_single_channel_task.out_stream)
     samples_to_write = 10
     expected = _get_expected_voltage_for_chan(0)
-    waveform = AnalogWaveform(
-        numpy.linspace(0.0, expected, num=samples_to_write, dtype=numpy.float32))
+    waveform = AnalogWaveform.from_array_1d(
+        numpy.full(samples_to_write, expected, dtype=numpy.float32)
+    )
 
     with pytest.raises((ctypes.ArgumentError, TypeError)) as exc_info:
-        _ = writer.write_waveform(waveform)
+        _ = writer.write_waveform(waveform)  # type: ignore[arg-type]
 
     assert "float64" in exc_info.value.args[0]
