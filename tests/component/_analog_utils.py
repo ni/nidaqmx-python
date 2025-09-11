@@ -55,21 +55,15 @@ def _get_voltage_code_offset_for_chan(chan_index: int) -> int:
     return _volts_to_codes(voltage_limits)
 
 
-def _create_sine_wave_waveform(
-    num_samples: int, frequency: float = 10.0, amplitude: float = 5.0, sample_rate: float = 1000.0
+def _create_linear_ramp_waveform(
+    num_samples: int, start_val: float, end_val: float
 ) -> AnalogWaveform:
-    t = np.linspace(0, num_samples / sample_rate, num_samples, endpoint=False)
-    samples = amplitude * np.sin(2 * np.pi * frequency * t)
-    return AnalogWaveform.from_array_1d(samples.astype(np.float64))
-
-
-def _create_linear_ramp_waveform(num_samples: int, start_val: float, end_val: float) -> AnalogWaveform:
     samples = np.linspace(start_val, end_val, num_samples, dtype=np.float64)
     return AnalogWaveform.from_array_1d(samples)
 
 
-def _create_constant_waveform(num_samples: int, value: float) -> AnalogWaveform:
-    samples = np.full(num_samples, value, dtype=np.float64)
+def _create_constant_waveform(num_samples: int) -> AnalogWaveform:
+    samples = np.full(num_samples, 1, dtype=np.float64)
     return AnalogWaveform.from_array_1d(samples)
 
 
@@ -82,28 +76,25 @@ def _setup_synchronized_waveform_tasks(
     chan_index: int = 0,
 ) -> tuple[nidaqmx.Task, nidaqmx.Task, nidaqmx.Task, str]:
     """Set up synchronized AO, AI, and sample clock tasks for waveform testing.
-    
+
     Returns:
         tuple: (ao_task, ai_task, sample_clk_task, sample_clk_terminal)
     """
     import nidaqmx.constants as constants
-    
+
     ao_task = generate_task()
     ai_task = generate_task()
     sample_clk_task = generate_task()
-    
+
     min_voltage, max_voltage = voltage_range
-    
+
     # Set up sample clock task
-    sample_clk_task.co_channels.add_co_pulse_chan_freq(
-        f"{device.name}/ctr0", 
-        freq=sample_rate
-    )
+    sample_clk_task.co_channels.add_co_pulse_chan_freq(f"{device.name}/ctr0", freq=sample_rate)
     sample_clk_task.timing.cfg_implicit_timing(samps_per_chan=num_samples)
     sample_clk_task.control(constants.TaskMode.TASK_COMMIT)
-    
+
     sample_clk_terminal = f"/{device.name}/Ctr0InternalOutput"
-    
+
     # Set up AO task
     ao_task.ao_channels.add_ao_voltage_chan(
         device.ao_physical_chans[chan_index].name,
@@ -116,7 +107,7 @@ def _setup_synchronized_waveform_tasks(
         active_edge=constants.Edge.RISING,
         samps_per_chan=num_samples,
     )
-    
+
     # Set up AI task for loopback
     ai_task.ai_channels.add_ai_voltage_chan(
         f"{device.name}/_ao{chan_index}_vs_aognd",
@@ -129,7 +120,7 @@ def _setup_synchronized_waveform_tasks(
         active_edge=constants.Edge.FALLING,
         samps_per_chan=num_samples,
     )
-    
+
     return ao_task, ai_task, sample_clk_task, sample_clk_terminal
 
 
