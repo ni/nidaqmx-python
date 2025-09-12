@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import numpy
+from typing import Any
 
 from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, requires_feature
 from nidaqmx.constants import FillMode
@@ -89,7 +90,7 @@ class AnalogSingleChannelWriter(ChannelWriterBase):
     @requires_feature(WAVEFORM_SUPPORT)
     def write_waveform(
         self, 
-        waveform: AnalogWaveform[numpy.float64], 
+        waveform: AnalogWaveform[Any], 
         timeout: float = 10.0
     ) -> int:
         """
@@ -105,7 +106,7 @@ class AnalogSingleChannelWriter(ChannelWriterBase):
         the device generated all samples.
 
         Args:
-            waveform (AnalogWaveform[numpy.float64]): Specifies the
+            waveform (AnalogWaveform[Any]): Specifies the
                 waveform to write to the task.
             timeout (Optional[float]): Specifies the amount of time in
                 seconds to wait for the method to write all samples.
