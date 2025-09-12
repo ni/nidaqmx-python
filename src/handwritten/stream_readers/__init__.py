@@ -1,5 +1,4 @@
-"""
-NI-DAQmx stream readers.
+"""NI-DAQmx stream readers.
 
 This package provides classes for reading samples from NI-DAQmx tasks.
 """

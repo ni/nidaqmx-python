@@ -6,15 +6,13 @@ from nidaqmx.types import CtrFreq, CtrTick, CtrTime
 
 
 class CounterReader(ChannelReaderBase):
-    """
-    Reads samples from a counter input channel in an NI-DAQmx task.
+    """Reads samples from a counter input channel in an NI-DAQmx task.
     """
 
     def read_many_sample_double(
         self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0
     ):
-        """
-        Reads one or more floating-point samples from a single counter
+        """Reads one or more floating-point samples from a single counter
         input channel in a task.
 
         This read method accepts a preallocated NumPy array to hold the
@@ -93,8 +91,7 @@ class CounterReader(ChannelReaderBase):
         number_of_samples_per_channel=READ_ALL_AVAILABLE,
         timeout=10.0,
     ):
-        """
-        Reads one or more pulse samples in terms of frequency from a
+        """Reads one or more pulse samples in terms of frequency from a
         single counter input channel in a task.
 
         This read method accepts preallocated NumPy arrays to hold the
@@ -179,8 +176,7 @@ class CounterReader(ChannelReaderBase):
     def read_many_sample_pulse_ticks(
         self, high_ticks, low_ticks, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0
     ):
-        """
-        Reads one or more pulse samples in terms of ticks from a single
+        """Reads one or more pulse samples in terms of ticks from a single
         counter input channel in a task.
 
         This read method accepts preallocated NumPy arrays to hold the
@@ -265,8 +261,7 @@ class CounterReader(ChannelReaderBase):
     def read_many_sample_pulse_time(
         self, high_times, low_times, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0
     ):
-        """
-        Reads one or more pulse samples in terms of time from a single
+        """Reads one or more pulse samples in terms of time from a single
         counter input channel in a task.
 
         This read method accepts preallocated NumPy arrays to hold the
@@ -351,8 +346,7 @@ class CounterReader(ChannelReaderBase):
     def read_many_sample_uint32(
         self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0
     ):
-        """
-        Reads one or more 32-bit unsigned integer samples from a single
+        """Reads one or more 32-bit unsigned integer samples from a single
         counter input channel in a task.
 
         This read method accepts a preallocated NumPy array to hold the
@@ -425,8 +419,7 @@ class CounterReader(ChannelReaderBase):
         return samps_per_chan_read
 
     def read_one_sample_double(self, timeout=10):
-        """
-        Reads a single floating-point sample from a single counter input
+        """Reads a single floating-point sample from a single counter input
         channel in a task.
 
         Args:
@@ -446,8 +439,7 @@ class CounterReader(ChannelReaderBase):
         return self._interpreter.read_counter_scalar_f64(self._handle, timeout)
 
     def read_one_sample_pulse_frequency(self, timeout=10):
-        """
-        Reads a pulse sample in terms of frequency from a single counter
+        """Reads a pulse sample in terms of frequency from a single counter
         input channel in a task.
 
         Args:
@@ -470,8 +462,7 @@ class CounterReader(ChannelReaderBase):
         return CtrFreq(freq, duty_cycle)
 
     def read_one_sample_pulse_ticks(self, timeout=10):
-        """
-        Reads a pulse sample in terms of ticks from a single counter
+        """Reads a pulse sample in terms of ticks from a single counter
         input channel in a task.
 
         Args:
@@ -494,8 +485,7 @@ class CounterReader(ChannelReaderBase):
         return CtrTick(high_ticks, low_ticks)
 
     def read_one_sample_pulse_time(self, timeout=10):
-        """
-        Reads a pulse sample in terms of time from a single counter
+        """Reads a pulse sample in terms of time from a single counter
         input channel in a task.
 
         Args:
@@ -518,8 +508,7 @@ class CounterReader(ChannelReaderBase):
         return CtrTime(high_time, low_time)
 
     def read_one_sample_uint32(self, timeout=10):
-        """
-        Reads a single 32-bit unsigned integer sample from a single
+        """Reads a single 32-bit unsigned integer sample from a single
         counter input channel in a task.
 
         Args:

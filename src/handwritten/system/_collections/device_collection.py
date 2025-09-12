@@ -7,15 +7,13 @@ from nidaqmx.utils import unflatten_channel_string
 
 
 class DeviceCollection(Sequence):
-    """
-    Contains the collection of devices for a DAQmx system.
+    """Contains the collection of devices for a DAQmx system.
 
     This class defines methods that implements a container object.
     """
 
     def __init__(self, interpreter):
-        """
-        Do not construct this object directly; instead, call nidaqmx.system.System.local().devices.
+        """Do not construct this object directly; instead, call nidaqmx.system.System.local().devices.
         """
         self._interpreter = interpreter
 
@@ -35,8 +33,7 @@ class DeviceCollection(Sequence):
         return False
 
     def __getitem__(self, index):
-        """
-        Indexes a subset of devices on this device collection.
+        """Indexes a subset of devices on this device collection.
 
         Args:
             index: The value of the index. The following index types are
@@ -91,8 +88,7 @@ class DeviceCollection(Sequence):
 
     @property
     def device_names(self):
-        """
-        List[str]: Indicates the names of all devices on this device
+        """List[str]: Indicates the names of all devices on this device
             collection.
         """
         val = self._interpreter.get_system_info_attribute_string(0x193B)

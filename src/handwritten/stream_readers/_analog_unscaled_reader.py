@@ -5,14 +5,12 @@ from nidaqmx.stream_readers._channel_reader_base import ChannelReaderBase
 
 
 class AnalogUnscaledReader(ChannelReaderBase):
-    """
-    Reads unscaled samples from one or more analog input channels in an
+    """Reads unscaled samples from one or more analog input channels in an
     NI-DAQmx task.
     """
 
     def read_int16(self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0):
-        """
-        Reads one or more unscaled 16-bit integer samples from one or
+        """Reads one or more unscaled 16-bit integer samples from one or
         more analog input channels in a task.
 
         This read method accepts a preallocated NumPy array to hold the
@@ -98,8 +96,7 @@ class AnalogUnscaledReader(ChannelReaderBase):
         return samps_per_chan_read
 
     def read_int32(self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0):
-        """
-        Reads one or more unscaled 32-bit integer samples from one or
+        """Reads one or more unscaled 32-bit integer samples from one or
         more analog input channels in a task.
 
         This read method accepts a preallocated NumPy array to hold the
@@ -185,8 +182,7 @@ class AnalogUnscaledReader(ChannelReaderBase):
         return samps_per_chan_read
 
     def read_uint16(self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0):
-        """
-        Reads one or more unscaled 16-bit unsigned integer samples from
+        """Reads one or more unscaled 16-bit unsigned integer samples from
         one or more analog input channels in a task.
 
         This read method accepts a preallocated NumPy array to hold the
@@ -272,8 +268,7 @@ class AnalogUnscaledReader(ChannelReaderBase):
         return samps_per_chan_read
 
     def read_uint32(self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0):
-        """
-        Reads one or more unscaled unsigned 32-bit integer samples from
+        """Reads one or more unscaled unsigned 32-bit integer samples from
         one or more analog input channels in a task.
 
         This read method accepts a preallocated NumPy array to hold the

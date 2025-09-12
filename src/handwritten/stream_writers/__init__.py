@@ -1,5 +1,4 @@
-"""
-NI-DAQmx stream writers.
+"""NI-DAQmx stream writers.
 
 This package provides classes for writing samples to NI-DAQmx tasks.
 """

@@ -14,13 +14,11 @@ from nidaqmx.stream_writers._channel_writer_base import (
 
 
 class AnalogSingleChannelWriter(ChannelWriterBase):
-    """
-    Writes samples to an analog output channel in an NI-DAQmx task.
+    """Writes samples to an analog output channel in an NI-DAQmx task.
     """
 
     def write_many_sample(self, data, timeout=10.0):
-        """
-        Writes one or more floating-point samples to a single analog
+        """Writes one or more floating-point samples to a single analog
         output channel in a task.
 
         If the task uses on-demand timing, this method returns only
@@ -62,8 +60,7 @@ class AnalogSingleChannelWriter(ChannelWriterBase):
         )
 
     def write_one_sample(self, data, timeout=10):
-        """
-        Writes a single floating-point sample to a single analog output
+        """Writes a single floating-point sample to a single analog output
         channel in a task.
 
         Args:
@@ -90,8 +87,7 @@ class AnalogSingleChannelWriter(ChannelWriterBase):
 
     @requires_feature(WAVEFORM_SUPPORT)
     def write_waveform(self, waveform: AnalogWaveform[Any], timeout: float = 10.0) -> int:
-        """
-        Writes a waveform to a single analog output channel in a task.
+        """Writes a waveform to a single analog output channel in a task.
 
         If the task uses on-demand timing, this method returns only
         after the device generates all samples. On-demand is the default

@@ -8,32 +8,25 @@ __all__ = ["DaqError", "DaqReadError", "DaqWriteError", "DaqWarning", "DaqResour
 
 
 class Error(Exception):
-    """
-    Base error class for module.
-    """
+    """Base error class for module."""
 
     pass
 
 
 class DaqNotFoundError(Error):
-    """
-    Error raised when NI-DAQmx driver is not installed.
-    """
+    """Error raised when NI-DAQmx driver is not installed."""
 
     pass
 
 
 class DaqNotSupportedError(Error):
-    """
-    Error raised when DAQmx is not supported on this platform.
-    """
+    """Error raised when DAQmx is not supported on this platform."""
 
     pass
 
 
 class DaqFunctionNotSupportedError(Error):
-    """
-    Error raised when a specific function isn't supported by the installed
+    """Error raised when a specific function isn't supported by the installed
     version of the NI-DAQmx driver.
     """
 
@@ -41,12 +34,11 @@ class DaqFunctionNotSupportedError(Error):
 
 
 class DaqError(Error):
-    """
-    Error raised by any DAQmx method.
-    """
+    """Error raised by any DAQmx method."""
 
     def __init__(self, message, error_code, task_name=""):
-        """
+        """Initialize a new DaqError.
+        
         Args:
             message (string): Specifies the error message.
             error_code (int): Specifies the NI-DAQmx error code.
@@ -73,28 +65,24 @@ class DaqError(Error):
 
     @property
     def error_code(self):
-        """
-        int: Specifies the NI-DAQmx error code.
-        """
+        """int: Specifies the NI-DAQmx error code."""
         return self._error_code
 
     @property
     def error_type(self):
-        """
-        :class:`nidaqmx.error_codes.DAQmxErrors`: Specifies the NI-DAQmx
-            error type.
-        """
+        """:class:`nidaqmx.error_codes.DAQmxErrors`: Specifies the NI-DAQmx
+            error type."""
         return self._error_type
 
 
 class DaqReadError(DaqError):
-    """
-    Error raised by DAQmx write method that includes the amount of data that was
+    """Error raised by DAQmx write method that includes the amount of data that was
     read.
     """
 
     def __init__(self, message, error_code, samps_per_chan_read, task_name=""):
-        """
+        """Initialize a new DaqReadError.
+        
         Args:
             message (string): Specifies the error message.
             error_code (int): Specifies the NI-DAQmx error code.
@@ -105,20 +93,18 @@ class DaqReadError(DaqError):
 
     @property
     def samps_per_chan_read(self):
-        """
-        int: Indicates the number of samples successfully read.
-        """
+        """int: Indicates the number of samples successfully read."""
         return self._samps_per_chan_read
 
 
 class DaqWriteError(DaqError):
-    """
-    Error raised by DAQmx write method that includes the amount of data that was
+    """Error raised by DAQmx write method that includes the amount of data that was
     written.
     """
 
     def __init__(self, message, error_code, samps_per_chan_written, task_name=""):
-        """
+        """Initialize a new DaqWriteError.
+        
         Args:
             message (string): Specifies the error message.
             error_code (int): Specifies the NI-DAQmx error code.
@@ -130,19 +116,16 @@ class DaqWriteError(DaqError):
 
     @property
     def samps_per_chan_written(self):
-        """
-        int: Indicates the number of samples successfully written.
-        """
+        """int: Indicates the number of samples successfully written."""
         return self._samps_per_chan_written
 
 
 class DaqWarning(Warning):
-    """
-    Warning raised by any NI-DAQmx method.
-    """
+    """Warning raised by any NI-DAQmx method."""
 
     def __init__(self, message, error_code):
-        """
+        """Initialize a new DaqWarning.
+        
         Args:
             message (string): Specifies the warning message.
             error_code (int): Specifies the NI-DAQmx error code.
@@ -158,17 +141,13 @@ class DaqWarning(Warning):
 
     @property
     def error_code(self):
-        """
-        int: Specifies the NI-DAQmx error code.
-        """
+        """int: Specifies the NI-DAQmx error code."""
         return self._error_code
 
     @property
     def error_type(self):
-        """
-        :class:`nidaqmx.error_codes.DAQmxWarnings`: Specifies the NI-DAQmx
-            error type.
-        """
+        """:class:`nidaqmx.error_codes.DAQmxWarnings`: Specifies the NI-DAQmx
+            error type."""
         return self._error_type
 
 
@@ -213,6 +192,7 @@ class RpcError(Error):
     """An error specific to sessions to the NI gRPC Device Server"""
 
     def __init__(self, rpc_code, description):
+        """Initialize a new RpcError."""
         self.rpc_code = rpc_code
         self.description = description
         try:

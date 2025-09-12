@@ -79,10 +79,7 @@ LINUX_COMMANDS = {
 def get_linux_installation_commands(
     _directory_to_extract_to: str, dist_name: str, dist_version: str, _release_string: str
 ) -> list[list[str]]:
-    """
-    Get the installation commands for Linux based on the distribution.
-
-    """
+    """Get the installation commands for Linux based on the distribution."""
     if dist_name not in LINUX_COMMANDS:
         raise ValueError(f"Unsupported distribution '{dist_name}'")
 

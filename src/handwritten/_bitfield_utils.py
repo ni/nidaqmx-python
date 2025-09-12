@@ -1,6 +1,5 @@
 def enum_bitfield_to_list(bitfield_value, bitfield_enum_type, actual_enum_type):
-    """
-    Converts a bitfield value to a list of enums.
+    """Converts a bitfield value to a list of enums.
 
     Args:
         bitfield_value (int): Specifies the value of the bitfield.
@@ -20,8 +19,7 @@ def enum_bitfield_to_list(bitfield_value, bitfield_enum_type, actual_enum_type):
 
 
 def enum_list_to_bitfield(enum_list, bitfield_enum_type):
-    """
-    Converts a list of enums to a bitfield value.
+    """Converts a list of enums to a bitfield value.
 
     Args:
         enum_list (List[enum.Enum]): Specifies the list of enums.

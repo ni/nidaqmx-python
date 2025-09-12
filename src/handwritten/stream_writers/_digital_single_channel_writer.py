@@ -8,14 +8,12 @@ from nidaqmx.stream_writers._channel_writer_base import (
 
 
 class DigitalSingleChannelWriter(ChannelWriterBase):
-    """
-    Writes samples to a single digital output channel in an NI-DAQmx
+    """Writes samples to a single digital output channel in an NI-DAQmx
     task.
     """
 
     def write_many_sample_port_byte(self, data, timeout=10.0):
-        """
-        Writes one or more 8-bit unsigned integer samples to a single
+        """Writes one or more 8-bit unsigned integer samples to a single
         digital output channel in a task.
 
         Use this method for devices with up to 8 lines per port.
@@ -59,8 +57,7 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
         )
 
     def write_many_sample_port_uint16(self, data, timeout=10.0):
-        """
-        Writes one or more 16-bit unsigned integer samples to a single
+        """Writes one or more 16-bit unsigned integer samples to a single
         digital output channel in a task.
 
         Use this method for devices with up to 16 lines per port.
@@ -104,8 +101,7 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
         )
 
     def write_many_sample_port_uint32(self, data, timeout=10.0):
-        """
-        Writes one or more 32-bit unsigned integer samples to a single
+        """Writes one or more 32-bit unsigned integer samples to a single
         digital output channel in a task.
 
         Use this method for devices with up to 32 lines per port.
@@ -149,8 +145,7 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
         )
 
     def write_one_sample_multi_line(self, data, timeout=10):
-        """
-        Writes a single boolean sample to a single digital output
+        """Writes a single boolean sample to a single digital output
         channel in a task. The channel can contain multiple digital
         lines.
 
@@ -179,8 +174,7 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
         )
 
     def write_one_sample_one_line(self, data, timeout=10):
-        """
-        Writes a single boolean sample to a single digital output
+        """Writes a single boolean sample to a single digital output
         channel in a task. The channel can contain only one digital
         line.
 
@@ -208,8 +202,7 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
         )
 
     def write_one_sample_port_byte(self, data, timeout=10):
-        """
-        Writes a single 8-bit unsigned integer sample to a single
+        """Writes a single 8-bit unsigned integer sample to a single
         digital output channel in a task.
 
         Use this method for devices with up to 8 lines per port.
@@ -238,8 +231,7 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
         )
 
     def write_one_sample_port_uint16(self, data, timeout=10):
-        """
-        Writes a single 16-bit unsigned integer sample to a single
+        """Writes a single 16-bit unsigned integer sample to a single
         digital output channel in a task.
 
         Use this method for devices with up to 16 lines per port.
@@ -268,8 +260,7 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
         )
 
     def write_one_sample_port_uint32(self, data, timeout=10):
-        """
-        Writes a single 32-bit unsigned integer sample to a single
+        """Writes a single 32-bit unsigned integer sample to a single
         digital output channel in a task.
 
         Use this method for devices with up to 32 lines per port.

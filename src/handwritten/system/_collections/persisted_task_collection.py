@@ -10,15 +10,13 @@ from nidaqmx.utils import unflatten_channel_string
 
 
 class PersistedTaskCollection(Sequence):
-    """
-    Contains the collection of task saved on a DAQmx system.
+    """Contains the collection of task saved on a DAQmx system.
 
     This class defines methods that implements a container object.
     """
 
     def __init__(self, interpreter):
-        """
-        Do not construct this object directly; instead, call nidaqmx.system.System.local().tasks.
+        """Do not construct this object directly; instead, call nidaqmx.system.System.local().tasks.
         """
         self._interpreter = interpreter
 
@@ -37,8 +35,7 @@ class PersistedTaskCollection(Sequence):
         return False
 
     def __getitem__(self, index):
-        """
-        Indexes a subset of saved tasks on this collection.
+        """Indexes a subset of saved tasks on this collection.
 
         Args:
             index: The value of the index. The following index types
@@ -94,8 +91,7 @@ class PersistedTaskCollection(Sequence):
 
     @property
     def task_names(self):
-        """
-        List[str]: Indicates the names of all the tasks on this collection.
+        """List[str]: Indicates the names of all the tasks on this collection.
         """
         val = self._interpreter.get_system_info_attribute_string(0x1267)
         return unflatten_channel_string(val)

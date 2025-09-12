@@ -10,15 +10,13 @@ from nidaqmx.utils import unflatten_channel_string
 
 
 class PersistedScaleCollection(Sequence):
-    """
-    Contains the collection of custom scales on a DAQmx system.
+    """Contains the collection of custom scales on a DAQmx system.
 
     This class defines methods that implements a container object.
     """
 
     def __init__(self, interpreter):
-        """
-        Do not construct this object directly; instead, call nidaqmx.system.System.local().scales.
+        """Do not construct this object directly; instead, call nidaqmx.system.System.local().scales.
         """
         self._interpreter = interpreter
 
@@ -37,8 +35,7 @@ class PersistedScaleCollection(Sequence):
         return False
 
     def __getitem__(self, index):
-        """
-        Indexes a subset of custom scales on this collection.
+        """Indexes a subset of custom scales on this collection.
 
         Args:
             index: The value of the index. The following index types
@@ -94,8 +91,7 @@ class PersistedScaleCollection(Sequence):
 
     @property
     def scale_names(self):
-        """
-        List[str]: Indicates the names of all the custom scales on this
+        """List[str]: Indicates the names of all the custom scales on this
             collection.
         """
         val = self._interpreter.get_system_info_attribute_string(0x1266)
