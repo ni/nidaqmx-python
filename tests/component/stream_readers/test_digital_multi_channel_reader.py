@@ -322,7 +322,7 @@ def test___digital_multi_channel_multi_line_reader___read_waveforms_feature_disa
     with pytest.raises(FeatureNotSupportedError) as exc_info:
         reader.read_waveforms(waveforms)
 
-    error_message = str(exc_info.value)
+    error_message = exc_info.value.args[0]
     assert "WAVEFORM_SUPPORT feature is not supported" in error_message
     assert "NIDAQMX_ENABLE_WAVEFORM_SUPPORT" in error_message
 
@@ -487,7 +487,7 @@ def test___digital_multi_channel_different_lines_reader___read_mismatched_wavefo
     with pytest.raises(ValueError) as exc_info:
         reader.read_waveforms(waveforms, samples_to_read)
 
-    error_message = str(exc_info.value)
+    error_message = exc_info.value.args[0]
     assert "waveforms[1].data has 3 signals, but expected 2" in error_message
 
 

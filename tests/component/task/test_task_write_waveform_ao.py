@@ -25,7 +25,7 @@ def test___task___write_waveform_feature_disabled___raises_feature_not_supported
     with pytest.raises(FeatureNotSupportedError) as exc_info:
         ao_single_channel_task.write(waveform)
 
-    error_message = str(exc_info.value)
+    error_message = exc_info.value.args[0]
     assert "WAVEFORM_SUPPORT feature is not supported" in error_message
     assert "NIDAQMX_ENABLE_WAVEFORM_SUPPORT" in error_message
 
@@ -82,7 +82,7 @@ def test___task_with_multiple_channels___write_single_channel_waveform___raises_
     with pytest.raises(nidaqmx.errors.DaqError) as exc_info:
         ao_multi_channel_task.write(single_channel_waveform)
 
-    error_message = str(exc_info.value)
+    error_message = exc_info.value.args[0]
     assert (
         "Write cannot be performed, because the number of channels in the data does not match the number of channels in the task"
         in error_message
@@ -99,7 +99,7 @@ def test___task___write_waveform_with_wrong_dtype___raises_type_error(
     with pytest.raises((TypeError, ValueError)) as exc_info:
         ao_single_channel_task.write(wrong_waveform)
 
-    error_message = str(exc_info.value)
+    error_message = exc_info.value.args[0]
     assert "waveform.raw_data must have dtype numpy.float64, got int32" in error_message
 
 

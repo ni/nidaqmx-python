@@ -7005,8 +7005,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         channel_count = len(write_arrays)
         assert channel_count > 0
-        array_size = write_arrays[0].size
-        assert all(write_array.size == array_size for write_array in write_arrays)
+        assert all(write_array.size >= num_samps_per_chan for write_array in write_arrays)
 
         cfunc = lib_importer.windll.DAQmxInternalWriteAnalogWaveformPerChan
         if cfunc.argtypes is None:
