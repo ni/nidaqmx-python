@@ -1,3 +1,5 @@
+"""NI-DAQmx error classes."""
+
 import warnings
 
 import deprecation

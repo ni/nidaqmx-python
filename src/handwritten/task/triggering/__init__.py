@@ -1,3 +1,5 @@
+"""NI-DAQmx task triggering classes."""
+
 from nidaqmx.task.triggering._arm_start_trigger import ArmStartTrigger
 from nidaqmx.task.triggering._handshake_trigger import HandshakeTrigger
 from nidaqmx.task.triggering._pause_trigger import PauseTrigger

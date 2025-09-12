@@ -1,3 +1,5 @@
+"""NI-DAQmx persisted task classes."""
+
 from nidaqmx import task, utils
 
 __all__ = ["PersistedTask"]

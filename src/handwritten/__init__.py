@@ -1,3 +1,5 @@
+"""The NI-DAQmx API for Python."""
+
 from nidaqmx.errors import (
     DaqError,
     DaqReadError,

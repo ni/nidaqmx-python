@@ -1,3 +1,5 @@
+"""NI-DAQmx storage classes."""
+
 from nidaqmx.system.storage.persisted_channel import PersistedChannel
 from nidaqmx.system.storage.persisted_scale import PersistedScale
 from nidaqmx.system.storage.persisted_task import PersistedTask
