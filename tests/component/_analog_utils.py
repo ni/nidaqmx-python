@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import numpy as np
 import pytest
-from nitypes.waveform import AnalogWaveform
+from nitypes.waveform import AnalogWaveform, LinearScaleMode
 
 import nidaqmx
 import nidaqmx.system
@@ -55,6 +55,11 @@ def _get_voltage_code_offset_for_chan(chan_index: int) -> int:
     return _volts_to_codes(voltage_limits)
 
 
+def _create_constant_waveform(num_samples: int) -> AnalogWaveform:
+    samples = np.full(num_samples, 1, dtype=np.float64)
+    return AnalogWaveform.from_array_1d(samples)
+
+
 def _create_linear_ramp_waveform(
     num_samples: int, start_val: float, end_val: float
 ) -> AnalogWaveform:
@@ -62,9 +67,25 @@ def _create_linear_ramp_waveform(
     return AnalogWaveform.from_array_1d(samples)
 
 
-def _create_constant_waveform(num_samples: int) -> AnalogWaveform:
-    samples = np.full(num_samples, 1, dtype=np.float64)
-    return AnalogWaveform.from_array_1d(samples)
+def _create_scaled_linear_ramp_waveform(
+    num_samples: int, start_val: float, end_val: float, gain: float, offset: float
+) -> AnalogWaveform:
+    samples = np.linspace(start_val, end_val, num_samples, dtype=np.float64)
+    return AnalogWaveform.from_array_1d(
+        samples, scale_mode=LinearScaleMode(gain=gain, offset=offset)
+    )
+
+
+def _create_non_contiguous_waveform(
+    num_samples: int, start_val: float, end_val: float
+) -> AnalogWaveform:
+    larger_array_size = num_samples * 2
+    large_samples = np.linspace(start_val, end_val, larger_array_size, dtype=np.float64)
+    non_contiguous_samples = large_samples[::2]
+    waveform = AnalogWaveform(sample_count=num_samples, raw_data=non_contiguous_samples)
+    assert not waveform.raw_data.flags.c_contiguous
+    assert waveform.sample_count == num_samples
+    return waveform
 
 
 def _setup_synchronized_waveform_tasks(

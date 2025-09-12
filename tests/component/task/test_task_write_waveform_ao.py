@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import numpy as np
 import pytest
-from nitypes.waveform import AnalogWaveform
 
 import nidaqmx
 from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
@@ -11,6 +10,8 @@ from tests.component._analog_utils import (
     AO_VOLTAGE_EPSILON,
     _create_constant_waveform,
     _create_linear_ramp_waveform,
+    _create_non_contiguous_waveform,
+    _create_scaled_linear_ramp_waveform,
     _setup_synchronized_waveform_tasks,
 )
 
@@ -90,17 +91,55 @@ def test___task_with_multiple_channels___write_single_channel_waveform___raises_
 
 
 @pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
-def test___task___write_waveform_with_wrong_dtype___raises_type_error(
+def test___task___write_waveform_with_float32_dtype___output_matches_final_value(
     ao_single_channel_task: nidaqmx.Task,
+    ai_single_channel_loopback_task: nidaqmx.Task,
 ) -> None:
-    wrong_dtype_samples = np.array([1, 2, 3], dtype=np.int32)
-    wrong_waveform = AnalogWaveform.from_array_1d(wrong_dtype_samples)
+    num_samples = 20
+    start_value = 0.0
+    end_value = 1.0
+    waveform = _create_linear_ramp_waveform(num_samples, start_value, end_value)
 
-    with pytest.raises((TypeError, ValueError)) as exc_info:
-        ao_single_channel_task.write(wrong_waveform)
+    ao_single_channel_task.write(waveform)
 
-    error_message = exc_info.value.args[0]
-    assert "waveform.raw_data must have dtype numpy.float64, got int32" in error_message
+    actual_value = ai_single_channel_loopback_task.read()
+    assert actual_value == pytest.approx(end_value, abs=AO_VOLTAGE_EPSILON)
+
+
+@pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
+def test___task___write_waveform_with_scaling___output_matches_final_value(
+    ao_single_channel_task: nidaqmx.Task,
+    ai_single_channel_loopback_task: nidaqmx.Task,
+) -> None:
+    num_samples = 20
+    start_value = -0.1
+    end_value = 0.1
+    gain = 2.0
+    offset = 0.5
+    waveform = _create_scaled_linear_ramp_waveform(
+        num_samples, start_value, end_value, gain=gain, offset=offset
+    )
+
+    ao_single_channel_task.write(waveform)
+
+    actual_value = ai_single_channel_loopback_task.read()
+    assert actual_value == pytest.approx(end_value * gain + offset, abs=AO_VOLTAGE_EPSILON)
+
+
+@pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
+def test___task___write_waveform_with_non_contiguous_data___updates_output(
+    ao_single_channel_task: nidaqmx.Task,
+    ai_single_channel_loopback_task: nidaqmx.Task,
+) -> None:
+    num_samples = 20
+    waveform = _create_non_contiguous_waveform(num_samples, -0.0, 0.1)
+
+    samples_written = ao_single_channel_task.write(waveform)
+
+    assert samples_written == num_samples
+    assert ai_single_channel_loopback_task.read() == pytest.approx(
+        waveform.scaled_data[-1], abs=AO_VOLTAGE_EPSILON
+    )
 
 
 @pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
