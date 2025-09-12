@@ -13,12 +13,12 @@ import subprocess  # nosec: B404
 import sys
 import tempfile
 import traceback
-import requests
 import zipfile
 from typing import Generator, List, Optional, Tuple
 from urllib.parse import urlparse
 
 import click
+import requests
 
 if sys.platform.startswith("win"):
     import winreg
@@ -101,7 +101,9 @@ def _get_daqmx_installed_version() -> str | None:
             commands_info = LINUX_COMMANDS[distribution]
             query_command = commands_info.get_daqmx_version
             # Run the package query command defined by _linux_installation_commands.py.
-            query_output = subprocess.run(query_command, stdout=subprocess.PIPE, text=True).stdout  # nosec: B603
+            query_output = subprocess.run(
+                query_command, stdout=subprocess.PIPE, text=True
+            ).stdout  # nosec: B603
 
             if distribution == "ubuntu":
                 version_match = re.search(r"ii\s+ni-daqmx\s+(\d+\.\d+\.\d+)", query_output)
@@ -127,9 +129,7 @@ def _get_daqmx_installed_version() -> str | None:
 
 # Creating a temp file that we then close and yield - this is used to allow subprocesses to access
 @contextlib.contextmanager
-def _multi_access_temp_file(
-    *, suffix: str = ".exe", delete: bool = True
-) -> Generator[str]:
+def _multi_access_temp_file(*, suffix: str = ".exe", delete: bool = True) -> Generator[str]:
     """
     Context manager for creating a temporary file.
 
@@ -244,7 +244,7 @@ def _install_daqmx_driver_windows_core(download_url: str) -> None:
             _logger.info("Downloading Driver to %s", temp_file)
             response = requests.get(download_url, timeout=_NETWORK_TIMEOUT_IN_SECONDS)
             response.raise_for_status()
-            with open(temp_file, 'wb') as f:
+            with open(temp_file, "wb") as f:
                 f.write(response.content)
             _logger.info("Installing NI-DAQmx")
             # Run the installer that we just downloaded from https://download.ni.com.
@@ -274,7 +274,7 @@ def _install_daqmx_driver_linux_core(download_url: str, release: str) -> None:
                 _logger.info("Downloading Driver to %s", temp_file)
                 response = requests.get(download_url, timeout=_NETWORK_TIMEOUT_IN_SECONDS)
                 response.raise_for_status()
-                with open(temp_file, 'wb') as f:
+                with open(temp_file, "wb") as f:
                     f.write(response.content)
 
                 with tempfile.TemporaryDirectory() as temp_folder:
@@ -443,9 +443,7 @@ def _install_daqmx_driver():
                 installed_version, latest_version, release
             )
         else:
-            user_response = _fresh_install_daqmx_user_confirmation(
-                latest_version, release
-            )
+            user_response = _fresh_install_daqmx_user_confirmation(latest_version, release)
 
         if user_response:
             if platform == "Linux":

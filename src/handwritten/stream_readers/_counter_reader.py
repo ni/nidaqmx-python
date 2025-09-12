@@ -1,9 +1,8 @@
 from __future__ import annotations
 
-from nidaqmx.constants import FillMode, READ_ALL_AVAILABLE
-from nidaqmx.types import CtrFreq, CtrTick, CtrTime
-
+from nidaqmx.constants import READ_ALL_AVAILABLE, FillMode
 from nidaqmx.stream_readers._channel_reader_base import ChannelReaderBase
+from nidaqmx.types import CtrFreq, CtrTick, CtrTime
 
 
 class CounterReader(ChannelReaderBase):
@@ -12,8 +11,8 @@ class CounterReader(ChannelReaderBase):
     """
 
     def read_many_sample_double(
-            self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE,
-            timeout=10.0):
+        self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0
+    ):
         """
         Reads one or more floating-point samples from a single counter
         input channel in a task.
@@ -71,21 +70,29 @@ class CounterReader(ChannelReaderBase):
             NI-DAQmx returns a single value because this value is the
             same for all channels.
         """
-        number_of_samples_per_channel = (
-            self._task._calculate_num_samps_per_chan(
-                number_of_samples_per_channel))
+        number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
+            number_of_samples_per_channel
+        )
 
         self._verify_array(data, number_of_samples_per_channel, False, True)
 
         _, samps_per_chan_read = self._interpreter.read_counter_f64_ex(
-            self._handle,number_of_samples_per_channel, timeout, 
-            FillMode.GROUP_BY_CHANNEL.value, data)
-        
+            self._handle,
+            number_of_samples_per_channel,
+            timeout,
+            FillMode.GROUP_BY_CHANNEL.value,
+            data,
+        )
+
         return samps_per_chan_read
 
     def read_many_sample_pulse_frequency(
-            self, frequencies, duty_cycles,
-            number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0):
+        self,
+        frequencies,
+        duty_cycles,
+        number_of_samples_per_channel=READ_ALL_AVAILABLE,
+        timeout=10.0,
+    ):
         """
         Reads one or more pulse samples in terms of frequency from a
         single counter input channel in a task.
@@ -151,24 +158,27 @@ class CounterReader(ChannelReaderBase):
             NI-DAQmx returns a single value because this value is the
             same for all channels.
         """
-        number_of_samples_per_channel = (
-            self._task._calculate_num_samps_per_chan(
-                number_of_samples_per_channel))
+        number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
+            number_of_samples_per_channel
+        )
 
-        self._verify_array(
-            frequencies, number_of_samples_per_channel, False, True)
-        self._verify_array(
-            duty_cycles, number_of_samples_per_channel, False, True)
+        self._verify_array(frequencies, number_of_samples_per_channel, False, True)
+        self._verify_array(duty_cycles, number_of_samples_per_channel, False, True)
 
         _, _, samps_per_chan_read = self._interpreter.read_ctr_freq(
-            self._handle, number_of_samples_per_channel, timeout, 
-            FillMode.GROUP_BY_CHANNEL.value, frequencies, duty_cycles)
-        
+            self._handle,
+            number_of_samples_per_channel,
+            timeout,
+            FillMode.GROUP_BY_CHANNEL.value,
+            frequencies,
+            duty_cycles,
+        )
+
         return samps_per_chan_read
 
     def read_many_sample_pulse_ticks(
-            self, high_ticks, low_ticks,
-            number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0):
+        self, high_ticks, low_ticks, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0
+    ):
         """
         Reads one or more pulse samples in terms of ticks from a single
         counter input channel in a task.
@@ -234,24 +244,27 @@ class CounterReader(ChannelReaderBase):
             NI-DAQmx returns a single value because this value is the
             same for all channels.
         """
-        number_of_samples_per_channel = (
-            self._task._calculate_num_samps_per_chan(
-                number_of_samples_per_channel))
+        number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
+            number_of_samples_per_channel
+        )
 
-        self._verify_array(
-            high_ticks, number_of_samples_per_channel, False, True)
-        self._verify_array(
-            low_ticks, number_of_samples_per_channel, False, True)
+        self._verify_array(high_ticks, number_of_samples_per_channel, False, True)
+        self._verify_array(low_ticks, number_of_samples_per_channel, False, True)
 
         _, _, samps_per_chan_read = self._interpreter.read_ctr_ticks(
-            self._handle, number_of_samples_per_channel, timeout, 
-            FillMode.GROUP_BY_CHANNEL.value, high_ticks, low_ticks)
-        
+            self._handle,
+            number_of_samples_per_channel,
+            timeout,
+            FillMode.GROUP_BY_CHANNEL.value,
+            high_ticks,
+            low_ticks,
+        )
+
         return samps_per_chan_read
 
     def read_many_sample_pulse_time(
-            self, high_times, low_times,
-            number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0):
+        self, high_times, low_times, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0
+    ):
         """
         Reads one or more pulse samples in terms of time from a single
         counter input channel in a task.
@@ -317,24 +330,27 @@ class CounterReader(ChannelReaderBase):
             NI-DAQmx returns a single value because this value is the
             same for all channels.
         """
-        number_of_samples_per_channel = (
-            self._task._calculate_num_samps_per_chan(
-                number_of_samples_per_channel))
+        number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
+            number_of_samples_per_channel
+        )
 
-        self._verify_array(
-            high_times, number_of_samples_per_channel, False, True)
-        self._verify_array(
-            low_times, number_of_samples_per_channel, False, True)
+        self._verify_array(high_times, number_of_samples_per_channel, False, True)
+        self._verify_array(low_times, number_of_samples_per_channel, False, True)
 
         _, _, samps_per_chan_read = self._interpreter.read_ctr_time(
-            self._handle, number_of_samples_per_channel, timeout, 
-            FillMode.GROUP_BY_CHANNEL.value, high_times, low_times)
-        
+            self._handle,
+            number_of_samples_per_channel,
+            timeout,
+            FillMode.GROUP_BY_CHANNEL.value,
+            high_times,
+            low_times,
+        )
+
         return samps_per_chan_read
 
     def read_many_sample_uint32(
-            self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE,
-            timeout=10.0):
+        self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0
+    ):
         """
         Reads one or more 32-bit unsigned integer samples from a single
         counter input channel in a task.
@@ -392,16 +408,20 @@ class CounterReader(ChannelReaderBase):
             NI-DAQmx returns a single value because this value is the
             same for all channels.
         """
-        number_of_samples_per_channel = (
-            self._task._calculate_num_samps_per_chan(
-                number_of_samples_per_channel))
+        number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
+            number_of_samples_per_channel
+        )
 
         self._verify_array(data, number_of_samples_per_channel, False, True)
 
         _, samps_per_chan_read = self._interpreter.read_counter_u32_ex(
-            self._handle, number_of_samples_per_channel, timeout, 
-            FillMode.GROUP_BY_CHANNEL.value, data)
-        
+            self._handle,
+            number_of_samples_per_channel,
+            timeout,
+            FillMode.GROUP_BY_CHANNEL.value,
+            data,
+        )
+
         return samps_per_chan_read
 
     def read_one_sample_double(self, timeout=10):

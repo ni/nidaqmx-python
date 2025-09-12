@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Callable, Dict, List, Tuple
 
+
 def _get_version_ubuntu(dist_version: str) -> str:
     return dist_version.replace(".", "")
 
@@ -56,6 +57,7 @@ _YUM_INSTALL_COMMANDS = [
 
 _DEBIAN_DAQMX_VERSION_COMMAND = ["dpkg", "-l", "ni-daqmx"]
 _RPM_DAQMX_VERSION_COMMAND = ["rpm", "-q", "ni-daqmx"]
+
 
 @dataclass
 class DistroInfo:

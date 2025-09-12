@@ -1,17 +1,18 @@
 from collections.abc import Sequence
 
-from nidaqmx.task.channels._channel import Channel
-from nidaqmx.errors import DaqError
 from nidaqmx.error_codes import DAQmxErrors
-from nidaqmx.utils import unflatten_channel_string, flatten_channel_string
+from nidaqmx.errors import DaqError
+from nidaqmx.task.channels._channel import Channel
+from nidaqmx.utils import flatten_channel_string, unflatten_channel_string
 
 
 class ChannelCollection(Sequence):
     """
     Contains the collection of channels for a DAQmx Task.
-    
+
     This class defines methods that implements a container object.
     """
+
     def __init__(self, task_handle, interpreter):
         """
         Do not construct this object directly; instead, construct a nidaqmx.Task and use the appropriate property, such as task.ai_channels.
@@ -50,8 +51,8 @@ class ChannelCollection(Sequence):
                 - slice: Range of the indexes/positions of virtual channels in
                     the collection.
         Returns:
-            nidaqmx.task.channels.Channel: 
-            
+            nidaqmx.task.channels.Channel:
+
             Indicates a channel object representing the subset of virtual
             channels indexed.
         """
@@ -63,15 +64,18 @@ class ChannelCollection(Sequence):
             channel_names = index
         else:
             raise DaqError(
-                'Invalid index type "{}" used to access channels.'
-                .format(type(index)), DAQmxErrors.UNKNOWN)
+                'Invalid index type "{}" used to access channels.'.format(type(index)),
+                DAQmxErrors.UNKNOWN,
+            )
 
         if channel_names:
             return Channel._factory(self._handle, channel_names, self._interpreter)
         else:
             raise DaqError(
-                'You cannot specify an empty index when indexing channels.\n'
-                'Index used: {}'.format(index), DAQmxErrors.UNKNOWN)
+                "You cannot specify an empty index when indexing channels.\n"
+                "Index used: {}".format(index),
+                DAQmxErrors.UNKNOWN,
+            )
 
     def __hash__(self):
         return self._interpreter.hash_task_handle(self._handle)
@@ -97,11 +101,11 @@ class ChannelCollection(Sequence):
     def all(self):
         """
         :class:`nidaqmx.task.channels.Channel`:
-            Specifies a channel object that represents the entire list of 
+            Specifies a channel object that represents the entire list of
             virtual channels on this channel collection.
         """
         # Passing a blank string means all channels.
-        return Channel._factory(self._handle, '', self._interpreter)
+        return Channel._factory(self._handle, "", self._interpreter)
 
     @property
     def channel_names(self):

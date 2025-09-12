@@ -1,4 +1,10 @@
-from nidaqmx.errors import DaqError, DaqReadError, DaqWriteError, DaqWarning, DaqResourceWarning
+from nidaqmx.errors import (
+    DaqError,
+    DaqReadError,
+    DaqResourceWarning,
+    DaqWarning,
+    DaqWriteError,
+)
 from nidaqmx.grpc_session_options import *
 from nidaqmx.scale import Scale
 from nidaqmx.task import Task

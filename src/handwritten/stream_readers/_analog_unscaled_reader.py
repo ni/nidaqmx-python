@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-from nidaqmx.constants import FillMode, READ_ALL_AVAILABLE
-
+from nidaqmx.constants import READ_ALL_AVAILABLE, FillMode
 from nidaqmx.stream_readers._channel_reader_base import ChannelReaderBase
 
 
@@ -11,9 +10,7 @@ class AnalogUnscaledReader(ChannelReaderBase):
     NI-DAQmx task.
     """
 
-    def read_int16(
-            self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE,
-            timeout=10.0):
+    def read_int16(self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0):
         """
         Reads one or more unscaled 16-bit integer samples from one or
         more analog input channels in a task.
@@ -84,21 +81,23 @@ class AnalogUnscaledReader(ChannelReaderBase):
             NI-DAQmx returns a single value because this value is the
             same for all channels.
         """
-        number_of_samples_per_channel = (
-            self._task._calculate_num_samps_per_chan(
-                number_of_samples_per_channel))
+        number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
+            number_of_samples_per_channel
+        )
 
         self._verify_array(data, number_of_samples_per_channel, True, True)
 
         _, samps_per_chan_read = self._interpreter.read_binary_i16(
-            self._handle, number_of_samples_per_channel,
-            timeout, FillMode.GROUP_BY_CHANNEL.value, data)
-        
+            self._handle,
+            number_of_samples_per_channel,
+            timeout,
+            FillMode.GROUP_BY_CHANNEL.value,
+            data,
+        )
+
         return samps_per_chan_read
 
-    def read_int32(
-            self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE,
-            timeout=10.0):
+    def read_int32(self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0):
         """
         Reads one or more unscaled 32-bit integer samples from one or
         more analog input channels in a task.
@@ -169,21 +168,23 @@ class AnalogUnscaledReader(ChannelReaderBase):
             NI-DAQmx returns a single value because this value is the
             same for all channels.
         """
-        number_of_samples_per_channel = (
-            self._task._calculate_num_samps_per_chan(
-                number_of_samples_per_channel))
+        number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
+            number_of_samples_per_channel
+        )
 
         self._verify_array(data, number_of_samples_per_channel, True, True)
 
         _, samps_per_chan_read = self._interpreter.read_binary_i32(
-            self._handle, number_of_samples_per_channel,
-            timeout, FillMode.GROUP_BY_CHANNEL.value, data)
-        
+            self._handle,
+            number_of_samples_per_channel,
+            timeout,
+            FillMode.GROUP_BY_CHANNEL.value,
+            data,
+        )
+
         return samps_per_chan_read
 
-    def read_uint16(
-            self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE,
-            timeout=10.0):
+    def read_uint16(self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0):
         """
         Reads one or more unscaled 16-bit unsigned integer samples from
         one or more analog input channels in a task.
@@ -254,21 +255,23 @@ class AnalogUnscaledReader(ChannelReaderBase):
             NI-DAQmx returns a single value because this value is the
             same for all channels.
         """
-        number_of_samples_per_channel = (
-            self._task._calculate_num_samps_per_chan(
-                number_of_samples_per_channel))
+        number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
+            number_of_samples_per_channel
+        )
 
         self._verify_array(data, number_of_samples_per_channel, True, True)
 
         _, samps_per_chan_read = self._interpreter.read_binary_u16(
-            self._handle, number_of_samples_per_channel,
-            timeout, FillMode.GROUP_BY_CHANNEL.value, data)
-        
+            self._handle,
+            number_of_samples_per_channel,
+            timeout,
+            FillMode.GROUP_BY_CHANNEL.value,
+            data,
+        )
+
         return samps_per_chan_read
 
-    def read_uint32(
-            self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE,
-            timeout=10.0):
+    def read_uint32(self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0):
         """
         Reads one or more unscaled unsigned 32-bit integer samples from
         one or more analog input channels in a task.
@@ -339,14 +342,18 @@ class AnalogUnscaledReader(ChannelReaderBase):
             NI-DAQmx returns a single value because this value is the
             same for all channels.
         """
-        number_of_samples_per_channel = (
-            self._task._calculate_num_samps_per_chan(
-                number_of_samples_per_channel))
+        number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
+            number_of_samples_per_channel
+        )
 
         self._verify_array(data, number_of_samples_per_channel, True, True)
 
-        _, samps_per_chan_read =  self._interpreter.read_binary_u32(
-            self._handle, number_of_samples_per_channel,
-            timeout, FillMode.GROUP_BY_CHANNEL.value, data)
-        
+        _, samps_per_chan_read = self._interpreter.read_binary_u32(
+            self._handle,
+            number_of_samples_per_channel,
+            timeout,
+            FillMode.GROUP_BY_CHANNEL.value,
+            data,
+        )
+
         return samps_per_chan_read

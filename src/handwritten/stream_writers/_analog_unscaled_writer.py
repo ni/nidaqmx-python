@@ -1,6 +1,8 @@
 from nidaqmx.constants import FillMode
-
-from nidaqmx.stream_writers._channel_writer_base import ChannelWriterBase, AUTO_START_UNSET
+from nidaqmx.stream_writers._channel_writer_base import (
+    AUTO_START_UNSET,
+    ChannelWriterBase,
+)
 
 
 class AnalogUnscaledWriter(ChannelWriterBase):
@@ -47,12 +49,12 @@ class AnalogUnscaledWriter(ChannelWriterBase):
             successfully wrote to each channel in the task.
         """
         self._verify_array(data, True, True)
-        
-        auto_start = (self._auto_start if self._auto_start is not 
-                      AUTO_START_UNSET else False)
+
+        auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else False
 
         return self._interpreter.write_binary_i16(
-            self._handle, data.shape[1], auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
+            self._handle, data.shape[1], auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data
+        )
 
     def write_int32(self, data, timeout=10.0):
         """
@@ -92,12 +94,12 @@ class AnalogUnscaledWriter(ChannelWriterBase):
             successfully wrote to each channel in the task.
         """
         self._verify_array(data, True, True)
-        
-        auto_start = (self._auto_start if self._auto_start is not 
-                      AUTO_START_UNSET else False)
+
+        auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else False
 
         return self._interpreter.write_binary_i32(
-            self._handle, data.shape[1], auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
+            self._handle, data.shape[1], auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data
+        )
 
     def write_uint16(self, data, timeout=10.0):
         """
@@ -137,12 +139,12 @@ class AnalogUnscaledWriter(ChannelWriterBase):
             successfully wrote to each channel in the task.
         """
         self._verify_array(data, True, True)
-        
-        auto_start = (self._auto_start if self._auto_start is not 
-                      AUTO_START_UNSET else False)
+
+        auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else False
 
         return self._interpreter.write_binary_u16(
-            self._handle, data.shape[1], auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
+            self._handle, data.shape[1], auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data
+        )
 
     def write_uint32(self, data, timeout=10.0):
         """
@@ -182,9 +184,9 @@ class AnalogUnscaledWriter(ChannelWriterBase):
             successfully wrote to each channel in the task.
         """
         self._verify_array(data, True, True)
-        
-        auto_start = (self._auto_start if self._auto_start is not 
-                      AUTO_START_UNSET else False)
+
+        auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else False
 
         return self._interpreter.write_binary_u32(
-            self._handle, data.shape[1], auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
+            self._handle, data.shape[1], auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data
+        )

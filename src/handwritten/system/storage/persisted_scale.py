@@ -1,7 +1,7 @@
 from nidaqmx import utils
 from nidaqmx.scale import _ScaleAlternateConstructor
 
-__all__ = ['PersistedScale']
+__all__ = ["PersistedScale"]
 
 
 class PersistedScale:
@@ -11,7 +11,8 @@ class PersistedScale:
     Use the DAQmx Persisted Scale properties to query information about
     programmatically saved custom scales.
     """
-    __slots__ = ['_name', '_interpreter', '__weakref__']
+
+    __slots__ = ["_name", "_interpreter", "__weakref__"]
 
     def __init__(self, name, *, grpc_options=None):
         """
@@ -35,7 +36,7 @@ class PersistedScale:
         return not self.__eq__(other)
 
     def __repr__(self):
-        return f'PersistedScale(name={self._name})'
+        return f"PersistedScale(name={self._name})"
 
     @property
     def name(self):
@@ -49,7 +50,7 @@ class PersistedScale:
         """
         str: Indicates the author of the custom scale.
         """
-        val = self._interpreter.get_persisted_scale_attribute_string(self._name, 0x22d4)
+        val = self._interpreter.get_persisted_scale_attribute_string(self._name, 0x22D4)
         return val
 
     @property
@@ -58,7 +59,7 @@ class PersistedScale:
         bool: Indicates whether the custom scale can be edited in the
             DAQ Assistant.
         """
-        val = self._interpreter.get_persisted_scale_attribute_bool(self._name, 0x22d5)
+        val = self._interpreter.get_persisted_scale_attribute_bool(self._name, 0x22D5)
         return val
 
     @property
@@ -67,7 +68,7 @@ class PersistedScale:
         bool: Indicates whether the custom scale can be deleted through
             MAX.
         """
-        val = self._interpreter.get_persisted_scale_attribute_bool(self._name, 0x22d6)
+        val = self._interpreter.get_persisted_scale_attribute_bool(self._name, 0x22D6)
         return val
 
     def delete(self):
@@ -95,6 +96,7 @@ class _PersistedScaleAlternateConstructor(PersistedScale):
 
     This is a private API used to instantiate a PersistedScale with an existing interpreter.
     """
+
     # Setting __slots__ avoids TypeError: __class__ assignment: 'Base' object layout differs from 'Derived'.
     __slots__ = ()
 

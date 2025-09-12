@@ -1,5 +1,4 @@
-def enum_bitfield_to_list(bitfield_value, bitfield_enum_type,
-                          actual_enum_type):
+def enum_bitfield_to_list(bitfield_value, bitfield_enum_type, actual_enum_type):
     """
     Converts a bitfield value to a list of enums.
 
@@ -14,8 +13,7 @@ def enum_bitfield_to_list(bitfield_value, bitfield_enum_type,
     supported_values = []
     for bitfield_mask in bitfield_enum_type:
         if bitfield_value & bitfield_mask.value:
-            enum_value = next(
-                e for e in actual_enum_type if e.name == bitfield_mask.name)
+            enum_value = next(e for e in actual_enum_type if e.name == bitfield_mask.name)
             supported_values.append(enum_value)
 
     return supported_values
@@ -34,8 +32,7 @@ def enum_list_to_bitfield(enum_list, bitfield_enum_type):
     """
     bitfield_value = 0
     for enum_value in enum_list:
-        bitfield_mask = next(
-            b for b in bitfield_enum_type if b.name == enum_value.name)
+        bitfield_mask = next(b for b in bitfield_enum_type if b.name == enum_value.name)
         bitfield_value |= bitfield_mask.value
 
     return bitfield_value
