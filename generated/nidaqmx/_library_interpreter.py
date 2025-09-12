@@ -6975,9 +6975,9 @@ class LibraryInterpreter(BaseInterpreter):
         timeout: float
     ) -> int:
         """Write an analog waveform."""
-        array = waveform.scaled_data
-        if not array.flags.c_contiguous:
-            array = array.copy(order="C")
+        write_array = waveform.scaled_data
+        if not write_array.flags.c_contiguous:
+            write_array = write_array.copy(order="C")
 
         return self.write_analog_f64(
             task_handle,
@@ -6985,8 +6985,88 @@ class LibraryInterpreter(BaseInterpreter):
             auto_start,
             timeout,
             FillMode.GROUP_BY_CHANNEL.value,
-            array,
+            write_array,
         )
+
+    def write_analog_waveforms(
+        self,
+        task_handle: object,
+        waveforms: Sequence[AnalogWaveform[Any]],
+        auto_start: bool,
+        timeout: float
+    ) -> int:
+        """Write analog waveforms."""
+        assert len(waveforms) > 0
+        num_samps_per_chan = waveforms[0].sample_count
+
+        write_arrays = []
+        for waveform in waveforms:
+            assert waveform.sample_count == num_samps_per_chan
+            write_array = waveform.scaled_data
+            if not write_array.flags.c_contiguous:
+                write_array = write_array.copy(order="C")
+            write_arrays.append(write_array)
+
+        error_code, samples_written = self._internal_write_analog_waveform_per_chan(
+            task_handle,
+            num_samps_per_chan,
+            auto_start,
+            timeout,
+            write_arrays,
+        )
+
+        self.check_for_error(error_code, samps_per_chan_written=samples_written)
+        return samples_written
+
+    def _internal_write_analog_waveform_per_chan(
+        self,
+        task_handle: object,
+        num_samps_per_chan: int,
+        auto_start: bool,
+        timeout: float,
+        write_arrays: Sequence[numpy.typing.NDArray[numpy.float64]],
+    ) -> Tuple[
+        int, # error code
+        int, # The number of samples per channel that were written
+    ]:
+        assert isinstance(task_handle, TaskHandle)
+        samps_per_chan_written = ctypes.c_int()
+
+        channel_count = len(write_arrays)
+        assert channel_count > 0
+        assert all(write_array.size >= num_samps_per_chan for write_array in write_arrays)
+
+        cfunc = lib_importer.windll.DAQmxInternalWriteAnalogWaveformPerChan
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        TaskHandle,
+                        ctypes.c_int,
+                        c_bool32,
+                        ctypes.c_double,
+                        ctypes.POINTER(ctypes.POINTER(ctypes.c_double)),
+                        ctypes.c_uint,
+                        ctypes.POINTER(ctypes.c_int),
+                        ctypes.POINTER(c_bool32),
+                    ]
+
+        write_array_ptrs = (ctypes.POINTER(ctypes.c_double) * channel_count)()
+        for i, write_array in enumerate(write_arrays):
+            write_array_ptrs[i] = write_array.ctypes.data_as(ctypes.POINTER(ctypes.c_double))
+
+        error_code = cfunc(
+            task_handle,
+            num_samps_per_chan,
+            auto_start,
+            timeout,
+            write_array_ptrs,
+            channel_count,
+            ctypes.byref(samps_per_chan_written),
+            None,
+        )
+
+        return error_code, samps_per_chan_written.value
 
 
     def write_raw(

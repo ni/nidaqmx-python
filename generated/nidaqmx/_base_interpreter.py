@@ -1919,3 +1919,13 @@ class BaseInterpreter(abc.ABC):
         timeout: float
     ) -> int:
         raise NotImplementedError
+
+    @abc.abstractmethod
+    def write_analog_waveforms(
+        self,
+        task_handle: object,
+        waveforms: Sequence[AnalogWaveform[Any]],
+        auto_start: bool,
+        timeout: float
+    ) -> int:
+        raise NotImplementedError
