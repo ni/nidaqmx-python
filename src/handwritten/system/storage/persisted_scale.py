@@ -1,3 +1,5 @@
+"""NI-DAQmx persisted scale classes."""
+
 from nidaqmx import utils
 from nidaqmx.scale import _ScaleAlternateConstructor
 

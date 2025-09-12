@@ -1,3 +1,5 @@
+"""NI-DAQmx channel collection classes."""
+
 from nidaqmx.task.collections._ai_channel_collection import AIChannelCollection
 from nidaqmx.task.collections._ao_channel_collection import AOChannelCollection
 from nidaqmx.task.collections._channel_collection import ChannelCollection

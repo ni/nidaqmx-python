@@ -1,3 +1,5 @@
+"""NI-DAQmx data types."""
+
 import collections
 import typing
 

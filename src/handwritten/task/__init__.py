@@ -1,3 +1,5 @@
+"""NI-DAQmx task and related classes."""
+
 from nidaqmx.task._export_signals import ExportSignals
 from nidaqmx.task._in_stream import InStream
 from nidaqmx.task._out_stream import OutStream

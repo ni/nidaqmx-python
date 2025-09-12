@@ -1,3 +1,5 @@
+"""NI-DAQmx persisted channel classes."""
+
 from nidaqmx import utils
 
 __all__ = ["PersistedChannel"]
