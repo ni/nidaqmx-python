@@ -1242,6 +1242,7 @@ class Task:
         - List of lists/2D numpy.ndarray: Multiple samples for multiple
           channels.
         - AnalogWaveform: Waveform data for a single analog output channel.
+        - List of AnalogWaveform: Waveform data for multiple analog output channels.
 
         The data type of the samples passed in must be appropriate for
         the channel type of the task.
@@ -1336,7 +1337,15 @@ class Task:
                     self._raise_invalid_write_num_chans_error(
                         number_of_channels, len(data))
 
-                if isinstance(data[0], list):
+                if data and isinstance(data[0], AnalogWaveform):
+                    WAVEFORM_SUPPORT.raise_if_disabled()
+                    if not all(isinstance(wf, AnalogWaveform) for wf in data):
+                        raise DaqError(
+                            'Write failed, because not all elements in the list are AnalogWaveform objects.',
+                            DAQmxErrors.UNKNOWN, task_name=self.name)                    
+                    number_of_samples_per_channel = data[0].sample_count
+                    element = data[0].raw_data[0]
+                elif isinstance(data[0], list):
                     number_of_samples_per_channel = len(data[0])
                     element = data[0][0]
                 else:
@@ -1368,6 +1377,9 @@ class Task:
         if write_chan_type == ChannelType.ANALOG_OUTPUT:
             if isinstance(data, AnalogWaveform):
                 return self._interpreter.write_analog_waveform(
+                    self._handle, data, auto_start, timeout)
+            elif isinstance(data, list) and data and isinstance(data[0], AnalogWaveform):
+                return self._interpreter.write_analog_waveforms(
                     self._handle, data, auto_start, timeout)
             else:
                 data = numpy.asarray(data, dtype=numpy.float64)

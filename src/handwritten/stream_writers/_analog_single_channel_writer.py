@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import numpy
 from typing import Any
 
 from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, requires_feature
@@ -120,7 +119,9 @@ class AnalogSingleChannelWriter(ChannelWriterBase):
                 not write all the submitted samples, it returns an error
                 and the number of samples successfully written.
         Returns:
-            int: Specifies the actual number of samples this method
+            int:
+             
+            Specifies the actual number of samples this method
             successfully wrote.
         """
         auto_start = (self._auto_start if self._auto_start is not 
