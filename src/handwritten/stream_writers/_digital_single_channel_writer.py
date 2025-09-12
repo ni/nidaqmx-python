@@ -1,8 +1,10 @@
 import numpy
 
 from nidaqmx.constants import FillMode
-
-from nidaqmx.stream_writers._channel_writer_base import ChannelWriterBase, AUTO_START_UNSET
+from nidaqmx.stream_writers._channel_writer_base import (
+    AUTO_START_UNSET,
+    ChannelWriterBase,
+)
 
 
 class DigitalSingleChannelWriter(ChannelWriterBase):
@@ -49,12 +51,12 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
             successfully wrote.
         """
         self._verify_array(data, False, True)
-        
-        auto_start = (self._auto_start if self._auto_start is not 
-                      AUTO_START_UNSET else False)
+
+        auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else False
 
         return self._interpreter.write_digital_u8(
-            self._handle, data.shape[0], auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
+            self._handle, data.shape[0], auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data
+        )
 
     def write_many_sample_port_uint16(self, data, timeout=10.0):
         """
@@ -94,12 +96,12 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
             successfully wrote.
         """
         self._verify_array(data, False, True)
-        
-        auto_start = (self._auto_start if self._auto_start is not 
-                      AUTO_START_UNSET else False)
+
+        auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else False
 
         return self._interpreter.write_digital_u16(
-            self._handle, data.shape[0], auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
+            self._handle, data.shape[0], auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data
+        )
 
     def write_many_sample_port_uint32(self, data, timeout=10.0):
         """
@@ -139,12 +141,12 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
             successfully wrote.
         """
         self._verify_array(data, False, True)
-        
-        auto_start = (self._auto_start if self._auto_start is not 
-                      AUTO_START_UNSET else False)
+
+        auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else False
 
         return self._interpreter.write_digital_u32(
-            self._handle, data.shape[0], auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
+            self._handle, data.shape[0], auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data
+        )
 
     def write_one_sample_multi_line(self, data, timeout=10):
         """
@@ -169,12 +171,12 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
                 and the number of samples successfully written.
         """
         self._verify_array_digital_lines(data, False, True)
-        
-        auto_start = (self._auto_start if self._auto_start is not 
-                      AUTO_START_UNSET else True)
+
+        auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else True
 
         return self._interpreter.write_digital_lines(
-            self._handle, 1, auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
+            self._handle, 1, auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data
+        )
 
     def write_one_sample_one_line(self, data, timeout=10):
         """
@@ -197,13 +199,13 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
                 not write all the submitted samples, it returns an error
                 and the number of samples successfully written.
         """
-        auto_start = (self._auto_start if self._auto_start is not 
-                      AUTO_START_UNSET else True)
-        
+        auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else True
+
         numpy_array = numpy.asarray([data], dtype=bool)
 
         return self._interpreter.write_digital_lines(
-            self._handle, 1, auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, numpy_array)
+            self._handle, 1, auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, numpy_array
+        )
 
     def write_one_sample_port_byte(self, data, timeout=10):
         """
@@ -227,13 +229,13 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
                 not write all the submitted samples, it returns an error
                 and the number of samples successfully written.
         """
-        auto_start = (self._auto_start if self._auto_start is not 
-                      AUTO_START_UNSET else True)
-        
+        auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else True
+
         numpy_array = numpy.asarray([data], dtype=numpy.uint8)
 
         return self._interpreter.write_digital_u8(
-            self._handle, 1, auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, numpy_array)
+            self._handle, 1, auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, numpy_array
+        )
 
     def write_one_sample_port_uint16(self, data, timeout=10):
         """
@@ -257,13 +259,13 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
                 not write all the submitted samples, it returns an error
                 and the number of samples successfully written.
         """
-        auto_start = (self._auto_start if self._auto_start is not 
-                      AUTO_START_UNSET else True)
-        
+        auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else True
+
         numpy_array = numpy.asarray([data], dtype=numpy.uint16)
 
         return self._interpreter.write_digital_u16(
-            self._handle, 1, auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, numpy_array)
+            self._handle, 1, auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, numpy_array
+        )
 
     def write_one_sample_port_uint32(self, data, timeout=10):
         """
@@ -287,8 +289,6 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
                 not write all the submitted samples, it returns an error
                 and the number of samples successfully written.
         """
-        auto_start = (self._auto_start if self._auto_start is not 
-                      AUTO_START_UNSET else True)
-        
-        return self._interpreter.write_digital_scalar_u32(
-            self._handle, auto_start, timeout, data)
+        auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else True
+
+        return self._interpreter.write_digital_scalar_u32(self._handle, auto_start, timeout, data)

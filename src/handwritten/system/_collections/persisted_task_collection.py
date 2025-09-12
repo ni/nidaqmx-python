@@ -1,22 +1,27 @@
 from collections.abc import Sequence
 
-from nidaqmx.errors import DaqError
 from nidaqmx.error_codes import DAQmxErrors
-from nidaqmx.system.storage.persisted_task import PersistedTask, _PersistedTaskAlternateConstructor
+from nidaqmx.errors import DaqError
+from nidaqmx.system.storage.persisted_task import (
+    PersistedTask,
+    _PersistedTaskAlternateConstructor,
+)
 from nidaqmx.utils import unflatten_channel_string
+
 
 class PersistedTaskCollection(Sequence):
     """
     Contains the collection of task saved on a DAQmx system.
-    
+
     This class defines methods that implements a container object.
     """
+
     def __init__(self, interpreter):
         """
         Do not construct this object directly; instead, call nidaqmx.system.System.local().tasks.
         """
         self._interpreter = interpreter
-    
+
     def __contains__(self, item):
         task_names = self.task_names
 
@@ -49,14 +54,16 @@ class PersistedTaskCollection(Sequence):
                     in the collection.
         Returns:
             List[nidaqmx.system.storage.persisted_task.PersistedTask]:
-            
+
             Indicates the subset of saved tasks indexed.
         """
         if isinstance(index, int):
             return _PersistedTaskAlternateConstructor(self.task_names[index], self._interpreter)
         elif isinstance(index, slice):
-            return [_PersistedTaskAlternateConstructor(name, self._interpreter) for name in
-                    self.task_names[index]]
+            return [
+                _PersistedTaskAlternateConstructor(name, self._interpreter)
+                for name in self.task_names[index]
+            ]
         elif isinstance(index, str):
             names = unflatten_channel_string(index)
             if len(names) == 1:
@@ -64,8 +71,9 @@ class PersistedTaskCollection(Sequence):
             return [_PersistedTaskAlternateConstructor(name, self._interpreter) for name in names]
         else:
             raise DaqError(
-                'Invalid index type "{}" used to access collection.'
-                .format(type(index)), DAQmxErrors.UNKNOWN)
+                'Invalid index type "{}" used to access collection.'.format(type(index)),
+                DAQmxErrors.UNKNOWN,
+            )
 
     def __iter__(self):
         for task_name in self.task_names:

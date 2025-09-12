@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 from nidaqmx import DaqError
-
 from nidaqmx.error_codes import DAQmxErrors
+
 
 class ChannelReaderBase:
     """
@@ -38,8 +38,7 @@ class ChannelReaderBase:
     def verify_array_shape(self, val):
         self._verify_array_shape = val
 
-    def _verify_array(self, data, number_of_samples_per_channel,
-                      is_many_chan, is_many_samp):
+    def _verify_array(self, data, number_of_samples_per_channel, is_many_chan, is_many_samp):
         """
         Verifies that the shape of the specified NumPy array can be used
         to read multiple samples from the current task which contains
@@ -64,8 +63,7 @@ class ChannelReaderBase:
         array_shape: tuple[int, ...] | None = None
         if is_many_chan:
             if is_many_samp:
-                array_shape = (number_of_channels,
-                               number_of_samples_per_channel)
+                array_shape = (number_of_channels, number_of_samples_per_channel)
             else:
                 array_shape = (number_of_channels,)
         else:
@@ -74,18 +72,18 @@ class ChannelReaderBase:
 
         if array_shape is not None and data.shape != array_shape:
             raise DaqError(
-                'Read cannot be performed because the NumPy array passed into '
-                'this function is not shaped correctly. You must pass in a '
-                'NumPy array of the correct shape based on the number of '
-                'channels in task and the number of samples per channel '
-                'requested.\n\n'
-                'Shape of NumPy Array provided: {}\n'
-                'Shape of NumPy Array required: {}'
-                .format(data.shape, array_shape),
-                DAQmxErrors.UNKNOWN, task_name=self._task.name)
+                "Read cannot be performed because the NumPy array passed into "
+                "this function is not shaped correctly. You must pass in a "
+                "NumPy array of the correct shape based on the number of "
+                "channels in task and the number of samples per channel "
+                "requested.\n\n"
+                "Shape of NumPy Array provided: {}\n"
+                "Shape of NumPy Array required: {}".format(data.shape, array_shape),
+                DAQmxErrors.UNKNOWN,
+                task_name=self._task.name,
+            )
 
-    def _verify_array_digital_lines(
-            self, data, is_many_chan, is_many_line):
+    def _verify_array_digital_lines(self, data, is_many_chan, is_many_line):
         """
         Verifies that the shape of the specified NumPy array can be used
         to read samples from the current task which contains one or more
@@ -118,12 +116,13 @@ class ChannelReaderBase:
 
         if array_shape is not None and data.shape != array_shape:
             raise DaqError(
-                'Read cannot be performed because the NumPy array passed into '
-                'this function is not shaped correctly. You must pass in a '
-                'NumPy array of the correct shape based on the number of '
-                'channels in task and the number of digital lines per '
-                'channel.\n\n'
-                'Shape of NumPy Array provided: {}\n'
-                'Shape of NumPy Array required: {}'
-                .format(data.shape, array_shape),
-                DAQmxErrors.UNKNOWN, task_name=self._task.name)
+                "Read cannot be performed because the NumPy array passed into "
+                "this function is not shaped correctly. You must pass in a "
+                "NumPy array of the correct shape based on the number of "
+                "channels in task and the number of digital lines per "
+                "channel.\n\n"
+                "Shape of NumPy Array provided: {}\n"
+                "Shape of NumPy Array required: {}".format(data.shape, array_shape),
+                DAQmxErrors.UNKNOWN,
+                task_name=self._task.name,
+            )

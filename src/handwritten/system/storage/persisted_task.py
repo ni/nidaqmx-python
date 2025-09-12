@@ -1,7 +1,6 @@
-from nidaqmx import task
-from nidaqmx import utils
+from nidaqmx import task, utils
 
-__all__ = ['PersistedTask']
+__all__ = ["PersistedTask"]
 
 
 class PersistedTask:
@@ -11,7 +10,8 @@ class PersistedTask:
     Use the DAQmx Persisted Task properties to query information about
     programmatically saved tasks.
     """
-    __slots__ = ['_name', '_interpreter', '__weakref__']
+
+    __slots__ = ["_name", "_interpreter", "__weakref__"]
 
     def __init__(self, name, *, grpc_options=None):
         """
@@ -35,7 +35,7 @@ class PersistedTask:
         return not self.__eq__(other)
 
     def __repr__(self):
-        return f'PersistedTask(name={self._name})'
+        return f"PersistedTask(name={self._name})"
 
     @property
     def name(self):
@@ -49,7 +49,7 @@ class PersistedTask:
         """
         str: Indicates the author of the task.
         """
-        val = self._interpreter.get_persisted_task_attribute_string(self._name, 0x22cc)
+        val = self._interpreter.get_persisted_task_attribute_string(self._name, 0x22CC)
         return val
 
     @property
@@ -58,7 +58,7 @@ class PersistedTask:
         bool: Indicates whether the task can be edited in the DAQ
             Assistant.
         """
-        val = self._interpreter.get_persisted_task_attribute_bool(self._name, 0x22cd)
+        val = self._interpreter.get_persisted_task_attribute_bool(self._name, 0x22CD)
         return val
 
     @property
@@ -66,7 +66,7 @@ class PersistedTask:
         """
         bool: Indicates whether the task can be deleted through MAX.
         """
-        val = self._interpreter.get_persisted_task_attribute_bool(self._name, 0x22ce)
+        val = self._interpreter.get_persisted_task_attribute_bool(self._name, 0x22CE)
         return val
 
     def delete(self):
@@ -99,6 +99,7 @@ class _PersistedTaskAlternateConstructor(PersistedTask):
 
     This is a private API used to instantiate a PersistedTask with an existing interpreter.
     """
+
     # Setting __slots__ avoids TypeError: __class__ assignment: 'Base' object layout differs from 'Derived'.
     __slots__ = ()
 

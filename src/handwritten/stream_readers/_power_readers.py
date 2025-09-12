@@ -1,9 +1,8 @@
 from __future__ import annotations
 
-from nidaqmx.constants import FillMode, READ_ALL_AVAILABLE
-from nidaqmx.types import PowerMeasurement
-
+from nidaqmx.constants import READ_ALL_AVAILABLE, FillMode
 from nidaqmx.stream_readers._channel_reader_base import ChannelReaderBase
+from nidaqmx.types import PowerMeasurement
 
 
 class PowerSingleChannelReader(ChannelReaderBase):
@@ -12,8 +11,12 @@ class PowerSingleChannelReader(ChannelReaderBase):
     """
 
     def read_many_sample(
-            self, voltage_data, current_data, number_of_samples_per_channel=READ_ALL_AVAILABLE,
-            timeout=10.0):
+        self,
+        voltage_data,
+        current_data,
+        number_of_samples_per_channel=READ_ALL_AVAILABLE,
+        timeout=10.0,
+    ):
         """
         Reads one or more floating-point power samples from a single analog
         input power channel in a task.
@@ -79,17 +82,22 @@ class PowerSingleChannelReader(ChannelReaderBase):
             NI-DAQmx returns a single value because this value is the
             same for all channels.
         """
-        number_of_samples_per_channel = (
-            self._task._calculate_num_samps_per_chan(
-                number_of_samples_per_channel))
+        number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
+            number_of_samples_per_channel
+        )
 
         self._verify_array(voltage_data, number_of_samples_per_channel, False, True)
         self._verify_array(current_data, number_of_samples_per_channel, False, True)
 
         _, _, samps_per_chan_read = self._interpreter.read_power_f64(
-            self._handle, number_of_samples_per_channel, timeout, 
-            FillMode.GROUP_BY_CHANNEL.value, voltage_data, current_data)
-        
+            self._handle,
+            number_of_samples_per_channel,
+            timeout,
+            FillMode.GROUP_BY_CHANNEL.value,
+            voltage_data,
+            current_data,
+        )
+
         return samps_per_chan_read
 
     def read_one_sample(self, timeout=10):
@@ -123,8 +131,12 @@ class PowerMultiChannelReader(ChannelReaderBase):
     """
 
     def read_many_sample(
-            self, voltage_data, current_data, number_of_samples_per_channel=READ_ALL_AVAILABLE,
-            timeout=10.0):
+        self,
+        voltage_data,
+        current_data,
+        number_of_samples_per_channel=READ_ALL_AVAILABLE,
+        timeout=10.0,
+    ):
         """
         Reads one or more floating-point power samples from one or more analog
         input power channels in a task.
@@ -216,17 +228,22 @@ class PowerMultiChannelReader(ChannelReaderBase):
             NI-DAQmx returns a single value because this value is the
             same for all channels.
         """
-        number_of_samples_per_channel = (
-            self._task._calculate_num_samps_per_chan(
-                number_of_samples_per_channel))
+        number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
+            number_of_samples_per_channel
+        )
 
         self._verify_array(voltage_data, number_of_samples_per_channel, True, True)
         self._verify_array(current_data, number_of_samples_per_channel, True, True)
 
         _, _, samps_per_chan_read = self._interpreter.read_power_f64(
-            self._handle, number_of_samples_per_channel, timeout, 
-            FillMode.GROUP_BY_CHANNEL.value, voltage_data, current_data)
-        
+            self._handle,
+            number_of_samples_per_channel,
+            timeout,
+            FillMode.GROUP_BY_CHANNEL.value,
+            voltage_data,
+            current_data,
+        )
+
         return samps_per_chan_read
 
     def read_one_sample(self, voltage_data, current_data, timeout=10):
@@ -273,8 +290,8 @@ class PowerMultiChannelReader(ChannelReaderBase):
         self._verify_array(current_data, 1, True, False)
 
         self._interpreter.read_power_f64(
-            self._handle, 1, timeout, FillMode.GROUP_BY_CHANNEL.value, 
-            voltage_data, current_data)
+            self._handle, 1, timeout, FillMode.GROUP_BY_CHANNEL.value, voltage_data, current_data
+        )
 
 
 class PowerBinaryReader(ChannelReaderBase):
@@ -284,8 +301,12 @@ class PowerBinaryReader(ChannelReaderBase):
     """
 
     def read_many_sample(
-            self, voltage_data, current_data, number_of_samples_per_channel=READ_ALL_AVAILABLE,
-            timeout=10.0):
+        self,
+        voltage_data,
+        current_data,
+        number_of_samples_per_channel=READ_ALL_AVAILABLE,
+        timeout=10.0,
+    ):
         """
         Reads one or more binary int16 samples from one or more analog
         input power channel in a task.
@@ -371,15 +392,20 @@ class PowerBinaryReader(ChannelReaderBase):
             NI-DAQmx returns a single value because this value is the
             same for all channels.
         """
-        number_of_samples_per_channel = (
-            self._task._calculate_num_samps_per_chan(
-                number_of_samples_per_channel))
+        number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
+            number_of_samples_per_channel
+        )
 
         self._verify_array(voltage_data, number_of_samples_per_channel, True, True)
         self._verify_array(current_data, number_of_samples_per_channel, True, True)
 
         _, _, samps_per_chan_read = self._interpreter.read_power_binary_i16(
-            self._handle, number_of_samples_per_channel, timeout, 
-            FillMode.GROUP_BY_CHANNEL.value, voltage_data, current_data)
-        
+            self._handle,
+            number_of_samples_per_channel,
+            timeout,
+            FillMode.GROUP_BY_CHANNEL.value,
+            voltage_data,
+            current_data,
+        )
+
         return samps_per_chan_read

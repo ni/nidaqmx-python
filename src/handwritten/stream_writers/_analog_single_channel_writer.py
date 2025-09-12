@@ -1,13 +1,16 @@
 from __future__ import annotations
 
-import numpy
 from typing import Any
+
+import numpy
+from nitypes.waveform import AnalogWaveform
 
 from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, requires_feature
 from nidaqmx.constants import FillMode
-from nitypes.waveform import AnalogWaveform
-
-from nidaqmx.stream_writers._channel_writer_base import ChannelWriterBase, AUTO_START_UNSET
+from nidaqmx.stream_writers._channel_writer_base import (
+    AUTO_START_UNSET,
+    ChannelWriterBase,
+)
 
 
 class AnalogSingleChannelWriter(ChannelWriterBase):
@@ -51,12 +54,12 @@ class AnalogSingleChannelWriter(ChannelWriterBase):
             successfully wrote.
         """
         self._verify_array(data, False, True)
-        
-        auto_start = (self._auto_start if self._auto_start is not 
-                      AUTO_START_UNSET else False)
+
+        auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else False
 
         return self._interpreter.write_analog_f64(
-            self._handle, data.shape[0], auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
+            self._handle, data.shape[0], auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data
+        )
 
     def write_one_sample(self, data, timeout=10):
         """
@@ -81,18 +84,12 @@ class AnalogSingleChannelWriter(ChannelWriterBase):
                 not write all the submitted samples, it returns an error
                 and the number of samples successfully written.
         """
-        auto_start = (self._auto_start if self._auto_start is not 
-                      AUTO_START_UNSET else True)
-        
-        return self._interpreter.write_analog_scalar_f64(
-            self._handle, auto_start, timeout, data)
+        auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else True
+
+        return self._interpreter.write_analog_scalar_f64(self._handle, auto_start, timeout, data)
 
     @requires_feature(WAVEFORM_SUPPORT)
-    def write_waveform(
-        self, 
-        waveform: AnalogWaveform[Any], 
-        timeout: float = 10.0
-    ) -> int:
+    def write_waveform(self, waveform: AnalogWaveform[Any], timeout: float = 10.0) -> int:
         """
         Writes a waveform to a single analog output channel in a task.
 
@@ -123,9 +120,6 @@ class AnalogSingleChannelWriter(ChannelWriterBase):
             int: Specifies the actual number of samples this method
             successfully wrote.
         """
-        auto_start = (self._auto_start if self._auto_start is not 
-                      AUTO_START_UNSET else False)
+        auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else False
 
-        return self._interpreter.write_analog_waveform(
-            self._handle, waveform, auto_start, timeout)
-    
+        return self._interpreter.write_analog_waveform(self._handle, waveform, auto_start, timeout)

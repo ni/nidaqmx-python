@@ -4,10 +4,9 @@ import re
 from dataclasses import dataclass
 from typing import List, Optional
 
+from nidaqmx._base_interpreter import BaseInterpreter
 from nidaqmx.errors import DaqError
 from nidaqmx.grpc_session_options import GrpcSessionOptions
-from nidaqmx._base_interpreter import BaseInterpreter
-
 
 # Method logic adapted from
 # //Measurements/Infrastructure/dmxf/trunk/2.5/source/nimuck/parseUtilities.cpp
@@ -18,7 +17,8 @@ _invalid_range_syntax_message = (
     "every colon (':') in the input string. Or, if a name is specified after "
     "the colon, it must be identical to the name specified immediately before "
     "the colon. Colons are not allowed within the names of the individual "
-    "objects.")
+    "objects."
+)
 
 
 @dataclass
@@ -67,7 +67,7 @@ def flatten_channel_string(channel_names: list[str]) -> str:
     flattened_channel_list = []
     previous = _ChannelInfo()
     for channel_name in unflattened_channel_names:
-        m = re.search('(.*[^0-9])?([0-9]+)$', channel_name)
+        m = re.search("(.*[^0-9])?([0-9]+)$", channel_name)
         if not m:
             # If the channel name doesn't end in a valid number, just use the
             # channel name as-is.
@@ -81,10 +81,15 @@ def flatten_channel_string(channel_names: list[str]) -> str:
             current_index = int(current_index_str)
 
             if current_base_name == previous.base_name and (
-                (current_index == previous.end_index + 1 and
-                 previous.end_index >= previous.start_index) or
-                (current_index == previous.end_index - 1 and
-                 previous.end_index <= previous.start_index)):
+                (
+                    current_index == previous.end_index + 1
+                    and previous.end_index >= previous.start_index
+                )
+                or (
+                    current_index == previous.end_index - 1
+                    and previous.end_index <= previous.start_index
+                )
+            ):
                 # If the current channel name has the same base name as the
                 # previous and it's end index differs by 1, change the end
                 # index value. It gets flattened later.
@@ -96,11 +101,11 @@ def flatten_channel_string(channel_names: list[str]) -> str:
                 # get flattened with the previous channel.
                 flattened_channel_list.append(previous.to_flattened_name())
                 previous = _ChannelInfo(
-                    current_base_name, 
-                    current_index, 
-                    current_index_str, 
-                    current_index, 
-                    current_index_str
+                    current_base_name,
+                    current_index,
+                    current_index_str,
+                    current_index,
+                    current_index_str,
                 )
 
     # Convert the final channel dictionary to a flattened string
@@ -108,9 +113,9 @@ def flatten_channel_string(channel_names: list[str]) -> str:
 
     # Remove empty strings in list, convert to comma-delimited string, then trim
     # whitespace.
-    return ','.join([_f for _f in flattened_channel_list if _f]).strip()
+    return ",".join([_f for _f in flattened_channel_list if _f]).strip()
 
-                                   
+
 def unflatten_channel_string(channel_names: str) -> list[str]:
     """
     Converts a comma-delimited list of channel names to a list of names.
@@ -128,36 +133,33 @@ def unflatten_channel_string(channel_names: str) -> list[str]:
 
     Args:
         channel_names: The list or range of physical or virtual channels.
-        
+
     Returns:
-        The list of physical or virtual channel names. 
-        
+        The list of physical or virtual channel names.
+
         Each element of the list contains a single channel.
     """
     channel_list_to_return = []
-    channel_list = [c for c in channel_names.strip().split(',') if c]
+    channel_list = [c for c in channel_names.strip().split(",") if c]
 
     for channel in channel_list:
         channel = channel.strip()
-        colon_index = channel.find(':')
+        colon_index = channel.find(":")
 
         if colon_index == -1:
             channel_list_to_return.append(channel)
         else:
             before = channel[:colon_index]
-            after = channel[colon_index+1:]
+            after = channel[colon_index + 1 :]
 
-            m_before = re.match('(.*?)([0-9]+)$', before)
-            m_after = re.match('(.*?)([0-9]+)$', after)
+            m_before = re.match("(.*?)([0-9]+)$", before)
+            m_after = re.match("(.*?)([0-9]+)$", after)
 
             if not m_before or not m_after:
-                raise DaqError(_invalid_range_syntax_message,
-                                       error_code=-200498)
+                raise DaqError(_invalid_range_syntax_message, error_code=-200498)
 
-            if m_after.group(1) and (
-                m_before.group(1).lower() != m_after.group(1).lower()):
-                raise DaqError(_invalid_range_syntax_message,
-                               error_code=-200498)
+            if m_after.group(1) and (m_before.group(1).lower() != m_after.group(1).lower()):
+                raise DaqError(_invalid_range_syntax_message, error_code=-200498)
 
             num_before_str = m_before.group(2)
             num_before = int(num_before_str)
@@ -168,7 +170,7 @@ def unflatten_channel_string(channel_names: str) -> list[str]:
             # If there are any leading 0s in the first number, we want to ensure
             # match that width. This is established precedence in the DAQmx
             # algorithm.
-            if num_before > 0 and len(num_before_str.lstrip('0')) < len(num_before_str):
+            if num_before > 0 and len(num_before_str.lstrip("0")) < len(num_before_str):
                 num_min_width = len(num_before_str)
 
             num_max = max([num_before, num_after])
@@ -176,8 +178,7 @@ def unflatten_channel_string(channel_names: str) -> list[str]:
             number_of_channels = (num_max - num_min) + 1
 
             if number_of_channels >= 15000:
-                raise DaqError(_invalid_range_syntax_message,
-                                       error_code=-200498)
+                raise DaqError(_invalid_range_syntax_message, error_code=-200498)
 
             colon_expanded_channel = []
             for i in range(number_of_channels):
@@ -199,15 +200,16 @@ def unflatten_channel_string(channel_names: str) -> list[str]:
 
 
 def _select_interpreter(
-    grpc_options: GrpcSessionOptions | None = None,
-    interpreter: BaseInterpreter | None = None
+    grpc_options: GrpcSessionOptions | None = None, interpreter: BaseInterpreter | None = None
 ) -> BaseInterpreter:
     if interpreter:
         return interpreter
     else:
         if grpc_options:
             from nidaqmx._grpc_interpreter import GrpcStubInterpreter
+
             return GrpcStubInterpreter(grpc_options)
         else:
             from nidaqmx._library_interpreter import LibraryInterpreter
+
             return LibraryInterpreter()

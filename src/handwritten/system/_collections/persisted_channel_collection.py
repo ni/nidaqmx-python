@@ -1,22 +1,27 @@
 from collections.abc import Sequence
 
-from nidaqmx.errors import DaqError
 from nidaqmx.error_codes import DAQmxErrors
-from nidaqmx.system.storage.persisted_channel import PersistedChannel, _PersistedChannelAlternateConstructor
+from nidaqmx.errors import DaqError
+from nidaqmx.system.storage.persisted_channel import (
+    PersistedChannel,
+    _PersistedChannelAlternateConstructor,
+)
 from nidaqmx.utils import unflatten_channel_string
+
 
 class PersistedChannelCollection(Sequence):
     """
     Contains the collection of global channels for a DAQmx system.
-    
+
     This class defines methods that implements a container object.
     """
+
     def __init__(self, interpreter):
         """
         Do not construct this object directly; instead, call nidaqmx.system.System.local().global_channels.
         """
         self._interpreter = interpreter
-    
+
     def __contains__(self, item):
         channel_names = self.global_channel_names
 
@@ -50,23 +55,30 @@ class PersistedChannelCollection(Sequence):
                     channels in the collection.
         Returns:
             List[nidaqmx.system.storage.persisted_channel.PersistedChannel]:
-            
+
             Indicates the of global channels indexed.
         """
         if isinstance(index, int):
-            return _PersistedChannelAlternateConstructor(self.global_channel_names[index], self._interpreter)
+            return _PersistedChannelAlternateConstructor(
+                self.global_channel_names[index], self._interpreter
+            )
         elif isinstance(index, slice):
-            return [_PersistedChannelAlternateConstructor(name, self._interpreter) for name in
-                    self.global_channel_names[index]]
+            return [
+                _PersistedChannelAlternateConstructor(name, self._interpreter)
+                for name in self.global_channel_names[index]
+            ]
         elif isinstance(index, str):
             names = unflatten_channel_string(index)
             if len(names) == 1:
                 return _PersistedChannelAlternateConstructor(names[0], self._interpreter)
-            return [_PersistedChannelAlternateConstructor(name, self._interpreter) for name in names]
+            return [
+                _PersistedChannelAlternateConstructor(name, self._interpreter) for name in names
+            ]
         else:
             raise DaqError(
-                'Invalid index type "{}" used to access collection.'
-                .format(type(index)), DAQmxErrors.UNKNOWN)
+                'Invalid index type "{}" used to access collection.'.format(type(index)),
+                DAQmxErrors.UNKNOWN,
+            )
 
     def __iter__(self):
         for channel_name in self.global_channel_names:

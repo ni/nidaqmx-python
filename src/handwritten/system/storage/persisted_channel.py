@@ -1,6 +1,6 @@
 from nidaqmx import utils
 
-__all__ = ['PersistedChannel']
+__all__ = ["PersistedChannel"]
 
 
 class PersistedChannel:
@@ -10,7 +10,8 @@ class PersistedChannel:
     Use the DAQmx Persisted Channel properties to query information about
     programmatically saved global channels.
     """
-    __slots__ = ['_name', '_interpreter', '__weakref__']
+
+    __slots__ = ["_name", "_interpreter", "__weakref__"]
 
     def __init__(self, name, *, grpc_options=None):
         """
@@ -34,7 +35,7 @@ class PersistedChannel:
         return not self.__eq__(other)
 
     def __repr__(self):
-        return f'PersistedChannel(name={self._name})'
+        return f"PersistedChannel(name={self._name})"
 
     @property
     def name(self):
@@ -48,7 +49,7 @@ class PersistedChannel:
         """
         str: Indicates the author of the global channel.
         """
-        val = self._interpreter.get_persisted_chan_attribute_string(self._name, 0x22d0)
+        val = self._interpreter.get_persisted_chan_attribute_string(self._name, 0x22D0)
         return val
 
     @property
@@ -57,7 +58,7 @@ class PersistedChannel:
         bool: Indicates whether the global channel can be edited in the
             DAQ Assistant.
         """
-        val = self._interpreter.get_persisted_chan_attribute_bool(self._name, 0x22d1)
+        val = self._interpreter.get_persisted_chan_attribute_bool(self._name, 0x22D1)
         return val
 
     @property
@@ -66,7 +67,7 @@ class PersistedChannel:
         bool: Indicates whether the global channel can be deleted
             through MAX.
         """
-        val = self._interpreter.get_persisted_chan_attribute_bool(self._name, 0x22d2)
+        val = self._interpreter.get_persisted_chan_attribute_bool(self._name, 0x22D2)
         return val
 
     def delete(self):
@@ -85,6 +86,7 @@ class _PersistedChannelAlternateConstructor(PersistedChannel):
 
     This is a private API used to instantiate a PersistedChannel with an existing interpreter.
     """
+
     # Setting __slots__ avoids TypeError: __class__ assignment: 'Base' object layout differs from 'Derived'.
     __slots__ = ()
 

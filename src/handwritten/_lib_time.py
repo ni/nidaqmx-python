@@ -2,13 +2,13 @@ from __future__ import annotations
 
 import ctypes
 import functools
-from datetime import timezone
-from datetime import datetime as std_datetime
-from datetime import tzinfo as dt_tzinfo
-from hightime import datetime as ht_datetime
-from hightime import timedelta as ht_timedelta
+from datetime import datetime as std_datetime, timezone, tzinfo as dt_tzinfo
 from typing import Optional, Union
+
+from hightime import datetime as ht_datetime, timedelta as ht_timedelta
+
 from nidaqmx._time import _convert_to_desired_timezone
+
 
 @functools.total_ordering
 class AbsoluteTime(ctypes.Structure):
@@ -33,7 +33,6 @@ class AbsoluteTime(ctypes.Structure):
 
     _EPOCH_1904 = ht_datetime(1904, 1, 1, tzinfo=timezone.utc)
 
-
     @classmethod
     def from_datetime(cls, dt: std_datetime | ht_datetime) -> AbsoluteTime:
         seconds_since_1904 = 0
@@ -49,9 +48,7 @@ class AbsoluteTime(ctypes.Structure):
             )
         else:
             seconds_since_1904 = int((dt - AbsoluteTime._EPOCH_1904).total_seconds())
-            lsb = int(
-                round(AbsoluteTime._NUM_SUBSECONDS * dt.microsecond / AbsoluteTime._US_PER_S)
-            )
+            lsb = int(round(AbsoluteTime._NUM_SUBSECONDS * dt.microsecond / AbsoluteTime._US_PER_S))
 
         return AbsoluteTime(lsb=lsb, msb=seconds_since_1904)
 
@@ -59,8 +56,12 @@ class AbsoluteTime(ctypes.Structure):
         total_yoctoseconds = int(
             round(AbsoluteTime._YS_PER_S * self.lsb / AbsoluteTime._NUM_SUBSECONDS)
         )
-        dt = AbsoluteTime._EPOCH_1904 + ht_timedelta(seconds=self.msb) + ht_timedelta(yoctoseconds=total_yoctoseconds)
-        return _convert_to_desired_timezone(dt,tzinfo)
+        dt = (
+            AbsoluteTime._EPOCH_1904
+            + ht_timedelta(seconds=self.msb)
+            + ht_timedelta(yoctoseconds=total_yoctoseconds)
+        )
+        return _convert_to_desired_timezone(dt, tzinfo)
 
     def __str__(self) -> str:
         return f"AbsoluteTime(lsb=0x{self.lsb:x}, msb=0x{self.msb:x})"
