@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import threading
 import warnings
+from collections.abc import Iterable
 from enum import Enum
 
 import numpy
@@ -1405,15 +1406,15 @@ class Task:
                     auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
         elif write_chan_type == ChannelType.COUNTER_OUTPUT:
-            if isinstance(data, AnalogWaveform):
-                raise DaqError(
-                    'Write failed, because waveform data is not supported for counter output channels.',
-                    DAQmxErrors.UNKNOWN, task_name=self.name)
-            
             output_type = channels_to_write.co_output_type
 
             if number_of_samples_per_channel == 1:
                 data = [data]
+            elif not isinstance(data, Iterable):
+                raise DaqError(
+                    'Write failed, because the provided data type is not supported '
+                    'for counter output channels.',
+                    DAQmxErrors.UNKNOWN, task_name=self.name)
 
             if output_type == UsageTypeCO.PULSE_FREQUENCY:
                 if not all(isinstance(sample, CtrFreq) for sample in data):
