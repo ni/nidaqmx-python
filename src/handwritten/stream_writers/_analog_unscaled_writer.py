@@ -6,14 +6,12 @@ from nidaqmx.stream_writers._channel_writer_base import (
 
 
 class AnalogUnscaledWriter(ChannelWriterBase):
-    """
-    Writes unscaled samples to one or more analog output channels in
+    """Writes unscaled samples to one or more analog output channels in
     an NI-DAQmx task.
     """
 
     def write_int16(self, data, timeout=10.0):
-        """
-        Writes one or more unscaled 16-bit integer samples to one or
+        """Writes one or more unscaled 16-bit integer samples to one or
         more analog output channels in a task.
 
         If the task uses on-demand timing, this method returns only
@@ -57,8 +55,7 @@ class AnalogUnscaledWriter(ChannelWriterBase):
         )
 
     def write_int32(self, data, timeout=10.0):
-        """
-        Writes one or more unscaled 32-bit integer samples to one or
+        """Writes one or more unscaled 32-bit integer samples to one or
         more analog output channels in a task.
 
         If the task uses on-demand timing, this method returns only
@@ -102,8 +99,7 @@ class AnalogUnscaledWriter(ChannelWriterBase):
         )
 
     def write_uint16(self, data, timeout=10.0):
-        """
-        Writes one or more unscaled 16-bit unsigned integer samples to
+        """Writes one or more unscaled 16-bit unsigned integer samples to
         one or more analog output channels in a task.
 
         If the task uses on-demand timing, this method returns only
@@ -147,8 +143,7 @@ class AnalogUnscaledWriter(ChannelWriterBase):
         )
 
     def write_uint32(self, data, timeout=10.0):
-        """
-        Writes one or more unscaled 32-bit unsigned integer samples to
+        """Writes one or more unscaled 32-bit unsigned integer samples to
         one or more analog output channels in a task.
 
         If the task uses on-demand timing, this method returns only

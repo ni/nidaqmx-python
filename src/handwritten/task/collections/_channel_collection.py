@@ -7,15 +7,13 @@ from nidaqmx.utils import flatten_channel_string, unflatten_channel_string
 
 
 class ChannelCollection(Sequence):
-    """
-    Contains the collection of channels for a DAQmx Task.
+    """Contains the collection of channels for a DAQmx Task.
 
     This class defines methods that implements a container object.
     """
 
     def __init__(self, task_handle, interpreter):
-        """
-        Do not construct this object directly; instead, construct a nidaqmx.Task and use the appropriate property, such as task.ai_channels.
+        """Do not construct this object directly; instead, construct a nidaqmx.Task and use the appropriate property, such as task.ai_channels.
         """
         self._handle = task_handle
         self._interpreter = interpreter
@@ -36,8 +34,7 @@ class ChannelCollection(Sequence):
         return False
 
     def __getitem__(self, index):
-        """
-        Indexes a subset of virtual channels on this channel collection.
+        """Indexes a subset of virtual channels on this channel collection.
 
         Args:
             index: The value of the index. The following index types are
@@ -99,8 +96,7 @@ class ChannelCollection(Sequence):
 
     @property
     def all(self):
-        """
-        :class:`nidaqmx.task.channels.Channel`:
+        """:class:`nidaqmx.task.channels.Channel`:
             Specifies a channel object that represents the entire list of
             virtual channels on this channel collection.
         """
@@ -109,8 +105,7 @@ class ChannelCollection(Sequence):
 
     @property
     def channel_names(self):
-        """
-        List[str]: Specifies the entire list of virtual channels on this
+        """List[str]: Specifies the entire list of virtual channels on this
             channel collection.
         """
         val = self._interpreter.get_task_attribute_string(self._handle, 0x1273)

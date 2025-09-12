@@ -61,9 +61,7 @@ del UnsetAutoStartSentinel
 
 
 class Task:
-    """
-    Represents a DAQmx Task.
-    """
+    """Represents a DAQmx Task."""
 
     __slots__ = (
         "_handle",
@@ -88,8 +86,7 @@ class Task:
     )
 
     def __init__(self, new_task_name="", *, grpc_options=None):
-        """
-        Creates a DAQmx task.
+        """Creates a DAQmx task.
 
         Args:
             new_task_name (Optional[str]): Specifies the name to assign to
@@ -163,18 +160,15 @@ class Task:
 
     @property
     def name(self):
-        """
-        str: Indicates the name of the task.
-        """
+        """str: Indicates the name of the task."""
         val = self._interpreter.get_task_attribute_string(self._handle, 0x1276)
         return val
 
     @property
     def channels(self):
-        """
-        :class:`nidaqmx.task.channels.Channel`: Specifies
-            a channel object that represents the entire list of virtual
-            channels in this task.
+        """:class:`nidaqmx.task.channels.Channel`: Specifies
+        a channel object that represents the entire list of virtual
+        channels in this task.
         """
         return Channel._factory(
             self._handle, flatten_channel_string(self.channel_names), self._interpreter
@@ -182,25 +176,20 @@ class Task:
 
     @property
     def channel_names(self):
-        """
-        List[str]: Indicates the names of all virtual channels in the task.
-        """
+        """List[str]: Indicates the names of all virtual channels in the task."""
         val = self._interpreter.get_task_attribute_string(self._handle, 0x1273)
         return unflatten_channel_string(val)
 
     @property
     def number_of_channels(self):
-        """
-        int: Indicates the number of virtual channels in the task.
-        """
+        """int: Indicates the number of virtual channels in the task."""
         val = self._interpreter.get_task_attribute_uint32(self._handle, 0x2181)
         return val
 
     @property
     def devices(self):
-        """
-        List[:class:`nidaqmx.system.device.Device`]: Indicates a list
-            of Device objects representing all the devices in the task.
+        """List[:class:`nidaqmx.system.device.Device`]: Indicates a list
+        of Device objects representing all the devices in the task.
         """
         val = self._interpreter.get_task_attribute_string(self._handle, 0x230E)
         return [
@@ -209,92 +198,67 @@ class Task:
 
     @property
     def number_of_devices(self):
-        """
-        int: Indicates the number of devices in the task.
-        """
+        """int: Indicates the number of devices in the task."""
         val = self._interpreter.get_task_attribute_uint32(self._handle, 0x29BA)
         return val
 
     @property
     def ai_channels(self) -> AIChannelCollection:
-        """
-        Gets the collection of analog input channels for this task.
-        """
+        """Gets the collection of analog input channels for this task."""
         return self._ai_channels
 
     @property
     def ao_channels(self) -> AOChannelCollection:
-        """
-        Gets the collection of analog output channels for this task.
-        """
+        """Gets the collection of analog output channels for this task."""
         return self._ao_channels
 
     @property
     def ci_channels(self) -> CIChannelCollection:
-        """
-        Gets the collection of counter input channels for this task.
-        """
+        """Gets the collection of counter input channels for this task."""
         return self._ci_channels
 
     @property
     def co_channels(self) -> COChannelCollection:
-        """
-        Gets the collection of counter output channels for this task.
-        """
+        """Gets the collection of counter output channels for this task."""
         return self._co_channels
 
     @property
     def di_channels(self) -> DIChannelCollection:
-        """
-        Gets the collection of digital input channels for this task.
-        """
+        """Gets the collection of digital input channels for this task."""
         return self._di_channels
 
     @property
     def do_channels(self) -> DOChannelCollection:
-        """
-        Gets the collection of digital output channels for this task.
-        """
+        """Gets the collection of digital output channels for this task."""
         return self._do_channels
 
     @property
     def export_signals(self) -> ExportSignals:
-        """
-        Gets the exported signal configurations for the task.
-        """
+        """Gets the exported signal configurations for the task."""
         return self._export_signals
 
     @property
     def in_stream(self) -> InStream:
-        """
-        Gets the read configurations for the task.
-        """
+        """Gets the read configurations for the task."""
         return self._in_stream
 
     @property
     def out_stream(self) -> OutStream:
-        """
-        Gets the write configurations for the task.
-        """
+        """Gets the write configurations for the task."""
         return self._out_stream
 
     @property
     def timing(self) -> Timing:
-        """
-        Gets the timing configurations for the task.
-        """
+        """Gets the timing configurations for the task."""
         return self._timing
 
     @property
     def triggers(self) -> Triggers:
-        """
-        Gets the trigger configurations for the task.
-        """
+        """Gets the trigger configurations for the task."""
         return self._triggers
 
     def _initialize(self, task_handle, interpreter):
-        """
-        Instantiates and populates various attributes used by this task.
+        """Instantiates and populates various attributes used by this task.
 
         Args:
             task_handle (TaskHandle): Specifies the handle for this task.
@@ -318,8 +282,7 @@ class Task:
         self._event_handler_lock = threading.Lock()
 
     def _calculate_num_samps_per_chan(self, num_samps_per_chan):
-        """
-        Calculates the actual number of samples per channel to read.
+        """Calculates the actual number of samples per channel to read.
 
         This method is necessary because the number of samples per channel
         can be set to NUM_SAMPLES_UNSET or -1, where each value entails a
@@ -343,8 +306,7 @@ class Task:
             return num_samps_per_chan
 
     def add_global_channels(self, global_channels):
-        """
-        Adds global virtual channels from MAX to the given task.
+        """Adds global virtual channels from MAX to the given task.
 
         Args:
             global_channels (List[nidaqmx.system.storage.persisted_channel.PersistedChannel]):
@@ -359,8 +321,7 @@ class Task:
         self._interpreter.add_global_chans_to_task(self._handle, channels)
 
     def close(self):
-        """
-        Clears the task.
+        """Clears the task.
 
         Before clearing, this method aborts the task, if necessary,
         and releases any resources the task reserved. You cannot use a task
@@ -399,8 +360,7 @@ class Task:
             raise first_exception
 
     def control(self, action):
-        """
-        Alters the state of a task according to the action you specify.
+        """Alters the state of a task according to the action you specify.
 
         Args:
             action (nidaqmx.constants.TaskMode): Specifies how to alter
@@ -409,8 +369,7 @@ class Task:
         self._interpreter.task_control(self._handle, action.value)
 
     def is_task_done(self):
-        """
-        Queries the status of the task and indicates if it completed
+        """Queries the status of the task and indicates if it completed
         execution. Use this function to ensure that the specified
         operation is complete before you stop the task.
 
@@ -424,8 +383,7 @@ class Task:
         return is_task_done
 
     def perform_bridge_offset_nulling_cal(self, channel="", skip_unsupported_channels=False):
-        """
-        Perform a bridge offset nulling calibration on the channels in the task.
+        """Perform a bridge offset nulling calibration on the channels in the task.
 
         If the task measures both bridge-based sensors and non-bridge-based sensors,
         use the channels input to specify the names of the channels that measure
@@ -456,8 +414,7 @@ class Task:
         shunt_resistor_source=ShuntCalSource.DEFAULT,
         skip_unsupported_channels=False,
     ):
-        """
-        Perform shunt calibration for the specified channels using a strain
+        """Perform shunt calibration for the specified channels using a strain
         gage sensor.
 
         Refer to the calibration procedure for your module for detailed
@@ -498,8 +455,7 @@ class Task:
         bridge_resistance=120,
         skip_unsupported_channels=False,
     ):
-        """
-        Perform shunt calibration for the specified channels using a bridge sensor.
+        """Perform shunt calibration for the specified channels using a bridge sensor.
 
         Refer to the calibration procedure for your module for detailed
         calibration instructions.
@@ -534,8 +490,7 @@ class Task:
         )
 
     def perform_thrmcpl_lead_offset_nulling_cal(self, channel="", skip_unsupported_channels=False):
-        """
-        Perform thermocouple lead offset nulling calibration on the channels in the task.
+        """Perform thermocouple lead offset nulling calibration on the channels in the task.
 
         This is to compensate for offsets introduced by open thermocouple detection.
         Keep the measured temperature as constant as possible while performing this
@@ -558,8 +513,7 @@ class Task:
         )
 
     def read(self, number_of_samples_per_channel=NUM_SAMPLES_UNSET, timeout=10.0):
-        """
-        Reads samples from the task or virtual channels you specify.
+        """Reads samples from the task or virtual channels you specify.
 
         This read method is dynamic, and is capable of inferring an appropriate
         return type based on these factors:
@@ -855,8 +809,7 @@ class Task:
 
     @requires_feature(WAVEFORM_SUPPORT)
     def read_waveform(self, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0):
-        """
-        Reads samples from the task or virtual channels you specify, and returns them as waveforms.
+        """Reads samples from the task or virtual channels you specify, and returns them as waveforms.
 
         This read method is dynamic, and is capable of inferring an appropriate
         return type based on these factors:
@@ -987,8 +940,7 @@ class Task:
             )
 
     def register_done_event(self, callback_method):
-        """
-        Registers a callback function to receive an event when a task stops due
+        """Registers a callback function to receive an event when a task stops due
         to an error or when a finite acquisition task or finite generation task
         completes execution. A Done event does not occur when a task is stopped
         explicitly, such as by calling DAQmx Stop Task.
@@ -1030,8 +982,7 @@ class Task:
                 event_handler.close()  # may raise an exception
 
     def register_every_n_samples_acquired_into_buffer_event(self, sample_interval, callback_method):
-        """
-        Registers a callback function to receive an event when the specified
+        """Registers a callback function to receive an event when the specified
         number of samples is written from the device to the buffer. This
         function only works with devices that support buffered tasks.
 
@@ -1094,8 +1045,7 @@ class Task:
     def register_every_n_samples_transferred_from_buffer_event(
         self, sample_interval, callback_method
     ):
-        """
-        Registers a callback function to receive an event when the specified
+        """Registers a callback function to receive an event when the specified
         number of samples is written from the buffer to the device. This
         function only works with devices that support buffered tasks.
 
@@ -1157,8 +1107,7 @@ class Task:
                 event_handler.close()  # may raise an exception
 
     def register_signal_event(self, signal_type, callback_method):
-        """
-        Registers a callback function to receive an event when the specified
+        """Registers a callback function to receive an event when the specified
         hardware event occurs.
 
         When you stop a task explicitly any pending events are discarded. For
@@ -1211,8 +1160,7 @@ class Task:
         allow_interactive_editing=True,
         allow_interactive_deletion=True,
     ):
-        """
-        Saves this task and any local channels it contains to MAX.
+        """Saves this task and any local channels it contains to MAX.
 
         This function does not save global channels. Use the DAQmx Save
         Global Channel function to save global channels.
@@ -1249,8 +1197,7 @@ class Task:
         self._interpreter.save_task(self._handle, save_as, author, options)
 
     def start(self):
-        """
-        Transitions the task to the running state to begin the measurement
+        """Transitions the task to the running state to begin the measurement
         or generation. Using this method is required for some applications and
         is optional for others.
 
@@ -1268,8 +1215,7 @@ class Task:
         self._interpreter.start_task(self._handle)
 
     def stop(self):
-        """
-        Stops the task and returns it to the state the task was in before the
+        """Stops the task and returns it to the state the task was in before the
         DAQmx Start Task method ran or the DAQmx Write method ran with the
         autostart input set to TRUE.
 
@@ -1282,8 +1228,7 @@ class Task:
         self._interpreter.stop_task(self._handle)
 
     def wait_for_valid_timestamp(self, timestamp_event, timeout=10.0):
-        """
-        Wait until the specified timestamp has a value.
+        """Wait until the specified timestamp has a value.
 
         Use this method to ensure the timestamp has a valid value to prevent an error when querying a timestamp value.
 
@@ -1305,8 +1250,7 @@ class Task:
         )
 
     def wait_until_done(self, timeout=10.0):
-        """
-        Waits for the measurement or generation to complete.
+        """Waits for the measurement or generation to complete.
 
         Use this method to ensure that the specified operation is complete
         before you stop the task.
@@ -1351,8 +1295,7 @@ class Task:
         )
 
     def write(self, data, auto_start=AUTO_START_UNSET, timeout=10.0):
-        """
-        Writes samples to the task or virtual channels you specify.
+        """Writes samples to the task or virtual channels you specify.
 
         This write method is dynamic, and is capable of accepting the
         samples to write in the various forms for most operations:
@@ -1622,8 +1565,7 @@ class Task:
 
 
 class _TaskAlternateConstructor(Task):
-    """
-    Provide an alternate constructor for the Task object.
+    """Provide an alternate constructor for the Task object.
 
     This is a private API used to instantiate a Task with an existing task handle and interpreter.
     """
@@ -1632,13 +1574,13 @@ class _TaskAlternateConstructor(Task):
     __slots__ = ()
 
     def __init__(self, task_handle, interpreter, close_on_exit):
-        """
+        """Initialize a new Task with an existing interpreter.
+        
         Args:
             task_handle: Specifies the task handle from which to create a
                 Task object.
             interpreter: Specifies the interpreter instance.
             close_on_exit: Specifies whether the task's context manager closes the task.
-
         """
         # Initialize the fields that __del__ accesses so it doesn't crash when _initialize raises an exception.
         self._handle = task_handle

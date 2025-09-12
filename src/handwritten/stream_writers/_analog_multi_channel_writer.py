@@ -6,14 +6,12 @@ from nidaqmx.stream_writers._channel_writer_base import (
 
 
 class AnalogMultiChannelWriter(ChannelWriterBase):
-    """
-    Writes samples to one or more analog output channels in an NI-DAQmx
+    """Writes samples to one or more analog output channels in an NI-DAQmx
     task.
     """
 
     def write_many_sample(self, data, timeout=10.0):
-        """
-        Writes one or more floating-point samples to one or more analog
+        """Writes one or more floating-point samples to one or more analog
         output channels in a task.
 
         If the task uses on-demand timing, this method returns only
@@ -59,8 +57,7 @@ class AnalogMultiChannelWriter(ChannelWriterBase):
         )
 
     def write_one_sample(self, data, timeout=10):
-        """
-        Writes a single floating-point sample to one or more analog
+        """Writes a single floating-point sample to one or more analog
         output channels in a task.
 
         Args:

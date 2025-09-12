@@ -37,8 +37,7 @@ _NETWORK_TIMEOUT_IN_SECONDS = 60
 
 
 def _parse_version(version: str) -> tuple[int, ...]:
-    """
-    Split the version string into a tuple of integers.
+    """Split the version string into a tuple of integers.
 
     >>> _parse_version("23.8.0")
     (23, 8, 0)
@@ -57,10 +56,7 @@ def _parse_version(version: str) -> tuple[int, ...]:
 
 
 def _get_daqmx_installed_version() -> str | None:
-    """
-    Check for existing installation of NI-DAQmx.
-
-    """
+    """Check for existing installation of NI-DAQmx."""
     if sys.platform.startswith("win"):
         try:
             _logger.debug("Reading the registry entries to get installed DAQmx version")
@@ -130,10 +126,7 @@ def _get_daqmx_installed_version() -> str | None:
 # Creating a temp file that we then close and yield - this is used to allow subprocesses to access
 @contextlib.contextmanager
 def _multi_access_temp_file(*, suffix: str = ".exe", delete: bool = True) -> Generator[str]:
-    """
-    Context manager for creating a temporary file.
-
-    """
+    """Context manager for creating a temporary file."""
     try:
         temp_file = tempfile.NamedTemporaryFile(suffix=suffix, delete=False, mode="w")
         temp_file.close()
@@ -161,8 +154,7 @@ def _multi_access_temp_file(*, suffix: str = ".exe", delete: bool = True) -> Gen
 def _load_data(
     json_data: str, platform: str
 ) -> tuple[str | None, str | None, str | None, list[str] | None]:
-    """
-    Load data from JSON string and extract Windows metadata.
+    """Load data from JSON string and extract Windows metadata.
 
     >>> json_data = '{"Windows": [{"Location": "path/to/windows/driver", "Version": "24.0", "Release": "2024Q1", "supportedOS": ["Windows 11"]}], "Linux": []}'
     >>> _load_data(json_data, "Windows")
@@ -214,10 +206,7 @@ def _load_data(
 def _get_driver_details(
     platform: str,
 ) -> tuple[str | None, str | None, str | None, list[str] | None]:
-    """
-    Parse the JSON data and retrieve the download link and version information.
-
-    """
+    """Parse the JSON data and retrieve the download link and version information."""
     try:
         with pkg_resources.open_text(__package__, METADATA_FILE) as json_file:
             _logger.debug("Opening the metadata file %s.", METADATA_FILE)
@@ -234,10 +223,7 @@ def _get_driver_details(
 
 
 def _install_daqmx_driver_windows_core(download_url: str) -> None:
-    """
-    Download and launch NI-DAQmx Driver installation in an interactive mode
-
-    """
+    """Download and launch NI-DAQmx Driver installation in an interactive mode"""
     _validate_download_url(download_url)
     try:
         with _multi_access_temp_file() as temp_file:
@@ -263,10 +249,7 @@ def _install_daqmx_driver_windows_core(download_url: str) -> None:
 
 
 def _install_daqmx_driver_linux_core(download_url: str, release: str) -> None:
-    """
-    Download NI Linux Device Drivers and install NI-DAQmx on Linux OS
-
-    """
+    """Download NI Linux Device Drivers and install NI-DAQmx on Linux OS"""
     if sys.platform.startswith("linux"):
         _validate_download_url(download_url)
         try:
@@ -330,10 +313,7 @@ def _validate_download_url(download_url: str) -> None:
 
 
 def _ask_user_confirmation(user_message: str) -> bool:
-    """
-    Prompt for user confirmation
-
-    """
+    """Prompt for user confirmation"""
     while True:
         response = input(user_message + " (yes/no): ").strip().lower()
         if response in ["yes", "y"]:
@@ -349,10 +329,7 @@ def _upgrade_daqmx_user_confirmation(
     latest_version: str,
     release: str,
 ) -> bool:
-    """
-    Confirm with the user and return the user response.
-
-    """
+    """Confirm with the user and return the user response."""
     _logger.debug("Entering _upgrade_daqmx_user_confirmation")
     installed_parts = _parse_version(installed_version)
     latest_parts = _parse_version(latest_version)
@@ -371,10 +348,7 @@ def _fresh_install_daqmx_user_confirmation(
     latest_version: str,
     release: str,
 ) -> bool:
-    """
-    Confirm with the user and return the user response.
-
-    """
+    """Confirm with the user and return the user response."""
     _logger.debug("Entering _fresh_install_daqmx_user_confirmation")
     return _ask_user_confirmation(
         f"Latest NI-DAQmx version available is {latest_version} ({release}). Do you want to install?"
@@ -382,10 +356,7 @@ def _fresh_install_daqmx_user_confirmation(
 
 
 def _is_distribution_supported() -> None:
-    """
-    Raises an exception if the linux distribution and its version are not supported.
-
-    """
+    """Raises an exception if the linux distribution and its version are not supported."""
     if sys.platform.startswith("linux"):
         dist_name = distro.id()
         dist_version = distro.version()
@@ -409,10 +380,7 @@ def _is_distribution_supported() -> None:
 
 
 def _install_daqmx_driver():
-    """
-    Install the NI-DAQmx driver.
-
-    """
+    """Install the NI-DAQmx driver."""
     if sys.platform.startswith("win"):
         _logger.info("Windows platform detected")
         platform = "Windows"
@@ -453,10 +421,7 @@ def _install_daqmx_driver():
 
 
 def installdriver() -> None:
-    """
-    Download and launch NI-DAQmx Driver installation in an interactive mode.
-
-    """
+    """Download and launch NI-DAQmx Driver installation in an interactive mode."""
     try:
         _install_daqmx_driver()
     except click.ClickException:

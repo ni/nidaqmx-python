@@ -6,13 +6,11 @@ from nidaqmx.stream_writers._channel_writer_base import (
 
 
 class CounterWriter(ChannelWriterBase):
-    """
-    Writes samples to a counter output channel in an NI-DAQmx task.
+    """Writes samples to a counter output channel in an NI-DAQmx task.
     """
 
     def write_many_sample_pulse_frequency(self, frequencies, duty_cycles, timeout=10.0):
-        """
-        Writes one or more pulse samples in terms of frequency to a
+        """Writes one or more pulse samples in terms of frequency to a
         single counter output channel in a task.
 
         If the task uses on-demand timing, this method returns only
@@ -66,8 +64,7 @@ class CounterWriter(ChannelWriterBase):
         )
 
     def write_many_sample_pulse_ticks(self, high_ticks, low_ticks, timeout=10.0):
-        """
-        Writes one or more pulse samples in terms of ticks to a single
+        """Writes one or more pulse samples in terms of ticks to a single
         counter output channel in a task.
 
         If the task uses on-demand timing, this method returns only
@@ -121,8 +118,7 @@ class CounterWriter(ChannelWriterBase):
         )
 
     def write_many_sample_pulse_time(self, high_times, low_times, timeout=10.0):
-        """
-        Writes one or more pulse samples in terms of time to a single
+        """Writes one or more pulse samples in terms of time to a single
         counter output channel in a task.
 
         If the task uses on-demand timing, this method returns only
@@ -176,8 +172,7 @@ class CounterWriter(ChannelWriterBase):
         )
 
     def write_one_sample_pulse_frequency(self, frequency, duty_cycle, timeout=10):
-        """
-        Writes a new pulse frequency and duty cycle to a single counter
+        """Writes a new pulse frequency and duty cycle to a single counter
         output channel in a task.
 
         Args:
@@ -209,8 +204,7 @@ class CounterWriter(ChannelWriterBase):
         )
 
     def write_one_sample_pulse_ticks(self, high_ticks, low_ticks, timeout=10):
-        """
-        Writes a new pulse high tick count and low tick count to a
+        """Writes a new pulse high tick count and low tick count to a
         single counter output channel in a task.
 
         Args:
@@ -237,8 +231,7 @@ class CounterWriter(ChannelWriterBase):
         )
 
     def write_one_sample_pulse_time(self, high_time, low_time, timeout=10):
-        """
-        Writes a new pulse high time and low time to a single counter
+        """Writes a new pulse high time and low time to a single counter
         output channel in a task.
 
         Args:

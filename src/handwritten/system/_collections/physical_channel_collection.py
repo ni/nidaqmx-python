@@ -10,15 +10,13 @@ from nidaqmx.utils import flatten_channel_string, unflatten_channel_string
 
 
 class PhysicalChannelCollection(Sequence):
-    """
-    Contains the collection of physical channels for a DAQmx device.
+    """Contains the collection of physical channels for a DAQmx device.
 
     This class defines methods that implements a container object.
     """
 
     def __init__(self, device_name, interpreter):
-        """
-        Do not construct this object directly; instead, construct a nidaqmx.system.Device and use the appropriate property, such as device.ai_physical_channels.
+        """Do not construct this object directly; instead, construct a nidaqmx.system.Device and use the appropriate property, such as device.ai_physical_channels.
         """
         self._name = device_name
         self._interpreter = interpreter
@@ -39,8 +37,7 @@ class PhysicalChannelCollection(Sequence):
         return False
 
     def __getitem__(self, index):
-        """
-        Indexes a subset of physical channels on this physical channel
+        """Indexes a subset of physical channels on this physical channel
         collection.
 
         Args:
@@ -112,8 +109,7 @@ class PhysicalChannelCollection(Sequence):
 
     @property
     def all(self):
-        """
-        nidaqmx.system.physical_channel.PhysicalChannel: Specifies a
+        """nidaqmx.system.physical_channel.PhysicalChannel: Specifies a
             physical channel object that represents the entire list of
             physical channels on this channel collection.
         """
@@ -123,16 +119,14 @@ class PhysicalChannelCollection(Sequence):
 
     @property
     def channel_names(self):
-        """
-        List[str]: Specifies the entire list of physical channels in this
+        """List[str]: Specifies the entire list of physical channels in this
             collection.
         """
         raise NotImplementedError()
 
 
 class AIPhysicalChannelCollection(PhysicalChannelCollection):
-    """
-    Contains the collection of analog input physical channels for a
+    """Contains the collection of analog input physical channels for a
     DAQmx device.
 
     This class defines methods that implements a container object.
@@ -145,8 +139,7 @@ class AIPhysicalChannelCollection(PhysicalChannelCollection):
 
 
 class AOPhysicalChannelCollection(PhysicalChannelCollection):
-    """
-    Contains the collection of analog output physical channels for a
+    """Contains the collection of analog output physical channels for a
     DAQmx device.
 
     This class defines methods that implements a container object.
@@ -159,8 +152,7 @@ class AOPhysicalChannelCollection(PhysicalChannelCollection):
 
 
 class CIPhysicalChannelCollection(PhysicalChannelCollection):
-    """
-    Contains the collection of counter input physical channels for a
+    """Contains the collection of counter input physical channels for a
     DAQmx device.
 
     This class defines methods that implements a container object.
@@ -173,8 +165,7 @@ class CIPhysicalChannelCollection(PhysicalChannelCollection):
 
 
 class COPhysicalChannelCollection(PhysicalChannelCollection):
-    """
-    Contains the collection of counter output physical channels for a
+    """Contains the collection of counter output physical channels for a
     DAQmx device.
 
     This class defines methods that implements a container object.
@@ -187,8 +178,7 @@ class COPhysicalChannelCollection(PhysicalChannelCollection):
 
 
 class DILinesCollection(PhysicalChannelCollection):
-    """
-    Contains the collection of digital input lines for a DAQmx device.
+    """Contains the collection of digital input lines for a DAQmx device.
 
     This class defines methods that implements a container object.
     """
@@ -200,8 +190,7 @@ class DILinesCollection(PhysicalChannelCollection):
 
 
 class DOLinesCollection(PhysicalChannelCollection):
-    """
-    Contains the collection of digital output lines for a DAQmx device.
+    """Contains the collection of digital output lines for a DAQmx device.
 
     This class defines methods that implements a container object.
     """
@@ -213,8 +202,7 @@ class DOLinesCollection(PhysicalChannelCollection):
 
 
 class DIPortsCollection(PhysicalChannelCollection):
-    """
-    Contains the collection of digital input ports for a DAQmx device.
+    """Contains the collection of digital input ports for a DAQmx device.
 
     This class defines methods that implements a container object.
     """
@@ -226,8 +214,7 @@ class DIPortsCollection(PhysicalChannelCollection):
 
 
 class DOPortsCollection(PhysicalChannelCollection):
-    """
-    Contains the collection of digital output ports for a DAQmx device.
+    """Contains the collection of digital output ports for a DAQmx device.
 
     This class defines methods that implements a container object.
     """

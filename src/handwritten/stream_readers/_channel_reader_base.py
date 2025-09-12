@@ -5,12 +5,12 @@ from nidaqmx.error_codes import DAQmxErrors
 
 
 class ChannelReaderBase:
-    """
-    Defines base class for all NI-DAQmx stream readers.
+    """Defines base class for all NI-DAQmx stream readers.
     """
 
     def __init__(self, task_in_stream):
-        """
+        """Initialize a new ChannelReaderBase.
+        
         Args:
             task_in_stream: Specifies the input stream associated with
                 an NI-DAQmx task from which to read samples.
@@ -24,8 +24,7 @@ class ChannelReaderBase:
 
     @property
     def verify_array_shape(self):
-        """
-        bool: Indicates whether the size and shape of the user-defined
+        """bool: Indicates whether the size and shape of the user-defined
             NumPy arrays passed to read methods are verified. Defaults
             to True when this object is instantiated.
 
@@ -39,8 +38,7 @@ class ChannelReaderBase:
         self._verify_array_shape = val
 
     def _verify_array(self, data, number_of_samples_per_channel, is_many_chan, is_many_samp):
-        """
-        Verifies that the shape of the specified NumPy array can be used
+        """Verifies that the shape of the specified NumPy array can be used
         to read multiple samples from the current task which contains
         one or more channels, if the "verify_array_shape" property is
         set to True.
@@ -84,8 +82,7 @@ class ChannelReaderBase:
             )
 
     def _verify_array_digital_lines(self, data, is_many_chan, is_many_line):
-        """
-        Verifies that the shape of the specified NumPy array can be used
+        """Verifies that the shape of the specified NumPy array can be used
         to read samples from the current task which contains one or more
         channels that have one or more digital lines per channel, if the
         "verify_array_shape" property is set to True.

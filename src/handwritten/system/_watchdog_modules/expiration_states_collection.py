@@ -3,8 +3,7 @@ from nidaqmx.system._watchdog_modules.expiration_state import ExpirationState
 
 
 class ExpirationStatesCollection:
-    """
-    Contains the collection of expiration states for a DAQmx Watchdog Task.
+    """Contains the collection of expiration states for a DAQmx Watchdog Task.
 
     This class defines methods that implements a container object.
     """
@@ -25,8 +24,7 @@ class ExpirationStatesCollection:
         return not self.__eq__(other)
 
     def __getitem__(self, index):
-        """
-        Indexes an expiration state on this collection.
+        """Indexes an expiration state on this collection.
 
         Args:
             index (str): Name of the physical channel of which the

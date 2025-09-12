@@ -15,12 +15,12 @@ AUTO_START_UNSET = object.__new__(UnsetAutoStartSentinel)
 
 
 class ChannelWriterBase:
-    """
-    Defines base class for all NI-DAQmx stream writers.
+    """Defines base class for all NI-DAQmx stream writers.
     """
 
     def __init__(self, task_out_stream, auto_start=AUTO_START_UNSET):
-        """
+        """Initialize a new ChannelWriterBase.
+        
         Args:
             task_out_stream: Specifies the output stream associated with
                 an NI-DAQmx task which to write samples.
@@ -44,8 +44,7 @@ class ChannelWriterBase:
 
     @property
     def auto_start(self):
-        """
-        bool: Specifies if the write method automatically starts the
+        """bool: Specifies if the write method automatically starts the
             task if you did not explicitly start it with the DAQmx Start
             Task method.
 
@@ -67,8 +66,7 @@ class ChannelWriterBase:
 
     @property
     def verify_array_shape(self):
-        """
-        bool: Indicates whether the size and shape of the user-defined
+        """bool: Indicates whether the size and shape of the user-defined
             NumPy arrays passed to read methods are verified. Defaults
             to True when this object is instantiated.
 
@@ -82,8 +80,7 @@ class ChannelWriterBase:
         self._verify_array_shape = val
 
     def _verify_array(self, data, is_many_chan, is_many_samp):
-        """
-        Verifies that the shape of the specified NumPy array can be used
+        """Verifies that the shape of the specified NumPy array can be used
         with the specified write method type, if the
         "verify_array_shape" property is set to True.
 
@@ -117,8 +114,7 @@ class ChannelWriterBase:
             self._raise_error_if_invalid_write_dimensions(expected_num_dimensions, len(data.shape))
 
     def _verify_array_digital_lines(self, data, is_many_chan, is_many_line):
-        """
-        Verifies that the shape of the specified NumPy array can be used
+        """Verifies that the shape of the specified NumPy array can be used
         to read samples from the current task which contains one or more
         channels that have one or more digital lines per channel, if the
         "verify_array_shape" property is set to True.

@@ -10,15 +10,13 @@ from nidaqmx.utils import unflatten_channel_string
 
 
 class PersistedChannelCollection(Sequence):
-    """
-    Contains the collection of global channels for a DAQmx system.
+    """Contains the collection of global channels for a DAQmx system.
 
     This class defines methods that implements a container object.
     """
 
     def __init__(self, interpreter):
-        """
-        Do not construct this object directly; instead, call nidaqmx.system.System.local().global_channels.
+        """Do not construct this object directly; instead, call nidaqmx.system.System.local().global_channels.
         """
         self._interpreter = interpreter
 
@@ -37,8 +35,7 @@ class PersistedChannelCollection(Sequence):
         return False
 
     def __getitem__(self, index):
-        """
-        Indexes a subset of global channels on this global channel
+        """Indexes a subset of global channels on this global channel
         collection.
 
         Args:
@@ -99,8 +96,7 @@ class PersistedChannelCollection(Sequence):
 
     @property
     def global_channel_names(self):
-        """
-        List[str]: The names of all the global channels on this
+        """List[str]: The names of all the global channels on this
             collection.
         """
         val = self._interpreter.get_system_info_attribute_string(0x1265)

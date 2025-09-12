@@ -38,9 +38,7 @@ _FUNCTION_NOT_SUPPORTED_MESSAGE = (
 
 
 class c_bool32(ctypes.c_uint):
-    """
-    Specifies a custom ctypes data type to represent 32-bit booleans.
-    """
+    """Specifies a custom ctypes data type to represent 32-bit booleans."""
 
     # typeshed specifies that _SimpleCData[_T].value is an instance variable with type _T, so
     # accessing it with the descriptor protocol via its class results in "error: Access to generic
@@ -58,10 +56,8 @@ class c_bool32(ctypes.c_uint):
 
 
 class CtypesByteString:
-    """
-    Custom argtype that automatically converts unicode strings to encoding
-    used by the DAQmx C API DLL in Python 3.
-    """
+    """Custom argtype that automatically converts unicode strings to encoding
+    used by the DAQmx C API DLL in Python 3."""
 
     @classmethod
     def from_param(cls, param):
@@ -74,8 +70,7 @@ ctypes_byte_str: TypeAlias = CtypesByteString
 
 
 def wrapped_ndpointer(*args, **kwargs):
-    """
-    Specifies an ndpointer type that wraps numpy.ctypeslib.ndpointer and
+    """Specifies an ndpointer type that wraps numpy.ctypeslib.ndpointer and
     allows a value of None to be passed to an argument of that type.
 
     Taken from http://stackoverflow.com/questions/32120178
@@ -91,8 +86,7 @@ def wrapped_ndpointer(*args, **kwargs):
 
 
 class DaqFunctionImporter:
-    """
-    Wraps the function getter function of a ctypes library.
+    """Wraps the function getter function of a ctypes library.
 
     Allows the NI-DAQmx Python API to fail elegantly if a function is not
     supported in the current version of the API.
@@ -132,17 +126,13 @@ compatibility because uInt32 and void* are the same size for 32-bit applications
 
 
 def get_encoding_from_locale() -> str:
-    """
-    Gets the current locale encoding handling cases where it is unset.
-    """
+    """Gets the current locale encoding handling cases where it is unset."""
     _, encoding = locale.getlocale()
     return encoding or "ascii"
 
 
 class DaqLibImporter:
-    """
-    Encapsulates NI-DAQmx library importing and handle type parsing logic.
-    """
+    """Encapsulates NI-DAQmx library importing and handle type parsing logic."""
 
     def __init__(self):
         self._windll = None
@@ -178,9 +168,7 @@ class DaqLibImporter:
         return self._encoding
 
     def _import_lib(self):
-        """
-        Determines the location of and loads the NI-DAQmx CAI DLL.
-        """
+        """Determines the location of and loads the NI-DAQmx CAI DLL."""
         self._windll = None
         self._cdll = None
         self._encoding = None
