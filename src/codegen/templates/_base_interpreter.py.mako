@@ -15,7 +15,7 @@ from __future__ import annotations
 import abc
 import numpy
 from nitypes.waveform import AnalogWaveform, DigitalWaveform
-from typing import Sequence
+from typing import Any, Sequence
 from nidaqmx.constants import WaveformAttributeMode
 
 
@@ -117,4 +117,14 @@ class BaseInterpreter(abc.ABC):
         timeout: float,
         waveform_attribute_mode: WaveformAttributeMode,
     ) -> Sequence[DigitalWaveform[numpy.uint8]]:
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def write_analog_waveform(
+        self,
+        task_handle: object,
+        waveform: AnalogWaveform[Any],
+        auto_start: bool,
+        timeout: float
+    ) -> int:
         raise NotImplementedError

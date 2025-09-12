@@ -121,7 +121,8 @@ class FeatureToggle:
             return self._is_enabled_override
         return self.readiness <= get_code_readiness_level()
 
-    def _raise_if_disabled(self) -> None:
+    def raise_if_disabled(self) -> None:
+        """Raises an error if the feature is disabled."""
         if self.is_enabled:
             return
 
@@ -143,7 +144,7 @@ def requires_feature(
     def decorator(func: Callable[_P, _T]) -> Callable[_P, _T]:
         @functools.wraps(func)
         def wrapper(*args: _P.args, **kwargs: _P.kwargs) -> _T:
-            feature_toggle._raise_if_disabled()
+            feature_toggle.raise_if_disabled()
             return func(*args, **kwargs)
 
         return wrapper

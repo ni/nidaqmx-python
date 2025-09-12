@@ -11,7 +11,7 @@ from enum import Enum
 from datetime import timezone
 from hightime import datetime as ht_datetime
 from hightime import timedelta as ht_timedelta
-from typing import Callable, List, Sequence, Tuple, TYPE_CHECKING, Union
+from typing import Any, Callable, List, Sequence, Tuple, TYPE_CHECKING, Union
 
 from nidaqmx._base_interpreter import BaseEventHandler, BaseInterpreter
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer, TaskHandle
@@ -6966,6 +6966,28 @@ class LibraryInterpreter(BaseInterpreter):
         self.check_for_error(error_code, samps_per_chan_read=samples_read.value)
 
         return read_array, samples_read.value, number_of_bytes_per_sample.value
+
+    def write_analog_waveform(
+        self,
+        task_handle: object,
+        waveform: AnalogWaveform[Any],
+        auto_start: bool,
+        timeout: float
+    ) -> int:
+        """Write an analog waveform."""
+        array = waveform.scaled_data
+        if not array.flags.c_contiguous:
+            array = array.copy(order="C")
+
+        return self.write_analog_f64(
+            task_handle,
+            waveform.sample_count,
+            auto_start,
+            timeout,
+            FillMode.GROUP_BY_CHANNEL.value,
+            array,
+        )
+
 
     def write_raw(
             self, task_handle, num_samps_per_chan, auto_start, timeout, numpy_array):

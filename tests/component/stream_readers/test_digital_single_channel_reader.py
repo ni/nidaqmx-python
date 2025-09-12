@@ -207,7 +207,7 @@ def test___digital_single_line_reader___read_waveform_feature_disabled___raises_
     with pytest.raises(FeatureNotSupportedError) as exc_info:
         reader.read_waveform(waveform)
 
-    error_message = str(exc_info.value)
+    error_message = exc_info.value.args[0]
     assert "WAVEFORM_SUPPORT feature is not supported" in error_message
     assert "NIDAQMX_ENABLE_WAVEFORM_SUPPORT" in error_message
 

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import threading
 import warnings
+from collections.abc import Iterable
 from enum import Enum
 
 import numpy
@@ -1240,6 +1241,7 @@ class Task:
           sample for multiple channels.
         - List of lists/2D numpy.ndarray: Multiple samples for multiple
           channels.
+        - AnalogWaveform: Waveform data for a single analog output channel.
 
         The data type of the samples passed in must be appropriate for
         the channel type of the task.
@@ -1316,6 +1318,14 @@ class Task:
                 number_of_samples_per_channel = len(data)
                 element = data[0]
 
+            elif isinstance(data, AnalogWaveform):
+                WAVEFORM_SUPPORT.raise_if_disabled()
+                if number_of_channels != 1:
+                    self._raise_invalid_write_num_chans_error(
+                        number_of_channels, 1)
+                number_of_samples_per_channel = data.sample_count
+                element = data.raw_data[0]
+
             else:
                 number_of_samples_per_channel = 1
                 element = data
@@ -1356,10 +1366,14 @@ class Task:
                 auto_start = True
 
         if write_chan_type == ChannelType.ANALOG_OUTPUT:
-            data = numpy.asarray(data, dtype=numpy.float64)
-            return self._interpreter.write_analog_f64(
-                self._handle, number_of_samples_per_channel, auto_start,
-                timeout, FillMode.GROUP_BY_CHANNEL.value, data)
+            if isinstance(data, AnalogWaveform):
+                return self._interpreter.write_analog_waveform(
+                    self._handle, data, auto_start, timeout)
+            else:
+                data = numpy.asarray(data, dtype=numpy.float64)
+                return self._interpreter.write_analog_f64(
+                    self._handle, number_of_samples_per_channel, auto_start,
+                    timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
         elif write_chan_type == ChannelType.DIGITAL_OUTPUT:
             if self.out_stream.do_num_booleans_per_chan == 1:
@@ -1396,6 +1410,11 @@ class Task:
 
             if number_of_samples_per_channel == 1:
                 data = [data]
+            elif not isinstance(data, Iterable):
+                raise DaqError(
+                    'Write failed, because the provided data type is not supported '
+                    'for counter output channels.',
+                    DAQmxErrors.UNKNOWN, task_name=self.name)
 
             if output_type == UsageTypeCO.PULSE_FREQUENCY:
                 if not all(isinstance(sample, CtrFreq) for sample in data):
