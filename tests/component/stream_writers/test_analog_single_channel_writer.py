@@ -10,9 +10,10 @@ from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
 from nidaqmx.stream_writers import AnalogSingleChannelWriter
 from tests.component._analog_utils import (
     AO_VOLTAGE_EPSILON,
+    _create_float32_ramp_waveform,
     _create_linear_ramp_waveform,
     _create_non_contiguous_waveform,
-    _create_scaled_linear_ramp_waveform,
+    _create_scaled_int32_ramp_waveform,
     _get_expected_voltage_for_chan,
 )
 
@@ -101,7 +102,7 @@ def test___analog_single_channel_writer___write_waveform_with_float32_dtype___up
     num_samples = 20
     start_value = 0.0
     end_value = 1.0
-    waveform = _create_linear_ramp_waveform(num_samples, start_value, end_value)
+    waveform = _create_float32_ramp_waveform(num_samples, start_value, end_value)
 
     samples_written = writer.write_waveform(waveform)
 
@@ -118,19 +119,13 @@ def test___analog_single_channel_writer___write_waveform_with_scaling___updates_
 ) -> None:
     writer = AnalogSingleChannelWriter(ao_single_channel_task.out_stream)
     num_samples = 20
-    start_value = -0.1
-    end_value = 0.1
-    gain = 2.0
-    offset = 0.5
-    waveform = _create_scaled_linear_ramp_waveform(
-        num_samples, start_value, end_value, gain=gain, offset=offset
-    )
+    waveform = _create_scaled_int32_ramp_waveform(num_samples)
 
     samples_written = writer.write_waveform(waveform)
 
     assert samples_written == num_samples
     assert ai_single_channel_loopback_task.read() == pytest.approx(
-        end_value * gain + offset, abs=AO_VOLTAGE_EPSILON
+        waveform.scaled_data[-1], abs=AO_VOLTAGE_EPSILON
     )
 
 

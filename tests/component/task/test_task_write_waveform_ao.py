@@ -9,9 +9,10 @@ from nidaqmx.constants import AcquisitionType
 from tests.component._analog_utils import (
     AO_VOLTAGE_EPSILON,
     _create_constant_waveform,
+    _create_float32_ramp_waveform,
     _create_linear_ramp_waveform,
     _create_non_contiguous_waveform,
-    _create_scaled_linear_ramp_waveform,
+    _create_scaled_int32_ramp_waveform,
     _setup_synchronized_waveform_tasks,
 )
 
@@ -98,7 +99,7 @@ def test___task___write_waveform_with_float32_dtype___output_matches_final_value
     num_samples = 20
     start_value = 0.0
     end_value = 1.0
-    waveform = _create_linear_ramp_waveform(num_samples, start_value, end_value)
+    waveform = _create_float32_ramp_waveform(num_samples, start_value, end_value)
 
     ao_single_channel_task.write(waveform)
 
@@ -112,18 +113,12 @@ def test___task___write_waveform_with_scaling___output_matches_final_value(
     ai_single_channel_loopback_task: nidaqmx.Task,
 ) -> None:
     num_samples = 20
-    start_value = -0.1
-    end_value = 0.1
-    gain = 2.0
-    offset = 0.5
-    waveform = _create_scaled_linear_ramp_waveform(
-        num_samples, start_value, end_value, gain=gain, offset=offset
-    )
+    waveform = _create_scaled_int32_ramp_waveform(num_samples)
 
     ao_single_channel_task.write(waveform)
 
     actual_value = ai_single_channel_loopback_task.read()
-    assert actual_value == pytest.approx(end_value * gain + offset, abs=AO_VOLTAGE_EPSILON)
+    assert actual_value == pytest.approx(waveform.scaled_data[-1], abs=AO_VOLTAGE_EPSILON)
 
 
 @pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")

@@ -67,13 +67,16 @@ def _create_linear_ramp_waveform(
     return AnalogWaveform.from_array_1d(samples)
 
 
-def _create_scaled_linear_ramp_waveform(
-    num_samples: int, start_val: float, end_val: float, gain: float, offset: float
+def _create_scaled_int32_ramp_waveform(num_samples: int) -> AnalogWaveform:
+    samples = np.arange(0, num_samples, dtype=np.int32)
+    return AnalogWaveform.from_array_1d(samples, scale_mode=LinearScaleMode(gain=0.02, offset=0.2))
+
+
+def _create_float32_ramp_waveform(
+    num_samples: int, start_val: float, end_val: float
 ) -> AnalogWaveform:
-    samples = np.linspace(start_val, end_val, num_samples, dtype=np.float64)
-    return AnalogWaveform.from_array_1d(
-        samples, scale_mode=LinearScaleMode(gain=gain, offset=offset)
-    )
+    samples = np.linspace(start_val, end_val, num_samples, dtype=np.float32)
+    return AnalogWaveform.from_array_1d(samples)
 
 
 def _create_non_contiguous_waveform(
