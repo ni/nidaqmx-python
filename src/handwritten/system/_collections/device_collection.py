@@ -46,6 +46,7 @@ class DeviceCollection(Sequence):
                 - int: Index/position of the device in the collection.
                 - slice: Range of the indexes/positions of devices in the
                     collection.
+
         Returns:
             List[nidaqmx.system.device.Device]:
 

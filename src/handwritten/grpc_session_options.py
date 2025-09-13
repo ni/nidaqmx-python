@@ -55,8 +55,8 @@ class GrpcSessionOptions:
         api_key=MEASUREMENTLINK_23Q1_NIDAQMX_PYTHON_API_KEY,
         initialization_behavior=SessionInitializationBehavior.AUTO,
     ):
-        r"""Collection of options that specifies session behaviors related to gRPC.
-        Creates and returns an object you can pass to a Session constructor.
+        """Initialize a new GrpcSessionOptions.
+        
         Args:
             grpc_channel (grpc.Channel): Specifies the channel to the NI gRPC Device Server.
             session_name (str): User-specified name that identifies the driver session on the NI gRPC Device

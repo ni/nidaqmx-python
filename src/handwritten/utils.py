@@ -57,6 +57,7 @@ def flatten_channel_string(channel_names: list[str]) -> str:
 
     Args:
         channel_names: The list of physical or virtual channel names.
+
     Returns:
         The resulting comma-delimited list of physical or virtual channel names.
     """
