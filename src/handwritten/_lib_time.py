@@ -3,7 +3,6 @@ from __future__ import annotations
 import ctypes
 import functools
 from datetime import datetime as std_datetime, timezone, tzinfo as dt_tzinfo
-from typing import Optional, Union
 
 from hightime import datetime as ht_datetime, timedelta as ht_timedelta
 

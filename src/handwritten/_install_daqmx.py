@@ -1,20 +1,16 @@
 from __future__ import annotations
 
 import contextlib
-import errno
 import importlib.resources as pkg_resources
 import json
 import logging
 import os
-import pathlib
 import re
-import shutil
 import subprocess  # nosec: B404
 import sys
 import tempfile
-import traceback
 import zipfile
-from typing import Generator, List, Optional, Tuple
+from typing import Generator
 from urllib.parse import urlparse
 
 import click
