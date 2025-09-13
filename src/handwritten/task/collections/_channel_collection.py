@@ -13,8 +13,7 @@ class ChannelCollection(Sequence):
     """
 
     def __init__(self, task_handle, interpreter):
-        """Do not construct this object directly; instead, construct a nidaqmx.Task and use the appropriate property, such as task.ai_channels.
-        """
+        """Do not construct this object directly; instead, construct a nidaqmx.Task and use the appropriate property, such as task.ai_channels."""
         self._handle = task_handle
         self._interpreter = interpreter
 
@@ -97,17 +96,12 @@ class ChannelCollection(Sequence):
 
     @property
     def all(self):
-        """:class:`nidaqmx.task.channels.Channel`:
-            Specifies a channel object that represents the entire list of
-            virtual channels on this channel collection.
-        """
+        """:class:`nidaqmx.task.channels.Channel`: Specifies a channel object that represents the entire list of virtual channels on this channel collection."""
         # Passing a blank string means all channels.
         return Channel._factory(self._handle, "", self._interpreter)
 
     @property
     def channel_names(self):
-        """List[str]: Specifies the entire list of virtual channels on this
-            channel collection.
-        """
+        """List[str]: Specifies the entire list of virtual channels on this channel collection."""
         val = self._interpreter.get_task_attribute_string(self._handle, 0x1273)
         return unflatten_channel_string(val)

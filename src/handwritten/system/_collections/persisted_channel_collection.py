@@ -16,8 +16,7 @@ class PersistedChannelCollection(Sequence):
     """
 
     def __init__(self, interpreter):
-        """Do not construct this object directly; instead, call nidaqmx.system.System.local().global_channels.
-        """
+        """Do not construct this object directly; instead, call nidaqmx.system.System.local().global_channels."""
         self._interpreter = interpreter
 
     def __contains__(self, item):
@@ -35,8 +34,7 @@ class PersistedChannelCollection(Sequence):
         return False
 
     def __getitem__(self, index):
-        """Indexes a subset of global channels on this global channel
-        collection.
+        """Indexes a subset of global channels on this global channel collection.
 
         Args:
             index: The value of the index. The following index types
@@ -97,8 +95,6 @@ class PersistedChannelCollection(Sequence):
 
     @property
     def global_channel_names(self):
-        """List[str]: The names of all the global channels on this
-            collection.
-        """
+        """List[str]: The names of all the global channels on this collection."""
         val = self._interpreter.get_system_info_attribute_string(0x1265)
         return unflatten_channel_string(val)

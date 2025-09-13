@@ -56,7 +56,7 @@ class GrpcSessionOptions:
         initialization_behavior=SessionInitializationBehavior.AUTO,
     ):
         """Initialize a new GrpcSessionOptions.
-        
+
         Args:
             grpc_channel (grpc.Channel): Specifies the channel to the NI gRPC Device Server.
             session_name (str): User-specified name that identifies the driver session on the NI gRPC Device

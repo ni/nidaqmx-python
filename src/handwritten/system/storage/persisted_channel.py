@@ -16,7 +16,7 @@ class PersistedChannel:
 
     def __init__(self, name, *, grpc_options=None):
         """Initialize a new PersistedChannel.
-        
+
         Args:
             name (str): Specifies the name of the global channel.
             grpc_options (Optional[:class:`~nidaqmx.GrpcSessionOptions`]): Specifies
@@ -41,30 +41,24 @@ class PersistedChannel:
 
     @property
     def name(self):
-        """str: Indicates the name of the global channel.
-        """
+        """str: Indicates the name of the global channel."""
         return self._name
 
     @property
     def author(self):
-        """str: Indicates the author of the global channel.
-        """
+        """str: Indicates the author of the global channel."""
         val = self._interpreter.get_persisted_chan_attribute_string(self._name, 0x22D0)
         return val
 
     @property
     def allow_interactive_editing(self):
-        """bool: Indicates whether the global channel can be edited in the
-            DAQ Assistant.
-        """
+        """bool: Indicates whether the global channel can be edited in the DAQ Assistant."""
         val = self._interpreter.get_persisted_chan_attribute_bool(self._name, 0x22D1)
         return val
 
     @property
     def allow_interactive_deletion(self):
-        """bool: Indicates whether the global channel can be deleted
-            through MAX.
-        """
+        """bool: Indicates whether the global channel can be deleted through MAX."""
         val = self._interpreter.get_persisted_chan_attribute_bool(self._name, 0x22D2)
         return val
 
@@ -88,7 +82,7 @@ class _PersistedChannelAlternateConstructor(PersistedChannel):
 
     def __init__(self, name, interpreter):
         """Initialize a new PersistedChannel with an existing interpreter.
-        
+
         Args:
             name: Specifies the name of the PersistedChannel.
             interpreter: Specifies the interpreter instance.

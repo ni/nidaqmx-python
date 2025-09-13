@@ -16,8 +16,7 @@ class PhysicalChannelCollection(Sequence):
     """
 
     def __init__(self, device_name, interpreter):
-        """Do not construct this object directly; instead, construct a nidaqmx.system.Device and use the appropriate property, such as device.ai_physical_channels.
-        """
+        """Do not construct this object directly; instead, construct a nidaqmx.system.Device and use the appropriate property, such as device.ai_physical_channels."""
         self._name = device_name
         self._interpreter = interpreter
 
@@ -37,8 +36,7 @@ class PhysicalChannelCollection(Sequence):
         return False
 
     def __getitem__(self, index):
-        """Indexes a subset of physical channels on this physical channel
-        collection.
+        """Indexes a subset of physical channels on this physical channel collection.
 
         Args:
             index: The value of the index. The following index types
@@ -110,25 +108,19 @@ class PhysicalChannelCollection(Sequence):
 
     @property
     def all(self):
-        """nidaqmx.system.physical_channel.PhysicalChannel: Specifies a
-            physical channel object that represents the entire list of
-            physical channels on this channel collection.
-        """
+        """nidaqmx.system.physical_channel.PhysicalChannel: Specifies a physical channel object that represents the entire list of physical channels on this channel collection."""
         return _PhysicalChannelAlternateConstructor(
             flatten_channel_string(self.channel_names), self._interpreter
         )
 
     @property
     def channel_names(self):
-        """List[str]: Specifies the entire list of physical channels in this
-            collection.
-        """
+        """List[str]: Specifies the entire list of physical channels in this collection."""
         raise NotImplementedError()
 
 
 class AIPhysicalChannelCollection(PhysicalChannelCollection):
-    """Contains the collection of analog input physical channels for a
-    DAQmx device.
+    """Contains the collection of analog input physical channels for a DAQmx device.
 
     This class defines methods that implements a container object.
     """
@@ -140,8 +132,7 @@ class AIPhysicalChannelCollection(PhysicalChannelCollection):
 
 
 class AOPhysicalChannelCollection(PhysicalChannelCollection):
-    """Contains the collection of analog output physical channels for a
-    DAQmx device.
+    """Contains the collection of analog output physical channels for a DAQmx device.
 
     This class defines methods that implements a container object.
     """
@@ -153,8 +144,7 @@ class AOPhysicalChannelCollection(PhysicalChannelCollection):
 
 
 class CIPhysicalChannelCollection(PhysicalChannelCollection):
-    """Contains the collection of counter input physical channels for a
-    DAQmx device.
+    """Contains the collection of counter input physical channels for a DAQmx device.
 
     This class defines methods that implements a container object.
     """
@@ -166,8 +156,7 @@ class CIPhysicalChannelCollection(PhysicalChannelCollection):
 
 
 class COPhysicalChannelCollection(PhysicalChannelCollection):
-    """Contains the collection of counter output physical channels for a
-    DAQmx device.
+    """Contains the collection of counter output physical channels for a DAQmx device.
 
     This class defines methods that implements a container object.
     """

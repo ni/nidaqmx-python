@@ -16,8 +16,7 @@ class PersistedScaleCollection(Sequence):
     """
 
     def __init__(self, interpreter):
-        """Do not construct this object directly; instead, call nidaqmx.system.System.local().scales.
-        """
+        """Do not construct this object directly; instead, call nidaqmx.system.System.local().scales."""
         self._interpreter = interpreter
 
     def __contains__(self, item):
@@ -92,8 +91,6 @@ class PersistedScaleCollection(Sequence):
 
     @property
     def scale_names(self):
-        """List[str]: Indicates the names of all the custom scales on this
-            collection.
-        """
+        """List[str]: Indicates the names of all the custom scales on this collection."""
         val = self._interpreter.get_system_info_attribute_string(0x1266)
         return unflatten_channel_string(val)
