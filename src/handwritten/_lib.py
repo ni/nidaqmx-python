@@ -91,6 +91,7 @@ class DaqFunctionImporter:
     """
 
     def __init__(self, library):
+        """Initialize a new DaqFunctionImporter."""
         self._library = library
         self._lib_lock = threading.Lock()
 
@@ -133,6 +134,7 @@ class DaqLibImporter:
     """Encapsulates NI-DAQmx library importing and handle type parsing logic."""
 
     def __init__(self):
+        """Initialize a new DaqLibImporter."""
         self._windll = None
         self._cdll = None
         self._cal_handle = None
