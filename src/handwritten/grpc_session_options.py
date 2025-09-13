@@ -19,6 +19,8 @@ MEASUREMENTLINK_23Q1_NIDAQMX_PYTHON_API_KEY = "147D9BA7-BE75-4B29-8591-BA4A737AA
 
 
 class SessionInitializationBehavior(IntEnum):
+    """Specifies how to initialize sessions on the server."""
+
     AUTO = 0
     r"""
     The NI gRPC Device Server will attach to an existing session with the specified name if it exists, otherwise the server
