@@ -1,22 +1,17 @@
 from __future__ import annotations
 
-from nidaqmx.constants import FillMode, READ_ALL_AVAILABLE
-from nidaqmx.types import CtrFreq, CtrTick, CtrTime
-
+from nidaqmx.constants import READ_ALL_AVAILABLE, FillMode
 from nidaqmx.stream_readers._channel_reader_base import ChannelReaderBase
+from nidaqmx.types import CtrFreq, CtrTick, CtrTime
 
 
 class CounterReader(ChannelReaderBase):
-    """
-    Reads samples from a counter input channel in an NI-DAQmx task.
-    """
+    """Reads samples from a counter input channel in an NI-DAQmx task."""
 
     def read_many_sample_double(
-            self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE,
-            timeout=10.0):
-        """
-        Reads one or more floating-point samples from a single counter
-        input channel in a task.
+        self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0
+    ):
+        """Reads one or more floating-point samples from a single counter input channel in a task.
 
         This read method accepts a preallocated NumPy array to hold the
         samples requested, which can be advantageous for performance and
@@ -64,6 +59,7 @@ class CounterReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
+
         Returns:
             int:
 
@@ -71,24 +67,30 @@ class CounterReader(ChannelReaderBase):
             NI-DAQmx returns a single value because this value is the
             same for all channels.
         """
-        number_of_samples_per_channel = (
-            self._task._calculate_num_samps_per_chan(
-                number_of_samples_per_channel))
+        number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
+            number_of_samples_per_channel
+        )
 
         self._verify_array(data, number_of_samples_per_channel, False, True)
 
         _, samps_per_chan_read = self._interpreter.read_counter_f64_ex(
-            self._handle,number_of_samples_per_channel, timeout, 
-            FillMode.GROUP_BY_CHANNEL.value, data)
-        
+            self._handle,
+            number_of_samples_per_channel,
+            timeout,
+            FillMode.GROUP_BY_CHANNEL.value,
+            data,
+        )
+
         return samps_per_chan_read
 
     def read_many_sample_pulse_frequency(
-            self, frequencies, duty_cycles,
-            number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0):
-        """
-        Reads one or more pulse samples in terms of frequency from a
-        single counter input channel in a task.
+        self,
+        frequencies,
+        duty_cycles,
+        number_of_samples_per_channel=READ_ALL_AVAILABLE,
+        timeout=10.0,
+    ):
+        """Reads one or more pulse samples in terms of frequency from a single counter input channel in a task.
 
         This read method accepts preallocated NumPy arrays to hold the
         samples requested, which can be advantageous for performance and
@@ -144,34 +146,36 @@ class CounterReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
+
         Returns:
             int:
 
             Indicates the number of samples acquired by each channel.
             NI-DAQmx returns a single value because this value is the
             same for all channels.
-        """
-        number_of_samples_per_channel = (
-            self._task._calculate_num_samps_per_chan(
-                number_of_samples_per_channel))
+        """  # noqa: W505 - doc line too long (111 > 100 characters) (auto-generated noqa)
+        number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
+            number_of_samples_per_channel
+        )
 
-        self._verify_array(
-            frequencies, number_of_samples_per_channel, False, True)
-        self._verify_array(
-            duty_cycles, number_of_samples_per_channel, False, True)
+        self._verify_array(frequencies, number_of_samples_per_channel, False, True)
+        self._verify_array(duty_cycles, number_of_samples_per_channel, False, True)
 
         _, _, samps_per_chan_read = self._interpreter.read_ctr_freq(
-            self._handle, number_of_samples_per_channel, timeout, 
-            FillMode.GROUP_BY_CHANNEL.value, frequencies, duty_cycles)
-        
+            self._handle,
+            number_of_samples_per_channel,
+            timeout,
+            FillMode.GROUP_BY_CHANNEL.value,
+            frequencies,
+            duty_cycles,
+        )
+
         return samps_per_chan_read
 
     def read_many_sample_pulse_ticks(
-            self, high_ticks, low_ticks,
-            number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0):
-        """
-        Reads one or more pulse samples in terms of ticks from a single
-        counter input channel in a task.
+        self, high_ticks, low_ticks, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0
+    ):
+        """Reads one or more pulse samples in terms of ticks from a single counter input channel in a task.
 
         This read method accepts preallocated NumPy arrays to hold the
         samples requested, which can be advantageous for performance and
@@ -227,34 +231,36 @@ class CounterReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
+
         Returns:
             int:
 
             Indicates the number of samples acquired by each channel.
             NI-DAQmx returns a single value because this value is the
             same for all channels.
-        """
-        number_of_samples_per_channel = (
-            self._task._calculate_num_samps_per_chan(
-                number_of_samples_per_channel))
+        """  # noqa: W505 - doc line too long (107 > 100 characters) (auto-generated noqa)
+        number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
+            number_of_samples_per_channel
+        )
 
-        self._verify_array(
-            high_ticks, number_of_samples_per_channel, False, True)
-        self._verify_array(
-            low_ticks, number_of_samples_per_channel, False, True)
+        self._verify_array(high_ticks, number_of_samples_per_channel, False, True)
+        self._verify_array(low_ticks, number_of_samples_per_channel, False, True)
 
         _, _, samps_per_chan_read = self._interpreter.read_ctr_ticks(
-            self._handle, number_of_samples_per_channel, timeout, 
-            FillMode.GROUP_BY_CHANNEL.value, high_ticks, low_ticks)
-        
+            self._handle,
+            number_of_samples_per_channel,
+            timeout,
+            FillMode.GROUP_BY_CHANNEL.value,
+            high_ticks,
+            low_ticks,
+        )
+
         return samps_per_chan_read
 
     def read_many_sample_pulse_time(
-            self, high_times, low_times,
-            number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0):
-        """
-        Reads one or more pulse samples in terms of time from a single
-        counter input channel in a task.
+        self, high_times, low_times, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0
+    ):
+        """Reads one or more pulse samples in terms of time from a single counter input channel in a task.
 
         This read method accepts preallocated NumPy arrays to hold the
         samples requested, which can be advantageous for performance and
@@ -310,34 +316,36 @@ class CounterReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
+
         Returns:
             int:
 
             Indicates the number of samples acquired by each channel.
             NI-DAQmx returns a single value because this value is the
             same for all channels.
-        """
-        number_of_samples_per_channel = (
-            self._task._calculate_num_samps_per_chan(
-                number_of_samples_per_channel))
+        """  # noqa: W505 - doc line too long (106 > 100 characters) (auto-generated noqa)
+        number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
+            number_of_samples_per_channel
+        )
 
-        self._verify_array(
-            high_times, number_of_samples_per_channel, False, True)
-        self._verify_array(
-            low_times, number_of_samples_per_channel, False, True)
+        self._verify_array(high_times, number_of_samples_per_channel, False, True)
+        self._verify_array(low_times, number_of_samples_per_channel, False, True)
 
         _, _, samps_per_chan_read = self._interpreter.read_ctr_time(
-            self._handle, number_of_samples_per_channel, timeout, 
-            FillMode.GROUP_BY_CHANNEL.value, high_times, low_times)
-        
+            self._handle,
+            number_of_samples_per_channel,
+            timeout,
+            FillMode.GROUP_BY_CHANNEL.value,
+            high_times,
+            low_times,
+        )
+
         return samps_per_chan_read
 
     def read_many_sample_uint32(
-            self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE,
-            timeout=10.0):
-        """
-        Reads one or more 32-bit unsigned integer samples from a single
-        counter input channel in a task.
+        self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0
+    ):
+        """Reads one or more 32-bit unsigned integer samples from a single counter input channel in a task.
 
         This read method accepts a preallocated NumPy array to hold the
         samples requested, which can be advantageous for performance and
@@ -385,29 +393,32 @@ class CounterReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
+
         Returns:
             int:
 
             Indicates the number of samples acquired by each channel.
             NI-DAQmx returns a single value because this value is the
             same for all channels.
-        """
-        number_of_samples_per_channel = (
-            self._task._calculate_num_samps_per_chan(
-                number_of_samples_per_channel))
+        """  # noqa: W505 - doc line too long (107 > 100 characters) (auto-generated noqa)
+        number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
+            number_of_samples_per_channel
+        )
 
         self._verify_array(data, number_of_samples_per_channel, False, True)
 
         _, samps_per_chan_read = self._interpreter.read_counter_u32_ex(
-            self._handle, number_of_samples_per_channel, timeout, 
-            FillMode.GROUP_BY_CHANNEL.value, data)
-        
+            self._handle,
+            number_of_samples_per_channel,
+            timeout,
+            FillMode.GROUP_BY_CHANNEL.value,
+            data,
+        )
+
         return samps_per_chan_read
 
     def read_one_sample_double(self, timeout=10):
-        """
-        Reads a single floating-point sample from a single counter input
-        channel in a task.
+        """Reads a single floating-point sample from a single counter input channel in a task.
 
         Args:
             timeout (Optional[float]): Specifies the amount of time in
@@ -419,6 +430,7 @@ class CounterReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
+
         Returns:
             float: Indicates a single floating-point sample from the
                 task.
@@ -426,9 +438,7 @@ class CounterReader(ChannelReaderBase):
         return self._interpreter.read_counter_scalar_f64(self._handle, timeout)
 
     def read_one_sample_pulse_frequency(self, timeout=10):
-        """
-        Reads a pulse sample in terms of frequency from a single counter
-        input channel in a task.
+        """Reads a pulse sample in terms of frequency from a single counter input channel in a task.
 
         Args:
             timeout (Optional[float]): Specifies the amount of time in
@@ -440,6 +450,7 @@ class CounterReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
+
         Returns:
             nidaqmx.types.CtrFreq:
 
@@ -450,9 +461,7 @@ class CounterReader(ChannelReaderBase):
         return CtrFreq(freq, duty_cycle)
 
     def read_one_sample_pulse_ticks(self, timeout=10):
-        """
-        Reads a pulse sample in terms of ticks from a single counter
-        input channel in a task.
+        """Reads a pulse sample in terms of ticks from a single counter input channel in a task.
 
         Args:
             timeout (Optional[float]): Specifies the amount of time in
@@ -464,6 +473,7 @@ class CounterReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
+
         Returns:
             nidaqmx.types.CtrTick:
 
@@ -474,9 +484,7 @@ class CounterReader(ChannelReaderBase):
         return CtrTick(high_ticks, low_ticks)
 
     def read_one_sample_pulse_time(self, timeout=10):
-        """
-        Reads a pulse sample in terms of time from a single counter
-        input channel in a task.
+        """Reads a pulse sample in terms of time from a single counter input channel in a task.
 
         Args:
             timeout (Optional[float]): Specifies the amount of time in
@@ -488,6 +496,7 @@ class CounterReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
+
         Returns:
             nidaqmx.types.CtrTime:
 
@@ -498,9 +507,7 @@ class CounterReader(ChannelReaderBase):
         return CtrTime(high_time, low_time)
 
     def read_one_sample_uint32(self, timeout=10):
-        """
-        Reads a single 32-bit unsigned integer sample from a single
-        counter input channel in a task.
+        """Reads a single 32-bit unsigned integer sample from a single counter input channel in a task.
 
         Args:
             timeout (Optional[float]): Specifies the amount of time in
@@ -512,10 +519,11 @@ class CounterReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
+
         Returns:
             int:
 
             Indicates a single 32-bit unsigned integer sample from the
             task.
-        """
+        """  # noqa: W505 - doc line too long (103 > 100 characters) (auto-generated noqa)
         return self._interpreter.read_counter_scalar_u32(self._handle, timeout)
