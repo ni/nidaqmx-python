@@ -42,6 +42,7 @@ class CounterWriter(ChannelWriterBase):
                 once to write the submitted samples. If the method could
                 not write all the submitted samples, it returns an error
                 and the number of samples successfully written.
+
         Returns:
             int:
 
@@ -96,6 +97,7 @@ class CounterWriter(ChannelWriterBase):
                 once to write the submitted samples. If the method could
                 not write all the submitted samples, it returns an error
                 and the number of samples successfully written.
+
         Returns:
             int:
 
@@ -150,6 +152,7 @@ class CounterWriter(ChannelWriterBase):
                 once to write the submitted samples. If the method could
                 not write all the submitted samples, it returns an error
                 and the number of samples successfully written.
+
         Returns:
             int:
 

@@ -29,6 +29,7 @@ class ExpirationStatesCollection:
         Args:
             index (str): Name of the physical channel of which the
                 expiration state to retrieve.
+
         Returns:
             nidaqmx.system._watchdog_modules.expiration_state.ExpirationState:
 

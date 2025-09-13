@@ -53,6 +53,7 @@ class PhysicalChannelCollection(Sequence):
                     collection.
                 - slice: Range of the indexes/positions of physical
                     channels in the collection.
+
         Returns:
             nidaqmx.system.physical_channel.PhysicalChannel:
 

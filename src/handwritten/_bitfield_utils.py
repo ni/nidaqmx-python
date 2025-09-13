@@ -6,6 +6,7 @@ def enum_bitfield_to_list(bitfield_value, bitfield_enum_type, actual_enum_type):
         bitfield_enum_type (enum.Enum): Specifies the bitfield enum type
             from which to mask and extract the enum values.
         actual_enum_type (enum.Enum): Specifies the actual enum type.
+
     Returns:
         List[enum.Enum]: Indicates the converted list of enums.
     """
@@ -25,6 +26,7 @@ def enum_list_to_bitfield(enum_list, bitfield_enum_type):
         enum_list (List[enum.Enum]): Specifies the list of enums.
         bitfield_enum_type (enum.Enum): Specifies the bitfield enum type
             from which to mask and extract the enum values.
+
     Returns:
         int: Indicates the value of the bitfield.
     """

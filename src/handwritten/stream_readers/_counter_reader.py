@@ -61,6 +61,7 @@ class CounterReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
+
         Returns:
             int:
 
@@ -148,6 +149,7 @@ class CounterReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
+
         Returns:
             int:
 
@@ -233,6 +235,7 @@ class CounterReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
+
         Returns:
             int:
 
@@ -318,6 +321,7 @@ class CounterReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
+
         Returns:
             int:
 
@@ -395,6 +399,7 @@ class CounterReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
+
         Returns:
             int:
 
@@ -432,6 +437,7 @@ class CounterReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
+
         Returns:
             float: Indicates a single floating-point sample from the
                 task.
@@ -452,6 +458,7 @@ class CounterReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
+
         Returns:
             nidaqmx.types.CtrFreq:
 
@@ -475,6 +482,7 @@ class CounterReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
+
         Returns:
             nidaqmx.types.CtrTick:
 
@@ -498,6 +506,7 @@ class CounterReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
+
         Returns:
             nidaqmx.types.CtrTime:
 
@@ -521,6 +530,7 @@ class CounterReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
+
         Returns:
             int:
 

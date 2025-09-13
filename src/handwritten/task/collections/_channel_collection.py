@@ -47,6 +47,7 @@ class ChannelCollection(Sequence):
                 - int: Index/position of the virtual channel in the collection.
                 - slice: Range of the indexes/positions of virtual channels in
                     the collection.
+
         Returns:
             nidaqmx.task.channels.Channel:
 

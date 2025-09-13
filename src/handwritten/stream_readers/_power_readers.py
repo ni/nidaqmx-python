@@ -73,6 +73,7 @@ class PowerSingleChannelReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
+
         Returns:
             int:
 
@@ -112,6 +113,7 @@ class PowerSingleChannelReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
+
         Returns:
             float:
 
@@ -216,6 +218,7 @@ class PowerMultiChannelReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
+
         Returns:
             int:
 
@@ -377,6 +380,7 @@ class PowerBinaryReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
+
         Returns:
             int:
 
