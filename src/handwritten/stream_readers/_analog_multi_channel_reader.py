@@ -1,28 +1,22 @@
 from __future__ import annotations
 
 import numpy
-from nidaqmx import DaqError
-
-from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, requires_feature
-from nidaqmx.constants import FillMode, READ_ALL_AVAILABLE, ReallocationPolicy
-from nidaqmx.error_codes import DAQmxErrors
 from nitypes.waveform import AnalogWaveform
 
+from nidaqmx import DaqError
+from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, requires_feature
+from nidaqmx.constants import READ_ALL_AVAILABLE, FillMode, ReallocationPolicy
+from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.stream_readers._channel_reader_base import ChannelReaderBase
 
 
 class AnalogMultiChannelReader(ChannelReaderBase):
-    """
-    Reads samples from one or more analog input channels in an NI-DAQmx
-    task.
-    """
+    """Reads samples from one or more analog input channels in an NI-DAQmx task."""
 
     def read_many_sample(
-            self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE,
-            timeout=10.0):
-        """
-        Reads one or more floating-point samples from one or more analog
-        input channels in a task.
+        self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0
+    ):
+        """Reads one or more floating-point samples from one or more analog input channels in a task.
 
         This read method accepts a preallocated NumPy array to hold the
         samples requested, which can be advantageous for performance and
@@ -83,29 +77,32 @@ class AnalogMultiChannelReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
+
         Returns:
             int:
 
             Indicates the number of samples acquired by each channel.
             NI-DAQmx returns a single value because this value is the
             same for all channels.
-        """
-        number_of_samples_per_channel = (
-            self._task._calculate_num_samps_per_chan(
-                number_of_samples_per_channel))
+        """  # noqa: W505 - doc line too long (101 > 100 characters) (auto-generated noqa)
+        number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
+            number_of_samples_per_channel
+        )
 
         self._verify_array(data, number_of_samples_per_channel, True, True)
 
         _, samps_per_chan_read = self._interpreter.read_analog_f64(
-            self._handle, number_of_samples_per_channel,
-            timeout, FillMode.GROUP_BY_CHANNEL.value, data)
-        
+            self._handle,
+            number_of_samples_per_channel,
+            timeout,
+            FillMode.GROUP_BY_CHANNEL.value,
+            data,
+        )
+
         return samps_per_chan_read
 
     def read_one_sample(self, data, timeout=10):
-        """
-        Reads a single floating-point sample from one or more analog
-        input channels in a task.
+        """Reads a single floating-point sample from one or more analog input channels in a task.
 
         This read method accepts a preallocated NumPy array to hold the
         samples requested, which can be advantageous for performance and
@@ -136,7 +133,9 @@ class AnalogMultiChannelReader(ChannelReaderBase):
         """
         self._verify_array(data, 1, True, False)
 
-        self._interpreter.read_analog_f64(self._handle, 1, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
+        self._interpreter.read_analog_f64(
+            self._handle, 1, timeout, FillMode.GROUP_BY_CHANNEL.value, data
+        )
 
     @requires_feature(WAVEFORM_SUPPORT)
     def read_waveforms(
@@ -146,9 +145,7 @@ class AnalogMultiChannelReader(ChannelReaderBase):
         reallocation_policy: ReallocationPolicy = ReallocationPolicy.TO_GROW,
         timeout: int = 10,
     ) -> int:
-        """
-        Reads one or more floating-point samples from one or more analog
-        input channels into a list of waveforms.
+        """Reads one or more floating-point samples from one or more analog input channels into a list of waveforms.
 
         This read method optionally accepts a preallocated list of waveforms to hold
         the samples requested, which can be advantageous for performance and
@@ -161,7 +158,7 @@ class AnalogMultiChannelReader(ChannelReaderBase):
         Args:
             waveforms (list[AnalogWaveform]): Specifies a list of AnalogWaveform
                 objects to use for reading samples into.
-                The list must contain one waveform for each channel in the task. 
+                The list must contain one waveform for each channel in the task.
             number_of_samples_per_channel (Optional[int]): Specifies the
                 number of samples to read.
 
@@ -194,35 +191,40 @@ class AnalogMultiChannelReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
+
         Returns:
             int:
 
             Indicates the number of samples acquired by each channel.
             NI-DAQmx returns a single value because this value is the
             same for all channels.
-        """
+        """  # noqa: W505 - doc line too long (116 > 100 characters) (auto-generated noqa)
         number_of_channels = self._in_stream.num_chans
-        number_of_samples_per_channel = (
-            self._task._calculate_num_samps_per_chan(
-                number_of_samples_per_channel))
+        number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
+            number_of_samples_per_channel
+        )
 
         if len(waveforms) != number_of_channels:
             raise DaqError(
-                f'The number of waveforms provided ({len(waveforms)}) does not match '
-                f'the number of channels in the task ({number_of_channels}). Please provide '
-                'one waveform for each channel.',
-                DAQmxErrors.MISMATCHED_INPUT_ARRAY_SIZES, task_name=self._task.name)
-        
+                f"The number of waveforms provided ({len(waveforms)}) does not match "
+                f"the number of channels in the task ({number_of_channels}). Please provide "
+                "one waveform for each channel.",
+                DAQmxErrors.MISMATCHED_INPUT_ARRAY_SIZES,
+                task_name=self._task.name,
+            )
+
         for i, waveform in enumerate(waveforms):
             if waveform.start_index + number_of_samples_per_channel > waveform.capacity:
                 if reallocation_policy == ReallocationPolicy.TO_GROW:
                     waveform.capacity = waveform.start_index + number_of_samples_per_channel
                 else:
                     raise DaqError(
-                        f'The waveform at index {i} does not have enough space ({waveform.capacity - waveform.start_index}) to hold '
-                        f'the requested number of samples ({number_of_samples_per_channel}). Please provide larger '
-                        'waveforms or adjust the number of samples requested.',
-                        DAQmxErrors.READ_BUFFER_TOO_SMALL, task_name=self._task.name)
+                        f"The waveform at index {i} does not have enough space ({waveform.capacity - waveform.start_index}) to hold "
+                        f"the requested number of samples ({number_of_samples_per_channel}). Please provide larger "
+                        "waveforms or adjust the number of samples requested.",
+                        DAQmxErrors.READ_BUFFER_TOO_SMALL,
+                        task_name=self._task.name,
+                    )
 
         return self._interpreter.read_analog_waveforms(
             self._handle,

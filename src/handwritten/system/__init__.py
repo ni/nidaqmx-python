@@ -1,9 +1,19 @@
-from nidaqmx.system.system import (
-    System, AOPowerUpState, CDAQSyncConnection, DOPowerUpState,
-    DOResistorPowerUpState)
+"""NI-DAQmx system classes."""
+
 from nidaqmx.system.device import Device
 from nidaqmx.system.physical_channel import PhysicalChannel
+from nidaqmx.system.system import (
+    AOPowerUpState,
+    CDAQSyncConnection,
+    DOPowerUpState,
+    DOResistorPowerUpState,
+    System,
+)
 from nidaqmx.system.watchdog import (
-    WatchdogTask, AOExpirationState, COExpirationState, DOExpirationState)
+    AOExpirationState,
+    COExpirationState,
+    DOExpirationState,
+    WatchdogTask,
+)
 
-__all__ = ['system', 'device', 'physical_channel', 'storage', 'watchdog']
+__all__ = ["system", "device", "physical_channel", "storage", "watchdog"]

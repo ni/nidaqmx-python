@@ -1,23 +1,27 @@
 from collections.abc import Sequence
 
-from nidaqmx.errors import DaqError
 from nidaqmx.error_codes import DAQmxErrors
-from nidaqmx.system.storage.persisted_scale import PersistedScale, _PersistedScaleAlternateConstructor
+from nidaqmx.errors import DaqError
+from nidaqmx.system.storage.persisted_scale import (
+    PersistedScale,
+    _PersistedScaleAlternateConstructor,
+)
 from nidaqmx.utils import unflatten_channel_string
 
+
 class PersistedScaleCollection(Sequence):
-    """
-    Contains the collection of custom scales on a DAQmx system.
-    
+    """Contains the collection of custom scales on a DAQmx system.
+
     This class defines methods that implements a container object.
     """
+
     def __init__(self, interpreter):
-        """
-        Do not construct this object directly; instead, call nidaqmx.system.System.local().scales.
-        """
+        """Do not construct this object directly; instead, call nidaqmx.system.System.local().scales."""  # noqa: W505 - doc line too long (104 > 100 characters) (auto-generated noqa)
         self._interpreter = interpreter
-    
-    def __contains__(self, item):
+
+    def __contains__(  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
+        self, item
+    ):
         scale_names = self.scale_names
 
         if isinstance(item, str):
@@ -26,14 +30,13 @@ class PersistedScaleCollection(Sequence):
         elif isinstance(item, PersistedScale):
             return item._name in scale_names
 
-    def __eq__(self, other):
+    def __eq__(self, other):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         if isinstance(other, self.__class__):
             return True
         return False
 
     def __getitem__(self, index):
-        """
-        Indexes a subset of custom scales on this collection.
+        """Indexes a subset of custom scales on this collection.
 
         Args:
             index: The value of the index. The following index types
@@ -47,16 +50,19 @@ class PersistedScaleCollection(Sequence):
                     collection.
                 - slice: Range of the indexes/positions of custom scales
                     in the collection.
+
         Returns:
             List[nidaqmx.system.storage.persisted_scale.PersistedScale]:
-            
+
             Indicates the subset of custom scales indexed.
         """
         if isinstance(index, int):
             return _PersistedScaleAlternateConstructor(self.scale_names[index], self._interpreter)
         elif isinstance(index, slice):
-            return [_PersistedScaleAlternateConstructor(name, self._interpreter) for name in
-                    self.scale_names[index]]
+            return [
+                _PersistedScaleAlternateConstructor(name, self._interpreter)
+                for name in self.scale_names[index]
+            ]
         elif isinstance(index, str):
             names = unflatten_channel_string(index)
             if len(names) == 1:
@@ -64,20 +70,21 @@ class PersistedScaleCollection(Sequence):
             return [_PersistedScaleAlternateConstructor(name, self._interpreter) for name in names]
         else:
             raise DaqError(
-                'Invalid index type "{}" used to access collection.'
-                .format(type(index)), DAQmxErrors.UNKNOWN)
+                'Invalid index type "{}" used to access collection.'.format(type(index)),
+                DAQmxErrors.UNKNOWN,
+            )
 
-    def __iter__(self):
+    def __iter__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         for scale_name in self.scale_names:
             yield _PersistedScaleAlternateConstructor(scale_name, self._interpreter)
 
-    def __len__(self):
+    def __len__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         return len(self.scale_names)
 
-    def __ne__(self, other):
+    def __ne__(self, other):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         return not self.__eq__(other)
 
-    def __reversed__(self):
+    def __reversed__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         scale_names = self.scale_names
         scale_names.reverse()
 
@@ -86,9 +93,6 @@ class PersistedScaleCollection(Sequence):
 
     @property
     def scale_names(self):
-        """
-        List[str]: Indicates the names of all the custom scales on this
-            collection.
-        """
+        """List[str]: Indicates the names of all the custom scales on this collection."""
         val = self._interpreter.get_system_info_attribute_string(0x1266)
         return unflatten_channel_string(val)

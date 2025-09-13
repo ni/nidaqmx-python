@@ -1,23 +1,27 @@
 from collections.abc import Sequence
 
-from nidaqmx.errors import DaqError
 from nidaqmx.error_codes import DAQmxErrors
-from nidaqmx.system.storage.persisted_task import PersistedTask, _PersistedTaskAlternateConstructor
+from nidaqmx.errors import DaqError
+from nidaqmx.system.storage.persisted_task import (
+    PersistedTask,
+    _PersistedTaskAlternateConstructor,
+)
 from nidaqmx.utils import unflatten_channel_string
 
+
 class PersistedTaskCollection(Sequence):
-    """
-    Contains the collection of task saved on a DAQmx system.
-    
+    """Contains the collection of task saved on a DAQmx system.
+
     This class defines methods that implements a container object.
     """
+
     def __init__(self, interpreter):
-        """
-        Do not construct this object directly; instead, call nidaqmx.system.System.local().tasks.
-        """
+        """Do not construct this object directly; instead, call nidaqmx.system.System.local().tasks."""  # noqa: W505 - doc line too long (103 > 100 characters) (auto-generated noqa)
         self._interpreter = interpreter
-    
-    def __contains__(self, item):
+
+    def __contains__(  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
+        self, item
+    ):
         task_names = self.task_names
 
         if isinstance(item, str):
@@ -26,14 +30,13 @@ class PersistedTaskCollection(Sequence):
         elif isinstance(item, PersistedTask):
             return item._name in task_names
 
-    def __eq__(self, other):
+    def __eq__(self, other):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         if isinstance(other, self.__class__):
             return True
         return False
 
     def __getitem__(self, index):
-        """
-        Indexes a subset of saved tasks on this collection.
+        """Indexes a subset of saved tasks on this collection.
 
         Args:
             index: The value of the index. The following index types
@@ -47,16 +50,19 @@ class PersistedTaskCollection(Sequence):
                     collection.
                 - slice: Range of the indexes/positions of saved tasks
                     in the collection.
+
         Returns:
             List[nidaqmx.system.storage.persisted_task.PersistedTask]:
-            
+
             Indicates the subset of saved tasks indexed.
         """
         if isinstance(index, int):
             return _PersistedTaskAlternateConstructor(self.task_names[index], self._interpreter)
         elif isinstance(index, slice):
-            return [_PersistedTaskAlternateConstructor(name, self._interpreter) for name in
-                    self.task_names[index]]
+            return [
+                _PersistedTaskAlternateConstructor(name, self._interpreter)
+                for name in self.task_names[index]
+            ]
         elif isinstance(index, str):
             names = unflatten_channel_string(index)
             if len(names) == 1:
@@ -64,20 +70,21 @@ class PersistedTaskCollection(Sequence):
             return [_PersistedTaskAlternateConstructor(name, self._interpreter) for name in names]
         else:
             raise DaqError(
-                'Invalid index type "{}" used to access collection.'
-                .format(type(index)), DAQmxErrors.UNKNOWN)
+                'Invalid index type "{}" used to access collection.'.format(type(index)),
+                DAQmxErrors.UNKNOWN,
+            )
 
-    def __iter__(self):
+    def __iter__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         for task_name in self.task_names:
             yield _PersistedTaskAlternateConstructor(task_name, self._interpreter)
 
-    def __len__(self):
+    def __len__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         return len(self.task_names)
 
-    def __ne__(self, other):
+    def __ne__(self, other):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         return not self.__eq__(other)
 
-    def __reversed__(self):
+    def __reversed__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         task_names = self.task_names
         task_names.reverse()
 
@@ -86,8 +93,6 @@ class PersistedTaskCollection(Sequence):
 
     @property
     def task_names(self):
-        """
-        List[str]: Indicates the names of all the tasks on this collection.
-        """
+        """List[str]: Indicates the names of all the tasks on this collection."""
         val = self._interpreter.get_system_info_attribute_string(0x1267)
         return unflatten_channel_string(val)

@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Callable, Dict, List, Tuple
+from typing import Callable
+
 
 def _get_version_ubuntu(dist_version: str) -> str:
     return dist_version.replace(".", "")
@@ -57,8 +58,9 @@ _YUM_INSTALL_COMMANDS = [
 _DEBIAN_DAQMX_VERSION_COMMAND = ["dpkg", "-l", "ni-daqmx"]
 _RPM_DAQMX_VERSION_COMMAND = ["rpm", "-q", "ni-daqmx"]
 
+
 @dataclass
-class DistroInfo:
+class DistroInfo:  # noqa: D101 - Missing docstring in public class (auto-generated noqa)
     get_distro_version: Callable[[str], str]
     get_daqmx_version: list[str]
     install_commands: list[list[str]]
@@ -77,10 +79,7 @@ LINUX_COMMANDS = {
 def get_linux_installation_commands(
     _directory_to_extract_to: str, dist_name: str, dist_version: str, _release_string: str
 ) -> list[list[str]]:
-    """
-    Get the installation commands for Linux based on the distribution.
-
-    """
+    """Get the installation commands for Linux based on the distribution."""
     if dist_name not in LINUX_COMMANDS:
         raise ValueError(f"Unsupported distribution '{dist_name}'")
 

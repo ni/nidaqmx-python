@@ -4,9 +4,11 @@ from __future__ import annotations
 
 import functools
 import sys
-from decouple import AutoConfig, Undefined, undefined
 from enum import Enum
 from typing import TYPE_CHECKING, Callable, TypeVar
+
+from decouple import AutoConfig, Undefined, undefined
+
 from nidaqmx._dotenvpath import get_dotenv_search_path
 from nidaqmx.errors import FeatureNotSupportedError
 
@@ -35,6 +37,7 @@ if TYPE_CHECKING:
         default: _T | Undefined = undefined,
         cast: Callable[[str], _T] | Undefined = undefined,
     ) -> _T: ...
+
 
 # Based on the recipe at https://docs.python.org/3/howto/enum.html
 class _OrderedEnum(Enum):
