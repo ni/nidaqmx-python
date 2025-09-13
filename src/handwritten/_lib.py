@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import ctypes
 import locale
-import platform
 import sys
 import threading
 from ctypes.util import find_library

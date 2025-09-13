@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
-from typing import List, Optional
 
 from nidaqmx._base_interpreter import BaseInterpreter
 from nidaqmx.errors import DaqError

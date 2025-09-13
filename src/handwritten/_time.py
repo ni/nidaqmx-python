@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from datetime import datetime as std_datetime, timezone, tzinfo as dt_tzinfo
-from typing import Optional, Union
 from zoneinfo import ZoneInfo
 
 from hightime import datetime as ht_datetime
