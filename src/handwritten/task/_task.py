@@ -166,10 +166,7 @@ class Task:
 
     @property
     def channels(self):
-        """:class:`nidaqmx.task.channels.Channel`: Specifies
-        a channel object that represents the entire list of virtual
-        channels in this task.
-        """
+        """:class:`nidaqmx.task.channels.Channel`: Specifies a channel object that represents the entire list of virtual channels in this task."""
         return Channel._factory(
             self._handle, flatten_channel_string(self.channel_names), self._interpreter
         )
@@ -188,9 +185,7 @@ class Task:
 
     @property
     def devices(self):
-        """List[:class:`nidaqmx.system.device.Device`]: Indicates a list
-        of Device objects representing all the devices in the task.
-        """
+        """List[:class:`nidaqmx.system.device.Device`]: Indicates a list of Device objects representing all the devices in the task."""
         val = self._interpreter.get_task_attribute_string(self._handle, 0x230E)
         return [
             _DeviceAlternateConstructor(v, self._interpreter) for v in unflatten_channel_string(val)
@@ -369,8 +364,9 @@ class Task:
         self._interpreter.task_control(self._handle, action.value)
 
     def is_task_done(self):
-        """Queries the status of the task and indicates if it completed
-        execution. Use this function to ensure that the specified
+        """Queries the status of the task and indicates if it completed execution.
+
+        Use this function to ensure that the specified
         operation is complete before you stop the task.
 
         Returns:
@@ -414,8 +410,7 @@ class Task:
         shunt_resistor_source=ShuntCalSource.DEFAULT,
         skip_unsupported_channels=False,
     ):
-        """Perform shunt calibration for the specified channels using a strain
-        gage sensor.
+        """Perform shunt calibration for the specified channels using a strain gage sensor.
 
         Refer to the calibration procedure for your module for detailed
         calibration instructions.
@@ -942,10 +937,9 @@ class Task:
             )
 
     def register_done_event(self, callback_method):
-        """Registers a callback function to receive an event when a task stops due
-        to an error or when a finite acquisition task or finite generation task
-        completes execution. A Done event does not occur when a task is stopped
-        explicitly, such as by calling DAQmx Stop Task.
+        """Registers a callback function to receive an event when a task stops due to an error or when a finite acquisition task or finite generation task completes execution.
+
+        A Done event does not occur when a task is stopped explicitly, such as by calling DAQmx Stop Task.
 
         Args:
             callback_method (function): Specifies the function that you want
@@ -984,9 +978,9 @@ class Task:
                 event_handler.close()  # may raise an exception
 
     def register_every_n_samples_acquired_into_buffer_event(self, sample_interval, callback_method):
-        """Registers a callback function to receive an event when the specified
-        number of samples is written from the device to the buffer. This
-        function only works with devices that support buffered tasks.
+        """Registers a callback function to receive an event when the specified number of samples is written from the device to the buffer.
+
+        This function only works with devices that support buffered tasks.
 
         When you stop a task explicitly any pending events are discarded. For
         example, if you call DAQmx Stop Task then you do not receive any
@@ -1047,9 +1041,9 @@ class Task:
     def register_every_n_samples_transferred_from_buffer_event(
         self, sample_interval, callback_method
     ):
-        """Registers a callback function to receive an event when the specified
-        number of samples is written from the buffer to the device. This
-        function only works with devices that support buffered tasks.
+        """Registers a callback function to receive an event when the specified number of samples is written from the buffer to the device.
+
+        This function only works with devices that support buffered tasks.
 
         When you stop a task explicitly any pending events are discarded. For
         example, if you call DAQmx Stop Task then you do not receive any
@@ -1109,8 +1103,7 @@ class Task:
                 event_handler.close()  # may raise an exception
 
     def register_signal_event(self, signal_type, callback_method):
-        """Registers a callback function to receive an event when the specified
-        hardware event occurs.
+        """Registers a callback function to receive an event when the specified hardware event occurs.
 
         When you stop a task explicitly any pending events are discarded. For
         example, if you call DAQmx Stop Task then you do not receive any
@@ -1199,8 +1192,10 @@ class Task:
         self._interpreter.save_task(self._handle, save_as, author, options)
 
     def start(self):
-        """Transitions the task to the running state to begin the measurement
-        or generation. Using this method is required for some applications and
+        """Start the task.
+
+        This method transitions the task to the running state to begin the measurement or
+        generation. Using this method is required for some applications and
         is optional for others.
 
         If you do not use this method, a measurement task starts automatically
@@ -1217,7 +1212,9 @@ class Task:
         self._interpreter.start_task(self._handle)
 
     def stop(self):
-        """Stops the task and returns it to the state the task was in before the
+        """Stop the task.
+
+        This method stops the task and returns it to the state the task was in before the
         DAQmx Start Task method ran or the DAQmx Write method ran with the
         autostart input set to TRUE.
 
@@ -1578,7 +1575,7 @@ class _TaskAlternateConstructor(Task):
 
     def __init__(self, task_handle, interpreter, close_on_exit):
         """Initialize a new Task with an existing interpreter.
-        
+
         Args:
             task_handle: Specifies the task handle from which to create a
                 Task object.

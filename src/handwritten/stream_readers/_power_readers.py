@@ -6,8 +6,7 @@ from nidaqmx.types import PowerMeasurement
 
 
 class PowerSingleChannelReader(ChannelReaderBase):
-    """Reads samples from an analog input power channel in an NI-DAQmx task.
-    """
+    """Reads samples from an analog input power channel in an NI-DAQmx task."""
 
     def read_many_sample(
         self,
@@ -16,8 +15,7 @@ class PowerSingleChannelReader(ChannelReaderBase):
         number_of_samples_per_channel=READ_ALL_AVAILABLE,
         timeout=10.0,
     ):
-        """Reads one or more floating-point power samples from a single analog
-        input power channel in a task.
+        """Reads one or more floating-point power samples from a single analog input power channel in a task.
 
         This read method accepts a preallocated NumPy array to hold the
         samples requested, which can be advantageous for performance and
@@ -100,8 +98,7 @@ class PowerSingleChannelReader(ChannelReaderBase):
         return samps_per_chan_read
 
     def read_one_sample(self, timeout=10):
-        """Reads a single floating-point power sample from a single analog input
-        power channel in a task.
+        """Reads a single floating-point power sample from a single analog input power channel in a task.
 
         Args:
             timeout (Optional[float]): Specifies the amount of time in
@@ -124,9 +121,7 @@ class PowerSingleChannelReader(ChannelReaderBase):
 
 
 class PowerMultiChannelReader(ChannelReaderBase):
-    """Reads samples from one or more analog input power channels in an NI-DAQmx
-    task.
-    """
+    """Reads samples from one or more analog input power channels in an NI-DAQmx task."""
 
     def read_many_sample(
         self,
@@ -135,8 +130,7 @@ class PowerMultiChannelReader(ChannelReaderBase):
         number_of_samples_per_channel=READ_ALL_AVAILABLE,
         timeout=10.0,
     ):
-        """Reads one or more floating-point power samples from one or more analog
-        input power channels in a task.
+        """Reads one or more floating-point power samples from one or more analog input power channels in a task.
 
         This read method accepts a preallocated NumPy array to hold the
         samples requested, which can be advantageous for performance and
@@ -245,8 +239,7 @@ class PowerMultiChannelReader(ChannelReaderBase):
         return samps_per_chan_read
 
     def read_one_sample(self, voltage_data, current_data, timeout=10):
-        """Reads a single floating-point power sample from one or more analog
-        input channels in a task.
+        """Reads a single floating-point power sample from one or more analog input channels in a task.
 
         This read method accepts a preallocated NumPy array to hold the
         samples requested, which can be advantageous for performance and
@@ -292,9 +285,7 @@ class PowerMultiChannelReader(ChannelReaderBase):
 
 
 class PowerBinaryReader(ChannelReaderBase):
-    """Reads binary samples from one or more analog input power channels in an
-    NI-DAQmx task.
-    """
+    """Reads binary samples from one or more analog input power channels in an NI-DAQmx task."""
 
     def read_many_sample(
         self,
@@ -303,8 +294,7 @@ class PowerBinaryReader(ChannelReaderBase):
         number_of_samples_per_channel=READ_ALL_AVAILABLE,
         timeout=10.0,
     ):
-        """Reads one or more binary int16 samples from one or more analog
-        input power channel in a task.
+        """Reads one or more binary int16 samples from one or more analog input power channel in a task.
 
         This read method accepts a preallocated NumPy array to hold the
         samples requested, which can be advantageous for performance and

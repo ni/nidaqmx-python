@@ -17,7 +17,7 @@ class PersistedScale:
 
     def __init__(self, name, *, grpc_options=None):
         """Initialize a new PersistedScale.
-        
+
         Args:
             name (str): Specifies the name of the saved scale.
             grpc_options (Optional[:class:`~nidaqmx.GrpcSessionOptions`]): Specifies
@@ -42,30 +42,24 @@ class PersistedScale:
 
     @property
     def name(self):
-        """str: Indicates the name of the custom scale.
-        """
+        """str: Indicates the name of the custom scale."""
         return self._name
 
     @property
     def author(self):
-        """str: Indicates the author of the custom scale.
-        """
+        """str: Indicates the author of the custom scale."""
         val = self._interpreter.get_persisted_scale_attribute_string(self._name, 0x22D4)
         return val
 
     @property
     def allow_interactive_editing(self):
-        """bool: Indicates whether the custom scale can be edited in the
-            DAQ Assistant.
-        """
+        """bool: Indicates whether the custom scale can be edited in the DAQ Assistant."""
         val = self._interpreter.get_persisted_scale_attribute_bool(self._name, 0x22D5)
         return val
 
     @property
     def allow_interactive_deletion(self):
-        """bool: Indicates whether the custom scale can be deleted through
-            MAX.
-        """
+        """bool: Indicates whether the custom scale can be deleted through MAX."""
         val = self._interpreter.get_persisted_scale_attribute_bool(self._name, 0x22D6)
         return val
 
@@ -97,7 +91,7 @@ class _PersistedScaleAlternateConstructor(PersistedScale):
 
     def __init__(self, name, interpreter):
         """Initialize a new PersistedScale with an existing interpreter.
-        
+
         Args:
             name: Specifies the name of the PersistedScale.
             interpreter: Specifies the interpreter instance.

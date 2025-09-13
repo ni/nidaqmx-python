@@ -223,7 +223,7 @@ def _get_driver_details(
 
 
 def _install_daqmx_driver_windows_core(download_url: str) -> None:
-    """Download and launch NI-DAQmx Driver installation in an interactive mode"""
+    """Download and launch NI-DAQmx Driver installation in an interactive mode."""
     _validate_download_url(download_url)
     try:
         with _multi_access_temp_file() as temp_file:
@@ -249,7 +249,7 @@ def _install_daqmx_driver_windows_core(download_url: str) -> None:
 
 
 def _install_daqmx_driver_linux_core(download_url: str, release: str) -> None:
-    """Download NI Linux Device Drivers and install NI-DAQmx on Linux OS"""
+    """Download NI Linux Device Drivers and install NI-DAQmx on Linux OS."""
     if sys.platform.startswith("linux"):
         _validate_download_url(download_url)
         try:
@@ -313,7 +313,7 @@ def _validate_download_url(download_url: str) -> None:
 
 
 def _ask_user_confirmation(user_message: str) -> bool:
-    """Prompt for user confirmation"""
+    """Prompt for user confirmation."""
     while True:
         response = input(user_message + " (yes/no): ").strip().lower()
         if response in ["yes", "y"]:

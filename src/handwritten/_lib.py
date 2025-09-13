@@ -56,8 +56,7 @@ class c_bool32(ctypes.c_uint):
 
 
 class CtypesByteString:
-    """Custom argtype that automatically converts unicode strings to encoding
-    used by the DAQmx C API DLL in Python 3."""
+    """Custom argtype that automatically converts unicode strings to encoding used by the C API."""
 
     @classmethod
     def from_param(cls, param):
@@ -70,8 +69,7 @@ ctypes_byte_str: TypeAlias = CtypesByteString
 
 
 def wrapped_ndpointer(*args, **kwargs):
-    """Specifies an ndpointer type that wraps numpy.ctypeslib.ndpointer and
-    allows a value of None to be passed to an argument of that type.
+    """Wraps numpy.ctypeslib.ndpointer in order to allow passing None.
 
     Taken from http://stackoverflow.com/questions/32120178
     """

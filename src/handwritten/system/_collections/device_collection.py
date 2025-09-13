@@ -13,8 +13,7 @@ class DeviceCollection(Sequence):
     """
 
     def __init__(self, interpreter):
-        """Do not construct this object directly; instead, call nidaqmx.system.System.local().devices.
-        """
+        """Do not construct this object directly; instead, call nidaqmx.system.System.local().devices."""
         self._interpreter = interpreter
 
     def __contains__(self, item):
@@ -89,8 +88,6 @@ class DeviceCollection(Sequence):
 
     @property
     def device_names(self):
-        """List[str]: Indicates the names of all devices on this device
-            collection.
-        """
+        """List[str]: Indicates the names of all devices on this device collection."""
         val = self._interpreter.get_system_info_attribute_string(0x193B)
         return unflatten_channel_string(val)

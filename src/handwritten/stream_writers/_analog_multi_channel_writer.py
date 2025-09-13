@@ -6,13 +6,10 @@ from nidaqmx.stream_writers._channel_writer_base import (
 
 
 class AnalogMultiChannelWriter(ChannelWriterBase):
-    """Writes samples to one or more analog output channels in an NI-DAQmx
-    task.
-    """
+    """Writes samples to one or more analog output channels in an NI-DAQmx task."""
 
     def write_many_sample(self, data, timeout=10.0):
-        """Writes one or more floating-point samples to one or more analog
-        output channels in a task.
+        """Writes one or more floating-point samples to one or more analog output channels in a task.
 
         If the task uses on-demand timing, this method returns only
         after the device generates all samples. On-demand is the default
@@ -58,8 +55,7 @@ class AnalogMultiChannelWriter(ChannelWriterBase):
         )
 
     def write_one_sample(self, data, timeout=10):
-        """Writes a single floating-point sample to one or more analog
-        output channels in a task.
+        """Writes a single floating-point sample to one or more analog output channels in a task.
 
         Args:
             data (numpy.ndarray): Contains a 1D NumPy array of

@@ -11,14 +11,12 @@ from nidaqmx.stream_readers._channel_reader_base import ChannelReaderBase
 
 
 class AnalogSingleChannelReader(ChannelReaderBase):
-    """Reads samples from an analog input channel in an NI-DAQmx task.
-    """
+    """Reads samples from an analog input channel in an NI-DAQmx task."""
 
     def read_many_sample(
         self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0
     ):
-        """Reads one or more floating-point samples from a single analog
-        input channel in a task.
+        """Reads one or more floating-point samples from a single analog input channel in a task.
 
         This read method accepts a preallocated NumPy array to hold the
         samples requested, which can be advantageous for performance and
@@ -91,8 +89,7 @@ class AnalogSingleChannelReader(ChannelReaderBase):
         return samps_per_chan_read
 
     def read_one_sample(self, timeout=10):
-        """Reads a single floating-point sample from a single analog input
-        channel in a task.
+        """Reads a single floating-point sample from a single analog input channel in a task.
 
         Args:
             timeout (Optional[float]): Specifies the amount of time in
@@ -120,8 +117,7 @@ class AnalogSingleChannelReader(ChannelReaderBase):
         reallocation_policy: ReallocationPolicy = ReallocationPolicy.TO_GROW,
         timeout: int = 10,
     ) -> int:
-        """Reads one or more floating-point samples from a single analog
-        input channel into a waveform.
+        """Reads one or more floating-point samples from a single analog input channel into a waveform.
 
         This read method optionally accepts a preallocated waveform to hold
         the samples requested, which can be advantageous for performance and

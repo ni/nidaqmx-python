@@ -11,15 +11,12 @@ from nidaqmx.stream_readers._channel_reader_base import ChannelReaderBase
 
 
 class DigitalMultiChannelReader(ChannelReaderBase):
-    """Reads samples from one or more digital input channels in an NI-DAQmx
-    task.
-    """
+    """Reads samples from one or more digital input channels in an NI-DAQmx task."""
 
     def read_many_sample_port_byte(
         self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0
     ):
-        """Reads one or more 8-bit unsigned integer samples from one or
-        more digital input channel in a task.
+        """Reads one or more 8-bit unsigned integer samples from one or more digital input channel in a task.
 
         Use this method for devices with up to 8 lines per port.
 
@@ -109,8 +106,7 @@ class DigitalMultiChannelReader(ChannelReaderBase):
     def read_many_sample_port_uint16(
         self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0
     ):
-        """Reads one or more 16-bit unsigned integer samples from one or
-        more digital input channels in a task.
+        """Reads one or more 16-bit unsigned integer samples from one or more digital input channels in a task.
 
         Use this method for devices with up to 16 lines per port.
 
@@ -200,8 +196,7 @@ class DigitalMultiChannelReader(ChannelReaderBase):
     def read_many_sample_port_uint32(
         self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0
     ):
-        """Reads one or more 32-bit unsigned integer samples from one or
-        more digital input channels in a task.
+        """Reads one or more 32-bit unsigned integer samples from one or more digital input channels in a task.
 
         Use this method for devices with up to 32 lines per port.
 
@@ -289,9 +284,9 @@ class DigitalMultiChannelReader(ChannelReaderBase):
         return samps_per_chan_read
 
     def read_one_sample_multi_line(self, data, timeout=10):
-        """Reads a single boolean sample from one or more digital input
-        channels in a task. The channels can contain multiple digital
-        lines.
+        """Reads a single boolean sample from one or more digital input channels in a task.
+
+        The channels can contain multiple digital lines.
 
         This read method accepts a preallocated NumPy array to hold the
         samples requested, which can be advantageous for performance and
@@ -340,9 +335,9 @@ class DigitalMultiChannelReader(ChannelReaderBase):
         )
 
     def read_one_sample_one_line(self, data, timeout=10):
-        """Reads a single boolean sample from one or more digital input
-        channels in a task. The channel can contain only one digital
-        line.
+        """Reads a single boolean sample from one or more digital input channels in a task.
+
+        The channel can contain only one digital line.
 
         This read method accepts a preallocated NumPy array to hold the
         samples requested, which can be advantageous for performance and
@@ -377,8 +372,7 @@ class DigitalMultiChannelReader(ChannelReaderBase):
         )
 
     def read_one_sample_port_byte(self, data, timeout=10):
-        """Reads a single 8-bit unsigned integer sample from one or more
-        digital input channels in a task.
+        """Reads a single 8-bit unsigned integer sample from one or more digital input channels in a task.
 
         Use this method for devices with up to 8 lines per port.
 
@@ -416,8 +410,7 @@ class DigitalMultiChannelReader(ChannelReaderBase):
         )
 
     def read_one_sample_port_uint16(self, data, timeout=10):
-        """Reads a single 16-bit unsigned integer sample from one or more
-        digital input channels in a task.
+        """Reads a single 16-bit unsigned integer sample from one or more digital input channels in a task.
 
         Use this method for devices with up to 16 lines per port.
 
@@ -455,8 +448,7 @@ class DigitalMultiChannelReader(ChannelReaderBase):
         )
 
     def read_one_sample_port_uint32(self, data, timeout=10):
-        """Reads a single 32-bit unsigned integer sample from one or more
-        digital input channels in a task.
+        """Reads a single 32-bit unsigned integer sample from one or more digital input channels in a task.
 
         Use this method for devices with up to 32 lines per port.
 
@@ -501,8 +493,7 @@ class DigitalMultiChannelReader(ChannelReaderBase):
         reallocation_policy: ReallocationPolicy = ReallocationPolicy.TO_GROW,
         timeout: int = 10,
     ) -> list[DigitalWaveform[numpy.uint8]]:
-        """Reads one or more samples from one or more digital
-        input channels into a list of waveforms.
+        """Reads one or more samples from one or more digital input channels into a list of waveforms.
 
         Args:
             waveforms (list[DigitalWaveform]): Specifies an existing

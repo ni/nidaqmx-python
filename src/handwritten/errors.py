@@ -28,9 +28,7 @@ class DaqNotSupportedError(Error):
 
 
 class DaqFunctionNotSupportedError(Error):
-    """Error raised when a specific function isn't supported by the installed
-    version of the NI-DAQmx driver.
-    """
+    """Error raised when a specific function isn't supported by the installed NI-DAQmx driver."""
 
     pass
 
@@ -40,7 +38,7 @@ class DaqError(Error):
 
     def __init__(self, message, error_code, task_name=""):
         """Initialize a new DaqError.
-        
+
         Args:
             message (string): Specifies the error message.
             error_code (int): Specifies the NI-DAQmx error code.
@@ -72,19 +70,16 @@ class DaqError(Error):
 
     @property
     def error_type(self):
-        """:class:`nidaqmx.error_codes.DAQmxErrors`: Specifies the NI-DAQmx
-            error type."""
+        """:class:`nidaqmx.error_codes.DAQmxErrors`: Specifies the NI-DAQmx error type."""
         return self._error_type
 
 
 class DaqReadError(DaqError):
-    """Error raised by DAQmx write method that includes the amount of data that was
-    read.
-    """
+    """Error raised by DAQmx write method that includes the amount of data that was read."""
 
     def __init__(self, message, error_code, samps_per_chan_read, task_name=""):
         """Initialize a new DaqReadError.
-        
+
         Args:
             message (string): Specifies the error message.
             error_code (int): Specifies the NI-DAQmx error code.
@@ -100,13 +95,11 @@ class DaqReadError(DaqError):
 
 
 class DaqWriteError(DaqError):
-    """Error raised by DAQmx write method that includes the amount of data that was
-    written.
-    """
+    """Error raised by DAQmx write method that includes the amount of data that was written."""
 
     def __init__(self, message, error_code, samps_per_chan_written, task_name=""):
         """Initialize a new DaqWriteError.
-        
+
         Args:
             message (string): Specifies the error message.
             error_code (int): Specifies the NI-DAQmx error code.
@@ -127,7 +120,7 @@ class DaqWarning(Warning):
 
     def __init__(self, message, error_code):
         """Initialize a new DaqWarning.
-        
+
         Args:
             message (string): Specifies the warning message.
             error_code (int): Specifies the NI-DAQmx error code.
@@ -148,8 +141,7 @@ class DaqWarning(Warning):
 
     @property
     def error_type(self):
-        """:class:`nidaqmx.error_codes.DAQmxWarnings`: Specifies the NI-DAQmx
-            error type."""
+        """:class:`nidaqmx.error_codes.DAQmxWarnings`: Specifies the NI-DAQmx error type."""
         return self._error_type
 
 
@@ -191,7 +183,7 @@ def is_array_buffer_too_small(error_code):
 
 
 class RpcError(Error):
-    """An error specific to sessions to the NI gRPC Device Server"""
+    """An error specific to sessions to the NI gRPC Device Server."""
 
     def __init__(self, rpc_code, description):
         """Initialize a new RpcError."""
