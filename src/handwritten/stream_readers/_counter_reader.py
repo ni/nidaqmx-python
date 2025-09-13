@@ -153,7 +153,7 @@ class CounterReader(ChannelReaderBase):
             Indicates the number of samples acquired by each channel.
             NI-DAQmx returns a single value because this value is the
             same for all channels.
-        """
+        """  # noqa: W505 - doc line too long (111 > 100 characters) (auto-generated noqa)
         number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
             number_of_samples_per_channel
         )
@@ -238,7 +238,7 @@ class CounterReader(ChannelReaderBase):
             Indicates the number of samples acquired by each channel.
             NI-DAQmx returns a single value because this value is the
             same for all channels.
-        """
+        """  # noqa: W505 - doc line too long (107 > 100 characters) (auto-generated noqa)
         number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
             number_of_samples_per_channel
         )
@@ -323,7 +323,7 @@ class CounterReader(ChannelReaderBase):
             Indicates the number of samples acquired by each channel.
             NI-DAQmx returns a single value because this value is the
             same for all channels.
-        """
+        """  # noqa: W505 - doc line too long (106 > 100 characters) (auto-generated noqa)
         number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
             number_of_samples_per_channel
         )
@@ -400,7 +400,7 @@ class CounterReader(ChannelReaderBase):
             Indicates the number of samples acquired by each channel.
             NI-DAQmx returns a single value because this value is the
             same for all channels.
-        """
+        """  # noqa: W505 - doc line too long (107 > 100 characters) (auto-generated noqa)
         number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
             number_of_samples_per_channel
         )
@@ -525,5 +525,5 @@ class CounterReader(ChannelReaderBase):
 
             Indicates a single 32-bit unsigned integer sample from the
             task.
-        """
+        """  # noqa: W505 - doc line too long (103 > 100 characters) (auto-generated noqa)
         return self._interpreter.read_counter_scalar_u32(self._handle, timeout)

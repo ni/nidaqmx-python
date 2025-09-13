@@ -45,7 +45,7 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
 
             Specifies the actual number of samples this method
             successfully wrote.
-        """
+        """  # noqa: W505 - doc line too long (106 > 100 characters) (auto-generated noqa)
         self._verify_array(data, False, True)
 
         auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else False
@@ -89,7 +89,7 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
 
             Specifies the actual number of samples this method
             successfully wrote.
-        """
+        """  # noqa: W505 - doc line too long (107 > 100 characters) (auto-generated noqa)
         self._verify_array(data, False, True)
 
         auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else False
@@ -133,7 +133,7 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
 
             Specifies the actual number of samples this method
             successfully wrote.
-        """
+        """  # noqa: W505 - doc line too long (107 > 100 characters) (auto-generated noqa)
         self._verify_array(data, False, True)
 
         auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else False
@@ -218,7 +218,7 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
                 once to write the submitted samples. If the method could
                 not write all the submitted samples, it returns an error
                 and the number of samples successfully written.
-        """
+        """  # noqa: W505 - doc line too long (102 > 100 characters) (auto-generated noqa)
         auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else True
 
         numpy_array = numpy.asarray([data], dtype=numpy.uint8)
@@ -246,7 +246,7 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
                 once to write the submitted samples. If the method could
                 not write all the submitted samples, it returns an error
                 and the number of samples successfully written.
-        """
+        """  # noqa: W505 - doc line too long (103 > 100 characters) (auto-generated noqa)
         auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else True
 
         numpy_array = numpy.asarray([data], dtype=numpy.uint16)
@@ -274,7 +274,7 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
                 once to write the submitted samples. If the method could
                 not write all the submitted samples, it returns an error
                 and the number of samples successfully written.
-        """
+        """  # noqa: W505 - doc line too long (103 > 100 characters) (auto-generated noqa)
         auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else True
 
         return self._interpreter.write_digital_scalar_u32(self._handle, auto_start, timeout, data)

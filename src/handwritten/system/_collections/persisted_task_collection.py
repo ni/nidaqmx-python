@@ -16,10 +16,12 @@ class PersistedTaskCollection(Sequence):
     """
 
     def __init__(self, interpreter):
-        """Do not construct this object directly; instead, call nidaqmx.system.System.local().tasks."""
+        """Do not construct this object directly; instead, call nidaqmx.system.System.local().tasks."""  # noqa: W505 - doc line too long (103 > 100 characters) (auto-generated noqa)
         self._interpreter = interpreter
 
-    def __contains__(self, item):
+    def __contains__(  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
+        self, item
+    ):
         task_names = self.task_names
 
         if isinstance(item, str):
@@ -28,7 +30,7 @@ class PersistedTaskCollection(Sequence):
         elif isinstance(item, PersistedTask):
             return item._name in task_names
 
-    def __eq__(self, other):
+    def __eq__(self, other):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         if isinstance(other, self.__class__):
             return True
         return False
@@ -72,17 +74,17 @@ class PersistedTaskCollection(Sequence):
                 DAQmxErrors.UNKNOWN,
             )
 
-    def __iter__(self):
+    def __iter__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         for task_name in self.task_names:
             yield _PersistedTaskAlternateConstructor(task_name, self._interpreter)
 
-    def __len__(self):
+    def __len__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         return len(self.task_names)
 
-    def __ne__(self, other):
+    def __ne__(self, other):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         return not self.__eq__(other)
 
-    def __reversed__(self):
+    def __reversed__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         task_names = self.task_names
         task_names.reverse()
 

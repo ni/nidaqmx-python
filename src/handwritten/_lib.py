@@ -36,7 +36,9 @@ _FUNCTION_NOT_SUPPORTED_MESSAGE = (
 )
 
 
-class c_bool32(ctypes.c_uint):
+class c_bool32(  # noqa: N801 - class name 'c_bool32' should use CapWords convention (auto-generated noqa)
+    ctypes.c_uint
+):
     """Specifies a custom ctypes data type to represent 32-bit booleans."""
 
     # typeshed specifies that _SimpleCData[_T].value is an instance variable with type _T, so
@@ -58,7 +60,9 @@ class CtypesByteString:
     """Custom argtype that automatically converts unicode strings to encoding used by the C API."""
 
     @classmethod
-    def from_param(cls, param):
+    def from_param(  # noqa: D102 - Missing docstring in public method (auto-generated noqa)
+        cls, param
+    ):
         if isinstance(param, str):
             param = param.encode(lib_importer.encoding)
         return ctypes.c_char_p(param)
@@ -94,7 +98,9 @@ class DaqFunctionImporter:
         self._library = library
         self._lib_lock = threading.Lock()
 
-    def __getattr__(self, function):
+    def __getattr__(  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
+        self, function
+    ):
         try:
             cfunc = getattr(self._library, function)
             if not hasattr(cfunc, "arglock"):
@@ -141,27 +147,31 @@ class DaqLibImporter:
         self._encoding = None
 
     @property
-    def windll(self):
+    def windll(self):  # noqa: D102 - Missing docstring in public method (auto-generated noqa)
         if self._windll is None:
             self._import_lib()
         return self._windll
 
     @property
-    def cdll(self):
+    def cdll(self):  # noqa: D102 - Missing docstring in public method (auto-generated noqa)
         if self._cdll is None:
             self._import_lib()
         return self._cdll
 
     @property
-    def task_handle(self) -> type:
+    def task_handle(  # noqa: D102 - Missing docstring in public method (auto-generated noqa)
+        self,
+    ) -> type:
         return TaskHandle
 
     @property
-    def cal_handle(self) -> type:
+    def cal_handle(  # noqa: D102 - Missing docstring in public method (auto-generated noqa)
+        self,
+    ) -> type:
         return CalHandle
 
     @property
-    def encoding(self):
+    def encoding(self):  # noqa: D102 - Missing docstring in public method (auto-generated noqa)
         if self._encoding is None:
             self._import_lib()
         return self._encoding

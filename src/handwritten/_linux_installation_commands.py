@@ -60,7 +60,7 @@ _RPM_DAQMX_VERSION_COMMAND = ["rpm", "-q", "ni-daqmx"]
 
 
 @dataclass
-class DistroInfo:
+class DistroInfo:  # noqa: D101 - Missing docstring in public class (auto-generated noqa)
     get_distro_version: Callable[[str], str]
     get_daqmx_version: list[str]
     install_commands: list[list[str]]

@@ -20,7 +20,7 @@ _YS_PER_FS = 10**9
 _EPOCH_1970 = ht_datetime(1970, 1, 1, tzinfo=timezone.utc)
 
 
-def convert_time_to_timestamp(
+def convert_time_to_timestamp(  # noqa: D103 - Missing docstring in public function (auto-generated noqa)
     dt: std_datetime | ht_datetime, ts: GrpcTimestamp | None = None
 ) -> GrpcTimestamp:
     seconds_since_1970 = 0
@@ -45,7 +45,9 @@ def convert_time_to_timestamp(
     return ts
 
 
-def convert_timestamp_to_time(ts: GrpcTimestamp, tzinfo: dt_tzinfo | None = None) -> ht_datetime:
+def convert_timestamp_to_time(  # noqa: D103 - Missing docstring in public function (auto-generated noqa)
+    ts: GrpcTimestamp, tzinfo: dt_tzinfo | None = None
+) -> ht_datetime:
     total_nanos = ts.ToNanoseconds()
     seconds, nanos = divmod(total_nanos, _NS_PER_S)
     # Convert the nanoseconds to yoctoseconds.

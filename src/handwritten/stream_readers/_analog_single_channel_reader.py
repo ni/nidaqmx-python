@@ -167,7 +167,7 @@ class AnalogSingleChannelReader(ChannelReaderBase):
             int:
 
             Indicates the number of samples acquired.
-        """
+        """  # noqa: W505 - doc line too long (103 > 100 characters) (auto-generated noqa)
         number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
             number_of_samples_per_channel
         )

@@ -5,7 +5,7 @@ from nidaqmx.error_codes import DAQmxErrors
 class UnsetAutoStartSentinel:
     """Sentinel class for unset auto_start parameter."""
 
-    def __init__(self):
+    def __init__(self):  # noqa: D107 - Missing docstring in __init__ (auto-generated noqa)
         raise RuntimeError(
             "Cannot instantiate UnsetAutoStartSentinel. Use AUTO_START_UNSET instead."
         )

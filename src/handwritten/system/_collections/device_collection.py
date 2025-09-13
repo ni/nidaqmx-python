@@ -13,10 +13,12 @@ class DeviceCollection(Sequence):
     """
 
     def __init__(self, interpreter):
-        """Do not construct this object directly; instead, call nidaqmx.system.System.local().devices."""
+        """Do not construct this object directly; instead, call nidaqmx.system.System.local().devices."""  # noqa: W505 - doc line too long (105 > 100 characters) (auto-generated noqa)
         self._interpreter = interpreter
 
-    def __contains__(self, item):
+    def __contains__(  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
+        self, item
+    ):
         device_names = self.device_names
 
         if isinstance(item, str):
@@ -26,7 +28,7 @@ class DeviceCollection(Sequence):
             return item.name in device_names
         return False
 
-    def __eq__(self, other):
+    def __eq__(self, other):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         if isinstance(other, self.__class__):
             return True
         return False
@@ -69,17 +71,17 @@ class DeviceCollection(Sequence):
                 DAQmxErrors.UNKNOWN,
             )
 
-    def __iter__(self):
+    def __iter__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         for device_name in self.device_names:
             yield _DeviceAlternateConstructor(device_name, self._interpreter)
 
-    def __len__(self):
+    def __len__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         return len(self.device_names)
 
-    def __ne__(self, other):
+    def __ne__(self, other):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         return not self.__eq__(other)
 
-    def __reversed__(self):
+    def __reversed__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         device_names = self.device_names
         device_names.reverse()
 
