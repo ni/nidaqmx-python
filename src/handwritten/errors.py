@@ -146,6 +146,8 @@ class DaqWarning(Warning):
 
 
 class DaqResourceWarning(ResourceWarning):
+    """Warning about DAQ resource usage, such as a leaking an NI-DAQmx task."""
+
     pass
 
 
