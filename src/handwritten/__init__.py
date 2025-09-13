@@ -7,7 +7,7 @@ from nidaqmx.errors import (
     DaqWarning,
     DaqWriteError,
 )
-from nidaqmx.grpc_session_options import *
+from nidaqmx.grpc_session_options import *  # noqa: F403 - 'from nidaqmx.grpc_session_options import *' used; unable to detect undefined names (auto-generated noqa)
 from nidaqmx.scale import Scale
 from nidaqmx.task import Task
 from nidaqmx.types import CtrFreq, CtrTick, CtrTime
@@ -19,7 +19,13 @@ except ImportError:
 
 __version__ = version(__name__)
 
-__all__ = ["errors", "scale", "stream_readers", "stream_writers", "task"]
+__all__ = [  # noqa: F405 - 'errors' may be undefined, or defined from star imports: nidaqmx.grpc_session_options (auto-generated noqa)
+    "errors",
+    "scale",
+    "stream_readers",
+    "stream_writers",
+    "task",
+]
 
 # Do not add a null logging handler. If the application has not configured logging, the
 # default behavior is to log warnings and errors to stderr.

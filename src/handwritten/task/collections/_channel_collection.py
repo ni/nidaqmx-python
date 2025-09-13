@@ -13,11 +13,13 @@ class ChannelCollection(Sequence):
     """
 
     def __init__(self, task_handle, interpreter):
-        """Do not construct this object directly; instead, construct a nidaqmx.Task and use the appropriate property, such as task.ai_channels."""
+        """Do not construct this object directly; instead, construct a nidaqmx.Task and use the appropriate property, such as task.ai_channels."""  # noqa: W505 - doc line too long (146 > 100 characters) (auto-generated noqa)
         self._handle = task_handle
         self._interpreter = interpreter
 
-    def __contains__(self, item):
+    def __contains__(  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
+        self, item
+    ):
         channel_names = self.channel_names
 
         if isinstance(item, str):
@@ -27,7 +29,7 @@ class ChannelCollection(Sequence):
 
         return all([item in channel_names for item in items])
 
-    def __eq__(self, other):
+    def __eq__(self, other):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         if isinstance(other, self.__class__):
             return self._handle == other._handle
         return False
@@ -74,20 +76,20 @@ class ChannelCollection(Sequence):
                 DAQmxErrors.UNKNOWN,
             )
 
-    def __hash__(self):
+    def __hash__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         return self._interpreter.hash_task_handle(self._handle)
 
-    def __iter__(self):
+    def __iter__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         for channel_name in self.channel_names:
             yield Channel._factory(self._handle, channel_name, self._interpreter)
 
-    def __len__(self):
+    def __len__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         return len(self.channel_names)
 
-    def __ne__(self, other):
+    def __ne__(self, other):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         return not self.__eq__(other)
 
-    def __reversed__(self):
+    def __reversed__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         channel_names = self.channel_names
         channel_names.reverse()
 
@@ -96,7 +98,7 @@ class ChannelCollection(Sequence):
 
     @property
     def all(self):
-        """:class:`nidaqmx.task.channels.Channel`: Specifies a channel object that represents the entire list of virtual channels on this channel collection."""
+        """:class:`nidaqmx.task.channels.Channel`: Specifies a channel object that represents the entire list of virtual channels on this channel collection."""  # noqa: W505 - doc line too long (160 > 100 characters) (auto-generated noqa)
         # Passing a blank string means all channels.
         return Channel._factory(self._handle, "", self._interpreter)
 

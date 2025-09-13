@@ -84,7 +84,7 @@ class AnalogMultiChannelReader(ChannelReaderBase):
             Indicates the number of samples acquired by each channel.
             NI-DAQmx returns a single value because this value is the
             same for all channels.
-        """
+        """  # noqa: W505 - doc line too long (101 > 100 characters) (auto-generated noqa)
         number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
             number_of_samples_per_channel
         )
@@ -198,7 +198,7 @@ class AnalogMultiChannelReader(ChannelReaderBase):
             Indicates the number of samples acquired by each channel.
             NI-DAQmx returns a single value because this value is the
             same for all channels.
-        """
+        """  # noqa: W505 - doc line too long (116 > 100 characters) (auto-generated noqa)
         number_of_channels = self._in_stream.num_chans
         number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
             number_of_samples_per_channel

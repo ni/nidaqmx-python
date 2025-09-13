@@ -26,18 +26,18 @@ class PersistedScale:
         self._name = name
         self._interpreter = utils._select_interpreter(grpc_options)
 
-    def __eq__(self, other):
+    def __eq__(self, other):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         if isinstance(other, self.__class__):
             return self._name == other._name
         return False
 
-    def __hash__(self):
+    def __hash__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         return hash(self._name)
 
-    def __ne__(self, other):
+    def __ne__(self, other):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         return not self.__eq__(other)
 
-    def __repr__(self):
+    def __repr__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         return f"PersistedScale(name={self._name})"
 
     @property
@@ -86,7 +86,7 @@ class _PersistedScaleAlternateConstructor(PersistedScale):
     This is a private API used to instantiate a PersistedScale with an existing interpreter.
     """
 
-    # Setting __slots__ avoids TypeError: __class__ assignment: 'Base' object layout differs from 'Derived'.
+    # Setting __slots__ avoids TypeError: __class__ assignment: 'Base' object layout differs from 'Derived'.  # noqa: W505 - doc line too long (108 > 100 characters) (auto-generated noqa)
     __slots__ = ()
 
     def __init__(self, name, interpreter):

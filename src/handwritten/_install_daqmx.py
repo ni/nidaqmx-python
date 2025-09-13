@@ -176,7 +176,7 @@ def _load_data(
     Traceback (most recent call last):
     click.exceptions.ClickException: Unsupported os 'macOS'
 
-    """
+    """  # noqa: W505 - doc line too long (159 > 100 characters) (auto-generated noqa)
     try:
         if platform == "Windows":
             metadata = json.loads(json_data).get("Windows", [])

@@ -73,7 +73,7 @@ class DigitalSingleChannelReader(ChannelReaderBase):
             Indicates the number of samples acquired by each channel.
             NI-DAQmx returns a single value because this value is the
             same for all channels.
-        """
+        """  # noqa: W505 - doc line too long (106 > 100 characters) (auto-generated noqa)
         number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
             number_of_samples_per_channel
         )
@@ -150,7 +150,7 @@ class DigitalSingleChannelReader(ChannelReaderBase):
             Indicates the number of samples acquired by each channel.
             NI-DAQmx returns a single value because this value is the
             same for all channels.
-        """
+        """  # noqa: W505 - doc line too long (107 > 100 characters) (auto-generated noqa)
         number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
             number_of_samples_per_channel
         )
@@ -227,7 +227,7 @@ class DigitalSingleChannelReader(ChannelReaderBase):
             Indicates the number of samples acquired by each channel.
             NI-DAQmx returns a single value because this value is the
             same for all channels.
-        """
+        """  # noqa: W505 - doc line too long (107 > 100 characters) (auto-generated noqa)
         number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
             number_of_samples_per_channel
         )
@@ -330,7 +330,7 @@ class DigitalSingleChannelReader(ChannelReaderBase):
 
             Indicates a single 8-bit unsigned integer sample from the
             task.
-        """
+        """  # noqa: W505 - doc line too long (102 > 100 characters) (auto-generated noqa)
         data = numpy.zeros(1, dtype=numpy.uint8)
         _, samps_per_chan_read = self._interpreter.read_digital_u8(
             self._handle, 1, timeout, FillMode.GROUP_BY_CHANNEL.value, data
@@ -359,7 +359,7 @@ class DigitalSingleChannelReader(ChannelReaderBase):
 
             Indicates a single 16-bit unsigned integer sample from the
             task.
-        """
+        """  # noqa: W505 - doc line too long (103 > 100 characters) (auto-generated noqa)
         data = numpy.zeros(1, dtype=numpy.uint16)
         _, samps_per_read_chan = self._interpreter.read_digital_u16(
             self._handle, 1, timeout, FillMode.GROUP_BY_CHANNEL.value, data
@@ -388,7 +388,7 @@ class DigitalSingleChannelReader(ChannelReaderBase):
 
             Indicates a single 32-bit unsigned integer sample from the
             task.
-        """
+        """  # noqa: W505 - doc line too long (103 > 100 characters) (auto-generated noqa)
         return self._interpreter.read_digital_scalar_u32(self._handle, timeout)
 
     @requires_feature(WAVEFORM_SUPPORT)

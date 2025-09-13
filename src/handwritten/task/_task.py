@@ -101,7 +101,7 @@ class Task:
             grpc_options (Optional[:class:`~nidaqmx.GrpcSessionOptions`]): Specifies
                 the gRPC session options.
         """
-        # Initialize the fields that __del__ accesses so it doesn't crash when __init__ raises an exception.
+        # Initialize the fields that __del__ accesses so it doesn't crash when __init__ raises an exception.  # noqa: W505 - doc line too long (108 > 100 characters) (auto-generated noqa)
         self._handle = None
         self._close_on_exit = False
         self._saved_name = new_task_name  # _initialize sets this to the name assigned by DAQmx.
@@ -122,7 +122,7 @@ class Task:
 
         self._initialize(self._handle, self._interpreter)
 
-    def __del__(self):
+    def __del__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         if self._handle is not None and self._close_on_exit and self._grpc_options is None:
             warnings.warn(
                 'Task of name "{}" was not explicitly closed before it was '
@@ -137,25 +137,27 @@ class Task:
                 DaqResourceWarning,
             )
 
-    def __enter__(self):
+    def __enter__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         return self
 
-    def __eq__(self, other):
+    def __eq__(self, other):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         if isinstance(other, self.__class__):
             return self._handle == other._handle
         return False
 
-    def __exit__(self, type, value, traceback):
+    def __exit__(  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
+        self, type, value, traceback
+    ):
         if self._close_on_exit:
             self.close()
 
-    def __hash__(self):
+    def __hash__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         return self._interpreter.hash_task_handle(self._handle)
 
-    def __ne__(self, other):
+    def __ne__(self, other):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         return not self.__eq__(other)
 
-    def __repr__(self):
+    def __repr__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         return f"Task(name={self._saved_name})"
 
     @property
@@ -166,7 +168,7 @@ class Task:
 
     @property
     def channels(self):
-        """:class:`nidaqmx.task.channels.Channel`: Specifies a channel object that represents the entire list of virtual channels in this task."""
+        """:class:`nidaqmx.task.channels.Channel`: Specifies a channel object that represents the entire list of virtual channels in this task."""  # noqa: W505 - doc line too long (146 > 100 characters) (auto-generated noqa)
         return Channel._factory(
             self._handle, flatten_channel_string(self.channel_names), self._interpreter
         )
@@ -185,7 +187,7 @@ class Task:
 
     @property
     def devices(self):
-        """List[:class:`nidaqmx.system.device.Device`]: Indicates a list of Device objects representing all the devices in the task."""
+        """List[:class:`nidaqmx.system.device.Device`]: Indicates a list of Device objects representing all the devices in the task."""  # noqa: W505 - doc line too long (135 > 100 characters) (auto-generated noqa)
         val = self._interpreter.get_task_attribute_string(self._handle, 0x230E)
         return [
             _DeviceAlternateConstructor(v, self._interpreter) for v in unflatten_channel_string(val)
@@ -257,7 +259,7 @@ class Task:
 
         Args:
             task_handle (TaskHandle): Specifies the handle for this task.
-        """
+        """  # noqa: D417 - Missing argument descriptions in the docstring (auto-generated noqa)
         # Saved name is used in self.close() to throw graceful error on
         # double closes.
         self._saved_name = self.name
@@ -395,7 +397,7 @@ class Task:
                 support calibration.
                 If skip unsupported channels is TRUE, this VI calibrates only supported channels.
                 If FALSE, this VI calibrates the channels specified by channels. The default is FALSE.
-        """
+        """  # noqa: D202, W505 - No blank lines allowed after function docstring (auto-generated noqa), doc line too long (102 > 100 characters) (auto-generated noqa)
 
         self._interpreter.perform_bridge_offset_nulling_cal_ex(
             self._handle, channel, skip_unsupported_channels
@@ -501,7 +503,7 @@ class Task:
                 support calibration.
                 If skip unsupported channels is TRUE, this VI calibrates only supported channels.
                 If FALSE, this VI calibrates the channels specified by channels. The default is FALSE.
-        """
+        """  # noqa: D202, W505 - No blank lines allowed after function docstring (auto-generated noqa), doc line too long (102 > 100 characters) (auto-generated noqa)
 
         self._interpreter.perform_thrmcpl_lead_offset_nulling_cal(
             self._handle, channel, skip_unsupported_channels
@@ -869,7 +871,7 @@ class Task:
             >>> data = task.read_waveform()
             >>> type(data)
             <type 'AnalogWaveform'>
-        """
+        """  # noqa: W505 - doc line too long (102 > 100 characters) (auto-generated noqa)
         channels_to_read = self.in_stream.channels_to_read
         number_of_channels = len(channels_to_read.channel_names)
         read_chan_type = channels_to_read.chan_type
@@ -960,7 +962,7 @@ class Task:
 
                 Passing None for this parameter unregisters the event callback
                 function.
-        """
+        """  # noqa: W505 - doc line too long (175 > 100 characters) (auto-generated noqa)
         if callback_method is not None:
             # If the event is already registered, the interpreter should raise DaqError with code
             # DAQmxErrors.DONE_EVENT_ALREADY_REGISTERED.
@@ -1008,7 +1010,7 @@ class Task:
 
                 Passing None for this parameter unregisters the event callback
                 function.
-        """
+        """  # noqa: W505 - doc line too long (139 > 100 characters) (auto-generated noqa)
         if callback_method is not None:
             # If the event is already registered, the interpreter should raise DaqError with code
             # DAQmxErrors.EVERY_N_SAMPS_ACQ_INTO_BUFFER_EVENT_ALREADY_REGISTERED.
@@ -1071,7 +1073,7 @@ class Task:
 
                 Passing None for this parameter unregisters the event callback
                 function.
-        """
+        """  # noqa: W505 - doc line too long (139 > 100 characters) (auto-generated noqa)
         if callback_method is not None:
             # If the event is already registered, the interpreter should raise DaqError with code
             # DAQmxErrors.EVERY_N_SAMPS_TRANSFERRED_FROM_BUFFER_EVENT_ALREADY_REGISTERED.
@@ -1128,7 +1130,7 @@ class Task:
 
                 Passing None for this parameter unregisters the event callback
                 function.
-        """
+        """  # noqa: W505 - doc line too long (102 > 100 characters) (auto-generated noqa)
         if callback_method is not None:
             # If the event is already registered, the interpreter should raise DaqError with code
             # DAQmxErrors.SIGNAL_EVENT_ALREADY_REGISTERED.
@@ -1243,7 +1245,7 @@ class Task:
             datetime:
 
             The timestamp value of timestamp_event.
-        """
+        """  # noqa: W505 - doc line too long (118 > 100 characters) (auto-generated noqa)
         return self._interpreter.wait_for_valid_timestamp(
             self._handle, timestamp_event.value, timeout
         )
@@ -1570,7 +1572,7 @@ class _TaskAlternateConstructor(Task):
     This is a private API used to instantiate a Task with an existing task handle and interpreter.
     """
 
-    # Setting __slots__ avoids TypeError: __class__ assignment: 'Base' object layout differs from 'Derived'.
+    # Setting __slots__ avoids TypeError: __class__ assignment: 'Base' object layout differs from 'Derived'.  # noqa: W505 - doc line too long (108 > 100 characters) (auto-generated noqa)
     __slots__ = ()
 
     def __init__(self, task_handle, interpreter, close_on_exit):
@@ -1582,7 +1584,7 @@ class _TaskAlternateConstructor(Task):
             interpreter: Specifies the interpreter instance.
             close_on_exit: Specifies whether the task's context manager closes the task.
         """
-        # Initialize the fields that __del__ accesses so it doesn't crash when _initialize raises an exception.
+        # Initialize the fields that __del__ accesses so it doesn't crash when _initialize raises an exception.  # noqa: W505 - doc line too long (111 > 100 characters) (auto-generated noqa)
         self._handle = task_handle
         self._close_on_exit = close_on_exit
         self._saved_name = ""  # _initialize sets this to the name assigned by DAQmx.

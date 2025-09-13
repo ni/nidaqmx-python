@@ -16,11 +16,13 @@ class PhysicalChannelCollection(Sequence):
     """
 
     def __init__(self, device_name, interpreter):
-        """Do not construct this object directly; instead, construct a nidaqmx.system.Device and use the appropriate property, such as device.ai_physical_channels."""
+        """Do not construct this object directly; instead, construct a nidaqmx.system.Device and use the appropriate property, such as device.ai_physical_channels."""  # noqa: W505 - doc line too long (166 > 100 characters) (auto-generated noqa)
         self._name = device_name
         self._interpreter = interpreter
 
-    def __contains__(self, item):
+    def __contains__(  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
+        self, item
+    ):
         channel_names = self.channel_names
 
         if isinstance(item, str):
@@ -30,7 +32,7 @@ class PhysicalChannelCollection(Sequence):
             return item._name in channel_names
         return False
 
-    def __eq__(self, other):
+    def __eq__(self, other):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         if isinstance(other, self.__class__):
             return self._name == other._name
         return False
@@ -68,7 +70,7 @@ class PhysicalChannelCollection(Sequence):
             ]
         elif isinstance(index, str):
             requested_channels = unflatten_channel_string(index)
-            # Ensure the channel names are fully qualified. If the channel is invalid, the user will get errors from the
+            # Ensure the channel names are fully qualified. If the channel is invalid, the user will get errors from the  # noqa: W505 - doc line too long (120 > 100 characters) (auto-generated noqa)
             # channel objects on use.
             channels_to_use = []
             for channel in requested_channels:
@@ -89,17 +91,17 @@ class PhysicalChannelCollection(Sequence):
                 DAQmxErrors.UNKNOWN,
             )
 
-    def __iter__(self):
+    def __iter__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         for channel_name in self.channel_names:
             yield _PhysicalChannelAlternateConstructor(channel_name, self._interpreter)
 
-    def __len__(self):
+    def __len__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         return len(self.channel_names)
 
-    def __ne__(self, other):
+    def __ne__(self, other):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         return not self.__eq__(other)
 
-    def __reversed__(self):
+    def __reversed__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         channel_names = self.channel_names
         channel_names.reverse()
 
@@ -108,7 +110,7 @@ class PhysicalChannelCollection(Sequence):
 
     @property
     def all(self):
-        """nidaqmx.system.physical_channel.PhysicalChannel: Specifies a physical channel object that represents the entire list of physical channels on this channel collection."""
+        """nidaqmx.system.physical_channel.PhysicalChannel: Specifies a physical channel object that represents the entire list of physical channels on this channel collection."""  # noqa: W505 - doc line too long (179 > 100 characters) (auto-generated noqa)
         return _PhysicalChannelAlternateConstructor(
             flatten_channel_string(self.channel_names), self._interpreter
         )
@@ -126,7 +128,9 @@ class AIPhysicalChannelCollection(PhysicalChannelCollection):
     """
 
     @property
-    def channel_names(self):
+    def channel_names(  # noqa: D102 - Missing docstring in public method (auto-generated noqa)
+        self,
+    ):
         val = self._interpreter.get_device_attribute_string(self._name, 0x231E)
         return unflatten_channel_string(val)
 
@@ -138,7 +142,9 @@ class AOPhysicalChannelCollection(PhysicalChannelCollection):
     """
 
     @property
-    def channel_names(self):
+    def channel_names(  # noqa: D102 - Missing docstring in public method (auto-generated noqa)
+        self,
+    ):
         val = self._interpreter.get_device_attribute_string(self._name, 0x231F)
         return unflatten_channel_string(val)
 
@@ -150,7 +156,9 @@ class CIPhysicalChannelCollection(PhysicalChannelCollection):
     """
 
     @property
-    def channel_names(self):
+    def channel_names(  # noqa: D102 - Missing docstring in public method (auto-generated noqa)
+        self,
+    ):
         val = self._interpreter.get_device_attribute_string(self._name, 0x2324)
         return unflatten_channel_string(val)
 
@@ -162,7 +170,9 @@ class COPhysicalChannelCollection(PhysicalChannelCollection):
     """
 
     @property
-    def channel_names(self):
+    def channel_names(  # noqa: D102 - Missing docstring in public method (auto-generated noqa)
+        self,
+    ):
         val = self._interpreter.get_device_attribute_string(self._name, 0x2325)
         return unflatten_channel_string(val)
 
@@ -174,7 +184,9 @@ class DILinesCollection(PhysicalChannelCollection):
     """
 
     @property
-    def channel_names(self):
+    def channel_names(  # noqa: D102 - Missing docstring in public method (auto-generated noqa)
+        self,
+    ):
         val = self._interpreter.get_device_attribute_string(self._name, 0x2320)
         return unflatten_channel_string(val)
 
@@ -186,7 +198,9 @@ class DOLinesCollection(PhysicalChannelCollection):
     """
 
     @property
-    def channel_names(self):
+    def channel_names(  # noqa: D102 - Missing docstring in public method (auto-generated noqa)
+        self,
+    ):
         val = self._interpreter.get_device_attribute_string(self._name, 0x2322)
         return unflatten_channel_string(val)
 
@@ -198,7 +212,9 @@ class DIPortsCollection(PhysicalChannelCollection):
     """
 
     @property
-    def channel_names(self):
+    def channel_names(  # noqa: D102 - Missing docstring in public method (auto-generated noqa)
+        self,
+    ):
         val = self._interpreter.get_device_attribute_string(self._name, 0x2321)
         return unflatten_channel_string(val)
 
@@ -210,6 +226,8 @@ class DOPortsCollection(PhysicalChannelCollection):
     """
 
     @property
-    def channel_names(self):
+    def channel_names(  # noqa: D102 - Missing docstring in public method (auto-generated noqa)
+        self,
+    ):
         val = self._interpreter.get_device_attribute_string(self._name, 0x2323)
         return unflatten_channel_string(val)

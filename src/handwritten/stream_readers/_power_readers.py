@@ -78,7 +78,7 @@ class PowerSingleChannelReader(ChannelReaderBase):
             Indicates the number of samples acquired by each channel.
             NI-DAQmx returns a single value because this value is the
             same for all channels.
-        """
+        """  # noqa: W505 - doc line too long (109 > 100 characters) (auto-generated noqa)
         number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
             number_of_samples_per_channel
         )
@@ -115,7 +115,7 @@ class PowerSingleChannelReader(ChannelReaderBase):
             float:
 
             Indicates a single floating-point power sample from the task.
-        """
+        """  # noqa: W505 - doc line too long (105 > 100 characters) (auto-generated noqa)
         voltage, current = self._interpreter.read_power_scalar_f64(self._handle, timeout)
         return PowerMeasurement(voltage=voltage, current=current)
 
@@ -219,7 +219,7 @@ class PowerMultiChannelReader(ChannelReaderBase):
             Indicates the number of samples acquired by each channel.
             NI-DAQmx returns a single value because this value is the
             same for all channels.
-        """
+        """  # noqa: W505 - doc line too long (113 > 100 characters) (auto-generated noqa)
         number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
             number_of_samples_per_channel
         )
@@ -275,7 +275,7 @@ class PowerMultiChannelReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
-        """
+        """  # noqa: W505 - doc line too long (103 > 100 characters) (auto-generated noqa)
         self._verify_array(voltage_data, 1, True, False)
         self._verify_array(current_data, 1, True, False)
 
@@ -377,7 +377,7 @@ class PowerBinaryReader(ChannelReaderBase):
             Indicates the number of samples acquired by each channel.
             NI-DAQmx returns a single value because this value is the
             same for all channels.
-        """
+        """  # noqa: W505 - doc line too long (104 > 100 characters) (auto-generated noqa)
         number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
             number_of_samples_per_channel
         )

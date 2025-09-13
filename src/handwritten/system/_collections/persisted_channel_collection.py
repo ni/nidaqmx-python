@@ -16,10 +16,12 @@ class PersistedChannelCollection(Sequence):
     """
 
     def __init__(self, interpreter):
-        """Do not construct this object directly; instead, call nidaqmx.system.System.local().global_channels."""
+        """Do not construct this object directly; instead, call nidaqmx.system.System.local().global_channels."""  # noqa: W505 - doc line too long (113 > 100 characters) (auto-generated noqa)
         self._interpreter = interpreter
 
-    def __contains__(self, item):
+    def __contains__(  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
+        self, item
+    ):
         channel_names = self.global_channel_names
 
         if isinstance(item, str):
@@ -28,7 +30,7 @@ class PersistedChannelCollection(Sequence):
         elif isinstance(item, PersistedChannel):
             return item._name in channel_names
 
-    def __eq__(self, other):
+    def __eq__(self, other):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         if isinstance(other, self.__class__):
             return True
         return False
@@ -76,17 +78,17 @@ class PersistedChannelCollection(Sequence):
                 DAQmxErrors.UNKNOWN,
             )
 
-    def __iter__(self):
+    def __iter__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         for channel_name in self.global_channel_names:
             yield _PersistedChannelAlternateConstructor(channel_name, self._interpreter)
 
-    def __len__(self):
+    def __len__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         return len(self.global_channel_names)
 
-    def __ne__(self, other):
+    def __ne__(self, other):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         return not self.__eq__(other)
 
-    def __reversed__(self):
+    def __reversed__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         channel_names = self.global_channel_names
         channel_names.reverse()
 

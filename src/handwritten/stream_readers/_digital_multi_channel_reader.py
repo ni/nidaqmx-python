@@ -86,7 +86,7 @@ class DigitalMultiChannelReader(ChannelReaderBase):
             Indicates the number of samples acquired by each channel.
             NI-DAQmx returns a single value because this value is the
             same for all channels.
-        """
+        """  # noqa: W505 - doc line too long (109 > 100 characters) (auto-generated noqa)
         number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
             number_of_samples_per_channel
         )
@@ -176,7 +176,7 @@ class DigitalMultiChannelReader(ChannelReaderBase):
             Indicates the number of samples acquired by each channel.
             NI-DAQmx returns a single value because this value is the
             same for all channels.
-        """
+        """  # noqa: W505 - doc line too long (111 > 100 characters) (auto-generated noqa)
         number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
             number_of_samples_per_channel
         )
@@ -266,7 +266,7 @@ class DigitalMultiChannelReader(ChannelReaderBase):
             Indicates the number of samples acquired by each channel.
             NI-DAQmx returns a single value because this value is the
             same for all channels.
-        """
+        """  # noqa: W505 - doc line too long (111 > 100 characters) (auto-generated noqa)
         number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
             number_of_samples_per_channel
         )
@@ -402,7 +402,7 @@ class DigitalMultiChannelReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
-        """
+        """  # noqa: W505 - doc line too long (106 > 100 characters) (auto-generated noqa)
         self._verify_array(data, 1, True, False)
 
         self._interpreter.read_digital_u8(
@@ -440,7 +440,7 @@ class DigitalMultiChannelReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
-        """
+        """  # noqa: W505 - doc line too long (107 > 100 characters) (auto-generated noqa)
         self._verify_array(data, 1, True, False)
 
         self._interpreter.read_digital_u16(
@@ -478,7 +478,7 @@ class DigitalMultiChannelReader(ChannelReaderBase):
                 indefinitely. If you set timeout to 0, the method tries
                 once to read the requested samples and returns an error
                 if it is unable to.
-        """
+        """  # noqa: W505 - doc line too long (107 > 100 characters) (auto-generated noqa)
         self._verify_array(data, 1, True, False)
 
         self._interpreter.read_digital_u32(
@@ -539,7 +539,7 @@ class DigitalMultiChannelReader(ChannelReaderBase):
             Indicates the number of samples acquired by each channel.
             NI-DAQmx returns a single value because this value is the
             same for all channels.
-        """
+        """  # noqa: W505 - doc line too long (102 > 100 characters) (auto-generated noqa)
         number_of_channels = self._in_stream.num_chans
         number_of_samples_per_channel = self._task._calculate_num_samps_per_chan(
             number_of_samples_per_channel

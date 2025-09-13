@@ -25,7 +25,7 @@ def _convert_to_desired_timezone(
         desired_expected_time = tzinfo.fromutc(localized_time)
         return desired_expected_time
 
-    # if the tzinfo passed in is a timedelta function, then we don't need to consider daylight savings
+    # if the tzinfo passed in is a timedelta function, then we don't need to consider daylight savings  # noqa: W505 - doc line too long (102 > 100 characters) (auto-generated noqa)
     elif tzinfo.utcoffset(None) is not None:
         current_time_utc = ht_datetime.now(timezone.utc)
         desired_timezone_offset = current_time_utc.astimezone(tz=tzinfo).utcoffset()

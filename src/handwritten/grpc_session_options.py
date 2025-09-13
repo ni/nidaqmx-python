@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 
 
 # This constant specifies the gRPC package and service used by this API.
-# Customers can pass this value to the MeasurementLink discovery service to resolve the server instance that provides this interface.
+# Customers can pass this value to the MeasurementLink discovery service to resolve the server instance that provides this interface.  # noqa: W505 - doc line too long (133 > 100 characters) (auto-generated noqa)
 GRPC_SERVICE_INTERFACE_NAME = "nidaqmx_grpc.NiDAQmx"
 
 # This constant specifies the API license key required by the NI gRPC Device Server that comes with
@@ -29,21 +29,21 @@ class SessionInitializationBehavior(IntEnum):
     When using the Session as a context manager and the context exits, the behavior depends on what happened when the constructor
     was called. If it resulted in a new session being initialized on the NI gRPC Device Server, then it will automatically close the
     server session. If it instead attached to an existing session, then it will detach from the server session and leave it open.
-    """
+    """  # noqa: W505 - doc line too long (123 > 100 characters) (auto-generated noqa)
     INITIALIZE_SERVER_SESSION = 1
     r"""
     Require the NI gRPC Device Server to initialize a new session with the specified name.
     Note:
     When using the Session as a context manager and the context exits, it will automatically close the
     server session.
-    """
+    """  # noqa: W505 - doc line too long (102 > 100 characters) (auto-generated noqa)
     ATTACH_TO_SERVER_SESSION = 2
     r"""
     Require the NI gRPC Device Server to attach to an existing session with the specified name.
     Note:
     When using the Session as a context manager and the context exits, it will detach from the server session
     and leave it open.
-    """
+    """  # noqa: W505 - doc line too long (109 > 100 characters) (auto-generated noqa)
 
 
 class GrpcSessionOptions:
@@ -70,7 +70,7 @@ class GrpcSessionOptions:
             initialization_behavior (enum): Specifies whether it is acceptable to initialize a new
                 session or attach to an existing one, or if only one of the behaviors is desired.
                 The driver session exists on the NI gRPC Device Server.
-        """
+        """  # noqa: W505 - doc line too long (108 > 100 characters) (auto-generated noqa)
         self.grpc_channel = grpc_channel
         self.session_name = session_name
         self.api_key = api_key

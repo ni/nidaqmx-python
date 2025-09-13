@@ -42,7 +42,7 @@ class DaqError(Error):
         Args:
             message (string): Specifies the error message.
             error_code (int): Specifies the NI-DAQmx error code.
-        """
+        """  # noqa: D417 - Missing argument descriptions in the docstring (auto-generated noqa)
         self._error_code = int(error_code)
 
         try:
@@ -57,7 +57,7 @@ class DaqError(Error):
         if task_name:
             message = f"{message}\n\nTask Name: {task_name}"
 
-        # We do not know where the error description came from, so we add the status code if it is not already in the message
+        # We do not know where the error description came from, so we add the status code if it is not already in the message  # noqa: W505 - doc line too long (125 > 100 characters) (auto-generated noqa)
         if str(self._error_code) not in message:
             message = f"{message}\n\nStatus Code: {self._error_code}"
 
@@ -83,7 +83,7 @@ class DaqReadError(DaqError):
         Args:
             message (string): Specifies the error message.
             error_code (int): Specifies the NI-DAQmx error code.
-        """
+        """  # noqa: D417 - Missing argument descriptions in the docstring (auto-generated noqa)
         super().__init__(message, error_code, task_name)
 
         self._samps_per_chan_read = samps_per_chan_read
@@ -104,7 +104,7 @@ class DaqWriteError(DaqError):
             message (string): Specifies the error message.
             error_code (int): Specifies the NI-DAQmx error code.
             samps_per_chan_written (int): Specifies the number of samples written.
-        """
+        """  # noqa: D417 - Missing argument descriptions in the docstring (auto-generated noqa)
         super().__init__(message, error_code, task_name)
 
         self._samps_per_chan_written = samps_per_chan_written

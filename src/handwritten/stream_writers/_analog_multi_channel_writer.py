@@ -45,7 +45,7 @@ class AnalogMultiChannelWriter(ChannelWriterBase):
 
             Specifies the actual number of samples this method
             successfully wrote to each channel in the task.
-        """
+        """  # noqa: W505 - doc line too long (101 > 100 characters) (auto-generated noqa)
         self._verify_array(data, True, True)
 
         auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else False

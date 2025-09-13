@@ -8,19 +8,21 @@ class ExpirationStatesCollection:
     This class defines methods that implements a container object.
     """
 
-    def __init__(self, task_handle, interpreter):
+    def __init__(  # noqa: D107 - Missing docstring in __init__ (auto-generated noqa)
+        self, task_handle, interpreter
+    ):
         self._handle = task_handle
         self._interpreter = interpreter
 
-    def __eq__(self, other):
+    def __eq__(self, other):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         if isinstance(other, self.__class__):
             return self._handle == other._handle
         return False
 
-    def __hash__(self):
+    def __hash__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         return self._interpreter.hash_task_handle(self._handle)
 
-    def __ne__(self, other):
+    def __ne__(self, other):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         return not self.__eq__(other)
 
     def __getitem__(self, index):

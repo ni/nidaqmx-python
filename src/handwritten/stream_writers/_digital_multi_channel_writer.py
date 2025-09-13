@@ -47,7 +47,7 @@ class DigitalMultiChannelWriter(ChannelWriterBase):
 
             Specifies the actual number of samples this method
             successfully wrote to each channel in the task.
-        """
+        """  # noqa: W505 - doc line too long (110 > 100 characters) (auto-generated noqa)
         self._verify_array(data, True, True)
 
         auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else False
@@ -95,7 +95,7 @@ class DigitalMultiChannelWriter(ChannelWriterBase):
 
             Specifies the actual number of samples this method
             successfully wrote to each channel in the task.
-        """
+        """  # noqa: W505 - doc line too long (111 > 100 characters) (auto-generated noqa)
         self._verify_array(data, True, True)
 
         auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else False
@@ -143,7 +143,7 @@ class DigitalMultiChannelWriter(ChannelWriterBase):
 
             Specifies the actual number of samples this method
             successfully wrote to each channel in the task.
-        """
+        """  # noqa: W505 - doc line too long (111 > 100 characters) (auto-generated noqa)
         self._verify_array(data, True, True)
 
         auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else False
@@ -242,7 +242,7 @@ class DigitalMultiChannelWriter(ChannelWriterBase):
                 once to write the submitted samples. If the method could
                 not write all the submitted samples, it returns an error
                 and the number of samples successfully written.
-        """
+        """  # noqa: W505 - doc line too long (106 > 100 characters) (auto-generated noqa)
         self._verify_array(data, True, False)
 
         auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else True
@@ -275,7 +275,7 @@ class DigitalMultiChannelWriter(ChannelWriterBase):
                 once to write the submitted samples. If the method could
                 not write all the submitted samples, it returns an error
                 and the number of samples successfully written.
-        """
+        """  # noqa: W505 - doc line too long (107 > 100 characters) (auto-generated noqa)
         self._verify_array(data, True, False)
 
         auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else True
@@ -308,7 +308,7 @@ class DigitalMultiChannelWriter(ChannelWriterBase):
                 once to write the submitted samples. If the method could
                 not write all the submitted samples, it returns an error
                 and the number of samples successfully written.
-        """
+        """  # noqa: W505 - doc line too long (107 > 100 characters) (auto-generated noqa)
         self._verify_array(data, True, False)
 
         auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else True
