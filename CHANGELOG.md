@@ -45,6 +45,7 @@ All notable changes to this project will be documented in this file.
           one for Python 3.9-3.12 (numpy>=1.22) and one for Python 3.13+ (numpy>=2.1).
         * The `nidaqmx` distribution package now specifies only a lower bound for `click`.
     * Clarify PyPy support and enable unit testing with PyPy.
+    * Adopt ni-python-styleguide for hand-written code.
 
 * ### Known Issues
     * ...
