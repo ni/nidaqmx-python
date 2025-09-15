@@ -431,6 +431,24 @@ def ao_single_channel_task(
 
 
 @pytest.fixture
+def ao_single_channel_task_with_timing(
+    generate_task: Callable[[], nidaqmx.Task],
+    real_x_series_multiplexed_device: nidaqmx.system.Device,
+) -> nidaqmx.Task:
+    """Configure a single-channel AO task with timing for waveform testing."""
+    task = generate_task()
+    task.ao_channels.add_ao_voltage_chan(
+        real_x_series_multiplexed_device.ao_physical_chans[0].name,
+        min_val=0.0,
+        max_val=3.0,
+    )
+    task.timing.cfg_samp_clk_timing(
+        rate=1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=100
+    )
+    return task
+
+
+@pytest.fixture
 def ai_single_channel_loopback_task(
     generate_task: Callable[[], nidaqmx.Task],
     real_x_series_multiplexed_device: nidaqmx.system.Device,
@@ -474,6 +492,28 @@ def ao_multi_channel_task(
 
     # set the output to a known initial value
     task.write([0.0] * num_chans)
+
+    return task
+
+
+@pytest.fixture
+def ao_multi_channel_task_with_timing(
+    generate_task: Callable[[], nidaqmx.Task],
+    real_x_series_multiplexed_device: nidaqmx.system.Device,
+) -> nidaqmx.Task:
+    """Configure a multi-channel AO task with timing for waveform testing."""
+    task = generate_task()
+    num_chans = 2
+    for chan_index in range(num_chans):
+        task.ao_channels.add_ao_voltage_chan(
+            real_x_series_multiplexed_device.ao_physical_chans[chan_index].name,
+            min_val=0.0,
+            max_val=3.0,
+        )
+
+    task.timing.cfg_samp_clk_timing(
+        rate=1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=100
+    )
 
     return task
 

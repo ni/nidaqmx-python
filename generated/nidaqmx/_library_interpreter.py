@@ -7001,7 +7001,11 @@ class LibraryInterpreter(BaseInterpreter):
 
         write_arrays = []
         for waveform in waveforms:
-            assert waveform.sample_count == num_samps_per_chan
+            if not waveform.sample_count == num_samps_per_chan:
+                raise DaqError(
+                    "The waveforms must all have the same sample count.",
+                     DAQmxErrors.UNKNOWN
+                )
             write_array = waveform.scaled_data
             if not write_array.flags.c_contiguous:
                 write_array = write_array.copy(order="C")

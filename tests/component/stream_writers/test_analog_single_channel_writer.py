@@ -10,10 +10,12 @@ from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
 from nidaqmx.stream_writers import AnalogSingleChannelWriter
 from tests.component._analog_utils import (
     AO_VOLTAGE_EPSILON,
+    _create_constant_waveform,
     _create_float32_ramp_waveform,
     _create_linear_ramp_waveform,
     _create_non_contiguous_waveform,
     _create_scaled_int32_ramp_waveform,
+    _get_approx_final_value,
     _get_expected_voltage_for_chan,
 )
 
@@ -64,7 +66,7 @@ def test___analog_single_channel_reader___read_waveform_feature_disabled___raise
     ao_single_channel_task: nidaqmx.Task,
 ) -> None:
     writer = AnalogSingleChannelWriter(ao_single_channel_task.out_stream)
-    waveform = _create_linear_ramp_waveform(20, 0, 1)
+    waveform = _create_constant_waveform(20)
 
     with pytest.raises(FeatureNotSupportedError) as exc_info:
         writer.write_waveform(waveform)
@@ -88,9 +90,8 @@ def test___analog_single_channel_writer___write_waveform___updates_output(
     samples_written = writer.write_waveform(waveform)
 
     assert samples_written == num_samples
-    assert ai_single_channel_loopback_task.read() == pytest.approx(
-        end_value, abs=AO_VOLTAGE_EPSILON
-    )
+    actual_value = ai_single_channel_loopback_task.read()
+    assert actual_value == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
 
 
 @pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
@@ -107,9 +108,8 @@ def test___analog_single_channel_writer___write_waveform_with_float32_dtype___up
     samples_written = writer.write_waveform(waveform)
 
     assert samples_written == num_samples
-    assert ai_single_channel_loopback_task.read() == pytest.approx(
-        end_value, abs=AO_VOLTAGE_EPSILON
-    )
+    actual_value = ai_single_channel_loopback_task.read()
+    assert actual_value == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
 
 
 @pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
@@ -124,9 +124,8 @@ def test___analog_single_channel_writer___write_waveform_with_scaling___updates_
     samples_written = writer.write_waveform(waveform)
 
     assert samples_written == num_samples
-    assert ai_single_channel_loopback_task.read() == pytest.approx(
-        waveform.scaled_data[-1], abs=AO_VOLTAGE_EPSILON
-    )
+    actual_value = ai_single_channel_loopback_task.read()
+    assert actual_value == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
 
 
 @pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
@@ -141,6 +140,5 @@ def test___analog_single_channel_writer___write_waveform_with_non_contiguous_dat
     samples_written = writer.write_waveform(waveform)
 
     assert samples_written == num_samples
-    assert ai_single_channel_loopback_task.read() == pytest.approx(
-        waveform.scaled_data[-1], abs=AO_VOLTAGE_EPSILON
-    )
+    actual_value = ai_single_channel_loopback_task.read()
+    assert actual_value == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
