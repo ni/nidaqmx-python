@@ -112,7 +112,7 @@ class AnalogSingleChannelWriter(ChannelWriterBase):
 
         Returns:
             int:
-             
+
             Specifies the actual number of samples this method
             successfully wrote.
         """

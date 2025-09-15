@@ -3,9 +3,10 @@ from __future__ import annotations
 from collections.abc import Sequence
 from typing import Any
 
+from nitypes.waveform import AnalogWaveform
+
 from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, requires_feature
 from nidaqmx.constants import FillMode
-from nitypes.waveform import AnalogWaveform
 from nidaqmx.stream_writers._channel_writer_base import (
     AUTO_START_UNSET,
     ChannelWriterBase,
@@ -94,13 +95,9 @@ class AnalogMultiChannelWriter(ChannelWriterBase):
 
     @requires_feature(WAVEFORM_SUPPORT)
     def write_waveforms(
-        self, 
-        waveforms: Sequence[AnalogWaveform[Any]], 
-        timeout: float = 10.0
-        ) -> int:
-        """
-        Writes one or more waveforms to one or more analog
-        output channels in a task.
+        self, waveforms: Sequence[AnalogWaveform[Any]], timeout: float = 10.0
+    ) -> int:
+        """Writes one or more waveforms to one or more analog output channels in a task.
 
         If the task uses on-demand timing, this method returns only
         after the device generates all samples. On-demand is the default
@@ -130,14 +127,15 @@ class AnalogMultiChannelWriter(ChannelWriterBase):
                 once to write the submitted samples. If the method could
                 not write all the submitted samples, it returns an error
                 and the number of samples successfully written.
+
         Returns:
             int:
 
             Specifies the actual number of samples this method
             successfully wrote to each channel in the task.
         """
-        auto_start = (self._auto_start if self._auto_start is not 
-                      AUTO_START_UNSET else False)
+        auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else False
 
         return self._interpreter.write_analog_waveforms(
-            self._handle, waveforms, auto_start, timeout)
+            self._handle, waveforms, auto_start, timeout
+        )
