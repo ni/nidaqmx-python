@@ -1,25 +1,25 @@
 from collections.abc import Sequence
 
-from nidaqmx.task.channels._channel import Channel
-from nidaqmx.errors import DaqError
 from nidaqmx.error_codes import DAQmxErrors
-from nidaqmx.utils import unflatten_channel_string, flatten_channel_string
+from nidaqmx.errors import DaqError
+from nidaqmx.task.channels._channel import Channel
+from nidaqmx.utils import flatten_channel_string, unflatten_channel_string
 
 
 class ChannelCollection(Sequence):
-    """
-    Contains the collection of channels for a DAQmx Task.
-    
+    """Contains the collection of channels for a DAQmx Task.
+
     This class defines methods that implements a container object.
     """
+
     def __init__(self, task_handle, interpreter):
-        """
-        Do not construct this object directly; instead, construct a nidaqmx.Task and use the appropriate property, such as task.ai_channels.
-        """
+        """Do not construct this object directly; instead, construct a nidaqmx.Task and use the appropriate property, such as task.ai_channels."""  # noqa: W505 - doc line too long (146 > 100 characters) (auto-generated noqa)
         self._handle = task_handle
         self._interpreter = interpreter
 
-    def __contains__(self, item):
+    def __contains__(  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
+        self, item
+    ):
         channel_names = self.channel_names
 
         if isinstance(item, str):
@@ -29,14 +29,13 @@ class ChannelCollection(Sequence):
 
         return all([item in channel_names for item in items])
 
-    def __eq__(self, other):
+    def __eq__(self, other):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         if isinstance(other, self.__class__):
             return self._handle == other._handle
         return False
 
     def __getitem__(self, index):
-        """
-        Indexes a subset of virtual channels on this channel collection.
+        """Indexes a subset of virtual channels on this channel collection.
 
         Args:
             index: The value of the index. The following index types are
@@ -49,9 +48,10 @@ class ChannelCollection(Sequence):
                 - int: Index/position of the virtual channel in the collection.
                 - slice: Range of the indexes/positions of virtual channels in
                     the collection.
+
         Returns:
-            nidaqmx.task.channels.Channel: 
-            
+            nidaqmx.task.channels.Channel:
+
             Indicates a channel object representing the subset of virtual
             channels indexed.
         """
@@ -63,30 +63,33 @@ class ChannelCollection(Sequence):
             channel_names = index
         else:
             raise DaqError(
-                'Invalid index type "{}" used to access channels.'
-                .format(type(index)), DAQmxErrors.UNKNOWN)
+                'Invalid index type "{}" used to access channels.'.format(type(index)),
+                DAQmxErrors.UNKNOWN,
+            )
 
         if channel_names:
             return Channel._factory(self._handle, channel_names, self._interpreter)
         else:
             raise DaqError(
-                'You cannot specify an empty index when indexing channels.\n'
-                'Index used: {}'.format(index), DAQmxErrors.UNKNOWN)
+                "You cannot specify an empty index when indexing channels.\n"
+                "Index used: {}".format(index),
+                DAQmxErrors.UNKNOWN,
+            )
 
-    def __hash__(self):
+    def __hash__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         return self._interpreter.hash_task_handle(self._handle)
 
-    def __iter__(self):
+    def __iter__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         for channel_name in self.channel_names:
             yield Channel._factory(self._handle, channel_name, self._interpreter)
 
-    def __len__(self):
+    def __len__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         return len(self.channel_names)
 
-    def __ne__(self, other):
+    def __ne__(self, other):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         return not self.__eq__(other)
 
-    def __reversed__(self):
+    def __reversed__(self):  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
         channel_names = self.channel_names
         channel_names.reverse()
 
@@ -95,19 +98,12 @@ class ChannelCollection(Sequence):
 
     @property
     def all(self):
-        """
-        :class:`nidaqmx.task.channels.Channel`:
-            Specifies a channel object that represents the entire list of 
-            virtual channels on this channel collection.
-        """
+        """:class:`nidaqmx.task.channels.Channel`: Specifies a channel object that represents the entire list of virtual channels on this channel collection."""  # noqa: W505 - doc line too long (160 > 100 characters) (auto-generated noqa)
         # Passing a blank string means all channels.
-        return Channel._factory(self._handle, '', self._interpreter)
+        return Channel._factory(self._handle, "", self._interpreter)
 
     @property
     def channel_names(self):
-        """
-        List[str]: Specifies the entire list of virtual channels on this
-            channel collection.
-        """
+        """List[str]: Specifies the entire list of virtual channels on this channel collection."""
         val = self._interpreter.get_task_attribute_string(self._handle, 0x1273)
         return unflatten_channel_string(val)

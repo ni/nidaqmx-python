@@ -1,35 +1,45 @@
 from __future__ import annotations
 
-from ctypes.util import find_library
 import ctypes
-from numpy.ctypeslib import ndpointer
-import platform
+import locale
 import sys
 import threading
-import locale
-from decouple import config
-from typing import cast, TYPE_CHECKING
+from ctypes.util import find_library
+from typing import TYPE_CHECKING, cast
 
-from nidaqmx.errors import DaqNotFoundError, DaqNotSupportedError, DaqFunctionNotSupportedError
+from decouple import config
+from numpy.ctypeslib import ndpointer
+
+from nidaqmx.errors import (
+    DaqFunctionNotSupportedError,
+    DaqNotFoundError,
+    DaqNotSupportedError,
+)
 
 if TYPE_CHECKING:
     from typing_extensions import TypeAlias
 
 
-_DAQ_NOT_FOUND_MESSAGE = "Could not find an installation of NI-DAQmx. Please ensure that NI-DAQmx " \
-                         "is installed on this machine or contact National Instruments for support."
+_DAQ_NOT_FOUND_MESSAGE = (
+    "Could not find an installation of NI-DAQmx. Please ensure that NI-DAQmx "
+    "is installed on this machine or contact National Instruments for support."
+)
 
-_DAQ_NOT_SUPPORTED_MESSAGE = "NI-DAQmx Python is not supported on this platform: {0}. Please " \
-                             "direct any questions or feedback to National Instruments."
+_DAQ_NOT_SUPPORTED_MESSAGE = (
+    "NI-DAQmx Python is not supported on this platform: {0}. Please "
+    "direct any questions or feedback to National Instruments."
+)
 
-_FUNCTION_NOT_SUPPORTED_MESSAGE = "The NI-DAQmx function \"{0}\" is not supported in this version " \
-                                  "of NI-DAQmx. Visit ni.com/downloads to upgrade."
+_FUNCTION_NOT_SUPPORTED_MESSAGE = (
+    'The NI-DAQmx function "{0}" is not supported in this version '
+    "of NI-DAQmx. Visit ni.com/downloads to upgrade."
+)
 
 
-class c_bool32(ctypes.c_uint):
-    """
-    Specifies a custom ctypes data type to represent 32-bit booleans.
-    """
+class c_bool32(  # noqa: N801 - class name 'c_bool32' should use CapWords convention (auto-generated noqa)
+    ctypes.c_uint
+):
+    """Specifies a custom ctypes data type to represent 32-bit booleans."""
 
     # typeshed specifies that _SimpleCData[_T].value is an instance variable with type _T, so
     # accessing it with the descriptor protocol via its class results in "error: Access to generic
@@ -47,12 +57,12 @@ class c_bool32(ctypes.c_uint):
 
 
 class CtypesByteString:
-    """
-    Custom argtype that automatically converts unicode strings to encoding 
-    used by the DAQmx C API DLL in Python 3.
-    """
+    """Custom argtype that automatically converts unicode strings to encoding used by the C API."""
+
     @classmethod
-    def from_param(cls, param):
+    def from_param(  # noqa: D102 - Missing docstring in public method (auto-generated noqa)
+        cls, param
+    ):
         if isinstance(param, str):
             param = param.encode(lib_importer.encoding)
         return ctypes.c_char_p(param)
@@ -62,9 +72,7 @@ ctypes_byte_str: TypeAlias = CtypesByteString
 
 
 def wrapped_ndpointer(*args, **kwargs):
-    """
-    Specifies an ndpointer type that wraps numpy.ctypeslib.ndpointer and
-    allows a value of None to be passed to an argument of that type.
+    """Wraps numpy.ctypeslib.ndpointer in order to allow passing None.
 
     Taken from http://stackoverflow.com/questions/32120178
     """
@@ -75,28 +83,29 @@ def wrapped_ndpointer(*args, **kwargs):
             return obj
         return base.from_param(obj)
 
-    return type(base.__name__, (base,),
-                {'from_param': classmethod(from_param)})
+    return type(base.__name__, (base,), {"from_param": classmethod(from_param)})
 
 
 class DaqFunctionImporter:
-    """
-    Wraps the function getter function of a ctypes library.
+    """Wraps the function getter function of a ctypes library.
 
     Allows the NI-DAQmx Python API to fail elegantly if a function is not
     supported in the current version of the API.
     """
 
     def __init__(self, library):
+        """Initialize a new DaqFunctionImporter."""
         self._library = library
         self._lib_lock = threading.Lock()
 
-    def __getattr__(self, function):
+    def __getattr__(  # noqa: D105 - Missing docstring in magic method (auto-generated noqa)
+        self, function
+    ):
         try:
             cfunc = getattr(self._library, function)
-            if not hasattr(cfunc, 'arglock'):
+            if not hasattr(cfunc, "arglock"):
                 with self._lib_lock:
-                    if not hasattr(cfunc, 'arglock'):
+                    if not hasattr(cfunc, "arglock"):
                         cfunc.arglock = threading.Lock()
             return cfunc
         except AttributeError:
@@ -121,19 +130,16 @@ compatibility because uInt32 and void* are the same size for 32-bit applications
 
 
 def get_encoding_from_locale() -> str:
-    """
-    Gets the current locale encoding handling cases where it is unset.
-    """
+    """Gets the current locale encoding handling cases where it is unset."""
     _, encoding = locale.getlocale()
-    return encoding or 'ascii'
+    return encoding or "ascii"
 
 
 class DaqLibImporter:
-    """
-    Encapsulates NI-DAQmx library importing and handle type parsing logic.
-    """
+    """Encapsulates NI-DAQmx library importing and handle type parsing logic."""
 
     def __init__(self):
+        """Initialize a new DaqLibImporter."""
         self._windll = None
         self._cdll = None
         self._cal_handle = None
@@ -141,35 +147,37 @@ class DaqLibImporter:
         self._encoding = None
 
     @property
-    def windll(self):
+    def windll(self):  # noqa: D102 - Missing docstring in public method (auto-generated noqa)
         if self._windll is None:
             self._import_lib()
         return self._windll
 
     @property
-    def cdll(self):
+    def cdll(self):  # noqa: D102 - Missing docstring in public method (auto-generated noqa)
         if self._cdll is None:
             self._import_lib()
         return self._cdll
 
     @property
-    def task_handle(self) -> type:
+    def task_handle(  # noqa: D102 - Missing docstring in public method (auto-generated noqa)
+        self,
+    ) -> type:
         return TaskHandle
 
     @property
-    def cal_handle(self) -> type:
+    def cal_handle(  # noqa: D102 - Missing docstring in public method (auto-generated noqa)
+        self,
+    ) -> type:
         return CalHandle
-    
+
     @property
-    def encoding(self):
+    def encoding(self):  # noqa: D102 - Missing docstring in public method (auto-generated noqa)
         if self._encoding is None:
             self._import_lib()
         return self._encoding
 
     def _import_lib(self):
-        """
-        Determines the location of and loads the NI-DAQmx CAI DLL.
-        """
+        """Determines the location of and loads the NI-DAQmx CAI DLL."""
         self._windll = None
         self._cdll = None
         self._encoding = None
@@ -178,42 +186,44 @@ class DaqLibImporter:
         cdll = None
         encoding = None
 
-        if sys.platform.startswith('win'):
+        if sys.platform.startswith("win"):
 
             def _load_lib(libname: str):
                 windll = ctypes.windll.LoadLibrary(libname)
                 cdll = ctypes.cdll.LoadLibrary(libname)
-                return windll, cdll  
-            
+                return windll, cdll
+
             # Feature Toggle to load nicaiu.dll or nicai_utf8.dll
             # The Feature Toggle can be set in the .env file
-            nidaqmx_c_library = config('NIDAQMX_C_LIBRARY', default=None) 
-  
+            nidaqmx_c_library = config("NIDAQMX_C_LIBRARY", default=None)
+
             if nidaqmx_c_library is not None:
-                try: 
-                    if nidaqmx_c_library=="nicaiu":
+                try:
+                    if nidaqmx_c_library == "nicaiu":
                         windll, cdll = _load_lib("nicaiu")
                         encoding = get_encoding_from_locale()
-                    elif nidaqmx_c_library=="nicai_utf8":
+                    elif nidaqmx_c_library == "nicai_utf8":
                         windll, cdll = _load_lib("nicai_utf8")
-                        encoding = 'utf-8'  
+                        encoding = "utf-8"
                     else:
-                        raise ValueError(f"Unsupported NIDAQMX_C_LIBRARY value: {nidaqmx_c_library}")
+                        raise ValueError(
+                            f"Unsupported NIDAQMX_C_LIBRARY value: {nidaqmx_c_library}"
+                        )
                 except OSError as e:
-                    raise DaqNotFoundError(_DAQ_NOT_FOUND_MESSAGE) from e         
+                    raise DaqNotFoundError(_DAQ_NOT_FOUND_MESSAGE) from e
             else:
                 try:
                     windll, cdll = _load_lib("nicai_utf8")
-                    encoding = 'utf-8'  
+                    encoding = "utf-8"
                 except OSError:
                     # Fallback to nicaiu.dll if nicai_utf8.dll cannot be loaded
                     try:
                         windll, cdll = _load_lib("nicaiu")
                         encoding = get_encoding_from_locale()
                     except OSError as e:
-                        raise DaqNotFoundError(_DAQ_NOT_FOUND_MESSAGE) from e       
-        elif sys.platform.startswith('linux'):
-            library_path = find_library('nidaqmx')
+                        raise DaqNotFoundError(_DAQ_NOT_FOUND_MESSAGE) from e
+        elif sys.platform.startswith("linux"):
+            library_path = find_library("nidaqmx")
             if library_path is not None:
                 cdll = ctypes.cdll.LoadLibrary(library_path)
                 windll = cdll

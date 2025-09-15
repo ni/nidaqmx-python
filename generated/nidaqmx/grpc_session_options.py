@@ -1,4 +1,7 @@
+"""NI-DAQmx gRPC session options."""
+
 from __future__ import annotations
+
 from enum import IntEnum
 from typing import TYPE_CHECKING
 
@@ -7,42 +10,44 @@ if TYPE_CHECKING:
 
 
 # This constant specifies the gRPC package and service used by this API.
-# Customers can pass this value to the MeasurementLink discovery service to resolve the server instance that provides this interface.
-GRPC_SERVICE_INTERFACE_NAME = 'nidaqmx_grpc.NiDAQmx'
+# Customers can pass this value to the MeasurementLink discovery service to resolve the server instance that provides this interface.  # noqa: W505 - doc line too long (133 > 100 characters) (auto-generated noqa)
+GRPC_SERVICE_INTERFACE_NAME = "nidaqmx_grpc.NiDAQmx"
 
 # This constant specifies the API license key required by the NI gRPC Device Server that comes with
 # MeasurementLink 2023 Q1.
-MEASUREMENTLINK_23Q1_NIDAQMX_PYTHON_API_KEY = '147D9BA7-BE75-4B29-8591-BA4A737AA8CF'
+MEASUREMENTLINK_23Q1_NIDAQMX_PYTHON_API_KEY = "147D9BA7-BE75-4B29-8591-BA4A737AA8CF"
 
 
 class SessionInitializationBehavior(IntEnum):
+    """Specifies how to initialize sessions on the server."""
+
     AUTO = 0
-    r'''
+    r"""
     The NI gRPC Device Server will attach to an existing session with the specified name if it exists, otherwise the server
     will initialize a new session.
     Note:
     When using the Session as a context manager and the context exits, the behavior depends on what happened when the constructor
     was called. If it resulted in a new session being initialized on the NI gRPC Device Server, then it will automatically close the
     server session. If it instead attached to an existing session, then it will detach from the server session and leave it open.
-    '''
+    """  # noqa: W505 - doc line too long (123 > 100 characters) (auto-generated noqa)
     INITIALIZE_SERVER_SESSION = 1
-    r'''
+    r"""
     Require the NI gRPC Device Server to initialize a new session with the specified name.
     Note:
     When using the Session as a context manager and the context exits, it will automatically close the
     server session.
-    '''
+    """  # noqa: W505 - doc line too long (102 > 100 characters) (auto-generated noqa)
     ATTACH_TO_SERVER_SESSION = 2
-    r'''
+    r"""
     Require the NI gRPC Device Server to attach to an existing session with the specified name.
     Note:
     When using the Session as a context manager and the context exits, it will detach from the server session
     and leave it open.
-    '''
+    """  # noqa: W505 - doc line too long (109 > 100 characters) (auto-generated noqa)
 
 
 class GrpcSessionOptions:
-    '''Collection of options that specifies session behaviors related to gRPC.'''
+    """Collection of options that specifies session behaviors related to gRPC."""
 
     def __init__(
         self,
@@ -50,10 +55,10 @@ class GrpcSessionOptions:
         session_name: str,
         *,
         api_key=MEASUREMENTLINK_23Q1_NIDAQMX_PYTHON_API_KEY,
-        initialization_behavior=SessionInitializationBehavior.AUTO
+        initialization_behavior=SessionInitializationBehavior.AUTO,
     ):
-        r'''Collection of options that specifies session behaviors related to gRPC.
-        Creates and returns an object you can pass to a Session constructor.
+        """Initialize a new GrpcSessionOptions.
+
         Args:
             grpc_channel (grpc.Channel): Specifies the channel to the NI gRPC Device Server.
             session_name (str): User-specified name that identifies the driver session on the NI gRPC Device
@@ -65,7 +70,7 @@ class GrpcSessionOptions:
             initialization_behavior (enum): Specifies whether it is acceptable to initialize a new
                 session or attach to an existing one, or if only one of the behaviors is desired.
                 The driver session exists on the NI gRPC Device Server.
-        '''
+        """  # noqa: W505 - doc line too long (108 > 100 characters) (auto-generated noqa)
         self.grpc_channel = grpc_channel
         self.session_name = session_name
         self.api_key = api_key

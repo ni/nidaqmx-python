@@ -1,7 +1,8 @@
+"""'nidaqmx' command line utility."""
+
 from __future__ import annotations
 
 import logging
-from typing import Optional
 
 import click
 
@@ -16,12 +17,14 @@ from . import _install_daqmx
     count=True,
     help="Enable verbose logging. Repeat to increase verbosity.",
 )
-def main(verbosity: int) -> None:
+def main(  # noqa: D103 - Missing docstring in public function (auto-generated noqa)
+    verbosity: int,
+) -> None:
     _configure_logging(verbosity)
 
 
 @main.command()
-def installdriver():
+def installdriver():  # noqa: D103 - Missing docstring in public function (auto-generated noqa)
     _install_daqmx.installdriver()
 
 
