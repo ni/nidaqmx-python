@@ -233,7 +233,10 @@ def test___task___write_waveform_and_array___raises_daq_error(
         ao_multi_channel_task.write(mixed_data)
 
     error_message = exc_info.value.args[0]
-    assert "not all elements in the list are AnalogWaveform objects" in error_message
+    assert (
+        "Write cannot be performed, because the list contains a mix of AnalogWaveform and non-AnalogWaveform objects."
+        in error_message
+    )
 
 
 @pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")

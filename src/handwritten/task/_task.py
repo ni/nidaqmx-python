@@ -1295,6 +1295,15 @@ class Task:
             task_name=self.name,
         )
 
+    def _raise_invalid_write_mixed_data_error(self):
+        raise DaqError(
+            "Write cannot be performed, because the list contains a mix of "
+            "AnalogWaveform and non-AnalogWaveform objects. All elements in "
+            "the list must be the same type.",
+            DAQmxErrors.UNKNOWN,
+            task_name=self.name,
+        )
+
     def write(self, data, auto_start=AUTO_START_UNSET, timeout=10.0):
         """Writes samples to the task or virtual channels you specify.
 
@@ -1388,7 +1397,7 @@ class Task:
                 if number_of_channels != 1:
                     self._raise_invalid_write_num_chans_error(number_of_channels, 1)
                 number_of_samples_per_channel = data.sample_count
-                element = data.raw_data[0]
+                element = data.scaled_data[0]
 
             else:
                 number_of_samples_per_channel = 1
@@ -1399,19 +1408,18 @@ class Task:
                 if len(data) != number_of_channels:
                     self._raise_invalid_write_num_chans_error(number_of_channels, len(data))
 
-                if data and isinstance(data[0], AnalogWaveform):
+                if isinstance(data[0], AnalogWaveform):
                     WAVEFORM_SUPPORT.raise_if_disabled()
                     if not all(isinstance(wf, AnalogWaveform) for wf in data):
-                        raise DaqError(
-                            "Write failed, because not all elements in the list are AnalogWaveform objects.",
-                            DAQmxErrors.UNKNOWN,
-                            task_name=self.name,
-                        )
+                        self._raise_invalid_write_mixed_data_error()
+
                     number_of_samples_per_channel = data[0].sample_count
-                    element = data[0].raw_data[0]
+                    element = data[0].scaled_data[0]
+
                 elif isinstance(data[0], list):
                     number_of_samples_per_channel = len(data[0])
                     element = data[0][0]
+
                 else:
                     number_of_samples_per_channel = 1
                     element = data[0]

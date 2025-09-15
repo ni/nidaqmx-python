@@ -111,9 +111,7 @@ class AnalogSingleChannelWriter(ChannelWriterBase):
                 and the number of samples successfully written.
 
         Returns:
-            int:
-
-            Specifies the actual number of samples this method
+            int: Specifies the actual number of samples this method
             successfully wrote.
         """
         auto_start = self._auto_start if self._auto_start is not AUTO_START_UNSET else False
