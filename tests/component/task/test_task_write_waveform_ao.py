@@ -240,7 +240,7 @@ def test___task___write_waveform_and_array___raises_daq_error(
 
 
 @pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")
-def test___task___write_waveforms_with_different_lengths___raises_error(
+def test___task___write_waveforms_with_different_lengths___raises_daq_error(
     ao_multi_channel_task: nidaqmx.Task,
 ) -> None:
     waveforms_different_lengths = [_create_constant_waveform(10), _create_constant_waveform(20)]

@@ -1449,7 +1449,7 @@ class Task:
                 return self._interpreter.write_analog_waveform(
                     self._handle, data, auto_start, timeout
                 )
-            elif isinstance(data, list) and data and isinstance(data[0], AnalogWaveform):
+            elif isinstance(data, list) and isinstance(data[0], AnalogWaveform):
                 return self._interpreter.write_analog_waveforms(
                     self._handle, data, auto_start, timeout
                 )
