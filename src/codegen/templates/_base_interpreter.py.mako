@@ -138,3 +138,13 @@ class BaseInterpreter(abc.ABC):
         timeout: float
     ) -> int:
         raise NotImplementedError
+        
+    @abc.abstractmethod
+    def write_digital_waveform(
+        self,
+        task_handle: object,
+        waveform: DigitalWaveform[numpy.uint8],
+        auto_start: bool,
+        timeout: float,
+    ) -> int:
+        raise NotImplementedError

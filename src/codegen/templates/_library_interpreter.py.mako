@@ -893,6 +893,84 @@ class LibraryInterpreter(BaseInterpreter):
 
         return error_code, samps_per_chan_written.value
 
+    def write_digital_waveform(
+        self,
+        task_handle: object,
+        waveform: DigitalWaveform[numpy.uint8],
+        auto_start: bool,
+        timeout: float,
+    ) -> int:
+        """Write a digital waveform."""
+        # Ensure the waveform data is C-contiguous
+        data = waveform.data
+        if not data.flags.c_contiguous:
+            data = data.copy(order="C")
+
+        # Create bytes_per_chan_array from the waveform data shape
+        # For a single waveform, we have one channel with waveform.signal_count bytes per channel
+        bytes_per_chan_array = numpy.array([waveform.signal_count], dtype=numpy.uint32)
+
+        error_code, samples_written = self._internal_write_digital_waveform(
+            task_handle,
+            waveform.sample_count,
+            auto_start,
+            timeout,
+            FillMode.GROUP_BY_CHANNEL.value,
+            data,
+            bytes_per_chan_array,
+        )
+
+        self.check_for_error(error_code, samps_per_chan_written=samples_written)
+        return samples_written
+
+    def _internal_write_digital_waveform(
+        self,
+        task_handle: object,
+        num_samps_per_chan: int,
+        auto_start: bool,
+        timeout: float,
+        data_layout: int,
+        write_array: numpy.typing.NDArray[numpy.uint8],
+        bytes_per_chan_array: numpy.typing.NDArray[numpy.uint32] | None = None,
+    ) -> Tuple[
+        int, # error code
+        int, # The number of samples per channel that were written
+    ]:
+        assert isinstance(task_handle, TaskHandle)
+        samps_per_chan_written = ctypes.c_int()
+
+        cfunc = lib_importer.windll.DAQmxInternalWriteDigitalWaveform
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        TaskHandle,
+                        ctypes.c_int,
+                        c_bool32,
+                        ctypes.c_double,
+                        c_bool32,
+                        wrapped_ndpointer(dtype=numpy.uint8, flags=("C",)),
+                        wrapped_ndpointer(dtype=numpy.uint32, flags=("C",)),
+                        ctypes.c_uint,
+                        ctypes.POINTER(ctypes.c_int),
+                        ctypes.POINTER(c_bool32),
+                    ]
+
+        error_code = cfunc(
+            task_handle,
+            num_samps_per_chan,
+            auto_start,
+            timeout,
+            data_layout,
+            write_array,
+            bytes_per_chan_array,
+            0 if bytes_per_chan_array is None else bytes_per_chan_array.size,
+            ctypes.byref(samps_per_chan_written),
+            None,
+        )
+
+        return error_code, samps_per_chan_written.value
+
     def _get_write_array(self, waveform: AnalogWaveform[Any]) -> numpy.typing.NDArray[numpy.float64]:  
         scaled_data = waveform.scaled_data
         if scaled_data.flags.c_contiguous:

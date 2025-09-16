@@ -3673,6 +3673,15 @@ class GrpcStubInterpreter(BaseInterpreter):
     ) -> int:
         raise NotImplementedError
 
+    def write_digital_waveform(
+        self,
+        task_handle: object,
+        waveform: DigitalWaveform[numpy.uint8],
+        auto_start: bool,
+        timeout: float,
+    ) -> int:
+        raise NotImplementedError
+
 def _assign_numpy_array(numpy_array, grpc_array):
     """
     Assigns grpc array to numpy array maintaining the original shape.

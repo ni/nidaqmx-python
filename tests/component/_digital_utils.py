@@ -120,6 +120,30 @@ def _get_waveform_data(waveform: DigitalWaveform) -> list[int]:
     return [_bool_array_to_int(sample) for sample in waveform.data]
 
 
+def _create_digital_waveform(num_samples: int, num_lines: int = 1) -> DigitalWaveform:
+    """Create a digital waveform with test data.
+    
+    Args:
+        num_samples: Number of samples in the waveform
+        num_lines: Number of digital lines (default 1 for single line)
+        
+    Returns:
+        DigitalWaveform populated with test data
+    """
+    # Create a waveform with the specified number of samples and lines
+    waveform = DigitalWaveform(num_samples, num_lines)
+    
+    # Populate with test data - use the same pattern as _get_digital_data
+    expected_data = _get_digital_data(num_lines, num_samples)
+    
+    # Convert integer data to boolean arrays for each sample
+    for i in range(num_samples):
+        bool_array = _int_to_bool_array(num_lines, expected_data[i])
+        waveform.data[i] = bool_array
+    
+    return waveform
+
+
 def _read_and_copy(
     read_func: Callable[[numpy.typing.NDArray[_D]], None], array: numpy.typing.NDArray[_D]
 ) -> numpy.typing.NDArray[_D]:
