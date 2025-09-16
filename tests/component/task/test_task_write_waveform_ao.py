@@ -215,7 +215,7 @@ def test___task___write_waveforms___output_matches_final_values(
 
 
 @pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")
-def test___task___write_waveform_with_write___output_matches_final_values(
+def test___task___write_waveforms_with_write___output_matches_final_values(
     ao_multi_channel_task: nidaqmx.Task,
     ai_multi_channel_loopback_task: nidaqmx.Task,
 ) -> None:
