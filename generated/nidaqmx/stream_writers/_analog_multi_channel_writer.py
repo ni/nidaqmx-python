@@ -95,7 +95,7 @@ class AnalogMultiChannelWriter(ChannelWriterBase):
     def write_waveforms(
         self, waveforms: Sequence[AnalogWaveform[Any]], timeout: float = 10.0
     ) -> int:
-        """Writes one or more waveforms to one or more analog output channels in a task.
+        """Writes waveforms to one or more analog output channels in a task.
 
         If the task uses on-demand timing, this method returns only
         after the device generates all samples. On-demand is the default

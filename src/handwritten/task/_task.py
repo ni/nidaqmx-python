@@ -4,6 +4,7 @@ import threading
 import warnings
 from collections.abc import Iterable
 from enum import Enum
+from typing import Any, Sequence
 
 import numpy
 from nitypes.waveform import AnalogWaveform, DigitalWaveform
@@ -1587,6 +1588,59 @@ class Task:
                 DAQmxErrors.WRITE_NO_OUTPUT_CHANS_IN_TASK,
                 task_name=self.name,
             )
+
+    def write_waveforms(
+        self,
+        waveforms: AnalogWaveform[Any] | Sequence[AnalogWaveform[Any]],
+        auto_start=AUTO_START_UNSET,
+        timeout: float = 10.0,
+    ) -> int:
+        """Writes samples from waveforms to the task or virtual channels you specify.
+
+        If the task uses on-demand timing, this method returns only
+        after the device generates all samples. On-demand is the default
+        timing type if you do not use the timing property on the task to
+        configure a sample timing type. If the task uses any timing type
+        other than on-demand, this method returns immediately and does
+        not wait for the device to generate all samples. Your
+        application must determine if the task is done to ensure that
+        the device generated all samples.
+
+        Args:
+            waveforms (AnalogWaveform[Any] or Sequence[AnalogWaveform[Any]]):
+                Contains the waveforms to write to the task.
+
+                The data you write must be in the units of the
+                generation, including any custom scales. Use the DAQmx
+                Create Channel methods to specify these units.
+            auto_start (Optional[bool]): Specifies if this method
+                automatically starts the task if you did not explicitly
+                start it with the DAQmx Start Task method.
+
+                The default value of this parameter depends on whether
+                you specify one sample or many samples to write to each
+                channel. If one sample per channel was specified, the
+                default value is True. If multiple samples per channel
+                were specified, the default value is False.
+            timeout (Optional[float]): Specifies the amount of time in
+                seconds to wait for the method to write all samples.
+                NI-DAQmx performs a timeout check only if the method
+                must wait before it writes data. This method returns an
+                error if the time elapses. The default timeout is 10
+                seconds. If you set timeout to
+                nidaqmx.constants.WAIT_INFINITELY, the method waits
+                indefinitely. If you set timeout to 0, the method tries
+                once to write the submitted samples. If the method could
+                not write all the submitted samples, it returns an error
+                and the number of samples successfully written.
+
+        Returns:
+            int:
+
+            Specifies the actual number of samples this method
+            successfully wrote.
+        """
+        return self.write(waveforms, auto_start, timeout)
 
 
 class _TaskAlternateConstructor(Task):

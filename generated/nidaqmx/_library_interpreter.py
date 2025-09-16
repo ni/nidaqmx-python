@@ -6975,17 +6975,13 @@ class LibraryInterpreter(BaseInterpreter):
         timeout: float
     ) -> int:
         """Write an analog waveform."""
-        write_array = waveform.scaled_data
-        if not write_array.flags.c_contiguous:
-            write_array = write_array.copy(order="C")
-
         return self.write_analog_f64(
             task_handle,
             waveform.sample_count,
             auto_start,
             timeout,
             FillMode.GROUP_BY_CHANNEL.value,
-            write_array,
+            self._get_write_array(waveform),
         )
 
     def write_analog_waveforms(
@@ -6999,17 +6995,14 @@ class LibraryInterpreter(BaseInterpreter):
         assert len(waveforms) > 0
         num_samps_per_chan = waveforms[0].sample_count
 
-        write_arrays = []
         for waveform in waveforms:
-            if not waveform.sample_count == num_samps_per_chan:
+            if waveform.sample_count != num_samps_per_chan:
                 raise DaqError(
                     "The waveforms must all have the same sample count.",
                      DAQmxErrors.UNKNOWN
                 )
-            write_array = waveform.scaled_data
-            if not write_array.flags.c_contiguous:
-                write_array = write_array.copy(order="C")
-            write_arrays.append(write_array)
+
+        write_arrays = [self._get_write_array(waveform) for waveform in waveforms]
 
         error_code, samples_written = self._internal_write_analog_waveform_per_chan(
             task_handle,
@@ -7071,6 +7064,11 @@ class LibraryInterpreter(BaseInterpreter):
         )
 
         return error_code, samps_per_chan_written.value
+
+    def _get_write_array(self, waveform: AnalogWaveform[Any]) -> numpy.typing.NDArray[numpy.float64]:  
+        if waveform.scaled_data.flags.c_contiguous:
+            return waveform.scaled_data
+        return waveform.scaled_data.copy(order="C")
 
 
     def write_raw(
