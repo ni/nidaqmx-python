@@ -1425,10 +1425,9 @@ class Task:
                 if len(data) != number_of_channels:
                     self._raise_invalid_write_num_chans_error(number_of_channels, len(data))
 
-                elif isinstance(data[0], list):
+                if isinstance(data[0], list):
                     number_of_samples_per_channel = len(data[0])
                     element = data[0][0]
-
                 else:
                     number_of_samples_per_channel = 1
                     element = data[0]
