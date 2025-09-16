@@ -1636,7 +1636,7 @@ class Task:
         if isinstance(waveforms, AnalogWaveform):
             number_of_samples_per_channel = waveforms.sample_count
         elif isinstance(waveforms, list):
-            number_of_samples_per_channel = len(waveforms)
+            number_of_samples_per_channel = waveforms[0].sample_count
         else:
             number_of_samples_per_channel = 1
 
