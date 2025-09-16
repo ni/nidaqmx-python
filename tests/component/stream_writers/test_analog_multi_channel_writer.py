@@ -6,10 +6,17 @@ import numpy
 import pytest
 
 import nidaqmx
+from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
 from nidaqmx.stream_writers import AnalogMultiChannelWriter
 from tests.component._analog_utils import (
-    _get_expected_voltage_for_chan,
     AO_VOLTAGE_EPSILON,
+    _create_constant_waveform,
+    _create_float32_ramp_waveform,
+    _create_linear_ramp_waveform,
+    _create_non_contiguous_waveform,
+    _create_scaled_int32_ramp_waveform,
+    _get_approx_final_value,
+    _get_expected_voltage_for_chan,
 )
 
 
@@ -78,3 +85,141 @@ def test___analog_multi_channel_writer___write_many_sample_with_wrong_dtype___ra
         _ = writer.write_many_sample(data)
 
     assert "float64" in exc_info.value.args[0]
+
+
+@pytest.mark.disable_feature_toggle(WAVEFORM_SUPPORT)
+def test___analog_multi_channel_writer___write_waveforms_feature_disabled___raises_feature_not_supported_error(
+    ao_multi_channel_task: nidaqmx.Task,
+) -> None:
+    writer = AnalogMultiChannelWriter(ao_multi_channel_task.out_stream)
+    num_samples = 10
+    waveforms = [
+        _create_constant_waveform(num_samples),
+        _create_constant_waveform(num_samples),
+    ]
+
+    with pytest.raises(FeatureNotSupportedError) as exc_info:
+        writer.write_waveforms(waveforms)
+
+    error_message = exc_info.value.args[0]
+    assert "WAVEFORM_SUPPORT feature is not supported" in error_message
+    assert "NIDAQMX_ENABLE_WAVEFORM_SUPPORT" in error_message
+
+
+@pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")
+def test___analog_multi_channel_writer___write_waveforms___output_matches_final_values(
+    ao_multi_channel_task: nidaqmx.Task,
+    ai_multi_channel_loopback_task: nidaqmx.Task,
+) -> None:
+    writer = AnalogMultiChannelWriter(ao_multi_channel_task.out_stream)
+    num_samples = 50
+    waveforms = [
+        _create_linear_ramp_waveform(num_samples, 0.0, 0.5),
+        _create_linear_ramp_waveform(num_samples, 0.5, 1.0),
+    ]
+
+    samples_written = writer.write_waveforms(waveforms)
+
+    assert samples_written == num_samples
+    read_data = ai_multi_channel_loopback_task.read()
+    for i, waveform in enumerate(waveforms):
+        assert read_data[i] == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
+
+
+@pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")
+def test___analog_multi_channel_writer___write_waveforms_with_float32_dtype___output_matches_final_values(
+    ao_multi_channel_task: nidaqmx.Task,
+    ai_multi_channel_loopback_task: nidaqmx.Task,
+) -> None:
+    writer = AnalogMultiChannelWriter(ao_multi_channel_task.out_stream)
+    num_samples = 50
+    waveforms = [
+        _create_float32_ramp_waveform(num_samples, 0.0, 0.5),
+        _create_float32_ramp_waveform(num_samples, 0.5, 1.0),
+    ]
+
+    samples_written = writer.write_waveforms(waveforms)
+
+    assert samples_written == num_samples
+    read_data = ai_multi_channel_loopback_task.read()
+    for i, waveform in enumerate(waveforms):
+        assert read_data[i] == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
+
+
+@pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")
+def test___analog_multi_channel_writer___write_waveforms_with_scaling___output_matches_final_values(
+    ao_multi_channel_task: nidaqmx.Task,
+    ai_multi_channel_loopback_task: nidaqmx.Task,
+) -> None:
+    writer = AnalogMultiChannelWriter(ao_multi_channel_task.out_stream)
+    num_samples = 20
+    waveforms = [
+        _create_scaled_int32_ramp_waveform(num_samples),
+        _create_scaled_int32_ramp_waveform(num_samples),
+    ]
+
+    samples_written = writer.write_waveforms(waveforms)
+
+    assert samples_written == num_samples
+    read_data = ai_multi_channel_loopback_task.read()
+    for i, waveform in enumerate(waveforms):
+        assert read_data[i] == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
+
+
+@pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")
+def test___analog_multi_channel_writer___write_waveforms_with_non_contiguous_data___output_matches_final_values(
+    ao_multi_channel_task: nidaqmx.Task,
+    ai_multi_channel_loopback_task: nidaqmx.Task,
+) -> None:
+    writer = AnalogMultiChannelWriter(ao_multi_channel_task.out_stream)
+    num_samples = 50
+    waveforms = [
+        _create_non_contiguous_waveform(num_samples, 0.0, 0.05),
+        _create_non_contiguous_waveform(num_samples, 0.05, 0.1),
+    ]
+
+    samples_written = writer.write_waveforms(waveforms)
+
+    assert samples_written == num_samples
+    read_data = ai_multi_channel_loopback_task.read()
+    for i, waveform in enumerate(waveforms):
+        assert read_data[i] == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
+
+
+@pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")
+def test___analog_multi_channel_writer___write_waveforms_with_different_lengths___raises_daq_error(
+    ao_multi_channel_task: nidaqmx.Task,
+) -> None:
+    writer = AnalogMultiChannelWriter(ao_multi_channel_task.out_stream)
+    waveforms = [
+        _create_constant_waveform(10),
+        _create_constant_waveform(20),
+    ]
+
+    with pytest.raises(nidaqmx.DaqError) as exc_info:
+        writer.write_waveforms(waveforms)
+
+    error_message = exc_info.value.args[0]
+    assert "The waveforms must all have the same sample count" in error_message
+
+
+@pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")
+def test___analog_multi_channel_writer___write_waveforms_with_wrong_number_of_channels___raises_daq_error(
+    ao_multi_channel_task: nidaqmx.Task,
+) -> None:
+    writer = AnalogMultiChannelWriter(ao_multi_channel_task.out_stream)
+    num_samples = 10
+    waveforms = [
+        _create_constant_waveform(num_samples),
+        _create_constant_waveform(num_samples),
+        _create_constant_waveform(num_samples),
+    ]
+
+    with pytest.raises(nidaqmx.DaqError) as exc_info:
+        writer.write_waveforms(waveforms)
+
+    error_message = exc_info.value.args[0]
+    assert (
+        "Write cannot be performed, because the number of channels in the data does not match the number of channels in the task"
+        in error_message
+    )
