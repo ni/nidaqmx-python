@@ -1,9 +1,6 @@
 from __future__ import annotations
 
-from typing import Any
-
 import numpy
-
 from nitypes.waveform import DigitalWaveform
 
 from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, requires_feature

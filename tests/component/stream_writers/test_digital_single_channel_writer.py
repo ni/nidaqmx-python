@@ -5,11 +5,9 @@ import math
 
 import numpy
 import pytest
-from nitypes.waveform import DigitalWaveform
 
 import nidaqmx
 from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
-from nidaqmx.constants import AcquisitionType
 from nidaqmx.stream_writers import DigitalSingleChannelWriter
 from tests.component._digital_utils import (
     _create_digital_waveform,
@@ -215,11 +213,11 @@ def test___digital_single_channel_writer___write_waveform_single_line___updates_
     samples_written = writer.write_waveform(waveform)
 
     assert samples_written == num_samples
-    
+
     # Read back the data to verify it was written correctly
     actual_data = di_single_line_timing_task.read(number_of_samples_per_channel=num_samples)
     expected_data = _get_digital_data(1, num_samples)
-    
+
     # Verify the final value matches expected
     final_expected = bool(expected_data[-1])
     assert actual_data[-1] == final_expected
@@ -238,11 +236,13 @@ def test___digital_single_channel_writer___write_waveform_multi_line___updates_o
     samples_written = writer.write_waveform(waveform)
 
     assert samples_written == num_samples
-    
+
     # Read back the data to verify it was written correctly
-    actual_data = di_single_channel_multi_line_timing_task.read(number_of_samples_per_channel=num_samples)
+    actual_data = di_single_channel_multi_line_timing_task.read(
+        number_of_samples_per_channel=num_samples
+    )
     expected_data = _get_digital_data(num_lines, num_samples)
-    
+
     # For multi-line tasks, the read data might be returned as integers rather than boolean arrays
     # So we compare the final integer values directly
     assert actual_data[-1] == expected_data[-1]
