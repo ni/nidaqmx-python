@@ -894,9 +894,10 @@ class LibraryInterpreter(BaseInterpreter):
         return error_code, samps_per_chan_written.value
 
     def _get_write_array(self, waveform: AnalogWaveform[Any]) -> numpy.typing.NDArray[numpy.float64]:  
-        if waveform.scaled_data.flags.c_contiguous:
-            return waveform.scaled_data
-        return waveform.scaled_data.copy(order="C")
+        scaled_data = waveform.scaled_data
+        if scaled_data.flags.c_contiguous:
+            return scaled_data
+        return scaled_data.copy(order="C")
 
 
     ## The datatype of 'write_array' is incorrect in daqmxAPISharp.json file.

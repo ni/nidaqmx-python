@@ -4,7 +4,7 @@ import threading
 import warnings
 from collections.abc import Iterable
 from enum import Enum
-from typing import Any, Sequence
+from typing import Any, NoReturn, Sequence
 
 import numpy
 from nitypes.waveform import AnalogWaveform, DigitalWaveform
@@ -1268,7 +1268,7 @@ class Task:
         """
         self._interpreter.wait_until_task_done(self._handle, timeout)
 
-    def _raise_invalid_num_lines_error(self, num_lines_expected, num_lines_in_data):
+    def _raise_invalid_num_lines_error(self, num_lines_expected, num_lines_in_data) -> NoReturn:
         raise DaqError(
             "Specified read or write operation failed, because the number "
             "of lines in the data for a channel does not match the number "
@@ -1282,7 +1282,9 @@ class Task:
             task_name=self.name,
         )
 
-    def _raise_invalid_write_num_chans_error(self, number_of_channels, number_of_channels_in_data):
+    def _raise_invalid_write_num_chans_error(
+        self, number_of_channels, number_of_channels_in_data
+    ) -> NoReturn:
 
         raise DaqError(
             "Write cannot be performed, because the number of channels in the "
@@ -1296,11 +1298,27 @@ class Task:
             task_name=self.name,
         )
 
-    def _raise_invalid_write_mixed_data_error(self):
+    def _raise_invalid_write_mixed_data_error(self) -> NoReturn:
         raise DaqError(
             "Write cannot be performed, because the list contains a mix of "
             "AnalogWaveform and non-AnalogWaveform objects. All elements in "
             "the list must be the same type.",
+            DAQmxErrors.UNKNOWN,
+            task_name=self.name,
+        )
+
+    def _raise_no_output_channels_error(self) -> NoReturn:
+        raise DaqError(
+            "Write failed, because there are no output channels in this "
+            "task to which data can be written.",
+            DAQmxErrors.WRITE_NO_OUTPUT_CHANS_IN_TASK,
+            task_name=self.name,
+        )
+
+    def _raise_unsupported_output_type_error(self, output_type) -> NoReturn:
+        raise DaqError(
+            "Write failed, because the output type is not supported.\n\n"
+            f"Output type: {output_type}",
             DAQmxErrors.UNKNOWN,
             task_name=self.name,
         )
@@ -1373,6 +1391,11 @@ class Task:
             Specifies the actual number of samples this method
             successfully wrote.
         """
+        if isinstance(data, AnalogWaveform) or (
+            isinstance(data, list) and data and all(isinstance(wf, AnalogWaveform) for wf in data)
+        ):
+            return self.write_waveform(data, auto_start, timeout)
+
         channels_to_write = self.channels
         number_of_channels = len(channels_to_write.channel_names)
         write_chan_type = channels_to_write.chan_type
@@ -1393,13 +1416,6 @@ class Task:
                 number_of_samples_per_channel = len(data)
                 element = data[0]
 
-            elif isinstance(data, AnalogWaveform):
-                WAVEFORM_SUPPORT.raise_if_disabled()
-                if number_of_channels != 1:
-                    self._raise_invalid_write_num_chans_error(number_of_channels, 1)
-                number_of_samples_per_channel = data.sample_count
-                element = data.scaled_data[0]
-
             else:
                 number_of_samples_per_channel = 1
                 element = data
@@ -1408,14 +1424,6 @@ class Task:
             if isinstance(data, list):
                 if len(data) != number_of_channels:
                     self._raise_invalid_write_num_chans_error(number_of_channels, len(data))
-
-                if isinstance(data[0], AnalogWaveform):
-                    WAVEFORM_SUPPORT.raise_if_disabled()
-                    if not all(isinstance(wf, AnalogWaveform) for wf in data):
-                        self._raise_invalid_write_mixed_data_error()
-
-                    number_of_samples_per_channel = data[0].sample_count
-                    element = data[0].scaled_data[0]
 
                 elif isinstance(data[0], list):
                     number_of_samples_per_channel = len(data[0])
@@ -1446,24 +1454,15 @@ class Task:
                 auto_start = True
 
         if write_chan_type == ChannelType.ANALOG_OUTPUT:
-            if isinstance(data, AnalogWaveform):
-                return self._interpreter.write_analog_waveform(
-                    self._handle, data, auto_start, timeout
-                )
-            elif isinstance(data, list) and isinstance(data[0], AnalogWaveform):
-                return self._interpreter.write_analog_waveforms(
-                    self._handle, data, auto_start, timeout
-                )
-            else:
-                data = numpy.asarray(data, dtype=numpy.float64)
-                return self._interpreter.write_analog_f64(
-                    self._handle,
-                    number_of_samples_per_channel,
-                    auto_start,
-                    timeout,
-                    FillMode.GROUP_BY_CHANNEL.value,
-                    data,
-                )
+            data = numpy.asarray(data, dtype=numpy.float64)
+            return self._interpreter.write_analog_f64(
+                self._handle,
+                number_of_samples_per_channel,
+                auto_start,
+                timeout,
+                FillMode.GROUP_BY_CHANNEL.value,
+                data,
+            )
 
         elif write_chan_type == ChannelType.DIGITAL_OUTPUT:
             if self.out_stream.do_num_booleans_per_chan == 1:
@@ -1574,28 +1573,19 @@ class Task:
                 )
 
             else:
-                raise DaqError(
-                    "Write failed, because the output type is not supported.\n\n"
-                    f"Output type: {output_type}",
-                    DAQmxErrors.UNKNOWN,
-                    task_name=self.name,
-                )
+                self._raise_unsupported_output_type_error(output_type)
 
         else:
-            raise DaqError(
-                "Write failed, because there are no output channels in this "
-                "task to which data can be written.",
-                DAQmxErrors.WRITE_NO_OUTPUT_CHANS_IN_TASK,
-                task_name=self.name,
-            )
+            self._raise_no_output_channels_error()
 
-    def write_waveforms(
+    @requires_feature(WAVEFORM_SUPPORT)
+    def write_waveform(
         self,
         waveforms: AnalogWaveform[Any] | Sequence[AnalogWaveform[Any]],
         auto_start=AUTO_START_UNSET,
         timeout: float = 10.0,
     ) -> int:
-        """Writes samples from waveforms to the task or virtual channels you specify.
+        """Writes samples from one or more waveforms to the task or virtual channels you specify.
 
         If the task uses on-demand timing, this method returns only
         after the device generates all samples. On-demand is the default
@@ -1640,7 +1630,41 @@ class Task:
             Specifies the actual number of samples this method
             successfully wrote.
         """
-        return self.write(waveforms, auto_start, timeout)
+        channels_to_write = self.channels
+        number_of_channels = len(channels_to_write.channel_names)
+        write_chan_type = channels_to_write.chan_type
+
+        if isinstance(waveforms, AnalogWaveform):
+            number_of_samples_per_channel = waveforms.sample_count
+        elif isinstance(waveforms, list):
+            number_of_samples_per_channel = len(waveforms)
+        else:
+            number_of_samples_per_channel = 1
+
+        if auto_start is AUTO_START_UNSET:
+            if number_of_samples_per_channel > 1:
+                auto_start = False
+            else:
+                auto_start = True
+
+        if write_chan_type == ChannelType.ANALOG_OUTPUT:
+            if isinstance(waveforms, AnalogWaveform):
+                if number_of_channels != 1:
+                    self._raise_invalid_write_num_chans_error(number_of_channels, 1)
+                return self._interpreter.write_analog_waveform(
+                    self._handle, waveforms, auto_start, timeout
+                )
+            elif isinstance(waveforms, list) and isinstance(waveforms[0], AnalogWaveform):
+                if number_of_channels != len(waveforms):
+                    self._raise_invalid_write_num_chans_error(number_of_channels, len(waveforms))
+                return self._interpreter.write_analog_waveforms(
+                    self._handle, waveforms, auto_start, timeout
+                )
+            else:
+                self._raise_unsupported_output_type_error(type(waveforms))
+
+        else:
+            self._raise_no_output_channels_error()
 
 
 class _TaskAlternateConstructor(Task):

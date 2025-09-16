@@ -26,7 +26,7 @@ def test___task___write_waveform_feature_disabled___raises_feature_not_supported
     waveform = _create_constant_waveform(10)
 
     with pytest.raises(FeatureNotSupportedError) as exc_info:
-        ao_single_channel_task.write_waveforms(waveform)
+        ao_single_channel_task.write_waveform(waveform)
 
     error_message = exc_info.value.args[0]
     assert "WAVEFORM_SUPPORT feature is not supported" in error_message
@@ -41,7 +41,37 @@ def test___task___write_linear_ramp_waveform___output_matches_final_value(
     num_samples = 20
     waveform = _create_linear_ramp_waveform(num_samples, 0.0, 1.0)
 
-    samples_written = ao_single_channel_task.write_waveforms(waveform)
+    samples_written = ao_single_channel_task.write_waveform(waveform)
+
+    assert samples_written == num_samples
+    actual_value = ai_single_channel_loopback_task.read()
+    assert actual_value == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
+
+
+@pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
+def test___task___write_waveform_as_list___output_matches_final_value(
+    ao_single_channel_task: nidaqmx.Task,
+    ai_single_channel_loopback_task: nidaqmx.Task,
+) -> None:
+    num_samples = 20
+    waveform = _create_linear_ramp_waveform(num_samples, 0.0, 1.0)
+
+    samples_written = ao_single_channel_task.write_waveform([waveform])
+
+    assert samples_written == num_samples
+    actual_value = ai_single_channel_loopback_task.read()
+    assert actual_value == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
+
+
+@pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
+def test___task___write_waveform_with_write___output_matches_final_value(
+    ao_single_channel_task: nidaqmx.Task,
+    ai_single_channel_loopback_task: nidaqmx.Task,
+) -> None:
+    num_samples = 20
+    waveform = _create_linear_ramp_waveform(num_samples, 0.0, 1.0)
+
+    samples_written = ao_single_channel_task.write([waveform])
 
     assert samples_written == num_samples
     actual_value = ai_single_channel_loopback_task.read()
@@ -56,7 +86,7 @@ def test___task___write_waveform_with_auto_start___output_matches_final_value(
     num_samples = 20
     waveform = _create_linear_ramp_waveform(num_samples, 0.0, 1.0)
 
-    samples_written = ao_single_channel_task_with_timing.write_waveforms(waveform, auto_start=True)
+    samples_written = ao_single_channel_task_with_timing.write_waveform(waveform, auto_start=True)
 
     assert samples_written == num_samples
     ao_single_channel_task_with_timing.wait_until_done(timeout=2.0)
@@ -71,7 +101,7 @@ def test___task_with_multiple_channels___write_single_channel_waveform___raises_
     single_channel_waveform = _create_constant_waveform(10)
 
     with pytest.raises(nidaqmx.errors.DaqError) as exc_info:
-        ao_multi_channel_task.write_waveforms(single_channel_waveform)
+        ao_multi_channel_task.write_waveform(single_channel_waveform)
 
     error_message = exc_info.value.args[0]
     assert (
@@ -88,7 +118,7 @@ def test___task___write_waveform_with_float32_dtype___output_matches_final_value
     num_samples = 20
     waveform = _create_float32_ramp_waveform(num_samples, 0.0, 1.0)
 
-    samples_written = ao_single_channel_task.write_waveforms(waveform)
+    samples_written = ao_single_channel_task.write_waveform(waveform)
 
     assert samples_written == num_samples
     actual_value = ai_single_channel_loopback_task.read()
@@ -103,7 +133,7 @@ def test___task___write_waveform_with_scaling___output_matches_final_value(
     num_samples = 20
     waveform = _create_scaled_int32_ramp_waveform(num_samples)
 
-    samples_written = ao_single_channel_task.write_waveforms(waveform)
+    samples_written = ao_single_channel_task.write_waveform(waveform)
 
     assert samples_written == num_samples
     actual_value = ai_single_channel_loopback_task.read()
@@ -118,7 +148,7 @@ def test___task___write_waveform_with_non_contiguous_data___output_matches_final
     num_samples = 20
     waveform = _create_non_contiguous_waveform(num_samples, -0.0, 0.1)
 
-    samples_written = ao_single_channel_task.write_waveforms(waveform)
+    samples_written = ao_single_channel_task.write_waveform(waveform)
 
     assert samples_written == num_samples
     actual_value = ai_single_channel_loopback_task.read()
@@ -138,7 +168,7 @@ def test___task___write_waveform_with_timing___all_samples_match_waveform_data(
     )
     waveform = _create_linear_ramp_waveform(num_samples, -4.0, 4.0)
 
-    ao_task.write_waveforms(waveform)
+    ao_task.write_waveform(waveform)
 
     ai_task.start()
     ao_task.start()
@@ -159,7 +189,7 @@ def test___task___write_waveforms_feature_disabled___raises_feature_not_supporte
     ]
 
     with pytest.raises(FeatureNotSupportedError) as exc_info:
-        ao_multi_channel_task.write_waveforms(waveforms)
+        ao_multi_channel_task.write_waveform(waveforms)
 
     error_message = exc_info.value.args[0]
     assert "WAVEFORM_SUPPORT feature is not supported" in error_message
@@ -176,7 +206,26 @@ def test___task___write_waveforms___output_matches_final_values(
         _create_linear_ramp_waveform(num_samples, 0.5, 1.0),
     ]
 
-    samples_written = ao_multi_channel_task.write_waveforms(waveforms)
+    samples_written = ao_multi_channel_task.write_waveform(waveforms)
+
+    assert samples_written == num_samples
+    actual_values = ai_multi_channel_loopback_task.read()
+    for i, waveform in enumerate(waveforms):
+        assert actual_values[i] == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
+
+
+@pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")
+def test___task___write_waveform_with_write___output_matches_final_values(
+    ao_multi_channel_task: nidaqmx.Task,
+    ai_multi_channel_loopback_task: nidaqmx.Task,
+) -> None:
+    num_samples = 20
+    waveforms = [
+        _create_linear_ramp_waveform(num_samples, 0.0, 0.5),
+        _create_linear_ramp_waveform(num_samples, 0.5, 1.0),
+    ]
+
+    samples_written = ao_multi_channel_task.write(waveforms)
 
     assert samples_written == num_samples
     actual_values = ai_multi_channel_loopback_task.read()
@@ -195,7 +244,7 @@ def test___task___write_waveforms_with_different_formulas___output_matches_final
         _create_linear_ramp_waveform(num_samples, 0.1, 0.7),
     ]
 
-    samples_written = ao_multi_channel_task.write_waveforms(waveforms)
+    samples_written = ao_multi_channel_task.write_waveform(waveforms)
 
     assert samples_written == num_samples
     actual_values = ai_multi_channel_loopback_task.read()
@@ -214,7 +263,7 @@ def test___task_with_single_channel___write_multiple_waveforms___raises_daq_erro
     ]
 
     with pytest.raises(nidaqmx.errors.DaqError) as exc_info:
-        ao_single_channel_task.write_waveforms(waveforms)
+        ao_single_channel_task.write_waveform(waveforms)
 
     error_message = exc_info.value.args[0]
     assert (
@@ -224,17 +273,17 @@ def test___task_with_single_channel___write_multiple_waveforms___raises_daq_erro
 
 
 @pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")
-def test___task___write_waveform_and_array___raises_daq_error(
+def test___task___write_waveform_and_array___raises_value_error(
     ao_multi_channel_task: nidaqmx.Task,
 ) -> None:
     mixed_data = [_create_constant_waveform(10), [1.0, 2.0, 3.0]]
 
-    with pytest.raises(nidaqmx.errors.DaqError) as exc_info:
+    with pytest.raises(ValueError) as exc_info:
         ao_multi_channel_task.write(mixed_data)
 
     error_message = exc_info.value.args[0]
     assert (
-        "Write cannot be performed, because the list contains a mix of AnalogWaveform and non-AnalogWaveform objects."
+        "setting an array element with a sequence. The requested array has an inhomogeneous shape after 1 dimensions."
         in error_message
     )
 
@@ -246,7 +295,7 @@ def test___task___write_waveforms_with_different_lengths___raises_daq_error(
     waveforms_different_lengths = [_create_constant_waveform(10), _create_constant_waveform(20)]
 
     with pytest.raises((nidaqmx.errors.DaqError, AssertionError)) as exc_info:
-        ao_multi_channel_task.write_waveforms(waveforms_different_lengths)
+        ao_multi_channel_task.write_waveform(waveforms_different_lengths)
 
     error_message = exc_info.value.args[0]
     assert "The waveforms must all have the same sample count." in error_message
@@ -283,7 +332,7 @@ def test___task___write_waveforms_with_float32_dtype___output_matches_final_valu
         _create_float32_ramp_waveform(num_samples, 0.1, 0.2),
     ]
 
-    samples_written = ao_multi_channel_task.write_waveforms(waveforms)
+    samples_written = ao_multi_channel_task.write_waveform(waveforms)
 
     assert samples_written == num_samples
     actual_values = ai_multi_channel_loopback_task.read()
@@ -302,7 +351,7 @@ def test___task___write_waveforms_with_scaling___output_matches_final_values(
         _create_scaled_int32_ramp_waveform(num_samples),
     ]
 
-    samples_written = ao_multi_channel_task.write_waveforms(waveforms)
+    samples_written = ao_multi_channel_task.write_waveform(waveforms)
 
     assert samples_written == num_samples
     actual_values = ai_multi_channel_loopback_task.read()
@@ -321,7 +370,7 @@ def test___task___write_waveforms_with_non_contiguous_data___output_matches_fina
         _create_non_contiguous_waveform(num_samples, 0.05, 0.1),
     ]
 
-    samples_written = ao_multi_channel_task.write_waveforms(waveforms)
+    samples_written = ao_multi_channel_task.write_waveform(waveforms)
 
     assert samples_written == num_samples
     actual_values = ai_multi_channel_loopback_task.read()
@@ -351,7 +400,7 @@ def test___task___write_waveforms_with_timing___all_samples_match_waveform_data(
         _create_linear_ramp_waveform(num_samples, 0.5, 1.0),
     ]
 
-    ao_task.write_waveforms(waveforms)
+    ao_task.write_waveform(waveforms)
 
     ai_task.start()
     ao_task.start()
