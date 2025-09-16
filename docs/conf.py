@@ -27,15 +27,15 @@ root_path = pathlib.Path(__file__).parent.parent
 pyproj_file = root_path / "pyproject.toml"
 proj_config = toml.loads(pyproj_file.read_text())
 
-project = proj_config["tool"]["poetry"]["name"]
+project = proj_config["project"]["name"]
 company = "National Instruments"
 author = company
 copyright = f"2017-%Y, {company}"
 
 # Release is the full version, version is only the major component
-release = proj_config["tool"]["poetry"]["version"]
+release = proj_config["project"]["version"]
 version = ".".join(release.split(".")[:2])
-description = proj_config["tool"]["poetry"]["description"]
+description = proj_config["project"]["description"]
 
 language = "en"
 
