@@ -8,11 +8,15 @@ import pytest
 
 import nidaqmx
 from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
+from nidaqmx.errors import DaqError
 from nidaqmx.stream_writers import DigitalSingleChannelWriter
 from tests.component._digital_utils import (
     _create_digital_waveform,
+    _create_non_contiguous_digital_waveform,
     _get_digital_data,
     _get_num_do_lines_in_task,
+    _get_waveform_data,
+    _get_waveform_data_msb,
     _int_to_bool_array,
 )
 
@@ -203,77 +207,100 @@ def test___digital_single_channel_writer___write_waveform_feature_disabled___rai
 
 @pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
 def test___digital_single_channel_writer___write_waveform_single_line___updates_output(
-    do_single_line_timing_task: nidaqmx.Task,
-    di_single_line_timing_task: nidaqmx.Task,
+    do_single_line_task: nidaqmx.Task,
+    di_single_line_loopback_task: nidaqmx.Task,
 ) -> None:
-    writer = DigitalSingleChannelWriter(do_single_line_timing_task.out_stream)
+    writer = DigitalSingleChannelWriter(do_single_line_task.out_stream)
     num_samples = 10
-    waveform = _create_digital_waveform(num_samples, 1)  # 1 line for single line
+    waveform = _create_digital_waveform(num_samples, 1)
 
     samples_written = writer.write_waveform(waveform)
 
     assert samples_written == num_samples
-
-    # Read back the data to verify it was written correctly
-    actual_data = di_single_line_timing_task.read(number_of_samples_per_channel=num_samples)
-    expected_data = _get_digital_data(1, num_samples)
-
-    # Verify the final value matches expected
-    final_expected = bool(expected_data[-1])
-    assert actual_data[-1] == final_expected
+    assert di_single_line_loopback_task.read() == _get_waveform_data(waveform)[-1]
 
 
 @pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
 def test___digital_single_channel_writer___write_waveform_multi_line___updates_output(
-    do_single_channel_multi_line_timing_task: nidaqmx.Task,
-    di_single_channel_multi_line_timing_task: nidaqmx.Task,
+    do_single_channel_multi_line_task: nidaqmx.Task,
+    di_multi_line_loopback_task: nidaqmx.Task,
 ) -> None:
-    writer = DigitalSingleChannelWriter(do_single_channel_multi_line_timing_task.out_stream)
-    num_lines = _get_num_do_lines_in_task(do_single_channel_multi_line_timing_task)
+    writer = DigitalSingleChannelWriter(do_single_channel_multi_line_task.out_stream)
+    num_lines = 8
     num_samples = 10
     waveform = _create_digital_waveform(num_samples, num_lines)
 
     samples_written = writer.write_waveform(waveform)
 
     assert samples_written == num_samples
-
-    # Read back the data to verify it was written correctly
-    actual_data = di_single_channel_multi_line_timing_task.read(
-        number_of_samples_per_channel=num_samples
-    )
-    expected_data = _get_digital_data(num_lines, num_samples)
-
-    # For multi-line tasks, the read data might be returned as integers rather than boolean arrays
-    # So we compare the final integer values directly
-    assert actual_data[-1] == expected_data[-1]
+    assert di_multi_line_loopback_task.read() == _get_waveform_data(waveform)[-1]
 
 
 @pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
-def test___digital_single_channel_writer___write_waveform_with_auto_start___writes_successfully(
-    do_single_line_timing_task: nidaqmx.Task,
+def test___digital_single_channel_writer___write_waveform_port_uint8___succeeds(
+    do_port1_task: nidaqmx.Task,
+    di_port1_loopback_task: nidaqmx.Task,
 ) -> None:
-    writer = DigitalSingleChannelWriter(do_single_line_timing_task.out_stream)
-    writer.auto_start = True  # Set auto_start property
-    num_samples = 5
-    waveform = _create_digital_waveform(num_samples, 1)  # 1 line for single line
-
-    # Don't manually start the task - let auto_start handle it
+    writer = DigitalSingleChannelWriter(do_port1_task.out_stream)
+    writer.auto_start = True
+    num_samples = 50
+    num_lines = 8
+    assert num_lines == _get_num_do_lines_in_task(do_port1_task)
+    waveform = _create_digital_waveform(num_samples, num_lines)
+    
     samples_written = writer.write_waveform(waveform)
 
+    actual_value = di_port1_loopback_task.read()
     assert samples_written == num_samples
+    assert waveform.signal_count == num_lines
+    assert actual_value == _get_waveform_data_msb(waveform)[-1] # TODO: AB#3178052 - change to _get_waveform_data()
 
 
 @pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
-def test___digital_single_channel_writer___write_waveform_without_auto_start___writes_successfully(
-    do_single_line_timing_task: nidaqmx.Task,
+def test___digital_single_channel_writer___write_waveform_port_uint32___succeeds(
+    do_port0_task: nidaqmx.Task,
+    di_port0_loopback_task: nidaqmx.Task,
 ) -> None:
-    writer = DigitalSingleChannelWriter(do_single_line_timing_task.out_stream)
-    writer.auto_start = False  # Disable auto_start
-    num_samples = 5
-    waveform = _create_digital_waveform(num_samples, 1)  # 1 line for single line
+    writer = DigitalSingleChannelWriter(do_port0_task.out_stream)
+    writer.auto_start = True
+    num_samples = 50
+    num_lines = 32
+    assert num_lines == _get_num_do_lines_in_task(do_port0_task)
+    waveform = _create_digital_waveform(num_samples, num_lines)
+    
+    samples_written = writer.write_waveform(waveform)
+    
+    actual_value = di_port0_loopback_task.read()
+    assert samples_written == num_samples
+    assert waveform.signal_count == num_lines
+    assert actual_value == _get_waveform_data_msb(waveform)[-1] # TODO: AB#3178052 - change to _get_waveform_data()
 
-    # For timing tasks with auto_start=False, the write should still succeed
-    # as the waveform write operation handles task management internally
+
+@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
+def test___digital_single_channel_writer___write_waveform_signal_count_mismatch___raises_daq_error(
+    do_single_line_task: nidaqmx.Task,
+) -> None:
+    writer = DigitalSingleChannelWriter(do_single_line_task.out_stream)
+    samples_to_write = 10
+    waveform = _create_digital_waveform(samples_to_write, 2)
+    
+    with pytest.raises(DaqError) as exc_info:
+        writer.write_waveform(waveform)
+    
+    error_message = exc_info.value.args[0]
+    assert "Specified read or write operation failed, because the number of lines in the data" in error_message
+
+
+@pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
+def test___analog_single_channel_writer___write_waveform_with_non_contiguous_data___output_matches_final_value(
+    do_single_line_task: nidaqmx.Task,
+    di_single_line_loopback_task: nidaqmx.Task,
+) -> None:
+    writer = DigitalSingleChannelWriter(do_single_line_task.out_stream)
+    num_samples = 20
+    waveform = _create_non_contiguous_digital_waveform(num_samples, 1)
+
     samples_written = writer.write_waveform(waveform)
 
     assert samples_written == num_samples
+    assert di_single_line_loopback_task.read() == _get_waveform_data(waveform)[-1]

@@ -108,6 +108,14 @@ def _bool_array_to_int(bool_array: numpy.typing.NDArray[numpy.bool_]) -> int:
     return result
 
 
+def _bool_array_to_int_msb(bool_array: numpy.typing.NDArray[numpy.bool_]) -> int:
+    result = 0
+    # Data from ports is big-endian (see AB#3178052)
+    for bit in bool_array:
+        result = (result << 1) | int(bit)
+    return result
+
+
 def _int_to_bool_array(num_lines: int, input: int) -> numpy.typing.NDArray[numpy.bool_]:
     result = numpy.full(num_lines, True, dtype=numpy.bool_)
     for bit in range(num_lines):
@@ -120,27 +128,38 @@ def _get_waveform_data(waveform: DigitalWaveform) -> list[int]:
     return [_bool_array_to_int(sample) for sample in waveform.data]
 
 
+def _get_waveform_data_msb(waveform: DigitalWaveform) -> list[int]:
+    assert isinstance(waveform, DigitalWaveform)
+    return [_bool_array_to_int_msb(sample) for sample in waveform.data]
+
+
 def _create_digital_waveform(num_samples: int, num_lines: int = 1) -> DigitalWaveform:
-    """Create a digital waveform with test data.
-
-    Args:
-        num_samples: Number of samples in the waveform
-        num_lines: Number of digital lines (default 1 for single line)
-
-    Returns:
-        DigitalWaveform populated with test data
-    """
-    # Create a waveform with the specified number of samples and lines
     waveform = DigitalWaveform(num_samples, num_lines)
-
-    # Populate with test data - use the same pattern as _get_digital_data
     expected_data = _get_digital_data(num_lines, num_samples)
 
-    # Convert integer data to boolean arrays for each sample
     for i in range(num_samples):
         bool_array = _int_to_bool_array(num_lines, expected_data[i])
         waveform.data[i] = bool_array
 
+    return waveform
+
+
+def _create_non_contiguous_digital_waveform(
+    num_samples: int, num_lines: int
+) -> DigitalWaveform:
+    digital_data = _get_digital_data(num_lines, num_samples)
+    interleaved_data = numpy.zeros(num_samples * 2, dtype=numpy.uint8)
+
+    for i in range(num_samples):
+        bool_array = _int_to_bool_array(num_lines, digital_data[i])
+        interleaved_data[i*2] = bool_array
+
+    non_contiguous_samples = interleaved_data[::2]
+    waveform = DigitalWaveform(num_samples, num_lines, data=non_contiguous_samples)
+    assert not waveform.data.flags.c_contiguous
+    assert waveform.sample_count == num_samples
+    assert waveform.data[0] == interleaved_data[0]
+    assert waveform.data[1] == interleaved_data[2]
     return waveform
 
 
