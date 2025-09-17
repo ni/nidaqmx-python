@@ -1335,6 +1335,7 @@ class Task:
         - List of lists/2D numpy.ndarray: Multiple samples for multiple
           channels.
         - AnalogWaveform: Waveform data for a single analog output channel.
+        - DigitalWaveform: Waveform data for a single digital output channel.
         - List of AnalogWaveform: Waveform data for multiple analog output channels.
 
         The data type of the samples passed in must be appropriate for
@@ -1391,8 +1392,14 @@ class Task:
             Specifies the actual number of samples this method
             successfully wrote.
         """
-        if isinstance(data, AnalogWaveform) or (
-            isinstance(data, list) and data and all(isinstance(wf, AnalogWaveform) for wf in data)
+        if (
+            isinstance(data, AnalogWaveform)
+            or isinstance(data, DigitalWaveform)
+            or (
+                isinstance(data, list)
+                and data
+                and all(isinstance(wf, AnalogWaveform) for wf in data)
+            )
         ):
             return self.write_waveform(data, auto_start, timeout)
 
@@ -1580,7 +1587,7 @@ class Task:
     @requires_feature(WAVEFORM_SUPPORT)
     def write_waveform(
         self,
-        waveforms: AnalogWaveform[Any] | Sequence[AnalogWaveform[Any]],
+        waveforms: AnalogWaveform[Any] | DigitalWaveform[Any] | Sequence[AnalogWaveform[Any]],
         auto_start=AUTO_START_UNSET,
         timeout: float = 10.0,
     ) -> int:
@@ -1596,7 +1603,8 @@ class Task:
         the device generated all samples.
 
         Args:
-            waveforms (AnalogWaveform[Any] or Sequence[AnalogWaveform[Any]]):
+            waveforms (AnalogWaveform[Any] or DigitalWaveform[Any] or
+                Sequence[AnalogWaveform[Any]]):
                 Contains the waveforms to write to the task.
 
                 The data you write must be in the units of the
@@ -1633,7 +1641,7 @@ class Task:
         number_of_channels = len(channels_to_write.channel_names)
         write_chan_type = channels_to_write.chan_type
 
-        if isinstance(waveforms, AnalogWaveform):
+        if isinstance(waveforms, AnalogWaveform) or isinstance(waveforms, DigitalWaveform):
             number_of_samples_per_channel = waveforms.sample_count
         elif isinstance(waveforms, list):
             number_of_samples_per_channel = waveforms[0].sample_count
@@ -1657,6 +1665,16 @@ class Task:
                 if number_of_channels != len(waveforms):
                     self._raise_invalid_write_num_chans_error(number_of_channels, len(waveforms))
                 return self._interpreter.write_analog_waveforms(
+                    self._handle, waveforms, auto_start, timeout
+                )
+            else:
+                self._raise_unsupported_output_type_error(type(waveforms))
+
+        elif write_chan_type == ChannelType.DIGITAL_OUTPUT:
+            if isinstance(waveforms, DigitalWaveform):
+                if number_of_channels != 1:
+                    self._raise_invalid_write_num_chans_error(number_of_channels, 1)
+                return self._interpreter.write_digital_waveform(
                     self._handle, waveforms, auto_start, timeout
                 )
             else:

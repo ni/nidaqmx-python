@@ -146,7 +146,7 @@ def _create_digital_waveform(num_samples: int, num_lines: int = 1) -> DigitalWav
 
 def _create_non_contiguous_digital_waveform(num_samples: int, num_lines: int) -> DigitalWaveform:
     digital_data = _get_digital_data(num_lines, num_samples)
-    interleaved_data = numpy.zeros(num_samples * 2, dtype=numpy.uint8)
+    interleaved_data = numpy.zeros((num_samples * 2, num_lines), dtype=numpy.uint8)
 
     for i in range(num_samples):
         bool_array = _int_to_bool_array(num_lines, digital_data[i])
@@ -156,8 +156,6 @@ def _create_non_contiguous_digital_waveform(num_samples: int, num_lines: int) ->
     waveform = DigitalWaveform(num_samples, num_lines, data=non_contiguous_samples)
     assert not waveform.data.flags.c_contiguous
     assert waveform.sample_count == num_samples
-    assert waveform.data[0] == interleaved_data[0]
-    assert waveform.data[1] == interleaved_data[2]
     return waveform
 
 
