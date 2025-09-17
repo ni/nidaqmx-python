@@ -247,13 +247,15 @@ def test___digital_single_channel_writer___write_waveform_port_uint8___succeeds(
     num_lines = 8
     assert num_lines == _get_num_do_lines_in_task(do_port1_task)
     waveform = _create_digital_waveform(num_samples, num_lines)
-    
+
     samples_written = writer.write_waveform(waveform)
 
     actual_value = di_port1_loopback_task.read()
     assert samples_written == num_samples
     assert waveform.signal_count == num_lines
-    assert actual_value == _get_waveform_data_msb(waveform)[-1] # TODO: AB#3178052 - change to _get_waveform_data()
+    assert (
+        actual_value == _get_waveform_data_msb(waveform)[-1]
+    )  # TODO: AB#3178052 - change to _get_waveform_data()
 
 
 @pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
@@ -267,13 +269,15 @@ def test___digital_single_channel_writer___write_waveform_port_uint32___succeeds
     num_lines = 32
     assert num_lines == _get_num_do_lines_in_task(do_port0_task)
     waveform = _create_digital_waveform(num_samples, num_lines)
-    
+
     samples_written = writer.write_waveform(waveform)
-    
+
     actual_value = di_port0_loopback_task.read()
     assert samples_written == num_samples
     assert waveform.signal_count == num_lines
-    assert actual_value == _get_waveform_data_msb(waveform)[-1] # TODO: AB#3178052 - change to _get_waveform_data()
+    assert (
+        actual_value == _get_waveform_data_msb(waveform)[-1]
+    )  # TODO: AB#3178052 - change to _get_waveform_data()
 
 
 @pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
@@ -283,12 +287,15 @@ def test___digital_single_channel_writer___write_waveform_signal_count_mismatch_
     writer = DigitalSingleChannelWriter(do_single_line_task.out_stream)
     samples_to_write = 10
     waveform = _create_digital_waveform(samples_to_write, 2)
-    
+
     with pytest.raises(DaqError) as exc_info:
         writer.write_waveform(waveform)
-    
+
     error_message = exc_info.value.args[0]
-    assert "Specified read or write operation failed, because the number of lines in the data" in error_message
+    assert (
+        "Specified read or write operation failed, because the number of lines in the data"
+        in error_message
+    )
 
 
 @pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")

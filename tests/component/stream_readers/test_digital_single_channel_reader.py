@@ -23,8 +23,8 @@ from nidaqmx.stream_readers import DaqError, DigitalSingleChannelReader
 from nidaqmx.utils import flatten_channel_string
 from tests.component._digital_utils import (
     _bool_array_to_int,
-    _get_expected_data_for_line,
     _get_digital_data,
+    _get_expected_data_for_line,
     _get_num_di_lines_in_task,
     _get_waveform_data,
     _get_waveform_data_msb,
@@ -561,7 +561,9 @@ def test___digital_single_channel_port_uint32_reader___read_waveform___returns_v
     samples_read = reader.read_waveform(waveform, num_samples)
 
     assert samples_read == num_samples
-    assert _get_waveform_data_msb(waveform) == _get_digital_data(num_lines, num_samples) # TODO: AB#3178052 - change to _get_waveform_data()
+    assert _get_waveform_data_msb(waveform) == _get_digital_data(
+        num_lines, num_samples
+    )  # TODO: AB#3178052 - change to _get_waveform_data()
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
