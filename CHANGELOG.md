@@ -46,6 +46,7 @@ All notable changes to this project will be documented in this file.
         * The `nidaqmx` distribution package now specifies only a lower bound for `click`.
     * Clarify PyPy support and enable unit testing with PyPy.
     * Adopt ni-python-styleguide for hand-written code.
+    * Upgrade to Poetry 2.x and migrate `pyproject.toml` format.
 
 * ### Known Issues
     * ...
