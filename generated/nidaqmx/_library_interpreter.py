@@ -6981,7 +6981,7 @@ class LibraryInterpreter(BaseInterpreter):
             auto_start,
             timeout,
             FillMode.GROUP_BY_CHANNEL.value,
-            self._get_write_array(waveform),
+            self._get_analog_write_array(waveform),
         )
 
     def write_analog_waveforms(
@@ -7002,7 +7002,7 @@ class LibraryInterpreter(BaseInterpreter):
                      DAQmxErrors.UNKNOWN
                 )
 
-        write_arrays = [self._get_write_array(waveform) for waveform in waveforms]
+        write_arrays = [self._get_analog_write_array(waveform) for waveform in waveforms]
 
         error_code, samples_written = self._internal_write_analog_waveform_per_chan(
             task_handle,
@@ -7014,6 +7014,12 @@ class LibraryInterpreter(BaseInterpreter):
 
         self.check_for_error(error_code, samps_per_chan_written=samples_written)
         return samples_written
+
+    def _get_analog_write_array(self, waveform: AnalogWaveform[Any]) -> numpy.typing.NDArray[numpy.float64]:  
+        scaled_data = waveform.scaled_data
+        if scaled_data.flags.c_contiguous:
+            return scaled_data
+        return scaled_data.copy(order="C")
 
     def _internal_write_analog_waveform_per_chan(
         self,
@@ -7068,15 +7074,11 @@ class LibraryInterpreter(BaseInterpreter):
     def write_digital_waveform(
         self,
         task_handle: object,
-        waveform: DigitalWaveform[numpy.uint8],
+        waveform: DigitalWaveform[Any],
         auto_start: bool,
         timeout: float,
     ) -> int:
         """Write a digital waveform."""
-        data = waveform.data
-        if not data.flags.c_contiguous:
-            data = data.copy(order="C")
-
         bytes_per_chan_array = numpy.array([waveform.signal_count], dtype=numpy.uint32)
 
         error_code, samples_written = self._internal_write_digital_waveform(
@@ -7085,12 +7087,20 @@ class LibraryInterpreter(BaseInterpreter):
             auto_start,
             timeout,
             FillMode.GROUP_BY_CHANNEL.value,
-            data,
+            self._get_digital_write_array(waveform),
             bytes_per_chan_array,
         )
 
         self.check_for_error(error_code, samps_per_chan_written=samples_written)
         return samples_written
+
+    def _get_digital_write_array(self, waveform: DigitalWaveform[Any]) -> numpy.typing.NDArray[numpy.uint8]:  
+        data = waveform.data
+        if data.dtype != numpy.uint8:
+            data = data.view(numpy.uint8)
+        if data.flags.c_contiguous:
+            return data
+        return data.copy(order="C")
 
     def _internal_write_digital_waveform(
         self,
@@ -7139,13 +7149,6 @@ class LibraryInterpreter(BaseInterpreter):
         )
 
         return error_code, samps_per_chan_written.value
-
-    def _get_write_array(self, waveform: AnalogWaveform[Any]) -> numpy.typing.NDArray[numpy.float64]:  
-        scaled_data = waveform.scaled_data
-        if scaled_data.flags.c_contiguous:
-            return scaled_data
-        return scaled_data.copy(order="C")
-
 
     def write_raw(
             self, task_handle, num_samps_per_chan, auto_start, timeout, numpy_array):

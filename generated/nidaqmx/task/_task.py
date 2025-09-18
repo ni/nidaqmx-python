@@ -1392,14 +1392,8 @@ class Task:
             Specifies the actual number of samples this method
             successfully wrote.
         """
-        if (
-            isinstance(data, AnalogWaveform)
-            or isinstance(data, DigitalWaveform)
-            or (
-                isinstance(data, list)
-                and data
-                and all(isinstance(wf, AnalogWaveform) for wf in data)
-            )
+        if isinstance(data, (AnalogWaveform, DigitalWaveform)) or (
+            isinstance(data, list) and data and all(isinstance(wf, AnalogWaveform) for wf in data)
         ):
             return self.write_waveform(data, auto_start, timeout)
 
