@@ -928,6 +928,31 @@ class LibraryInterpreter(BaseInterpreter):
         self.check_for_error(error_code, samps_per_chan_written=samples_written)
         return samples_written
 
+    def write_digital_waveforms(
+        self,
+        task_handle: object,
+        waveform: Sequence[DigitalWaveform[Any]],
+        auto_start: bool,
+        timeout: float,
+    ) -> int:
+        """Write digital waveforms."""
+        # TODO: Support multiple waveforms
+
+        bytes_per_chan_array = numpy.array([waveform[0].signal_count], dtype=numpy.uint32)
+
+        error_code, samples_written = self._internal_write_digital_waveform(
+            task_handle,
+            waveform[0].sample_count,
+            auto_start,
+            timeout,
+            FillMode.GROUP_BY_CHANNEL.value,
+            self._get_digital_write_array(waveform[0]),
+            bytes_per_chan_array,
+        )
+
+        self.check_for_error(error_code, samps_per_chan_written=samples_written)
+        return samples_written
+
     def _get_digital_write_array(self, waveform: DigitalWaveform[Any]) -> numpy.typing.NDArray[numpy.uint8]:  
         data = waveform.data
         if data.dtype != numpy.uint8:

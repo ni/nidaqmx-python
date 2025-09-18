@@ -1393,7 +1393,9 @@ class Task:
             successfully wrote.
         """
         if isinstance(data, (AnalogWaveform, DigitalWaveform)) or (
-            isinstance(data, list) and data and all(isinstance(wf, AnalogWaveform) for wf in data)
+            isinstance(data, list)
+            and data
+            and all(isinstance(wf, (AnalogWaveform, DigitalWaveform)) for wf in data)
         ):
             return self.write_waveform(data, auto_start, timeout)
 
@@ -1581,7 +1583,12 @@ class Task:
     @requires_feature(WAVEFORM_SUPPORT)
     def write_waveform(
         self,
-        waveforms: AnalogWaveform[Any] | DigitalWaveform[Any] | Sequence[AnalogWaveform[Any]],
+        waveforms: (
+            AnalogWaveform[Any]
+            | DigitalWaveform[Any]
+            | Sequence[AnalogWaveform[Any]]
+            | Sequence[DigitalWaveform[Any]]
+        ),
         auto_start=AUTO_START_UNSET,
         timeout: float = 10.0,
     ) -> int:
@@ -1669,6 +1676,12 @@ class Task:
                 if number_of_channels != 1:
                     self._raise_invalid_write_num_chans_error(number_of_channels, 1)
                 return self._interpreter.write_digital_waveform(
+                    self._handle, waveforms, auto_start, timeout
+                )
+            elif isinstance(waveforms, list) and isinstance(waveforms[0], DigitalWaveform):
+                if number_of_channels != len(waveforms):
+                    self._raise_invalid_write_num_chans_error(number_of_channels, len(waveforms))
+                return self._interpreter.write_digital_waveforms(
                     self._handle, waveforms, auto_start, timeout
                 )
             else:
