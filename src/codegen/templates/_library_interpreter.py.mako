@@ -473,7 +473,7 @@ class LibraryInterpreter(BaseInterpreter):
         task_handle: object,
         number_of_samples_per_channel: int,
         timeout: float,
-        waveform: DigitalWaveform[numpy.uint8],
+        waveform: DigitalWaveform[Any],
         waveform_attribute_mode: WaveformAttributeMode
     ) -> int:
         """Read a digital waveform with timing and attributes."""
@@ -496,7 +496,7 @@ class LibraryInterpreter(BaseInterpreter):
             number_of_samples_per_channel,
             timeout,
             FillMode.GROUP_BY_CHANNEL.value,
-            waveform.data,
+            self._get_digital_read_array(waveform),
             properties,
             t0_array,
             dt_array,
@@ -511,6 +511,12 @@ class LibraryInterpreter(BaseInterpreter):
         self.check_for_error(error_code, samps_per_chan_read=samples_read)
         return samples_read
 
+    def _get_digital_read_array(self, waveform: DigitalWaveform[Any]) -> numpy.typing.NDArray[numpy.uint8]:  
+        data = waveform.data
+        if data.dtype != numpy.uint8:
+            data = data.view(numpy.uint8)
+        return data
+
     def read_digital_waveforms(
         self,
         task_handle: object,
@@ -518,7 +524,7 @@ class LibraryInterpreter(BaseInterpreter):
         number_of_samples_per_channel: int,
         number_of_signals_per_sample: int,
         timeout: float,
-        waveforms: Sequence[DigitalWaveform[numpy.uint8]],
+        waveforms: Sequence[DigitalWaveform[Any]],
         waveform_attribute_mode: WaveformAttributeMode,
     ) -> int:
         """Read a digital waveform with timing and attributes."""
@@ -808,7 +814,7 @@ class LibraryInterpreter(BaseInterpreter):
             auto_start,
             timeout,
             FillMode.GROUP_BY_CHANNEL.value,
-            self._get_write_array(waveform),
+            self._get_analog_write_array(waveform),
         )
 
     ## write_analog_waveforms has special handling
@@ -830,7 +836,7 @@ class LibraryInterpreter(BaseInterpreter):
                      DAQmxErrors.UNKNOWN
                 )
 
-        write_arrays = [self._get_write_array(waveform) for waveform in waveforms]
+        write_arrays = [self._get_analog_write_array(waveform) for waveform in waveforms]
 
         error_code, samples_written = self._internal_write_analog_waveform_per_chan(
             task_handle,
@@ -842,6 +848,12 @@ class LibraryInterpreter(BaseInterpreter):
 
         self.check_for_error(error_code, samps_per_chan_written=samples_written)
         return samples_written
+
+    def _get_analog_write_array(self, waveform: AnalogWaveform[Any]) -> numpy.typing.NDArray[numpy.float64]:  
+        scaled_data = waveform.scaled_data
+        if scaled_data.flags.c_contiguous:
+            return scaled_data
+        return scaled_data.copy(order="C")
 
     def _internal_write_analog_waveform_per_chan(
         self,
@@ -893,12 +905,84 @@ class LibraryInterpreter(BaseInterpreter):
 
         return error_code, samps_per_chan_written.value
 
-    def _get_write_array(self, waveform: AnalogWaveform[Any]) -> numpy.typing.NDArray[numpy.float64]:  
-        scaled_data = waveform.scaled_data
-        if scaled_data.flags.c_contiguous:
-            return scaled_data
-        return scaled_data.copy(order="C")
+    def write_digital_waveform(
+        self,
+        task_handle: object,
+        waveform: DigitalWaveform[Any],
+        auto_start: bool,
+        timeout: float,
+    ) -> int:
+        """Write a digital waveform."""
+        bytes_per_chan_array = numpy.array([waveform.signal_count], dtype=numpy.uint32)
 
+        error_code, samples_written = self._internal_write_digital_waveform(
+            task_handle,
+            waveform.sample_count,
+            auto_start,
+            timeout,
+            FillMode.GROUP_BY_CHANNEL.value,
+            self._get_digital_write_array(waveform),
+            bytes_per_chan_array,
+        )
+
+        self.check_for_error(error_code, samps_per_chan_written=samples_written)
+        return samples_written
+
+    def _get_digital_write_array(self, waveform: DigitalWaveform[Any]) -> numpy.typing.NDArray[numpy.uint8]:  
+        data = waveform.data
+        if data.dtype != numpy.uint8:
+            data = data.view(numpy.uint8)
+        if data.flags.c_contiguous:
+            return data
+        return data.copy(order="C")
+
+    def _internal_write_digital_waveform(
+        self,
+        task_handle: object,
+        num_samps_per_chan: int,
+        auto_start: bool,
+        timeout: float,
+        data_layout: int,
+        write_array: numpy.typing.NDArray[numpy.uint8],
+        bytes_per_chan_array: numpy.typing.NDArray[numpy.uint32] | None = None,
+    ) -> Tuple[
+        int, # error code
+        int, # The number of samples per channel that were written
+    ]:
+        assert isinstance(task_handle, TaskHandle)
+        samps_per_chan_written = ctypes.c_int()
+
+        cfunc = lib_importer.windll.DAQmxInternalWriteDigitalWaveform
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        TaskHandle,
+                        ctypes.c_int,
+                        c_bool32,
+                        ctypes.c_double,
+                        c_bool32,
+                        wrapped_ndpointer(dtype=numpy.uint8, flags=("C",)),
+                        wrapped_ndpointer(dtype=numpy.uint32, flags=("C",)),
+                        ctypes.c_uint,
+                        ctypes.POINTER(ctypes.c_int),
+                        ctypes.POINTER(c_bool32),
+                    ]
+
+        error_code = cfunc(
+            task_handle,
+            num_samps_per_chan,
+            auto_start,
+            timeout,
+            data_layout,
+            write_array,
+            bytes_per_chan_array,
+            0 if bytes_per_chan_array is None else bytes_per_chan_array.size,
+            ctypes.byref(samps_per_chan_written),
+            None,
+        )
+
+        return error_code, samps_per_chan_written.value
 
     ## The datatype of 'write_array' is incorrect in daqmxAPISharp.json file.
     def write_raw(

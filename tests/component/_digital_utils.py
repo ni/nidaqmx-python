@@ -108,6 +108,14 @@ def _bool_array_to_int(bool_array: numpy.typing.NDArray[numpy.bool_]) -> int:
     return result
 
 
+def _bool_array_to_int_msb(bool_array: numpy.typing.NDArray[numpy.bool_]) -> int:
+    result = 0
+    # Data from ports is big-endian (see AB#3178052)
+    for bit in bool_array:
+        result = (result << 1) | int(bit)
+    return result
+
+
 def _int_to_bool_array(num_lines: int, input: int) -> numpy.typing.NDArray[numpy.bool_]:
     result = numpy.full(num_lines, True, dtype=numpy.bool_)
     for bit in range(num_lines):
@@ -118,6 +126,37 @@ def _int_to_bool_array(num_lines: int, input: int) -> numpy.typing.NDArray[numpy
 def _get_waveform_data(waveform: DigitalWaveform) -> list[int]:
     assert isinstance(waveform, DigitalWaveform)
     return [_bool_array_to_int(sample) for sample in waveform.data]
+
+
+def _get_waveform_data_msb(waveform: DigitalWaveform) -> list[int]:
+    assert isinstance(waveform, DigitalWaveform)
+    return [_bool_array_to_int_msb(sample) for sample in waveform.data]
+
+
+def _create_digital_waveform(num_samples: int, num_lines: int = 1) -> DigitalWaveform:
+    waveform = DigitalWaveform(num_samples, num_lines)
+    expected_data = _get_digital_data(num_lines, num_samples)
+
+    for i in range(num_samples):
+        bool_array = _int_to_bool_array(num_lines, expected_data[i])
+        waveform.data[i] = bool_array
+
+    return waveform
+
+
+def _create_non_contiguous_digital_waveform(num_samples: int, num_lines: int) -> DigitalWaveform:
+    digital_data = _get_digital_data(num_lines, num_samples)
+    interleaved_data = numpy.zeros((num_samples * 2, num_lines), dtype=numpy.uint8)
+
+    for i in range(num_samples):
+        bool_array = _int_to_bool_array(num_lines, digital_data[i])
+        interleaved_data[i * 2] = bool_array
+
+    non_contiguous_samples = interleaved_data[::2]
+    waveform = DigitalWaveform(num_samples, num_lines, data=non_contiguous_samples)
+    assert not waveform.data.flags.c_contiguous
+    assert waveform.sample_count == num_samples
+    return waveform
 
 
 def _read_and_copy(

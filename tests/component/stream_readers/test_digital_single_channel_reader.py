@@ -23,10 +23,11 @@ from nidaqmx.stream_readers import DaqError, DigitalSingleChannelReader
 from nidaqmx.utils import flatten_channel_string
 from tests.component._digital_utils import (
     _bool_array_to_int,
-    _get_expected_data_for_line,
     _get_digital_data,
+    _get_expected_data_for_line,
     _get_num_di_lines_in_task,
     _get_waveform_data,
+    _get_waveform_data_msb,
     _read_and_copy,
 )
 from tests.component._utils import _is_timestamp_close_to_now
@@ -548,23 +549,21 @@ def test___digital_single_line_reader_with_none_flag___read_waveform___minimal_w
     assert waveform.channel_name == ""
 
 
-@pytest.mark.xfail(
-    reason="TODO: AB#3178052 - DigitalWaveform signal index is reversed when channels are specified by ports",
-    raises=AssertionError,
-)
 @pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
 def test___digital_single_channel_port_uint32_reader___read_waveform___returns_valid_waveform(
     di_single_channel_port_uint32_timing_task: nidaqmx.Task,
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_channel_port_uint32_timing_task.in_stream)
-    num_lines = _get_num_di_lines_in_task(di_single_channel_port_uint32_timing_task)
-    samples_to_read = 10
-    waveform = DigitalWaveform(samples_to_read, num_lines)
+    num_lines = 32
+    num_samples = 10
+    waveform = DigitalWaveform(num_samples, num_lines)
 
-    samples_read = reader.read_waveform(waveform, samples_to_read)
+    samples_read = reader.read_waveform(waveform, num_samples)
 
-    assert samples_read == 50
-    assert _get_waveform_data(waveform) == _get_digital_data(num_lines, samples_to_read)
+    assert samples_read == num_samples
+    assert _get_waveform_data_msb(waveform) == _get_digital_data(
+        num_lines, num_samples
+    )  # TODO: AB#3178052 - change to _get_waveform_data()
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
@@ -602,3 +601,27 @@ def test___digital_single_channel_lines_and_port___read_waveform___returns_valid
         sim_6363_device.di_lines[33].name,
         sim_6363_device.di_lines[32].name,
     ]
+
+
+@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
+@pytest.mark.parametrize(
+    "dtype",
+    [
+        numpy.bool,
+        numpy.int8,
+        numpy.uint8,
+    ],
+)
+def test___digital_single_channel_multi_line_reader___read_waveform_all_dtypes___returns_valid_waveform(
+    di_single_channel_multi_line_timing_task: nidaqmx.Task,
+    dtype,
+) -> None:
+    reader = DigitalSingleChannelReader(di_single_channel_multi_line_timing_task.in_stream)
+    num_lines = 8
+    num_samples = 10
+    waveform = DigitalWaveform(num_samples, num_lines, dtype=dtype)
+
+    samples_read = reader.read_waveform(waveform, num_samples)
+
+    assert samples_read == num_samples
+    assert _get_waveform_data(waveform) == _get_digital_data(num_lines, num_samples)

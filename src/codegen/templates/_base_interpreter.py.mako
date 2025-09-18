@@ -89,7 +89,7 @@ class BaseInterpreter(abc.ABC):
         task_handle: object,
         number_of_samples_per_channel: int,
         timeout: float,
-        waveform: DigitalWaveform[numpy.uint8],
+        waveform: DigitalWaveform[Any],
         waveform_attribute_mode: WaveformAttributeMode
     ) -> int:
         raise NotImplementedError
@@ -102,7 +102,7 @@ class BaseInterpreter(abc.ABC):
         number_of_samples_per_channel: int,
         number_of_signals_per_sample: int,
         timeout: float,
-        waveforms: Sequence[DigitalWaveform[numpy.uint8]],
+        waveforms: Sequence[DigitalWaveform[Any]],
         waveform_attribute_mode: WaveformAttributeMode,
     ) -> int:
         raise NotImplementedError
@@ -136,5 +136,15 @@ class BaseInterpreter(abc.ABC):
         waveforms: Sequence[AnalogWaveform[Any]],
         auto_start: bool,
         timeout: float
+    ) -> int:
+        raise NotImplementedError
+        
+    @abc.abstractmethod
+    def write_digital_waveform(
+        self,
+        task_handle: object,
+        waveform: DigitalWaveform[Any],
+        auto_start: bool,
+        timeout: float,
     ) -> int:
         raise NotImplementedError

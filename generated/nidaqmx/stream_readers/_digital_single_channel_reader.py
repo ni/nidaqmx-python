@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any
+
 import numpy
 from nitypes.waveform import DigitalWaveform
 
@@ -394,7 +396,7 @@ class DigitalSingleChannelReader(ChannelReaderBase):
     @requires_feature(WAVEFORM_SUPPORT)
     def read_waveform(
         self,
-        waveform: DigitalWaveform[numpy.uint8],
+        waveform: DigitalWaveform[Any],
         number_of_samples_per_channel: int = READ_ALL_AVAILABLE,
         reallocation_policy: ReallocationPolicy = ReallocationPolicy.TO_GROW,
         timeout: float = 10.0,
@@ -402,7 +404,7 @@ class DigitalSingleChannelReader(ChannelReaderBase):
         """Reads one or more digital samples from a single digital input channel into a waveform.
 
         Args:
-            waveform (DigitalWaveform[numpy.uint8]): Specifies a
+            waveform (DigitalWaveform[Any]): Specifies a
                 preallocated DigitalWaveform object to hold the samples
                 requested.
             number_of_samples_per_channel (Optional[int]): Specifies the

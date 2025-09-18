@@ -553,6 +553,22 @@ def do_single_line_task(
 
 
 @pytest.fixture
+def do_single_line_task_with_timing(
+    generate_task, real_x_series_multiplexed_device: nidaqmx.system.Device
+) -> nidaqmx.Task:
+    """Configure a single-line DO task with timing for waveform testing."""
+    task = generate_task()
+    task.do_channels.add_do_chan(
+        real_x_series_multiplexed_device.do_lines[0].name,
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    task.timing.cfg_samp_clk_timing(
+        rate=1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=100
+    )
+    return task
+
+
+@pytest.fixture
 def do_single_channel_multi_line_task(
     generate_task: Callable[[], nidaqmx.Task], real_x_series_device: nidaqmx.system.Device
 ) -> nidaqmx.Task:
@@ -577,6 +593,22 @@ def do_multi_channel_multi_line_task(
         line_grouping=LineGrouping.CHAN_PER_LINE,
     )
     _start_do_task(task, num_chans=task.number_of_channels)
+    return task
+
+
+@pytest.fixture
+def do_single_channel_multi_line_task_with_timing(
+    generate_task, real_x_series_multiplexed_device: nidaqmx.system.Device
+) -> nidaqmx.Task:
+    """Configure a single-channel multi-line DO task with timing for waveform testing."""
+    task = generate_task()
+    task.do_channels.add_do_chan(
+        flatten_channel_string(real_x_series_multiplexed_device.do_lines.channel_names[:8]),
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    task.timing.cfg_samp_clk_timing(
+        rate=1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=100
+    )
     return task
 
 
