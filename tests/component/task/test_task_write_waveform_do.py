@@ -1,6 +1,10 @@
 from __future__ import annotations
 
+import ctypes
+
+import numpy
 import pytest
+from nitypes.waveform import DigitalWaveform
 
 import nidaqmx
 from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
@@ -29,6 +33,19 @@ def test___task___write_waveform_feature_disabled___raises_feature_not_supported
 
 
 @pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
+def test___task___write_waveform_wrong_dtype___raises_argument_error(
+    do_single_line_task: nidaqmx.Task,
+) -> None:
+    waveform = DigitalWaveform(1, 1, dtype=numpy.bool)
+
+    with pytest.raises(ctypes.ArgumentError) as exc_info:
+        do_single_line_task.write_waveform(waveform)  # type: ignore[arg-type]
+
+    error_message = exc_info.value.args[0]
+    assert "must have data type uint8" in error_message
+
+
+@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
 def test___task___write_waveform_single_line___outputs_match_final_values(
     do_single_line_task: nidaqmx.Task,
     di_single_line_loopback_task: nidaqmx.Task,
@@ -36,7 +53,7 @@ def test___task___write_waveform_single_line___outputs_match_final_values(
     # Since digital outputs don't have built-in loopback channels like analog outputs,
     # we can only read back the last value. So to verify the whole signal, we must
     # write waveforms of increasing length and verify the final value each time.
-    for i in range(2, 20):
+    for i in range(1, 20):
         num_samples = i
         waveform = _create_digital_waveform(num_samples, 1)
 
@@ -55,7 +72,7 @@ def test___task___write_waveform_single_line_with_write___outputs_match_final_va
     # Since digital outputs don't have built-in loopback channels like analog outputs,
     # we can only read back the last value. So to verify the whole signal, we must
     # write waveforms of increasing length and verify the final value each time.
-    for i in range(2, 20):
+    for i in range(1, 20):
         num_samples = i
         waveform = _create_digital_waveform(num_samples, 1)
 
@@ -127,7 +144,7 @@ def test___task___write_waveform_multi_line___outputs_match_final_values(
     # Since digital outputs don't have built-in loopback channels like analog outputs,
     # we can only read back the last value. So to verify the whole signal, we must
     # write waveforms of increasing length and verify the final value each time.
-    for i in range(2, 20):
+    for i in range(1, 20):
         num_samples = i
         num_lines = 8
         waveform = _create_digital_waveform(num_samples, num_lines)
@@ -147,7 +164,7 @@ def test___task___write_waveform_multi_line_with_write___outputs_match_final_val
     # Since digital outputs don't have built-in loopback channels like analog outputs,
     # we can only read back the last value. So to verify the whole signal, we must
     # write waveforms of increasing length and verify the final value each time.
-    for i in range(2, 20):
+    for i in range(1, 20):
         num_samples = i
         num_lines = 8
         waveform = _create_digital_waveform(num_samples, num_lines)
@@ -224,7 +241,7 @@ def test___task___write_waveform_port_uint8___outputs_match_final_values(
     # Since digital outputs don't have built-in loopback channels like analog outputs,
     # we can only read back the last value. So to verify the whole signal, we must
     # write waveforms of increasing length and verify the final value each time.
-    for i in range(2, 20):
+    for i in range(1, 20):
         num_samples = i
         num_lines = 8
         waveform = _create_digital_waveform(num_samples, num_lines)
@@ -246,7 +263,7 @@ def test___task___write_waveform_port_uint32___outputs_match_final_values(
     # Since digital outputs don't have built-in loopback channels like analog outputs,
     # we can only read back the last value. So to verify the whole signal, we must
     # write waveforms of increasing length and verify the final value each time.
-    for i in range(2, 20):
+    for i in range(1, 20):
         num_samples = i
         num_lines = 32
         waveform = _create_digital_waveform(num_samples, num_lines)

@@ -5,6 +5,7 @@ import math
 
 import numpy
 import pytest
+from nitypes.waveform import DigitalWaveform
 
 import nidaqmx
 from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
@@ -206,6 +207,20 @@ def test___digital_single_channel_writer___write_waveform_feature_disabled___rai
 
 
 @pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
+def test___digital_single_channel_writer___write_waveform_wrong_dtype___raises_argument_error(
+    do_single_line_task: nidaqmx.Task,
+) -> None:
+    writer = DigitalSingleChannelWriter(do_single_line_task.out_stream)
+    waveform = DigitalWaveform(1, 1, dtype=numpy.bool)
+
+    with pytest.raises(ctypes.ArgumentError) as exc_info:
+        writer.write_waveform(waveform)  # type: ignore[arg-type]
+
+    error_message = exc_info.value.args[0]
+    assert "must have data type uint8" in error_message
+
+
+@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
 def test___digital_single_channel_writer___write_waveform_single_line___outputs_match_final_values(
     do_single_line_task: nidaqmx.Task,
     di_single_line_loopback_task: nidaqmx.Task,
@@ -214,7 +229,7 @@ def test___digital_single_channel_writer___write_waveform_single_line___outputs_
     # Since digital outputs don't have built-in loopback channels like analog outputs,
     # we can only read back the last value. So to verify the whole signal, we must
     # write waveforms of increasing length and verify the final value each time.
-    for i in range(2, 10):
+    for i in range(1, 10):
         num_samples = i
         waveform = _create_digital_waveform(num_samples, 1)
 
@@ -288,7 +303,7 @@ def test___digital_single_channel_writer___write_waveform_multi_line___outputs_m
     # Since digital outputs don't have built-in loopback channels like analog outputs,
     # we can only read back the last value. So to verify the whole signal, we must
     # write waveforms of increasing length and verify the final value each time.
-    for i in range(2, 10):
+    for i in range(1, 10):
         num_samples = i
         num_lines = 8
         waveform = _create_digital_waveform(num_samples, num_lines)
@@ -368,7 +383,7 @@ def test___digital_single_channel_writer___write_waveform_port_uint8___outputs_m
     # Since digital outputs don't have built-in loopback channels like analog outputs,
     # we can only read back the last value. So to verify the whole signal, we must
     # write waveforms of increasing length and verify the final value each time.
-    for i in range(2, 10):
+    for i in range(1, 10):
         num_samples = i
         num_lines = 8
         assert num_lines == _get_num_do_lines_in_task(do_port1_task)
@@ -393,7 +408,7 @@ def test___digital_single_channel_writer___write_waveform_port_uint32___outputs_
     # Since digital outputs don't have built-in loopback channels like analog outputs,
     # we can only read back the last value. So to verify the whole signal, we must
     # write waveforms of increasing length and verify the final value each time.
-    for i in range(2, 10):
+    for i in range(1, 10):
         num_samples = i
         num_lines = 32
         assert num_lines == _get_num_do_lines_in_task(do_port0_task)
