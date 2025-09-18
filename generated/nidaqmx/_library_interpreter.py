@@ -6652,7 +6652,7 @@ class LibraryInterpreter(BaseInterpreter):
         task_handle: object,
         number_of_samples_per_channel: int,
         timeout: float,
-        waveform: DigitalWaveform[numpy.uint8],
+        waveform: DigitalWaveform[Any],
         waveform_attribute_mode: WaveformAttributeMode
     ) -> int:
         """Read a digital waveform with timing and attributes."""
@@ -6675,7 +6675,7 @@ class LibraryInterpreter(BaseInterpreter):
             number_of_samples_per_channel,
             timeout,
             FillMode.GROUP_BY_CHANNEL.value,
-            waveform.data,
+            self._get_digital_read_array(waveform),
             properties,
             t0_array,
             dt_array,
@@ -6690,6 +6690,12 @@ class LibraryInterpreter(BaseInterpreter):
         self.check_for_error(error_code, samps_per_chan_read=samples_read)
         return samples_read
 
+    def _get_digital_read_array(self, waveform: DigitalWaveform[Any]) -> numpy.typing.NDArray[numpy.uint8]:  
+        data = waveform.data
+        if data.dtype != numpy.uint8:
+            data = data.view(numpy.uint8)
+        return data
+
     def read_digital_waveforms(
         self,
         task_handle: object,
@@ -6697,7 +6703,7 @@ class LibraryInterpreter(BaseInterpreter):
         number_of_samples_per_channel: int,
         number_of_signals_per_sample: int,
         timeout: float,
-        waveforms: Sequence[DigitalWaveform[numpy.uint8]],
+        waveforms: Sequence[DigitalWaveform[Any]],
         waveform_attribute_mode: WaveformAttributeMode,
     ) -> int:
         """Read a digital waveform with timing and attributes."""

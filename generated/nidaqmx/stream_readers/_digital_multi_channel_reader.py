@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-import numpy
+from typing import Any
+
 from nitypes.waveform import DigitalWaveform
 
 from nidaqmx import DaqError
@@ -488,15 +489,15 @@ class DigitalMultiChannelReader(ChannelReaderBase):
     @requires_feature(WAVEFORM_SUPPORT)
     def read_waveforms(
         self,
-        waveforms: list[DigitalWaveform[numpy.uint8]],
+        waveforms: list[DigitalWaveform[Any]],
         number_of_samples_per_channel: int = READ_ALL_AVAILABLE,
         reallocation_policy: ReallocationPolicy = ReallocationPolicy.TO_GROW,
         timeout: int = 10,
-    ) -> list[DigitalWaveform[numpy.uint8]]:
+    ) -> list[DigitalWaveform[Any]]:
         """Reads one or more samples from one or more digital input channels into a list of waveforms.
 
         Args:
-            waveforms (list[DigitalWaveform]): Specifies an existing
+            waveforms (list[DigitalWaveform[Any]]): Specifies an existing
                 list of DigitalWaveform objects to use for reading samples into.
                 The list must contain one waveform
                 for each channel in the task.

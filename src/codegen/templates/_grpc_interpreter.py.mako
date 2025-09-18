@@ -23,7 +23,7 @@ import threading
 import typing
 import warnings
 from nitypes.waveform import AnalogWaveform, DigitalWaveform
-from typing import Callable, Generic, Sequence, TypeVar
+from typing import Any, Callable, Generic, Sequence, TypeVar
 
 import google.protobuf.message
 from google.protobuf.timestamp_pb2 import Timestamp as GrpcTimestamp
@@ -272,7 +272,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         task_handle: object,
         number_of_samples_per_channel: int,
         timeout: float,
-        waveform: DigitalWaveform[numpy.uint8],
+        waveform: DigitalWaveform[Any],
         waveform_attribute_mode: WaveformAttributeMode
     ) -> int:
         raise NotImplementedError
@@ -284,7 +284,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         number_of_samples_per_channel: int,
         number_of_signals_per_sample: int,
         timeout: float,
-        waveforms: Sequence[DigitalWaveform[numpy.uint8]],
+        waveforms: Sequence[DigitalWaveform[Any]],
         waveform_attribute_mode: WaveformAttributeMode,
     ) -> int:
         raise NotImplementedError
@@ -321,7 +321,7 @@ class GrpcStubInterpreter(BaseInterpreter):
     def write_digital_waveform(
         self,
         task_handle: object,
-        waveform: DigitalWaveform[numpy.uint8],
+        waveform: DigitalWaveform[Any],
         auto_start: bool,
         timeout: float,
     ) -> int:

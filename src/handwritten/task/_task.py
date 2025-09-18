@@ -1581,9 +1581,7 @@ class Task:
     @requires_feature(WAVEFORM_SUPPORT)
     def write_waveform(
         self,
-        waveforms: (
-            AnalogWaveform[Any] | DigitalWaveform[numpy.uint8] | Sequence[AnalogWaveform[Any]]
-        ),
+        waveforms: AnalogWaveform[Any] | DigitalWaveform[Any] | Sequence[AnalogWaveform[Any]],
         auto_start=AUTO_START_UNSET,
         timeout: float = 10.0,
     ) -> int:
@@ -1599,7 +1597,7 @@ class Task:
         the device generated all samples.
 
         Args:
-            waveforms (AnalogWaveform[Any] or DigitalWaveform[numpy.uint8] or
+            waveforms (AnalogWaveform[Any] or DigitalWaveform[Any] or
                 Sequence[AnalogWaveform[Any]]):
                 Contains the waveforms to write to the task.
 

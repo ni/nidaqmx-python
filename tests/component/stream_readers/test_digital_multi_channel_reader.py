@@ -796,3 +796,34 @@ def test___digital_multi_channel_multi_line_reader_with_none_flag___read_wavefor
         assert waveform.timing.sample_interval_mode == SampleIntervalMode.NONE
         assert waveform.channel_name == ""
         assert waveform.sample_count == samples_to_read
+
+
+@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
+@pytest.mark.parametrize(
+    "dtype",
+    [
+        numpy.bool,
+        numpy.int8,
+        numpy.uint8,
+    ],
+)
+def test___digital_multi_channel_multi_line_reader___read_waveform_all_dtypes___returns_valid_waveform(
+    di_multi_chan_multi_line_timing_task: nidaqmx.Task,
+    dtype,
+) -> None:
+    in_stream = di_multi_chan_multi_line_timing_task.in_stream
+    reader = DigitalMultiChannelReader(in_stream)
+    num_channels = di_multi_chan_multi_line_timing_task.number_of_channels
+    num_lines = _get_num_di_lines_in_task(di_multi_chan_multi_line_timing_task)
+    samples_to_read = 10
+    waveforms = [DigitalWaveform(samples_to_read, dtype=dtype) for _ in range(num_channels)]
+
+    samples_read = reader.read_waveforms(waveforms, samples_to_read)
+
+    assert samples_read == samples_to_read
+    assert num_channels == 8
+    assert num_lines == 8
+    assert isinstance(waveforms, list)
+    assert len(waveforms) == num_channels
+    for chan, waveform in enumerate(waveforms):
+        assert _get_waveform_data(waveform) == _get_expected_data_for_line(samples_to_read, chan)

@@ -601,3 +601,28 @@ def test___digital_single_channel_lines_and_port___read_waveform___returns_valid
         sim_6363_device.di_lines[33].name,
         sim_6363_device.di_lines[32].name,
     ]
+
+
+@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
+@pytest.mark.parametrize(
+    "dtype",
+    [
+        numpy.bool,
+        numpy.int8,
+        numpy.uint8,
+    ],
+)
+def test___digital_single_channel_multi_line_reader___read_waveform_all_dtypes___returns_valid_waveform(
+    di_single_channel_multi_line_timing_task: nidaqmx.Task,
+    dtype,
+) -> None:
+    reader = DigitalSingleChannelReader(di_single_channel_multi_line_timing_task.in_stream)
+    num_lines = _get_num_di_lines_in_task(di_single_channel_multi_line_timing_task)
+    samples_to_read = 10
+    waveform = DigitalWaveform(samples_to_read, num_lines, dtype=dtype)
+
+    samples_read = reader.read_waveform(waveform, samples_to_read)
+
+    assert samples_read == samples_to_read
+    assert num_lines == 8
+    assert _get_waveform_data(waveform) == _get_digital_data(num_lines, samples_to_read)

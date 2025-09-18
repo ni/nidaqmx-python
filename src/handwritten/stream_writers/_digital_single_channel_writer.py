@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any
+
 import numpy
 from nitypes.waveform import DigitalWaveform
 
@@ -284,7 +286,7 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
         return self._interpreter.write_digital_scalar_u32(self._handle, auto_start, timeout, data)
 
     @requires_feature(WAVEFORM_SUPPORT)
-    def write_waveform(self, waveform: DigitalWaveform[numpy.uint8], timeout: float = 10.0) -> int:
+    def write_waveform(self, waveform: DigitalWaveform[Any], timeout: float = 10.0) -> int:
         """Writes a waveform to a single digital output channel in a task.
 
         If the task uses on-demand timing, this method returns only
@@ -297,7 +299,7 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
         the device generated all samples.
 
         Args:
-            waveform (DigitalWaveform[numpy.uint8]): Specifies the
+            waveform (DigitalWaveform[Any]): Specifies the
                 waveform to write to the task.
             timeout (Optional[float]): Specifies the amount of time in
                 seconds to wait for the method to write all samples.

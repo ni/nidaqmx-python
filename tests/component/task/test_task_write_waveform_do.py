@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import ctypes
-
 import numpy
 import pytest
 from nitypes.waveform import DigitalWaveform
@@ -30,19 +28,6 @@ def test___task___write_waveform_feature_disabled___raises_feature_not_supported
     error_message = exc_info.value.args[0]
     assert "WAVEFORM_SUPPORT feature is not supported" in error_message
     assert "NIDAQMX_ENABLE_WAVEFORM_SUPPORT" in error_message
-
-
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
-def test___task___write_waveform_wrong_dtype___raises_argument_error(
-    do_single_line_task: nidaqmx.Task,
-) -> None:
-    waveform = DigitalWaveform(1, 1, dtype=numpy.bool)
-
-    with pytest.raises(ctypes.ArgumentError) as exc_info:
-        do_single_line_task.write_waveform(waveform)  # type: ignore[arg-type]
-
-    error_message = exc_info.value.args[0]
-    assert "must have data type uint8" in error_message
 
 
 @pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
