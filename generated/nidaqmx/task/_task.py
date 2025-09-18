@@ -1587,7 +1587,9 @@ class Task:
     @requires_feature(WAVEFORM_SUPPORT)
     def write_waveform(
         self,
-        waveforms: AnalogWaveform[Any] | DigitalWaveform[numpy.uint8] | Sequence[AnalogWaveform[Any]],
+        waveforms: (
+            AnalogWaveform[Any] | DigitalWaveform[numpy.uint8] | Sequence[AnalogWaveform[Any]]
+        ),
         auto_start=AUTO_START_UNSET,
         timeout: float = 10.0,
     ) -> int:

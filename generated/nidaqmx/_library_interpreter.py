@@ -7073,13 +7073,10 @@ class LibraryInterpreter(BaseInterpreter):
         timeout: float,
     ) -> int:
         """Write a digital waveform."""
-        # Ensure the waveform data is C-contiguous
         data = waveform.data
         if not data.flags.c_contiguous:
             data = data.copy(order="C")
 
-        # Create bytes_per_chan_array from the waveform data shape
-        # For a single waveform, we have one channel with waveform.signal_count bytes per channel
         bytes_per_chan_array = numpy.array([waveform.signal_count], dtype=numpy.uint32)
 
         error_code, samples_written = self._internal_write_digital_waveform(
