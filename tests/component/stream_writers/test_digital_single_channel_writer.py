@@ -206,87 +206,68 @@ def test___digital_single_channel_writer___write_waveform_feature_disabled___rai
 
 
 @pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
-def test___digital_single_channel_writer___write_waveform_single_line___updates_output(
+def test___digital_single_channel_writer___write_waveform_single_line___outputs_match_final_values(
     do_single_line_task: nidaqmx.Task,
     di_single_line_loopback_task: nidaqmx.Task,
 ) -> None:
     writer = DigitalSingleChannelWriter(do_single_line_task.out_stream)
+    # Since digital outputs don't have built-in loopback channels like analog outputs,
+    # we can only read back the last value. So to verify the whole signal, we must
+    # write waveforms of increasing length and verify the final value each time.
+    for i in range(2, 10):
+        num_samples = i
+        waveform = _create_digital_waveform(num_samples, 1)
+
+        samples_written = writer.write_waveform(waveform)
+
+        assert samples_written == num_samples
+        assert di_single_line_loopback_task.read() == _get_waveform_data(waveform)[i - 1]
+
+
+@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
+def test___digital_single_channel_writer___write_waveform_single_line_with_auto_start___output_matches_final_value(
+    do_single_line_task_with_timing: nidaqmx.Task,
+    di_single_line_loopback_task: nidaqmx.Task,
+) -> None:
+    writer = DigitalSingleChannelWriter(do_single_line_task_with_timing.out_stream, auto_start=True)
     num_samples = 10
     waveform = _create_digital_waveform(num_samples, 1)
 
     samples_written = writer.write_waveform(waveform)
 
     assert samples_written == num_samples
-    assert di_single_line_loopback_task.read() == _get_waveform_data(waveform)[-1]
+    do_single_line_task_with_timing.wait_until_done(timeout=2.0)
+    actual_value = di_single_line_loopback_task.read()
+    assert actual_value == _get_waveform_data(waveform)[-1]
 
 
 @pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
-def test___digital_single_channel_writer___write_waveform_multi_line___updates_output(
-    do_single_channel_multi_line_task: nidaqmx.Task,
-    di_multi_line_loopback_task: nidaqmx.Task,
+def test___digital_single_channel_writer___write_waveform_single_line_with_non_contiguous_data___outputs_match_final_values(
+    do_single_line_task: nidaqmx.Task,
+    di_single_line_loopback_task: nidaqmx.Task,
 ) -> None:
-    writer = DigitalSingleChannelWriter(do_single_channel_multi_line_task.out_stream)
-    num_lines = 8
-    num_samples = 10
-    waveform = _create_digital_waveform(num_samples, num_lines)
+    writer = DigitalSingleChannelWriter(do_single_line_task.out_stream)
+    # Since digital outputs don't have built-in loopback channels like analog outputs,
+    # we can only read back the last value. So to verify the whole signal, we must
+    # write waveforms of increasing length and verify the final value each time.
+    for i in range(2, 10):
+        num_samples = i
+        waveform = _create_non_contiguous_digital_waveform(num_samples, 1)
 
-    samples_written = writer.write_waveform(waveform)
+        samples_written = writer.write_waveform(waveform)
 
-    assert samples_written == num_samples
-    assert di_multi_line_loopback_task.read() == _get_waveform_data(waveform)[-1]
-
-
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
-def test___digital_single_channel_writer___write_waveform_port_uint8___succeeds(
-    do_port1_task: nidaqmx.Task,
-    di_port1_loopback_task: nidaqmx.Task,
-) -> None:
-    writer = DigitalSingleChannelWriter(do_port1_task.out_stream)
-    writer.auto_start = True
-    num_samples = 50
-    num_lines = 8
-    assert num_lines == _get_num_do_lines_in_task(do_port1_task)
-    waveform = _create_digital_waveform(num_samples, num_lines)
-
-    samples_written = writer.write_waveform(waveform)
-
-    actual_value = di_port1_loopback_task.read()
-    assert samples_written == num_samples
-    assert waveform.signal_count == num_lines
-    assert (
-        actual_value == _get_waveform_data_msb(waveform)[-1]
-    )  # TODO: AB#3178052 - change to _get_waveform_data()
+        assert samples_written == num_samples
+        assert di_single_line_loopback_task.read() == _get_waveform_data(waveform)[i - 1]
 
 
 @pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
-def test___digital_single_channel_writer___write_waveform_port_uint32___succeeds(
-    do_port0_task: nidaqmx.Task,
-    di_port0_loopback_task: nidaqmx.Task,
-) -> None:
-    writer = DigitalSingleChannelWriter(do_port0_task.out_stream)
-    writer.auto_start = True
-    num_samples = 50
-    num_lines = 32
-    assert num_lines == _get_num_do_lines_in_task(do_port0_task)
-    waveform = _create_digital_waveform(num_samples, num_lines)
-
-    samples_written = writer.write_waveform(waveform)
-
-    actual_value = di_port0_loopback_task.read()
-    assert samples_written == num_samples
-    assert waveform.signal_count == num_lines
-    assert (
-        actual_value == _get_waveform_data_msb(waveform)[-1]
-    )  # TODO: AB#3178052 - change to _get_waveform_data()
-
-
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
-def test___digital_single_channel_writer___write_waveform_signal_count_mismatch___raises_daq_error(
+def test___digital_single_channel_writer___write_waveform_single_line_signal_count_mismatch___raises_daq_error(
     do_single_line_task: nidaqmx.Task,
 ) -> None:
     writer = DigitalSingleChannelWriter(do_single_line_task.out_stream)
-    samples_to_write = 10
-    waveform = _create_digital_waveform(samples_to_write, 2)
+    num_samples = 20
+    num_lines = 3
+    waveform = _create_digital_waveform(num_samples, num_lines)
 
     with pytest.raises(DaqError) as exc_info:
         writer.write_waveform(waveform)
@@ -298,16 +279,131 @@ def test___digital_single_channel_writer___write_waveform_signal_count_mismatch_
     )
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
-def test___analog_single_channel_writer___write_waveform_with_non_contiguous_data___output_matches_final_value(
-    do_single_line_task: nidaqmx.Task,
-    di_single_line_loopback_task: nidaqmx.Task,
+@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
+def test___digital_single_channel_writer___write_waveform_multi_line___outputs_match_final_values(
+    do_single_channel_multi_line_task: nidaqmx.Task,
+    di_multi_line_loopback_task: nidaqmx.Task,
 ) -> None:
-    writer = DigitalSingleChannelWriter(do_single_line_task.out_stream)
+    writer = DigitalSingleChannelWriter(do_single_channel_multi_line_task.out_stream)
+    # Since digital outputs don't have built-in loopback channels like analog outputs,
+    # we can only read back the last value. So to verify the whole signal, we must
+    # write waveforms of increasing length and verify the final value each time.
+    for i in range(2, 10):
+        num_samples = i
+        num_lines = 8
+        waveform = _create_digital_waveform(num_samples, num_lines)
+
+        samples_written = writer.write_waveform(waveform)
+
+        assert samples_written == num_samples
+        assert di_multi_line_loopback_task.read() == _get_waveform_data(waveform)[i - 1]
+
+
+@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
+def test___digital_single_channel_writer___write_waveform_multi_line_with_auto_start___output_matches_final_value(
+    do_single_channel_multi_line_task_with_timing: nidaqmx.Task,
+    di_multi_line_loopback_task: nidaqmx.Task,
+) -> None:
+    writer = DigitalSingleChannelWriter(
+        do_single_channel_multi_line_task_with_timing.out_stream, auto_start=True
+    )
     num_samples = 20
-    waveform = _create_non_contiguous_digital_waveform(num_samples, 1)
+    num_lines = 8
+    waveform = _create_digital_waveform(num_samples, num_lines)
 
     samples_written = writer.write_waveform(waveform)
 
     assert samples_written == num_samples
-    assert di_single_line_loopback_task.read() == _get_waveform_data(waveform)[-1]
+    do_single_channel_multi_line_task_with_timing.wait_until_done(timeout=2.0)
+    actual_value = di_multi_line_loopback_task.read()
+    assert actual_value == _get_waveform_data(waveform)[-1]
+
+
+@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
+def test___digital_single_channel_writer___write_waveform_multi_line_with_non_contiguous_data___outputs_match_final_values(
+    do_single_channel_multi_line_task: nidaqmx.Task,
+    di_multi_line_loopback_task: nidaqmx.Task,
+) -> None:
+    writer = DigitalSingleChannelWriter(do_single_channel_multi_line_task.out_stream)
+    # Since digital outputs don't have built-in loopback channels like analog outputs,
+    # we can only read back the last value. So to verify the whole signal, we must
+    # write waveforms of increasing length and verify the final value each time.
+    for i in range(2, 20):
+        num_samples = i
+        num_lines = 8
+        waveform = _create_non_contiguous_digital_waveform(num_samples, num_lines)
+
+        samples_written = writer.write_waveform(waveform)
+
+        assert samples_written == num_samples
+        actual_value = di_multi_line_loopback_task.read()
+        assert actual_value == _get_waveform_data(waveform)[i - 1]
+
+
+@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
+def test___digital_single_channel_writer___write_waveform_multi_line_signal_count_mismatch___raises_daq_error(
+    do_single_channel_multi_line_task: nidaqmx.Task,
+) -> None:
+    writer = DigitalSingleChannelWriter(do_single_channel_multi_line_task.out_stream)
+    num_samples = 20
+    num_lines = 1
+    waveform = _create_digital_waveform(num_samples, num_lines)
+
+    with pytest.raises(DaqError) as exc_info:
+        writer.write_waveform(waveform)
+
+    error_message = exc_info.value.args[0]
+    assert (
+        "Specified read or write operation failed, because the number of lines in the data"
+        in error_message
+    )
+
+
+@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
+def test___digital_single_channel_writer___write_waveform_port_uint8___outputs_match_final_values(
+    do_port1_task: nidaqmx.Task,
+    di_port1_loopback_task: nidaqmx.Task,
+) -> None:
+    writer = DigitalSingleChannelWriter(do_port1_task.out_stream)
+    # Since digital outputs don't have built-in loopback channels like analog outputs,
+    # we can only read back the last value. So to verify the whole signal, we must
+    # write waveforms of increasing length and verify the final value each time.
+    for i in range(2, 10):
+        num_samples = i
+        num_lines = 8
+        assert num_lines == _get_num_do_lines_in_task(do_port1_task)
+        waveform = _create_digital_waveform(num_samples, num_lines)
+
+        samples_written = writer.write_waveform(waveform)
+
+        actual_value = di_port1_loopback_task.read()
+        assert samples_written == num_samples
+        assert waveform.signal_count == num_lines
+        assert (
+            actual_value == _get_waveform_data_msb(waveform)[i - 1]
+        )  # TODO: AB#3178052 - change to _get_waveform_data()
+
+
+@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
+def test___digital_single_channel_writer___write_waveform_port_uint32___outputs_match_final_values(
+    do_port0_task: nidaqmx.Task,
+    di_port0_loopback_task: nidaqmx.Task,
+) -> None:
+    writer = DigitalSingleChannelWriter(do_port0_task.out_stream)
+    # Since digital outputs don't have built-in loopback channels like analog outputs,
+    # we can only read back the last value. So to verify the whole signal, we must
+    # write waveforms of increasing length and verify the final value each time.
+    for i in range(2, 10):
+        num_samples = i
+        num_lines = 32
+        assert num_lines == _get_num_do_lines_in_task(do_port0_task)
+        waveform = _create_digital_waveform(num_samples, num_lines)
+
+        samples_written = writer.write_waveform(waveform)
+
+        actual_value = di_port0_loopback_task.read()
+        assert samples_written == num_samples
+        assert waveform.signal_count == num_lines
+        assert (
+            actual_value == _get_waveform_data_msb(waveform)[i - 1]
+        )  # TODO: AB#3178052 - change to _get_waveform_data()
