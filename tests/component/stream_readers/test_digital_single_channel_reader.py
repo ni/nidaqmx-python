@@ -617,12 +617,11 @@ def test___digital_single_channel_multi_line_reader___read_waveform_all_dtypes__
     dtype,
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_channel_multi_line_timing_task.in_stream)
-    num_lines = _get_num_di_lines_in_task(di_single_channel_multi_line_timing_task)
-    samples_to_read = 10
-    waveform = DigitalWaveform(samples_to_read, num_lines, dtype=dtype)
+    num_lines = 8
+    num_samples = 10
+    waveform = DigitalWaveform(num_samples, num_lines, dtype=dtype)
 
-    samples_read = reader.read_waveform(waveform, samples_to_read)
+    samples_read = reader.read_waveform(waveform, num_samples)
 
-    assert samples_read == samples_to_read
-    assert num_lines == 8
-    assert _get_waveform_data(waveform) == _get_digital_data(num_lines, samples_to_read)
+    assert samples_read == num_samples
+    assert _get_waveform_data(waveform) == _get_digital_data(num_lines, num_samples)

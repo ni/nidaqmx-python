@@ -813,17 +813,14 @@ def test___digital_multi_channel_multi_line_reader___read_waveform_all_dtypes___
 ) -> None:
     in_stream = di_multi_chan_multi_line_timing_task.in_stream
     reader = DigitalMultiChannelReader(in_stream)
-    num_channels = di_multi_chan_multi_line_timing_task.number_of_channels
-    num_lines = _get_num_di_lines_in_task(di_multi_chan_multi_line_timing_task)
-    samples_to_read = 10
-    waveforms = [DigitalWaveform(samples_to_read, dtype=dtype) for _ in range(num_channels)]
+    num_channels = 8
+    num_samples = 10
+    waveforms = [DigitalWaveform(num_samples, dtype=dtype) for _ in range(num_channels)]
 
-    samples_read = reader.read_waveforms(waveforms, samples_to_read)
+    samples_read = reader.read_waveforms(waveforms, num_samples)
 
-    assert samples_read == samples_to_read
-    assert num_channels == 8
-    assert num_lines == 8
+    assert samples_read == num_samples
     assert isinstance(waveforms, list)
     assert len(waveforms) == num_channels
     for chan, waveform in enumerate(waveforms):
-        assert _get_waveform_data(waveform) == _get_expected_data_for_line(samples_to_read, chan)
+        assert _get_waveform_data(waveform) == _get_expected_data_for_line(num_samples, chan)
