@@ -150,10 +150,12 @@ def _get_waveform_data_msb(waveform: DigitalWaveform) -> list[int]:
     return [_bool_array_to_int_msb(sample) for sample in waveform.data]
 
 
-def _create_digital_waveform(num_samples: int, num_lines: int = 1) -> DigitalWaveform:
+def _create_digital_waveform(
+    num_samples: int, num_lines: int = 1, invert: bool = False
+) -> DigitalWaveform:
     waveform = DigitalWaveform(num_samples, num_lines)
     expected_data = _get_digital_data(num_lines, num_samples)
-    _set_waveform_data(num_samples, num_lines, waveform, expected_data)
+    _set_waveform_data(num_samples, num_lines, waveform, expected_data, invert=invert)
     return waveform
 
 
@@ -165,9 +167,9 @@ def _create_waveform_for_line(num_samples: int, line_number: int) -> DigitalWave
 
 
 def _create_waveform_for_lines(
-    num_samples: int, first_line: int, num_lines: int
+    num_samples: int, first_line: int, num_lines: int, dtype: type[numpy.generic]
 ) -> DigitalWaveform:
-    waveform = DigitalWaveform(num_samples, num_lines)
+    waveform = DigitalWaveform(num_samples, num_lines, dtype=dtype)
     expected_data = _get_expected_data_for_lines(num_samples, first_line, num_lines)
     _set_waveform_data(num_samples, num_lines, waveform, expected_data)
     return waveform
@@ -177,15 +179,17 @@ def _create_waveforms_for_mixed_lines(num_samples: int) -> list[DigitalWaveform]
     # create waveforms for lines 2-4, 0-1, and 5-7, matching the channel configuration
     # in the do_multi_channel_mixed_line_task fixture
     return [
-        _create_waveform_for_lines(num_samples, first_line=2, num_lines=3),
-        _create_waveform_for_lines(num_samples, first_line=0, num_lines=2),
-        _create_waveform_for_lines(num_samples, first_line=5, num_lines=3),
+        _create_waveform_for_lines(num_samples, first_line=2, num_lines=3, dtype=numpy.uint8),
+        _create_waveform_for_lines(num_samples, first_line=0, num_lines=2, dtype=numpy.int8),
+        _create_waveform_for_lines(num_samples, first_line=5, num_lines=3, dtype=numpy.bool),
     ]
 
 
-def _set_waveform_data(num_samples, num_lines, waveform, expected_data):
+def _set_waveform_data(num_samples, num_lines, waveform, expected_data, invert=False):
     for i in range(num_samples):
         bool_array = _int_to_bool_array(num_lines, expected_data[i])
+        if invert:
+            bool_array = numpy.logical_not(bool_array)
         waveform.data[i] = bool_array
 
 
