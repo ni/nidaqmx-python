@@ -340,8 +340,8 @@ class DigitalMultiChannelWriter(ChannelWriterBase):
         the device generated all samples.
 
         Args:
-            waveform (DigitalWaveform[Any]): Specifies the
-                waveform to write to the task.
+            waveforms (Sequence[DigitalWaveform[Any]]): Specifies the
+                waveforms to write to the task.
             timeout (Optional[float]): Specifies the amount of time in
                 seconds to wait for the method to write all samples.
                 NI-DAQmx performs a timeout check only if the method
