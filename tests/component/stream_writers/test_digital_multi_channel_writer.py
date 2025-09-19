@@ -6,7 +6,6 @@ from typing import Callable
 
 import numpy
 import pytest
-from nitypes.waveform import DigitalWaveform
 
 import nidaqmx
 import nidaqmx.system
@@ -415,7 +414,7 @@ def test___digital_multi_channel_writer___write_waveforms_with_non_contiguous_da
     # Since digital outputs don't have built-in loopback channels like analog outputs,
     # we can only read back the last value. So to verify the whole signal, we must
     # write waveforms of increasing length and verify the final value each time.
-    for i in range(1, 50):
+    for i in range(2, 50):
         num_samples = i
         num_lines = 8
         waveforms = [
@@ -427,4 +426,59 @@ def test___digital_multi_channel_writer___write_waveforms_with_non_contiguous_da
 
         assert samples_written == num_samples
         actual_value = di_multi_line_loopback_task.read()
-    assert actual_value == _get_digital_data(num_lines, num_samples)[-1]
+        assert actual_value == _get_digital_data(num_lines, num_samples)[-1]
+
+
+@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
+def test___digital_multi_channel_writer___write_waveforms_with_different_sample_counts___raises_daq_error(
+    do_multi_channel_port_task: nidaqmx.Task,
+) -> None:
+    writer = DigitalMultiChannelWriter(do_multi_channel_port_task.out_stream)
+    num_lines = 8
+    waveforms = [
+        _create_digital_waveform(10, num_lines),
+        _create_digital_waveform(11, num_lines),
+    ]
+
+    with pytest.raises(DaqError) as exc_info:
+        writer.write_waveforms(waveforms)
+
+    error_message = exc_info.value.args[0]
+    assert "The waveforms must all have the same sample count." in error_message
+
+
+@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
+def test___digital_multi_channel_writer___write_waveforms_with_too_many___raises_daq_error(
+    do_multi_channel_port_task: nidaqmx.Task,
+) -> None:
+    writer = DigitalMultiChannelWriter(do_multi_channel_port_task.out_stream)
+    num_lines = 8
+    waveforms = [
+        _create_digital_waveform(10, num_lines),
+        _create_digital_waveform(10, num_lines),
+        _create_digital_waveform(10, num_lines),
+    ]
+
+    with pytest.raises(DaqError) as exc_info:
+        writer.write_waveforms(waveforms)
+
+    error_message = exc_info.value.args[0]
+    assert "Write cannot be performed, because the number of channels" in error_message
+
+
+@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
+def test___digital_multi_channel_writer___write_waveforms_with_too_many_signals___raises_daq_error(
+    do_multi_channel_port_task: nidaqmx.Task,
+) -> None:
+    writer = DigitalMultiChannelWriter(do_multi_channel_port_task.out_stream)
+    num_samples = 10
+    waveforms = [
+        _create_digital_waveform(num_samples, 8),
+        _create_digital_waveform(num_samples, 10),
+    ]
+
+    with pytest.raises(DaqError) as exc_info:
+        writer.write_waveforms(waveforms)
+
+    error_message = exc_info.value.args[0]
+    assert "Specified read or write operation failed, because the number of lines" in error_message

@@ -7111,7 +7111,14 @@ class LibraryInterpreter(BaseInterpreter):
         channel_count = len(waveforms)
         assert channel_count > 0
         sample_count = waveforms[0].sample_count
-        assert all(wf.sample_count == sample_count for wf in waveforms)
+
+        for waveform in waveforms:
+            if waveform.sample_count != sample_count:
+                raise DaqError(
+                    "The waveforms must all have the same sample count.",
+                    DAQmxErrors.UNKNOWN
+                )
+                
         bytes_per_chan_array = numpy.array([wf.signal_count for wf in waveforms], dtype=numpy.uint32)
 
         # build a temporary contiguous array to write the data from multiple channels into.

@@ -151,9 +151,12 @@ def _get_waveform_data_msb(waveform: DigitalWaveform) -> list[int]:
 
 
 def _create_digital_waveform(
-    num_samples: int, num_lines: int = 1, invert: bool = False
+    num_samples: int,
+    num_lines: int = 1,
+    invert: bool = False,
+    dtype: type[numpy.generic] = numpy.uint8,
 ) -> DigitalWaveform:
-    waveform = DigitalWaveform(num_samples, num_lines)
+    waveform = DigitalWaveform(num_samples, num_lines, dtype=dtype)
     expected_data = _get_digital_data(num_lines, num_samples)
     _set_waveform_data(num_samples, num_lines, waveform, expected_data, invert=invert)
     return waveform
