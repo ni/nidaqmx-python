@@ -1392,9 +1392,7 @@ class Task:
             Specifies the actual number of samples this method
             successfully wrote.
         """
-        if isinstance(data, (AnalogWaveform, DigitalWaveform)) or (
-            isinstance(data, list) and data and all(isinstance(wf, AnalogWaveform) for wf in data)
-        ):
+        if self._is_waveform_data(data):
             return self.write_waveform(data, auto_start, timeout)
 
         channels_to_write = self.channels
@@ -1578,10 +1576,27 @@ class Task:
         else:
             self._raise_no_output_channels_error()
 
+    def _is_waveform_data(self, data):
+        """Check if data is waveform data (single waveform or list of waveforms)."""
+        if isinstance(data, (AnalogWaveform, DigitalWaveform)):
+            return True
+
+        if not isinstance(data, list) or not data:
+            return False
+
+        return all(isinstance(wf, AnalogWaveform) for wf in data) or all(
+            isinstance(wf, DigitalWaveform) for wf in data
+        )
+
     @requires_feature(WAVEFORM_SUPPORT)
     def write_waveform(
         self,
-        waveforms: AnalogWaveform[Any] | DigitalWaveform[Any] | Sequence[AnalogWaveform[Any]],
+        waveforms: (
+            AnalogWaveform[Any]
+            | DigitalWaveform[Any]
+            | Sequence[AnalogWaveform[Any]]
+            | Sequence[DigitalWaveform[Any]]
+        ),
         auto_start=AUTO_START_UNSET,
         timeout: float = 10.0,
     ) -> int:
@@ -1669,6 +1684,12 @@ class Task:
                 if number_of_channels != 1:
                     self._raise_invalid_write_num_chans_error(number_of_channels, 1)
                 return self._interpreter.write_digital_waveform(
+                    self._handle, waveforms, auto_start, timeout
+                )
+            elif isinstance(waveforms, list) and isinstance(waveforms[0], DigitalWaveform):
+                if number_of_channels != len(waveforms):
+                    self._raise_invalid_write_num_chans_error(number_of_channels, len(waveforms))
+                return self._interpreter.write_digital_waveforms(
                     self._handle, waveforms, auto_start, timeout
                 )
             else:

@@ -7100,6 +7100,50 @@ class LibraryInterpreter(BaseInterpreter):
         self.check_for_error(error_code, samps_per_chan_written=samples_written)
         return samples_written
 
+    def write_digital_waveforms(
+        self,
+        task_handle: object,
+        waveforms: Sequence[DigitalWaveform[Any]],
+        auto_start: bool,
+        timeout: float,
+    ) -> int:
+        """Write digital waveforms."""
+        channel_count = len(waveforms)
+        assert channel_count > 0
+        sample_count = waveforms[0].sample_count
+
+        for waveform in waveforms:
+            if waveform.sample_count != sample_count:
+                raise DaqError(
+                    "The waveforms must all have the same sample count.",
+                    DAQmxErrors.UNKNOWN
+                )
+                
+        bytes_per_chan_array = numpy.array([wf.signal_count for wf in waveforms], dtype=numpy.uint32)
+
+        # build a temporary contiguous array to write the data from multiple channels into.
+        # write_array must be in the format (numChans x numSampsPerChan x maxDataWidth)
+        write_array = numpy.zeros(
+            (channel_count, sample_count, max(bytes_per_chan_array)),
+            dtype=numpy.uint8,
+        )
+        for i, wf in enumerate(waveforms):
+            signal_count = wf.signal_count
+            write_array[i, :, :signal_count] = self._get_digital_write_array(wf)
+
+        error_code, samples_written = self._internal_write_digital_waveform(
+            task_handle,
+            sample_count,
+            auto_start,
+            timeout,
+            FillMode.GROUP_BY_CHANNEL.value,
+            write_array,
+            bytes_per_chan_array,
+        )
+
+        self.check_for_error(error_code, samps_per_chan_written=samples_written)
+        return samples_written
+
     def _get_digital_write_array(self, waveform: DigitalWaveform[Any]) -> numpy.typing.NDArray[numpy.uint8]:  
         data = waveform.data
         if data.dtype != numpy.uint8:

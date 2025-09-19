@@ -583,6 +583,22 @@ def do_single_channel_multi_line_task(
 
 
 @pytest.fixture
+def do_single_channel_multi_line_task_with_timing(
+    generate_task, real_x_series_multiplexed_device: nidaqmx.system.Device
+) -> nidaqmx.Task:
+    """Configure a single-channel multi-line DO task with timing for waveform testing."""
+    task = generate_task()
+    task.do_channels.add_do_chan(
+        flatten_channel_string(real_x_series_multiplexed_device.do_lines.channel_names[:8]),
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    task.timing.cfg_samp_clk_timing(
+        rate=1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=100
+    )
+    return task
+
+
+@pytest.fixture
 def do_multi_channel_multi_line_task(
     generate_task: Callable[[], nidaqmx.Task], real_x_series_device: nidaqmx.system.Device
 ) -> nidaqmx.Task:
@@ -597,18 +613,40 @@ def do_multi_channel_multi_line_task(
 
 
 @pytest.fixture
-def do_single_channel_multi_line_task_with_timing(
+def do_multi_channel_multi_line_task_with_timing(
     generate_task, real_x_series_multiplexed_device: nidaqmx.system.Device
 ) -> nidaqmx.Task:
     """Configure a single-channel multi-line DO task with timing for waveform testing."""
     task = generate_task()
     task.do_channels.add_do_chan(
         flatten_channel_string(real_x_series_multiplexed_device.do_lines.channel_names[:8]),
-        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+        line_grouping=LineGrouping.CHAN_PER_LINE,
     )
     task.timing.cfg_samp_clk_timing(
         rate=1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=100
     )
+    return task
+
+
+@pytest.fixture
+def do_multi_channel_mixed_line_task(
+    generate_task: Callable[[], nidaqmx.Task], real_x_series_device: nidaqmx.system.Device
+) -> nidaqmx.Task:
+    """Configure a multi-channel DO task with a mix of lines."""
+    task = generate_task()
+    task.do_channels.add_do_chan(
+        flatten_channel_string(real_x_series_device.do_lines.channel_names[2:5]),
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    task.do_channels.add_do_chan(
+        flatten_channel_string(real_x_series_device.do_lines.channel_names[0:2]),
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    task.do_channels.add_do_chan(
+        flatten_channel_string(real_x_series_device.do_lines.channel_names[5:8]),
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    _start_do_task(task, num_chans=task.number_of_channels)
     return task
 
 
@@ -657,6 +695,25 @@ def do_multi_channel_port_task(
     # X Series port 2 has 8 lines, and can be used with any sized port write
     task.do_channels.add_do_chan(
         real_x_series_device.do_ports[2].name,
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    _start_do_task(task, is_port=True, num_chans=task.number_of_channels)
+    return task
+
+
+@pytest.fixture
+def do_multi_channel_port_and_lines_task(
+    generate_task: Callable[[], nidaqmx.Task], real_x_series_device: nidaqmx.system.Device
+) -> nidaqmx.Task:
+    """Configure a multi-channel DO task."""
+    task = generate_task()
+    # X Series port 1 has 8 lines, and can be used with any sized port write
+    task.do_channels.add_do_chan(
+        real_x_series_device.do_ports[1].name,
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    task.do_channels.add_do_chan(
+        flatten_channel_string(real_x_series_device.do_lines.channel_names[:8]),
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
     )
     _start_do_task(task, is_port=True, num_chans=task.number_of_channels)
@@ -787,6 +844,24 @@ def di_multi_channel_port_loopback_task(
     )
     task.di_channels.add_di_chan(
         real_x_series_device.di_ports[2].name,
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    _start_di_task(task)
+    return task
+
+
+@pytest.fixture
+def di_multi_channel_port_and_lines_loopback_task(
+    generate_task: Callable[[], nidaqmx.Task], real_x_series_device: nidaqmx.system.Device
+) -> nidaqmx.Task:
+    """Configure a multi-channel DI loopback task."""
+    task = generate_task()
+    task.di_channels.add_di_chan(
+        real_x_series_device.di_ports[1].name,
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    task.di_channels.add_di_chan(
+        flatten_channel_string(real_x_series_device.di_lines.channel_names[:8]),
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
     )
     _start_di_task(task)

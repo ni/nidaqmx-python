@@ -1939,3 +1939,12 @@ class BaseInterpreter(abc.ABC):
         timeout: float,
     ) -> int:
         raise NotImplementedError
+        
+    def write_digital_waveforms(
+        self,
+        task_handle: object,
+        waveform: Sequence[DigitalWaveform[Any]],
+        auto_start: bool,
+        timeout: float,
+    ) -> int:
+        raise NotImplementedError
