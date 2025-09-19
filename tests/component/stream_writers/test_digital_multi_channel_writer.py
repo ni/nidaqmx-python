@@ -367,13 +367,40 @@ def test___digital_multi_channel_writer___write_waveforms_ports___outputs_match_
             _create_digital_waveform(num_samples, num_lines),
             _create_digital_waveform(num_samples, num_lines, invert=True),
         ]
-        assert waveforms[0].data[-1] != waveforms[1].data[-1]
 
         samples_written = writer.write_waveforms(waveforms)
 
         assert samples_written == num_samples
         actual_value = di_multi_channel_port_loopback_task.read()
+        assert actual_value[0] != actual_value[1]
         assert actual_value == [
             _get_waveform_data_msb(waveforms[0])[-1],
             _get_waveform_data_msb(waveforms[1])[-1],
+        ]  # TODO: AB#3178052 - change to _get_waveform_data()
+
+
+@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
+def test___digital_multi_channel_writer___write_waveforms_port_and_lines___outputs_match_final_values(
+    do_multi_channel_port_and_lines_task: nidaqmx.Task,
+    di_multi_channel_port_and_lines_loopback_task: nidaqmx.Task,
+) -> None:
+    writer = DigitalMultiChannelWriter(do_multi_channel_port_and_lines_task.out_stream)
+    # Since digital outputs don't have built-in loopback channels like analog outputs,
+    # we can only read back the last value. So to verify the whole signal, we must
+    # write waveforms of increasing length and verify the final value each time.
+    for i in range(1, 50):
+        num_samples = i
+        num_lines = 8
+        waveforms = [
+            _create_digital_waveform(num_samples, num_lines),
+            _create_digital_waveform(num_samples, num_lines, invert=True),
+        ]
+
+        samples_written = writer.write_waveforms(waveforms)
+
+        assert samples_written == num_samples
+        actual_value = di_multi_channel_port_and_lines_loopback_task.read()
+        assert actual_value == [
+            _get_waveform_data_msb(waveforms[0])[-1],
+            _get_waveform_data(waveforms[1])[-1],
         ]  # TODO: AB#3178052 - change to _get_waveform_data()
