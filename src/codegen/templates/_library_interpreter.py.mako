@@ -931,22 +931,34 @@ class LibraryInterpreter(BaseInterpreter):
     def write_digital_waveforms(
         self,
         task_handle: object,
-        waveform: Sequence[DigitalWaveform[Any]],
+        waveforms: Sequence[DigitalWaveform[Any]],
         auto_start: bool,
         timeout: float,
     ) -> int:
         """Write digital waveforms."""
-        # TODO: Support multiple waveforms
+        channel_count = len(waveforms)
+        assert channel_count > 0
+        sample_count = waveforms[0].sample_count
+        assert all(wf.sample_count == sample_count for wf in waveforms)
+        bytes_per_chan_array = numpy.array([wf.signal_count for wf in waveforms], dtype=numpy.uint32)
 
-        bytes_per_chan_array = numpy.array([waveform[0].signal_count], dtype=numpy.uint32)
+        # build a temporary contiguous array to write the data from multiple channels into.
+        # write_array must be in the format (numChans x numSampsPerChan x maxDataWidth)
+        write_array = numpy.zeros(
+            (channel_count, sample_count, max(bytes_per_chan_array)),
+            dtype=numpy.uint8,
+        )
+        for i, wf in enumerate(waveforms):
+            signal_count = wf.signal_count
+            write_array[i, :, :signal_count] = self._get_digital_write_array(wf)
 
         error_code, samples_written = self._internal_write_digital_waveform(
             task_handle,
-            waveform[0].sample_count,
+            sample_count,
             auto_start,
             timeout,
             FillMode.GROUP_BY_CHANNEL.value,
-            self._get_digital_write_array(waveform[0]),
+            write_array,
             bytes_per_chan_array,
         )
 

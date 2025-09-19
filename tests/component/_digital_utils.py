@@ -144,6 +144,17 @@ def _create_digital_waveform(num_samples: int, num_lines: int = 1) -> DigitalWav
     return waveform
 
 
+def _create_waveform_for_line(num_samples: int, line_number: int) -> DigitalWaveform:
+    waveform = DigitalWaveform(num_samples, 1)
+    expected_data = _get_expected_data_for_line(num_samples, line_number)
+
+    for i in range(num_samples):
+        bool_array = _int_to_bool_array(1, expected_data[i])
+        waveform.data[i] = bool_array
+
+    return waveform
+
+
 def _create_non_contiguous_digital_waveform(num_samples: int, num_lines: int) -> DigitalWaveform:
     digital_data = _get_digital_data(num_lines, num_samples)
     interleaved_data = numpy.zeros((num_samples * 2, num_lines), dtype=numpy.uint8)
