@@ -1392,11 +1392,7 @@ class Task:
             Specifies the actual number of samples this method
             successfully wrote.
         """
-        if isinstance(data, (AnalogWaveform, DigitalWaveform)) or (
-            isinstance(data, list)
-            and data
-            and all(isinstance(wf, (AnalogWaveform, DigitalWaveform)) for wf in data)
-        ):
+        if self._is_waveform_data(data):
             return self.write_waveform(data, auto_start, timeout)
 
         channels_to_write = self.channels
@@ -1579,6 +1575,18 @@ class Task:
 
         else:
             self._raise_no_output_channels_error()
+
+    def _is_waveform_data(self, data):
+        """Check if data is waveform data (single waveform or list of waveforms)."""
+        if isinstance(data, (AnalogWaveform, DigitalWaveform)):
+            return True
+
+        if not isinstance(data, list) or not data:
+            return False
+
+        return all(isinstance(wf, AnalogWaveform) for wf in data) or all(
+            isinstance(wf, DigitalWaveform) for wf in data
+        )
 
     @requires_feature(WAVEFORM_SUPPORT)
     def write_waveform(
