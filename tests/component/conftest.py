@@ -629,6 +629,28 @@ def do_multi_channel_multi_line_task_with_timing(
 
 
 @pytest.fixture
+def do_multi_channel_mixed_line_task(
+    generate_task: Callable[[], nidaqmx.Task], real_x_series_device: nidaqmx.system.Device
+) -> nidaqmx.Task:
+    """Configure a multi-channel DO task with a mix of lines."""
+    task = generate_task()
+    task.do_channels.add_do_chan(
+        flatten_channel_string(real_x_series_device.do_lines.channel_names[2:5]),
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    task.do_channels.add_do_chan(
+        flatten_channel_string(real_x_series_device.do_lines.channel_names[0:2]),
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    task.do_channels.add_do_chan(
+        flatten_channel_string(real_x_series_device.do_lines.channel_names[5:8]),
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    _start_do_task(task, num_chans=task.number_of_channels)
+    return task
+
+
+@pytest.fixture
 def do_port0_task(
     generate_task: Callable[[], nidaqmx.Task], real_x_series_device: nidaqmx.system.Device
 ) -> nidaqmx.Task:

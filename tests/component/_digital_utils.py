@@ -65,6 +65,23 @@ def _get_expected_data_for_line(num_samples: int, line_number: int) -> list[int]
     return data
 
 
+def _get_expected_data_for_lines(num_samples: int, first_line: int, num_lines: int) -> list[int]:
+    data = []
+    # Simulated digital signals "count" from 0 in binary within each group of 8 lines.
+    # Each line represents a bit in the binary representation of the sample number.
+    # This function combines multiple lines into integer values where each bit represents a line.
+    for sample_num in range(num_samples):
+        result = 0
+        for line_num in range(first_line, first_line + num_lines):
+            line_index = line_num % 8
+            bit_value = (sample_num >> line_index) & 1
+            # Set the bit at position (line_num - first_line) in the result
+            if bit_value:
+                result |= 1 << (line_num - first_line)
+        data.append(result)
+    return data
+
+
 def _get_digital_data(num_lines: int, num_samples: int) -> list[int]:
     return [
         _get_digital_data_for_sample(num_lines, sample_number)
@@ -136,23 +153,40 @@ def _get_waveform_data_msb(waveform: DigitalWaveform) -> list[int]:
 def _create_digital_waveform(num_samples: int, num_lines: int = 1) -> DigitalWaveform:
     waveform = DigitalWaveform(num_samples, num_lines)
     expected_data = _get_digital_data(num_lines, num_samples)
-
-    for i in range(num_samples):
-        bool_array = _int_to_bool_array(num_lines, expected_data[i])
-        waveform.data[i] = bool_array
-
+    _set_waveform_data(num_samples, num_lines, waveform, expected_data)
     return waveform
 
 
 def _create_waveform_for_line(num_samples: int, line_number: int) -> DigitalWaveform:
     waveform = DigitalWaveform(num_samples, 1)
     expected_data = _get_expected_data_for_line(num_samples, line_number)
-
-    for i in range(num_samples):
-        bool_array = _int_to_bool_array(1, expected_data[i])
-        waveform.data[i] = bool_array
-
+    _set_waveform_data(num_samples, 1, waveform, expected_data)
     return waveform
+
+
+def _create_waveform_for_lines(
+    num_samples: int, first_line: int, num_lines: int
+) -> DigitalWaveform:
+    waveform = DigitalWaveform(num_samples, num_lines)
+    expected_data = _get_expected_data_for_lines(num_samples, first_line, num_lines)
+    _set_waveform_data(num_samples, num_lines, waveform, expected_data)
+    return waveform
+
+
+def _create_waveforms_for_mixed_lines(num_samples: int) -> list[DigitalWaveform]:
+    # create waveforms for lines 2-4, 0-1, and 5-7, matching the channel configuration
+    # in the do_multi_channel_mixed_line_task fixture
+    return [
+        _create_waveform_for_lines(num_samples, first_line=2, num_lines=3),
+        _create_waveform_for_lines(num_samples, first_line=0, num_lines=2),
+        _create_waveform_for_lines(num_samples, first_line=5, num_lines=3),
+    ]
+
+
+def _set_waveform_data(num_samples, num_lines, waveform, expected_data):
+    for i in range(num_samples):
+        bool_array = _int_to_bool_array(num_lines, expected_data[i])
+        waveform.data[i] = bool_array
 
 
 def _create_non_contiguous_digital_waveform(num_samples: int, num_lines: int) -> DigitalWaveform:
