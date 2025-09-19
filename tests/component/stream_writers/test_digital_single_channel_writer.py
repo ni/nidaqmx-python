@@ -253,7 +253,7 @@ def test___digital_single_channel_writer___write_waveform_single_line_with_non_c
     # write waveforms of increasing length and verify the final value each time.
     for i in range(2, 10):
         num_samples = i
-        waveform = _create_non_contiguous_digital_waveform(num_samples, 1)
+        waveform = _create_non_contiguous_digital_waveform(num_samples, 0, 1)
 
         samples_written = writer.write_waveform(waveform)
 
@@ -360,7 +360,7 @@ def test___digital_single_channel_writer___write_waveform_multi_line_with_non_co
     for i in range(2, 20):
         num_samples = i
         num_lines = 8
-        waveform = _create_non_contiguous_digital_waveform(num_samples, num_lines)
+        waveform = _create_non_contiguous_digital_waveform(num_samples, 0, num_lines)
 
         samples_written = writer.write_waveform(waveform)
 

@@ -94,7 +94,7 @@ def test___task___write_waveform_single_line_with_non_contiguous_data___outputs_
     # write waveforms of increasing length and verify the final value each time.
     for i in range(2, 20):
         num_samples = i
-        waveform = _create_non_contiguous_digital_waveform(num_samples, 1)
+        waveform = _create_non_contiguous_digital_waveform(num_samples, 0, 1)
 
         samples_written = do_single_line_task.write_waveform(waveform)
 
@@ -218,7 +218,7 @@ def test___task___write_waveform_multi_line_with_non_contiguous_data___outputs_m
     for i in range(2, 20):
         num_samples = i
         num_lines = 8
-        waveform = _create_non_contiguous_digital_waveform(num_samples, num_lines)
+        waveform = _create_non_contiguous_digital_waveform(num_samples, 0, num_lines)
 
         samples_written = do_single_channel_multi_line_task.write_waveform(waveform)
 

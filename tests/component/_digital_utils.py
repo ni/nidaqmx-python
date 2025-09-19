@@ -193,8 +193,10 @@ def _set_waveform_data(num_samples, num_lines, waveform, expected_data, invert=F
         waveform.data[i] = bool_array
 
 
-def _create_non_contiguous_digital_waveform(num_samples: int, num_lines: int) -> DigitalWaveform:
-    digital_data = _get_digital_data(num_lines, num_samples)
+def _create_non_contiguous_digital_waveform(
+    num_samples: int, first_line: int, num_lines: int
+) -> DigitalWaveform:
+    digital_data = _get_expected_data_for_lines(num_samples, first_line, num_lines)
     interleaved_data = numpy.zeros((num_samples * 2, num_lines), dtype=numpy.uint8)
 
     for i in range(num_samples):
