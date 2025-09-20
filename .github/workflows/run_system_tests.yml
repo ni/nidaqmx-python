@@ -23,8 +23,6 @@ jobs:
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Import DAQmx config
         run: C:\nidaqmxconfig\targets\win64U\x64\msvc-14.0\release\nidaqmxconfig.exe --eraseconfig --import tests\max_config\nidaqmxMaxConfig.ini
-      - run: echo $env:PATH
-        shell: powershell
       - name: Set up Python
         uses: ni/python-actions/setup-python@8554e7ef74e95c9762962205f45a1e10c48de671 # v0.5.1
       - name: Set up Poetry
