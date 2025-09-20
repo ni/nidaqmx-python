@@ -76,6 +76,7 @@ def test___ao_task___get_uint64_property___returns_default_value(ao_task: Task):
     assert ao_task.out_stream.curr_write_pos == 0
 
 
+@pytest.mark.xfail(reason="https://github.com/ni/nidaqmx-python/issues/833")
 @pytest.mark.device_name("aoTester")
 def test___ao_current_task___get_bool_property___returns_default_value(task, device):
     task.ao_channels.add_ao_current_chan(device.ao_physical_chans[0].name)
@@ -84,6 +85,7 @@ def test___ao_current_task___get_bool_property___returns_default_value(task, dev
     assert not task.out_stream.open_current_loop_chans_exist
 
 
+@pytest.mark.xfail(reason="https://github.com/ni/nidaqmx-python/issues/833")
 @pytest.mark.grpc_xfail(
     reason="AB#2393824: DAQmx read/write status properties return errors when called from C, Python, or grpc-device.",
     raises=DaqError,
@@ -97,6 +99,7 @@ def test___ao_current_task___get_string_list_property___returns_default_value(ta
     assert task.out_stream.open_current_loop_chans == []
 
 
+@pytest.mark.xfail(reason="https://github.com/ni/nidaqmx-python/issues/833")
 @pytest.mark.device_name("aoTester")
 def test___ao_current_task__read_property___out_of_order___throws_daqerror(task, device):
     task.ao_channels.add_ao_current_chan(device.ao_physical_chans[0].name)
