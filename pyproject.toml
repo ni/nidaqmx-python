@@ -107,6 +107,7 @@ types-grpcio = ">=1.0"
 
 [tool.poetry.group.test.dependencies]
 pytest = ">=7.2"
+pytest-benchmark = ">=5.1"
 pytest-cov = ">=4.0"
 pytest-mock = ">=3.0"
 pykka = ">=3.0"
