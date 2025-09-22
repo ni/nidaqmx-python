@@ -14,7 +14,7 @@ from nidaqmx.constants import LineGrouping
 from nidaqmx.errors import DaqError
 from nidaqmx.stream_writers import DigitalMultiChannelWriter
 from tests.component._digital_utils import (
-    _create_digital_waveform,
+    _create_digital_waveform_uint8,
     _create_non_contiguous_digital_waveform,
     _create_waveform_for_line,
     _create_waveforms_for_mixed_lines,
@@ -278,7 +278,7 @@ def test___digital_multi_channel_writer___write_waveforms_feature_disabled___rai
     do_multi_channel_multi_line_task: nidaqmx.Task,
 ) -> None:
     writer = DigitalMultiChannelWriter(do_multi_channel_multi_line_task.out_stream)
-    waveforms = [_create_digital_waveform(20), _create_digital_waveform(20)]
+    waveforms = [_create_digital_waveform_uint8(20), _create_digital_waveform_uint8(20)]
 
     with pytest.raises(FeatureNotSupportedError) as exc_info:
         writer.write_waveforms(waveforms)
@@ -363,8 +363,8 @@ def test___digital_multi_channel_writer___write_waveforms_ports___outputs_match_
         num_samples = i
         num_lines = 8
         waveforms = [
-            _create_digital_waveform(num_samples, num_lines),
-            _create_digital_waveform(num_samples, num_lines, invert=True),
+            _create_digital_waveform_uint8(num_samples, num_lines),
+            _create_digital_waveform_uint8(num_samples, num_lines, invert=True),
         ]
 
         samples_written = writer.write_waveforms(waveforms)
@@ -391,8 +391,8 @@ def test___digital_multi_channel_writer___write_waveforms_port_and_lines___outpu
         num_samples = i
         num_lines = 8
         waveforms = [
-            _create_digital_waveform(num_samples, num_lines),
-            _create_digital_waveform(num_samples, num_lines, invert=True),
+            _create_digital_waveform_uint8(num_samples, num_lines),
+            _create_digital_waveform_uint8(num_samples, num_lines, invert=True),
         ]
 
         samples_written = writer.write_waveforms(waveforms)
@@ -436,8 +436,8 @@ def test___digital_multi_channel_writer___write_waveforms_with_different_sample_
     writer = DigitalMultiChannelWriter(do_multi_channel_port_task.out_stream)
     num_lines = 8
     waveforms = [
-        _create_digital_waveform(10, num_lines),
-        _create_digital_waveform(11, num_lines),
+        _create_digital_waveform_uint8(10, num_lines),
+        _create_digital_waveform_uint8(11, num_lines),
     ]
 
     with pytest.raises(DaqError) as exc_info:
@@ -454,9 +454,9 @@ def test___digital_multi_channel_writer___write_waveforms_with_too_many___raises
     writer = DigitalMultiChannelWriter(do_multi_channel_port_task.out_stream)
     num_lines = 8
     waveforms = [
-        _create_digital_waveform(10, num_lines),
-        _create_digital_waveform(10, num_lines),
-        _create_digital_waveform(10, num_lines),
+        _create_digital_waveform_uint8(10, num_lines),
+        _create_digital_waveform_uint8(10, num_lines),
+        _create_digital_waveform_uint8(10, num_lines),
     ]
 
     with pytest.raises(DaqError) as exc_info:
@@ -473,8 +473,8 @@ def test___digital_multi_channel_writer___write_waveforms_with_too_many_signals_
     writer = DigitalMultiChannelWriter(do_multi_channel_port_task.out_stream)
     num_samples = 10
     waveforms = [
-        _create_digital_waveform(num_samples, 8),
-        _create_digital_waveform(num_samples, 10),
+        _create_digital_waveform_uint8(num_samples, 8),
+        _create_digital_waveform_uint8(num_samples, 10),
     ]
 
     with pytest.raises(DaqError) as exc_info:

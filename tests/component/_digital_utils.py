@@ -6,6 +6,7 @@ from typing import Any, Callable, TypeVar
 
 import numpy
 from nitypes.waveform import DigitalWaveform
+from nitypes.waveform.typing import AnyDigitalState, TDigitalState
 
 import nidaqmx
 
@@ -150,12 +151,18 @@ def _get_waveform_data_msb(waveform: DigitalWaveform[Any]) -> list[int]:
     return [_bool_array_to_int_msb(sample) for sample in waveform.data]
 
 
+def _create_digital_waveform_uint8(
+    num_samples: int, num_lines: int = 1, invert: bool = False
+) -> DigitalWaveform[numpy.uint8]:
+    return _create_digital_waveform(num_samples, num_lines, invert=invert, dtype=numpy.uint8)
+
+
 def _create_digital_waveform(
     num_samples: int,
-    num_lines: int = 1,
+    num_lines: int,
+    dtype: type[TDigitalState],
     invert: bool = False,
-    dtype: type[numpy.generic] = numpy.uint8,
-) -> DigitalWaveform[Any]:
+) -> DigitalWaveform[TDigitalState]:
     waveform = DigitalWaveform(num_samples, num_lines, dtype=dtype)
     expected_data = _get_digital_data(num_lines, num_samples)
     _set_waveform_data(num_samples, num_lines, waveform, expected_data, invert=invert)
@@ -170,15 +177,15 @@ def _create_waveform_for_line(num_samples: int, line_number: int) -> DigitalWave
 
 
 def _create_waveform_for_lines(
-    num_samples: int, first_line: int, num_lines: int, dtype: type[numpy.generic]
-) -> DigitalWaveform[Any]:
+    num_samples: int, first_line: int, num_lines: int, dtype: type[TDigitalState]
+) -> DigitalWaveform[TDigitalState]:
     waveform = DigitalWaveform(num_samples, num_lines, dtype=dtype)
     expected_data = _get_expected_data_for_lines(num_samples, first_line, num_lines)
     _set_waveform_data(num_samples, num_lines, waveform, expected_data)
     return waveform
 
 
-def _create_waveforms_for_mixed_lines(num_samples: int) -> list[DigitalWaveform[Any]]:
+def _create_waveforms_for_mixed_lines(num_samples: int) -> list[DigitalWaveform[AnyDigitalState]]:
     # create waveforms for lines 2-4, 0-1, and 5-7, matching the channel configuration
     # in the do_multi_channel_mixed_line_task fixture
     return [
@@ -194,7 +201,7 @@ def _set_waveform_data(
     waveform: DigitalWaveform[Any],
     expected_data: list[int],
     invert: bool = False,
-):
+) -> None:
     for i in range(num_samples):
         bool_array = _int_to_bool_array(num_lines, expected_data[i])
         if invert:

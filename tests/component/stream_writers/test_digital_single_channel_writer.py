@@ -12,6 +12,7 @@ from nidaqmx.errors import DaqError
 from nidaqmx.stream_writers import DigitalSingleChannelWriter
 from tests.component._digital_utils import (
     _create_digital_waveform,
+    _create_digital_waveform_uint8,
     _create_non_contiguous_digital_waveform,
     _get_digital_data,
     _get_num_do_lines_in_task,
@@ -195,7 +196,7 @@ def test___digital_single_channel_writer___write_waveform_feature_disabled___rai
     do_single_line_task: nidaqmx.Task,
 ) -> None:
     writer = DigitalSingleChannelWriter(do_single_line_task.out_stream)
-    waveform = _create_digital_waveform(20)
+    waveform = _create_digital_waveform_uint8(20)
 
     with pytest.raises(FeatureNotSupportedError) as exc_info:
         writer.write_waveform(waveform)
@@ -216,7 +217,7 @@ def test___digital_single_channel_writer___write_waveform_single_line___outputs_
     # write waveforms of increasing length and verify the final value each time.
     for i in range(1, 10):
         num_samples = i
-        waveform = _create_digital_waveform(num_samples, 1)
+        waveform = _create_digital_waveform_uint8(num_samples, 1)
 
         samples_written = writer.write_waveform(waveform)
 
@@ -231,7 +232,7 @@ def test___digital_single_channel_writer___write_waveform_single_line_with_auto_
 ) -> None:
     writer = DigitalSingleChannelWriter(do_single_line_task_with_timing.out_stream, auto_start=True)
     num_samples = 10
-    waveform = _create_digital_waveform(num_samples, 1)
+    waveform = _create_digital_waveform_uint8(num_samples, 1)
 
     samples_written = writer.write_waveform(waveform)
 
@@ -267,7 +268,7 @@ def test___digital_single_channel_writer___write_waveform_single_line_signal_cou
     writer = DigitalSingleChannelWriter(do_single_line_task.out_stream)
     num_samples = 20
     num_lines = 3
-    waveform = _create_digital_waveform(num_samples, num_lines)
+    waveform = _create_digital_waveform_uint8(num_samples, num_lines)
 
     with pytest.raises(DaqError) as exc_info:
         writer.write_waveform(waveform)
@@ -319,7 +320,7 @@ def test___digital_single_channel_writer___write_waveform_multi_line___outputs_m
     for i in range(1, 10):
         num_samples = i
         num_lines = 8
-        waveform = _create_digital_waveform(num_samples, num_lines)
+        waveform = _create_digital_waveform_uint8(num_samples, num_lines)
 
         samples_written = writer.write_waveform(waveform)
 
@@ -337,7 +338,7 @@ def test___digital_single_channel_writer___write_waveform_multi_line_with_auto_s
     )
     num_samples = 20
     num_lines = 8
-    waveform = _create_digital_waveform(num_samples, num_lines)
+    waveform = _create_digital_waveform_uint8(num_samples, num_lines)
 
     samples_written = writer.write_waveform(waveform)
 
@@ -404,7 +405,7 @@ def test___digital_single_channel_writer___write_waveform_multi_line_signal_coun
     writer = DigitalSingleChannelWriter(do_single_channel_multi_line_task.out_stream)
     num_samples = 20
     num_lines = 1
-    waveform = _create_digital_waveform(num_samples, num_lines)
+    waveform = _create_digital_waveform_uint8(num_samples, num_lines)
 
     with pytest.raises(DaqError) as exc_info:
         writer.write_waveform(waveform)
@@ -429,7 +430,7 @@ def test___digital_single_channel_writer___write_waveform_port_uint8___outputs_m
         num_samples = i
         num_lines = 8
         assert num_lines == _get_num_do_lines_in_task(do_port1_task)
-        waveform = _create_digital_waveform(num_samples, num_lines)
+        waveform = _create_digital_waveform_uint8(num_samples, num_lines)
 
         samples_written = writer.write_waveform(waveform)
 
@@ -454,7 +455,7 @@ def test___digital_single_channel_writer___write_waveform_port_uint32___outputs_
         num_samples = i
         num_lines = 32
         assert num_lines == _get_num_do_lines_in_task(do_port0_task)
-        waveform = _create_digital_waveform(num_samples, num_lines)
+        waveform = _create_digital_waveform_uint8(num_samples, num_lines)
 
         samples_written = writer.write_waveform(waveform)
 

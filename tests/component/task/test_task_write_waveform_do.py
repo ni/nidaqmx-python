@@ -2,13 +2,13 @@ from __future__ import annotations
 
 import numpy
 import pytest
-from nitypes.waveform import DigitalWaveform
 
 import nidaqmx
 from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
 from nidaqmx.errors import DaqError
 from tests.component._digital_utils import (
     _create_digital_waveform,
+    _create_digital_waveform_uint8,
     _create_non_contiguous_digital_waveform,
     _create_waveform_for_line,
     _create_waveforms_for_mixed_lines,
@@ -23,7 +23,7 @@ from tests.component._digital_utils import (
 def test___task___write_waveform_feature_disabled___raises_feature_not_supported_error(
     do_single_line_task: nidaqmx.Task,
 ) -> None:
-    waveform = _create_digital_waveform(10)
+    waveform = _create_digital_waveform_uint8(10)
 
     with pytest.raises(FeatureNotSupportedError) as exc_info:
         do_single_line_task.write_waveform(waveform)
@@ -43,7 +43,7 @@ def test___task___write_waveform_single_line___outputs_match_final_values(
     # write waveforms of increasing length and verify the final value each time.
     for i in range(1, 20):
         num_samples = i
-        waveform = _create_digital_waveform(num_samples, 1)
+        waveform = _create_digital_waveform_uint8(num_samples, 1)
 
         samples_written = do_single_line_task.write_waveform(waveform)
 
@@ -62,7 +62,7 @@ def test___task___write_waveform_single_line_with_write___outputs_match_final_va
     # write waveforms of increasing length and verify the final value each time.
     for i in range(1, 20):
         num_samples = i
-        waveform = _create_digital_waveform(num_samples, 1)
+        waveform = _create_digital_waveform_uint8(num_samples, 1)
 
         samples_written = do_single_line_task.write(waveform)
 
@@ -77,7 +77,7 @@ def test___task___write_waveform_single_line_with_auto_start___output_matches_fi
     di_single_line_loopback_task: nidaqmx.Task,
 ) -> None:
     num_samples = 20
-    waveform = _create_digital_waveform(num_samples, 1)
+    waveform = _create_digital_waveform_uint8(num_samples, 1)
 
     samples_written = do_single_line_task_with_timing.write_waveform(waveform, auto_start=True)
 
@@ -125,7 +125,7 @@ def test___task___write_waveform_single_line_all_dtypes___outputs_match_final_va
     # write waveforms of increasing length and verify the final value each time.
     for i in range(1, 10):
         num_samples = i
-        waveform = DigitalWaveform(num_samples, 1, dtype=dtype)
+        waveform = _create_digital_waveform(num_samples, 1, dtype=dtype)
 
         samples_written = do_single_line_task.write_waveform(waveform)
 
@@ -139,7 +139,7 @@ def test___task___write_waveform_single_line_signal_count_mismatch___raises_daq_
 ) -> None:
     num_samples = 20
     num_lines = 3
-    waveform = _create_digital_waveform(num_samples, num_lines)
+    waveform = _create_digital_waveform_uint8(num_samples, num_lines)
 
     with pytest.raises(DaqError) as exc_info:
         do_single_line_task.write_waveform(waveform)
@@ -162,7 +162,7 @@ def test___task___write_waveform_multi_line___outputs_match_final_values(
     for i in range(1, 20):
         num_samples = i
         num_lines = 8
-        waveform = _create_digital_waveform(num_samples, num_lines)
+        waveform = _create_digital_waveform_uint8(num_samples, num_lines)
 
         samples_written = do_single_channel_multi_line_task.write_waveform(waveform)
 
@@ -182,7 +182,7 @@ def test___task___write_waveform_multi_line_with_write___outputs_match_final_val
     for i in range(1, 20):
         num_samples = i
         num_lines = 8
-        waveform = _create_digital_waveform(num_samples, num_lines)
+        waveform = _create_digital_waveform_uint8(num_samples, num_lines)
 
         samples_written = do_single_channel_multi_line_task.write(waveform)
 
@@ -198,7 +198,7 @@ def test___task___write_waveform_multi_line_with_auto_start___output_matches_fin
 ) -> None:
     num_samples = 20
     num_lines = 8
-    waveform = _create_digital_waveform(num_samples, num_lines)
+    waveform = _create_digital_waveform_uint8(num_samples, num_lines)
 
     samples_written = do_single_channel_multi_line_task_with_timing.write_waveform(
         waveform, auto_start=True
@@ -250,7 +250,7 @@ def test___task___write_waveform_multi_line_all_dtypes___outputs_match_final_val
     for i in range(1, 10):
         num_samples = i
         num_lines = 8
-        waveform = DigitalWaveform(num_samples, num_lines, dtype=dtype)
+        waveform = _create_digital_waveform(num_samples, num_lines, dtype=dtype)
 
         samples_written = do_single_channel_multi_line_task.write_waveform(waveform)
 
@@ -264,7 +264,7 @@ def test___task___write_waveform_multi_line_signal_count_mismatch___raises_daq_e
 ) -> None:
     num_samples = 20
     num_lines = 1
-    waveform = _create_digital_waveform(num_samples, num_lines)
+    waveform = _create_digital_waveform_uint8(num_samples, num_lines)
 
     with pytest.raises(DaqError) as exc_info:
         do_single_channel_multi_line_task.write_waveform(waveform)
@@ -287,7 +287,7 @@ def test___task___write_waveform_port_uint8___outputs_match_final_values(
     for i in range(1, 20):
         num_samples = i
         num_lines = 8
-        waveform = _create_digital_waveform(num_samples, num_lines)
+        waveform = _create_digital_waveform_uint8(num_samples, num_lines)
 
         samples_written = do_port1_task.write_waveform(waveform)
 
@@ -309,7 +309,7 @@ def test___task___write_waveform_port_uint32___outputs_match_final_values(
     for i in range(1, 20):
         num_samples = i
         num_lines = 32
-        waveform = _create_digital_waveform(num_samples, num_lines)
+        waveform = _create_digital_waveform_uint8(num_samples, num_lines)
 
         samples_written = do_port0_task.write_waveform(waveform)
 
@@ -324,7 +324,7 @@ def test___task___write_waveform_port_uint32___outputs_match_final_values(
 def test___task___write_waveforms_feature_disabled___raises_feature_not_supported_error(
     do_multi_channel_multi_line_task: nidaqmx.Task,
 ) -> None:
-    waveforms = [_create_digital_waveform(20), _create_digital_waveform(20)]
+    waveforms = [_create_digital_waveform_uint8(20), _create_digital_waveform_uint8(20)]
 
     with pytest.raises(FeatureNotSupportedError) as exc_info:
         do_multi_channel_multi_line_task.write_waveform(waveforms)
@@ -427,8 +427,8 @@ def test___task___write_waveforms_ports___outputs_match_final_values(
         num_samples = i
         num_lines = 8
         waveforms = [
-            _create_digital_waveform(num_samples, num_lines),
-            _create_digital_waveform(num_samples, num_lines, invert=True),
+            _create_digital_waveform_uint8(num_samples, num_lines),
+            _create_digital_waveform_uint8(num_samples, num_lines, invert=True),
         ]
 
         samples_written = do_multi_channel_port_task.write_waveform(waveforms)
@@ -454,8 +454,8 @@ def test___task___write_waveforms_port_and_lines___outputs_match_final_values(
         num_samples = i
         num_lines = 8
         waveforms = [
-            _create_digital_waveform(num_samples, num_lines),
-            _create_digital_waveform(num_samples, num_lines, invert=True),
+            _create_digital_waveform_uint8(num_samples, num_lines),
+            _create_digital_waveform_uint8(num_samples, num_lines, invert=True),
         ]
 
         samples_written = do_multi_channel_port_and_lines_task.write_waveform(waveforms)
@@ -497,8 +497,8 @@ def test___task___write_waveforms_with_different_sample_counts___raises_daq_erro
 ) -> None:
     num_lines = 8
     waveforms = [
-        _create_digital_waveform(10, num_lines),
-        _create_digital_waveform(11, num_lines),
+        _create_digital_waveform_uint8(10, num_lines),
+        _create_digital_waveform_uint8(11, num_lines),
     ]
 
     with pytest.raises(DaqError) as exc_info:
@@ -514,9 +514,9 @@ def test___task___write_waveforms_with_too_many___raises_daq_error(
 ) -> None:
     num_lines = 8
     waveforms = [
-        _create_digital_waveform(10, num_lines),
-        _create_digital_waveform(10, num_lines),
-        _create_digital_waveform(10, num_lines),
+        _create_digital_waveform_uint8(10, num_lines),
+        _create_digital_waveform_uint8(10, num_lines),
+        _create_digital_waveform_uint8(10, num_lines),
     ]
 
     with pytest.raises(DaqError) as exc_info:
@@ -532,8 +532,8 @@ def test___task___write_waveforms_with_too_many_signals___raises_daq_error(
 ) -> None:
     num_samples = 10
     waveforms = [
-        _create_digital_waveform(num_samples, 8),
-        _create_digital_waveform(num_samples, 10),
+        _create_digital_waveform_uint8(num_samples, 8),
+        _create_digital_waveform_uint8(num_samples, 10),
     ]
 
     with pytest.raises(DaqError) as exc_info:
