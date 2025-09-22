@@ -7108,6 +7108,50 @@ class LibraryInterpreter(BaseInterpreter):
             return data
         return data.copy(order="C")
 
+    def write_digital_waveforms(
+        self,
+        task_handle: object,
+        waveforms: Sequence[DigitalWaveform[Any]],
+        auto_start: bool,
+        timeout: float,
+    ) -> int:
+        """Write digital waveforms."""
+        channel_count = len(waveforms)
+        assert channel_count > 0
+        sample_count = waveforms[0].sample_count
+
+        for waveform in waveforms:
+            if waveform.sample_count != sample_count:
+                raise DaqError(
+                    "The waveforms must all have the same sample count.",
+                    DAQmxErrors.UNKNOWN
+                )
+                
+        bytes_per_chan_array = numpy.array([wf.signal_count for wf in waveforms], dtype=numpy.uint32)
+
+        # build a temporary contiguous array to write the data from multiple channels into.
+        # write_array must be in the format (numChans x numSampsPerChan x maxDataWidth)
+        write_array = numpy.zeros(
+            (channel_count, sample_count, max(bytes_per_chan_array)),
+            dtype=numpy.uint8,
+        )
+        for i, waveform in enumerate(waveforms):
+            signal_count = waveform.signal_count
+            write_array[i, :, :signal_count] = waveform.data
+
+        error_code, samples_written = self._internal_write_digital_waveform(
+            task_handle,
+            sample_count,
+            auto_start,
+            timeout,
+            FillMode.GROUP_BY_CHANNEL.value,
+            write_array,
+            bytes_per_chan_array,
+        )
+
+        self.check_for_error(error_code, samps_per_chan_written=samples_written)
+        return samples_written
+
     def _internal_write_digital_waveform(
         self,
         task_handle: object,
