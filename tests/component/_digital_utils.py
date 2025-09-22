@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Callable, TypeVar
+from typing import Any, Callable, TypeVar
 
 import numpy
 from nitypes.waveform import DigitalWaveform
@@ -140,12 +140,12 @@ def _int_to_bool_array(num_lines: int, input: int) -> numpy.typing.NDArray[numpy
     return result
 
 
-def _get_waveform_data(waveform: DigitalWaveform) -> list[int]:
+def _get_waveform_data(waveform: DigitalWaveform[Any]) -> list[int]:
     assert isinstance(waveform, DigitalWaveform)
     return [_bool_array_to_int(sample) for sample in waveform.data]
 
 
-def _get_waveform_data_msb(waveform: DigitalWaveform) -> list[int]:
+def _get_waveform_data_msb(waveform: DigitalWaveform[Any]) -> list[int]:
     assert isinstance(waveform, DigitalWaveform)
     return [_bool_array_to_int_msb(sample) for sample in waveform.data]
 
@@ -155,14 +155,14 @@ def _create_digital_waveform(
     num_lines: int = 1,
     invert: bool = False,
     dtype: type[numpy.generic] = numpy.uint8,
-) -> DigitalWaveform:
+) -> DigitalWaveform[Any]:
     waveform = DigitalWaveform(num_samples, num_lines, dtype=dtype)
     expected_data = _get_digital_data(num_lines, num_samples)
     _set_waveform_data(num_samples, num_lines, waveform, expected_data, invert=invert)
     return waveform
 
 
-def _create_waveform_for_line(num_samples: int, line_number: int) -> DigitalWaveform:
+def _create_waveform_for_line(num_samples: int, line_number: int) -> DigitalWaveform[numpy.uint8]:
     waveform = DigitalWaveform(num_samples, 1)
     expected_data = _get_expected_data_for_line(num_samples, line_number)
     _set_waveform_data(num_samples, 1, waveform, expected_data)
@@ -171,14 +171,14 @@ def _create_waveform_for_line(num_samples: int, line_number: int) -> DigitalWave
 
 def _create_waveform_for_lines(
     num_samples: int, first_line: int, num_lines: int, dtype: type[numpy.generic]
-) -> DigitalWaveform:
+) -> DigitalWaveform[Any]:
     waveform = DigitalWaveform(num_samples, num_lines, dtype=dtype)
     expected_data = _get_expected_data_for_lines(num_samples, first_line, num_lines)
     _set_waveform_data(num_samples, num_lines, waveform, expected_data)
     return waveform
 
 
-def _create_waveforms_for_mixed_lines(num_samples: int) -> list[DigitalWaveform]:
+def _create_waveforms_for_mixed_lines(num_samples: int) -> list[DigitalWaveform[Any]]:
     # create waveforms for lines 2-4, 0-1, and 5-7, matching the channel configuration
     # in the do_multi_channel_mixed_line_task fixture
     return [
@@ -188,7 +188,13 @@ def _create_waveforms_for_mixed_lines(num_samples: int) -> list[DigitalWaveform]
     ]
 
 
-def _set_waveform_data(num_samples, num_lines, waveform, expected_data, invert=False):
+def _set_waveform_data(
+    num_samples: int,
+    num_lines: int,
+    waveform: DigitalWaveform[Any],
+    expected_data: list[int],
+    invert: bool = False,
+):
     for i in range(num_samples):
         bool_array = _int_to_bool_array(num_lines, expected_data[i])
         if invert:
@@ -198,7 +204,7 @@ def _set_waveform_data(num_samples, num_lines, waveform, expected_data, invert=F
 
 def _create_non_contiguous_digital_waveform(
     num_samples: int, first_line: int, num_lines: int
-) -> DigitalWaveform:
+) -> DigitalWaveform[numpy.uint8]:
     digital_data = _get_expected_data_for_lines(num_samples, first_line, num_lines)
     interleaved_data = numpy.zeros((num_samples * 2, num_lines), dtype=numpy.uint8)
 

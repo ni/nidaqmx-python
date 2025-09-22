@@ -7100,6 +7100,14 @@ class LibraryInterpreter(BaseInterpreter):
         self.check_for_error(error_code, samps_per_chan_written=samples_written)
         return samples_written
 
+    def _get_digital_write_array(self, waveform: DigitalWaveform[Any]) -> numpy.typing.NDArray[numpy.uint8]:  
+        data = waveform.data
+        if data.dtype != numpy.uint8:
+            data = data.view(numpy.uint8)
+        if data.flags.c_contiguous:
+            return data
+        return data.copy(order="C")
+
     def write_digital_waveforms(
         self,
         task_handle: object,
@@ -7127,9 +7135,9 @@ class LibraryInterpreter(BaseInterpreter):
             (channel_count, sample_count, max(bytes_per_chan_array)),
             dtype=numpy.uint8,
         )
-        for i, wf in enumerate(waveforms):
-            signal_count = wf.signal_count
-            write_array[i, :, :signal_count] = self._get_digital_write_array(wf)
+        for i, waveform in enumerate(waveforms):
+            signal_count = waveform.signal_count
+            write_array[i, :, :signal_count] = waveform.data
 
         error_code, samples_written = self._internal_write_digital_waveform(
             task_handle,
@@ -7143,14 +7151,6 @@ class LibraryInterpreter(BaseInterpreter):
 
         self.check_for_error(error_code, samps_per_chan_written=samples_written)
         return samples_written
-
-    def _get_digital_write_array(self, waveform: DigitalWaveform[Any]) -> numpy.typing.NDArray[numpy.uint8]:  
-        data = waveform.data
-        if data.dtype != numpy.uint8:
-            data = data.view(numpy.uint8)
-        if data.flags.c_contiguous:
-            return data
-        return data.copy(order="C")
 
     def _internal_write_digital_waveform(
         self,
