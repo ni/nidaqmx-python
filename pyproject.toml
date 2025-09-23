@@ -136,7 +136,7 @@ application-import-names = "nidaqmx"
 [tool.pytest.ini_options]
 addopts = "--doctest-modules --strict-markers"
 filterwarnings = ["always::ImportWarning", "always::ResourceWarning"]
-testpaths = ["tests"]
+testpaths = ["tests/acceptance", "tests/component", "tests/legacy", "tests/unit"]
 markers = [
   # Defines custom markers used by nidaqmx tests. Prevents PytestUnknownMarkWarning.
   "library_only(reason=...): run the test with only the library interpreter implementation.",
@@ -185,6 +185,8 @@ module = [
   "importlib_metadata",
   "mako.*",
   "nidaqmx.*",
+  # https://github.com/ionelmc/pytest-benchmark/issues/212 - Add type annotations
+  "pytest_benchmark.*",
 ]
 ignore_missing_imports = true
 

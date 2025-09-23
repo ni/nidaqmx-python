@@ -1,13 +1,17 @@
 from __future__ import annotations
 
 import numpy
-import nidaqmx
-from nidaqmx.stream_writers._digital_single_channel_writer import DigitalSingleChannelWriter
-from nidaqmx.stream_writers._digital_multi_channel_writer import DigitalMultiChannelWriter
 import pytest
+from nitypes.waveform import DigitalWaveform
 from pytest_benchmark.fixture import BenchmarkFixture
 
-from nitypes.waveform import DigitalWaveform
+import nidaqmx
+from nidaqmx.stream_writers._digital_multi_channel_writer import (
+    DigitalMultiChannelWriter,
+)
+from nidaqmx.stream_writers._digital_single_channel_writer import (
+    DigitalSingleChannelWriter,
+)
 
 
 @pytest.mark.benchmark(group="digital_stream_writers")
@@ -95,7 +99,7 @@ def test___digital_multi_channel_writer___write_one_sample_multi_line___1_sample
     do_multi_channel_multi_line_task: nidaqmx.Task,
 ) -> None:
     writer = DigitalMultiChannelWriter(do_multi_channel_multi_line_task.out_stream)
-    sample = numpy.full((2, 1), True, dtype=numpy.bool_)
+    sample = numpy.full((8, 1), True, dtype=numpy.bool_)
 
     benchmark(writer.write_one_sample_multi_line, sample)
 
@@ -119,9 +123,7 @@ def test___digital_multi_channel_writer___write_many_sample_port_byte___256_samp
     writer = DigitalMultiChannelWriter(do_multi_channel_port_task.out_stream)
     num_channels = 2
     samples_to_write = 256
-    data = numpy.full(
-        (num_channels, samples_to_write), numpy.uint8(1), dtype=numpy.uint8
-    )
+    data = numpy.full((num_channels, samples_to_write), numpy.uint8(1), dtype=numpy.uint8)
 
     benchmark(writer.write_many_sample_port_byte, data)
 
