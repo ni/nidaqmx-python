@@ -66,7 +66,7 @@ def test___digital_single_channel_reader___read_many_sample_port_uint32___256_sa
 
 @pytest.mark.benchmark(group="digital_stream_readers")
 @pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
-def test___digital_single_line_reader___read_waveform___256_samples(
+def test___digital_single_channel_reader___read_waveform___256_samples(
     benchmark: BenchmarkFixture,
     di_single_line_task: nidaqmx.Task,
 ) -> None:
@@ -178,7 +178,7 @@ def test___digital_multi_channel_reader___read_many_sample_port_uint32___256_sam
 
 @pytest.mark.benchmark(group="digital_stream_readers")
 @pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
-def test___digital_multi_channel_multi_line_reader___read_waveform___256_samples(
+def test___digital_multi_channel_reader___read_waveform_multi_line___256_samples(
     benchmark: BenchmarkFixture,
     di_multi_channel_multi_line_task: nidaqmx.Task,
 ) -> None:

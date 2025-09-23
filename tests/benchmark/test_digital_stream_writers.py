@@ -83,6 +83,61 @@ def test___digital_single_channel_writer___write_many_sample_port_uint32___256_s
 
 
 @pytest.mark.benchmark(group="digital_stream_writers")
+@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
+def test___digital_single_channel_writer___write_waveform___256_samples(
+    benchmark: BenchmarkFixture,
+    do_single_line_task: nidaqmx.Task,
+) -> None:
+    writer = DigitalSingleChannelWriter(do_single_line_task.out_stream)
+    samples_to_write = 256
+    waveform = DigitalWaveform(samples_to_write)
+
+    benchmark(writer.write_waveform, waveform)
+
+
+@pytest.mark.benchmark(group="digital_stream_writers")
+@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
+def test___digital_single_channel_writer___write_waveform_multi_line___256_samples(
+    benchmark: BenchmarkFixture,
+    do_single_channel_multi_line_task: nidaqmx.Task,
+) -> None:
+    writer = DigitalSingleChannelWriter(do_single_channel_multi_line_task.out_stream)
+    samples_to_write = 256
+    num_lines = 8
+    waveform = DigitalWaveform(samples_to_write, num_lines)
+
+    benchmark(writer.write_waveform, waveform)
+
+
+@pytest.mark.benchmark(group="digital_stream_writers")
+@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
+def test___digital_single_channel_writer___write_waveform_port_byte___256_samples(
+    benchmark: BenchmarkFixture,
+    do_port1_task: nidaqmx.Task,
+) -> None:
+    writer = DigitalSingleChannelWriter(do_port1_task.out_stream)
+    samples_to_write = 256
+    num_lines = 8
+    waveform = DigitalWaveform(samples_to_write, num_lines)
+
+    benchmark(writer.write_waveform, waveform)
+
+
+@pytest.mark.benchmark(group="digital_stream_writers")
+@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
+def test___digital_single_channel_writer___write_waveform_port_uint32___256_samples(
+    benchmark: BenchmarkFixture,
+    do_port0_task: nidaqmx.Task,
+) -> None:
+    writer = DigitalSingleChannelWriter(do_port0_task.out_stream)
+    samples_to_write = 256
+    num_lines = 32
+    waveform = DigitalWaveform(samples_to_write, num_lines)
+
+    benchmark(writer.write_waveform, waveform)
+
+
+@pytest.mark.benchmark(group="digital_stream_writers")
 def test___digital_multi_channel_writer___write_one_sample_one_line___1_sample(
     benchmark: BenchmarkFixture,
     do_single_line_task: nidaqmx.Task,
@@ -130,62 +185,7 @@ def test___digital_multi_channel_writer___write_many_sample_port_byte___256_samp
 
 @pytest.mark.benchmark(group="digital_stream_writers")
 @pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
-def test___digital_single_line_writer___write_waveform___256_samples(
-    benchmark: BenchmarkFixture,
-    do_single_line_task: nidaqmx.Task,
-) -> None:
-    writer = DigitalSingleChannelWriter(do_single_line_task.out_stream)
-    samples_to_write = 256
-    waveform = DigitalWaveform(samples_to_write)
-
-    benchmark(writer.write_waveform, waveform)
-
-
-@pytest.mark.benchmark(group="digital_stream_writers")
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
-def test___digital_single_channel_multi_line_writer___write_waveform___256_samples(
-    benchmark: BenchmarkFixture,
-    do_single_channel_multi_line_task: nidaqmx.Task,
-) -> None:
-    writer = DigitalSingleChannelWriter(do_single_channel_multi_line_task.out_stream)
-    samples_to_write = 256
-    num_lines = 8
-    waveform = DigitalWaveform(samples_to_write, num_lines)
-
-    benchmark(writer.write_waveform, waveform)
-
-
-@pytest.mark.benchmark(group="digital_stream_writers")
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
-def test___digital_single_channel_writer___write_waveform_port_byte___256_samples(
-    benchmark: BenchmarkFixture,
-    do_port1_task: nidaqmx.Task,
-) -> None:
-    writer = DigitalSingleChannelWriter(do_port1_task.out_stream)
-    samples_to_write = 256
-    num_lines = 8
-    waveform = DigitalWaveform(samples_to_write, num_lines)
-
-    benchmark(writer.write_waveform, waveform)
-
-
-@pytest.mark.benchmark(group="digital_stream_writers")
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
-def test___digital_single_channel_writer___write_waveform_port_uint32___256_samples(
-    benchmark: BenchmarkFixture,
-    do_port0_task: nidaqmx.Task,
-) -> None:
-    writer = DigitalSingleChannelWriter(do_port0_task.out_stream)
-    samples_to_write = 256
-    num_lines = 32
-    waveform = DigitalWaveform(samples_to_write, num_lines)
-
-    benchmark(writer.write_waveform, waveform)
-
-
-@pytest.mark.benchmark(group="digital_stream_writers")
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
-def test___digital_multi_channel_multi_line_writer___write_waveforms___256_samples(
+def test___digital_multi_channel_writer___write_waveform_multi_lines___256_samples(
     benchmark: BenchmarkFixture,
     do_multi_channel_multi_line_task: nidaqmx.Task,
 ) -> None:
