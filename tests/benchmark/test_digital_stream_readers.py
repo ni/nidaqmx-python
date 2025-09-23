@@ -184,7 +184,7 @@ def test___digital_multi_channel_reader___read_waveform_multi_line___256_samples
 ) -> None:
     reader = DigitalMultiChannelReader(di_multi_channel_multi_line_task.in_stream)
     num_channels = 8
-    samples_to_read = 2561
+    samples_to_read = 256
     waveforms = [DigitalWaveform(samples_to_read) for _ in range(num_channels)]
 
     benchmark(reader.read_waveforms, waveforms, samples_to_read)
