@@ -13,73 +13,87 @@ from nidaqmx.stream_writers._analog_single_channel_writer import (
 
 
 @pytest.mark.benchmark(group="analog_stream_writers")
-def test___analog_single_channel_writer___write_one_sample___1_sample(
+@pytest.mark.parametrize("num_channels", [1])
+def test___analog_single_channel_writer___write_one_sample(
     benchmark: BenchmarkFixture,
-    ao_single_channel_task: nidaqmx.Task,
+    ao_single_sample_benchmark_task: nidaqmx.Task,
+    num_channels: int,
 ) -> None:
-    writer = AnalogSingleChannelWriter(ao_single_channel_task.out_stream)
+    writer = AnalogSingleChannelWriter(ao_single_sample_benchmark_task.out_stream)
 
     benchmark(writer.write_one_sample, 1.0)
 
 
 @pytest.mark.benchmark(group="analog_stream_writers")
-def test___analog_single_channel_writer___write_many_sample___100_samples(
+@pytest.mark.parametrize("num_channels", [1])
+@pytest.mark.parametrize("num_samples", [1, 1000])
+def test___analog_single_channel_writer___write_many_sample(
     benchmark: BenchmarkFixture,
-    ao_single_channel_task: nidaqmx.Task,
+    ao_multi_sample_benchmark_task: nidaqmx.Task,
+    num_channels: int,
+    num_samples: int,
 ) -> None:
-    writer = AnalogSingleChannelWriter(ao_single_channel_task.out_stream)
-    samples_to_write = 100
-    data = numpy.linspace(0.0, 1.0, num=samples_to_write, dtype=numpy.float64)
+    writer = AnalogSingleChannelWriter(ao_multi_sample_benchmark_task.out_stream)
+    data = numpy.linspace(0.0, 1.0, num=num_samples, dtype=numpy.float64)
 
     benchmark(writer.write_many_sample, data)
 
 
 @pytest.mark.benchmark(group="analog_stream_writers")
+@pytest.mark.parametrize("num_channels", [1])
+@pytest.mark.parametrize("num_samples", [1, 1000])
 @pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
-def test___analog_single_channel_writer___write_waveform___100_samples(
+def test___analog_single_channel_writer___write_waveform(
     benchmark: BenchmarkFixture,
-    ao_single_channel_task: nidaqmx.Task,
+    ao_multi_sample_benchmark_task: nidaqmx.Task,
+    num_channels: int,
+    num_samples: int,
 ) -> None:
-    writer = AnalogSingleChannelWriter(ao_single_channel_task.out_stream)
-    num_samples = 100
+    writer = AnalogSingleChannelWriter(ao_multi_sample_benchmark_task.out_stream)
     waveform = AnalogWaveform(num_samples)
 
     benchmark(writer.write_waveform, waveform)
 
 
 @pytest.mark.benchmark(group="analog_stream_writers")
-def test___analog_multi_channel_writer___write_one_sample___1_sample(
+@pytest.mark.parametrize("num_channels", [1, 2])
+def test___analog_multi_channel_writer___write_one_sample(
     benchmark: BenchmarkFixture,
-    ao_multi_channel_task: nidaqmx.Task,
+    ao_single_sample_benchmark_task: nidaqmx.Task,
+    num_channels: int,
 ) -> None:
-    writer = AnalogMultiChannelWriter(ao_multi_channel_task.out_stream)
-    expected = [1.0, 1.0]
-    data = numpy.asarray(expected, dtype=numpy.float64)
+    writer = AnalogMultiChannelWriter(ao_single_sample_benchmark_task.out_stream)
+    data = numpy.asarray([1.0] * num_channels, dtype=numpy.float64)
 
     benchmark(writer.write_one_sample, data)
 
 
 @pytest.mark.benchmark(group="analog_stream_writers")
-def test___analog_multi_channel_writer___write_many_sample___100_samples(
+@pytest.mark.parametrize("num_channels", [1, 2])
+@pytest.mark.parametrize("num_samples", [1, 1000])
+def test___analog_multi_channel_writer___write_many_sample(
     benchmark: BenchmarkFixture,
-    ao_multi_channel_task: nidaqmx.Task,
+    ao_multi_sample_benchmark_task: nidaqmx.Task,
+    num_channels: int,
+    num_samples: int,
 ) -> None:
-    writer = AnalogMultiChannelWriter(ao_multi_channel_task.out_stream)
-    num_channels = 2
-    samples_to_write = 100
-    data = numpy.full((num_channels, samples_to_write), 1.0, dtype=numpy.float64)
+    writer = AnalogMultiChannelWriter(ao_multi_sample_benchmark_task.out_stream)
+    data = numpy.full((num_channels, num_samples), 1.0, dtype=numpy.float64)
 
     benchmark(writer.write_many_sample, data)
 
 
 @pytest.mark.benchmark(group="analog_stream_writers")
+@pytest.mark.parametrize("num_channels", [1, 2])
+@pytest.mark.parametrize("num_samples", [1, 1000])
 @pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
-def test___analog_multi_channel_writer___write_waveform___100_samples(
+def test___analog_multi_channel_writer___write_waveform(
     benchmark: BenchmarkFixture,
-    ao_multi_channel_task: nidaqmx.Task,
+    ao_multi_sample_benchmark_task: nidaqmx.Task,
+    num_channels: int,
+    num_samples: int,
 ) -> None:
-    writer = AnalogMultiChannelWriter(ao_multi_channel_task.out_stream)
-    num_samples = 100
-    waveform = [AnalogWaveform(num_samples), AnalogWaveform(num_samples)]
+    writer = AnalogMultiChannelWriter(ao_multi_sample_benchmark_task.out_stream)
+    waveform = [AnalogWaveform(num_samples) for _ in range(num_channels)]
 
     benchmark(writer.write_waveforms, waveform)

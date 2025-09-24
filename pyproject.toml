@@ -199,6 +199,7 @@ warn_unused_ignores = false
 typeCheckingMode = "basic"
 reportArgumentType = false
 reportAttributeAccessIssue = false
+reportGeneralTypeIssues = false
 reportInvalidTypeForm = false
 reportOperatorIssue = false
 reportOptionalIterable = false
