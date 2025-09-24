@@ -59,7 +59,7 @@ def test___analog_single_channel_reader___read_waveform(
 
 @pytest.mark.benchmark(group="analog_stream_readers")
 @pytest.mark.parametrize("num_channels", [1, 2, 8])
-@pytest.mark.parametrize("num_samples", [1, 1000])
+@pytest.mark.parametrize("num_samples", [1])
 def test___analog_multi_channel_reader___read_one_sample(
     benchmark: BenchmarkFixture, ai_benchmark_task: Task, num_channels: int, num_samples: int
 ) -> None:
