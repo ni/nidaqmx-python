@@ -88,6 +88,11 @@ Benchmark tests are not run by default when you run pytest. To run the benchmark
 $ poetry run pytest -v tests/benchmark
 ```
 
+Or you can use tox (which skips the gRPC variants):
+```
+poetry run tox -e benchmark
+```
+
 # Building Documentation
 
 To build the documentation install the optional docs packages and run sphinx. For example:
