@@ -15,7 +15,7 @@ from nidaqmx.stream_readers._analog_single_channel_reader import (
 )
 
 
-@pytest.mark.benchmark(group="analog_stream_readers")
+@pytest.mark.benchmark(group="analog_readers")
 @pytest.mark.parametrize("num_channels", [1])
 @pytest.mark.parametrize("num_samples", [1])
 def test___analog_single_channel_reader___read_one_sample(
@@ -26,7 +26,7 @@ def test___analog_single_channel_reader___read_one_sample(
     benchmark(reader.read_one_sample)
 
 
-@pytest.mark.benchmark(group="analog_stream_readers")
+@pytest.mark.benchmark(group="analog_readers")
 @pytest.mark.parametrize("num_channels", [1])
 @pytest.mark.parametrize("num_samples", [1, 1000])
 def test___analog_single_channel_reader___read_many_sample(
@@ -38,7 +38,7 @@ def test___analog_single_channel_reader___read_many_sample(
     benchmark(reader.read_many_sample, data, num_samples)
 
 
-@pytest.mark.benchmark(group="analog_stream_readers")
+@pytest.mark.benchmark(group="analog_readers")
 @pytest.mark.parametrize("num_channels", [1])
 @pytest.mark.parametrize("num_samples", [1, 1000])
 @pytest.mark.parametrize("waveform_attribute_mode", list(WaveformAttributeMode))
@@ -57,7 +57,7 @@ def test___analog_single_channel_reader___read_waveform(
     benchmark(reader.read_waveform, waveform, num_samples)
 
 
-@pytest.mark.benchmark(group="analog_stream_readers")
+@pytest.mark.benchmark(group="analog_readers")
 @pytest.mark.parametrize("num_channels", [1, 2, 8])
 @pytest.mark.parametrize("num_samples", [1])
 def test___analog_multi_channel_reader___read_one_sample(
@@ -69,20 +69,19 @@ def test___analog_multi_channel_reader___read_one_sample(
     benchmark(reader.read_one_sample, data)
 
 
-@pytest.mark.benchmark(group="analog_stream_readers")
+@pytest.mark.benchmark(group="analog_readers")
 @pytest.mark.parametrize("num_channels", [1, 2, 8])
 @pytest.mark.parametrize("num_samples", [1, 1000])
 def test___analog_multi_channel_reader___read_many_sample(
     benchmark: BenchmarkFixture, ai_benchmark_task: Task, num_channels: int, num_samples: int
 ) -> None:
     reader = AnalogMultiChannelReader(ai_benchmark_task.in_stream)
-    samples_to_read = 1000
-    data = numpy.full((num_channels, samples_to_read), math.inf, dtype=numpy.float64)
+    data = numpy.full((num_channels, num_samples), math.inf, dtype=numpy.float64)
 
-    benchmark(reader.read_many_sample, data, samples_to_read)
+    benchmark(reader.read_many_sample, data, num_samples)
 
 
-@pytest.mark.benchmark(group="analog_stream_readers")
+@pytest.mark.benchmark(group="analog_readers")
 @pytest.mark.parametrize("num_channels", [1, 2, 8])
 @pytest.mark.parametrize("num_samples", [1, 1000])
 @pytest.mark.parametrize("waveform_attribute_mode", list(WaveformAttributeMode))
@@ -96,7 +95,6 @@ def test___analog_multi_channel_reader___read_waveform(
 ) -> None:
     ai_benchmark_task.in_stream.waveform_attribute_mode = waveform_attribute_mode
     reader = AnalogMultiChannelReader(ai_benchmark_task.in_stream)
-    samples_to_read = 1000
-    waveforms = [AnalogWaveform(samples_to_read) for _ in range(num_channels)]
+    waveforms = [AnalogWaveform(num_samples) for _ in range(num_channels)]
 
-    benchmark(reader.read_waveforms, waveforms, samples_to_read)
+    benchmark(reader.read_waveforms, waveforms, num_samples)
