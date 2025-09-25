@@ -12,7 +12,8 @@ from nidaqmx.constants import (
     ReadRelativeTo,
     TaskMode,
 )
-from nidaqmx.system import Device
+from nidaqmx.system import Device, System
+from tests.conftest import DeviceType, _device_by_product_type
 
 
 def _configure_timing(task, num_channels, num_samples):
@@ -37,9 +38,15 @@ def _commit_output_task(task, num_channels, num_samples):
 
 
 @pytest.fixture
+def any_6363_device(system: System) -> Device:
+    """Gets a 6363 device, either real or simulated."""
+    return _device_by_product_type("PCIe-6363", DeviceType.ANY, system)
+
+
+@pytest.fixture
 def ai_benchmark_task(
     task: Task,
-    sim_6363_device: Device,
+    any_6363_device: Device,
     request: pytest.FixtureRequest,
 ) -> Task:
     """Configure an AI task for benchmarking."""
@@ -48,7 +55,7 @@ def ai_benchmark_task(
 
     for chan in range(num_channels):
         task.ai_channels.add_ai_voltage_chan(
-            sim_6363_device.ai_physical_chans[chan].name,
+            any_6363_device.ai_physical_chans[chan].name,
             min_val=-5.0,
             max_val=5.0,
         )
@@ -85,7 +92,7 @@ def ao_benchmark_task(
 @pytest.fixture
 def di_lines_benchmark_task(
     task: Task,
-    sim_6363_device: Device,
+    any_6363_device: Device,
     request: pytest.FixtureRequest,
 ) -> Task:
     """Configure a hardware-timed buffered DI task for benchmarking."""
@@ -96,7 +103,7 @@ def di_lines_benchmark_task(
     for chan in range(num_channels):
         line_names = [
             chan.name
-            for chan in sim_6363_device.di_lines[chan * num_lines : (chan + 1) * num_lines]
+            for chan in any_6363_device.di_lines[chan * num_lines : (chan + 1) * num_lines]
         ]
         physical_channel_string = ",".join(line_names)
         task.di_channels.add_di_chan(
@@ -112,7 +119,7 @@ def di_lines_benchmark_task(
 @pytest.fixture
 def di_port32_benchmark_task(
     task: Task,
-    sim_6363_device: Device,
+    any_6363_device: Device,
     request: pytest.FixtureRequest,
 ) -> Task:
     """Configure a hardware-timed buffered DI task for benchmarking."""
@@ -120,7 +127,7 @@ def di_port32_benchmark_task(
 
     # port 0 is the only port that supports buffered operations
     task.di_channels.add_di_chan(
-        sim_6363_device.di_ports[0].name, line_grouping=LineGrouping.CHAN_FOR_ALL_LINES
+        any_6363_device.di_ports[0].name, line_grouping=LineGrouping.CHAN_FOR_ALL_LINES
     )
 
     _configure_timing(task, 1, num_samples)
@@ -132,7 +139,7 @@ def di_port32_benchmark_task(
 @pytest.fixture
 def do_lines_benchmark_task(
     task: Task,
-    sim_6363_device: Device,
+    any_6363_device: Device,
     request: pytest.FixtureRequest,
 ) -> Task:
     """Configure a hardware-timed buffered DO task for benchmarking."""
@@ -143,7 +150,7 @@ def do_lines_benchmark_task(
     for chan in range(num_channels):
         line_names = [
             chan.name
-            for chan in sim_6363_device.do_lines[chan * num_lines : (chan + 1) * num_lines]
+            for chan in any_6363_device.do_lines[chan * num_lines : (chan + 1) * num_lines]
         ]
         physical_channel_string = ",".join(line_names)
         task.do_channels.add_do_chan(
@@ -159,7 +166,7 @@ def do_lines_benchmark_task(
 @pytest.fixture
 def do_port32_benchmark_task(
     task: Task,
-    sim_6363_device: Device,
+    any_6363_device: Device,
     request: pytest.FixtureRequest,
 ) -> Task:
     """Configure a hardware-timed buffered DO task for benchmarking."""
@@ -167,7 +174,7 @@ def do_port32_benchmark_task(
 
     # port 0 is the only port that supports buffered operations
     task.do_channels.add_do_chan(
-        sim_6363_device.do_ports[0].name, line_grouping=LineGrouping.CHAN_FOR_ALL_LINES
+        any_6363_device.do_ports[0].name, line_grouping=LineGrouping.CHAN_FOR_ALL_LINES
     )
 
     _configure_timing(task, 1, num_samples)
