@@ -15,6 +15,27 @@ from nidaqmx.constants import (
 from nidaqmx.system import Device
 
 
+def _configure_timing(task, num_channels, num_samples):
+    task.timing.cfg_samp_clk_timing(
+        rate=25000.0,
+        active_edge=Edge.RISING,
+        sample_mode=AcquisitionType.FINITE,
+        samps_per_chan=num_channels * num_samples * 2,
+    )
+
+
+def _start_input_task(task):
+    task.start()
+    task.wait_until_done(timeout=10.0)
+    task.in_stream.relative_to = ReadRelativeTo.FIRST_SAMPLE
+
+
+def _commit_output_task(task, num_channels, num_samples):
+    task.out_stream.output_buf_size = num_channels * num_samples * 2
+    task.control(TaskMode.TASK_COMMIT)
+    task.out_stream.relative_to = ReadRelativeTo.FIRST_SAMPLE
+
+
 @pytest.fixture
 def ai_benchmark_task(
     task: Task,
@@ -25,22 +46,15 @@ def ai_benchmark_task(
     num_channels = request.node.callspec.params.get("num_channels", 1)
     num_samples = request.node.callspec.params.get("num_samples", 1)
 
-    channel_names = [chan.name for chan in sim_6363_device.ai_physical_chans[:num_channels]]
-    physical_channel_string = ",".join(channel_names)
-    task.ai_channels.add_ai_voltage_chan(
-        physical_channel_string,
-        min_val=-5.0,
-        max_val=5.0,
-    )
-    task.timing.cfg_samp_clk_timing(
-        rate=25000.0,
-        active_edge=Edge.RISING,
-        sample_mode=AcquisitionType.FINITE,
-        samps_per_chan=num_channels * num_samples * 2,
-    )
-    task.start()
-    task.wait_until_done(timeout=10.0)
-    task.in_stream.relative_to = ReadRelativeTo.FIRST_SAMPLE
+    for chan in range(num_channels):
+        task.ai_channels.add_ai_voltage_chan(
+            sim_6363_device.ai_physical_chans[chan].name,
+            min_val=-5.0,
+            max_val=5.0,
+        )
+
+    _configure_timing(task, num_channels, num_samples)
+    _start_input_task(task)
 
     return task
 
@@ -54,6 +68,7 @@ def ao_benchmark_task(
     """Configure a hardware-timed buffered AO task for benchmarking."""
     num_channels = request.node.callspec.params.get("num_channels", 1)
     num_samples = request.node.callspec.params.get("num_samples", 1)
+
     for chan in range(num_channels):
         task.ao_channels.add_ao_voltage_chan(
             real_x_series_multiplexed_device.ao_physical_chans[chan].name,
@@ -61,15 +76,8 @@ def ao_benchmark_task(
             max_val=10.0,
         )
 
-    task.timing.cfg_samp_clk_timing(
-        rate=25000.0,
-        active_edge=Edge.RISING,
-        sample_mode=AcquisitionType.FINITE,
-        samps_per_chan=num_channels * num_samples * 2,
-    )
-    task.out_stream.output_buf_size = num_channels * num_samples * 2
-    task.control(TaskMode.TASK_COMMIT)
-    task.out_stream.relative_to = ReadRelativeTo.FIRST_SAMPLE
+    _configure_timing(task, num_channels, num_samples)
+    _commit_output_task(task, num_channels, num_samples)
 
     return task
 
@@ -84,18 +92,12 @@ def di_single_line_benchmark_task(
     num_samples = request.node.callspec.params.get("num_samples", 1)
     num_channels = request.node.callspec.params.get("num_channels", 1)
 
-    channel_names = [chan.name for chan in sim_6363_device.di_lines[:num_channels]]
-    physical_channel_string = ",".join(channel_names)
+    line_names = [chan.name for chan in sim_6363_device.di_lines[:num_channels]]
+    physical_channel_string = ",".join(line_names)
     task.di_channels.add_di_chan(physical_channel_string, line_grouping=LineGrouping.CHAN_PER_LINE)
-    task.timing.cfg_samp_clk_timing(
-        rate=25000.0,
-        active_edge=Edge.RISING,
-        sample_mode=AcquisitionType.FINITE,
-        samps_per_chan=num_samples * 2,
-    )
-    task.start()
-    task.wait_until_done(timeout=10.0)
-    task.in_stream.relative_to = ReadRelativeTo.FIRST_SAMPLE
+
+    _configure_timing(task, num_channels, num_samples)
+    _start_input_task(task)
 
     return task
 
@@ -121,15 +123,8 @@ def di_multi_line_benchmark_task(
             physical_channel_string, line_grouping=LineGrouping.CHAN_FOR_ALL_LINES
         )
 
-    task.timing.cfg_samp_clk_timing(
-        rate=25000.0,
-        active_edge=Edge.RISING,
-        sample_mode=AcquisitionType.FINITE,
-        samps_per_chan=num_channels * num_samples * 2,
-    )
-    task.start()
-    task.wait_until_done(timeout=10.0)
-    task.in_stream.relative_to = ReadRelativeTo.FIRST_SAMPLE
+    _configure_timing(task, num_channels, num_samples)
+    _start_input_task(task)
 
     return task
 
@@ -147,15 +142,9 @@ def di_port32_benchmark_task(
     task.di_channels.add_di_chan(
         sim_6363_device.di_ports[0].name, line_grouping=LineGrouping.CHAN_FOR_ALL_LINES
     )
-    task.timing.cfg_samp_clk_timing(
-        rate=25000.0,
-        active_edge=Edge.RISING,
-        sample_mode=AcquisitionType.FINITE,
-        samps_per_chan=num_samples * 2,
-    )
-    task.start()
-    task.wait_until_done(timeout=10.0)
-    task.in_stream.relative_to = ReadRelativeTo.FIRST_SAMPLE
+
+    _configure_timing(task, 1, num_samples)
+    _start_input_task(task)
 
     return task
 
@@ -170,18 +159,12 @@ def do_single_line_benchmark_task(
     num_channels = request.node.callspec.params.get("num_channels", 1)
     num_samples = request.node.callspec.params.get("num_samples", 1)
 
-    channel_names = [chan.name for chan in sim_6363_device.do_lines[:num_channels]]
-    physical_channel_string = ",".join(channel_names)
+    line_names = [chan.name for chan in sim_6363_device.do_lines[:num_channels]]
+    physical_channel_string = ",".join(line_names)
     task.do_channels.add_do_chan(physical_channel_string, line_grouping=LineGrouping.CHAN_PER_LINE)
-    task.timing.cfg_samp_clk_timing(
-        rate=25000.0,
-        active_edge=Edge.RISING,
-        sample_mode=AcquisitionType.FINITE,
-        samps_per_chan=num_samples * 2,
-    )
-    task.out_stream.output_buf_size = num_samples * 2
-    task.control(TaskMode.TASK_COMMIT)
-    task.out_stream.relative_to = ReadRelativeTo.FIRST_SAMPLE
+
+    _configure_timing(task, num_channels, num_samples)
+    _commit_output_task(task, num_channels, num_samples)
 
     return task
 
@@ -207,15 +190,8 @@ def do_multi_line_benchmark_task(
             physical_channel_string, line_grouping=LineGrouping.CHAN_FOR_ALL_LINES
         )
 
-    task.timing.cfg_samp_clk_timing(
-        rate=25000.0,
-        active_edge=Edge.RISING,
-        sample_mode=AcquisitionType.FINITE,
-        samps_per_chan=num_channels * num_samples * 2,
-    )
-    task.out_stream.output_buf_size = num_samples * 2
-    task.control(TaskMode.TASK_COMMIT)
-    task.out_stream.relative_to = ReadRelativeTo.FIRST_SAMPLE
+    _configure_timing(task, num_channels, num_samples)
+    _commit_output_task(task, num_channels, num_samples)
 
     return task
 
@@ -233,14 +209,8 @@ def do_port32_benchmark_task(
     task.do_channels.add_do_chan(
         sim_6363_device.do_ports[0].name, line_grouping=LineGrouping.CHAN_FOR_ALL_LINES
     )
-    task.timing.cfg_samp_clk_timing(
-        rate=25000.0,
-        active_edge=Edge.RISING,
-        sample_mode=AcquisitionType.FINITE,
-        samps_per_chan=num_samples * 2,
-    )
-    task.out_stream.output_buf_size = num_samples * 2
-    task.control(TaskMode.TASK_COMMIT)
-    task.out_stream.relative_to = ReadRelativeTo.FIRST_SAMPLE
+
+    _configure_timing(task, 1, num_samples)
+    _commit_output_task(task, 1, num_samples)
 
     return task
