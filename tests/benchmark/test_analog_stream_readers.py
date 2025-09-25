@@ -16,10 +16,8 @@ from nidaqmx.stream_readers._analog_single_channel_reader import (
 
 
 @pytest.mark.benchmark(group="analog_readers")
-@pytest.mark.parametrize("num_channels", [1])
-@pytest.mark.parametrize("num_samples", [1])
 def test___analog_single_channel_reader___read_one_sample(
-    benchmark: BenchmarkFixture, ai_benchmark_task: Task, num_channels: int, num_samples: int
+    benchmark: BenchmarkFixture, ai_benchmark_task: Task
 ) -> None:
     reader = AnalogSingleChannelReader(ai_benchmark_task.in_stream)
 
@@ -27,10 +25,9 @@ def test___analog_single_channel_reader___read_one_sample(
 
 
 @pytest.mark.benchmark(group="analog_readers")
-@pytest.mark.parametrize("num_channels", [1])
 @pytest.mark.parametrize("num_samples", [1, 1000])
 def test___analog_single_channel_reader___read_many_sample(
-    benchmark: BenchmarkFixture, ai_benchmark_task: Task, num_channels: int, num_samples: int
+    benchmark: BenchmarkFixture, ai_benchmark_task: Task, num_samples: int
 ) -> None:
     reader = AnalogSingleChannelReader(ai_benchmark_task.in_stream)
     data = numpy.full(num_samples, math.inf, dtype=numpy.float64)
@@ -39,14 +36,12 @@ def test___analog_single_channel_reader___read_many_sample(
 
 
 @pytest.mark.benchmark(group="analog_readers")
-@pytest.mark.parametrize("num_channels", [1])
 @pytest.mark.parametrize("num_samples", [1, 1000])
 @pytest.mark.parametrize("waveform_attribute_mode", list(WaveformAttributeMode))
 @pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
 def test___analog_single_channel_reader___read_waveform(
     benchmark: BenchmarkFixture,
     ai_benchmark_task: Task,
-    num_channels: int,
     num_samples: int,
     waveform_attribute_mode: WaveformAttributeMode,
 ) -> None:
@@ -59,9 +54,8 @@ def test___analog_single_channel_reader___read_waveform(
 
 @pytest.mark.benchmark(group="analog_readers")
 @pytest.mark.parametrize("num_channels", [1, 2, 8])
-@pytest.mark.parametrize("num_samples", [1])
 def test___analog_multi_channel_reader___read_one_sample(
-    benchmark: BenchmarkFixture, ai_benchmark_task: Task, num_channels: int, num_samples: int
+    benchmark: BenchmarkFixture, ai_benchmark_task: Task, num_channels: int
 ) -> None:
     reader = AnalogMultiChannelReader(ai_benchmark_task.in_stream)
     data = numpy.full(num_channels, math.inf, dtype=numpy.float64)

@@ -15,34 +15,26 @@ from nidaqmx.stream_writers._digital_single_channel_writer import (
 
 
 @pytest.mark.benchmark(group="digital_writers")
-@pytest.mark.parametrize("num_channels", [1])
-@pytest.mark.parametrize("num_samples", [1])
 def test___digital_single_channel_writer___write_one_sample_one_line(
     benchmark: BenchmarkFixture,
-    do_single_line_benchmark_task: nidaqmx.Task,
-    num_channels: int,
-    num_samples: int,
+    do_lines_benchmark_task: nidaqmx.Task,
 ) -> None:
-    writer = DigitalSingleChannelWriter(do_single_line_benchmark_task.out_stream, auto_start=False)
+    writer = DigitalSingleChannelWriter(do_lines_benchmark_task.out_stream, auto_start=False)
 
     benchmark(writer.write_one_sample_one_line, True)
 
 
 @pytest.mark.benchmark(group="digital_writers")
-@pytest.mark.parametrize("num_channels", [1])
-@pytest.mark.parametrize("num_samples", [1])
 @pytest.mark.parametrize("num_lines", [1, 2, 8])
 def test___digital_single_channel_writer___write_one_sample_multi_line(
     benchmark: BenchmarkFixture,
-    do_multi_line_benchmark_task: nidaqmx.Task,
-    num_channels: int,
-    num_samples: int,
+    do_lines_benchmark_task: nidaqmx.Task,
     num_lines: int,
 ) -> None:
-    writer = DigitalSingleChannelWriter(do_multi_line_benchmark_task.out_stream, auto_start=False)
-    sample = numpy.full(num_lines, True, dtype=numpy.bool_)
+    writer = DigitalSingleChannelWriter(do_lines_benchmark_task.out_stream, auto_start=False)
+    data = numpy.full(num_lines, True, dtype=numpy.bool_)
 
-    benchmark(writer.write_one_sample_multi_line, sample)
+    benchmark(writer.write_one_sample_multi_line, data)
 
 
 @pytest.mark.benchmark(group="digital_writers")
@@ -59,35 +51,17 @@ def test___digital_single_channel_writer___write_many_sample_port_uint32(
 
 
 @pytest.mark.benchmark(group="digital_writers")
-@pytest.mark.parametrize("num_channels", [1])
-@pytest.mark.parametrize("num_samples", [1, 100])
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
-def test___digital_single_channel_writer___write_waveform_single_line(
-    benchmark: BenchmarkFixture,
-    do_single_line_benchmark_task: nidaqmx.Task,
-    num_channels: int,
-    num_samples: int,
-) -> None:
-    writer = DigitalSingleChannelWriter(do_single_line_benchmark_task.out_stream, auto_start=False)
-    waveform = DigitalWaveform(num_samples)
-
-    benchmark(writer.write_waveform, waveform)
-
-
-@pytest.mark.benchmark(group="digital_writers")
-@pytest.mark.parametrize("num_channels", [1])
 @pytest.mark.parametrize("num_samples", [1, 100])
 @pytest.mark.parametrize("num_lines", [1, 2, 8])
 @pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
-def test___digital_single_channel_writer___write_waveform_multi_line(
+def test___digital_single_channel_writer___write_waveform_lines(
     benchmark: BenchmarkFixture,
-    do_multi_line_benchmark_task: nidaqmx.Task,
-    num_channels: int,
+    do_lines_benchmark_task: nidaqmx.Task,
     num_samples: int,
     num_lines: int,
 ) -> None:
-    writer = DigitalSingleChannelWriter(do_multi_line_benchmark_task.out_stream, auto_start=False)
-    waveform = DigitalWaveform(num_channels, num_lines)
+    writer = DigitalSingleChannelWriter(do_lines_benchmark_task.out_stream, auto_start=False)
+    waveform = DigitalWaveform(num_samples, num_lines)
 
     benchmark(writer.write_waveform, waveform)
 
@@ -95,7 +69,7 @@ def test___digital_single_channel_writer___write_waveform_multi_line(
 @pytest.mark.benchmark(group="digital_writers")
 @pytest.mark.parametrize("num_samples", [1, 100])
 @pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
-def test___digital_single_channel_writer___write_waveform_port_uint32(
+def test___digital_single_channel_writer___write_waveform_port(
     benchmark: BenchmarkFixture,
     do_port32_benchmark_task: nidaqmx.Task,
     num_samples: int,
@@ -108,34 +82,30 @@ def test___digital_single_channel_writer___write_waveform_port_uint32(
 
 @pytest.mark.benchmark(group="digital_writers")
 @pytest.mark.parametrize("num_channels", [1, 2])
-@pytest.mark.parametrize("num_samples", [1])
 def test___digital_multi_channel_writer___write_one_sample_one_line(
     benchmark: BenchmarkFixture,
-    do_single_line_benchmark_task: nidaqmx.Task,
+    do_lines_benchmark_task: nidaqmx.Task,
     num_channels: int,
-    num_samples: int,
 ) -> None:
-    writer = DigitalMultiChannelWriter(do_single_line_benchmark_task.out_stream, auto_start=False)
-    sample = numpy.full(num_channels, False, dtype=numpy.bool_)
+    writer = DigitalMultiChannelWriter(do_lines_benchmark_task.out_stream, auto_start=False)
+    data = numpy.full(num_channels, False, dtype=numpy.bool_)
 
-    benchmark(writer.write_one_sample_one_line, sample)
+    benchmark(writer.write_one_sample_one_line, data)
 
 
 @pytest.mark.benchmark(group="digital_writers")
 @pytest.mark.parametrize("num_channels", [1, 2])
-@pytest.mark.parametrize("num_samples", [1])
 @pytest.mark.parametrize("num_lines", [1, 2, 8])
 def test___digital_multi_channel_writer___write_one_sample_multi_line(
     benchmark: BenchmarkFixture,
-    do_multi_line_benchmark_task: nidaqmx.Task,
+    do_lines_benchmark_task: nidaqmx.Task,
     num_channels: int,
-    num_samples: int,
     num_lines: int,
 ) -> None:
-    writer = DigitalMultiChannelWriter(do_multi_line_benchmark_task.out_stream, auto_start=False)
-    sample = numpy.full((num_channels, num_lines), False, dtype=numpy.bool_)
+    writer = DigitalMultiChannelWriter(do_lines_benchmark_task.out_stream, auto_start=False)
+    data = numpy.full((num_channels, num_lines), False, dtype=numpy.bool_)
 
-    benchmark(writer.write_one_sample_multi_line, sample)
+    benchmark(writer.write_one_sample_multi_line, data)
 
 
 @pytest.mark.benchmark(group="digital_writers")
@@ -154,32 +124,16 @@ def test___digital_multi_channel_writer___write_many_sample_port_uint32(
 @pytest.mark.benchmark(group="digital_writers")
 @pytest.mark.parametrize("num_channels", [1, 2])
 @pytest.mark.parametrize("num_samples", [1, 100])
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
-def test___digital_multi_channel_writer___write_waveform_single_line(
-    benchmark: BenchmarkFixture,
-    do_single_line_benchmark_task: nidaqmx.Task,
-    num_channels: int,
-    num_samples: int,
-) -> None:
-    writer = DigitalMultiChannelWriter(do_single_line_benchmark_task.in_stream, auto_start=False)
-    waveforms = [DigitalWaveform(num_samples) for _ in range(num_channels)]
-
-    benchmark(writer.write_waveforms, waveforms, num_samples)
-
-
-@pytest.mark.benchmark(group="digital_writers")
-@pytest.mark.parametrize("num_channels", [1, 2])
-@pytest.mark.parametrize("num_samples", [1, 100])
 @pytest.mark.parametrize("num_lines", [1, 2, 8])
 @pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
-def test___digital_multi_channel_writer___write_waveform_multi_line(
+def test___digital_multi_channel_writer___write_waveform_lines(
     benchmark: BenchmarkFixture,
-    do_multi_line_benchmark_task: nidaqmx.Task,
+    do_lines_benchmark_task: nidaqmx.Task,
     num_channels: int,
     num_samples: int,
     num_lines: int,
 ) -> None:
-    writer = DigitalMultiChannelWriter(do_multi_line_benchmark_task.in_stream, auto_start=False)
+    writer = DigitalMultiChannelWriter(do_lines_benchmark_task.in_stream, auto_start=False)
     waveforms = [DigitalWaveform(num_samples, num_lines) for _ in range(num_channels)]
 
     benchmark(writer.write_waveforms, waveforms, num_samples)
@@ -188,7 +142,7 @@ def test___digital_multi_channel_writer___write_waveform_multi_line(
 @pytest.mark.benchmark(group="digital_writers")
 @pytest.mark.parametrize("num_samples", [1, 100])
 @pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
-def test___digital_multi_channel_writer___write_waveform_port_uint32(
+def test___digital_multi_channel_writer___write_waveform_port(
     benchmark: BenchmarkFixture,
     do_port32_benchmark_task: nidaqmx.Task,
     num_samples: int,

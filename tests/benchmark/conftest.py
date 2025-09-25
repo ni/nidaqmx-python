@@ -83,27 +83,7 @@ def ao_benchmark_task(
 
 
 @pytest.fixture
-def di_single_line_benchmark_task(
-    task: Task,
-    sim_6363_device: Device,
-    request: pytest.FixtureRequest,
-) -> Task:
-    """Configure a single-sample DI task for benchmarking."""
-    num_samples = request.node.callspec.params.get("num_samples", 1)
-    num_channels = request.node.callspec.params.get("num_channels", 1)
-
-    line_names = [chan.name for chan in sim_6363_device.di_lines[:num_channels]]
-    physical_channel_string = ",".join(line_names)
-    task.di_channels.add_di_chan(physical_channel_string, line_grouping=LineGrouping.CHAN_PER_LINE)
-
-    _configure_timing(task, num_channels, num_samples)
-    _start_input_task(task)
-
-    return task
-
-
-@pytest.fixture
-def di_multi_line_benchmark_task(
+def di_lines_benchmark_task(
     task: Task,
     sim_6363_device: Device,
     request: pytest.FixtureRequest,
@@ -150,27 +130,7 @@ def di_port32_benchmark_task(
 
 
 @pytest.fixture
-def do_single_line_benchmark_task(
-    task: Task,
-    sim_6363_device: Device,
-    request: pytest.FixtureRequest,
-) -> Task:
-    """Configure a single-sample DO task for benchmarking."""
-    num_channels = request.node.callspec.params.get("num_channels", 1)
-    num_samples = request.node.callspec.params.get("num_samples", 1)
-
-    line_names = [chan.name for chan in sim_6363_device.do_lines[:num_channels]]
-    physical_channel_string = ",".join(line_names)
-    task.do_channels.add_do_chan(physical_channel_string, line_grouping=LineGrouping.CHAN_PER_LINE)
-
-    _configure_timing(task, num_channels, num_samples)
-    _commit_output_task(task, num_channels, num_samples)
-
-    return task
-
-
-@pytest.fixture
-def do_multi_line_benchmark_task(
+def do_lines_benchmark_task(
     task: Task,
     sim_6363_device: Device,
     request: pytest.FixtureRequest,

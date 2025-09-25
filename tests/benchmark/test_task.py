@@ -96,12 +96,12 @@ def test___task___write_analog_waveform(
 @pytest.mark.parametrize("num_lines", [1, 2, 8])
 def test___task___read_digital_lines(
     benchmark: BenchmarkFixture,
-    di_multi_line_benchmark_task: Task,
+    di_lines_benchmark_task: Task,
     num_channels: int,
     num_samples: int,
     num_lines: int,
 ) -> None:
-    benchmark(di_multi_line_benchmark_task.read, num_samples)
+    benchmark(di_lines_benchmark_task.read, num_samples)
 
 
 @pytest.mark.benchmark(group="digital_readers")
@@ -121,12 +121,12 @@ def test___task___read_digital_port(
 @pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
 def test___task___read_digital_lines_waveform(
     benchmark: BenchmarkFixture,
-    di_multi_line_benchmark_task: Task,
+    di_lines_benchmark_task: Task,
     num_channels: int,
     num_samples: int,
     num_lines: int,
 ) -> None:
-    benchmark(di_multi_line_benchmark_task.read_waveform, num_samples)
+    benchmark(di_lines_benchmark_task.read_waveform, num_samples)
 
 
 @pytest.mark.benchmark(group="digital_readers")
@@ -146,13 +146,13 @@ def test___task___read_digital_port_waveform(
 @pytest.mark.parametrize("num_lines", [1, 2, 8])
 def test___task___write_digital_lines(
     benchmark: BenchmarkFixture,
-    do_multi_line_benchmark_task: Task,
+    do_lines_benchmark_task: Task,
     num_channels: int,
     num_samples: int,
     num_lines: int,
 ) -> None:
     data = _create_digital_data(num_channels, num_samples, num_lines)
-    benchmark(do_multi_line_benchmark_task.write, data, auto_start=False)
+    benchmark(do_lines_benchmark_task.write, data, auto_start=False)
 
 
 @pytest.mark.benchmark(group="digital_writers")
@@ -173,13 +173,13 @@ def test___task___write_digital_port(
 @pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
 def test___task___write_digital_lines_waveform(
     benchmark: BenchmarkFixture,
-    do_multi_line_benchmark_task: Task,
+    do_lines_benchmark_task: Task,
     num_channels: int,
     num_samples: int,
     num_lines: int,
 ) -> None:
     waveforms = [DigitalWaveform(num_samples, num_lines) for _ in range(num_channels)]
-    benchmark(do_multi_line_benchmark_task.write_waveform, waveforms, auto_start=False)
+    benchmark(do_lines_benchmark_task.write_waveform, waveforms, auto_start=False)
 
 
 @pytest.mark.benchmark(group="digital_writers")
