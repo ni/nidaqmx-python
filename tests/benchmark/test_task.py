@@ -9,6 +9,10 @@ from pytest_benchmark.fixture import BenchmarkFixture
 
 from nidaqmx import Task
 from nidaqmx.constants import WaveformAttributeMode
+from tests.benchmark.conftest import (
+    _WAVEFORM_BENCHMARK_MODE_IDS,
+    _WAVEFORM_BENCHMARK_MODES,
+)
 
 
 def _create_analog_data(num_channels, num_samples):
@@ -48,7 +52,9 @@ def test___task___read_analog(
 @pytest.mark.benchmark(group="analog_readers")
 @pytest.mark.parametrize("num_channels", [1, 2, 8])
 @pytest.mark.parametrize("num_samples", [1, 1000])
-@pytest.mark.parametrize("waveform_attribute_mode", list(WaveformAttributeMode))
+@pytest.mark.parametrize(
+    "waveform_attribute_mode", _WAVEFORM_BENCHMARK_MODES, ids=_WAVEFORM_BENCHMARK_MODE_IDS
+)
 @pytest.mark.grpc_skip(reason="read_analog_waveforms not implemented in GRPC")
 def test___task___read_analog_waveform(
     benchmark: BenchmarkFixture,

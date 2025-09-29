@@ -85,13 +85,17 @@ Benchmark tests are not run by default when you run pytest. To run the benchmark
 #     see https://pytest-benchmark.readthedocs.io/en/latest/comparing.html
 #   Run 1:  --benchmark-save=some-name
 #   Run N:  --benchmark-compare=0001
-$ poetry run pytest -v tests/benchmark
+$ poetry run pytest -v tests/benchmark --device Dev1
 ```
 
 Or you can use tox (which skips the gRPC variants):
 ```
-poetry run tox -e benchmark
+poetry run -- tox -e py39-base-benchmark -- --device Dev1
 ```
+
+The benchmarks are designed to run on a 6363 device. If you don't spcecify a specific
+device using `--device`, then it will automatically use any real or simulated 6363
+that can be found.
 
 # Building Documentation
 
