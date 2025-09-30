@@ -93,7 +93,7 @@ Or you can use tox (which skips the gRPC variants):
 poetry run -- tox -e py39-base-benchmark -- --device Dev1
 ```
 
-The benchmarks are designed to run on a 6363 device. If you don't spcecify a specific
+The benchmarks are designed to run on a 6363 device. If you don't specify a specific
 device using `--device`, then it will automatically use any real or simulated 6363
 that can be found.
 
