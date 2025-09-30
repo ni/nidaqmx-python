@@ -20,8 +20,10 @@ with nidaqmx.Task() as task:
 
     waveform = task.read_waveform(READ_ALL_AVAILABLE)
 
-    plot.plot(waveform.scaled_data)
-    plot.xlabel("Sample Number")
+    timestamps = list(waveform.timing.get_timestamps(0, waveform.sample_count))
+    time_offsets = [(ts - timestamps[0]).total_seconds() for ts in timestamps]
+    plot.plot(time_offsets, waveform.scaled_data)
+    plot.xlabel("Seconds")
     plot.ylabel(waveform.units)
     plot.title(waveform.channel_name)
     plot.grid(True)
