@@ -11,13 +11,14 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14-dev", "3.14t-dev", "pypy3.10", "pypy3.11"]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14", "3.14t", "pypy3.10", "pypy3.11"]
       # Fail-fast skews the pass/fail ratio and seems to make pytest produce
       # incomplete JUnit XML results.
       fail-fast: false
     env:
-      install-opts: ${{ !startsWith(matrix.python-version, 'pypy') && '--extras grpc' || '' }}
-      pytest-opts: ${{ startsWith(matrix.python-version, 'pypy') && '-k "not grpc"' || '' }}
+      # grpcio does not have binary wheels for pypy or free-threading, as of version 1.75.1.
+      install-opts: ${{ !(startsWith(matrix.python-version, 'pypy') || matrix.python-version == '3.14t') && '--extras grpc' || '' }}
+      pytest-opts: ${{ (startsWith(matrix.python-version, 'pypy') || matrix.python-version == '3.14t') && '-k "not grpc"' || '' }}
     steps:
       - name: Check out repo
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
