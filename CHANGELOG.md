@@ -47,6 +47,7 @@ All notable changes to this project will be documented in this file.
     * Clarify PyPy support and enable unit testing with PyPy.
     * Adopt ni-python-styleguide for hand-written code.
     * Upgrade to Poetry 2.x and migrate `pyproject.toml` format.
+    * Add support for Python 3.14.
 
 * ### Known Issues
     * ...
