@@ -93,8 +93,7 @@ class ChannelWriterBase:
         if not self._verify_array_shape:
             return
 
-        channels_to_write = self._task.channels
-        number_of_channels = len(channels_to_write.channel_names)
+        number_of_channels = self._out_stream.num_chans
 
         expected_num_dimensions = None
         if is_many_chan:
@@ -130,8 +129,7 @@ class ChannelWriterBase:
         if not self._verify_array_shape:
             return
 
-        channels_to_write = self._task.channels
-        number_of_channels = len(channels_to_write.channel_names)
+        number_of_channels = self._out_stream.num_chans
         number_of_lines = self._out_stream.do_num_booleans_per_chan
 
         expected_num_dimensions = None
