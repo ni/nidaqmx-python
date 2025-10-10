@@ -475,11 +475,22 @@ def test___timing___set_unint64_property_out_of_range_value___throws_daqerror(
     assert e.value.error_type == DAQmxErrors.INVALID_ATTRIBUTE_VALUE
 
 
+<<<<<<< HEAD
 def test___timing___get_timestamp_property___returns_value(
     task, sim_9205_device
 ):
     task.ai_channels.add_ai_voltage_chan(sim_9205_device.ai_physical_chans[0].name)
     task.timing.cfg_samp_clk_timing(1000, samps_per_chan=100)
+=======
+def test___timing___get_datetime_property___returns_datetime(task, real_x_series_device):
+    """Test that first_samp_clk_when returns a datetime object."""
+
+    # Print the device name for debugging
+    print(f"Using real device: {real_x_series_device.name}")
+    
+    task.ai_channels.add_ai_voltage_chan(real_x_series_device.ai_physical_chans[0].name)
+    task.timing.cfg_samp_clk_timing(1000)
+>>>>>>> 554f928 (update test)
 
     task.start()
     timestamp = task.timing.first_samp_timestamp_val
@@ -489,12 +500,21 @@ def test___timing___get_timestamp_property___returns_value(
     task.stop()
 
 
+<<<<<<< HEAD
 def test___timing___get_timestamp_property_with_device_context___throws_daqerror(
     task, sim_9205_device
 ):
     task.ai_channels.add_ai_voltage_chan(sim_9205_device.ai_physical_chans[0].name)
     task.timing.cfg_samp_clk_timing(1000, samps_per_chan=100)
     task.start()
+=======
+def test___timing___get_datetime_property_with_device_context___throws_daqerror(task, sim_6363_device):
+    """Test that first_samp_clk_when with device context raises an error."""
+
+    
+    task.ai_channels.add_ai_voltage_chan(sim_6363_device.ai_physical_chans[0].name)
+    task.timing.cfg_samp_clk_timing(1000)
+>>>>>>> 554f928 (update test)
 
     with pytest.raises(DaqError) as e:
         _ = task.timing[sim_9205_device].first_samp_timestamp_val
