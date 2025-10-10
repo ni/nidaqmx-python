@@ -94,7 +94,6 @@ def test___analog_multi_channel_reader___read_waveforms_feature_disabled___raise
     assert "NIDAQMX_ENABLE_WAVEFORM_SUPPORT" in error_message
 
 
-@pytest.mark.grpc_skip(reason="read_analog_waveforms not implemented in GRPC")
 def test___analog_multi_channel_reader___read_waveforms___returns_valid_waveforms(
     ai_multi_channel_task_with_timing: nidaqmx.Task,
 ) -> None:

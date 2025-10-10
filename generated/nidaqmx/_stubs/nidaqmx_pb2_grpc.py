@@ -2244,6 +2244,11 @@ class NiDAQmxStub(object):
                 request_serializer=nidaqmx__pb2.WriteToTEDSFromFileRequest.SerializeToString,
                 response_deserializer=nidaqmx__pb2.WriteToTEDSFromFileResponse.FromString,
                 )
+        self.ReadAnalogWaveforms = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/ReadAnalogWaveforms',
+                request_serializer=nidaqmx__pb2.ReadAnalogWaveformsRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.ReadAnalogWaveformsResponse.FromString,
+                )
 
 
 class NiDAQmxServicer(object):
@@ -4925,6 +4930,12 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ReadAnalogWaveforms(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_NiDAQmxServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -7157,6 +7168,11 @@ def add_NiDAQmxServicer_to_server(servicer, server):
                     servicer.WriteToTEDSFromFile,
                     request_deserializer=nidaqmx__pb2.WriteToTEDSFromFileRequest.FromString,
                     response_serializer=nidaqmx__pb2.WriteToTEDSFromFileResponse.SerializeToString,
+            ),
+            'ReadAnalogWaveforms': grpc.unary_unary_rpc_method_handler(
+                    servicer.ReadAnalogWaveforms,
+                    request_deserializer=nidaqmx__pb2.ReadAnalogWaveformsRequest.FromString,
+                    response_serializer=nidaqmx__pb2.ReadAnalogWaveformsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -14747,5 +14763,22 @@ class NiDAQmx(object):
         return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/WriteToTEDSFromFile',
             nidaqmx__pb2.WriteToTEDSFromFileRequest.SerializeToString,
             nidaqmx__pb2.WriteToTEDSFromFileResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ReadAnalogWaveforms(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/ReadAnalogWaveforms',
+            nidaqmx__pb2.ReadAnalogWaveformsRequest.SerializeToString,
+            nidaqmx__pb2.ReadAnalogWaveformsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

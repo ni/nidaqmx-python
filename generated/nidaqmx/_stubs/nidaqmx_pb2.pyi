@@ -31883,3 +31883,47 @@ class WriteToTEDSFromFileResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing.Literal["status", b"status"]) -> None: ...
 
 global___WriteToTEDSFromFileResponse = WriteToTEDSFromFileResponse
+
+@typing.final
+class ReadAnalogWaveformsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TASK_HANDLE_FIELD_NUMBER: builtins.int
+    NUMBER_OF_SAMPLES_PER_CHANNEL_FIELD_NUMBER: builtins.int
+    TIMEOUT_FIELD_NUMBER: builtins.int
+    ARRAY_SIZE_FIELD_NUMBER: builtins.int
+    WAVEFORM_ATTRIBUTE_MODE_FIELD_NUMBER: builtins.int
+    number_of_samples_per_channel: builtins.int
+    timeout: builtins.float
+    array_size: builtins.int
+    waveform_attribute_mode: builtins.int
+    @property
+    def task_handle(self) -> session_pb2.Session: ...
+    def __init__(
+        self,
+        *,
+        task_handle: session_pb2.Session | None = ...,
+        number_of_samples_per_channel: builtins.int = ...,
+        timeout: builtins.float = ...,
+        array_size: builtins.int = ...,
+        waveform_attribute_mode: builtins.int = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["task_handle", b"task_handle"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["array_size", b"array_size", "number_of_samples_per_channel", b"number_of_samples_per_channel", "task_handle", b"task_handle", "timeout", b"timeout", "waveform_attribute_mode", b"waveform_attribute_mode"]) -> None: ...
+
+global___ReadAnalogWaveformsRequest = ReadAnalogWaveformsRequest
+
+@typing.final
+class ReadAnalogWaveformsResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    status: builtins.int
+    def __init__(
+        self,
+        *,
+        status: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["status", b"status"]) -> None: ...
+
+global___ReadAnalogWaveformsResponse = ReadAnalogWaveformsResponse
