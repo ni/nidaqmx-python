@@ -473,9 +473,13 @@ def test___timing___set_unint64_property_out_of_range_value___throws_daqerror(
     assert e.value.error_type == DAQmxErrors.INVALID_ATTRIBUTE_VALUE
 
 
-def test___timing___get_datetime_property___returns_datetime(task, sim_6363_device):
+def test___timing___get_datetime_property___returns_datetime(task, real_x_series_device):
     """Test that first_samp_clk_when returns a datetime object."""
-    task.ai_channels.add_ai_voltage_chan(sim_6363_device.ai_physical_chans[0].name)
+
+    # Print the device name for debugging
+    print(f"Using real device: {real_x_series_device.name}")
+    
+    task.ai_channels.add_ai_voltage_chan(real_x_series_device.ai_physical_chans[0].name)
     task.timing.cfg_samp_clk_timing(1000)
 
     result = task.timing.first_samp_clk_when
@@ -485,6 +489,8 @@ def test___timing___get_datetime_property___returns_datetime(task, sim_6363_devi
 
 def test___timing___get_datetime_property_with_device_context___throws_daqerror(task, sim_6363_device):
     """Test that first_samp_clk_when with device context raises an error."""
+
+    
     task.ai_channels.add_ai_voltage_chan(sim_6363_device.ai_physical_chans[0].name)
     task.timing.cfg_samp_clk_timing(1000)
 
