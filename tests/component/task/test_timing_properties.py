@@ -1,5 +1,5 @@
 import pytest
-from datetime import datetime
+from datetime import datetime,timezone
 
 from nidaqmx import DaqError
 from nidaqmx.constants import AcquisitionType, Edge, SampleTimingType
@@ -476,18 +476,25 @@ def test___timing___set_unint64_property_out_of_range_value___throws_daqerror(
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 74a5dc4 (create tests for first_samp_clk_when)
 def test___timing___get_timestamp_property___returns_value(
     task, sim_9205_device
 ):
     task.ai_channels.add_ai_voltage_chan(sim_9205_device.ai_physical_chans[0].name)
     task.timing.cfg_samp_clk_timing(1000, samps_per_chan=100)
+<<<<<<< HEAD
 =======
 def test___timing___get_datetime_property___returns_datetime(task, real_x_series_device):
     """Test that first_samp_clk_when returns a datetime object."""
+=======
+>>>>>>> 74a5dc4 (create tests for first_samp_clk_when)
 
-    # Print the device name for debugging
-    print(f"Using real device: {real_x_series_device.name}")
+    task.start()
+    timestamp = task.timing.first_samp_clk_when
     
+<<<<<<< HEAD
     task.ai_channels.add_ai_voltage_chan(real_x_series_device.ai_physical_chans[0].name)
     task.timing.cfg_samp_clk_timing(1000)
 >>>>>>> 554f928 (update test)
@@ -518,8 +525,82 @@ def test___timing___get_datetime_property_with_device_context___throws_daqerror(
 
     with pytest.raises(DaqError) as e:
         _ = task.timing[sim_9205_device].first_samp_timestamp_val
+=======
+    assert isinstance(timestamp, datetime)
+    
+    task.stop()
+
+
+def test___timing___get_timestamp_property_with_device_context___throws_daqerror(
+    task, sim_9205_device
+):
+    task.ai_channels.add_ai_voltage_chan(sim_9205_device.ai_physical_chans[0].name)
+    task.timing.cfg_samp_clk_timing(1000, samps_per_chan=100)
+    task.start()
+
+    with pytest.raises(DaqError) as e:
+        _ = task.timing[sim_9205_device].first_samp_clk_when
 
     assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
 
     task.stop()
 
+
+def test___timing___set_timestamp_property___assigns_value(
+    task, sim_9205_device
+):
+    task.ai_channels.add_ai_voltage_chan(sim_9205_device.ai_physical_chans[0].name)
+    task.timing.cfg_samp_clk_timing(1000, samps_per_chan=100)
+
+    new_timestamp = datetime(2025, 1, 1, 12, 0, 0, tzinfo=timezone.utc)
+    task.timing.first_samp_clk_when = new_timestamp
+    task.start()
+
+    assert isinstance(task.timing.first_samp_clk_when, datetime)
+    
+    task.stop()
+
+
+def test___timing___set_timestamp_property_with_device_context___throws_daqerror(
+    task, sim_9205_device
+):
+    task.ai_channels.add_ai_voltage_chan(sim_9205_device.ai_physical_chans[0].name)
+    task.timing.cfg_samp_clk_timing(1000, samps_per_chan=100)
+    new_timestamp = datetime(2025, 1, 1, 12, 0, 0, tzinfo=timezone.utc)
+
+    with pytest.raises(DaqError) as e:
+        task.timing[sim_9205_device].first_samp_clk_when = new_timestamp
+>>>>>>> 74a5dc4 (create tests for first_samp_clk_when)
+
+    assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
+
+    task.stop()
+
+<<<<<<< HEAD
+=======
+def test___timing___reset_timestamp_property___returns_default_value(
+    task, sim_9205_device
+):
+    task.ai_channels.add_ai_voltage_chan(sim_9205_device.ai_physical_chans[0].name)
+    task.timing.cfg_samp_clk_timing(1000, samps_per_chan=100)
+    task.timing.first_samp_clk_when = datetime(2025, 1, 1, 12, 0, 0, tzinfo=timezone.utc)
+    del task.timing.first_samp_clk_when
+    
+    task.start()
+    
+    assert isinstance(task.timing.first_samp_clk_when, datetime)
+    
+    task.stop()
+
+
+def test___timing___reset_datetime_property_with_device_context___throws_daqerror(
+    task, sim_9205_device
+):
+    task.ai_channels.add_ai_voltage_chan(sim_9205_device.ai_physical_chans[0].name)
+    task.timing.cfg_samp_clk_timing(1000)
+
+    with pytest.raises(DaqError) as e:
+        del task.timing[sim_9205_device].first_samp_clk_when
+
+    assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
+>>>>>>> 74a5dc4 (create tests for first_samp_clk_when)
