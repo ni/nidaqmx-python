@@ -1,4 +1,4 @@
-from datetime import datetime as std_datime, timezone
+from datetime import datetime as std_datime
 
 import pytest
 
@@ -557,6 +557,7 @@ def test___timing___get_timestamp_property_with_device_context___throws_daqerror
     assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
 
     task.stop()
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 
@@ -622,3 +623,5 @@ def test___timing___reset_datetime_property_with_device_context___throws_daqerro
 >>>>>>> 74a5dc4 (create tests for first_samp_clk_when)
 =======
 >>>>>>> 1af6dc9 (test for first_samp_timestamp_val)
+=======
+>>>>>>> d2415b4 (fix lint)
