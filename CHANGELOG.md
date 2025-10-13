@@ -29,7 +29,7 @@ All notable changes to this project will be documented in this file.
     * [Full changelog: 1.2.0...1.3.0](https://github.com/ni/nidaqmx-python/compare/1.2.0...1.3.0)
 
 * ### Resolved Issues
-    * ...
+    * [843: read methods use task.in_stream.channels_to_read, which is slow](https://github.com/ni/nidaqmx-python/issues/843)
 
 * ### Major Changes
     * (IN PROGRESS behind "WAVEFORM_SUPPORT" feature toggle) Added support for reading and writing Waveform data. 
