@@ -3168,13 +3168,6 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.SetTimingAttributeStringRequest(
                 task=task, attribute_raw=attribute, value=value))
 
-    def set_timing_attribute_timestamp(self, task, attribute, value):
-        response = self._invoke(
-            self._client.SetTimingAttributeTimestamp,
-            grpc_types.SetTimingAttributeTimestampRequest(
-                task=task, attribute_raw=attribute,
-                value=convert_time_to_timestamp(value)))
-
     def set_timing_attribute_uint32(self, task, attribute, value):
         response = self._invoke(
             self._client.SetTimingAttributeUInt32,

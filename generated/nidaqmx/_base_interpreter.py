@@ -1615,10 +1615,6 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def set_timing_attribute_timestamp(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
     def set_timing_attribute_uint32(self, task, attribute, value):
         raise NotImplementedError
 

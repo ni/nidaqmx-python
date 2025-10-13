@@ -58,6 +58,7 @@ INTERPRETER_IGNORED_FUNCTIONS = [
     "SetStartTrigTrigWhen",
     "SetSyncPulseTimeWhen",
     "SetTimingAttributeExTimestamp",
+    "SetTimingAttributeTimestamp",
     # Deprecated, not working
     "GetAnalogPowerUpStates",
 ]

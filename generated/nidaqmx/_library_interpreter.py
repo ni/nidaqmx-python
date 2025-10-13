@@ -5572,18 +5572,6 @@ class LibraryInterpreter(BaseInterpreter):
             task, attribute, value.encode(lib_importer.encoding))
         self.check_for_error(error_code)
 
-    def set_timing_attribute_timestamp(self, task, attribute, value):
-        cfunc = lib_importer.cdll.DAQmxSetTimingAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
-
-        error_code = cfunc(
-            task, attribute, AbsoluteTime.from_datetime(value))
-        self.check_for_error(error_code)
-
     def set_timing_attribute_uint32(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTimingAttribute
         if cfunc.argtypes is None:
