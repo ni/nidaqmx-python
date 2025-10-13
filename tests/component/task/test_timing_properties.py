@@ -495,6 +495,7 @@ def test___timing___get_datetime_property___returns_datetime(task, real_x_series
 >>>>>>> 74a5dc4 (create tests for first_samp_clk_when)
 
     task.start()
+<<<<<<< HEAD
     timestamp = task.timing.first_samp_clk_when
 <<<<<<< HEAD
     
@@ -533,6 +534,9 @@ def test___timing___get_datetime_property_with_device_context___throws_daqerror(
     assert isinstance(timestamp, datetime)
     
 =======
+=======
+    timestamp = task.timing.first_samp_timestamp_val
+>>>>>>> 1af6dc9 (test for first_samp_timestamp_val)
 
     assert isinstance(timestamp, std_datime)
 
@@ -548,12 +552,13 @@ def test___timing___get_timestamp_property_with_device_context___throws_daqerror
     task.start()
 
     with pytest.raises(DaqError) as e:
-        _ = task.timing[sim_9205_device].first_samp_clk_when
+        _ = task.timing[sim_9205_device].first_samp_timestamp_val
 
     assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
 
     task.stop()
 
+<<<<<<< HEAD
 
 def test___timing___set_timestamp_property___assigns_value(task, sim_9205_device):
     task.ai_channels.add_ai_voltage_chan(sim_9205_device.ai_physical_chans[0].name)
@@ -615,3 +620,5 @@ def test___timing___reset_datetime_property_with_device_context___throws_daqerro
 
     assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
 >>>>>>> 74a5dc4 (create tests for first_samp_clk_when)
+=======
+>>>>>>> 1af6dc9 (test for first_samp_timestamp_val)
