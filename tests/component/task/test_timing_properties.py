@@ -1,4 +1,4 @@
-from datetime import datetime as std_datime
+from datetime import datetime as std_datetime
 
 import pytest
 
@@ -538,7 +538,7 @@ def test___timing___get_datetime_property_with_device_context___throws_daqerror(
     timestamp = task.timing.first_samp_timestamp_val
 >>>>>>> 1af6dc9 (test for first_samp_timestamp_val)
 
-    assert isinstance(timestamp, std_datime)
+    assert isinstance(timestamp, std_datetime)
 
 >>>>>>> 88bb422 (fix lint)
     task.stop()
