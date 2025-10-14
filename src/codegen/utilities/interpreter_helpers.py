@@ -43,8 +43,8 @@ INTERPRETER_IGNORED_FUNCTIONS = [
     "SetRealTimeAttributeInt32",
     "SetRealTimeAttributeUInt32",
     "WaitForNextSampleClock",
-    # Time triggers 
-    # Single-attribute get/set functions are not used 
+    # Time triggers
+    # Single-attribute get/set functions are not used
     # Generic Get/SetTimingAttribute{Type} functions are used instead
     "GetArmStartTrigTimestampVal",
     "GetArmStartTrigTrigWhen",
