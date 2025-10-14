@@ -34,6 +34,8 @@ jobs:
             .venv
             .tox
           key: run-system-tests-${{ runner.os }}-${{ matrix.configuration }}-${{ hashFiles('poetry.lock') }}
+      - name: Clear Poetry cache
+        run: poetry cache clear PyPI --all
       - name: Install dependencies
         run: poetry install
       - name: Run system tests
