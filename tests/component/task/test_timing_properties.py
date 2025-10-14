@@ -1,3 +1,5 @@
+from datetime import datetime as std_datetime
+
 import pytest
 
 from nidaqmx import DaqError
@@ -470,3 +472,30 @@ def test___timing___set_unint64_property_out_of_range_value___throws_daqerror(
     with pytest.raises(DaqError) as e:
         _ = task.timing.samp_quant_samp_per_chan
     assert e.value.error_type == DAQmxErrors.INVALID_ATTRIBUTE_VALUE
+
+
+def test___timing___get_timestamp_property___returns_value(task, sim_9205_device):
+    task.ai_channels.add_ai_voltage_chan(sim_9205_device.ai_physical_chans[0].name)
+    task.timing.cfg_samp_clk_timing(1000, samps_per_chan=100)
+
+    task.start()
+    timestamp = task.timing.first_samp_timestamp_val
+
+    assert isinstance(timestamp, std_datetime)
+
+    task.stop()
+
+
+def test___timing___get_timestamp_property_with_device_context___throws_daqerror(
+    task, sim_9205_device
+):
+    task.ai_channels.add_ai_voltage_chan(sim_9205_device.ai_physical_chans[0].name)
+    task.timing.cfg_samp_clk_timing(1000, samps_per_chan=100)
+    task.start()
+
+    with pytest.raises(DaqError) as e:
+        _ = task.timing[sim_9205_device].first_samp_timestamp_val
+
+    assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
+
+    task.stop()

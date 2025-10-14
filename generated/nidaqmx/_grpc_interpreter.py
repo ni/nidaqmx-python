@@ -2181,6 +2181,12 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.GetTimingAttributeStringRequest(task=task, attribute_raw=attribute))
         return response.value
 
+    def get_timing_attribute_timestamp(self, task, attribute):
+        response = self._invoke(
+            self._client.GetTimingAttributeTimestamp,
+            grpc_types.GetTimingAttributeTimestampRequest(task=task, attribute_raw=attribute))
+        return convert_timestamp_to_time(response.value)
+
     def get_timing_attribute_uint32(self, task, attribute):
         response = self._invoke(
             self._client.GetTimingAttributeUInt32,

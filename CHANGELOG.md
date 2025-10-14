@@ -30,6 +30,7 @@ All notable changes to this project will be documented in this file.
 
 * ### Resolved Issues
     * [843: read methods use task.in_stream.channels_to_read, which is slow](https://github.com/ni/nidaqmx-python/issues/843)
+    * [639: first_samp_timestamp_val property does not work because LibraryInterpreter is missing a method](https://github.com/ni/nidaqmx-python/issues/639)
 
 * ### Major Changes
     * (IN PROGRESS behind "WAVEFORM_SUPPORT" feature toggle) Added support for reading and writing Waveform data. 
