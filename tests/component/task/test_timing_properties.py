@@ -1,10 +1,14 @@
-from datetime import datetime as std_datetime
-
 import pytest
+from datetime import datetime
+from datetime import datetime,timezone
 
 from nidaqmx import DaqError
 from nidaqmx.constants import AcquisitionType, Edge, SampleTimingType
 from nidaqmx.error_codes import DAQmxErrors
+
+
+
+
 
 
 def test___timing___get_boolean_property___returns_value(task, sim_6363_device):
@@ -474,73 +478,24 @@ def test___timing___set_unint64_property_out_of_range_value___throws_daqerror(
     assert e.value.error_type == DAQmxErrors.INVALID_ATTRIBUTE_VALUE
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 74a5dc4 (create tests for first_samp_clk_when)
 def test___timing___get_timestamp_property___returns_value(
     task, sim_9205_device
 ):
-=======
-def test___timing___get_timestamp_property___returns_value(task, sim_9205_device):
->>>>>>> 88bb422 (fix lint)
-    task.ai_channels.add_ai_voltage_chan(sim_9205_device.ai_physical_chans[0].name)
-    task.timing.cfg_samp_clk_timing(1000, samps_per_chan=100)
-<<<<<<< HEAD
-=======
-def test___timing___get_datetime_property___returns_datetime(task, real_x_series_device):
-    """Test that first_samp_clk_when returns a datetime object."""
-=======
->>>>>>> 74a5dc4 (create tests for first_samp_clk_when)
-
-    task.start()
-<<<<<<< HEAD
-    timestamp = task.timing.first_samp_clk_when
-<<<<<<< HEAD
-    
-<<<<<<< HEAD
-    task.ai_channels.add_ai_voltage_chan(real_x_series_device.ai_physical_chans[0].name)
-    task.timing.cfg_samp_clk_timing(1000)
->>>>>>> 554f928 (update test)
-
-    task.start()
-    timestamp = task.timing.first_samp_timestamp_val
-    
-    assert isinstance(timestamp, datetime)
-    
-    task.stop()
-
-
-<<<<<<< HEAD
-def test___timing___get_timestamp_property_with_device_context___throws_daqerror(
+def test___timing___get_timestamp_property___returns_value(
     task, sim_9205_device
 ):
     task.ai_channels.add_ai_voltage_chan(sim_9205_device.ai_physical_chans[0].name)
     task.timing.cfg_samp_clk_timing(1000, samps_per_chan=100)
+
     task.start()
-=======
-def test___timing___get_datetime_property_with_device_context___throws_daqerror(task, sim_6363_device):
-    """Test that first_samp_clk_when with device context raises an error."""
-
+    timestamp = task.timing.first_samp_timestamp_val
     
-    task.ai_channels.add_ai_voltage_chan(sim_6363_device.ai_physical_chans[0].name)
-    task.timing.cfg_samp_clk_timing(1000)
->>>>>>> 554f928 (update test)
-
-    with pytest.raises(DaqError) as e:
-        _ = task.timing[sim_9205_device].first_samp_timestamp_val
-=======
     assert isinstance(timestamp, datetime)
     
-=======
-=======
-    timestamp = task.timing.first_samp_timestamp_val
->>>>>>> 1af6dc9 (test for first_samp_timestamp_val)
-
-    assert isinstance(timestamp, std_datetime)
-
->>>>>>> 88bb422 (fix lint)
+    timestamp = task.timing.first_samp_clk_when
+    
+    assert isinstance(timestamp, datetime)
+    
     task.stop()
 
 
@@ -557,20 +512,20 @@ def test___timing___get_timestamp_property_with_device_context___throws_daqerror
     assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
 
     task.stop()
-<<<<<<< HEAD
 
-<<<<<<< HEAD
 
-def test___timing___set_timestamp_property___assigns_value(task, sim_9205_device):
+def test___timing___set_timestamp_property___assigns_value(
+    task, sim_9205_device
+):
     task.ai_channels.add_ai_voltage_chan(sim_9205_device.ai_physical_chans[0].name)
     task.timing.cfg_samp_clk_timing(1000, samps_per_chan=100)
 
-    new_timestamp = std_datime(2025, 1, 1, 12, 0, 0, tzinfo=timezone.utc)
+    new_timestamp = datetime(2025, 1, 1, 12, 0, 0, tzinfo=timezone.utc)
     task.timing.first_samp_clk_when = new_timestamp
     task.start()
 
-    assert isinstance(task.timing.first_samp_clk_when, std_datime)
-
+    assert isinstance(task.timing.first_samp_clk_when, datetime)
+    
     task.stop()
 
 
@@ -579,34 +534,26 @@ def test___timing___set_timestamp_property_with_device_context___throws_daqerror
 ):
     task.ai_channels.add_ai_voltage_chan(sim_9205_device.ai_physical_chans[0].name)
     task.timing.cfg_samp_clk_timing(1000, samps_per_chan=100)
-    new_timestamp = std_datime(2025, 1, 1, 12, 0, 0, tzinfo=timezone.utc)
+    new_timestamp = datetime(2025, 1, 1, 12, 0, 0, tzinfo=timezone.utc)
 
     with pytest.raises(DaqError) as e:
         task.timing[sim_9205_device].first_samp_clk_when = new_timestamp
->>>>>>> 74a5dc4 (create tests for first_samp_clk_when)
 
     assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
 
-    task.stop()
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 def test___timing___reset_timestamp_property___returns_default_value(
     task, sim_9205_device
 ):
-=======
-def test___timing___reset_timestamp_property___returns_default_value(task, sim_9205_device):
->>>>>>> 88bb422 (fix lint)
     task.ai_channels.add_ai_voltage_chan(sim_9205_device.ai_physical_chans[0].name)
     task.timing.cfg_samp_clk_timing(1000, samps_per_chan=100)
-    task.timing.first_samp_clk_when = std_datime(2025, 1, 1, 12, 0, 0, tzinfo=timezone.utc)
+    task.timing.first_samp_clk_when = datetime(2025, 1, 1, 12, 0, 0, tzinfo=timezone.utc)
     del task.timing.first_samp_clk_when
-
+    
     task.start()
-
-    assert isinstance(task.timing.first_samp_clk_when, std_datime)
-
+    
+    assert isinstance(task.timing.first_samp_clk_when, datetime)
+    
     task.stop()
 
 
@@ -620,8 +567,3 @@ def test___timing___reset_datetime_property_with_device_context___throws_daqerro
         del task.timing[sim_9205_device].first_samp_clk_when
 
     assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
->>>>>>> 74a5dc4 (create tests for first_samp_clk_when)
-=======
->>>>>>> 1af6dc9 (test for first_samp_timestamp_val)
-=======
->>>>>>> d2415b4 (fix lint)
