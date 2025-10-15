@@ -37,7 +37,7 @@ jobs:
       - name: Clear Poetry cache
         run: poetry cache clear PyPI --all -n
       - name: Install dependencies
-        run: poetry install
+        run: poetry install -vvv
       - name: Run system tests
         run: poetry run tox
       - name: Rename test results
