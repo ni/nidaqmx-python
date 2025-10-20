@@ -129,10 +129,10 @@ numpy = [
 
 [tool.black]
 line-length = 100
-extend_exclude = ".tox/|docs/|generated/|src/codegen/metadata/|src/codegen/templates/|ni-apis/"
+extend_exclude = ".tox/|docs/|generated/|src/codegen/metadata/|src/codegen/templates/|third_party/"
 
 [tool.ni-python-styleguide]
-extend_exclude = ".tox,docs,generated,src/codegen/metadata,src/codegen/templates,ni-apis"
+extend_exclude = ".tox,docs,generated,src/codegen/metadata,src/codegen/templates,third_party"
 application-import-names = "nidaqmx"
 
 [tool.pytest.ini_options]

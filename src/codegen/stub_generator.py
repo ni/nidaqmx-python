@@ -14,7 +14,7 @@ STUBS_PATH = (
     pathlib.Path(__file__).parent.parent.parent / "generated" / STUBS_NAMESPACE.replace(".", "/")
 )
 PROTO_PATH = pathlib.Path(__file__).parent.parent.parent / "src" / "codegen" / "protos"
-NI_APIS_PATH = pathlib.Path(__file__).parent.parent.parent / "ni-apis"
+NI_APIS_PATH = pathlib.Path(__file__).parent.parent.parent / "third_party" / "ni-apis"
 PROTO_FILES = list(PROTO_PATH.rglob("*.proto"))
 
 
