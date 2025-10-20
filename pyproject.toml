@@ -169,7 +169,6 @@ build-backend = "poetry.core.masonry.api"
 files = "generated/,tests/"
 check_untyped_defs = true
 namespace_packages = true
-plugins = "numpy.typing.mypy_plugin"
 warn_redundant_casts = true
 warn_unreachable = true
 warn_unused_configs = true
