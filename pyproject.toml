@@ -64,6 +64,7 @@ distro = { version = ">=1.9.0", platform = "linux" }
 requests = ">=2.25.0"
 typing_extensions = { version = ">=4.0.0" }
 nitypes = {version=">=0.1.0dev10", allow-prereleases=true}
+ni-grpcdevice-v1-proto = { version = "^1.0.0" }
 
 [tool.poetry.group.codegen.dependencies]
 Mako = "^1.2"

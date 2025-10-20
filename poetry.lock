@@ -908,7 +908,6 @@ files = [
     {file = "grpcio-1.75.1-cp39-cp39-win_amd64.whl", hash = "sha256:9fe51e4a1f896ea84ac750900eae34d9e9b896b5b1e4a30b02dc31ad29f36383"},
     {file = "grpcio-1.75.1.tar.gz", hash = "sha256:3e81d89ece99b9ace23a6916880baca613c03a799925afb2857887efa8b1b3d2"},
 ]
-markers = {main = "extra == \"grpc\""}
 
 [package.dependencies]
 typing-extensions = ">=4.12,<5.0"
@@ -1921,6 +1920,22 @@ protobuf = ">=4.25.3"
 types-protobuf = ">=4.24"
 
 [[package]]
+name = "ni-grpcdevice-v1-proto"
+version = "1.0.0"
+description = "Protobuf generated code for the nidevice_grpc gRPC API"
+optional = false
+python-versions = "<4.0,>=3.9"
+groups = ["main"]
+files = [
+    {file = "ni_grpcdevice_v1_proto-1.0.0-py3-none-any.whl", hash = "sha256:36dfe9484cc40e8e1c97fb9720555f06563b0180e4837177d1cbf000c3d8988e"},
+    {file = "ni_grpcdevice_v1_proto-1.0.0.tar.gz", hash = "sha256:62f087f85d390c2932e45ad03d365c750bd55e147b81b66ef853e13ff8538b19"},
+]
+
+[package.dependencies]
+grpcio = ">=1.49.0,<2.0"
+protobuf = ">=4.21"
+
+[[package]]
 name = "ni-python-styleguide"
 version = "0.4.7"
 description = "NI's internal and external Python linter rules and plugins"
@@ -2415,6 +2430,7 @@ description = ""
 optional = false
 python-versions = ">=3.8"
 groups = ["main", "codegen"]
+markers = "python_version < \"3.13\""
 files = [
     {file = "protobuf-4.25.8-cp310-abi3-win32.whl", hash = "sha256:504435d831565f7cfac9f0714440028907f1975e4bed228e58e72ecfff58a1e0"},
     {file = "protobuf-4.25.8-cp310-abi3-win_amd64.whl", hash = "sha256:bd551eb1fe1d7e92c1af1d75bdfa572eff1ab0e5bf1736716814cdccdb2360f9"},
@@ -2428,7 +2444,6 @@ files = [
     {file = "protobuf-4.25.8-py3-none-any.whl", hash = "sha256:15a0af558aa3b13efef102ae6e4f3efac06f1eea11afb3a57db2901447d9fb59"},
     {file = "protobuf-4.25.8.tar.gz", hash = "sha256:6135cf8affe1fc6f76cced2641e4ea8d3e59518d1f24ae41ba97bcad82d397cd"},
 ]
-markers = {main = "extra == \"grpc\" and python_version < \"3.13\"", codegen = "python_version < \"3.13\""}
 
 [[package]]
 name = "protobuf"
@@ -2437,6 +2452,7 @@ description = ""
 optional = false
 python-versions = ">=3.8"
 groups = ["main", "codegen"]
+markers = "python_version == \"3.13\""
 files = [
     {file = "protobuf-5.29.5-cp310-abi3-win32.whl", hash = "sha256:3f1c6468a2cfd102ff4703976138844f78ebd1fb45f49011afc5139e9e283079"},
     {file = "protobuf-5.29.5-cp310-abi3-win_amd64.whl", hash = "sha256:3f76e3a3675b4a4d867b52e4a5f5b78a2ef9565549d4037e06cf7b0942b1d3fc"},
@@ -2450,7 +2466,6 @@ files = [
     {file = "protobuf-5.29.5-py3-none-any.whl", hash = "sha256:6cf42630262c59b2d8de33954443d94b746c952b01434fc58a417fdbd2e84bd5"},
     {file = "protobuf-5.29.5.tar.gz", hash = "sha256:bc1463bafd4b0929216c35f437a8e28731a2b7fe3d98bb77a600efced5a15c84"},
 ]
-markers = {main = "python_version == \"3.13\" and extra == \"grpc\"", codegen = "python_version == \"3.13\""}
 
 [[package]]
 name = "protobuf"
@@ -2459,6 +2474,7 @@ description = ""
 optional = false
 python-versions = ">=3.9"
 groups = ["main", "codegen"]
+markers = "python_version >= \"3.14\""
 files = [
     {file = "protobuf-6.32.1-cp310-abi3-win32.whl", hash = "sha256:a8a32a84bc9f2aad712041b8b366190f71dde248926da517bde9e832e4412085"},
     {file = "protobuf-6.32.1-cp310-abi3-win_amd64.whl", hash = "sha256:b00a7d8c25fa471f16bc8153d0e53d6c9e827f0953f3c09aaa4331c718cae5e1"},
@@ -2470,7 +2486,6 @@ files = [
     {file = "protobuf-6.32.1-py3-none-any.whl", hash = "sha256:2601b779fc7d32a866c6b4404f9d42a3f67c5b9f3f15b4db3cccabe06b95c346"},
     {file = "protobuf-6.32.1.tar.gz", hash = "sha256:ee2469e4a021474ab9baafea6cd070e5bf27c7d29433504ddea1a4ee5850f68d"},
 ]
-markers = {main = "python_version >= \"3.14\" and extra == \"grpc\"", codegen = "python_version >= \"3.14\""}
 
 [[package]]
 name = "py-cpuinfo"
@@ -3386,4 +3401,4 @@ grpc = ["grpcio", "protobuf"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.9,<4.0"
-content-hash = "f346cc03f1bece011608678fa272c92a1e181e02a60ba4fdb7fc8f2ff53dcd3c"
+content-hash = "68bea6fb2f64f3373f319585872b757fe1ba4444f8eaa66f25564a492318de06"
