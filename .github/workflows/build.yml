@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Check out repo
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - name: Initialize ni-apis submodule
+        run: git submodule update --init ni-apis
       - name: Set up Python
         uses: ni/python-actions/setup-python@9768589f3e50672173dad75a6fc181e4a85d33fa # v0.7.0
         id: setup-python
