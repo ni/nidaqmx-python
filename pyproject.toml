@@ -41,7 +41,7 @@ documentation = "https://nidaqmx-python.readthedocs.io"
 nidaqmx = 'nidaqmx.__main__:main'
 
 [project.optional-dependencies]
-grpc = ['grpcio (>=1.49.0,<2.0)', 'protobuf (>=4.21)']
+grpc = ['grpcio (>=1.49.0,<2.0)', 'protobuf (>=4.21)', 'ni-grpcdevice-v1-proto (>=1.0.0)']
 
 [tool.poetry]
 
@@ -129,10 +129,10 @@ numpy = [
 
 [tool.black]
 line-length = 100
-extend_exclude = ".tox/|docs/|generated/|src/codegen/metadata/|src/codegen/templates/"
+extend_exclude = ".tox/|docs/|generated/|src/codegen/metadata/|src/codegen/templates/|third_party/"
 
 [tool.ni-python-styleguide]
-extend_exclude = ".tox,docs,generated,src/codegen/metadata,src/codegen/templates"
+extend_exclude = ".tox,docs,generated,src/codegen/metadata,src/codegen/templates,third_party"
 application-import-names = "nidaqmx"
 
 [tool.pytest.ini_options]

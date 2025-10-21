@@ -1921,6 +1921,23 @@ protobuf = ">=4.25.3"
 types-protobuf = ">=4.24"
 
 [[package]]
+name = "ni-grpcdevice-v1-proto"
+version = "1.0.0"
+description = "Protobuf generated code for the nidevice_grpc gRPC API"
+optional = true
+python-versions = "<4.0,>=3.9"
+groups = ["main"]
+markers = "extra == \"grpc\""
+files = [
+    {file = "ni_grpcdevice_v1_proto-1.0.0-py3-none-any.whl", hash = "sha256:36dfe9484cc40e8e1c97fb9720555f06563b0180e4837177d1cbf000c3d8988e"},
+    {file = "ni_grpcdevice_v1_proto-1.0.0.tar.gz", hash = "sha256:62f087f85d390c2932e45ad03d365c750bd55e147b81b66ef853e13ff8538b19"},
+]
+
+[package.dependencies]
+grpcio = ">=1.49.0,<2.0"
+protobuf = ">=4.21"
+
+[[package]]
 name = "ni-python-styleguide"
 version = "0.4.7"
 description = "NI's internal and external Python linter rules and plugins"
@@ -3395,9 +3412,9 @@ test = ["big-O", "jaraco.functools", "jaraco.itertools", "jaraco.test", "more_it
 type = ["pytest-mypy"]
 
 [extras]
-grpc = ["grpcio", "protobuf"]
+grpc = ["grpcio", "ni-grpcdevice-v1-proto", "protobuf"]
 
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.9,<4.0"
-content-hash = "f346cc03f1bece011608678fa272c92a1e181e02a60ba4fdb7fc8f2ff53dcd3c"
+content-hash = "012220d38037cdc0dcc8d7432df1aebfbc0a374a2d35dee92ec7e47e442d4c0c"
