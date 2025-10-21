@@ -21,7 +21,6 @@ PROTO_FILES = list(PROTO_PATH.rglob("*.proto"))
 def generate_stubs():
     """Generate and fixup gRPC Python stubs."""
     generate_python_files(STUBS_PATH, PROTO_PATH, PROTO_FILES)
-    remove_session_files(STUBS_PATH)
     fix_import_paths(STUBS_PATH, STUBS_NAMESPACE, PROTO_PARENT_NAMESPACES)
     add_init_files(STUBS_PATH, PROTO_PATH)
 
@@ -55,15 +54,6 @@ def generate_python_files(
     print(proto_files)
 
     grpc_tools.protoc.main(arguments)
-
-
-def remove_session_files(stubs_path: pathlib.Path):
-    """Remove generated session files since we use ni-grpcdevice-v1-proto package instead."""
-    print("Removing generated session files (using ni-grpcdevice-v1-proto package instead)")
-    session_files = list(stubs_path.glob("session_pb2*"))
-    for file_path in session_files:
-        print(f"Removing {file_path}")
-        file_path.unlink()
 
 
 def fix_import_paths(
