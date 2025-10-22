@@ -48,15 +48,15 @@ def main():
 
             return 0
 
-        ai_task.ai_channels.add_ai_voltage_chan("Dev1/ai0")
+        ai_task.ai_channels.add_ai_voltage_chan("Dev2/ai0")
         ai_task.timing.cfg_samp_clk_timing(1000.0, sample_mode=AcquisitionType.CONTINUOUS)
         ai_task.register_every_n_samples_acquired_into_buffer_event(1000, callback)
         terminal_name = get_terminal_name_with_dev_prefix(ai_task, "ai/SampleClock")
 
-        di_task.di_channels.add_di_chan("Dev1/port0", line_grouping=LineGrouping.CHAN_FOR_ALL_LINES)
-        di_task.timing.cfg_samp_clk_timing(
-            1000.0, terminal_name, sample_mode=AcquisitionType.CONTINUOUS
-        )
+        di_task.di_channels.add_di_chan("PXI1Slot3/port0", line_grouping=LineGrouping.CHAN_FOR_ALL_LINES)
+        # di_task.timing.cfg_samp_clk_timing(
+        #     1000.0, terminal_name, sample_mode=AcquisitionType.CONTINUOUS
+        # )
 
         di_task.start()
         ai_task.start()
