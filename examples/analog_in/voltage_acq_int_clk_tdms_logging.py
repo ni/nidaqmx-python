@@ -19,7 +19,7 @@ from nidaqmx.constants import (
 )
 
 with nidaqmx.Task() as task:
-    task.ai_channels.add_ai_voltage_chan("Dev1/ai0")
+    task.ai_channels.add_ai_voltage_chan("Dev2/ai0")
     task.timing.cfg_samp_clk_timing(1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=10)
     task.in_stream.configure_logging(
         "TestData.tdms", LoggingMode.LOG_AND_READ, operation=LoggingOperation.CREATE_OR_REPLACE
@@ -33,8 +33,8 @@ with TdmsFile.open("TestData.tdms") as tdms_file:
             data = channel[:]
             print("Read data from TDMS file: [" + ", ".join(f"{value:f}" for value in data) + "]")
 
-if os.path.exists("TestData.tdms"):
-    os.remove("TestData.tdms")
+# if os.path.exists("TestData.tdms"):
+#     os.remove("TestData.tdms")
 
 if os.path.exists("TestData.tdms_index"):
     os.remove("TestData.tdms_index")
