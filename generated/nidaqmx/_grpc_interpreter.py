@@ -3617,7 +3617,20 @@ class GrpcStubInterpreter(BaseInterpreter):
         waveform: AnalogWaveform[numpy.float64],
         waveform_attribute_mode: WaveformAttributeMode
     ) -> int:
-        raise NotImplementedError
+        response = self._invoke(
+            self._client.ReadAnalogWaveforms,
+            grpc_types.ReadAnalogWaveformsRequest(
+                task=task_handle,
+                number_of_samples_per_channel=number_of_samples_per_channel,
+                timeout=timeout,
+                waveform_attribute_mode_raw=waveform_attribute_mode.value
+            ))
+        
+        if response.waveforms and len(response.waveforms) > 0:
+            _copy_protobuf_waveform_to_analog_waveform(response.waveforms[0], waveform)
+
+        self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
+        return response.samps_per_chan_read
 
     def read_analog_waveforms(
         self,
@@ -3736,9 +3749,11 @@ def _copy_protobuf_waveform_to_analog_waveform(grpc_waveform, target_waveform):
     if grpc_waveform.t0 and grpc_waveform.dt:
         # Convert protobuf timestamp to datetime and sample interval
         # PrecisionTimestamp has seconds and fractional_seconds fields
-        t0_seconds = grpc_waveform.t0.seconds + grpc_waveform.t0.fractional_seconds / 1e18
-        # Create timestamp relative to epoch (January 1, 1 AD)
-        _T0_EPOCH = ht_datetime(1, 1, 1, tzinfo=timezone.utc)
+        # fractional_seconds contains 100ns ticks (0 to TICKS_PER_SECOND-1)
+        fractional_seconds_as_time = grpc_waveform.t0.fractional_seconds / 10000000.0  # Convert 100ns ticks to seconds
+        t0_seconds = grpc_waveform.t0.seconds + fractional_seconds_as_time
+        # Create timestamp relative to NI-BTF epoch (January 1, 1904)
+        _T0_EPOCH = ht_datetime(1904, 1, 1, tzinfo=timezone.utc)
         timestamp = _T0_EPOCH + ht_timedelta(seconds=t0_seconds)
         sample_interval = ht_timedelta(seconds=grpc_waveform.dt)
         
