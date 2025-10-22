@@ -22,7 +22,9 @@ import logging
 import threading
 import typing
 import warnings
-from nitypes.waveform import AnalogWaveform, DigitalWaveform
+from datetime import timezone
+from hightime import datetime as ht_datetime, timedelta as ht_timedelta
+from nitypes.waveform import AnalogWaveform, DigitalWaveform, SampleIntervalMode, Timing
 from typing import Any, Callable, Generic, Sequence, TypeVar
 
 import google.protobuf.message
@@ -267,14 +269,21 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.ReadAnalogWaveforms,
             grpc_types.ReadAnalogWaveformsRequest(
-                task_handle=task_handle,
+                task=task_handle,
                 number_of_samples_per_channel=number_of_samples_per_channel,
                 timeout=timeout,
-                waveform_attribute_mode=0
+                waveform_attribute_mode_raw=waveform_attribute_mode.value
             ))
+        
+        # Copy waveforms from response to the provided waveforms parameter
+        for i, grpc_waveform in enumerate(response.waveforms):
+            if i < len(waveforms):
+                _copy_protobuf_waveform_to_analog_waveform(grpc_waveform, waveforms[i])
 
-        self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
-        return response.samps_per_chan_read
+        # Extract samples per channel from the first waveform (all channels should have same count)
+        samps_per_chan_read = len(response.waveforms[0].y_data) if response.waveforms else 0
+        self._check_for_error_from_response(response.status, samps_per_chan_read=samps_per_chan_read)
+        return samps_per_chan_read
 
     def read_digital_waveform(
         self,
@@ -344,6 +353,49 @@ class GrpcStubInterpreter(BaseInterpreter):
         timeout: float,
     ) -> int:
         raise NotImplementedError
+        
+def _copy_protobuf_waveform_to_analog_waveform(grpc_waveform, target_waveform):
+    """
+    Copies data from a protobuf DoubleAnalogWaveform to a nitypes AnalogWaveform.
+    
+    Args:
+        grpc_waveform: ni.protobuf.types.DoubleAnalogWaveform object from gRPC response
+        target_waveform: nitypes.waveform.AnalogWaveform object to copy data into
+    """
+    # Copy y_data to raw_data
+    _assign_numpy_array(target_waveform.raw_data, grpc_waveform.y_data)
+    
+    # Set sample count based on actual data received
+    target_waveform.sample_count = len(grpc_waveform.y_data)
+    
+    # Copy timing information if available
+    if grpc_waveform.t0 and grpc_waveform.dt:
+        # Convert protobuf timestamp to datetime and sample interval
+        # PrecisionTimestamp has seconds and fractional_seconds fields
+        t0_seconds = grpc_waveform.t0.seconds + grpc_waveform.t0.fractional_seconds / 1e18
+        # Create timestamp relative to epoch (January 1, 1 AD)
+        _T0_EPOCH = ht_datetime(1, 1, 1, tzinfo=timezone.utc)
+        timestamp = _T0_EPOCH + ht_timedelta(seconds=t0_seconds)
+        sample_interval = ht_timedelta(seconds=grpc_waveform.dt)
+        
+        # Set timing using the same pattern as library interpreter
+        target_waveform.timing = Timing(
+            sample_interval_mode=SampleIntervalMode.REGULAR,
+            timestamp=timestamp,
+            sample_interval=sample_interval,
+        )
+    
+    # Copy attributes if available
+    if grpc_waveform.attributes:
+        for key, attr_value in grpc_waveform.attributes.items():
+            if attr_value.HasField('bool_value'):
+                target_waveform.extended_properties[key] = attr_value.bool_value
+            elif attr_value.HasField('integer_value'):
+                target_waveform.extended_properties[key] = attr_value.integer_value
+            elif attr_value.HasField('double_value'):
+                target_waveform.extended_properties[key] = attr_value.double_value
+            elif attr_value.HasField('string_value'):
+                target_waveform.extended_properties[key] = attr_value.string_value
 
 def _assign_numpy_array(numpy_array, grpc_array):
     """

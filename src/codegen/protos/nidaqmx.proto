@@ -16,6 +16,7 @@ package nidaqmx_grpc;
 
 import "session.proto";
 import "data_moniker.proto";
+import "ni/protobuf/types/waveform.proto";
 import "google/protobuf/timestamp.proto";
 
 service NiDAQmx {
@@ -3557,6 +3558,12 @@ enum WriteBasicTEDSOptions {
   WRITE_BASIC_TEDS_OPTIONS_WRITE_TO_EEPROM = 12538;
   WRITE_BASIC_TEDS_OPTIONS_WRITE_TO_PROM = 12539;
   WRITE_BASIC_TEDS_OPTIONS_DO_NOT_WRITE = 12540;
+}
+
+enum WaveformAttributeMode {
+  WAVEFORM_ATTRIBUTE_MODE_NONE = 0;
+  WAVEFORM_ATTRIBUTE_MODE_TIMING = 1;
+  WAVEFORM_ATTRIBUTE_MODE_EXTENDED_PROPERTIES = 2;
 }
 
 enum ChannelInt32AttributeValues {
@@ -11513,14 +11520,16 @@ message WriteToTEDSFromFileResponse {
 }
 
 message ReadAnalogWaveformsRequest {
-  nidevice_grpc.Session task_handle = 1;
+  nidevice_grpc.Session task = 1;
   int32 number_of_samples_per_channel = 2;
   double timeout = 3;
-  int32 array_size = 4;
-  int32 waveform_attribute_mode = 5;
+  oneof waveform_attribute_mode_enum {
+    WaveformAttributeMode waveform_attribute_mode = 4;
+    int32 waveform_attribute_mode_raw = 5;
+  }
 }
 
 message ReadAnalogWaveformsResponse {
   int32 status = 1;
+  repeated ni.protobuf.types.DoubleAnalogWaveform waveforms = 2;
 }
-
