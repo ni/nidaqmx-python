@@ -359,11 +359,17 @@ def _copy_protobuf_waveform_to_analog_waveform(grpc_waveform, target_waveform):
         grpc_waveform: ni.protobuf.types.DoubleAnalogWaveform object from gRPC response
         target_waveform: nitypes.waveform.AnalogWaveform object to copy data into
     """
-    # Copy y_data to raw_data
-    _assign_numpy_array(target_waveform.raw_data, grpc_waveform.y_data)
+    samples_received = len(grpc_waveform.y_data)
     
-    # Set sample count based on actual data received
-    target_waveform.sample_count = len(grpc_waveform.y_data)
+    # Ensure the target waveform has enough capacity for the received data
+    if target_waveform.start_index + samples_received > target_waveform.capacity:
+        target_waveform.capacity = target_waveform.start_index + samples_received
+    
+    # Set sample count to resize the raw_data array to the correct size
+    target_waveform.sample_count = samples_received
+    
+    # Copy y_data to raw_data (after resize)
+    _assign_numpy_array(target_waveform.raw_data, grpc_waveform.y_data)
     
     # Copy timing information if available
     if grpc_waveform.t0 and grpc_waveform.dt:
