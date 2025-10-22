@@ -11532,4 +11532,5 @@ message ReadAnalogWaveformsRequest {
 message ReadAnalogWaveformsResponse {
   int32 status = 1;
   repeated ni.protobuf.types.DoubleAnalogWaveform waveforms = 2;
+  int32 samps_per_chan_read = 3;
 }

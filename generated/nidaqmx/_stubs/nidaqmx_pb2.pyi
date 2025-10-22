@@ -31938,7 +31938,9 @@ class ReadAnalogWaveformsResponse(google.protobuf.message.Message):
 
     STATUS_FIELD_NUMBER: builtins.int
     WAVEFORMS_FIELD_NUMBER: builtins.int
+    SAMPS_PER_CHAN_READ_FIELD_NUMBER: builtins.int
     status: builtins.int
+    samps_per_chan_read: builtins.int
     @property
     def waveforms(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ni.protobuf.types.waveform_pb2.DoubleAnalogWaveform]: ...
     def __init__(
@@ -31946,7 +31948,8 @@ class ReadAnalogWaveformsResponse(google.protobuf.message.Message):
         *,
         status: builtins.int = ...,
         waveforms: collections.abc.Iterable[ni.protobuf.types.waveform_pb2.DoubleAnalogWaveform] | None = ...,
+        samps_per_chan_read: builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["status", b"status", "waveforms", b"waveforms"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["samps_per_chan_read", b"samps_per_chan_read", "status", b"status", "waveforms", b"waveforms"]) -> None: ...
 
 global___ReadAnalogWaveformsResponse = ReadAnalogWaveformsResponse

@@ -3636,15 +3636,12 @@ class GrpcStubInterpreter(BaseInterpreter):
                 waveform_attribute_mode_raw=waveform_attribute_mode.value
             ))
         
-        # Copy waveforms from response to the provided waveforms parameter
         for i, grpc_waveform in enumerate(response.waveforms):
             if i < len(waveforms):
                 _copy_protobuf_waveform_to_analog_waveform(grpc_waveform, waveforms[i])
 
-        # Extract samples per channel from the first waveform (all channels should have same count)
-        samps_per_chan_read = len(response.waveforms[0].y_data) if response.waveforms else 0
-        self._check_for_error_from_response(response.status, samps_per_chan_read=samps_per_chan_read)
-        return samps_per_chan_read
+        self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
+        return response.samps_per_chan_read
 
     def read_digital_waveform(
         self,
@@ -3714,7 +3711,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         timeout: float,
     ) -> int:
         raise NotImplementedError
-        
+
 def _copy_protobuf_waveform_to_analog_waveform(grpc_waveform, target_waveform):
     """
     Copies data from a protobuf DoubleAnalogWaveform to a nitypes AnalogWaveform.
