@@ -56,8 +56,7 @@ class ChannelReaderBase:
         if not self._verify_array_shape:
             return
 
-        channels_to_read = self._in_stream.channels_to_read
-        number_of_channels = len(channels_to_read.channel_names)
+        number_of_channels = self._in_stream.num_chans
 
         array_shape: tuple[int, ...] | None = None
         if is_many_chan:
@@ -100,8 +99,7 @@ class ChannelReaderBase:
         if not self._verify_array_shape:
             return
 
-        channels_to_read = self._in_stream.channels_to_read
-        number_of_channels = len(channels_to_read.channel_names)
+        number_of_channels = self._in_stream.num_chans
         number_of_lines = self._in_stream.di_num_booleans_per_chan
 
         array_shape: tuple[int, ...] | None = None

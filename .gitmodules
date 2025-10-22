@@ -1,0 +1,3 @@
+[submodule "ni-apis"]
+	path = third_party/ni-apis
+	url = https://github.com/ni/ni-apis.git

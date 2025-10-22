@@ -29,7 +29,8 @@ All notable changes to this project will be documented in this file.
     * [Full changelog: 1.2.0...1.3.0](https://github.com/ni/nidaqmx-python/compare/1.2.0...1.3.0)
 
 * ### Resolved Issues
-    * ...
+    * [843: read methods use task.in_stream.channels_to_read, which is slow](https://github.com/ni/nidaqmx-python/issues/843)
+    * [639: first_samp_timestamp_val property does not work because LibraryInterpreter is missing a method](https://github.com/ni/nidaqmx-python/issues/639)
 
 * ### Major Changes
     * (IN PROGRESS behind "WAVEFORM_SUPPORT" feature toggle) Added support for reading and writing Waveform data. 
@@ -47,6 +48,7 @@ All notable changes to this project will be documented in this file.
     * Clarify PyPy support and enable unit testing with PyPy.
     * Adopt ni-python-styleguide for hand-written code.
     * Upgrade to Poetry 2.x and migrate `pyproject.toml` format.
+    * Add support for Python 3.14.
 
 * ### Known Issues
     * ...

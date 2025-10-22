@@ -34,7 +34,6 @@ from . import errors as errors
 from nidaqmx._base_interpreter import BaseEventHandler, BaseInterpreter
 from nidaqmx._stubs import nidaqmx_pb2 as grpc_types
 from nidaqmx._stubs import nidaqmx_pb2_grpc as nidaqmx_grpc
-from nidaqmx._stubs import session_pb2 as session_grpc_types
 from nidaqmx.constants import WaveformAttributeMode
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx._grpc_time import convert_time_to_timestamp, convert_timestamp_to_time

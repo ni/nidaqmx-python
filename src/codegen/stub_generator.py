@@ -14,6 +14,7 @@ STUBS_PATH = (
     pathlib.Path(__file__).parent.parent.parent / "generated" / STUBS_NAMESPACE.replace(".", "/")
 )
 PROTO_PATH = pathlib.Path(__file__).parent.parent.parent / "src" / "codegen" / "protos"
+NI_APIS_PATH = pathlib.Path(__file__).parent.parent.parent / "third_party" / "ni-apis"
 PROTO_FILES = list(PROTO_PATH.rglob("*.proto"))
 
 
@@ -41,6 +42,7 @@ def generate_python_files(
     arguments = [
         "protoc",
         f"--proto_path={str(proto_path)}",
+        f"--proto_path={str(NI_APIS_PATH / 'ni' / 'grpcdevice' / 'v1')}",  # ni-apis session.proto location for import resolution
         f"--proto_path={pkg_resources.resource_filename('grpc_tools', '_proto')}",
         f"--python_out={str(stubs_path)}",
         f"--mypy_out={str(stubs_path)}",
