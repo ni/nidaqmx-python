@@ -1197,13 +1197,14 @@ setuptools = "*"
 
 [[package]]
 name = "hightime"
-version = "0.2.2"
+version = "1.0.0"
 description = "Hightime Python API"
 optional = false
-python-versions = "*"
+python-versions = "<4.0,>=3.9"
 groups = ["main"]
 files = [
-    {file = "hightime-0.2.2-py3-none-any.whl", hash = "sha256:5109a449bb3a75dbf305147777de71634c91b943d47cfbee18ed2f34a8307e0b"},
+    {file = "hightime-1.0.0-py3-none-any.whl", hash = "sha256:ba86d42976c36451b14e11c736e61f296f9f00dbb79c8488e18d70c6b2dbb395"},
+    {file = "hightime-1.0.0.tar.gz", hash = "sha256:480d2a03e2c3ed44916d2406d40ab6d10a276ed7f101619fc3fcc1e00c46aacf"},
 ]
 
 [[package]]
@@ -1970,14 +1971,14 @@ toml = ">=0.10.1"
 
 [[package]]
 name = "nitypes"
-version = "0.1.0.dev10"
+version = "1.1.0.dev0"
 description = "Data types for NI Python APIs"
 optional = false
 python-versions = "<4.0,>=3.9"
 groups = ["main"]
 files = [
-    {file = "nitypes-0.1.0.dev10-py3-none-any.whl", hash = "sha256:c4f097ffdeaf05697a7752a1e2b712760b28e84a4f6f446b4b7b76b349927490"},
-    {file = "nitypes-0.1.0.dev10.tar.gz", hash = "sha256:e319ebbdefca63db8e879b9f119cc4f76a086c550931dea2be0e33e9c10e9d9f"},
+    {file = "nitypes-1.1.0.dev0-py3-none-any.whl", hash = "sha256:1dd0d15bb741294672ea7d61d98e951c5802eec0130d0162f4f19008dd74c0f6"},
+    {file = "nitypes-1.1.0.dev0.tar.gz", hash = "sha256:a82d2f518f514a24bfb3b9c4e023db23097a786ca40155693610d09578d86f10"},
 ]
 
 [package.dependencies]
@@ -1986,6 +1987,7 @@ numpy = [
     {version = ">=1.22", markers = "python_version >= \"3.9\" and python_version < \"3.13\""},
     {version = ">=2.1", markers = "python_version >= \"3.13\" and python_version < \"4.0\""},
 ]
+typing-extensions = ">=4.13.2"
 
 [[package]]
 name = "nptdms"
