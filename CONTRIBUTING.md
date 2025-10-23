@@ -19,7 +19,7 @@ To contribute to this project, it is recommended that you follow these steps:
 1. Ensure you have [poetry](https://python-poetry.org/) [installed](https://python-poetry.org/docs/#installation)
 2. Clone the repository using `git clone https://github.com/ni/nidaqmx-python.git`
 3. Get the submodules using `git submodule update --init --recursive`
-3. Install **nidaqmx** dependencies (including) using `poetry install --all-extras`
+3. Install **nidaqmx** dependencies using `poetry install --all-extras`
 4. Run the regression tests on your system (see Testing section). At this point, if any tests fail, do not
 begin development. Try to investigate these failures. If you're unable to do so, report an issue
 through our [GitHub issues page](http://github.com/ni/nidaqmx-python/issues).
