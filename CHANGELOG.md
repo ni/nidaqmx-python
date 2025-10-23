@@ -49,6 +49,7 @@ All notable changes to this project will be documented in this file.
     * Adopt ni-python-styleguide for hand-written code.
     * Upgrade to Poetry 2.x and migrate `pyproject.toml` format.
     * Add support for Python 3.14.
+    * Add https://github.com/ni/ni-apis as a submodule of nidaqmx-python.
 
 * ### Known Issues
     * ...
