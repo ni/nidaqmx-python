@@ -7,6 +7,7 @@ import pytest
 from hightime import datetime as ht_datetime
 
 from nidaqmx._lib_time import AbsoluteTime as LibTimestamp
+from nidaqmx._time import _convert_to_desired_timezone
 from tests.unit._time_utils import (
     JAN_01_1850_DATETIME,
     JAN_01_1850_HIGHTIME,
@@ -104,6 +105,37 @@ def test___utc_datetime___convert_to_timestamp_with_dst___is_reversible(date):
     roundtrip_dt = to_ts.to_datetime(tzinfo=target_timezone)
 
     assert astimezone_date == roundtrip_dt
+
+
+@pytest.mark.parametrize(
+    "base_dt, femtosecond, subseconds",
+    [
+        (ht_datetime(2023, 3, 12, tzinfo=timezone.utc), 0, 0),
+        (ht_datetime(2023, 3, 12, tzinfo=timezone.utc), 1, 0x480F),
+        (ht_datetime(2023, 6, 1, tzinfo=timezone.utc), 0, 0),
+        (ht_datetime(2023, 6, 1, tzinfo=timezone.utc), 1, 0x480F),
+        (ht_datetime(2023, 11, 5, tzinfo=timezone.utc), 0, 0),
+        (ht_datetime(2023, 11, 5, tzinfo=timezone.utc), 1, 0x480F),
+    ],
+)
+def test___datetime_with_dst_and_femtoseconds___convert_to_timestamp___is_reversible(
+    base_dt, femtosecond, subseconds
+):
+    target_timezone = ZoneInfo("America/Los_Angeles")
+    from_dt = base_dt.replace(femtosecond=femtosecond)
+    expected_la_time = _convert_to_desired_timezone(from_dt, target_timezone)
+
+    ts = LibTimestamp.from_datetime(from_dt)
+    roundtrip_dt = ts.to_datetime(tzinfo=target_timezone)
+
+    assert ts.msb == LibTimestamp.from_datetime(expected_la_time).msb
+    assert ts.lsb == subseconds
+    # comparison is tricky since imprecision in the conversion to NI-BTF are
+    # caught by the higher precision values in hightime, so we round here.
+    roundtrip_dt_femtosecond = roundtrip_dt.femtosecond
+    if roundtrip_dt.yoctosecond > LibTimestamp.MAX_YS / 2:
+        roundtrip_dt_femtosecond += 1
+    assert roundtrip_dt_femtosecond == femtosecond
 
 
 @pytest.mark.parametrize(
