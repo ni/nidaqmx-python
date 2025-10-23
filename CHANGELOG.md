@@ -50,6 +50,9 @@ All notable changes to this project will be documented in this file.
     * Upgrade to Poetry 2.x and migrate `pyproject.toml` format.
     * Add support for Python 3.14.
     * Add https://github.com/ni/ni-apis as a submodule of nidaqmx-python.
+    * Add an optional dependency on `ni.grpcdevice.v1.proto`.
+        * The internal `session_pb2` submodule has been moved to the shared package `ni.grpcdevice.v1.proto`. Installing the `nidaqmx` package's `grpc` extra will automatically install this package.
+        * If you get `ModuleNotFoundError: No module named 'session_pb2'`, make sure you are installing the `nidaqmx` package's `grpc` extra.
 
 * ### Known Issues
     * ...
