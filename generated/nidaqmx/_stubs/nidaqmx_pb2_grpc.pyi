@@ -2259,6 +2259,11 @@ class NiDAQmxStub:
         nidaqmx_pb2.ReadAnalogWaveformsResponse,
     ]
 
+    ReadDigitalWaveforms: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.ReadDigitalWaveformsRequest,
+        nidaqmx_pb2.ReadDigitalWaveformsResponse,
+    ]
+
 class NiDAQmxAsyncStub:
     AddCDAQSyncConnection: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.AddCDAQSyncConnectionRequest,
@@ -4493,6 +4498,11 @@ class NiDAQmxAsyncStub:
     ReadAnalogWaveforms: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadAnalogWaveformsRequest,
         nidaqmx_pb2.ReadAnalogWaveformsResponse,
+    ]
+
+    ReadDigitalWaveforms: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.ReadDigitalWaveformsRequest,
+        nidaqmx_pb2.ReadDigitalWaveformsResponse,
     ]
 
 class NiDAQmxServicer(metaclass=abc.ABCMeta):
@@ -7624,5 +7634,12 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
         request: nidaqmx_pb2.ReadAnalogWaveformsRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadAnalogWaveformsResponse, collections.abc.Awaitable[nidaqmx_pb2.ReadAnalogWaveformsResponse]]: ...
+
+    @abc.abstractmethod
+    def ReadDigitalWaveforms(
+        self,
+        request: nidaqmx_pb2.ReadDigitalWaveformsRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.ReadDigitalWaveformsResponse, collections.abc.Awaitable[nidaqmx_pb2.ReadDigitalWaveformsResponse]]: ...
 
 def add_NiDAQmxServicer_to_server(servicer: NiDAQmxServicer, server: typing.Union[grpc.Server, grpc.aio.Server]) -> None: ...
