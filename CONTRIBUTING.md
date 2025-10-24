@@ -27,7 +27,7 @@ through our [GitHub issues page](http://github.com/ni/nidaqmx-python/issues).
 6. Make your change.
 7. Once the necessary changes are done, update the auto-generated code using `poetry run python src/codegen --dest generated/nidaqmx`. This will ensure that the latest files are present in the ``generated`` folder.
    > **Note**
-   > The codegen scripts require Python 3.9 or later.
+   > The codegen scripts require Python 3.10 or later.
 8. Run all the regression tests again (including the tests you just added), and confirm that they all
 pass.
 9. Run `poetry run ni-python-styleguide lint` to check that the updated code follows NI's Python coding
@@ -91,7 +91,7 @@ $ poetry run pytest -v tests/benchmark --device Dev1
 
 Or you can use tox (which skips the gRPC variants):
 ```
-poetry run -- tox -e py39-base-benchmark -- --device Dev1
+poetry run -- tox -e py310-base-benchmark -- --device Dev1
 ```
 
 The benchmarks are designed to run on a 6363 device. If you don't specify a specific
