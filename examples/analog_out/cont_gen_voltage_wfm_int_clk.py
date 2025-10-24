@@ -4,8 +4,6 @@ This example demonstrates how to output a continuous periodic
 waveform using an internal sample clock.
 """
 
-from typing import Tuple
-
 import numpy as np
 import numpy.typing
 
@@ -19,7 +17,7 @@ def generate_sine_wave(
     sampling_rate: float,
     number_of_samples: int,
     phase_in: float = 0.0,
-) -> Tuple[numpy.typing.NDArray[numpy.double], float]:
+) -> tuple[numpy.typing.NDArray[numpy.double], float]:
     """Generates a sine wave with a specified phase.
 
     Args:
