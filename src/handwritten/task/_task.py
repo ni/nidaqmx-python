@@ -2,9 +2,9 @@ from __future__ import annotations
 
 import threading
 import warnings
-from collections.abc import Iterable
+from collections.abc import Iterable, Sequence
 from enum import Enum
-from typing import Any, NoReturn, Sequence
+from typing import Any, NoReturn
 
 import numpy
 from nitypes.waveform import AnalogWaveform, DigitalWaveform
