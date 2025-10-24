@@ -118,7 +118,7 @@ def test___utc_datetime___convert_to_timestamp_with_dst___is_reversible(date):
         (ht_datetime(2023, 11, 5, tzinfo=timezone.utc), 1, 0x480F),
     ],
 )
-def test___datetime_with_dst_and_femtoseconds___convert_to_timestamp___is_reversible(
+def test___utc_datetime_with_femtoseconds___convert_to_timestamp_with_dst___is_reversible(
     base_dt, femtosecond, subseconds
 ):
     target_timezone = ZoneInfo("America/Los_Angeles")
@@ -130,12 +130,7 @@ def test___datetime_with_dst_and_femtoseconds___convert_to_timestamp___is_revers
 
     assert ts.msb == LibTimestamp.from_datetime(expected_la_time).msb
     assert ts.lsb == subseconds
-    # comparison is tricky since imprecision in the conversion to NI-BTF are
-    # caught by the higher precision values in hightime, so we round here.
-    roundtrip_dt_femtosecond = roundtrip_dt.femtosecond
-    if roundtrip_dt.yoctosecond > LibTimestamp.MAX_YS / 2:
-        roundtrip_dt_femtosecond += 1
-    assert roundtrip_dt_femtosecond == femtosecond
+    assert roundtrip_dt.femtosecond == expected_la_time.femtosecond    
 
 
 @pytest.mark.parametrize(
