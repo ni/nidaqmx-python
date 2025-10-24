@@ -46,4 +46,4 @@ Search open/closed issues before submitting. Someone may have reported the same 
 * Operating system and version: [e.g. Windows 11 24H2, Ubuntu Linux 24.04]
 * NI-DAQmx version: [e.g. 2024 Q4]
 * `nidaqmx-python` version: [e.g. 1.0.1]
-* Python version [e.g. 3.9]
+* Python version [e.g. 3.11]
