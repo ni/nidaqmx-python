@@ -41,5 +41,5 @@ class ExpirationStatesCollection:
             return ExpirationState(self._handle, index, self._interpreter)
         else:
             raise DaqError(
-                'Invalid index type "{}" used to access expiration states.'.format(type(index)), -1
+                f'Invalid index type "{type(index)}" used to access expiration states.', -1
             )
