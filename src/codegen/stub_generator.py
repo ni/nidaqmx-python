@@ -2,7 +2,7 @@
 
 import os
 import pathlib
-from typing import Sequence
+from collections.abc import Sequence
 
 import grpc_tools.protoc
 import pkg_resources

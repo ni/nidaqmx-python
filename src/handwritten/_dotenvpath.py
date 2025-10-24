@@ -45,25 +45,10 @@ def _get_caller_path() -> Path | None:
     for frame, _ in traceback.walk_stack(inspect.currentframe()):
         if frame.f_code.co_filename:
             module_path = Path(frame.f_code.co_filename)
-            if _exists(module_path) and not module_path.is_relative_to(package_path):
+            if module_path.exists() and not module_path.is_relative_to(package_path):
                 return module_path
 
     return None
-
-
-# Path.exists() throws OSError when the path has invalid file characters.
-# https://github.com/python/cpython/issues/79487
-if sys.version_info >= (3, 10):
-
-    def _exists(path: Path) -> bool:
-        return path.exists()
-
-else:
-
-    def _exists(path: Path) -> bool:
-        import os
-
-        return os.path.exists(path)
 
 
 def _get_package_path() -> Path:

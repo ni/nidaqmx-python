@@ -4,9 +4,10 @@ from __future__ import annotations
 
 import contextlib
 import pathlib
+from collections.abc import Callable, Generator
 from concurrent.futures import ThreadPoolExecutor
 from enum import Enum
-from typing import TYPE_CHECKING, Callable, Generator
+from typing import TYPE_CHECKING
 
 import pytest
 

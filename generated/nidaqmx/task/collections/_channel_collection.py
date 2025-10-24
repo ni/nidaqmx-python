@@ -63,7 +63,7 @@ class ChannelCollection(Sequence):
             channel_names = index
         else:
             raise DaqError(
-                'Invalid index type "{}" used to access channels.'.format(type(index)),
+                f'Invalid index type "{type(index)}" used to access channels.',
                 DAQmxErrors.UNKNOWN,
             )
 
