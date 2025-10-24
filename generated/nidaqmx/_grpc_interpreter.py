@@ -6,10 +6,11 @@ import threading
 import typing
 import warnings
 from nitypes.waveform import AnalogWaveform, DigitalWaveform
-from typing import Any, Callable, Generic, Sequence, TypeVar
+from typing import Any, Generic, TypeVar
+
+from collections.abc import Callable, Sequence
 
 import google.protobuf.message
-from google.protobuf.timestamp_pb2 import Timestamp as GrpcTimestamp
 import grpc
 import numpy
 

@@ -23,12 +23,13 @@ import logging
 import numpy
 import platform
 import warnings
-import sys
 from enum import Enum
 from datetime import timezone
 from hightime import datetime as ht_datetime
 from hightime import timedelta as ht_timedelta
-from typing import Any, Callable, List, Sequence, Tuple, TYPE_CHECKING, Union
+from typing import Any, TYPE_CHECKING
+
+from collections.abc import Callable, Sequence
 
 from nidaqmx._base_interpreter import BaseEventHandler, BaseInterpreter
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer, TaskHandle
@@ -40,10 +41,7 @@ from nitypes.waveform.typing import ExtendedPropertyValue
 from nitypes.waveform import AnalogWaveform, DigitalWaveform, SampleIntervalMode, Timing, ExtendedPropertyDictionary
 
 if TYPE_CHECKING:
-    if sys.version_info >= (3, 10):
-        from typing import TypeAlias
-    else:
-        from typing_extensions import TypeAlias
+    from typing import TypeAlias
 
 _logger = logging.getLogger(__name__)
 _was_runtime_environment_set = None
@@ -286,7 +284,7 @@ class LibraryInterpreter(BaseInterpreter):
         properties: Sequence[ExtendedPropertyDictionary] | None,
         t0_array: numpy.typing.NDArray[numpy.int64] | None,
         dt_array: numpy.typing.NDArray[numpy.int64] | None,
-    ) -> Tuple[
+    ) -> tuple[
         int, # error code
         int, # The number of samples per channel that were read
     ]:
@@ -340,7 +338,7 @@ class LibraryInterpreter(BaseInterpreter):
         properties: Sequence[ExtendedPropertyDictionary] | None,
         t0_array: numpy.typing.NDArray[numpy.int64] | None,
         dt_array: numpy.typing.NDArray[numpy.int64] | None,
-    ) -> Tuple[
+    ) -> tuple[
         int, # error code
         int, # The number of samples per channel that were read
     ]:
@@ -456,7 +454,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     def _set_waveform_timings(
         self, 
-        waveforms: Sequence[Union[AnalogWaveform[numpy.float64], DigitalWaveform[numpy.uint8]]], 
+        waveforms: Sequence[AnalogWaveform[numpy.float64] | DigitalWaveform[numpy.uint8]], 
         t0_array: numpy.typing.NDArray[numpy.int64], 
         dt_array: numpy.typing.NDArray[numpy.int64]
     ) -> None:
@@ -641,7 +639,7 @@ class LibraryInterpreter(BaseInterpreter):
         t0_array: numpy.typing.NDArray[numpy.int64] | None,
         dt_array: numpy.typing.NDArray[numpy.int64] | None,
         bytes_per_chan_array: numpy.typing.NDArray[numpy.uint32] | None = None,
-    ) -> Tuple[
+    ) -> tuple[
         int, # error code
         int, # The number of samples per channel that were read
     ]:
@@ -862,7 +860,7 @@ class LibraryInterpreter(BaseInterpreter):
         auto_start: bool,
         timeout: float,
         write_arrays: Sequence[numpy.typing.NDArray[numpy.float64]],
-    ) -> Tuple[
+    ) -> tuple[
         int, # error code
         int, # The number of samples per channel that were written
     ]:
@@ -989,7 +987,7 @@ class LibraryInterpreter(BaseInterpreter):
         data_layout: int,
         write_array: numpy.typing.NDArray[numpy.uint8],
         bytes_per_chan_array: numpy.typing.NDArray[numpy.uint32] | None = None,
-    ) -> Tuple[
+    ) -> tuple[
         int, # error code
         int, # The number of samples per channel that were written
     ]:
