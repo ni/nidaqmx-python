@@ -5,10 +5,11 @@ import functools
 import random
 import threading
 import time
+from collections.abc import Callable, Sequence
 from concurrent.futures import Future, ThreadPoolExecutor
 from contextlib import ExitStack
 from threading import Barrier, Semaphore
-from typing import Any, Callable, Sequence
+from typing import Any
 
 import pytest
 

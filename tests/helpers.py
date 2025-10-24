@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import contextlib
 import pathlib
-from typing import Generator
+from collections.abc import Generator
 
 from nidaqmx.system.physical_channel import PhysicalChannel
 
