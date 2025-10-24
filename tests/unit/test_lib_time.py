@@ -130,7 +130,7 @@ def test___utc_datetime_with_femtoseconds___convert_to_timestamp_with_dst___is_r
 
     assert ts.msb == LibTimestamp.from_datetime(expected_la_time).msb
     assert ts.lsb == subseconds
-    assert roundtrip_dt.femtosecond == expected_la_time.femtosecond    
+    assert roundtrip_dt.femtosecond == expected_la_time.femtosecond
 
 
 @pytest.mark.parametrize(
