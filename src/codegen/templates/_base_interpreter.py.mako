@@ -15,7 +15,9 @@ from __future__ import annotations
 import abc
 import numpy
 from nitypes.waveform import AnalogWaveform, DigitalWaveform
-from typing import Any, Sequence
+from typing import Any
+
+from collections.abc import Sequence
 from nidaqmx.constants import WaveformAttributeMode
 
 

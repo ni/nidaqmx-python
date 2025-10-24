@@ -333,7 +333,7 @@ class InStream:
         return val
 
     @property
-    def logging_file_path(self) -> Optional[pathlib.Path]:
+    def logging_file_path(self) -> pathlib.Path | None:
         """
         pathlib.Path: Specifies the path to the TDMS file to which you
             want to log data.  If the file path is changed while the
@@ -349,7 +349,7 @@ class InStream:
         return pathlib.Path(val) if val else None
 
     @logging_file_path.setter
-    def logging_file_path(self, val: Optional[Union[str, pathlib.PurePath]]):
+    def logging_file_path(self, val: str | pathlib.PurePath | None):
         if val is None:
             val = ""
         val = str(val)
@@ -997,7 +997,7 @@ class InStream:
             return num_samps_per_chan
 
     def configure_logging(
-            self, file_path: Union[str, pathlib.PurePath], logging_mode=LoggingMode.LOG_AND_READ,
+            self, file_path: str | pathlib.PurePath, logging_mode=LoggingMode.LOG_AND_READ,
             group_name="", operation=LoggingOperation.OPEN_OR_CREATE):
         """
         Configures TDMS file logging for the task.
@@ -1090,7 +1090,7 @@ class InStream:
 
         if samp_size_in_bits == 32:
             if has_negative_range:
-                dtype: Type[numpy.generic] = numpy.int32
+                dtype: type[numpy.generic] = numpy.int32
             else:
                 dtype = numpy.uint32
         elif samp_size_in_bits == 16:
@@ -1238,7 +1238,7 @@ class InStream:
 
         return samples_read
 
-    def start_new_file(self, file_path: Union[str, pathlib.PurePath]):
+    def start_new_file(self, file_path: str | pathlib.PurePath):
         """
         Starts a new TDMS file the next time data is written to disk.
 

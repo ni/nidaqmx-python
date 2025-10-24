@@ -17,7 +17,7 @@
     argument_definition_lines = get_argument_definition_lines_for_varargs(varargs_parameters)
 %>\
         args = [device_name]
-        argtypes: List[type] = [ctypes_byte_str]
+        argtypes: list[type] = [ctypes_byte_str]
 
         for index in range(${varargs_array_length}):
 %for instantiation_line in instantiation_lines:

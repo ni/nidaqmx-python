@@ -4,7 +4,7 @@
     %>\
     @${attribute.name}.setter
     %if attribute.name in ATTRIBUTE_WITH_FILE_PATH_TYPE:
-    def ${attribute.name}(self, val: Optional[Union[str, pathlib.PurePath]]):
+    def ${attribute.name}(self, val: str | pathlib.PurePath | None):
     %else:
     def ${attribute.name}(self, val):
     %endif
