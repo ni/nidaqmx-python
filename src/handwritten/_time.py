@@ -36,7 +36,7 @@ def _convert_to_desired_timezone(
             femtosecond,
             yoctosecond,
             tzinfo=std_datetime_result.tzinfo,
-            fold=std_datetime_result.fold,
+            fold=std_datetime_result.fold
         )
         return desired_expected_time
 
