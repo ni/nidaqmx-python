@@ -3844,8 +3844,8 @@ def _copy_protobuf_waveform_to_digital_waveform(grpc_waveform, target_waveform):
     if grpc_waveform.t0 and grpc_waveform.dt:
         # Convert protobuf timestamp to datetime and sample interval
         # PrecisionTimestamp has seconds and fractional_seconds fields
-        # fractional_seconds contains 100ns ticks (0 to TICKS_PER_SECOND-1)
-        fractional_seconds_as_time = grpc_waveform.t0.fractional_seconds / 10000000.0  # Convert 100ns ticks to seconds
+        # fractional_seconds is non-negative fractions of a second at 2^-64 resolution.
+        fractional_seconds_as_time = grpc_waveform.t0.fractional_seconds / 2**64
         t0_seconds = grpc_waveform.t0.seconds + fractional_seconds_as_time
         # Create timestamp relative to NI-BTF epoch (January 1, 1904)
         _T0_EPOCH = ht_datetime(1904, 1, 1, tzinfo=timezone.utc)
