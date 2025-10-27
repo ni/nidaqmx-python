@@ -153,8 +153,10 @@ def test___utc_datetime_with_yoctoseconds___convert_to_timestamp_with_dst___is_r
     target_timezone = ZoneInfo("America/Los_Angeles")
     from_dt = base_dt.replace(yoctosecond=yoctosecond)
     expected_la_time = _convert_to_desired_timezone(from_dt, target_timezone)
+
     ts = LibTimestamp.from_datetime(from_dt)
     roundtrip_dt = ts.to_datetime(tzinfo=target_timezone)
+
     assert ts.msb == LibTimestamp.from_datetime(expected_la_time).msb
     assert ts.lsb == subseconds
     assert roundtrip_dt.microsecond == expected_la_time.microsecond
