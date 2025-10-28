@@ -22,8 +22,23 @@ def _convert_to_desired_timezone(
     # use ZoneInfo here to account for daylight savings
     if isinstance(tzinfo, ZoneInfo):
         localized_time = expected_time_utc.replace(tzinfo=tzinfo)
-        desired_expected_time = tzinfo.fromutc(localized_time)
-        return desired_expected_time  # type: ignore[return-value]  # https://github.com/ni/nidaqmx-python/issues/860
+        std_datetime_result = tzinfo.fromutc(localized_time)
+        femtosecond = getattr(expected_time_utc, "femtosecond", 0)
+        yoctosecond = getattr(expected_time_utc, "yoctosecond", 0)
+        desired_expected_time = ht_datetime(
+            std_datetime_result.year,
+            std_datetime_result.month,
+            std_datetime_result.day,
+            std_datetime_result.hour,
+            std_datetime_result.minute,
+            std_datetime_result.second,
+            std_datetime_result.microsecond,
+            femtosecond,
+            yoctosecond,
+            tzinfo=std_datetime_result.tzinfo,
+            fold=std_datetime_result.fold,
+        )
+        return desired_expected_time
 
     # if the tzinfo passed in is a timedelta function, then we don't need to consider daylight savings  # noqa: W505 - doc line too long (102 > 100 characters) (auto-generated noqa)
     elif tzinfo.utcoffset(None) is not None:
