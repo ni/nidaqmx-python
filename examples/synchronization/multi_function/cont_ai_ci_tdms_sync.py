@@ -33,7 +33,6 @@ def producer(
     """Producer function that reads data from DAQmx tasks and puts it in the queue."""
     try:
         while not stop_event.is_set():
-            # Read from all tasks
             data = []
             for task in tasks:
                 task_data = task.read(
@@ -41,14 +40,12 @@ def producer(
                 )
                 data.append(task_data)
 
-            # Put data in queue
             data_queue.put(data)
 
     except Exception as e:
         print(f"Error in producer: {e}")
         stop_event.set()
     finally:
-        # Signal consumer that we're done
         data_queue.put(None)
 
 
@@ -64,34 +61,28 @@ def consumer(
         with TdmsWriter(tdms_path) as tdms_writer:
             while not stop_event.is_set():
                 try:
-                    # Get data from queue with timeout
                     data = data_queue.get(timeout=TIMEOUT)
 
-                    # Check for producer completion
                     if data is None:
                         break
 
-                    # Create TDMS objects for each channel
                     root_object = RootObject(
                         properties={"Creation Time": time.strftime("%Y-%m-%d %H:%M:%S")}
                     )
 
                     objects_to_write = [root_object]
 
-                    # Write data for each task/group
                     for task_idx, task_data in enumerate(data):
                         group = GroupObject(
                             group_names[task_idx], properties={"Sample Rate": SAMPLE_RATE}
                         )
                         objects_to_write.append(group)
 
-                        # Convert data to numpy arrays and ensure 1D
                         if isinstance(task_data, (list, tuple)) and isinstance(
                             task_data[0], (list, tuple, np.ndarray)
                         ):
-                            # Multiple channels (AI task)
                             for chan_idx, chan_data in enumerate(task_data):
-                                chan_data = np.array(chan_data).flatten()  # Ensure 1D array
+                                chan_data = np.array(chan_data).flatten() 
                                 channel = ChannelObject(
                                     group_names[task_idx],
                                     channel_names[task_idx][chan_idx],
@@ -100,8 +91,7 @@ def consumer(
                                 )
                                 objects_to_write.append(channel)
                         else:
-                            # Single channel (CI task)
-                            task_data = np.array(task_data).flatten()  # Ensure 1D array
+                            task_data = np.array(task_data).flatten()  
                             channel = ChannelObject(
                                 group_names[task_idx],
                                 channel_names[task_idx][0],
@@ -110,7 +100,6 @@ def consumer(
                             )
                             objects_to_write.append(channel)
 
-                    # Write to TDMS file
                     tdms_writer.write_segment(objects_to_write)
 
                 except queue.Empty:
@@ -132,31 +121,26 @@ def main():
     Data is acquired continuously until user presses Enter, then saved to a TDMS file
     using a producer-consumer pattern with a queue for thread-safe data transfer.
     """
-    # Create a queue for data transfer
     data_queue = queue.Queue(maxsize=10)
     stop_event = threading.Event()
 
-    # Create tasks
     ai_task = nidaqmx.Task()
     ci1_task = nidaqmx.Task()
     clk_task = nidaqmx.Task()
 
     try:
-        # Configure sample clock
         clk_task.co_channels.add_co_pulse_chan_freq(
             counter="Dev1/ctr1",
             freq=SAMPLE_RATE,
         )
         clk_task.timing.cfg_implicit_timing(sample_mode=AcquisitionType.CONTINUOUS)
 
-        # Configure AI task
         ai_task.ai_channels.add_ai_voltage_chan("Dev2/ai0", "Torque01")
         ai_task.ai_channels.add_ai_voltage_chan("Dev2/ai1", "Torque02")
         ai_task.timing.cfg_samp_clk_timing(
             SAMPLE_RATE, sample_mode=AcquisitionType.CONTINUOUS, samps_per_chan=SAMPLES_PER_CHANNEL
         )
 
-        # Configure CI task
         ci1_chan = ci1_task.ci_channels.add_ci_count_edges_chan(
             "Dev1/ctr0", "Rotations01", edge=Edge.RISING, initial_count=0
         )
@@ -168,7 +152,6 @@ def main():
             samps_per_chan=SAMPLES_PER_CHANNEL,
         )
 
-        # Create threads
         producer_thread = threading.Thread(
             target=producer, args=([ai_task, ci1_task], data_queue, stop_event)
         )
@@ -184,12 +167,10 @@ def main():
             ),
         )
 
-        # Start tasks in correct order
         clk_task.start()
         ci1_task.start()
         ai_task.start()
 
-        # Start threads
         producer_thread.start()
         consumer_thread.start()
 
@@ -209,7 +190,6 @@ def main():
 
     print("\nAcquisition complete. Data saved to multi_task_data.tdms")
 
-    # Ensure TDMS index file is removed before reading
     if os.path.exists("multi_task_data.tdms_index"):
         os.remove("multi_task_data.tdms_index")
 
