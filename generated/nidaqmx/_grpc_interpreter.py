@@ -3758,14 +3758,18 @@ def _setup_waveform_capacity_and_samples(grpc_waveform, target_waveform, samples
     target_waveform.sample_count = samples_received
 
 def _copy_timing_information(grpc_waveform, target_waveform):
-    if grpc_waveform.t0 and grpc_waveform.dt:
+    if grpc_waveform.t0:
         # Create timestamp relative to NI-BTF epoch (January 1, 1904)
         _T0_EPOCH = ht_datetime(1904, 1, 1, tzinfo=timezone.utc)
         # fractional_seconds is non-negative fractions of a second at 2^-64 resolution.
         fractional_seconds_as_time = grpc_waveform.t0.fractional_seconds / 2**64
         t0_seconds = grpc_waveform.t0.seconds + fractional_seconds_as_time
         timestamp = _T0_EPOCH + ht_timedelta(seconds=t0_seconds)
-        sample_interval = ht_timedelta(seconds=grpc_waveform.dt)
+        
+        if grpc_waveform.dt:
+            sample_interval = ht_timedelta(seconds=grpc_waveform.dt)
+        else:
+            sample_interval = ht_timedelta(seconds=0.0)
         
         target_waveform.timing = Timing(
             sample_interval_mode=SampleIntervalMode.REGULAR,
