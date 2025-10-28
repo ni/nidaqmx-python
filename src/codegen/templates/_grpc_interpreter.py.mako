@@ -266,7 +266,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             ))
         
         if response.waveforms and len(response.waveforms) > 0:
-            _copy_protobuf_waveform_to_analog_waveform(response.waveforms[0], waveform)
+            _copy_protobuf_waveform_to_analog_waveform(response.waveforms[0], waveform, waveform_attribute_mode)
 
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
         return response.samps_per_chan_read
@@ -290,7 +290,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         
         for i, grpc_waveform in enumerate(response.waveforms):
             if i < len(waveforms):
-                _copy_protobuf_waveform_to_analog_waveform(grpc_waveform, waveforms[i])
+                _copy_protobuf_waveform_to_analog_waveform(grpc_waveform, waveforms[i], waveform_attribute_mode)
 
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
         return response.samps_per_chan_read
@@ -313,7 +313,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             ))
         
         if response.waveforms and len(response.waveforms) > 0:
-            _copy_protobuf_waveform_to_digital_waveform(response.waveforms[0], waveform)
+            _copy_protobuf_waveform_to_digital_waveform(response.waveforms[0], waveform, waveform_attribute_mode)
 
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
         return response.samps_per_chan_read
@@ -338,8 +338,9 @@ class GrpcStubInterpreter(BaseInterpreter):
             ))
         
         for i, grpc_waveform in enumerate(response.waveforms):
-            if i < len(waveforms):
-                _copy_protobuf_waveform_to_digital_waveform(grpc_waveform, waveforms[i])
+            if waveforms[i].data.shape[1] != grpc_waveform.signal_count:
+                raise ValueError(f"waveforms[{i}].data has {waveforms[i].data.shape[1]} signals, but expected {grpc_waveform.signal_count}")
+            _copy_protobuf_waveform_to_digital_waveform(grpc_waveform, waveforms[i], waveform_attribute_mode)
 
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
         return response.samps_per_chan_read
@@ -396,21 +397,26 @@ def _setup_waveform_capacity_and_samples(grpc_waveform, target_waveform, samples
         target_waveform.capacity = target_waveform.start_index + samples_received    
     target_waveform.sample_count = samples_received
 
-def _copy_timing_information(grpc_waveform, target_waveform):
-    if grpc_waveform.t0 and grpc_waveform.dt:
-        # Create timestamp relative to NI-BTF epoch (January 1, 1904)
-        _T0_EPOCH = ht_datetime(1904, 1, 1, tzinfo=timezone.utc)
-        # fractional_seconds is non-negative fractions of a second at 2^-64 resolution.
-        fractional_seconds_as_time = grpc_waveform.t0.fractional_seconds / 2**64
-        t0_seconds = grpc_waveform.t0.seconds + fractional_seconds_as_time
-        timestamp = _T0_EPOCH + ht_timedelta(seconds=t0_seconds)
-        sample_interval = ht_timedelta(seconds=grpc_waveform.dt)
-        
-        target_waveform.timing = Timing(
-            sample_interval_mode=SampleIntervalMode.REGULAR,
-            timestamp=timestamp,
-            sample_interval=sample_interval,
-        )
+def _copy_timing_information(grpc_waveform, target_waveform, waveform_attribute_mode):
+    if WaveformAttributeMode.TIMING in waveform_attribute_mode:
+        if grpc_waveform.t0:
+            # Create timestamp relative to NI-BTF epoch (January 1, 1904)
+            _T0_EPOCH = ht_datetime(1904, 1, 1, tzinfo=timezone.utc)
+            # fractional_seconds is non-negative fractions of a second at 2^-64 resolution.
+            fractional_seconds_as_time = grpc_waveform.t0.fractional_seconds / 2**64
+            t0_seconds = grpc_waveform.t0.seconds + fractional_seconds_as_time
+            timestamp = _T0_EPOCH + ht_timedelta(seconds=t0_seconds)
+            
+            if grpc_waveform.dt:
+                sample_interval = ht_timedelta(seconds=grpc_waveform.dt)
+            else:
+                sample_interval = ht_timedelta(seconds=0.0)
+            
+            target_waveform.timing = Timing(
+                sample_interval_mode=SampleIntervalMode.REGULAR,
+                timestamp=timestamp,
+                sample_interval=sample_interval,
+            )
 
 def _copy_waveform_attributes(grpc_waveform, target_waveform):
     if grpc_waveform.attributes:
@@ -424,17 +430,17 @@ def _copy_waveform_attributes(grpc_waveform, target_waveform):
             elif attr_value.HasField('string_value'):
                 target_waveform.extended_properties[key] = attr_value.string_value
 
-def _copy_protobuf_waveform_to_analog_waveform(grpc_waveform, target_waveform):
+def _copy_protobuf_waveform_to_analog_waveform(grpc_waveform, target_waveform, waveform_attribute_mode):
     samples_received = len(grpc_waveform.y_data)
     
     _setup_waveform_capacity_and_samples(grpc_waveform, target_waveform, samples_received)
 
     _assign_numpy_array(target_waveform.raw_data, grpc_waveform.y_data)
 
-    _copy_timing_information(grpc_waveform, target_waveform)
+    _copy_timing_information(grpc_waveform, target_waveform, waveform_attribute_mode)
     _copy_waveform_attributes(grpc_waveform, target_waveform)
 
-def _copy_protobuf_waveform_to_digital_waveform(grpc_waveform, target_waveform):
+def _copy_protobuf_waveform_to_digital_waveform(grpc_waveform, target_waveform, waveform_attribute_mode):
     signal_count = grpc_waveform.signal_count
     samples_received = len(grpc_waveform.y_data) // signal_count if signal_count > 0 else 0
     
@@ -445,7 +451,7 @@ def _copy_protobuf_waveform_to_digital_waveform(grpc_waveform, target_waveform):
         data_array = data_array.reshape(samples_received, signal_count)
         target_waveform.data[:samples_received, :signal_count] = data_array
 
-    _copy_timing_information(grpc_waveform, target_waveform)
+    _copy_timing_information(grpc_waveform, target_waveform, waveform_attribute_mode)
     _copy_waveform_attributes(grpc_waveform, target_waveform)
 
 def _assign_numpy_array(numpy_array, grpc_array):
