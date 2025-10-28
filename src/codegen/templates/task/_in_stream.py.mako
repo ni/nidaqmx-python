@@ -98,7 +98,7 @@ ${property_template.script_property(attribute)}\
             return num_samps_per_chan
 
     def configure_logging(
-            self, file_path: Union[str, pathlib.PurePath], logging_mode=LoggingMode.LOG_AND_READ,
+            self, file_path: str | pathlib.PurePath, logging_mode=LoggingMode.LOG_AND_READ,
             group_name="", operation=LoggingOperation.OPEN_OR_CREATE):
         """
         Configures TDMS file logging for the task.
@@ -191,7 +191,7 @@ ${property_template.script_property(attribute)}\
 
         if samp_size_in_bits == 32:
             if has_negative_range:
-                dtype: Type[numpy.generic] = numpy.int32
+                dtype: type[numpy.generic] = numpy.int32
             else:
                 dtype = numpy.uint32
         elif samp_size_in_bits == 16:
@@ -339,7 +339,7 @@ ${property_template.script_property(attribute)}\
 
         return samples_read
 
-    def start_new_file(self, file_path: Union[str, pathlib.PurePath]):
+    def start_new_file(self, file_path: str | pathlib.PurePath):
         """
         Starts a new TDMS file the next time data is written to disk.
 

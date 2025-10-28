@@ -4,8 +4,9 @@ from __future__ import annotations
 
 import functools
 import sys
+from collections.abc import Callable
 from enum import Enum
-from typing import TYPE_CHECKING, Callable, TypeVar
+from typing import TYPE_CHECKING, TypeVar
 
 from decouple import AutoConfig, Undefined, undefined
 
@@ -13,10 +14,7 @@ from nidaqmx._dotenvpath import get_dotenv_search_path
 from nidaqmx.errors import FeatureNotSupportedError
 
 if TYPE_CHECKING:
-    if sys.version_info >= (3, 10):
-        from typing import ParamSpec
-    else:
-        from typing_extensions import ParamSpec
+    from typing import ParamSpec
 
     if sys.version_info >= (3, 11):
         from typing import Self

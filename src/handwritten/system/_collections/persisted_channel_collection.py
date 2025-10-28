@@ -74,7 +74,7 @@ class PersistedChannelCollection(Sequence):
             ]
         else:
             raise DaqError(
-                'Invalid index type "{}" used to access collection.'.format(type(index)),
+                f'Invalid index type "{type(index)}" used to access collection.',
                 DAQmxErrors.UNKNOWN,
             )
 
