@@ -82,7 +82,7 @@ def consumer(
                             task_data[0], (list, tuple, np.ndarray)
                         ):
                             for chan_idx, chan_data in enumerate(task_data):
-                                chan_data = np.array(chan_data).flatten() 
+                                chan_data = np.array(chan_data).flatten()
                                 channel = ChannelObject(
                                     group_names[task_idx],
                                     channel_names[task_idx][chan_idx],
@@ -91,7 +91,7 @@ def consumer(
                                 )
                                 objects_to_write.append(channel)
                         else:
-                            task_data = np.array(task_data).flatten()  
+                            task_data = np.array(task_data).flatten()
                             channel = ChannelObject(
                                 group_names[task_idx],
                                 channel_names[task_idx][0],
@@ -128,6 +128,9 @@ def main():
     ci1_task = nidaqmx.Task()
     clk_task = nidaqmx.Task()
 
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    tdms_filepath = os.path.join(script_dir, "multi_task_data.tdms")
+
     try:
         clk_task.co_channels.add_co_pulse_chan_freq(
             counter="Dev1/ctr1",
@@ -160,7 +163,7 @@ def main():
             target=consumer,
             args=(
                 data_queue,
-                "multi_task_data.tdms",
+                tdms_filepath,
                 ["AI_Task", "CI_Task"],
                 [["Torque01", "Torque02"], ["Rotations01"]],
                 stop_event,
@@ -193,7 +196,7 @@ def main():
     if os.path.exists("multi_task_data.tdms_index"):
         os.remove("multi_task_data.tdms_index")
 
-    with TdmsFile.open("multi_task_data.tdms") as tdms_file:
+    with TdmsFile.open(tdms_filepath) as tdms_file:
         for group in tdms_file.groups():
             for channel in group.channels():
                 data = channel[:]
