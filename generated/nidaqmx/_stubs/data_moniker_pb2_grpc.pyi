@@ -5,7 +5,7 @@ isort:skip_file
 
 import abc
 import collections.abc
-from nidaqmx._stubs from nidaqmx._stubs import data_moniker_pb2
+from nidaqmx._stubs import data_moniker_pb2
 import grpc
 import grpc.aio
 import typing
