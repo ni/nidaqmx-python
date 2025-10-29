@@ -38,6 +38,7 @@ from nidaqmx._stubs import nidaqmx_pb2 as grpc_types
 from nidaqmx._stubs import nidaqmx_pb2_grpc as nidaqmx_grpc
 from nidaqmx._stubs.ni.protobuf.types import waveform_pb2
 from nidaqmx.constants import WaveformAttributeMode
+from nidaqmx.errors import DaqError
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx._grpc_time import convert_time_to_timestamp, convert_timestamp_to_time
 
@@ -149,9 +150,6 @@ class GrpcStubInterpreter(BaseInterpreter):
         if error_code is None:
             # Convert certain gRPC validation errors to DaqError for consistency with library version
             if grpc_error == grpc.StatusCode.INVALID_ARGUMENT:
-                # Server-side validation errors should be treated as DaqError for consistency
-                from nidaqmx.errors import DaqError
-                from nidaqmx.error_codes import DAQmxErrors
                 raise DaqError(error_message, DAQmxErrors.UNKNOWN) from None
             else:
                 raise errors.RpcError(grpc_error, error_message) from None
@@ -380,34 +378,24 @@ class GrpcStubInterpreter(BaseInterpreter):
         auto_start: bool,
         timeout: float
     ) -> int:
-        # Validate that all waveforms have the same sample count
         if len(waveforms) == 0:
             raise ValueError("At least one waveform must be provided")
         
         num_samps_per_chan = waveforms[0].sample_count
         for i, waveform in enumerate(waveforms):
             if waveform.sample_count != num_samps_per_chan:
-                from nidaqmx.errors import DaqError
-                from nidaqmx.error_codes import DAQmxErrors
                 raise DaqError(
                     "The waveforms must all have the same sample count.",
                     DAQmxErrors.UNKNOWN
                 )
         
-        # Convert AnalogWaveform objects to protobuf DoubleAnalogWaveform messages
         grpc_waveforms = []
         for waveform in waveforms:
-            grpc_waveform = waveform_pb2.DoubleAnalogWaveform()
-            
-            # Copy the scaled data to y_data field
+            grpc_waveform = waveform_pb2.DoubleAnalogWaveform()            
             scaled_data = waveform.scaled_data
             if not scaled_data.flags.c_contiguous:
                 scaled_data = scaled_data.copy(order="C")
             grpc_waveform.y_data[:] = scaled_data
-            
-            # TODO: Copy timing information if needed (t0, dt)
-            # TODO: Copy attributes if needed
-            
             grpc_waveforms.append(grpc_waveform)
         
         response = self._invoke(
