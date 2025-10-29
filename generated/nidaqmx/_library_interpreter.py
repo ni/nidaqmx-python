@@ -685,6 +685,29 @@ class LibraryInterpreter(BaseInterpreter):
             voltage_excit_val, nominal_bridge_resistance, custom_scale_name)
         self.check_for_error(error_code)
 
+    def create_ai_calculated_power_chan(
+            self, task, voltage_physical_channel, current_physical_channel,
+            name_to_assign_to_channel, terminal_config, voltage_min_val,
+            voltage_max_val, current_min_val, current_max_val, units,
+            shunt_resistor_loc, ext_shunt_resistor_val, custom_scale_name):
+        cfunc = lib_importer.windll.DAQmxCreateAICalculatedPowerChan
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes_byte_str]
+
+        error_code = cfunc(
+            task, voltage_physical_channel, current_physical_channel,
+            name_to_assign_to_channel, terminal_config, voltage_min_val,
+            voltage_max_val, current_min_val, current_max_val, units,
+            shunt_resistor_loc, ext_shunt_resistor_val, custom_scale_name)
+        self.check_for_error(error_code)
+
     def create_ai_charge_chan(
             self, task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, custom_scale_name):
@@ -4117,6 +4140,26 @@ class LibraryInterpreter(BaseInterpreter):
                 break
         self.check_for_error(size_or_code)
         return value.value.decode(lib_importer.encoding)
+
+    def internal_read_analog_waveform_per_chan(
+            self, task, num_samps_per_chan, timeout, set_wfm_attr_callback,
+            array_size_in_samps_per_chan):
+        raise NotImplementedError
+
+    def internal_read_digital_waveform(
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            set_wfm_attr_callback):
+        raise NotImplementedError
+
+    def internal_write_analog_waveform_per_chan(
+            self, task, num_samps_per_chan, auto_start, timeout,
+            write_array_ptrs):
+        raise NotImplementedError
+
+    def internal_write_digital_waveform(
+            self, task, num_samps_per_chan, auto_start, timeout, data_layout,
+            write_array, bytes_per_chan_array):
+        raise NotImplementedError
 
     def is_task_done(self, task):
         is_task_done = c_bool32()

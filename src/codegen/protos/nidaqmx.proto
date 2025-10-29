@@ -58,6 +58,7 @@ service NiDAQmx {
   rpc CreateAIAccelChan(CreateAIAccelChanRequest) returns (CreateAIAccelChanResponse);
   rpc CreateAIAccelChargeChan(CreateAIAccelChargeChanRequest) returns (CreateAIAccelChargeChanResponse);
   rpc CreateAIBridgeChan(CreateAIBridgeChanRequest) returns (CreateAIBridgeChanResponse);
+  rpc CreateAICalculatedPowerChan(CreateAICalculatedPowerChanRequest) returns (CreateAICalculatedPowerChanResponse);
   rpc CreateAIChargeChan(CreateAIChargeChanRequest) returns (CreateAIChargeChanResponse);
   rpc CreateAICurrentChan(CreateAICurrentChanRequest) returns (CreateAICurrentChanResponse);
   rpc CreateAICurrentRMSChan(CreateAICurrentRMSChanRequest) returns (CreateAICurrentRMSChanResponse);
@@ -710,6 +711,7 @@ enum ChannelInt32Attribute {
   CHANNEL_ATTRIBUTE_PWR_OUTPUT_STATE = 12759;
   CHANNEL_ATTRIBUTE_PWR_IDLE_OUTPUT_BEHAVIOR = 12760;
   CHANNEL_ATTRIBUTE_PWR_REMOTE_SENSE = 12763;
+  CHANNEL_ATTRIBUTE_AI_POWER_UNITS = 12780;
 }
 
 enum ChannelDoubleAttribute {
@@ -892,6 +894,10 @@ enum ChannelDoubleAttribute {
   CHANNEL_ATTRIBUTE_AO_COMMON_MODE_OFFSET = 12748;
   CHANNEL_ATTRIBUTE_PWR_VOLTAGE_SETPOINT = 12756;
   CHANNEL_ATTRIBUTE_PWR_CURRENT_SETPOINT = 12757;
+  CHANNEL_ATTRIBUTE_AI_CALCULATED_POWER_VOLTAGE_MAX = 12781;
+  CHANNEL_ATTRIBUTE_AI_CALCULATED_POWER_VOLTAGE_MIN = 12782;
+  CHANNEL_ATTRIBUTE_AI_CALCULATED_POWER_CURRENT_MAX = 12783;
+  CHANNEL_ATTRIBUTE_AI_CALCULATED_POWER_CURRENT_MIN = 12784;
 }
 
 enum ChannelResetAttribute {
@@ -1454,6 +1460,11 @@ enum ChannelResetAttribute {
   CHANNEL_RESET_ATTRIBUTE_PWR_OUTPUT_ENABLE = 12758;
   CHANNEL_RESET_ATTRIBUTE_PWR_IDLE_OUTPUT_BEHAVIOR = 12760;
   CHANNEL_RESET_ATTRIBUTE_PWR_REMOTE_SENSE = 12763;
+  CHANNEL_RESET_ATTRIBUTE_AI_POWER_UNITS = 12780;
+  CHANNEL_RESET_ATTRIBUTE_AI_CALCULATED_POWER_VOLTAGE_MAX = 12781;
+  CHANNEL_RESET_ATTRIBUTE_AI_CALCULATED_POWER_VOLTAGE_MIN = 12782;
+  CHANNEL_RESET_ATTRIBUTE_AI_CALCULATED_POWER_CURRENT_MAX = 12783;
+  CHANNEL_RESET_ATTRIBUTE_AI_CALCULATED_POWER_CURRENT_MIN = 12784;
 }
 
 enum ChannelBoolAttribute {
@@ -3234,6 +3245,12 @@ enum Polarity2 {
   POLARITY2_ACTIVE_LOW = 10096;
 }
 
+enum PowerUnits {
+  POWER_UNITS_UNSPECIFIED = 0;
+  POWER_UNITS_WATTS = 16203;
+  POWER_UNITS_FROM_CUSTOM_SCALE = 10065;
+}
+
 enum PowerUpChannelType {
   POWER_UP_CHANNEL_TYPE_CHANNEL_VOLTAGE = 0;
   POWER_UP_CHANNEL_TYPE_CHANNEL_CURRENT = 1;
@@ -3427,6 +3444,8 @@ enum ThermocoupleType1 {
   THERMOCOUPLE_TYPE1_T_TYPE_TC = 10086;
   THERMOCOUPLE_TYPE1_B_TYPE_TC = 10047;
   THERMOCOUPLE_TYPE1_E_TYPE_TC = 10055;
+  THERMOCOUPLE_TYPE1_A_TYPE_TC = 16208;
+  THERMOCOUPLE_TYPE1_C_TYPE_TC = 16209;
 }
 
 enum TimeUnits {
@@ -3825,6 +3844,8 @@ enum ChannelInt32AttributeValues {
   CHANNEL_INT32_POWER_OUTPUT_STATE_CONSTANT_CURRENT = 15501;
   CHANNEL_INT32_POWER_OUTPUT_STATE_OVERVOLTAGE = 15502;
   CHANNEL_INT32_POWER_OUTPUT_STATE_OUTPUT_DISABLED = 15503;
+  CHANNEL_INT32_POWER_UNITS_WATTS = 16203;
+  CHANNEL_INT32_POWER_UNITS_FROM_CUSTOM_SCALE = 10065;
   CHANNEL_INT32_PRESSURE_UNITS_PASCALS = 10081;
   CHANNEL_INT32_PRESSURE_UNITS_POUNDS_PER_SQUARE_INCH = 15879;
   CHANNEL_INT32_PRESSURE_UNITS_BAR = 15880;
@@ -3911,6 +3932,8 @@ enum ChannelInt32AttributeValues {
   CHANNEL_INT32_THERMOCOUPLE_TYPE1_T_TYPE_TC = 10086;
   CHANNEL_INT32_THERMOCOUPLE_TYPE1_B_TYPE_TC = 10047;
   CHANNEL_INT32_THERMOCOUPLE_TYPE1_E_TYPE_TC = 10055;
+  CHANNEL_INT32_THERMOCOUPLE_TYPE1_A_TYPE_TC = 16208;
+  CHANNEL_INT32_THERMOCOUPLE_TYPE1_C_TYPE_TC = 16209;
   CHANNEL_INT32_TIME_UNITS_SECONDS = 10364;
   CHANNEL_INT32_TIME_UNITS_FROM_CUSTOM_SCALE = 10065;
   CHANNEL_INT32_TIME_UNITS2_SECONDS = 10364;
@@ -4995,6 +5018,35 @@ message CreateAIBridgeChanRequest {
 }
 
 message CreateAIBridgeChanResponse {
+  int32 status = 1;
+}
+
+message CreateAICalculatedPowerChanRequest {
+  nidevice_grpc.Session task = 1;
+  string voltage_physical_channel = 2;
+  string current_physical_channel = 3;
+  string name_to_assign_to_channel = 4;
+  oneof terminal_config_enum {
+    InputTermCfgWithDefault terminal_config = 5;
+    int32 terminal_config_raw = 6;
+  }
+  double voltage_min_val = 7;
+  double voltage_max_val = 8;
+  double current_min_val = 9;
+  double current_max_val = 10;
+  oneof units_enum {
+    PowerUnits units = 11;
+    int32 units_raw = 12;
+  }
+  oneof shunt_resistor_loc_enum {
+    CurrentShuntResistorLocationWithDefault shunt_resistor_loc = 13;
+    int32 shunt_resistor_loc_raw = 14;
+  }
+  double ext_shunt_resistor_val = 15;
+  string custom_scale_name = 16;
+}
+
+message CreateAICalculatedPowerChanResponse {
   int32 status = 1;
 }
 
