@@ -1316,6 +1316,7 @@ def test___task___add_ai_chans_with_name___sets_channel_name(
 
     assert unflatten_channel_string(chan.name) == unflatten_channel_string("myChan09:12")
 
+
 @pytest.mark.parametrize(
     "voltage_min_val, voltage_max_val",
     [
