@@ -19,6 +19,7 @@ from . import errors as errors
 from nidaqmx._base_interpreter import BaseEventHandler, BaseInterpreter
 from nidaqmx._stubs import nidaqmx_pb2 as grpc_types
 from nidaqmx._stubs import nidaqmx_pb2_grpc as nidaqmx_grpc
+from nidaqmx._stubs.ni.protobuf.types import waveform_pb2
 from nidaqmx.constants import WaveformAttributeMode
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx._grpc_time import convert_time_to_timestamp, convert_timestamp_to_time
@@ -129,7 +130,14 @@ class GrpcStubInterpreter(BaseInterpreter):
                 'This operation is not supported by the NI gRPC Device Server being used. Upgrade NI gRPC Device Server.'
             )
         if error_code is None:
-            raise errors.RpcError(grpc_error, error_message) from None
+            # Convert certain gRPC validation errors to DaqError for consistency with library version
+            if grpc_error == grpc.StatusCode.INVALID_ARGUMENT:
+                # Server-side validation errors should be treated as DaqError for consistency
+                from nidaqmx.errors import DaqError
+                from nidaqmx.error_codes import DAQmxErrors
+                raise DaqError(error_message, DAQmxErrors.UNKNOWN) from None
+            else:
+                raise errors.RpcError(grpc_error, error_message) from None
         else:
             self._raise_error(error_code, error_message, samps_per_chan_written, samps_per_chan_read)
 
@@ -3724,7 +3732,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         auto_start: bool,
         timeout: float
     ) -> int:
-        raise NotImplementedError
+        return self.write_analog_waveforms(task_handle, [waveform], auto_start, timeout)
 
     def write_analog_waveforms(
         self,
@@ -3733,7 +3741,48 @@ class GrpcStubInterpreter(BaseInterpreter):
         auto_start: bool,
         timeout: float
     ) -> int:
-        raise NotImplementedError
+        # Validate that all waveforms have the same sample count
+        if len(waveforms) == 0:
+            raise ValueError("At least one waveform must be provided")
+        
+        num_samps_per_chan = waveforms[0].sample_count
+        for i, waveform in enumerate(waveforms):
+            if waveform.sample_count != num_samps_per_chan:
+                from nidaqmx.errors import DaqError
+                from nidaqmx.error_codes import DAQmxErrors
+                raise DaqError(
+                    "The waveforms must all have the same sample count.",
+                    DAQmxErrors.UNKNOWN
+                )
+        
+        # Convert AnalogWaveform objects to protobuf DoubleAnalogWaveform messages
+        grpc_waveforms = []
+        for waveform in waveforms:
+            grpc_waveform = waveform_pb2.DoubleAnalogWaveform()
+            
+            # Copy the scaled data to y_data field
+            scaled_data = waveform.scaled_data
+            if not scaled_data.flags.c_contiguous:
+                scaled_data = scaled_data.copy(order="C")
+            grpc_waveform.y_data[:] = scaled_data
+            
+            # TODO: Copy timing information if needed (t0, dt)
+            # TODO: Copy attributes if needed
+            
+            grpc_waveforms.append(grpc_waveform)
+        
+        response = self._invoke(
+            self._client.WriteAnalogWaveforms,
+            grpc_types.WriteAnalogWaveformsRequest(
+                task=task_handle,
+                num_samps_per_chan=num_samps_per_chan,
+                waveforms=grpc_waveforms,
+                auto_start=auto_start,
+                timeout=timeout
+            ))
+        
+        self._check_for_error_from_response(response.status, samps_per_chan_written=response.samps_per_chan_written)
+        return response.samps_per_chan_written
 
     def write_digital_waveform(
         self,

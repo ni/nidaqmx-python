@@ -467,7 +467,7 @@ service NiDAQmx {
   rpc WriteToTEDSFromArray(WriteToTEDSFromArrayRequest) returns (WriteToTEDSFromArrayResponse);
   rpc WriteToTEDSFromFile(WriteToTEDSFromFileRequest) returns (WriteToTEDSFromFileResponse);
   rpc ReadAnalogWaveforms(ReadAnalogWaveformsRequest) returns (ReadAnalogWaveformsResponse);
-  rpc ReadDigitalWaveforms(ReadDigitalWaveformsRequest) returns (ReadDigitalWaveformsResponse);
+  rpc WriteAnalogWaveforms(WriteAnalogWaveformsRequest) returns (WriteAnalogWaveformsResponse);
 }
 
 enum BufferUInt32Attribute {
@@ -11522,7 +11522,7 @@ message WriteToTEDSFromFileResponse {
 
 message ReadAnalogWaveformsRequest {
   nidevice_grpc.Session task = 1;
-  int32 number_of_samples_per_channel = 2;
+  int32 num_samps_per_chan = 2;
   double timeout = 3;
   oneof waveform_attribute_mode_enum {
     WaveformAttributeMode waveform_attribute_mode = 4;
@@ -11536,19 +11536,16 @@ message ReadAnalogWaveformsResponse {
   int32 samps_per_chan_read = 3;
 }
 
-message ReadDigitalWaveformsRequest {
+message WriteAnalogWaveformsRequest {
   nidevice_grpc.Session task = 1;
-  int32 number_of_samples_per_channel = 2;
-  double timeout = 3;
-  oneof waveform_attribute_mode_enum {
-    WaveformAttributeMode waveform_attribute_mode = 4;
-    int32 waveform_attribute_mode_raw = 5;
-  }
+  int32 num_samps_per_chan = 2;
+  repeated ni.protobuf.types.DoubleAnalogWaveform waveforms = 3;
+  bool auto_start = 4;
+  double timeout = 5;
 }
 
-message ReadDigitalWaveformsResponse {
+message WriteAnalogWaveformsResponse {
   int32 status = 1;
-  repeated ni.protobuf.types.DigitalWaveform waveforms = 2;
-  int32 samps_per_chan_read = 3;
+  int32 samps_per_chan_written = 2;
 }
 
