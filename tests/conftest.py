@@ -200,6 +200,10 @@ def real_x_series_multiplexed_device(system: nidaqmx.system.System) -> nidaqmx.s
     """Gets device information for a real X Series device with multiplexed sampling."""
     return _x_series_device(DeviceType.REAL, system, sampling_type=SamplingType.MULTIPLEXED)
 
+@pytest.fixture(scope="function")
+def sim_4311_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
+    """Gets 4311 device information."""
+    return _device_by_product_type("PXIe-4311", DeviceType.ANY, system)
 
 @pytest.fixture(scope="function")
 def sim_6363_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:

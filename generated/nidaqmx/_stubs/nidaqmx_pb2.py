@@ -12,7 +12,7 @@ _sym_db = _symbol_database.Default()
 
 
 import session_pb2 as session__pb2
-from nidaqmx._stubs import data_moniker_pb2 as data__moniker__pb2
+from nidaqmx._stubs from nidaqmx._stubs import data_moniker_pb2 as data__moniker__pb2
 from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 
 

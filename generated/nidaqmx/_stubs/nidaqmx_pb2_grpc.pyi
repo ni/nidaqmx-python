@@ -12,7 +12,7 @@ import abc
 import collections.abc
 import grpc
 import grpc.aio
-from nidaqmx._stubs import nidaqmx_pb2
+from nidaqmx._stubs from nidaqmx._stubs import nidaqmx_pb2
 import typing
 
 _T = typing.TypeVar("_T")

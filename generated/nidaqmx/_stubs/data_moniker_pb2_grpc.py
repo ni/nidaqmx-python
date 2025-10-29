@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from nidaqmx._stubs import data_moniker_pb2 as data__moniker__pb2
+from nidaqmx._stubs from nidaqmx._stubs import data_moniker_pb2 as data__moniker__pb2
 
 
 class DataMonikerStub(object):

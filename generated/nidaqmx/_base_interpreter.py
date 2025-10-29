@@ -230,6 +230,14 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
+    def create_ai_calculated_power_chan(
+            self, task, voltage_physical_channel, current_physical_channel,
+            name_to_assign_to_channel, terminal_config, voltage_min_val,
+            voltage_max_val, current_min_val, current_max_val, units,
+            shunt_resistor_loc, ext_shunt_resistor_val, custom_scale_name):
+        raise NotImplementedError
+
+    @abc.abstractmethod
     def create_ai_charge_chan(
             self, task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, custom_scale_name):
@@ -1181,6 +1189,30 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def internal_get_last_created_chan(self):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def internal_read_analog_waveform_per_chan(
+            self, task, num_samps_per_chan, timeout, set_wfm_attr_callback,
+            array_size_in_samps_per_chan):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def internal_read_digital_waveform(
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            set_wfm_attr_callback):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def internal_write_analog_waveform_per_chan(
+            self, task, num_samps_per_chan, auto_start, timeout,
+            write_array_ptrs):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def internal_write_digital_waveform(
+            self, task, num_samps_per_chan, auto_start, timeout, data_layout,
+            write_array, bytes_per_chan_array):
         raise NotImplementedError
 
     @abc.abstractmethod

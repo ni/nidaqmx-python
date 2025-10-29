@@ -10,7 +10,7 @@ Proto file for the NI-DAQMX Metadata
 
 import builtins
 import collections.abc
-from nidaqmx._stubs import data_moniker_pb2
+from nidaqmx._stubs from nidaqmx._stubs import data_moniker_pb2
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.internal.enum_type_wrapper

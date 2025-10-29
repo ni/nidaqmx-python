@@ -21,6 +21,7 @@ from nidaqmx.constants import (
     ForceIEPESensorSensitivityUnits,
     ForceUnits,
     LVDTSensitivityUnits,
+    PowerUnits,
     ResistanceConfiguration,
     RTDType,
     StrainGageBridgeType,
@@ -1314,3 +1315,69 @@ def test___task___add_ai_chans_with_name___sets_channel_name(
     )
 
     assert unflatten_channel_string(chan.name) == unflatten_channel_string("myChan09:12")
+
+@pytest.mark.parametrize(
+    "voltage_min_val, voltage_max_val",
+    [
+        (-0.15, 0.15),
+        (0.0, 6.0),
+        (0.0, 25.0),
+    ],
+)
+@pytest.mark.parametrize(
+    "current_min_val, current_max_val",
+    [
+        (-0.0015, 0.0015),
+        (0.0, 0.06),
+        (0.0, 0.25),
+    ],
+)
+@pytest.mark.parametrize(
+    "units, custom_scale_name",
+    [
+        (PowerUnits.WATTS, ""),
+        (PowerUnits.FROM_CUSTOM_SCALE, "no_scaling_scale"),
+    ],
+)
+@pytest.mark.parametrize(
+    "shunt_resistor_loc, expected_shunt_resistor_loc",
+    [
+        (CurrentShuntResistorLocation.LET_DRIVER_CHOOSE, CurrentShuntResistorLocation.EXTERNAL),
+        (CurrentShuntResistorLocation.EXTERNAL, CurrentShuntResistorLocation.EXTERNAL),
+    ],
+)
+def test___task___add_ai_calculated_power_chan___sets_channel_attributes(
+    task: Task,
+    sim_4311_device: Device,
+    voltage_min_val: float,
+    voltage_max_val: float,
+    current_min_val: float,
+    current_max_val: float,
+    units: PowerUnits,
+    shunt_resistor_loc: CurrentShuntResistorLocation,
+    expected_shunt_resistor_loc: CurrentShuntResistorLocation,
+    custom_scale_name: str,
+) -> None:
+    expected_shunt_resistor_value = 100.0
+    chan: AIChannel = task.ai_channels.add_ai_calculated_power_chan(
+        sim_4311_device.ai_physical_chans[0].name,
+        sim_4311_device.ai_physical_chans[1].name,
+        voltage_min_val=voltage_min_val,
+        voltage_max_val=voltage_max_val,
+        current_min_val=current_min_val,
+        current_max_val=current_max_val,
+        units=units,
+        shunt_resistor_loc=shunt_resistor_loc,
+        ext_shunt_resistor_val=expected_shunt_resistor_value,
+        custom_scale_name=custom_scale_name,
+    )
+
+    assert chan.ai_meas_type == UsageTypeAI.CALCULATED_POWER
+    assert chan.ai_calculated_power_voltage_min == voltage_min_val
+    assert chan.ai_calculated_power_voltage_max == voltage_max_val
+    assert chan.ai_calculated_power_current_min == current_min_val
+    assert chan.ai_calculated_power_current_max == current_max_val
+    assert chan.ai_power_units == units
+    assert chan.ai_current_shunt_loc == expected_shunt_resistor_loc
+    assert chan.ai_current_shunt_resistance == expected_shunt_resistor_value
+    assert chan.ai_custom_scale_name == custom_scale_name
