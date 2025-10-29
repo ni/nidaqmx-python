@@ -65,7 +65,7 @@ class GrpcServerProcess:
             server_exe = (
                 pathlib.Path(shared_dir) / "NI gRPC Device Server" / "ni_grpc_device_server.exe"
             )
-            server_exe = pathlib.Path(r"c:\dev\fireserp\grpc-device\build\Debug\ni_grpc_device_server.exe")
+            server_exe = pathlib.Path(r"c:\dev\github\grpc-device\build\Debug\ni_grpc_device_server.exe")
             if not server_exe.exists():
                 pytest.skip("NI gRPC Device Server not installed")
             return server_exe
