@@ -219,6 +219,11 @@ class NiDAQmxStub:
         nidaqmx_pb2.CreateAIBridgeChanResponse,
     ]
 
+    CreateAICalculatedPowerChan: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.CreateAICalculatedPowerChanRequest,
+        nidaqmx_pb2.CreateAICalculatedPowerChanResponse,
+    ]
+
     CreateAIChargeChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIChargeChanRequest,
         nidaqmx_pb2.CreateAIChargeChanResponse,
@@ -2448,6 +2453,11 @@ class NiDAQmxAsyncStub:
     CreateAIBridgeChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIBridgeChanRequest,
         nidaqmx_pb2.CreateAIBridgeChanResponse,
+    ]
+
+    CreateAICalculatedPowerChan: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.CreateAICalculatedPowerChanRequest,
+        nidaqmx_pb2.CreateAICalculatedPowerChanResponse,
     ]
 
     CreateAIChargeChan: grpc.aio.UnaryUnaryMultiCallable[
@@ -4758,6 +4768,13 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
         request: nidaqmx_pb2.CreateAIBridgeChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIBridgeChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIBridgeChanResponse]]: ...
+
+    @abc.abstractmethod
+    def CreateAICalculatedPowerChan(
+        self,
+        request: nidaqmx_pb2.CreateAICalculatedPowerChanRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.CreateAICalculatedPowerChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAICalculatedPowerChanResponse]]: ...
 
     @abc.abstractmethod
     def CreateAIChargeChan(

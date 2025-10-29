@@ -209,6 +209,11 @@ class NiDAQmxStub(object):
                 request_serializer=nidaqmx__pb2.CreateAIBridgeChanRequest.SerializeToString,
                 response_deserializer=nidaqmx__pb2.CreateAIBridgeChanResponse.FromString,
                 )
+        self.CreateAICalculatedPowerChan = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/CreateAICalculatedPowerChan',
+                request_serializer=nidaqmx__pb2.CreateAICalculatedPowerChanRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.CreateAICalculatedPowerChanResponse.FromString,
+                )
         self.CreateAIChargeChan = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/CreateAIChargeChan',
                 request_serializer=nidaqmx__pb2.CreateAIChargeChanRequest.SerializeToString,
@@ -2478,6 +2483,12 @@ class NiDAQmxServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def CreateAIBridgeChan(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateAICalculatedPowerChan(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -5122,6 +5133,11 @@ def add_NiDAQmxServicer_to_server(servicer, server):
                     servicer.CreateAIBridgeChan,
                     request_deserializer=nidaqmx__pb2.CreateAIBridgeChanRequest.FromString,
                     response_serializer=nidaqmx__pb2.CreateAIBridgeChanResponse.SerializeToString,
+            ),
+            'CreateAICalculatedPowerChan': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateAICalculatedPowerChan,
+                    request_deserializer=nidaqmx__pb2.CreateAICalculatedPowerChanRequest.FromString,
+                    response_serializer=nidaqmx__pb2.CreateAICalculatedPowerChanResponse.SerializeToString,
             ),
             'CreateAIChargeChan': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateAIChargeChan,
@@ -7828,6 +7844,23 @@ class NiDAQmx(object):
         return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/CreateAIBridgeChan',
             nidaqmx__pb2.CreateAIBridgeChanRequest.SerializeToString,
             nidaqmx__pb2.CreateAIBridgeChanResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateAICalculatedPowerChan(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/CreateAICalculatedPowerChan',
+            nidaqmx__pb2.CreateAICalculatedPowerChanRequest.SerializeToString,
+            nidaqmx__pb2.CreateAICalculatedPowerChanResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
