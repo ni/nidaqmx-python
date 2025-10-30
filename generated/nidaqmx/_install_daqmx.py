@@ -10,7 +10,7 @@ import subprocess  # nosec: B404
 import sys
 import tempfile
 import zipfile
-from typing import Generator
+from collections.abc import Generator
 from urllib.parse import urlparse
 
 import click

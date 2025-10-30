@@ -28,7 +28,6 @@ from nitypes.waveform import AnalogWaveform, DigitalWaveform, SampleIntervalMode
 from typing import Any, Callable, Generic, Sequence, TypeVar
 
 import google.protobuf.message
-from google.protobuf.timestamp_pb2 import Timestamp as GrpcTimestamp
 import grpc
 import numpy
 

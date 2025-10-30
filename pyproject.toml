@@ -3,7 +3,7 @@ name = "nidaqmx"
 description = "NI-DAQmx Python API"
 license = "MIT"
 keywords = ["nidaqmx", "nidaq", "daqmx", "daq"]
-version = "1.3.0-dev1"
+version = "1.4.0.dev0"
 classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Intended Audience :: Developers",
@@ -13,7 +13,6 @@ classifiers = [
   "Operating System :: Microsoft :: Windows",
   "Operating System :: POSIX",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
@@ -31,7 +30,7 @@ maintainers = [
   {name = "Maxx Boehme", email = "maxx.boehme@ni.com"},
   {name = "Brad Keryan", email = "brad.keryan@ni.com"},
 ]
-requires-python = '>=3.9,<4.0'
+requires-python = '>=3.10,<4.0'
 
 [project.urls]
 repository = "https://github.com/ni/nidaqmx-python"
@@ -52,7 +51,7 @@ requires-poetry = '>=2.1,<3.0'
 [tool.poetry.dependencies]
 # NumPy 2.0.x is the last version that supports Python 3.9, but it crashes with Python 3.13.
 numpy = [
-  { version = ">=1.22", python = ">=3.9,<3.13" },
+  { version = ">=1.22", python = ">=3.10,<3.13" },
   { version = ">=2.1", python = "^3.13" }
 ]
 deprecation = ">=2.1"
@@ -68,7 +67,7 @@ nitypes = {version=">=0.1.0dev10", allow-prereleases=true}
 [tool.poetry.group.codegen.dependencies]
 Mako = "^1.2"
 grpcio-tools = [
-  { version = "1.49.1", python = ">=3.9,<3.12" },
+  { version = "1.49.1", python = ">=3.10,<3.12" },
   { version = "1.59.0", python = ">=3.12,<3.13" },
   { version = "1.67.0", python = ">=3.13,<3.14" },
   { version = "1.75.1", python = "^3.14" },
@@ -81,7 +80,6 @@ optional = true
 [tool.poetry.group.docs.dependencies]
 # The latest Sphinx requires a recent Python version.
 Sphinx = [
-  { version = ">=7.4", python = ">=3.9,<3.10" },
   { version = ">=8.1", python = ">=3.10,<3.11" },
   { version = ">=8.2", python = "^3.11" },
 ]
@@ -93,10 +91,7 @@ toml = ">=0.10.2"
 optional = true
 
 [tool.poetry.group.examples.dependencies]
-matplotlib = [
-  { version = ">=3.9.0,<3.10.0", python = ">=3.9,<3.10" },
-  { version = ">=3.9.0", python = "^3.10" },
-]
+matplotlib = ">=3.9.0"
 nptdms = ">=1.9.0"
 
 [tool.poetry.group.lint.dependencies]
@@ -114,13 +109,10 @@ pytest-cov = ">=4.0"
 pytest-mock = ">=3.0"
 pykka = ">=3.0"
 tox = ">=3.24"
-click = [
-  { version = ">=8.0.0,<8.2.0", python = ">=3.9,<3.10" },
-  { version = ">=8.0.0", python = "^3.10" },
-]
+click = ">=8.0.0"
 # Specify additional NumPy version constraints to speed up locking and test with binary wheels that support PyPy.
 numpy = [
-  { version = ">=1.22", python = ">=3.9,<3.12", markers = "implementation_name != 'pypy'" },
+  { version = ">=1.22", python = ">=3.10,<3.12", markers = "implementation_name != 'pypy'" },
   { version = ">=1.26", python = ">=3.12,<3.13", markers = "implementation_name != 'pypy'" },
   { version = ">=2.1", python = "^3.13", markers = "implementation_name != 'pypy'" },
   { version = ">=2.1", python = ">=3.10,<3.11", markers = "implementation_name == 'pypy'" },
@@ -169,7 +161,6 @@ build-backend = "poetry.core.masonry.api"
 files = "generated/,tests/"
 check_untyped_defs = true
 namespace_packages = true
-plugins = "numpy.typing.mypy_plugin"
 warn_redundant_casts = true
 warn_unreachable = true
 warn_unused_configs = true
@@ -182,8 +173,6 @@ module = [
   # https://github.com/briancurtin/deprecation/issues/56 - Add type information (PEP 561)
   "deprecation.*",
   "grpc.experimental.*",
-  # https://github.com/ni/hightime/issues/4 - Add type annotations
-  "hightime.*",
   "importlib_metadata",
   "mako.*",
   "nidaqmx.*",

@@ -6,8 +6,6 @@ using an internal sample clock. The Every N Samples events indicate when
 the specified number of samples generation is complete.
 """
 
-from typing import Tuple
-
 import numpy as np
 import numpy.typing
 
@@ -21,7 +19,7 @@ def generate_sine_wave(
     sampling_rate: float,
     number_of_samples: int,
     phase_in: float = 0.0,
-) -> Tuple[numpy.typing.NDArray[numpy.double], float]:
+) -> tuple[numpy.typing.NDArray[numpy.double], float]:
     """Generates a sine wave with a specified phase.
 
     Args:

@@ -659,8 +659,7 @@ class PhysicalChannel:
         self._interpreter.clear_teds(
             self._name)
 
-    def configure_teds(
-            self, file_path: Optional[Union[str, pathlib.PurePath]]=None):
+    def configure_teds(self, file_path: str | pathlib.PurePath | None=None):
         """
         Associates TEDS information with the physical channel you
         specify. If you do not specify the filename of a data sheet in
@@ -708,7 +707,7 @@ class PhysicalChannel:
             self._name, bit_stream, basic_teds_options.value)
 
     def write_to_teds_from_file(
-            self, file_path: Optional[Union[str, pathlib.PurePath]]=None,
+            self, file_path: str | pathlib.PurePath | None=None,
             basic_teds_options=WriteBasicTEDSOptions.DO_NOT_WRITE):
         """
         Writes data from a virtual TEDS file to the TEDS sensor.

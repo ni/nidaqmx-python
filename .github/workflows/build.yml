@@ -17,8 +17,8 @@ jobs:
         uses: ni/python-actions/setup-python@9768589f3e50672173dad75a6fc181e4a85d33fa # v0.7.0
         id: setup-python
         with:
-          # The codegen scripts require Python 3.9 or later.
-          python-version: "3.9"
+          # The codegen scripts require Python 3.10 or later.
+          python-version: "3.10"
       - name: Set up Poetry
         uses: ni/python-actions/setup-poetry@9768589f3e50672173dad75a6fc181e4a85d33fa # v0.7.0
       - name: Cache virtualenv (all extras)

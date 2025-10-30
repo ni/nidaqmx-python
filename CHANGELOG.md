@@ -1,4 +1,5 @@
 # Changelog
+* [1.4.0](#140)
 * [1.3.0](#130)
 * [1.2.0](#120)
 * [1.1.0](#110)
@@ -23,6 +24,19 @@
 * [0.5.0](#050)
 
 All notable changes to this project will be documented in this file.
+
+## 1.4.0
+* ### Merged Pull Requests
+    * [Full changelog: 1.3.0...1.4.0](https://github.com/ni/nidaqmx-python/compare/1.3.0...1.4.0)
+
+* ### Resolved Issues
+    * ...
+
+* ### Major Changes
+    * Removed support for Python 3.9.
+
+* ### Known Issues
+    * ...
 
 ## 1.3.0
 * ### Merged Pull Requests
@@ -49,6 +63,10 @@ All notable changes to this project will be documented in this file.
     * Adopt ni-python-styleguide for hand-written code.
     * Upgrade to Poetry 2.x and migrate `pyproject.toml` format.
     * Add support for Python 3.14.
+    * Add https://github.com/ni/ni-apis as a submodule of nidaqmx-python.
+    * Add an optional dependency on `ni.grpcdevice.v1.proto`.
+        * The internal `session_pb2` submodule has been moved to the shared package `ni.grpcdevice.v1.proto`. Installing the `nidaqmx` package's `grpc` extra will automatically install this package.
+        * If you get `ModuleNotFoundError: No module named 'session_pb2'`, make sure you are installing the `nidaqmx` package's `grpc` extra.
 
 * ### Known Issues
     * ...

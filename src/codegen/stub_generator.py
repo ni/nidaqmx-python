@@ -2,7 +2,7 @@
 
 import os
 import pathlib
-from typing import Sequence
+from collections.abc import Sequence
 
 import grpc_tools.protoc
 import pkg_resources
@@ -141,6 +141,8 @@ def add_init_files(stubs_path: pathlib.Path, proto_path: pathlib.Path):
     """Add __init__.py files to generated file directories."""
     for dir in stubs_path.rglob(""):
         if not is_relative_to(dir, proto_path) and dir.is_dir():
-            init_path = dir / "__init__.py"
-            print(f"Creating {init_path}")
-            init_path.write_bytes(b'"""Auto generated gRPC files."""\n')
+            python_files = list(dir.glob("*.py"))
+            if python_files:
+                init_path = dir / "__init__.py"
+                print(f"Creating {init_path}")
+                init_path.write_bytes(b'"""Auto generated gRPC files."""\n')

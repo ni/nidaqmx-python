@@ -29,7 +29,7 @@ with nidaqmx.Task() as task:
             assert issubclass(w[-1].category, nidaqmx.DaqWarning)
 
         if w:
-            print("DaqWarning caught: {}\n".format(w[-1].message))
+            print(f"DaqWarning caught: {w[-1].message}\n")
 
 
 # Raising warnings as exceptions.
@@ -43,7 +43,7 @@ with nidaqmx.Task() as task:
         task.write([1.1, 2.2, 3.3, 4.4, 5.5], auto_start=True)
         task.stop()
     except nidaqmx.DaqWarning as e:
-        print("DaqWarning caught as exception: {}\n".format(e))
+        print(f"DaqWarning caught as exception: {e}\n")
         assert e.error_code == DAQmxWarnings.STOPPED_BEFORE_DONE
 
 

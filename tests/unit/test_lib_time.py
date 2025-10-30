@@ -7,6 +7,7 @@ import pytest
 from hightime import datetime as ht_datetime
 
 from nidaqmx._lib_time import AbsoluteTime as LibTimestamp
+from nidaqmx._time import _convert_to_desired_timezone
 from tests.unit._time_utils import (
     JAN_01_1850_DATETIME,
     JAN_01_1850_HIGHTIME,
@@ -104,6 +105,63 @@ def test___utc_datetime___convert_to_timestamp_with_dst___is_reversible(date):
     roundtrip_dt = to_ts.to_datetime(tzinfo=target_timezone)
 
     assert astimezone_date == roundtrip_dt
+
+
+@pytest.mark.parametrize(
+    "base_dt, femtosecond, subseconds",
+    [
+        (ht_datetime(2023, 3, 12, tzinfo=timezone.utc), 0, 0),
+        (ht_datetime(2023, 3, 12, tzinfo=timezone.utc), 1, 0x480F),
+        (ht_datetime(2023, 6, 1, tzinfo=timezone.utc), 0, 0),
+        (ht_datetime(2023, 6, 1, tzinfo=timezone.utc), 1, 0x480F),
+        (ht_datetime(2023, 11, 5, tzinfo=timezone.utc), 0, 0),
+        (ht_datetime(2023, 11, 5, tzinfo=timezone.utc), 1, 0x480F),
+    ],
+)
+def test___utc_datetime_with_femtoseconds___convert_to_timestamp_with_dst___is_reversible(
+    base_dt, femtosecond, subseconds
+):
+    target_timezone = ZoneInfo("America/Los_Angeles")
+    from_dt = base_dt.replace(femtosecond=femtosecond)
+    expected_la_time = _convert_to_desired_timezone(from_dt, target_timezone)
+
+    ts = LibTimestamp.from_datetime(from_dt)
+    roundtrip_dt = ts.to_datetime(tzinfo=target_timezone)
+
+    assert ts.msb == LibTimestamp.from_datetime(expected_la_time).msb
+    assert ts.lsb == subseconds
+    assert roundtrip_dt.microsecond == expected_la_time.microsecond
+    assert roundtrip_dt.femtosecond == expected_la_time.femtosecond
+    # The yoctosecond field may contain up to 1 NI-BTF tick of rounding error.
+    assert roundtrip_dt.yoctosecond <= 54210
+
+
+@pytest.mark.parametrize(
+    "base_dt, yoctosecond, subseconds",
+    [
+        (ht_datetime(2023, 3, 12, tzinfo=timezone.utc), 0, 0),
+        (ht_datetime(2023, 3, 12, tzinfo=timezone.utc), 54210, 1),
+        (ht_datetime(2023, 6, 1, tzinfo=timezone.utc), 0, 0),
+        (ht_datetime(2023, 6, 1, tzinfo=timezone.utc), 54210, 1),
+        (ht_datetime(2023, 11, 5, tzinfo=timezone.utc), 0, 0),
+        (ht_datetime(2023, 11, 5, tzinfo=timezone.utc), 54210, 1),
+    ],
+)
+def test___utc_datetime_with_yoctoseconds___convert_to_timestamp_with_dst___is_reversible(
+    base_dt, yoctosecond, subseconds
+):
+    target_timezone = ZoneInfo("America/Los_Angeles")
+    from_dt = base_dt.replace(yoctosecond=yoctosecond)
+    expected_la_time = _convert_to_desired_timezone(from_dt, target_timezone)
+
+    ts = LibTimestamp.from_datetime(from_dt)
+    roundtrip_dt = ts.to_datetime(tzinfo=target_timezone)
+
+    assert ts.msb == LibTimestamp.from_datetime(expected_la_time).msb
+    assert ts.lsb == subseconds
+    assert roundtrip_dt.microsecond == expected_la_time.microsecond
+    assert roundtrip_dt.femtosecond == expected_la_time.femtosecond
+    assert roundtrip_dt.yoctosecond == expected_la_time.yoctosecond
 
 
 @pytest.mark.parametrize(

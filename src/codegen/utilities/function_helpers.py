@@ -108,7 +108,7 @@ def get_parameter_signature(is_python_factory, sorted_params):
         param_type = ""
         param_default = param.default
         if is_path_type(param):
-            param_type = ": Optional[Union[str, pathlib.PurePath]]"
+            param_type = ": str | pathlib.PurePath | None"
             param_default = "None"
         if param._optional:
             params_with_defaults.append(f"{param.parameter_name}{param_type}={param_default}")

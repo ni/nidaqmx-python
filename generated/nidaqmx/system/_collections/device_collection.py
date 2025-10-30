@@ -67,7 +67,7 @@ class DeviceCollection(Sequence):
             return [_DeviceAlternateConstructor(name, self._interpreter) for name in device_names]
         else:
             raise DaqError(
-                'Invalid index type "{}" used to access collection.'.format(type(index)),
+                f'Invalid index type "{type(index)}" used to access collection.',
                 DAQmxErrors.UNKNOWN,
             )
 

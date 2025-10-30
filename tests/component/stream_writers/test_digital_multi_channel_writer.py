@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import ctypes
 import math
-from typing import Callable
+from collections.abc import Callable
 
 import numpy
 import pytest

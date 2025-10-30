@@ -70,7 +70,7 @@ class PersistedTaskCollection(Sequence):
             return [_PersistedTaskAlternateConstructor(name, self._interpreter) for name in names]
         else:
             raise DaqError(
-                'Invalid index type "{}" used to access collection.'.format(type(index)),
+                f'Invalid index type "{type(index)}" used to access collection.',
                 DAQmxErrors.UNKNOWN,
             )
 
