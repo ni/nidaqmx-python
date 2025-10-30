@@ -3720,7 +3720,25 @@ class GrpcStubInterpreter(BaseInterpreter):
         timeout: float,
         waveform_attribute_mode: WaveformAttributeMode,
     ) -> Sequence[DigitalWaveform[numpy.uint8]]:
-        raise NotImplementedError
+        response = self._invoke(
+            self._client.ReadDigitalWaveforms,
+            grpc_types.ReadDigitalWaveformsRequest(
+                task=task_handle,
+                num_samps_per_chan=number_of_samples_per_channel,
+                timeout=timeout,
+                waveform_attribute_mode_raw=waveform_attribute_mode.value
+            ))
+        
+        waveforms = []
+        for grpc_waveform in response.waveforms:
+            signal_count = grpc_waveform.signal_count
+            samples_received = len(grpc_waveform.y_data) // signal_count if signal_count > 0 else 0            
+            waveform = DigitalWaveform(samples_received, signal_count=signal_count)            
+            _copy_protobuf_waveform_to_digital_waveform(grpc_waveform, waveform, waveform_attribute_mode)            
+            waveforms.append(waveform)
+
+        self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
+        return waveforms
 
     def write_analog_waveform(
         self,
