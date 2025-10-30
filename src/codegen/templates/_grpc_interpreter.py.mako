@@ -418,16 +418,44 @@ class GrpcStubInterpreter(BaseInterpreter):
         auto_start: bool,
         timeout: float,
     ) -> int:
-        raise NotImplementedError
+        return self.write_digital_waveforms(task_handle, [waveform], auto_start, timeout)
 
     def write_digital_waveforms(
         self,
         task_handle: object,
-        waveform: Sequence[DigitalWaveform[Any]],
+        waveforms: Sequence[DigitalWaveform[Any]],
         auto_start: bool,
         timeout: float,
     ) -> int:
-        raise NotImplementedError
+        if len(waveforms) == 0:
+            raise ValueError("At least one waveform must be provided")
+        
+        num_samps_per_chan = waveforms[0].sample_count
+        for i, waveform in enumerate(waveforms):
+            if waveform.sample_count != num_samps_per_chan:
+                raise DaqError(
+                    "The waveforms must all have the same sample count.",
+                    DAQmxErrors.UNKNOWN
+                )
+        
+        grpc_waveforms = []
+        for waveform in waveforms:
+            grpc_waveform = waveform_pb2.DigitalWaveform()
+            _copy_digital_waveform_to_protobuf_waveform(waveform, grpc_waveform)
+            grpc_waveforms.append(grpc_waveform)
+        
+        response = self._invoke(
+            self._client.WriteDigitalWaveforms,
+            grpc_types.WriteDigitalWaveformsRequest(
+                task=task_handle,
+                num_samps_per_chan=num_samps_per_chan,
+                waveforms=grpc_waveforms,
+                auto_start=auto_start,
+                timeout=timeout
+            ))
+        
+        self._check_for_error_from_response(response.status, samps_per_chan_written=response.samps_per_chan_written)
+        return response.samps_per_chan_written
 
 def _setup_waveform_capacity_and_samples(grpc_waveform, target_waveform, samples_received):
     if target_waveform.start_index + samples_received > target_waveform.capacity:
@@ -490,6 +518,20 @@ def _copy_protobuf_waveform_to_digital_waveform(grpc_waveform, target_waveform, 
 
     _copy_timing_information(grpc_waveform, target_waveform, waveform_attribute_mode)
     _copy_waveform_attributes(grpc_waveform, target_waveform)
+
+def _copy_digital_waveform_to_protobuf_waveform(waveform, grpc_waveform):
+    """Copy from DigitalWaveform to protobuf DigitalWaveform format."""
+    grpc_waveform.signal_count = waveform.signal_count
+    
+    # Convert waveform data to bytes
+    data = waveform.data
+    if data.dtype != numpy.uint8:
+        data = data.view(numpy.uint8)
+    if not data.flags.c_contiguous:
+        data = data.copy(order="C")
+    
+    # Flatten the data for protobuf (samples * signals)
+    grpc_waveform.y_data = data.tobytes()
 
 def _assign_numpy_array(numpy_array, grpc_array):
     """
