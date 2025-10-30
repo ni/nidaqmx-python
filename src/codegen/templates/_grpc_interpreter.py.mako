@@ -266,7 +266,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.ReadAnalogWaveforms,
             grpc_types.ReadAnalogWaveformsRequest(
                 task=task_handle,
-                number_of_samples_per_channel=number_of_samples_per_channel,
+                num_samps_per_chan=number_of_samples_per_channel,
                 timeout=timeout,
                 waveform_attribute_mode_raw=waveform_attribute_mode.value
             ))
@@ -289,7 +289,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.ReadAnalogWaveforms,
             grpc_types.ReadAnalogWaveformsRequest(
                 task=task_handle,
-                number_of_samples_per_channel=number_of_samples_per_channel,
+                num_samps_per_chan=number_of_samples_per_channel,
                 timeout=timeout,
                 waveform_attribute_mode_raw=waveform_attribute_mode.value
             ))
@@ -313,7 +313,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.ReadDigitalWaveforms,
             grpc_types.ReadDigitalWaveformsRequest(
                 task=task_handle,
-                number_of_samples_per_channel=number_of_samples_per_channel,
+                num_samps_per_chan=number_of_samples_per_channel,
                 timeout=timeout,
                 waveform_attribute_mode_raw=waveform_attribute_mode.value
             ))
@@ -338,7 +338,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.ReadDigitalWaveforms,
             grpc_types.ReadDigitalWaveformsRequest(
                 task=task_handle,
-                number_of_samples_per_channel=number_of_samples_per_channel,
+                num_samps_per_chan=number_of_samples_per_channel,
                 timeout=timeout,
                 waveform_attribute_mode_raw=waveform_attribute_mode.value
             ))
