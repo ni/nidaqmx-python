@@ -408,11 +408,8 @@ class GrpcStubInterpreter(BaseInterpreter):
         
         grpc_waveforms = []
         for waveform in waveforms:
-            grpc_waveform = waveform_pb2.DoubleAnalogWaveform()            
-            scaled_data = waveform.scaled_data
-            if not scaled_data.flags.c_contiguous:
-                scaled_data = scaled_data.copy(order="C")
-            grpc_waveform.y_data[:] = scaled_data
+            grpc_waveform = waveform_pb2.DoubleAnalogWaveform()
+            _copy_analog_waveform_to_protobuf_waveform(waveform, grpc_waveform)
             grpc_waveforms.append(grpc_waveform)
         
         response = self._invoke(
@@ -513,41 +510,36 @@ def _copy_waveform_attributes(grpc_waveform, target_waveform):
                 target_waveform.extended_properties[key] = attr_value.string_value
 
 def _copy_protobuf_waveform_to_analog_waveform(grpc_waveform, target_waveform, waveform_attribute_mode):
-    samples_received = len(grpc_waveform.y_data)
-    
+    samples_received = len(grpc_waveform.y_data)    
     _setup_waveform_capacity_and_samples(grpc_waveform, target_waveform, samples_received)
-
     _assign_numpy_array(target_waveform.raw_data, grpc_waveform.y_data)
-
     _copy_timing_information(grpc_waveform, target_waveform, waveform_attribute_mode)
     _copy_waveform_attributes(grpc_waveform, target_waveform)
 
 def _copy_protobuf_waveform_to_digital_waveform(grpc_waveform, target_waveform, waveform_attribute_mode):
     signal_count = grpc_waveform.signal_count
-    samples_received = len(grpc_waveform.y_data) // signal_count if signal_count > 0 else 0
-    
+    samples_received = len(grpc_waveform.y_data) // signal_count if signal_count > 0 else 0    
     _setup_waveform_capacity_and_samples(grpc_waveform, target_waveform, samples_received)
-
     if samples_received > 0 and signal_count > 0:
         data_array = numpy.frombuffer(grpc_waveform.y_data, dtype=numpy.uint8)        
         data_array = data_array.reshape(samples_received, signal_count)
         target_waveform.data[:samples_received, :signal_count] = data_array
-
     _copy_timing_information(grpc_waveform, target_waveform, waveform_attribute_mode)
     _copy_waveform_attributes(grpc_waveform, target_waveform)
 
+def _copy_analog_waveform_to_protobuf_waveform(waveform, grpc_waveform):
+    scaled_data = waveform.scaled_data
+    if not scaled_data.flags.c_contiguous:
+        scaled_data = scaled_data.copy(order="C")
+    grpc_waveform.y_data[:] = scaled_data
+
 def _copy_digital_waveform_to_protobuf_waveform(waveform, grpc_waveform):
-    """Copy from DigitalWaveform to protobuf DigitalWaveform format."""
-    grpc_waveform.signal_count = waveform.signal_count
-    
-    # Convert waveform data to bytes
+    grpc_waveform.signal_count = waveform.signal_count    
     data = waveform.data
     if data.dtype != numpy.uint8:
         data = data.view(numpy.uint8)
     if not data.flags.c_contiguous:
-        data = data.copy(order="C")
-    
-    # Flatten the data for protobuf (samples * signals)
+        data = data.copy(order="C")    
     grpc_waveform.y_data = data.tobytes()
 
 def _assign_numpy_array(numpy_array, grpc_array):
