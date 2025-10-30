@@ -16,7 +16,7 @@ from pathlib import Path
 from typing import List, Union
 
 import numpy as np
-import numpy.typing as npt
+from nitypes.waveform import AnalogWaveform
 from nptdms import ChannelObject, GroupObject, RootObject, TdmsFile, TdmsWriter
 
 import nidaqmx
@@ -25,6 +25,8 @@ from nidaqmx.constants import (
     Edge,
 )
 from nidaqmx.stream_readers import AnalogMultiChannelReader, CounterReader
+
+os.environ["NIDAQMX_ENABLE_WAVEFORM_SUPPORT"] = "1"
 
 # Configuration
 SAMPLE_RATE = 1000
@@ -35,7 +37,12 @@ TIMEOUT = 10.0
 # a shared sample clock from one device to the other via a PFI line.
 DEVICE_NAME = "Dev1"
 
-TaskData = Union[List[npt.NDArray[np.float64]], npt.NDArray[np.float64], None]
+TaskData = Union[
+    List[np.ndarray],  # Analog input: list of arrays
+    np.ndarray,  # Counter input: array
+    float,  # Sample rate
+    None,  # Sentinel value
+]
 
 data_queue: queue.Queue[List[TaskData]] = queue.Queue(maxsize=10)
 
@@ -46,12 +53,12 @@ def producer(
     stop_event: threading.Event,
 ) -> None:
     """Producer function that reads data from DAQmx tasks and puts it in the queue."""
-    # The queue holds a list with one entry per task:
+    # The queue holds a list with task data and timing:
     # [
-    #   [np.ndarray, np.ndarray],  # Analog input: list of arrays, one per channel
-    #   np.ndarray                 # Counter input: single array for Counter0
+    #   [np.ndarray, np.ndarray],  # Element 0: AI data - list of arrays, one per channel
+    #   np.ndarray,                # Element 1: Counter data - single array (Counter0)
+    #   float                      # Element 2: Sample rate calculated from AI waveform timing
     # ]
-
     ai_reader = AnalogMultiChannelReader(tasks[0].in_stream)
     counter_reader = CounterReader(tasks[1].in_stream)
 
@@ -60,11 +67,20 @@ def producer(
     ai_data = np.zeros((num_ai_channels, SAMPLES_PER_CHANNEL), dtype=np.float64)
     counter_data = np.zeros(SAMPLES_PER_CHANNEL, dtype=np.float64)
 
+    ai_waveforms = [
+        AnalogWaveform(sample_count=SAMPLES_PER_CHANNEL) for _ in range(num_ai_channels)
+    ]
+
     try:
         while not stop_event.is_set():
             data = []
+
             ai_reader.read_many_sample(
                 ai_data, number_of_samples_per_channel=SAMPLES_PER_CHANNEL, timeout=TIMEOUT
+            )
+
+            ai_reader.read_waveforms(
+                ai_waveforms, number_of_samples_per_channel=SAMPLES_PER_CHANNEL, timeout=TIMEOUT
             )
 
             data.append([channel_data.copy() for channel_data in ai_data])
@@ -72,8 +88,10 @@ def producer(
             counter_reader.read_many_sample_double(
                 counter_data, number_of_samples_per_channel=SAMPLES_PER_CHANNEL, timeout=TIMEOUT
             )
-
             data.append(counter_data.copy())
+
+            sample_rate = 1.0 / ai_waveforms[0].timing.sample_interval.total_seconds()
+            data.append(sample_rate)
 
             data_queue.put(data)
 
@@ -103,6 +121,8 @@ def consumer(
             if data is None:
                 break
 
+            sample_rate = data.pop()
+
             root_object = RootObject(
                 properties={"Creation Time": time.strftime("%Y-%m-%d %H:%M:%S")}
             )
@@ -110,7 +130,7 @@ def consumer(
             objects_to_write = [root_object]
 
             for task_idx, task_data in enumerate(data):
-                group = GroupObject(group_names[task_idx], properties={"Sample Rate": SAMPLE_RATE})
+                group = GroupObject(group_names[task_idx], properties={"Sample Rate": sample_rate})
                 objects_to_write.append(group)
 
                 # Case 1: Multi-channel analog input data
@@ -122,7 +142,7 @@ def consumer(
                             group_names[task_idx],
                             channel_names[task_idx][chan_idx],
                             chan_data,
-                            properties={"Sample Rate": SAMPLE_RATE},
+                            properties={"Sample Rate": sample_rate},
                         )
                         objects_to_write.append(channel)
 
@@ -132,7 +152,7 @@ def consumer(
                         group_names[task_idx],
                         channel_names[task_idx][0],
                         task_data,
-                        properties={"Sample Rate": SAMPLE_RATE},
+                        properties={"Sample Rate": sample_rate},
                     )
                     objects_to_write.append(channel)
 
