@@ -15,7 +15,6 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import List, Union
 
-import numpy as np
 from nitypes.waveform import AnalogWaveform
 from nptdms import ChannelObject, GroupObject, RootObject, TdmsFile, TdmsWriter
 
@@ -38,9 +37,8 @@ TIMEOUT = 10.0
 DEVICE_NAME = "Dev1"
 
 TaskData = Union[
-    List[np.ndarray],  # Analog input: list of arrays
-    np.ndarray,  # Counter input: array
-    float,  # Sample rate
+    List[AnalogWaveform],  # Analog input: list of waveforms
+    AnalogWaveform,  # Counter input: waveform
     None,  # Sentinel value
 ]
 
@@ -55,43 +53,34 @@ def producer(
     """Producer function that reads data from DAQmx tasks and puts it in the queue."""
     # The queue holds a list with task data and timing:
     # [
-    #   [np.ndarray, np.ndarray],  # Element 0: AI data - list of arrays, one per channel
-    #   np.ndarray,                # Element 1: Counter data - single array (Counter0)
-    #   float                      # Element 2: Sample rate calculated from AI waveform timing
+    #   [AnalogWaveform, AnalogWaveform],  # Element 0: AI data - list of waveform objects
+    #   AnalogWaveform,                    # Element 1: Counter data - single waveform object
     # ]
     ai_reader = AnalogMultiChannelReader(tasks[0].in_stream)
     counter_reader = CounterReader(tasks[1].in_stream)
 
     num_ai_channels = len(tasks[0].ai_channels.all)
 
-    ai_data = np.zeros((num_ai_channels, SAMPLES_PER_CHANNEL), dtype=np.float64)
-    counter_data = np.zeros(SAMPLES_PER_CHANNEL, dtype=np.float64)
-
-    ai_waveforms = [
-        AnalogWaveform(sample_count=SAMPLES_PER_CHANNEL) for _ in range(num_ai_channels)
-    ]
-
     try:
         while not stop_event.is_set():
             data = []
 
-            ai_reader.read_many_sample(
-                ai_data, number_of_samples_per_channel=SAMPLES_PER_CHANNEL, timeout=TIMEOUT
-            )
+            ai_waveforms = [
+                AnalogWaveform(sample_count=SAMPLES_PER_CHANNEL) for _ in range(num_ai_channels)
+            ]
+            counter_waveform = AnalogWaveform(sample_count=SAMPLES_PER_CHANNEL)
 
             ai_reader.read_waveforms(
                 ai_waveforms, number_of_samples_per_channel=SAMPLES_PER_CHANNEL, timeout=TIMEOUT
             )
-
-            data.append([channel_data.copy() for channel_data in ai_data])
+            data.append(ai_waveforms)
 
             counter_reader.read_many_sample_double(
-                counter_data, number_of_samples_per_channel=SAMPLES_PER_CHANNEL, timeout=TIMEOUT
+                counter_waveform._data,
+                number_of_samples_per_channel=SAMPLES_PER_CHANNEL,
+                timeout=TIMEOUT,
             )
-            data.append(counter_data.copy())
-
-            sample_rate = 1.0 / ai_waveforms[0].timing.sample_interval.total_seconds()
-            data.append(sample_rate)
+            data.append(counter_waveform)
 
             data_queue.put(data)
 
@@ -121,7 +110,7 @@ def consumer(
             if data is None:
                 break
 
-            sample_rate = data.pop()
+            sample_rate = 1.0 / data[0][0].timing.sample_interval.total_seconds()
 
             root_object = RootObject(
                 properties={"Creation Time": time.strftime("%Y-%m-%d %H:%M:%S")}
@@ -135,23 +124,23 @@ def consumer(
 
                 # Case 1: Multi-channel analog input data
                 if isinstance(task_data, list) and all(
-                    isinstance(x, np.ndarray) for x in task_data
+                    isinstance(x, AnalogWaveform) for x in task_data
                 ):
-                    for chan_idx, chan_data in enumerate(task_data):
+                    for chan_idx, waveform in enumerate(task_data):
                         channel = ChannelObject(
                             group_names[task_idx],
                             channel_names[task_idx][chan_idx],
-                            chan_data,
+                            waveform._data,
                             properties={"Sample Rate": sample_rate},
                         )
                         objects_to_write.append(channel)
 
                 # Case 2: Single-channel counter input data
-                elif isinstance(task_data, np.ndarray):
+                elif isinstance(task_data, AnalogWaveform):
                     channel = ChannelObject(
                         group_names[task_idx],
                         channel_names[task_idx][0],
-                        task_data,
+                        task_data._data,
                         properties={"Sample Rate": sample_rate},
                     )
                     objects_to_write.append(channel)
@@ -210,7 +199,6 @@ def main():
         ai_task.start()
 
         with ThreadPoolExecutor(max_workers=2) as executor:
-            # Submit producer and consumer tasks
             producer_future = executor.submit(producer, [ai_task, ci_task], data_queue, stop_event)
             consumer_future = executor.submit(
                 consumer,
