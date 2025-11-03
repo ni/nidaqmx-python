@@ -16,6 +16,7 @@ import google.protobuf.internal.containers
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
 import google.protobuf.timestamp_pb2
+import ni.protobuf.types.waveform_pb2
 import session_pb2
 import sys
 import typing
@@ -7093,6 +7094,23 @@ WRITE_BASIC_TEDS_OPTIONS_WRITE_TO_EEPROM: WriteBasicTEDSOptions.ValueType  # 125
 WRITE_BASIC_TEDS_OPTIONS_WRITE_TO_PROM: WriteBasicTEDSOptions.ValueType  # 12539
 WRITE_BASIC_TEDS_OPTIONS_DO_NOT_WRITE: WriteBasicTEDSOptions.ValueType  # 12540
 global___WriteBasicTEDSOptions = WriteBasicTEDSOptions
+
+class _WaveformAttributeMode:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _WaveformAttributeModeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_WaveformAttributeMode.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    WAVEFORM_ATTRIBUTE_MODE_NONE: _WaveformAttributeMode.ValueType  # 0
+    WAVEFORM_ATTRIBUTE_MODE_TIMING: _WaveformAttributeMode.ValueType  # 1
+    WAVEFORM_ATTRIBUTE_MODE_EXTENDED_PROPERTIES: _WaveformAttributeMode.ValueType  # 2
+
+class WaveformAttributeMode(_WaveformAttributeMode, metaclass=_WaveformAttributeModeEnumTypeWrapper): ...
+
+WAVEFORM_ATTRIBUTE_MODE_NONE: WaveformAttributeMode.ValueType  # 0
+WAVEFORM_ATTRIBUTE_MODE_TIMING: WaveformAttributeMode.ValueType  # 1
+WAVEFORM_ATTRIBUTE_MODE_EXTENDED_PROPERTIES: WaveformAttributeMode.ValueType  # 2
+global___WaveformAttributeMode = WaveformAttributeMode
 
 class _ChannelInt32AttributeValues:
     ValueType = typing.NewType("ValueType", builtins.int)
@@ -31883,3 +31901,197 @@ class WriteToTEDSFromFileResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing.Literal["status", b"status"]) -> None: ...
 
 global___WriteToTEDSFromFileResponse = WriteToTEDSFromFileResponse
+
+@typing.final
+class ReadAnalogWaveformsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TASK_FIELD_NUMBER: builtins.int
+    NUM_SAMPS_PER_CHAN_FIELD_NUMBER: builtins.int
+    TIMEOUT_FIELD_NUMBER: builtins.int
+    WAVEFORM_ATTRIBUTE_MODE_FIELD_NUMBER: builtins.int
+    WAVEFORM_ATTRIBUTE_MODE_RAW_FIELD_NUMBER: builtins.int
+    num_samps_per_chan: builtins.int
+    timeout: builtins.float
+    waveform_attribute_mode: global___WaveformAttributeMode.ValueType
+    waveform_attribute_mode_raw: builtins.int
+    @property
+    def task(self) -> session_pb2.Session: ...
+    def __init__(
+        self,
+        *,
+        task: session_pb2.Session | None = ...,
+        num_samps_per_chan: builtins.int = ...,
+        timeout: builtins.float = ...,
+        waveform_attribute_mode: global___WaveformAttributeMode.ValueType = ...,
+        waveform_attribute_mode_raw: builtins.int = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["task", b"task", "waveform_attribute_mode", b"waveform_attribute_mode", "waveform_attribute_mode_enum", b"waveform_attribute_mode_enum", "waveform_attribute_mode_raw", b"waveform_attribute_mode_raw"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["num_samps_per_chan", b"num_samps_per_chan", "task", b"task", "timeout", b"timeout", "waveform_attribute_mode", b"waveform_attribute_mode", "waveform_attribute_mode_enum", b"waveform_attribute_mode_enum", "waveform_attribute_mode_raw", b"waveform_attribute_mode_raw"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["waveform_attribute_mode_enum", b"waveform_attribute_mode_enum"]) -> typing.Literal["waveform_attribute_mode", "waveform_attribute_mode_raw"] | None: ...
+
+global___ReadAnalogWaveformsRequest = ReadAnalogWaveformsRequest
+
+@typing.final
+class ReadAnalogWaveformsResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    WAVEFORMS_FIELD_NUMBER: builtins.int
+    SAMPS_PER_CHAN_READ_FIELD_NUMBER: builtins.int
+    status: builtins.int
+    samps_per_chan_read: builtins.int
+    @property
+    def waveforms(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ni.protobuf.types.waveform_pb2.DoubleAnalogWaveform]: ...
+    def __init__(
+        self,
+        *,
+        status: builtins.int = ...,
+        waveforms: collections.abc.Iterable[ni.protobuf.types.waveform_pb2.DoubleAnalogWaveform] | None = ...,
+        samps_per_chan_read: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["samps_per_chan_read", b"samps_per_chan_read", "status", b"status", "waveforms", b"waveforms"]) -> None: ...
+
+global___ReadAnalogWaveformsResponse = ReadAnalogWaveformsResponse
+
+@typing.final
+class ReadDigitalWaveformsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TASK_FIELD_NUMBER: builtins.int
+    NUM_SAMPS_PER_CHAN_FIELD_NUMBER: builtins.int
+    TIMEOUT_FIELD_NUMBER: builtins.int
+    WAVEFORM_ATTRIBUTE_MODE_FIELD_NUMBER: builtins.int
+    WAVEFORM_ATTRIBUTE_MODE_RAW_FIELD_NUMBER: builtins.int
+    num_samps_per_chan: builtins.int
+    timeout: builtins.float
+    waveform_attribute_mode: global___WaveformAttributeMode.ValueType
+    waveform_attribute_mode_raw: builtins.int
+    @property
+    def task(self) -> session_pb2.Session: ...
+    def __init__(
+        self,
+        *,
+        task: session_pb2.Session | None = ...,
+        num_samps_per_chan: builtins.int = ...,
+        timeout: builtins.float = ...,
+        waveform_attribute_mode: global___WaveformAttributeMode.ValueType = ...,
+        waveform_attribute_mode_raw: builtins.int = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["task", b"task", "waveform_attribute_mode", b"waveform_attribute_mode", "waveform_attribute_mode_enum", b"waveform_attribute_mode_enum", "waveform_attribute_mode_raw", b"waveform_attribute_mode_raw"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["num_samps_per_chan", b"num_samps_per_chan", "task", b"task", "timeout", b"timeout", "waveform_attribute_mode", b"waveform_attribute_mode", "waveform_attribute_mode_enum", b"waveform_attribute_mode_enum", "waveform_attribute_mode_raw", b"waveform_attribute_mode_raw"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["waveform_attribute_mode_enum", b"waveform_attribute_mode_enum"]) -> typing.Literal["waveform_attribute_mode", "waveform_attribute_mode_raw"] | None: ...
+
+global___ReadDigitalWaveformsRequest = ReadDigitalWaveformsRequest
+
+@typing.final
+class ReadDigitalWaveformsResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    WAVEFORMS_FIELD_NUMBER: builtins.int
+    SAMPS_PER_CHAN_READ_FIELD_NUMBER: builtins.int
+    status: builtins.int
+    samps_per_chan_read: builtins.int
+    @property
+    def waveforms(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ni.protobuf.types.waveform_pb2.DigitalWaveform]: ...
+    def __init__(
+        self,
+        *,
+        status: builtins.int = ...,
+        waveforms: collections.abc.Iterable[ni.protobuf.types.waveform_pb2.DigitalWaveform] | None = ...,
+        samps_per_chan_read: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["samps_per_chan_read", b"samps_per_chan_read", "status", b"status", "waveforms", b"waveforms"]) -> None: ...
+
+global___ReadDigitalWaveformsResponse = ReadDigitalWaveformsResponse
+
+@typing.final
+class WriteAnalogWaveformsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TASK_FIELD_NUMBER: builtins.int
+    AUTO_START_FIELD_NUMBER: builtins.int
+    TIMEOUT_FIELD_NUMBER: builtins.int
+    WAVEFORMS_FIELD_NUMBER: builtins.int
+    auto_start: builtins.bool
+    timeout: builtins.float
+    @property
+    def task(self) -> session_pb2.Session: ...
+    @property
+    def waveforms(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ni.protobuf.types.waveform_pb2.DoubleAnalogWaveform]: ...
+    def __init__(
+        self,
+        *,
+        task: session_pb2.Session | None = ...,
+        auto_start: builtins.bool = ...,
+        timeout: builtins.float = ...,
+        waveforms: collections.abc.Iterable[ni.protobuf.types.waveform_pb2.DoubleAnalogWaveform] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["task", b"task"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["auto_start", b"auto_start", "task", b"task", "timeout", b"timeout", "waveforms", b"waveforms"]) -> None: ...
+
+global___WriteAnalogWaveformsRequest = WriteAnalogWaveformsRequest
+
+@typing.final
+class WriteAnalogWaveformsResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    SAMPS_PER_CHAN_WRITTEN_FIELD_NUMBER: builtins.int
+    status: builtins.int
+    samps_per_chan_written: builtins.int
+    def __init__(
+        self,
+        *,
+        status: builtins.int = ...,
+        samps_per_chan_written: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["samps_per_chan_written", b"samps_per_chan_written", "status", b"status"]) -> None: ...
+
+global___WriteAnalogWaveformsResponse = WriteAnalogWaveformsResponse
+
+@typing.final
+class WriteDigitalWaveformsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TASK_FIELD_NUMBER: builtins.int
+    AUTO_START_FIELD_NUMBER: builtins.int
+    TIMEOUT_FIELD_NUMBER: builtins.int
+    WAVEFORMS_FIELD_NUMBER: builtins.int
+    auto_start: builtins.bool
+    timeout: builtins.float
+    @property
+    def task(self) -> session_pb2.Session: ...
+    @property
+    def waveforms(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ni.protobuf.types.waveform_pb2.DigitalWaveform]: ...
+    def __init__(
+        self,
+        *,
+        task: session_pb2.Session | None = ...,
+        auto_start: builtins.bool = ...,
+        timeout: builtins.float = ...,
+        waveforms: collections.abc.Iterable[ni.protobuf.types.waveform_pb2.DigitalWaveform] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["task", b"task"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["auto_start", b"auto_start", "task", b"task", "timeout", b"timeout", "waveforms", b"waveforms"]) -> None: ...
+
+global___WriteDigitalWaveformsRequest = WriteDigitalWaveformsRequest
+
+@typing.final
+class WriteDigitalWaveformsResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    SAMPS_PER_CHAN_WRITTEN_FIELD_NUMBER: builtins.int
+    status: builtins.int
+    samps_per_chan_written: builtins.int
+    def __init__(
+        self,
+        *,
+        status: builtins.int = ...,
+        samps_per_chan_written: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["samps_per_chan_written", b"samps_per_chan_written", "status", b"status"]) -> None: ...
+
+global___WriteDigitalWaveformsResponse = WriteDigitalWaveformsResponse
