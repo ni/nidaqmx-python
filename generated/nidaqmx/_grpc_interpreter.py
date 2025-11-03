@@ -5,10 +5,10 @@ import logging
 import threading
 import typing
 import warnings
-from nitypes.waveform import AnalogWaveform, DigitalWaveform
-from typing import Any, Generic, TypeVar
-
-from collections.abc import Callable, Sequence
+from datetime import timezone
+from hightime import datetime as ht_datetime, timedelta as ht_timedelta
+from nitypes.waveform import AnalogWaveform, DigitalWaveform, SampleIntervalMode, Timing
+from typing import Any, Callable, Generic, Sequence, TypeVar
 
 import google.protobuf.message
 import grpc
@@ -18,7 +18,9 @@ from . import errors as errors
 from nidaqmx._base_interpreter import BaseEventHandler, BaseInterpreter
 from nidaqmx._stubs import nidaqmx_pb2 as grpc_types
 from nidaqmx._stubs import nidaqmx_pb2_grpc as nidaqmx_grpc
+from nidaqmx._stubs.ni.protobuf.types import waveform_pb2
 from nidaqmx.constants import WaveformAttributeMode
+from nidaqmx.errors import DaqError
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx._grpc_time import convert_time_to_timestamp, convert_timestamp_to_time
 
@@ -128,7 +130,11 @@ class GrpcStubInterpreter(BaseInterpreter):
                 'This operation is not supported by the NI gRPC Device Server being used. Upgrade NI gRPC Device Server.'
             )
         if error_code is None:
-            raise errors.RpcError(grpc_error, error_message) from None
+            # Convert certain gRPC validation errors to DaqError for consistency with library version
+            if grpc_error == grpc.StatusCode.INVALID_ARGUMENT:
+                raise DaqError(error_message, DAQmxErrors.UNKNOWN) from None
+            else:
+                raise errors.RpcError(grpc_error, error_message) from None
         else:
             self._raise_error(error_code, error_message, samps_per_chan_written, samps_per_chan_read)
 
@@ -3616,7 +3622,20 @@ class GrpcStubInterpreter(BaseInterpreter):
         waveform: AnalogWaveform[numpy.float64],
         waveform_attribute_mode: WaveformAttributeMode
     ) -> int:
-        raise NotImplementedError
+        response = self._invoke(
+            self._client.ReadAnalogWaveforms,
+            grpc_types.ReadAnalogWaveformsRequest(
+                task=task_handle,
+                num_samps_per_chan=number_of_samples_per_channel,
+                timeout=timeout,
+                waveform_attribute_mode_raw=waveform_attribute_mode.value
+            ))
+        
+        if response.waveforms and len(response.waveforms) > 0:
+            _copy_protobuf_waveform_to_analog_waveform(response.waveforms[0], waveform, waveform_attribute_mode)
+
+        self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
+        return response.samps_per_chan_read
 
     def read_analog_waveforms(
         self,
@@ -3626,7 +3645,21 @@ class GrpcStubInterpreter(BaseInterpreter):
         waveforms: Sequence[AnalogWaveform[numpy.float64]],
         waveform_attribute_mode: WaveformAttributeMode
     ) -> int:
-        raise NotImplementedError
+        response = self._invoke(
+            self._client.ReadAnalogWaveforms,
+            grpc_types.ReadAnalogWaveformsRequest(
+                task=task_handle,
+                num_samps_per_chan=number_of_samples_per_channel,
+                timeout=timeout,
+                waveform_attribute_mode_raw=waveform_attribute_mode.value
+            ))
+        
+        for i, grpc_waveform in enumerate(response.waveforms):
+            if i < len(waveforms):
+                _copy_protobuf_waveform_to_analog_waveform(grpc_waveform, waveforms[i], waveform_attribute_mode)
+
+        self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
+        return response.samps_per_chan_read
 
     def read_digital_waveform(
         self,
@@ -3636,7 +3669,20 @@ class GrpcStubInterpreter(BaseInterpreter):
         waveform: DigitalWaveform[Any],
         waveform_attribute_mode: WaveformAttributeMode
     ) -> int:
-        raise NotImplementedError
+        response = self._invoke(
+            self._client.ReadDigitalWaveforms,
+            grpc_types.ReadDigitalWaveformsRequest(
+                task=task_handle,
+                num_samps_per_chan=number_of_samples_per_channel,
+                timeout=timeout,
+                waveform_attribute_mode_raw=waveform_attribute_mode.value
+            ))
+        
+        if response.waveforms and len(response.waveforms) > 0:
+            _copy_protobuf_waveform_to_digital_waveform(response.waveforms[0], waveform, waveform_attribute_mode)
+
+        self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
+        return response.samps_per_chan_read
 
     def read_digital_waveforms(
         self,
@@ -3648,7 +3694,22 @@ class GrpcStubInterpreter(BaseInterpreter):
         waveforms: Sequence[DigitalWaveform[Any]],
         waveform_attribute_mode: WaveformAttributeMode,
     ) -> int:
-        raise NotImplementedError
+        response = self._invoke(
+            self._client.ReadDigitalWaveforms,
+            grpc_types.ReadDigitalWaveformsRequest(
+                task=task_handle,
+                num_samps_per_chan=number_of_samples_per_channel,
+                timeout=timeout,
+                waveform_attribute_mode_raw=waveform_attribute_mode.value
+            ))
+        
+        for i, grpc_waveform in enumerate(response.waveforms):
+            if waveforms[i].data.shape[1] != grpc_waveform.signal_count:
+                raise ValueError(f"waveforms[{i}].data has {waveforms[i].data.shape[1]} signals, but expected {grpc_waveform.signal_count}")
+            _copy_protobuf_waveform_to_digital_waveform(grpc_waveform, waveforms[i], waveform_attribute_mode)
+
+        self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
+        return response.samps_per_chan_read
 
     def read_new_digital_waveforms(
         self,
@@ -3659,7 +3720,25 @@ class GrpcStubInterpreter(BaseInterpreter):
         timeout: float,
         waveform_attribute_mode: WaveformAttributeMode,
     ) -> Sequence[DigitalWaveform[numpy.uint8]]:
-        raise NotImplementedError
+        response = self._invoke(
+            self._client.ReadDigitalWaveforms,
+            grpc_types.ReadDigitalWaveformsRequest(
+                task=task_handle,
+                num_samps_per_chan=number_of_samples_per_channel,
+                timeout=timeout,
+                waveform_attribute_mode_raw=waveform_attribute_mode.value
+            ))
+        
+        waveforms = []
+        for grpc_waveform in response.waveforms:
+            signal_count = grpc_waveform.signal_count
+            samples_received = len(grpc_waveform.y_data) // signal_count if signal_count > 0 else 0            
+            waveform = DigitalWaveform(samples_received, signal_count=signal_count)            
+            _copy_protobuf_waveform_to_digital_waveform(grpc_waveform, waveform, waveform_attribute_mode)            
+            waveforms.append(waveform)
+
+        self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
+        return waveforms
 
     def write_analog_waveform(
         self,
@@ -3668,7 +3747,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         auto_start: bool,
         timeout: float
     ) -> int:
-        raise NotImplementedError
+        return self.write_analog_waveforms(task_handle, [waveform], auto_start, timeout)
 
     def write_analog_waveforms(
         self,
@@ -3677,7 +3756,34 @@ class GrpcStubInterpreter(BaseInterpreter):
         auto_start: bool,
         timeout: float
     ) -> int:
-        raise NotImplementedError
+        if len(waveforms) == 0:
+            raise ValueError("At least one waveform must be provided")
+        
+        num_samps_per_chan = waveforms[0].sample_count
+        for i, waveform in enumerate(waveforms):
+            if waveform.sample_count != num_samps_per_chan:
+                raise DaqError(
+                    "The waveforms must all have the same sample count.",
+                    DAQmxErrors.UNKNOWN
+                )
+        
+        grpc_waveforms = []
+        for waveform in waveforms:
+            grpc_waveform = waveform_pb2.DoubleAnalogWaveform()
+            _copy_analog_waveform_to_protobuf_waveform(waveform, grpc_waveform)
+            grpc_waveforms.append(grpc_waveform)
+        
+        response = self._invoke(
+            self._client.WriteAnalogWaveforms,
+            grpc_types.WriteAnalogWaveformsRequest(
+                task=task_handle,
+                auto_start=auto_start,
+                timeout=timeout,
+                waveforms=grpc_waveforms
+            ))
+        
+        self._check_for_error_from_response(response.status, samps_per_chan_written=response.samps_per_chan_written)
+        return response.samps_per_chan_written
 
     def write_digital_waveform(
         self,
@@ -3686,16 +3792,114 @@ class GrpcStubInterpreter(BaseInterpreter):
         auto_start: bool,
         timeout: float,
     ) -> int:
-        raise NotImplementedError
+        return self.write_digital_waveforms(task_handle, [waveform], auto_start, timeout)
 
     def write_digital_waveforms(
         self,
         task_handle: object,
-        waveform: Sequence[DigitalWaveform[Any]],
+        waveforms: Sequence[DigitalWaveform[Any]],
         auto_start: bool,
         timeout: float,
     ) -> int:
-        raise NotImplementedError
+        if len(waveforms) == 0:
+            raise ValueError("At least one waveform must be provided")
+        
+        num_samps_per_chan = waveforms[0].sample_count
+        for i, waveform in enumerate(waveforms):
+            if waveform.sample_count != num_samps_per_chan:
+                raise DaqError(
+                    "The waveforms must all have the same sample count.",
+                    DAQmxErrors.UNKNOWN
+                )
+        
+        grpc_waveforms = []
+        for waveform in waveforms:
+            grpc_waveform = waveform_pb2.DigitalWaveform()
+            _copy_digital_waveform_to_protobuf_waveform(waveform, grpc_waveform)
+            grpc_waveforms.append(grpc_waveform)
+        
+        response = self._invoke(
+            self._client.WriteDigitalWaveforms,
+            grpc_types.WriteDigitalWaveformsRequest(
+                task=task_handle,
+                auto_start=auto_start,
+                timeout=timeout,
+                waveforms=grpc_waveforms
+            ))
+        
+        self._check_for_error_from_response(response.status, samps_per_chan_written=response.samps_per_chan_written)
+        return response.samps_per_chan_written
+
+def _setup_waveform_capacity_and_samples(grpc_waveform, target_waveform, samples_received):
+    if target_waveform.start_index + samples_received > target_waveform.capacity:
+        target_waveform.capacity = target_waveform.start_index + samples_received    
+    target_waveform.sample_count = samples_received
+
+def _copy_timing_information(grpc_waveform, target_waveform, waveform_attribute_mode):
+    if WaveformAttributeMode.TIMING in waveform_attribute_mode:
+        if grpc_waveform.t0:
+            # Create timestamp relative to NI-BTF epoch (January 1, 1904)
+            _T0_EPOCH = ht_datetime(1904, 1, 1, tzinfo=timezone.utc)
+            # fractional_seconds is non-negative fractions of a second at 2^-64 resolution.
+            fractional_seconds_as_time = grpc_waveform.t0.fractional_seconds / 2**64
+            t0_seconds = grpc_waveform.t0.seconds + fractional_seconds_as_time
+            timestamp = _T0_EPOCH + ht_timedelta(seconds=t0_seconds)
+            
+            if grpc_waveform.dt:
+                sample_interval = ht_timedelta(seconds=grpc_waveform.dt)
+            else:
+                sample_interval = ht_timedelta(seconds=0.0)
+            
+            target_waveform.timing = Timing(
+                sample_interval_mode=SampleIntervalMode.REGULAR,
+                timestamp=timestamp,
+                sample_interval=sample_interval,
+            )
+
+def _copy_waveform_attributes(grpc_waveform, target_waveform):
+    if grpc_waveform.attributes:
+        for key, attr_value in grpc_waveform.attributes.items():
+            if attr_value.HasField('bool_value'):
+                target_waveform.extended_properties[key] = attr_value.bool_value
+            elif attr_value.HasField('integer_value'):
+                target_waveform.extended_properties[key] = attr_value.integer_value
+            elif attr_value.HasField('double_value'):
+                target_waveform.extended_properties[key] = attr_value.double_value
+            elif attr_value.HasField('string_value'):
+                target_waveform.extended_properties[key] = attr_value.string_value
+
+def _copy_protobuf_waveform_to_analog_waveform(grpc_waveform, target_waveform, waveform_attribute_mode):
+    samples_received = len(grpc_waveform.y_data)    
+    _setup_waveform_capacity_and_samples(grpc_waveform, target_waveform, samples_received)
+    _assign_numpy_array(target_waveform.raw_data, grpc_waveform.y_data)
+    _copy_timing_information(grpc_waveform, target_waveform, waveform_attribute_mode)
+    _copy_waveform_attributes(grpc_waveform, target_waveform)
+
+def _copy_protobuf_waveform_to_digital_waveform(grpc_waveform, target_waveform, waveform_attribute_mode):
+    signal_count = grpc_waveform.signal_count
+    samples_received = len(grpc_waveform.y_data) // signal_count if signal_count > 0 else 0    
+    _setup_waveform_capacity_and_samples(grpc_waveform, target_waveform, samples_received)
+    if samples_received > 0 and signal_count > 0:
+        data_array = numpy.frombuffer(grpc_waveform.y_data, dtype=numpy.uint8)        
+        data_array = data_array.reshape(samples_received, signal_count)
+        target_waveform.data[:samples_received, :signal_count] = data_array
+    _copy_timing_information(grpc_waveform, target_waveform, waveform_attribute_mode)
+    _copy_waveform_attributes(grpc_waveform, target_waveform)
+
+def _copy_analog_waveform_to_protobuf_waveform(waveform, grpc_waveform):
+    scaled_data = waveform.scaled_data
+    if not scaled_data.flags.c_contiguous:
+        scaled_data = scaled_data.copy(order="C")
+    grpc_waveform.y_data[:] = scaled_data
+
+def _copy_digital_waveform_to_protobuf_waveform(waveform, grpc_waveform):
+    grpc_waveform.signal_count = waveform.signal_count    
+    data = waveform.data
+    if data.dtype != numpy.uint8:
+        data = data.view(numpy.uint8)
+    if not data.flags.c_contiguous:
+        data = data.copy(order="C")    
+    grpc_waveform.y_data = data.tobytes()
 
 def _assign_numpy_array(numpy_array, grpc_array):
     """
