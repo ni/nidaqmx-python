@@ -3777,10 +3777,9 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.WriteAnalogWaveforms,
             grpc_types.WriteAnalogWaveformsRequest(
                 task=task_handle,
-                num_samps_per_chan=num_samps_per_chan,
-                waveforms=grpc_waveforms,
                 auto_start=auto_start,
-                timeout=timeout
+                timeout=timeout,
+                waveforms=grpc_waveforms
             ))
         
         self._check_for_error_from_response(response.status, samps_per_chan_written=response.samps_per_chan_written)

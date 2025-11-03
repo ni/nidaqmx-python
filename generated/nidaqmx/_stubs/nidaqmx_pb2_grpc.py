@@ -2254,10 +2254,10 @@ class NiDAQmxStub(object):
                 request_serializer=nidaqmx__pb2.ReadDigitalWaveformsRequest.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ReadDigitalWaveformsResponse.FromString,
                 )
-        self.WriteDigitalWaveforms = channel.unary_unary(
-                '/nidaqmx_grpc.NiDAQmx/WriteDigitalWaveforms',
-                request_serializer=nidaqmx__pb2.WriteDigitalWaveformsRequest.SerializeToString,
-                response_deserializer=nidaqmx__pb2.WriteDigitalWaveformsResponse.FromString,
+        self.WriteAnalogWaveforms = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/WriteAnalogWaveforms',
+                request_serializer=nidaqmx__pb2.WriteAnalogWaveformsRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.WriteAnalogWaveformsResponse.FromString,
                 )
 
 
@@ -4952,7 +4952,7 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def WriteDigitalWaveforms(self, request, context):
+    def WriteAnalogWaveforms(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -7201,10 +7201,10 @@ def add_NiDAQmxServicer_to_server(servicer, server):
                     request_deserializer=nidaqmx__pb2.ReadDigitalWaveformsRequest.FromString,
                     response_serializer=nidaqmx__pb2.ReadDigitalWaveformsResponse.SerializeToString,
             ),
-            'WriteDigitalWaveforms': grpc.unary_unary_rpc_method_handler(
-                    servicer.WriteDigitalWaveforms,
-                    request_deserializer=nidaqmx__pb2.WriteDigitalWaveformsRequest.FromString,
-                    response_serializer=nidaqmx__pb2.WriteDigitalWaveformsResponse.SerializeToString,
+            'WriteAnalogWaveforms': grpc.unary_unary_rpc_method_handler(
+                    servicer.WriteAnalogWaveforms,
+                    request_deserializer=nidaqmx__pb2.WriteAnalogWaveformsRequest.FromString,
+                    response_serializer=nidaqmx__pb2.WriteAnalogWaveformsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -14833,7 +14833,7 @@ class NiDAQmx(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def WriteDigitalWaveforms(request,
+    def WriteAnalogWaveforms(request,
             target,
             options=(),
             channel_credentials=None,
@@ -14843,8 +14843,8 @@ class NiDAQmx(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/WriteDigitalWaveforms',
-            nidaqmx__pb2.WriteDigitalWaveformsRequest.SerializeToString,
-            nidaqmx__pb2.WriteDigitalWaveformsResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/WriteAnalogWaveforms',
+            nidaqmx__pb2.WriteAnalogWaveformsRequest.SerializeToString,
+            nidaqmx__pb2.WriteAnalogWaveformsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
