@@ -1,12 +1,12 @@
 """Generates gRPC Python stubs from proto files."""
 
+import re
 import os
 import pathlib
 from collections.abc import Sequence
 
 import grpc_tools.protoc
 import pkg_resources
-
 
 STUBS_NAMESPACE = "nidaqmx._stubs"
 PROTO_PARENT_NAMESPACES = ["src.codegen", "protos"]
@@ -91,6 +91,33 @@ def _replace_imports_in_text(
     return "\n".join(lines)
 
 
+def _fix_ni_protobuf_imports(data: str, stubs_namespace: str) -> str:
+    data = _replace_imports_in_text(
+        data,
+        "from ni.protobuf.types",
+        f"from {stubs_namespace}.ni.protobuf.types",
+        stubs_namespace,
+    )
+
+    data = _replace_imports_in_text(
+        data,
+        "import ni.protobuf.types",
+        f"import {stubs_namespace}.ni.protobuf.types",
+        stubs_namespace,
+    )
+
+    # This will catch patterns like ni.protobuf.types.anything_pb2
+    pattern = r"\bni\.protobuf\.types\.(\w+_pb2)\b"
+    replacement = f"{stubs_namespace}.ni.protobuf.types.\\1"
+
+    lines = data.split("\n")
+    for i, line in enumerate(lines):
+        if "ni.protobuf.types." in line and stubs_namespace not in line:
+            lines[i] = re.sub(pattern, replacement, line)
+
+    return "\n".join(lines)
+
+
 def fix_import_paths(
     stubs_path: pathlib.Path, stubs_namespace: str, proto_parent_namespaces: Sequence[str]
 ):
@@ -117,33 +144,7 @@ def fix_import_paths(
                 f"{stubs_namespace}.{namespace}",
             )
 
-        data = _replace_imports_in_text(
-            data,
-            "from ni.protobuf.types",
-            f"from {stubs_namespace}.ni.protobuf.types",
-            stubs_namespace,
-        )
-
-        data = _replace_imports_in_text(
-            data,
-            "import ni.protobuf.types",
-            f"import {stubs_namespace}.ni.protobuf.types",
-            stubs_namespace,
-        )
-
-        data = _replace_imports_in_text(
-            data,
-            "ni.protobuf.types.precision_timestamp_pb2",
-            f"{stubs_namespace}.ni.protobuf.types.precision_timestamp_pb2",
-            stubs_namespace,
-        )
-
-        data = _replace_imports_in_text(
-            data,
-            "ni.protobuf.types.waveform_pb2",
-            f"{stubs_namespace}.ni.protobuf.types.waveform_pb2",
-            stubs_namespace,
-        )
+        data = _fix_ni_protobuf_imports(data, stubs_namespace)
 
         path.write_text(data, encoding="utf-8")
 
