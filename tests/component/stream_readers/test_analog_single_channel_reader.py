@@ -75,7 +75,6 @@ def test___analog_single_channel_reader___read_waveform_feature_disabled___raise
     assert "NIDAQMX_ENABLE_WAVEFORM_SUPPORT" in error_message
 
 
-@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
 def test___analog_single_channel_reader___read_waveform___returns_valid_waveform(
     ai_single_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
@@ -97,7 +96,6 @@ def test___analog_single_channel_reader___read_waveform___returns_valid_waveform
     assert waveform.sample_count == samples_to_read
 
 
-@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
 def test___analog_single_channel_reader___read_waveform_no_args___returns_valid_waveform(
     ai_single_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
@@ -118,7 +116,6 @@ def test___analog_single_channel_reader___read_waveform_no_args___returns_valid_
     assert waveform.sample_count == 50
 
 
-@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
 def test___analog_single_channel_reader___read_waveform_in_place___populates_valid_waveform(
     ai_single_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
@@ -140,7 +137,6 @@ def test___analog_single_channel_reader___read_waveform_in_place___populates_val
     assert waveform.sample_count == samples_to_read
 
 
-@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
 def test___analog_single_channel_reader___reuse_waveform_in_place___overwrites_data_timing_and_attributes(
     generate_task: Callable[[], nidaqmx.Task], sim_6363_device: nidaqmx.system.Device
 ) -> None:
@@ -173,7 +169,6 @@ def test___analog_single_channel_reader___reuse_waveform_in_place___overwrites_d
     assert timestamp2 > timestamp1
 
 
-@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
 def test___analog_single_channel_reader___read_into_undersized_waveform_without_reallocation___throws_exception(
     ai_single_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
@@ -188,7 +183,6 @@ def test___analog_single_channel_reader___read_into_undersized_waveform_without_
     assert exc_info.value.args[0].startswith("The provided waveform does not have enough space")
 
 
-@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
 def test___analog_single_channel_reader___read_into_undersized_waveform___returns_valid_waveform(
     ai_single_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
@@ -210,7 +204,6 @@ def test___analog_single_channel_reader___read_into_undersized_waveform___return
     assert waveform.sample_count == samples_to_read
 
 
-@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
 def test___analog_single_channel_reader___reuse_waveform_in_place_with_different_sample_counts___populates_valid_waveforms(
     generate_task: Callable[[], nidaqmx.Task], sim_6363_device: nidaqmx.system.Device
 ) -> None:
@@ -247,7 +240,6 @@ def test___analog_single_channel_reader___reuse_waveform_in_place_with_different
     assert waveform.channel_name == f"{sim_6363_device.name}/ai2"
 
 
-@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
 def test___analog_single_channel_reader___read_waveform_high_sample_rate___returns_correct_sample_interval(
     ai_single_channel_task_with_high_rate: nidaqmx.Task,
 ) -> None:
@@ -269,7 +261,6 @@ def test___analog_single_channel_reader___read_waveform_high_sample_rate___retur
     assert waveform.sample_count == samples_to_read
 
 
-@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
 def test___analog_single_channel_reader_with_timing_flag___read_waveform___only_includes_timing_data(
     ai_single_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
@@ -294,7 +285,6 @@ def test___analog_single_channel_reader_with_timing_flag___read_waveform___only_
     assert waveform.units == ""
 
 
-@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
 def test___analog_single_channel_reader_with_extended_properties_flag___read_waveform___only_includes_extended_properties(
     ai_single_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
@@ -316,7 +306,6 @@ def test___analog_single_channel_reader_with_extended_properties_flag___read_wav
     assert waveform.units == "Volts"
 
 
-@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
 def test___analog_single_channel_reader_with_both_flags___read_waveform___includes_both_timing_and_extended_properties(
     ai_single_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
@@ -343,7 +332,6 @@ def test___analog_single_channel_reader_with_both_flags___read_waveform___includ
     assert waveform.units == "Volts"
 
 
-@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
 def test___analog_single_channel_reader_with_none_flag___read_waveform___minimal_waveform_data(
     ai_single_channel_task_with_timing: nidaqmx.Task,
 ) -> None:

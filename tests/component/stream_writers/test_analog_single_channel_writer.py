@@ -76,7 +76,6 @@ def test___analog_single_channel_reader___read_waveform_feature_disabled___raise
     assert "NIDAQMX_ENABLE_WAVEFORM_SUPPORT" in error_message
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
 def test___analog_single_channel_writer___write_waveform___output_matches_final_value(
     ao_single_channel_task: nidaqmx.Task,
     ai_single_channel_loopback_task: nidaqmx.Task,
@@ -94,7 +93,6 @@ def test___analog_single_channel_writer___write_waveform___output_matches_final_
     assert actual_value == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
 def test___analog_single_channel_writer___write_waveform_with_float32_dtype___output_matches_final_value(
     ao_single_channel_task: nidaqmx.Task,
     ai_single_channel_loopback_task: nidaqmx.Task,
@@ -112,7 +110,6 @@ def test___analog_single_channel_writer___write_waveform_with_float32_dtype___ou
     assert actual_value == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
 def test___analog_single_channel_writer___write_waveform_with_scaling___output_matches_final_value(
     ao_single_channel_task: nidaqmx.Task,
     ai_single_channel_loopback_task: nidaqmx.Task,
@@ -128,7 +125,6 @@ def test___analog_single_channel_writer___write_waveform_with_scaling___output_m
     assert actual_value == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
 def test___analog_single_channel_writer___write_waveform_with_non_contiguous_data___output_matches_final_value(
     ao_single_channel_task: nidaqmx.Task,
     ai_single_channel_loopback_task: nidaqmx.Task,
