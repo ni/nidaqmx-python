@@ -40,6 +40,9 @@ def generate_python_files(
 ):
     """Generate python files from .proto files with protoc."""
     os.makedirs(stubs_path, exist_ok=True)
+    
+    sorted_proto_files = sorted(proto_files)
+    
     arguments = [
         "protoc",
         f"--proto_path={str(proto_path)}",
@@ -51,9 +54,9 @@ def generate_python_files(
         f"--grpc_python_out={str(stubs_path)}",
         f"--mypy_grpc_out={str(stubs_path)}",
     ]
-    arguments += [str(path.relative_to(proto_path)).replace("\\", "/") for path in proto_files]
+    arguments += [str(path.relative_to(proto_path)).replace("\\", "/") for path in sorted_proto_files]
 
-    print(proto_files)
+    print(sorted_proto_files)
 
     grpc_tools.protoc.main(arguments)
 
@@ -62,10 +65,10 @@ def generate_waveform_stubs(stubs_path: pathlib.Path):
     """Generate waveform protobuf stubs from ni-apis."""
     waveform_stubs_path = stubs_path / "ni" / "protobuf" / "types"
     os.makedirs(waveform_stubs_path, exist_ok=True)
-    ni_types_protos = [
+    ni_types_protos = sorted([
         "ni/protobuf/types/precision_timestamp.proto",
         "ni/protobuf/types/waveform.proto",
-    ]
+    ])
 
     for proto_file in ni_types_protos:
         arguments = [
