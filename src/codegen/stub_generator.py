@@ -73,6 +73,7 @@ def generate_waveform_stubs(stubs_path: pathlib.Path):
             f"--proto_path={str(NI_APIS_PATH)}",
             f"--proto_path={pkg_resources.resource_filename('grpc_tools', '_proto')}",
             f"--python_out={str(stubs_path)}",
+            f"--mypy_out={str(stubs_path)}",
             proto_file,
         ]
 
@@ -120,6 +121,27 @@ def fix_import_paths(
             data,
             "from ni.protobuf.types",
             f"from {stubs_namespace}.ni.protobuf.types",
+            stubs_namespace,
+        )
+
+        data = _replace_imports_in_text(
+            data,
+            "import ni.protobuf.types",
+            f"import {stubs_namespace}.ni.protobuf.types",
+            stubs_namespace,
+        )
+
+        data = _replace_imports_in_text(
+            data,
+            "ni.protobuf.types.precision_timestamp_pb2",
+            f"{stubs_namespace}.ni.protobuf.types.precision_timestamp_pb2",
+            stubs_namespace,
+        )
+
+        data = _replace_imports_in_text(
+            data,
+            "ni.protobuf.types.waveform_pb2",
+            f"{stubs_namespace}.ni.protobuf.types.waveform_pb2",
             stubs_namespace,
         )
 

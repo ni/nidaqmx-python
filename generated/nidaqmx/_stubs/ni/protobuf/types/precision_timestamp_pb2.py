@@ -16,7 +16,7 @@ _sym_db = _symbol_database.Default()
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n+ni/protobuf/types/precision_timestamp.proto\x12\x11ni.protobuf.types\"A\n\x12PrecisionTimestamp\x12\x0f\n\x07seconds\x18\x01 \x01(\x03\x12\x1a\n\x12\x66ractional_seconds\x18\x02 \x01(\x04\x42\x8a\x01\n\x15\x63om.ni.protobuf.typesB\x12PrecisionTimeProtoP\x01Z\x05types\xa2\x02\x04NIPT\xaa\x02\"NationalInstruments.Protobuf.Types\xca\x02\x11NI\\PROTOBUF\\TYPES\xea\x02\x13NI::Protobuf::Typesb\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
-_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'ni.protobuf.types.precision_timestamp_pb2', globals())
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'nidaqmx._stubs.ni.protobuf.types.precision_timestamp_pb2', globals())
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None

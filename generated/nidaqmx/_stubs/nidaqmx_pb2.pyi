@@ -16,7 +16,7 @@ import google.protobuf.internal.containers
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
 import google.protobuf.timestamp_pb2
-import ni.protobuf.types.waveform_pb2
+import nidaqmx._stubs.ni.protobuf.types.waveform_pb2
 import session_pb2
 import sys
 import typing
@@ -31942,12 +31942,12 @@ class ReadAnalogWaveformsResponse(google.protobuf.message.Message):
     status: builtins.int
     samps_per_chan_read: builtins.int
     @property
-    def waveforms(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ni.protobuf.types.waveform_pb2.DoubleAnalogWaveform]: ...
+    def waveforms(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[nidaqmx._stubs.ni.protobuf.types.waveform_pb2.DoubleAnalogWaveform]: ...
     def __init__(
         self,
         *,
         status: builtins.int = ...,
-        waveforms: collections.abc.Iterable[ni.protobuf.types.waveform_pb2.DoubleAnalogWaveform] | None = ...,
+        waveforms: collections.abc.Iterable[nidaqmx._stubs.ni.protobuf.types.waveform_pb2.DoubleAnalogWaveform] | None = ...,
         samps_per_chan_read: builtins.int = ...,
     ) -> None: ...
     def ClearField(self, field_name: typing.Literal["samps_per_chan_read", b"samps_per_chan_read", "status", b"status", "waveforms", b"waveforms"]) -> None: ...
@@ -31994,12 +31994,12 @@ class ReadDigitalWaveformsResponse(google.protobuf.message.Message):
     status: builtins.int
     samps_per_chan_read: builtins.int
     @property
-    def waveforms(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ni.protobuf.types.waveform_pb2.DigitalWaveform]: ...
+    def waveforms(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[nidaqmx._stubs.ni.protobuf.types.waveform_pb2.DigitalWaveform]: ...
     def __init__(
         self,
         *,
         status: builtins.int = ...,
-        waveforms: collections.abc.Iterable[ni.protobuf.types.waveform_pb2.DigitalWaveform] | None = ...,
+        waveforms: collections.abc.Iterable[nidaqmx._stubs.ni.protobuf.types.waveform_pb2.DigitalWaveform] | None = ...,
         samps_per_chan_read: builtins.int = ...,
     ) -> None: ...
     def ClearField(self, field_name: typing.Literal["samps_per_chan_read", b"samps_per_chan_read", "status", b"status", "waveforms", b"waveforms"]) -> None: ...
@@ -32019,14 +32019,14 @@ class WriteAnalogWaveformsRequest(google.protobuf.message.Message):
     @property
     def task(self) -> session_pb2.Session: ...
     @property
-    def waveforms(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ni.protobuf.types.waveform_pb2.DoubleAnalogWaveform]: ...
+    def waveforms(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[nidaqmx._stubs.ni.protobuf.types.waveform_pb2.DoubleAnalogWaveform]: ...
     def __init__(
         self,
         *,
         task: session_pb2.Session | None = ...,
         auto_start: builtins.bool = ...,
         timeout: builtins.float = ...,
-        waveforms: collections.abc.Iterable[ni.protobuf.types.waveform_pb2.DoubleAnalogWaveform] | None = ...,
+        waveforms: collections.abc.Iterable[nidaqmx._stubs.ni.protobuf.types.waveform_pb2.DoubleAnalogWaveform] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["task", b"task"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing.Literal["auto_start", b"auto_start", "task", b"task", "timeout", b"timeout", "waveforms", b"waveforms"]) -> None: ...
@@ -32064,14 +32064,14 @@ class WriteDigitalWaveformsRequest(google.protobuf.message.Message):
     @property
     def task(self) -> session_pb2.Session: ...
     @property
-    def waveforms(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ni.protobuf.types.waveform_pb2.DigitalWaveform]: ...
+    def waveforms(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[nidaqmx._stubs.ni.protobuf.types.waveform_pb2.DigitalWaveform]: ...
     def __init__(
         self,
         *,
         task: session_pb2.Session | None = ...,
         auto_start: builtins.bool = ...,
         timeout: builtins.float = ...,
-        waveforms: collections.abc.Iterable[ni.protobuf.types.waveform_pb2.DigitalWaveform] | None = ...,
+        waveforms: collections.abc.Iterable[nidaqmx._stubs.ni.protobuf.types.waveform_pb2.DigitalWaveform] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["task", b"task"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing.Literal["auto_start", b"auto_start", "task", b"task", "timeout", b"timeout", "waveforms", b"waveforms"]) -> None: ...
