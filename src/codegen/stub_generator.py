@@ -24,6 +24,7 @@ def generate_stubs():
     generate_waveform_stubs(STUBS_PATH)
     fix_import_paths(STUBS_PATH, STUBS_NAMESPACE, PROTO_PARENT_NAMESPACES)
     add_init_files(STUBS_PATH, PROTO_PATH)
+    normalize_line_endings(STUBS_PATH)
 
 
 def is_relative_to(path: pathlib.PurePath, other: pathlib.PurePath) -> bool:
@@ -153,7 +154,7 @@ def fix_import_paths(
 
         data = _fix_ni_protobuf_imports(data, stubs_namespace)
 
-        path.write_text(data, encoding="utf-8")
+        path.write_text(data, encoding="utf-8", newline="\n")
 
 
 def add_init_files(stubs_path: pathlib.Path, proto_path: pathlib.Path):
@@ -165,3 +166,18 @@ def add_init_files(stubs_path: pathlib.Path, proto_path: pathlib.Path):
                 init_path = dir / "__init__.py"
                 print(f"Creating {init_path}")
                 init_path.write_bytes(b'"""Auto generated gRPC files."""\n')
+
+
+def normalize_line_endings(stubs_path: pathlib.Path):
+    """Normalize line endings to Unix style (LF) for all generated files."""
+    print("Normalizing line endings")
+    all_generated_files = list(stubs_path.rglob("*pb2*.py")) + list(stubs_path.rglob("*pb2*.pyi"))
+    all_generated_files.extend(stubs_path.rglob("__init__.py"))
+
+    for file_path in all_generated_files:
+        if file_path.is_file():
+            print(f"Normalizing line endings in {file_path}")
+            content = file_path.read_text(encoding="utf-8")
+            # Normalize CRLF and CR to LF
+            normalized_content = content.replace("\r\n", "\n").replace("\r", "\n")
+            file_path.write_text(normalized_content, encoding="utf-8", newline="\n")
