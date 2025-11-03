@@ -34,6 +34,7 @@ All notable changes to this project will be documented in this file.
 
 * ### Major Changes
     * Removed support for Python 3.9.
+    * (IN PROGRESS behind "WAVEFORM_SUPPORT" feature toggle) Added gRPC support for reading and writing Waveform data. 
 
 * ### Known Issues
     * ...
