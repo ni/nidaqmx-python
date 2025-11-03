@@ -32050,3 +32050,48 @@ class WriteAnalogWaveformsResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing.Literal["samps_per_chan_written", b"samps_per_chan_written", "status", b"status"]) -> None: ...
 
 global___WriteAnalogWaveformsResponse = WriteAnalogWaveformsResponse
+
+@typing.final
+class WriteDigitalWaveformsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TASK_FIELD_NUMBER: builtins.int
+    AUTO_START_FIELD_NUMBER: builtins.int
+    TIMEOUT_FIELD_NUMBER: builtins.int
+    WAVEFORMS_FIELD_NUMBER: builtins.int
+    auto_start: builtins.bool
+    timeout: builtins.float
+    @property
+    def task(self) -> session_pb2.Session: ...
+    @property
+    def waveforms(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ni.protobuf.types.waveform_pb2.DigitalWaveform]: ...
+    def __init__(
+        self,
+        *,
+        task: session_pb2.Session | None = ...,
+        auto_start: builtins.bool = ...,
+        timeout: builtins.float = ...,
+        waveforms: collections.abc.Iterable[ni.protobuf.types.waveform_pb2.DigitalWaveform] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["task", b"task"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["auto_start", b"auto_start", "task", b"task", "timeout", b"timeout", "waveforms", b"waveforms"]) -> None: ...
+
+global___WriteDigitalWaveformsRequest = WriteDigitalWaveformsRequest
+
+@typing.final
+class WriteDigitalWaveformsResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    SAMPS_PER_CHAN_WRITTEN_FIELD_NUMBER: builtins.int
+    status: builtins.int
+    samps_per_chan_written: builtins.int
+    def __init__(
+        self,
+        *,
+        status: builtins.int = ...,
+        samps_per_chan_written: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["samps_per_chan_written", b"samps_per_chan_written", "status", b"status"]) -> None: ...
+
+global___WriteDigitalWaveformsResponse = WriteDigitalWaveformsResponse
