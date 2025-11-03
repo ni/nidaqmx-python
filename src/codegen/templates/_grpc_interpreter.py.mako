@@ -264,7 +264,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.ReadAnalogWaveforms,
             grpc_types.ReadAnalogWaveformsRequest(
-                task=task_handle,
+                task=typing.cast(typing.Any, task_handle),
                 num_samps_per_chan=number_of_samples_per_channel,
                 timeout=timeout,
                 waveform_attribute_mode_raw=waveform_attribute_mode.value
@@ -287,7 +287,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.ReadAnalogWaveforms,
             grpc_types.ReadAnalogWaveformsRequest(
-                task=task_handle,
+                task=typing.cast(typing.Any, task_handle),
                 num_samps_per_chan=number_of_samples_per_channel,
                 timeout=timeout,
                 waveform_attribute_mode_raw=waveform_attribute_mode.value
@@ -311,7 +311,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.ReadDigitalWaveforms,
             grpc_types.ReadDigitalWaveformsRequest(
-                task=task_handle,
+                task=typing.cast(typing.Any, task_handle),
                 num_samps_per_chan=number_of_samples_per_channel,
                 timeout=timeout,
                 waveform_attribute_mode_raw=waveform_attribute_mode.value
@@ -336,7 +336,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.ReadDigitalWaveforms,
             grpc_types.ReadDigitalWaveformsRequest(
-                task=task_handle,
+                task=typing.cast(typing.Any, task_handle),
                 num_samps_per_chan=number_of_samples_per_channel,
                 timeout=timeout,
                 waveform_attribute_mode_raw=waveform_attribute_mode.value
@@ -362,7 +362,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.ReadDigitalWaveforms,
             grpc_types.ReadDigitalWaveformsRequest(
-                task=task_handle,
+                task=typing.cast(typing.Any, task_handle),
                 num_samps_per_chan=number_of_samples_per_channel,
                 timeout=timeout,
                 waveform_attribute_mode_raw=waveform_attribute_mode.value
@@ -408,14 +408,14 @@ class GrpcStubInterpreter(BaseInterpreter):
         
         grpc_waveforms = []
         for waveform in waveforms:
-            grpc_waveform = waveform_pb2.DoubleAnalogWaveform()
+            grpc_waveform = waveform_pb2.DoubleAnalogWaveform()  # type: ignore[attr-defined]
             _copy_analog_waveform_to_protobuf_waveform(waveform, grpc_waveform)
             grpc_waveforms.append(grpc_waveform)
         
         response = self._invoke(
             self._client.WriteAnalogWaveforms,
             grpc_types.WriteAnalogWaveformsRequest(
-                task=task_handle,
+                task=typing.cast(typing.Any, task_handle),
                 auto_start=auto_start,
                 timeout=timeout,
                 waveforms=grpc_waveforms
@@ -453,14 +453,14 @@ class GrpcStubInterpreter(BaseInterpreter):
         
         grpc_waveforms = []
         for waveform in waveforms:
-            grpc_waveform = waveform_pb2.DigitalWaveform()
+            grpc_waveform = waveform_pb2.DigitalWaveform()  # type: ignore[attr-defined]
             _copy_digital_waveform_to_protobuf_waveform(waveform, grpc_waveform)
             grpc_waveforms.append(grpc_waveform)
         
         response = self._invoke(
             self._client.WriteDigitalWaveforms,
             grpc_types.WriteDigitalWaveformsRequest(
-                task=task_handle,
+                task=typing.cast(typing.Any, task_handle),
                 auto_start=auto_start,
                 timeout=timeout,
                 waveforms=grpc_waveforms

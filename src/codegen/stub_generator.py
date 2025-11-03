@@ -64,28 +64,30 @@ def generate_waveform_stubs(stubs_path: pathlib.Path):
     os.makedirs(waveform_stubs_path, exist_ok=True)
     ni_types_protos = [
         "ni/protobuf/types/precision_timestamp.proto",
-        "ni/protobuf/types/waveform.proto"
+        "ni/protobuf/types/waveform.proto",
     ]
-    
+
     for proto_file in ni_types_protos:
         arguments = [
             "protoc",
             f"--proto_path={str(NI_APIS_PATH)}",
             f"--proto_path={pkg_resources.resource_filename('grpc_tools', '_proto')}",
             f"--python_out={str(stubs_path)}",
-            proto_file
+            proto_file,
         ]
-        
+
         print(f"Generating {proto_file} stubs:", arguments)
         grpc_tools.protoc.main(arguments)
 
 
-def _replace_imports_in_text(data: str, pattern: str, replacement: str, skip_condition: str = None) -> str:
-    lines = data.split('\n')
+def _replace_imports_in_text(
+    data: str, pattern: str, replacement: str, skip_condition: str = None
+) -> str:
+    lines = data.split("\n")
     for i, line in enumerate(lines):
         if pattern in line and (skip_condition is None or skip_condition not in line):
             lines[i] = line.replace(pattern, replacement)
-    return '\n'.join(lines)
+    return "\n".join(lines)
 
 
 def fix_import_paths(
@@ -98,30 +100,30 @@ def fix_import_paths(
     grpc_codegened_file_paths.extend(stubs_path.rglob("*pb2*pyi"))
     for path in grpc_codegened_file_paths:
         print(f"Processing {path}")
-        data = path.read_text(encoding='utf-8')
+        data = path.read_text(encoding="utf-8")
         for name in imports_to_fix:
             if name == "session_pb2":
                 continue
             data = _replace_imports_in_text(
-                data,
-                f"import {name}",
-                f"from {stubs_namespace} import {name}",
-                stubs_namespace)
+                data, f"import {name}", f"from {stubs_namespace} import {name}", stubs_namespace
+            )
 
         for namespace in proto_parent_namespaces:
             data = _replace_imports_in_text(
                 data,
                 f"from {namespace}",
                 f"from {stubs_namespace}.{namespace}",
-                f"{stubs_namespace}.{namespace}")
-        
+                f"{stubs_namespace}.{namespace}",
+            )
+
         data = _replace_imports_in_text(
             data,
             "from ni.protobuf.types",
             f"from {stubs_namespace}.ni.protobuf.types",
-            stubs_namespace)
-            
-        path.write_text(data, encoding='utf-8')
+            stubs_namespace,
+        )
+
+        path.write_text(data, encoding="utf-8")
 
 
 def add_init_files(stubs_path: pathlib.Path, proto_path: pathlib.Path):

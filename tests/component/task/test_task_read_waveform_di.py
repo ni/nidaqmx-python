@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import pytest
 from nitypes.waveform import DigitalWaveform
 
 import nidaqmx
