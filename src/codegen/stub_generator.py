@@ -22,8 +22,8 @@ PROTO_FILES = list(PROTO_PATH.rglob("*.proto"))
 def generate_stubs():
     """Generate and fixup gRPC Python stubs."""
     generate_python_files(STUBS_PATH, PROTO_PATH, PROTO_FILES)
-    generate_waveform_stubs(STUBS_PATH)
-    fix_import_paths_and_protobuf_types(STUBS_PATH, STUBS_NAMESPACE, PROTO_PARENT_NAMESPACES)
+    generate_ni_type_stubs(STUBS_PATH)
+    fix_import_paths_and_ni_types(STUBS_PATH, STUBS_NAMESPACE, PROTO_PARENT_NAMESPACES)
     add_init_files(STUBS_PATH, PROTO_PATH)
 
 
@@ -59,8 +59,8 @@ def generate_python_files(
     grpc_tools.protoc.main(arguments)
 
 
-def generate_waveform_stubs(stubs_path: pathlib.Path):
-    """Generate waveform protobuf stubs from ni-apis."""
+def generate_ni_type_stubs(stubs_path: pathlib.Path):
+    """Generate waveform and timestamp protobuf stubs from ni-apis."""
     waveform_stubs_path = stubs_path / "ni" / "protobuf" / "types"
     os.makedirs(waveform_stubs_path, exist_ok=True)
     ni_types_protos = [
@@ -82,11 +82,11 @@ def generate_waveform_stubs(stubs_path: pathlib.Path):
         grpc_tools.protoc.main(arguments)
 
 
-def fix_import_paths_and_protobuf_types(
+def fix_import_paths_and_ni_types(
     stubs_path: pathlib.Path, stubs_namespace: str, proto_parent_namespaces: Sequence[str]
 ):
-    """Fix import paths and protobuf types of generated files."""
-    print("Fixing import paths and protobuf types")
+    """Fix import paths and ni types of generated files."""
+    print("Fixing import paths and ni types")
     grpc_codegened_file_paths = list(stubs_path.rglob("*pb2*py"))
     imports_to_fix = [path.stem for path in grpc_codegened_file_paths if path.parent == stubs_path]
     grpc_codegened_file_paths.extend(stubs_path.rglob("*pb2*pyi"))
@@ -104,6 +104,11 @@ def fix_import_paths_and_protobuf_types(
                 f"from {stubs_namespace}.{namespace}".encode(),
             )
 
+        # This will match patterns like ni.protobuf.types.anything_pb2
+        pattern = rb"\bni\.protobuf\.types\.(\w+_pb2)\b"
+        replacement = f"{stubs_namespace}.ni.protobuf.types.\\1".encode()
+        data = re.sub(pattern, replacement, data)
+
         data = data.replace(
             b"from ni.protobuf.types", f"from {stubs_namespace}.ni.protobuf.types".encode()
         )
@@ -111,12 +116,6 @@ def fix_import_paths_and_protobuf_types(
         data = data.replace(
             b"import ni.protobuf.types", f"import {stubs_namespace}.ni.protobuf.types".encode()
         )
-
-        # This will catch patterns like ni.protobuf.types.anything_pb2, that don't already have
-        # the namespace prefixed
-        pattern = rb"\b(?<!" + stubs_namespace.encode() + rb"\.)ni\.protobuf\.types\.(\w+_pb2)\b"
-        replacement = f"{stubs_namespace}.ni.protobuf.types.\\1".encode()
-        data = re.sub(pattern, replacement, data)
 
         path.write_bytes(data)
 
