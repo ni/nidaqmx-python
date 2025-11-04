@@ -138,4 +138,3 @@ def test___analog_single_channel_writer___write_waveform_with_non_contiguous_dat
     assert samples_written == num_samples
     actual_value = ai_single_channel_loopback_task.read()
     assert actual_value == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
-

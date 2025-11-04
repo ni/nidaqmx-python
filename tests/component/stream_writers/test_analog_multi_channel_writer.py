@@ -217,4 +217,3 @@ def test___analog_multi_channel_writer___write_waveforms_with_wrong_number_of_ch
         "Write cannot be performed, because the number of channels in the data does not match the number of channels in the task"
         in error_message
     )
-
