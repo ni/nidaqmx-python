@@ -7011,15 +7011,7 @@ class LibraryInterpreter(BaseInterpreter):
         timeout: float
     ) -> int:
         """Write analog waveforms."""
-        assert len(waveforms) > 0
-        num_samps_per_chan = waveforms[0].sample_count
-
-        for waveform in waveforms:
-            if waveform.sample_count != num_samps_per_chan:
-                raise DaqError(
-                    "The waveforms must all have the same sample count.",
-                     DAQmxErrors.UNKNOWN
-                )
+        num_samps_per_chan = self._get_num_samps_per_chan(waveforms)
 
         write_arrays = [self._get_analog_write_array(waveform) for waveform in waveforms]
 
@@ -7130,15 +7122,7 @@ class LibraryInterpreter(BaseInterpreter):
     ) -> int:
         """Write digital waveforms."""
         channel_count = len(waveforms)
-        assert channel_count > 0
-        sample_count = waveforms[0].sample_count
-
-        for waveform in waveforms:
-            if waveform.sample_count != sample_count:
-                raise DaqError(
-                    "The waveforms must all have the same sample count.",
-                    DAQmxErrors.UNKNOWN
-                )
+        sample_count = self._get_num_samps_per_chan(waveforms)
                 
         bytes_per_chan_array = numpy.array([wf.signal_count for wf in waveforms], dtype=numpy.uint32)
 

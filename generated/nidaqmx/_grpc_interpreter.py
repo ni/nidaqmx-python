@@ -3745,16 +3745,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         auto_start: bool,
         timeout: float
     ) -> int:
-        if len(waveforms) == 0:
-            raise ValueError("At least one waveform must be provided")
-        
-        num_samps_per_chan = waveforms[0].sample_count
-        for i, waveform in enumerate(waveforms):
-            if waveform.sample_count != num_samps_per_chan:
-                raise DaqError(
-                    "The waveforms must all have the same sample count.",
-                    DAQmxErrors.UNKNOWN
-                )
+        num_samps_per_chan = self._get_num_samps_per_chan(waveforms)
         
         grpc_waveforms = []
         for waveform in waveforms:
@@ -3790,16 +3781,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         auto_start: bool,
         timeout: float,
     ) -> int:
-        if len(waveforms) == 0:
-            raise ValueError("At least one waveform must be provided")
-        
-        num_samps_per_chan = waveforms[0].sample_count
-        for i, waveform in enumerate(waveforms):
-            if waveform.sample_count != num_samps_per_chan:
-                raise DaqError(
-                    "The waveforms must all have the same sample count.",
-                    DAQmxErrors.UNKNOWN
-                )
+        num_samps_per_chan = self._get_num_samps_per_chan(waveforms)
         
         grpc_waveforms = []
         for waveform in waveforms:

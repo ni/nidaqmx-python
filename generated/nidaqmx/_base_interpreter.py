@@ -1879,7 +1879,7 @@ class BaseInterpreter(abc.ABC):
         waveform_attribute_mode: WaveformAttributeMode
     ) -> int:
         raise NotImplementedError
-        
+
     @abc.abstractmethod
     def read_digital_waveform(
         self,
@@ -1935,7 +1935,7 @@ class BaseInterpreter(abc.ABC):
         timeout: float
     ) -> int:
         raise NotImplementedError
-        
+
     @abc.abstractmethod
     def write_digital_waveform(
         self,
@@ -1945,7 +1945,7 @@ class BaseInterpreter(abc.ABC):
         timeout: float,
     ) -> int:
         raise NotImplementedError
-        
+
     def write_digital_waveforms(
         self,
         task_handle: object,
@@ -1954,3 +1954,21 @@ class BaseInterpreter(abc.ABC):
         timeout: float,
     ) -> int:
         raise NotImplementedError
+
+    def _get_num_samps_per_chan(self, waveforms: Sequence[Any]) -> int:
+        """
+        Validate that all waveforms have the same sample count and return it.
+        """
+        if len(waveforms) == 0:
+            raise ValueError("At least one waveform must be provided")
+
+        num_samps_per_chan = waveforms[0].sample_count
+        for i, waveform in enumerate(waveforms):
+            if waveform.sample_count != num_samps_per_chan:
+                from nidaqmx.errors import DaqError
+                from nidaqmx.error_codes import DAQmxErrors
+                raise DaqError(
+                    "The waveforms must all have the same sample count.",
+                    DAQmxErrors.UNKNOWN
+                )
+        return num_samps_per_chan
