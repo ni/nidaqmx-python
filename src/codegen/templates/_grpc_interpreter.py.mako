@@ -261,20 +261,13 @@ class GrpcStubInterpreter(BaseInterpreter):
         waveform: AnalogWaveform[numpy.float64],
         waveform_attribute_mode: WaveformAttributeMode
     ) -> int:
-        response = self._invoke(
-            self._client.ReadAnalogWaveforms,
-            grpc_types.ReadAnalogWaveformsRequest(
-                task=typing.cast(typing.Any, task_handle),
-                num_samps_per_chan=number_of_samples_per_channel,
-                timeout=timeout,
-                waveform_attribute_mode_raw=waveform_attribute_mode.value
-            ))
-        
-        if response.waveforms and len(response.waveforms) > 0:
-            _copy_protobuf_waveform_to_analog_waveform(response.waveforms[0], waveform, waveform_attribute_mode)
-
-        self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
-        return response.samps_per_chan_read
+        return self.read_analog_waveforms(
+            task_handle,
+            number_of_samples_per_channel,
+            timeout,
+            [waveform],
+            waveform_attribute_mode
+        )
 
     def read_analog_waveforms(
         self,
@@ -308,20 +301,15 @@ class GrpcStubInterpreter(BaseInterpreter):
         waveform: DigitalWaveform[Any],
         waveform_attribute_mode: WaveformAttributeMode
     ) -> int:
-        response = self._invoke(
-            self._client.ReadDigitalWaveforms,
-            grpc_types.ReadDigitalWaveformsRequest(
-                task=typing.cast(typing.Any, task_handle),
-                num_samps_per_chan=number_of_samples_per_channel,
-                timeout=timeout,
-                waveform_attribute_mode_raw=waveform_attribute_mode.value
-            ))
-        
-        if response.waveforms and len(response.waveforms) > 0:
-            _copy_protobuf_waveform_to_digital_waveform(response.waveforms[0], waveform, waveform_attribute_mode)
-
-        self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
-        return response.samps_per_chan_read
+        return self.read_digital_waveforms(
+            task_handle,
+            1,  # channel_count
+            number_of_samples_per_channel,
+            waveform.signal_count,  # number_of_signals_per_sample
+            timeout,
+            [waveform],
+            waveform_attribute_mode
+        )
 
     def read_digital_waveforms(
         self,
