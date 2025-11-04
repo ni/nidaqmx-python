@@ -3692,9 +3692,10 @@ class GrpcStubInterpreter(BaseInterpreter):
             ))
         
         for i, grpc_waveform in enumerate(response.waveforms):
-            if waveforms[i].data.shape[1] != grpc_waveform.signal_count:
-                raise ValueError(f"waveforms[{i}].data has {waveforms[i].data.shape[1]} signals, but expected {grpc_waveform.signal_count}")
-            _copy_protobuf_waveform_to_digital_waveform(grpc_waveform, waveforms[i], waveform_attribute_mode)
+            if i < len(waveforms):
+                if waveforms[i].data.shape[1] != grpc_waveform.signal_count:
+                    raise ValueError(f"waveforms[{i}].data has {waveforms[i].data.shape[1]} signals, but expected {grpc_waveform.signal_count}")
+                _copy_protobuf_waveform_to_digital_waveform(grpc_waveform, waveforms[i], waveform_attribute_mode)
 
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
         return response.samps_per_chan_read
