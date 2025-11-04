@@ -82,41 +82,23 @@ def generate_waveform_stubs(stubs_path: pathlib.Path):
         grpc_tools.protoc.main(arguments)
 
 
-def _replace_imports_in_text(
-    data: bytes, pattern: bytes, replacement: bytes, skip_condition: bytes = None
-) -> bytes:
-    lines = data.split(b"\n")
-    for i, line in enumerate(lines):
-        if pattern in line and (skip_condition is None or skip_condition not in line):
-            lines[i] = line.replace(pattern, replacement)
-    return b"\n".join(lines)
-
-
 def _fix_ni_protobuf_imports(data: bytes, stubs_namespace: str) -> bytes:
-    data = _replace_imports_in_text(
-        data,
+    data = data.replace(
         b"from ni.protobuf.types",
-        f"from {stubs_namespace}.ni.protobuf.types".encode(),
-        stubs_namespace.encode(),
+        f"from {stubs_namespace}.ni.protobuf.types".encode()
     )
 
-    data = _replace_imports_in_text(
-        data,
+    data = data.replace(
         b"import ni.protobuf.types",
-        f"import {stubs_namespace}.ni.protobuf.types".encode(),
-        stubs_namespace.encode(),
+        f"import {stubs_namespace}.ni.protobuf.types".encode()
     )
 
-    # This will catch patterns like ni.protobuf.types.anything_pb2
-    pattern = rb"\bni\.protobuf\.types\.(\w+_pb2)\b"
+    # This will catch patterns like ni.protobuf.types.anything_pb2, that don't already have the namespace prefixed
+    pattern = rb"\b(?<!" + stubs_namespace.encode() + rb"\.)ni\.protobuf\.types\.(\w+_pb2)\b"
     replacement = f"{stubs_namespace}.ni.protobuf.types.\\1".encode()
+    data = re.sub(pattern, replacement, data)
 
-    lines = data.split(b"\n")
-    for i, line in enumerate(lines):
-        if b"ni.protobuf.types." in line and stubs_namespace.encode() not in line:
-            lines[i] = re.sub(pattern, replacement, line)
-
-    return b"\n".join(lines)
+    return data
 
 
 def fix_import_paths(
@@ -131,21 +113,14 @@ def fix_import_paths(
         print(f"Processing {path}")
         data = path.read_bytes()
         for name in imports_to_fix:
-            if name == "session_pb2":
-                continue
-            data = _replace_imports_in_text(
-                data, 
-                f"import {name}".encode(), 
-                f"from {stubs_namespace} import {name}".encode(), 
-                stubs_namespace.encode()
+            data = data.replace(
+                f"import {name}".encode(), f"from {stubs_namespace} import {name}".encode()
             )
 
         for namespace in proto_parent_namespaces:
-            data = _replace_imports_in_text(
-                data,
+            data = data.replace(
                 f"from {namespace}".encode(),
                 f"from {stubs_namespace}.{namespace}".encode(),
-                f"{stubs_namespace}.{namespace}".encode(),
             )
 
         data = _fix_ni_protobuf_imports(data, stubs_namespace)
