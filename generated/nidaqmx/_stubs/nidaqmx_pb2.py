@@ -10,7 +10,6 @@ from google.protobuf import symbol_database as _symbol_database
 
 _sym_db = _symbol_database.Default()
 
-
 import session_pb2 as session__pb2
 from nidaqmx._stubs import data_moniker_pb2 as data__moniker__pb2
 from nidaqmx._stubs.ni.protobuf.types import waveform_pb2 as ni_dot_protobuf_dot_types_dot_waveform__pb2
