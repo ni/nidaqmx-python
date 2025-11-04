@@ -8,6 +8,7 @@ from collections.abc import Sequence
 import grpc_tools.protoc
 import pkg_resources
 
+
 STUBS_NAMESPACE = "nidaqmx._stubs"
 PROTO_PARENT_NAMESPACES = ["src.codegen", "protos"]
 STUBS_PATH = (
@@ -40,7 +41,6 @@ def generate_python_files(
 ):
     """Generate python files from .proto files with protoc."""
     os.makedirs(stubs_path, exist_ok=True)
-
     arguments = [
         "protoc",
         f"--proto_path={str(proto_path)}",
@@ -83,40 +83,40 @@ def generate_waveform_stubs(stubs_path: pathlib.Path):
 
 
 def _replace_imports_in_text(
-    data: str, pattern: str, replacement: str, skip_condition: str = None
-) -> str:
-    lines = data.split("\n")
+    data: bytes, pattern: bytes, replacement: bytes, skip_condition: bytes = None
+) -> bytes:
+    lines = data.split(b"\n")
     for i, line in enumerate(lines):
         if pattern in line and (skip_condition is None or skip_condition not in line):
             lines[i] = line.replace(pattern, replacement)
-    return "\n".join(lines)
+    return b"\n".join(lines)
 
 
-def _fix_ni_protobuf_imports(data: str, stubs_namespace: str) -> str:
+def _fix_ni_protobuf_imports(data: bytes, stubs_namespace: str) -> bytes:
     data = _replace_imports_in_text(
         data,
-        "from ni.protobuf.types",
-        f"from {stubs_namespace}.ni.protobuf.types",
-        stubs_namespace,
+        b"from ni.protobuf.types",
+        f"from {stubs_namespace}.ni.protobuf.types".encode(),
+        stubs_namespace.encode(),
     )
 
     data = _replace_imports_in_text(
         data,
-        "import ni.protobuf.types",
-        f"import {stubs_namespace}.ni.protobuf.types",
-        stubs_namespace,
+        b"import ni.protobuf.types",
+        f"import {stubs_namespace}.ni.protobuf.types".encode(),
+        stubs_namespace.encode(),
     )
 
     # This will catch patterns like ni.protobuf.types.anything_pb2
-    pattern = r"\bni\.protobuf\.types\.(\w+_pb2)\b"
-    replacement = f"{stubs_namespace}.ni.protobuf.types.\\1"
+    pattern = rb"\bni\.protobuf\.types\.(\w+_pb2)\b"
+    replacement = f"{stubs_namespace}.ni.protobuf.types.\\1".encode()
 
-    lines = data.split("\n")
+    lines = data.split(b"\n")
     for i, line in enumerate(lines):
-        if "ni.protobuf.types." in line and stubs_namespace not in line:
+        if b"ni.protobuf.types." in line and stubs_namespace.encode() not in line:
             lines[i] = re.sub(pattern, replacement, line)
 
-    return "\n".join(lines)
+    return b"\n".join(lines)
 
 
 def fix_import_paths(
@@ -129,26 +129,28 @@ def fix_import_paths(
     grpc_codegened_file_paths.extend(stubs_path.rglob("*pb2*pyi"))
     for path in grpc_codegened_file_paths:
         print(f"Processing {path}")
-        data = path.read_text(encoding="utf-8")
+        data = path.read_bytes()
         for name in imports_to_fix:
             if name == "session_pb2":
                 continue
             data = _replace_imports_in_text(
-                data, f"import {name}", f"from {stubs_namespace} import {name}", stubs_namespace
+                data, 
+                f"import {name}".encode(), 
+                f"from {stubs_namespace} import {name}".encode(), 
+                stubs_namespace.encode()
             )
 
         for namespace in proto_parent_namespaces:
             data = _replace_imports_in_text(
                 data,
-                f"from {namespace}",
-                f"from {stubs_namespace}.{namespace}",
-                f"{stubs_namespace}.{namespace}",
+                f"from {namespace}".encode(),
+                f"from {stubs_namespace}.{namespace}".encode(),
+                f"{stubs_namespace}.{namespace}".encode(),
             )
 
         data = _fix_ni_protobuf_imports(data, stubs_namespace)
 
-        normalized_data = data.replace("\r\n", "\n").replace("\r", "\n")
-        path.write_text(normalized_data, encoding="utf-8", newline="\n")
+        path.write_bytes(data)
 
 
 def add_init_files(stubs_path: pathlib.Path, proto_path: pathlib.Path):
@@ -159,5 +161,4 @@ def add_init_files(stubs_path: pathlib.Path, proto_path: pathlib.Path):
             if python_files:
                 init_path = dir / "__init__.py"
                 print(f"Creating {init_path}")
-                init_content = '"""Auto generated gRPC files."""\n'
-                init_path.write_text(init_content, encoding="utf-8", newline="\n")
+                init_path.write_bytes(b'"""Auto generated gRPC files."""\n')
