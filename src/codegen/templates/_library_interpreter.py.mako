@@ -187,20 +187,6 @@ class LibraryInterpreter(BaseInterpreter):
             return 'Failed to retrieve error description.'
         return error_buffer.value.decode(lib_importer.encoding)
 
-    def get_default_number_of_samples_to_read(self, task_handle: object) -> int:
-        assert isinstance(task_handle, TaskHandle)
-        data = ctypes.c_uint()
-
-        cfunc = lib_importer.windll.DAQmxGetDefaultNumberOfSamplesToRead
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [TaskHandle, ctypes.POINTER(ctypes.c_uint)]
-
-        error_code = cfunc(task_handle, ctypes.byref(data))
-        self.check_for_error(error_code)
-        return data.value
-
     ## read_analog_waveform has special handling for waveform attributes and callbacks
     def read_analog_waveform(
         self,
@@ -211,9 +197,6 @@ class LibraryInterpreter(BaseInterpreter):
         waveform_attribute_mode: WaveformAttributeMode
     ) -> int:
         """Read an analog waveform with timing and attributes."""
-        if number_of_samples_per_channel == READ_ALL_AVAILABLE:
-            number_of_samples_per_channel = self.get_default_number_of_samples_to_read(task_handle)
-
         if WaveformAttributeMode.EXTENDED_PROPERTIES in waveform_attribute_mode:
             properties = [waveform.extended_properties]
         else:
@@ -257,9 +240,6 @@ class LibraryInterpreter(BaseInterpreter):
         waveform_attribute_mode: WaveformAttributeMode
     ) -> int:
         """Read a set of analog waveforms with timing and attributes. All of the waveforms must be the same size."""
-        if number_of_samples_per_channel == READ_ALL_AVAILABLE:
-            number_of_samples_per_channel = self.get_default_number_of_samples_to_read(task_handle)
-
         if WaveformAttributeMode.EXTENDED_PROPERTIES in waveform_attribute_mode:
             properties = [waveform.extended_properties for waveform in waveforms]
         else:
@@ -495,9 +475,6 @@ class LibraryInterpreter(BaseInterpreter):
         waveform_attribute_mode: WaveformAttributeMode
     ) -> int:
         """Read a digital waveform with timing and attributes."""
-        if number_of_samples_per_channel == READ_ALL_AVAILABLE:
-            number_of_samples_per_channel = self.get_default_number_of_samples_to_read(task_handle)
-
         if WaveformAttributeMode.EXTENDED_PROPERTIES in waveform_attribute_mode:
             properties = [waveform.extended_properties]
         else:
@@ -549,9 +526,6 @@ class LibraryInterpreter(BaseInterpreter):
         waveform_attribute_mode: WaveformAttributeMode,
     ) -> int:
         """Read a digital waveform with timing and attributes."""
-        if number_of_samples_per_channel == READ_ALL_AVAILABLE:
-            number_of_samples_per_channel = self.get_default_number_of_samples_to_read(task_handle)
-
         if WaveformAttributeMode.EXTENDED_PROPERTIES in waveform_attribute_mode:
             properties = [waveform.extended_properties for waveform in waveforms]
         else:
@@ -608,9 +582,6 @@ class LibraryInterpreter(BaseInterpreter):
         waveform_attribute_mode: WaveformAttributeMode,
     ) -> Sequence[DigitalWaveform[numpy.uint8]]:
         """Read a digital waveform with timing and attributes."""
-        if number_of_samples_per_channel == READ_ALL_AVAILABLE:
-            number_of_samples_per_channel = self.get_default_number_of_samples_to_read(task_handle)
-
         if WaveformAttributeMode.EXTENDED_PROPERTIES in waveform_attribute_mode:
             properties = [ExtendedPropertyDictionary() for _ in range(channel_count)]
         else:

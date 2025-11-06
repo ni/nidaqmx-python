@@ -1785,6 +1785,12 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, channel=channel, attribute_raw=attribute))
         return response.value
 
+    def get_default_number_of_samples_to_read(self, task):
+        response = self._invoke(
+            self._client.GetDefaultNumberOfSamplesToRead,
+            grpc_types.GetDefaultNumberOfSamplesToReadRequest(task=task))
+        return response.data
+
     def get_device_attribute_bool(self, device_name, attribute):
         response = self._invoke(
             self._client.GetDeviceAttributeBool,
