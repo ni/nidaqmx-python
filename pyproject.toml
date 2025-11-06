@@ -178,6 +178,8 @@ module = [
   "nidaqmx.*",
   # https://github.com/ionelmc/pytest-benchmark/issues/212 - Add type annotations
   "pytest_benchmark.*",
+  # https://github.com/adamreeve/npTDMS/issues/301 - Type Hints/Annotations
+  "nptdms.*",
 ]
 ignore_missing_imports = true
 
