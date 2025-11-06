@@ -1,6 +1,6 @@
 """Examples for using system properties in DAQmx."""
 
-import nidaqmx
+import nidaqmx.system
 
 local_system = nidaqmx.system.System.local()
 driver_version = local_system.driver_version
