@@ -31,8 +31,6 @@ if TYPE_CHECKING:
     # Not public yet: https://github.com/pytest-dev/pytest/issues/7469
     import _pytest.mark.structures  # noqa: I300
 
-    from nidaqmx.system.storage import PersistedChannel, PersistedScale, PersistedTask
-
 
 class Error(Exception):
     """Base error class."""
