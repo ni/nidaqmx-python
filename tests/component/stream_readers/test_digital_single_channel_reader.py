@@ -15,6 +15,7 @@ from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
 from nidaqmx.constants import (
     AcquisitionType,
     LineGrouping,
+    READ_ALL_AVAILABLE,
     ReallocationPolicy,
     WaveformAttributeMode,
 )
@@ -625,3 +626,20 @@ def test___digital_single_channel_multi_line_reader___read_waveform_all_dtypes__
 
     assert samples_read == num_samples
     assert _get_waveform_data(waveform) == _get_digital_data(num_lines, num_samples)
+
+
+@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
+def test___digital_single_line_reader___read_waveform_read_all_available___returns_valid_waveform(
+    di_single_line_timing_task: nidaqmx.Task,
+) -> None:
+    reader = DigitalSingleChannelReader(di_single_line_timing_task.in_stream)
+    waveform = DigitalWaveform(100)
+
+    samples_read = reader.read_waveform(waveform, READ_ALL_AVAILABLE)
+
+    assert samples_read == 50
+    assert _get_waveform_data(waveform) == _get_digital_data(1, samples_read)
+    assert _is_timestamp_close_to_now(waveform.timing.timestamp)
+    assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
+    assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
+    assert waveform.channel_name == di_single_line_timing_task.di_channels[0].name

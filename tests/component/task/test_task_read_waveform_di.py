@@ -5,6 +5,7 @@ from nitypes.waveform import DigitalWaveform
 
 import nidaqmx
 import nidaqmx.system
+from nidaqmx.constants import READ_ALL_AVAILABLE
 from tests.component._digital_utils import (
     _get_expected_data_for_line,
     _get_waveform_data,
@@ -235,3 +236,30 @@ def test___digital_multi_channel___read_waveform_lines_and_port___returns_valid_
         sim_6363_device.di_lines[33].name,
         sim_6363_device.di_lines[32].name,
     ]
+
+
+@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
+def test___digital_single_channel___read_waveform_read_all_available___returns_valid_waveform(
+    di_single_channel_timing_task: nidaqmx.Task,
+) -> None:
+    waveform = di_single_channel_timing_task.read_waveform(READ_ALL_AVAILABLE)
+
+    assert isinstance(waveform, DigitalWaveform)
+    assert waveform.sample_count == 50
+    assert _get_waveform_data(waveform) == _get_expected_data_for_line(waveform.sample_count, 0)
+
+
+@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
+def test___digital_multi_channel___read_waveform_read_all_available___returns_valid_waveforms(
+    di_multi_channel_timing_task: nidaqmx.Task,
+) -> None:
+    waveforms = di_multi_channel_timing_task.read_waveform(READ_ALL_AVAILABLE)
+
+    assert isinstance(waveforms, list)
+    assert len(waveforms) == di_multi_channel_timing_task.number_of_channels
+    assert all(isinstance(waveform, DigitalWaveform) for waveform in waveforms)
+    for chan_index, waveform in enumerate(waveforms):
+        assert waveform.sample_count == 50
+        assert _get_waveform_data(waveform) == _get_expected_data_for_line(
+            waveform.sample_count, chan_index
+        )

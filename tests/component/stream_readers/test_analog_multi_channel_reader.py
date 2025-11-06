@@ -12,7 +12,12 @@ from nitypes.waveform import AnalogWaveform, SampleIntervalMode
 import nidaqmx
 import nidaqmx.system
 from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
-from nidaqmx.constants import AcquisitionType, ReallocationPolicy, WaveformAttributeMode
+from nidaqmx.constants import (
+    READ_ALL_AVAILABLE,
+    AcquisitionType,
+    ReallocationPolicy,
+    WaveformAttributeMode,
+)
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.stream_readers import AnalogMultiChannelReader, DaqError
 from tests.component._analog_utils import (
@@ -426,3 +431,31 @@ def test___analog_multi_channel_reader_with_none_flag___read_waveforms___minimal
         assert waveform.channel_name == ""
         assert waveform.units == ""
         assert waveform.sample_count == samples_to_read
+
+
+@pytest.mark.grpc_skip(reason="read_analog_waveforms not implemented in GRPC")
+def test___analog_multi_channel_reader___read_waveforms_read_all_available___returns_valid_waveforms(
+    ai_multi_channel_task_with_timing: nidaqmx.Task,
+) -> None:
+    reader = AnalogMultiChannelReader(ai_multi_channel_task_with_timing.in_stream)
+    num_channels = ai_multi_channel_task_with_timing.number_of_channels
+    waveforms = [AnalogWaveform(100) for _ in range(num_channels)]
+
+    samples_read = reader.read_waveforms(waveforms, READ_ALL_AVAILABLE)
+
+    assert samples_read == 50
+    assert num_channels == 3
+    assert isinstance(waveforms, list)
+    assert len(waveforms) == num_channels
+    for chan_index, waveform in enumerate(waveforms):
+        assert isinstance(waveform, AnalogWaveform)
+        expected = _get_voltage_offset_for_chan(chan_index)
+        assert waveform.scaled_data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
+        assert isinstance(waveform.timing.timestamp, ht_datetime)
+        assert _is_timestamp_close_to_now(waveform.timing.timestamp)
+        assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
+        assert (
+            waveform.channel_name == ai_multi_channel_task_with_timing.ai_channels[chan_index].name
+        )
+        assert waveform.units == "Volts"
+        assert waveform.sample_count == samples_read
