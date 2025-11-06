@@ -1,5 +1,6 @@
 """NI-DAQmx system classes."""
 
+from nidaqmx.system import storage
 from nidaqmx.system.device import Device
 from nidaqmx.system.physical_channel import PhysicalChannel
 from nidaqmx.system.system import (

@@ -143,7 +143,7 @@ class AnalogMultiChannelReader(ChannelReaderBase):
         waveforms: list[AnalogWaveform[numpy.float64]],
         number_of_samples_per_channel: int = READ_ALL_AVAILABLE,
         reallocation_policy: ReallocationPolicy = ReallocationPolicy.TO_GROW,
-        timeout: int = 10,
+        timeout: float = 10.0,
     ) -> int:
         """Reads one or more floating-point samples from one or more analog input channels into a list of waveforms.
 
