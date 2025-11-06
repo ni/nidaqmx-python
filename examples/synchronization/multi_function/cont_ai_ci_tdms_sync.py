@@ -31,8 +31,8 @@ SAMPLE_RATE = 1000
 SAMPLES_PER_CHANNEL = 1000
 TIMEOUT = 10.0
 # Note: This example currently assumes all tasks run on a single synchronized device.
-# To make this example work across multiple devices, export
-# a shared sample clock from one device to the other via a PFI line.
+# To make this example work across multiple devices, share the sample clock
+# between devices using the PXI trigger bus or a PFI line.
 DEVICE_NAME = "Dev1"
 
 TaskData = tuple[
