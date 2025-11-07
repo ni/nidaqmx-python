@@ -294,7 +294,7 @@ class Task:
         if num_samps_per_chan is NUM_SAMPLES_UNSET:
             return 1
         elif num_samps_per_chan == READ_ALL_AVAILABLE:
-            if hasattr(self._interpreter, 'get_default_number_of_samples_to_read'):
+            if hasattr(self._interpreter, "get_default_number_of_samples_to_read"):
                 try:
                     return self._interpreter.get_default_number_of_samples_to_read(self._handle)
                 except AttributeError:
