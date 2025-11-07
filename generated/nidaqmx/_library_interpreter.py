@@ -16,7 +16,7 @@ from collections.abc import Callable, Sequence
 
 from nidaqmx._base_interpreter import BaseEventHandler, BaseInterpreter
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer, TaskHandle
-from nidaqmx.constants import FillMode, READ_ALL_AVAILABLE, WaveformAttributeMode
+from nidaqmx.constants import FillMode, WaveformAttributeMode
 from nidaqmx.error_codes import DAQmxErrors, DAQmxWarnings
 from nidaqmx.errors import DaqError, DaqFunctionNotSupportedError, DaqReadError, DaqWarning, DaqWriteError
 from nidaqmx._lib_time import AbsoluteTime
