@@ -2597,22 +2597,6 @@ class LibraryInterpreter(BaseInterpreter):
         self.check_for_error(error_code)
         return value.value
 
-    def get_default_number_of_samples_to_read(self, task):
-        data = ctypes.c_uint32()
-
-        cfunc = lib_importer.windll.DAQmxGetDefaultNumberOfSamplesToRead
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_uint32)]
-
-        error_code = cfunc(
-            task, ctypes.byref(data))
-        self.check_for_error(error_code)
-        return data.value
-
     def get_device_attribute_bool(self, device_name, attribute):
         value = c_bool32()
 

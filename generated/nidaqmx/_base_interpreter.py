@@ -853,10 +853,6 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_default_number_of_samples_to_read(self, task):
-        raise NotImplementedError
-
-    @abc.abstractmethod
     def get_device_attribute_bool(self, device_name, attribute):
         raise NotImplementedError
 

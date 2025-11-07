@@ -294,11 +294,12 @@ class Task:
         if num_samps_per_chan is NUM_SAMPLES_UNSET:
             return 1
         elif num_samps_per_chan == READ_ALL_AVAILABLE:
-            if hasattr(self._interpreter, "get_default_number_of_samples_to_read"):
-                try:
-                    return self._interpreter.get_default_number_of_samples_to_read(self._handle)
-                except AttributeError:
-                    pass
+            try:
+                # DAQmx_DefaultNumberOfSamplesToRead is 0x31E8
+                return self._interpreter.get_read_attribute_uint32(self._handle, 0x31E8)
+            except DaqError:
+                pass
+
             acq_type = self.timing.samp_quant_samp_mode
 
             if acq_type == AcquisitionType.FINITE and not self.in_stream.read_all_avail_samp:
