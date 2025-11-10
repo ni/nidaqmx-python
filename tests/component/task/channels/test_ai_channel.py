@@ -1337,7 +1337,7 @@ def test___task___add_ai_chans_with_name___sets_channel_name(
     "units, custom_scale_name",
     [
         (PowerUnits.WATTS, ""),
-        (PowerUnits.FROM_CUSTOM_SCALE, "no_scaling_scale"),
+        (PowerUnits.FROM_CUSTOM_SCALE, "power_scale"),
     ],
 )
 @pytest.mark.parametrize(
@@ -1381,4 +1381,4 @@ def test___task___add_ai_calculated_power_chan___sets_channel_attributes(
     assert chan.ai_power_units == units
     assert chan.ai_current_shunt_loc == expected_shunt_resistor_loc
     assert chan.ai_current_shunt_resistance == expected_shunt_resistor_value
-    assert chan.ai_custom_scale_name == custom_scale_name
+    assert chan.ai_custom_scale.name == custom_scale_name
