@@ -34,7 +34,7 @@ All notable changes to this project will be documented in this file.
 
 * ### Major Changes
     * Removed support for Python 3.9.
-    * (IN PROGRESS behind "WAVEFORM_SUPPORT" feature toggle) Added gRPC support for reading and writing Waveform data. 
+    * (IN PROGRESS behind "WAVEFORM_SUPPORT" feature toggle) Added support for reading and writing Waveform data through gRPC using [NI gRPC Device Server](https://github.com/ni/grpc-device).
 
 * ### Known Issues
     * ...
@@ -48,7 +48,7 @@ All notable changes to this project will be documented in this file.
     * [639: first_samp_timestamp_val property does not work because LibraryInterpreter is missing a method](https://github.com/ni/nidaqmx-python/issues/639)
 
 * ### Major Changes
-    * (IN PROGRESS behind "WAVEFORM_SUPPORT" feature toggle) Added support for reading and writing Waveform data. 
+    * (IN PROGRESS behind "WAVEFORM_SUPPORT" feature toggle) Added support for reading and writing Waveform data.
     * Simplify `numpy` and `click` version constraints.
         * `nidaqmx` supports a wider range of Python versions than `numpy` and `click`, so testing
           `nidaqmx` against its oldest supported Python version (currently 3.9) requires downgrading
