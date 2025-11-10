@@ -4141,6 +4141,26 @@ class LibraryInterpreter(BaseInterpreter):
         self.check_for_error(size_or_code)
         return value.value.decode(lib_importer.encoding)
 
+    def internal_read_analog_waveform_per_chan(
+            self, task, num_samps_per_chan, timeout, set_wfm_attr_callback,
+            array_size_in_samps_per_chan):
+        raise NotImplementedError
+
+    def internal_read_digital_waveform(
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            set_wfm_attr_callback):
+        raise NotImplementedError
+
+    def internal_write_analog_waveform_per_chan(
+            self, task, num_samps_per_chan, auto_start, timeout,
+            write_array_ptrs):
+        raise NotImplementedError
+
+    def internal_write_digital_waveform(
+            self, task, num_samps_per_chan, auto_start, timeout, data_layout,
+            write_array, bytes_per_chan_array):
+        raise NotImplementedError
+
     def is_task_done(self, task):
         is_task_done = c_bool32()
 

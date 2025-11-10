@@ -2331,6 +2331,57 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.GetWriteAttributeUInt64Request(task=task, attribute_raw=attribute))
         return response.value
 
+    def internal_read_analog_waveform_per_chan(
+            self, task, num_samps_per_chan, timeout, set_wfm_attr_callback,
+            array_size_in_samps_per_chan):
+        response = self._invoke(
+            self._client.InternalReadAnalogWaveformPerChan,
+            grpc_types.InternalReadAnalogWaveformPerChanRequest(
+                task=task, num_samps_per_chan=num_samps_per_chan,
+                timeout=timeout, set_wfm_attr_callback=set_wfm_attr_callback,
+                array_size_in_samps_per_chan=array_size_in_samps_per_chan))
+    
+        _assign_numpy_array(read_array_ptrs, response.read_array_ptrs)
+        self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
+        return response.t_0_array, response.dt_array, response.set_wfm_attr_callback_data, read_array_ptrs, response.samps_per_chan_read
+
+    def internal_read_digital_waveform(
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            set_wfm_attr_callback):
+        response = self._invoke(
+            self._client.InternalReadDigitalWaveform,
+            grpc_types.InternalReadDigitalWaveformRequest(
+                task=task, num_samps_per_chan=num_samps_per_chan,
+                timeout=timeout, fill_mode=fill_mode,
+                set_wfm_attr_callback=set_wfm_attr_callback))
+    
+        _assign_numpy_array(read_array, response.read_array)
+        self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
+        return response.t_0_array, response.dt_array, response.set_wfm_attr_callback_data, read_array, response.samps_per_chan_read, response.num_bytes_per_samp, list(response.bytes_per_chan_array)
+
+    def internal_write_analog_waveform_per_chan(
+            self, task, num_samps_per_chan, auto_start, timeout,
+            write_array_ptrs):
+        response = self._invoke(
+            self._client.InternalWriteAnalogWaveformPerChan,
+            grpc_types.InternalWriteAnalogWaveformPerChanRequest(
+                task=task, num_samps_per_chan=num_samps_per_chan,
+                auto_start=auto_start, timeout=timeout,
+                write_array_ptrs=write_array_ptrs))
+        return response.samps_per_chan_written
+
+    def internal_write_digital_waveform(
+            self, task, num_samps_per_chan, auto_start, timeout, data_layout,
+            write_array, bytes_per_chan_array):
+        response = self._invoke(
+            self._client.InternalWriteDigitalWaveform,
+            grpc_types.InternalWriteDigitalWaveformRequest(
+                task=task, num_samps_per_chan=num_samps_per_chan,
+                auto_start=auto_start, timeout=timeout,
+                data_layout=data_layout, write_array=write_array,
+                bytes_per_chan_array=bytes_per_chan_array))
+        return response.samps_per_chan_written
+
     def is_task_done(self, task):
         response = self._invoke(
             self._client.IsTaskDone,
