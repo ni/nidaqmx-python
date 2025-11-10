@@ -115,7 +115,7 @@ class AnalogSingleChannelReader(ChannelReaderBase):
         waveform: AnalogWaveform[numpy.float64],
         number_of_samples_per_channel: int = READ_ALL_AVAILABLE,
         reallocation_policy: ReallocationPolicy = ReallocationPolicy.TO_GROW,
-        timeout: int = 10,
+        timeout: float = 10.0,
     ) -> int:
         """Reads one or more floating-point samples from a single analog input channel into a waveform.
 
