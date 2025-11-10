@@ -26,12 +26,12 @@ _WAVEFORM_BENCHMARK_MODES = [
 _WAVEFORM_BENCHMARK_MODE_IDS = ["NONE", "TIMING", "ALL"]
 
 
-def _configure_timing(task: Task, num_channels: int, num_samples: int) -> None:
+def _configure_timing(task: Task, num_samples: int) -> None:
     task.timing.cfg_samp_clk_timing(
         rate=25000.0,
         active_edge=Edge.RISING,
         sample_mode=AcquisitionType.FINITE,
-        samps_per_chan=num_channels * num_samples * 2,
+        samps_per_chan=num_samples * 2,
     )
 
 
@@ -41,8 +41,8 @@ def _start_input_task(task: Task) -> None:
     task.in_stream.relative_to = ReadRelativeTo.FIRST_SAMPLE
 
 
-def _commit_output_task(task: Task, num_channels: int, num_samples: int) -> None:
-    task.out_stream.output_buf_size = num_channels * num_samples * 2
+def _commit_output_task(task: Task, num_samples: int) -> None:
+    task.out_stream.output_buf_size = num_samples * 2
     task.control(TaskMode.TASK_COMMIT)
     task.out_stream.relative_to = ReadRelativeTo.FIRST_SAMPLE
 
@@ -79,7 +79,7 @@ def ai_benchmark_task(
             max_val=5.0,
         )
 
-    _configure_timing(task, num_channels, num_samples)
+    _configure_timing(task, num_samples)
     _start_input_task(task)
 
     return task
@@ -102,8 +102,8 @@ def ao_benchmark_task(
             max_val=10.0,
         )
 
-    _configure_timing(task, num_channels, num_samples)
-    _commit_output_task(task, num_channels, num_samples)
+    _configure_timing(task, num_samples)
+    _commit_output_task(task, num_samples)
 
     return task
 
@@ -129,7 +129,7 @@ def di_lines_benchmark_task(
             physical_channel_string, line_grouping=LineGrouping.CHAN_FOR_ALL_LINES
         )
 
-    _configure_timing(task, num_channels, num_samples)
+    _configure_timing(task, num_samples)
     _start_input_task(task)
 
     return task
@@ -149,7 +149,7 @@ def di_port32_benchmark_task(
         benchmark_device.di_ports[0].name, line_grouping=LineGrouping.CHAN_FOR_ALL_LINES
     )
 
-    _configure_timing(task, 1, num_samples)
+    _configure_timing(task, num_samples)
     _start_input_task(task)
 
     return task
@@ -176,8 +176,8 @@ def do_lines_benchmark_task(
             physical_channel_string, line_grouping=LineGrouping.CHAN_FOR_ALL_LINES
         )
 
-    _configure_timing(task, num_channels, num_samples)
-    _commit_output_task(task, num_channels, num_samples)
+    _configure_timing(task, num_samples)
+    _commit_output_task(task, num_samples)
 
     return task
 
@@ -196,7 +196,7 @@ def do_port32_benchmark_task(
         benchmark_device.do_ports[0].name, line_grouping=LineGrouping.CHAN_FOR_ALL_LINES
     )
 
-    _configure_timing(task, 1, num_samples)
-    _commit_output_task(task, 1, num_samples)
+    _configure_timing(task, num_samples)
+    _commit_output_task(task, num_samples)
 
     return task
