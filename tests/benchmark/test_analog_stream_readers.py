@@ -47,7 +47,7 @@ def test___analog_single_channel_reader___read_all_available(
     reader = AnalogSingleChannelReader(ai_benchmark_task.in_stream)
     # This test reads the whole buffer, which is 2x num_samples.
     data = numpy.full(num_samples * 2, math.inf, dtype=numpy.float64)
- 
+
     benchmark(reader.read_many_sample, data, READ_ALL_AVAILABLE)
 
 
