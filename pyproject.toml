@@ -158,7 +158,7 @@ requires = ["poetry-core>=2.1,<3.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.mypy]
-files = "generated/,tests/"
+files = "examples/,generated/,tests/"
 check_untyped_defs = true
 namespace_packages = true
 warn_redundant_casts = true
@@ -178,6 +178,8 @@ module = [
   "nidaqmx.*",
   # https://github.com/ionelmc/pytest-benchmark/issues/212 - Add type annotations
   "pytest_benchmark.*",
+  # https://github.com/adamreeve/npTDMS/issues/301 - Type Hints/Annotations
+  "nptdms.*",
 ]
 ignore_missing_imports = true
 

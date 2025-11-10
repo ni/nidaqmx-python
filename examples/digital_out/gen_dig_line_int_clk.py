@@ -8,7 +8,7 @@ import nidaqmx
 from nidaqmx.constants import AcquisitionType, LineGrouping
 
 with nidaqmx.Task() as task:
-    data: bool = [bool(i % 2) for i in range(1000)]
+    data = [bool(i % 2) for i in range(1000)]
 
     task.do_channels.add_do_chan("Dev1/port0/line0", line_grouping=LineGrouping.CHAN_PER_LINE)
     task.timing.cfg_samp_clk_timing(
