@@ -83,7 +83,6 @@ class Task:
         "_triggers",
         "_out_stream",
         "_event_handler_lock",
-        "_default_number_of_samples_attribute_available",
         "__weakref__",
     )
 
@@ -109,7 +108,6 @@ class Task:
         self._saved_name = new_task_name  # _initialize sets this to the name assigned by DAQmx.
         self._grpc_options = grpc_options
         self._event_handlers = {}
-        self._default_number_of_samples_attribute_available = True
 
         if grpc_options and not (
             grpc_options.session_name == "" or grpc_options.session_name == new_task_name
@@ -296,22 +294,16 @@ class Task:
         if num_samps_per_chan is NUM_SAMPLES_UNSET:
             return 1
         elif num_samps_per_chan == READ_ALL_AVAILABLE:
-            if (
-                self._interpreter.driver_version >= (24, 8)
-                and self._default_number_of_samples_attribute_available
-            ):
-                try:
-                    # DAQmx_DefaultNumberOfSamplesToRead is 0x31E8
-                    return self._interpreter.get_read_attribute_uint32(self._handle, 0x31E8)
-                except DaqError:
-                    self._default_number_of_samples_attribute_available = False
-
-            acq_type = self.timing.samp_quant_samp_mode
-
-            if acq_type == AcquisitionType.FINITE and not self.in_stream.read_all_avail_samp:
-                return self.timing.samp_quant_samp_per_chan
+            if self._interpreter.driver_version >= (24, 5):
+                # DAQmx_DefaultNumberOfSamplesToRead is 0x31E8
+                return self._interpreter.get_read_attribute_uint32(self._handle, 0x31E8)
             else:
-                return self.in_stream.avail_samp_per_chan
+                acq_type = self.timing.samp_quant_samp_mode
+
+                if acq_type == AcquisitionType.FINITE and not self.in_stream.read_all_avail_samp:
+                    return self.timing.samp_quant_samp_per_chan
+                else:
+                    return self.in_stream.avail_samp_per_chan
         else:
             return num_samps_per_chan
 
@@ -1735,7 +1727,6 @@ class _TaskAlternateConstructor(Task):
         self._saved_name = ""  # _initialize sets this to the name assigned by DAQmx.
         self._grpc_options = getattr(interpreter, "_grpc_options", None)
         self._event_handlers = {}
-        self._default_number_of_samples_attribute_available = True
 
         self._interpreter = interpreter
         self._initialize(self._handle, self._interpreter)
