@@ -12,7 +12,6 @@ import threading
 import time
 from collections.abc import Sequence
 from concurrent.futures import ThreadPoolExecutor
-from datetime import datetime
 from pathlib import Path
 
 import numpy as np
@@ -133,11 +132,9 @@ def consumer(
                         "wf_increment": waveform.timing.sample_interval.total_seconds(),
                         "wf_samples": len(waveform.raw_data),
                         "wf_start_offset": 0.0,
-                        "wf_start_time": (
-                            waveform.timing.start_time
-                            if isinstance(waveform.timing.start_time, datetime)
-                            else datetime.now()
-                        ).strftime("%Y-%m-%d %H:%M:%S"),
+                        "wf_start_time": waveform.timing.to_datetime().start_time.strftime(
+                            "%Y-%m-%d %H:%M:%S"
+                        ),
                     },
                 )
                 objects_to_write.append(channel)
@@ -154,11 +151,9 @@ def consumer(
                     "wf_increment": counter_waveform.timing.sample_interval.total_seconds(),
                     "wf_samples": len(counter_waveform.raw_data),
                     "wf_start_offset": 0.0,
-                    "wf_start_time": (
-                        counter_waveform.timing.start_time
-                        if isinstance(counter_waveform.timing.start_time, datetime)
-                        else datetime.now()
-                    ).strftime("%Y-%m-%d %H:%M:%S"),
+                    "wf_start_time": counter_waveform.timing.to_datetime().start_time.strftime(
+                        "%Y-%m-%d %H:%M:%S"
+                    ),
                 },
             )
             objects_to_write.append(channel)
