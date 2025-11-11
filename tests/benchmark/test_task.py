@@ -55,7 +55,6 @@ def test___task___read_analog(
 @pytest.mark.parametrize(
     "waveform_attribute_mode", _WAVEFORM_BENCHMARK_MODES, ids=_WAVEFORM_BENCHMARK_MODE_IDS
 )
-@pytest.mark.grpc_skip(reason="read_analog_waveforms not implemented in GRPC")
 def test___task___read_analog_waveform(
     benchmark: BenchmarkFixture,
     ai_benchmark_task: Task,
@@ -84,7 +83,6 @@ def test___task___write_analog(
 @pytest.mark.benchmark(group="analog_writers")
 @pytest.mark.parametrize("num_channels", [1, 2])
 @pytest.mark.parametrize("num_samples", [1, 1000])
-@pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
 def test___task___write_analog_waveform(
     benchmark: BenchmarkFixture,
     ao_benchmark_task: Task,
@@ -124,7 +122,6 @@ def test___task___read_digital_port(
 @pytest.mark.parametrize("num_channels", [1, 2])
 @pytest.mark.parametrize("num_samples", [1, 100])
 @pytest.mark.parametrize("num_lines", [1, 2, 8])
-@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
 def test___task___read_digital_lines_waveform(
     benchmark: BenchmarkFixture,
     di_lines_benchmark_task: Task,
@@ -137,7 +134,6 @@ def test___task___read_digital_lines_waveform(
 
 @pytest.mark.benchmark(group="digital_readers")
 @pytest.mark.parametrize("num_samples", [1, 100])
-@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
 def test___task___read_digital_port_waveform(
     benchmark: BenchmarkFixture,
     di_port32_benchmark_task: Task,
@@ -176,7 +172,6 @@ def test___task___write_digital_port(
 @pytest.mark.parametrize("num_channels", [1, 2])
 @pytest.mark.parametrize("num_samples", [1, 100])
 @pytest.mark.parametrize("num_lines", [1, 2, 8])
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
 def test___task___write_digital_lines_waveform(
     benchmark: BenchmarkFixture,
     do_lines_benchmark_task: Task,
@@ -190,7 +185,6 @@ def test___task___write_digital_lines_waveform(
 
 @pytest.mark.benchmark(group="digital_writers")
 @pytest.mark.parametrize("num_samples", [1, 100])
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
 def test___task___write_digital_port_waveform(
     benchmark: BenchmarkFixture,
     do_port32_benchmark_task: Task,

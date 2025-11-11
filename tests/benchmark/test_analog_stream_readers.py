@@ -56,7 +56,6 @@ def test___analog_single_channel_reader___read_all_available(
 @pytest.mark.parametrize(
     "waveform_attribute_mode", _WAVEFORM_BENCHMARK_MODES, ids=_WAVEFORM_BENCHMARK_MODE_IDS
 )
-@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
 def test___analog_single_channel_reader___read_waveform(
     benchmark: BenchmarkFixture,
     ai_benchmark_task: Task,
@@ -112,7 +111,6 @@ def test___analog_multi_channel_reader___read_all_available(
 @pytest.mark.parametrize(
     "waveform_attribute_mode", _WAVEFORM_BENCHMARK_MODES, ids=_WAVEFORM_BENCHMARK_MODE_IDS
 )
-@pytest.mark.grpc_skip(reason="read_analog_waveforms not implemented in GRPC")
 def test___analog_multi_channel_reader___read_waveform(
     benchmark: BenchmarkFixture,
     ai_benchmark_task: Task,

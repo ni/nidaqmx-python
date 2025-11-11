@@ -2254,6 +2254,26 @@ class NiDAQmxStub:
         nidaqmx_pb2.WriteToTEDSFromFileResponse,
     ]
 
+    ReadAnalogWaveforms: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.ReadAnalogWaveformsRequest,
+        nidaqmx_pb2.ReadAnalogWaveformsResponse,
+    ]
+
+    ReadDigitalWaveforms: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.ReadDigitalWaveformsRequest,
+        nidaqmx_pb2.ReadDigitalWaveformsResponse,
+    ]
+
+    WriteAnalogWaveforms: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.WriteAnalogWaveformsRequest,
+        nidaqmx_pb2.WriteAnalogWaveformsResponse,
+    ]
+
+    WriteDigitalWaveforms: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.WriteDigitalWaveformsRequest,
+        nidaqmx_pb2.WriteDigitalWaveformsResponse,
+    ]
+
 class NiDAQmxAsyncStub:
     AddCDAQSyncConnection: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.AddCDAQSyncConnectionRequest,
@@ -4483,6 +4503,26 @@ class NiDAQmxAsyncStub:
     WriteToTEDSFromFile: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteToTEDSFromFileRequest,
         nidaqmx_pb2.WriteToTEDSFromFileResponse,
+    ]
+
+    ReadAnalogWaveforms: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.ReadAnalogWaveformsRequest,
+        nidaqmx_pb2.ReadAnalogWaveformsResponse,
+    ]
+
+    ReadDigitalWaveforms: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.ReadDigitalWaveformsRequest,
+        nidaqmx_pb2.ReadDigitalWaveformsResponse,
+    ]
+
+    WriteAnalogWaveforms: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.WriteAnalogWaveformsRequest,
+        nidaqmx_pb2.WriteAnalogWaveformsResponse,
+    ]
+
+    WriteDigitalWaveforms: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.WriteDigitalWaveformsRequest,
+        nidaqmx_pb2.WriteDigitalWaveformsResponse,
     ]
 
 class NiDAQmxServicer(metaclass=abc.ABCMeta):
@@ -7607,5 +7647,33 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
         request: nidaqmx_pb2.WriteToTEDSFromFileRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteToTEDSFromFileResponse, collections.abc.Awaitable[nidaqmx_pb2.WriteToTEDSFromFileResponse]]: ...
+
+    @abc.abstractmethod
+    def ReadAnalogWaveforms(
+        self,
+        request: nidaqmx_pb2.ReadAnalogWaveformsRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.ReadAnalogWaveformsResponse, collections.abc.Awaitable[nidaqmx_pb2.ReadAnalogWaveformsResponse]]: ...
+
+    @abc.abstractmethod
+    def ReadDigitalWaveforms(
+        self,
+        request: nidaqmx_pb2.ReadDigitalWaveformsRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.ReadDigitalWaveformsResponse, collections.abc.Awaitable[nidaqmx_pb2.ReadDigitalWaveformsResponse]]: ...
+
+    @abc.abstractmethod
+    def WriteAnalogWaveforms(
+        self,
+        request: nidaqmx_pb2.WriteAnalogWaveformsRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.WriteAnalogWaveformsResponse, collections.abc.Awaitable[nidaqmx_pb2.WriteAnalogWaveformsResponse]]: ...
+
+    @abc.abstractmethod
+    def WriteDigitalWaveforms(
+        self,
+        request: nidaqmx_pb2.WriteDigitalWaveformsRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.WriteDigitalWaveformsResponse, collections.abc.Awaitable[nidaqmx_pb2.WriteDigitalWaveformsResponse]]: ...
 
 def add_NiDAQmxServicer_to_server(servicer: NiDAQmxServicer, server: typing.Union[grpc.Server, grpc.aio.Server]) -> None: ...

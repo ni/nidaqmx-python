@@ -21,6 +21,7 @@ from nidaqmx.error_codes import DAQmxErrors, DAQmxWarnings
 from nidaqmx.errors import DaqError, DaqFunctionNotSupportedError, DaqReadError, DaqWarning, DaqWriteError
 from nidaqmx.types import DriverVersion
 from nidaqmx._lib_time import AbsoluteTime
+from nidaqmx._waveform_utils import get_num_samps_per_chan
 from nitypes.waveform.typing import ExtendedPropertyValue
 from nitypes.waveform import AnalogWaveform, DigitalWaveform, SampleIntervalMode, Timing, ExtendedPropertyDictionary
 
@@ -7021,15 +7022,7 @@ class LibraryInterpreter(BaseInterpreter):
         timeout: float
     ) -> int:
         """Write analog waveforms."""
-        assert len(waveforms) > 0
-        num_samps_per_chan = waveforms[0].sample_count
-
-        for waveform in waveforms:
-            if waveform.sample_count != num_samps_per_chan:
-                raise DaqError(
-                    "The waveforms must all have the same sample count.",
-                     DAQmxErrors.UNKNOWN
-                )
+        num_samps_per_chan = get_num_samps_per_chan(waveforms)
 
         write_arrays = [self._get_analog_write_array(waveform) for waveform in waveforms]
 
@@ -7140,15 +7133,7 @@ class LibraryInterpreter(BaseInterpreter):
     ) -> int:
         """Write digital waveforms."""
         channel_count = len(waveforms)
-        assert channel_count > 0
-        sample_count = waveforms[0].sample_count
-
-        for waveform in waveforms:
-            if waveform.sample_count != sample_count:
-                raise DaqError(
-                    "The waveforms must all have the same sample count.",
-                    DAQmxErrors.UNKNOWN
-                )
+        sample_count = get_num_samps_per_chan(waveforms)
                 
         bytes_per_chan_array = numpy.array([wf.signal_count for wf in waveforms], dtype=numpy.uint32)
 

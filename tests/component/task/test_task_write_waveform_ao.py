@@ -19,7 +19,6 @@ from tests.component._analog_utils import (
 
 
 @pytest.mark.disable_feature_toggle(WAVEFORM_SUPPORT)
-@pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
 def test___task___write_waveform_feature_disabled___raises_feature_not_supported_error(
     ao_single_channel_task: nidaqmx.Task,
 ) -> None:
@@ -33,7 +32,6 @@ def test___task___write_waveform_feature_disabled___raises_feature_not_supported
     assert "NIDAQMX_ENABLE_WAVEFORM_SUPPORT" in error_message
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
 def test___task___write_linear_ramp_waveform___output_matches_final_value(
     ao_single_channel_task: nidaqmx.Task,
     ai_single_channel_loopback_task: nidaqmx.Task,
@@ -48,7 +46,6 @@ def test___task___write_linear_ramp_waveform___output_matches_final_value(
     assert actual_value == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
 def test___task___write_waveform_as_list___output_matches_final_value(
     ao_single_channel_task: nidaqmx.Task,
     ai_single_channel_loopback_task: nidaqmx.Task,
@@ -63,7 +60,6 @@ def test___task___write_waveform_as_list___output_matches_final_value(
     assert actual_value == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
 def test___task___write_waveform_with_write___output_matches_final_value(
     ao_single_channel_task: nidaqmx.Task,
     ai_single_channel_loopback_task: nidaqmx.Task,
@@ -78,7 +74,6 @@ def test___task___write_waveform_with_write___output_matches_final_value(
     assert actual_value == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
 def test___task___write_waveform_with_auto_start___output_matches_final_value(
     ao_single_channel_task_with_timing: nidaqmx.Task,
     ai_single_channel_loopback_task: nidaqmx.Task,
@@ -94,7 +89,6 @@ def test___task___write_waveform_with_auto_start___output_matches_final_value(
     assert actual_value == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
 def test___task_with_multiple_channels___write_single_channel_waveform___raises_daq_error(
     ao_multi_channel_task: nidaqmx.Task,
 ) -> None:
@@ -110,7 +104,6 @@ def test___task_with_multiple_channels___write_single_channel_waveform___raises_
     )
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
 def test___task___write_waveform_with_float32_dtype___output_matches_final_value(
     ao_single_channel_task: nidaqmx.Task,
     ai_single_channel_loopback_task: nidaqmx.Task,
@@ -125,7 +118,6 @@ def test___task___write_waveform_with_float32_dtype___output_matches_final_value
     assert actual_value == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
 def test___task___write_waveform_with_scaling___output_matches_final_value(
     ao_single_channel_task: nidaqmx.Task,
     ai_single_channel_loopback_task: nidaqmx.Task,
@@ -140,7 +132,6 @@ def test___task___write_waveform_with_scaling___output_matches_final_value(
     assert actual_value == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
 def test___task___write_waveform_with_non_contiguous_data___output_matches_final_value(
     ao_single_channel_task: nidaqmx.Task,
     ai_single_channel_loopback_task: nidaqmx.Task,
@@ -155,7 +146,6 @@ def test___task___write_waveform_with_non_contiguous_data___output_matches_final
     assert actual_value == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
 def test___task___write_waveform_with_timing___all_samples_match_waveform_data(
     generate_task,
     real_x_series_multiplexed_device: nidaqmx.system.Device,
@@ -178,7 +168,6 @@ def test___task___write_waveform_with_timing___all_samples_match_waveform_data(
 
 
 @pytest.mark.disable_feature_toggle(WAVEFORM_SUPPORT)
-@pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")
 def test___task___write_waveforms_feature_disabled___raises_feature_not_supported_error(
     ao_multi_channel_task: nidaqmx.Task,
 ) -> None:
@@ -195,7 +184,6 @@ def test___task___write_waveforms_feature_disabled___raises_feature_not_supporte
     assert "WAVEFORM_SUPPORT feature is not supported" in error_message
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")
 def test___task___write_waveforms___output_matches_final_values(
     ao_multi_channel_task: nidaqmx.Task,
     ai_multi_channel_loopback_task: nidaqmx.Task,
@@ -214,7 +202,6 @@ def test___task___write_waveforms___output_matches_final_values(
         assert actual_values[i] == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")
 def test___task___write_waveforms_with_write___output_matches_final_values(
     ao_multi_channel_task: nidaqmx.Task,
     ai_multi_channel_loopback_task: nidaqmx.Task,
@@ -233,7 +220,6 @@ def test___task___write_waveforms_with_write___output_matches_final_values(
         assert actual_values[i] == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")
 def test___task___write_waveforms_with_different_formulas___output_matches_final_values(
     ao_multi_channel_task: nidaqmx.Task,
     ai_multi_channel_loopback_task: nidaqmx.Task,
@@ -252,7 +238,6 @@ def test___task___write_waveforms_with_different_formulas___output_matches_final
         assert actual_values[i] == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")
 def test___task_with_single_channel___write_multiple_waveforms___raises_daq_error(
     ao_single_channel_task: nidaqmx.Task,
 ) -> None:
@@ -272,7 +257,6 @@ def test___task_with_single_channel___write_multiple_waveforms___raises_daq_erro
     )
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")
 def test___task___write_waveform_and_array___raises_value_error(
     ao_multi_channel_task: nidaqmx.Task,
 ) -> None:
@@ -288,20 +272,18 @@ def test___task___write_waveform_and_array___raises_value_error(
     )
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")
-def test___task___write_waveforms_with_different_lengths___raises_daq_error(
+def test___task___write_waveforms_with_different_lengths___raises_error(
     ao_multi_channel_task: nidaqmx.Task,
 ) -> None:
     waveforms_different_lengths = [_create_constant_waveform(10), _create_constant_waveform(20)]
 
-    with pytest.raises((nidaqmx.errors.DaqError, AssertionError)) as exc_info:
+    with pytest.raises(ValueError) as exc_info:
         ao_multi_channel_task.write_waveform(waveforms_different_lengths)
 
     error_message = exc_info.value.args[0]
     assert "The waveforms must all have the same sample count." in error_message
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")
 def test___task___write_waveforms_with_auto_start___output_matches_final_values(
     ao_multi_channel_task_with_timing: nidaqmx.Task,
     ai_multi_channel_loopback_task: nidaqmx.Task,
@@ -321,7 +303,6 @@ def test___task___write_waveforms_with_auto_start___output_matches_final_values(
         assert actual_values[i] == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")
 def test___task___write_waveforms_with_float32_dtype___output_matches_final_values(
     ao_multi_channel_task: nidaqmx.Task,
     ai_multi_channel_loopback_task: nidaqmx.Task,
@@ -340,7 +321,6 @@ def test___task___write_waveforms_with_float32_dtype___output_matches_final_valu
         assert actual_values[i] == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")
 def test___task___write_waveforms_with_scaling___output_matches_final_values(
     ao_multi_channel_task: nidaqmx.Task,
     ai_multi_channel_loopback_task: nidaqmx.Task,
@@ -359,7 +339,6 @@ def test___task___write_waveforms_with_scaling___output_matches_final_values(
         assert actual_values[i] == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")
 def test___task___write_waveforms_with_non_contiguous_data___output_matches_final_values(
     ao_multi_channel_task: nidaqmx.Task,
     ai_multi_channel_loopback_task: nidaqmx.Task,
@@ -378,7 +357,6 @@ def test___task___write_waveforms_with_non_contiguous_data___output_matches_fina
         assert actual_values[i] == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")
 def test___task___write_waveforms_with_timing___all_samples_match_waveform_data(
     generate_task,
     real_x_series_multiplexed_device: nidaqmx.system.Device,

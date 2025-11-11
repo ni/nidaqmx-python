@@ -214,7 +214,6 @@ def test___digital_single_line_reader___read_waveform_feature_disabled___raises_
     assert "NIDAQMX_ENABLE_WAVEFORM_SUPPORT" in error_message
 
 
-@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
 def test___digital_single_line_reader___read_waveform___returns_valid_waveform(
     di_single_line_timing_task: nidaqmx.Task,
 ) -> None:
@@ -232,7 +231,6 @@ def test___digital_single_line_reader___read_waveform___returns_valid_waveform(
     assert waveform.channel_name == di_single_line_timing_task.di_channels[0].name
 
 
-@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
 def test___digital_single_channel_multi_line_reader___read_waveform___returns_valid_waveform(
     di_single_channel_multi_line_timing_task: nidaqmx.Task,
 ) -> None:
@@ -251,7 +249,6 @@ def test___digital_single_channel_multi_line_reader___read_waveform___returns_va
     assert waveform.channel_name == di_single_channel_multi_line_timing_task.di_channels[0].name
 
 
-@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
 def test___digital_single_line_reader___read_waveform_no_args___returns_valid_waveform(
     di_single_line_timing_task: nidaqmx.Task,
 ) -> None:
@@ -268,7 +265,6 @@ def test___digital_single_line_reader___read_waveform_no_args___returns_valid_wa
     assert waveform.channel_name == di_single_line_timing_task.di_channels[0].name
 
 
-@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
 def test___digital_single_channel_multi_line_reader___read_waveform_no_args___returns_valid_waveform(
     di_single_channel_multi_line_timing_task: nidaqmx.Task,
 ) -> None:
@@ -286,7 +282,6 @@ def test___digital_single_channel_multi_line_reader___read_waveform_no_args___re
     assert waveform.channel_name == di_single_channel_multi_line_timing_task.di_channels[0].name
 
 
-@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
 def test___digital_single_line_reader___read_waveform_in_place___returns_valid_waveform(
     di_single_line_timing_task: nidaqmx.Task,
 ) -> None:
@@ -302,7 +297,6 @@ def test___digital_single_line_reader___read_waveform_in_place___returns_valid_w
     assert waveform.channel_name == di_single_line_timing_task.di_channels[0].name
 
 
-@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
 def test___digital_single_channel_multi_line_reader___read_waveform_in_place___returns_valid_waveform(
     di_single_channel_multi_line_timing_task: nidaqmx.Task,
 ) -> None:
@@ -319,7 +313,6 @@ def test___digital_single_channel_multi_line_reader___read_waveform_in_place___r
     assert waveform.channel_name == di_single_channel_multi_line_timing_task.di_channels[0].name
 
 
-@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
 def test___digital_single_line_reader___reuse_waveform_in_place___overwrites_data_timing_and_attributes(
     generate_task: Callable[[], nidaqmx.Task], sim_6363_device: nidaqmx.system.Device
 ) -> None:
@@ -352,7 +345,6 @@ def test___digital_single_line_reader___reuse_waveform_in_place___overwrites_dat
     assert timestamp1 > timestamp0
 
 
-@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
 def test___digital_single_channel_multi_line_reader___reuse_waveform_in_place___overwrites_data_timing_and_attributes(
     generate_task: Callable[[], nidaqmx.Task], sim_6363_device: nidaqmx.system.Device
 ) -> None:
@@ -388,7 +380,6 @@ def test___digital_single_channel_multi_line_reader___reuse_waveform_in_place___
     assert timestamp1 > timestamp0
 
 
-@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
 def test___digital_single_line_reader___read_into_undersized_waveform_without_reallocation___throws_exception(
     di_single_line_timing_task: nidaqmx.Task,
 ) -> None:
@@ -405,7 +396,6 @@ def test___digital_single_line_reader___read_into_undersized_waveform_without_re
     )
 
 
-@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
 def test___digital_single_line_reader___read_into_undersized_waveform___returns_valid_waveform(
     di_single_line_timing_task: nidaqmx.Task,
 ) -> None:
@@ -423,7 +413,6 @@ def test___digital_single_line_reader___read_into_undersized_waveform___returns_
     assert waveform.channel_name == di_single_line_timing_task.di_channels[0].name
 
 
-@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
 def test___digital_single_channel_reader___reuse_waveform_in_place_with_different_sample_counts___populates_valid_waveforms(
     generate_task: Callable[[], nidaqmx.Task], sim_6363_device: nidaqmx.system.Device
 ) -> None:
@@ -458,7 +447,6 @@ def test___digital_single_channel_reader___reuse_waveform_in_place_with_differen
     assert waveform.channel_name == f"{sim_6363_device.name}/port0/line2"
 
 
-@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
 def test___digital_single_line_reader___read_waveform_high_sample_rate___returns_correct_sample_interval(
     di_single_line_high_rate_task: nidaqmx.Task,
 ) -> None:
@@ -476,7 +464,6 @@ def test___digital_single_line_reader___read_waveform_high_sample_rate___returns
     assert waveform.channel_name == di_single_line_high_rate_task.di_channels[0].name
 
 
-@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
 def test___digital_single_line_reader_with_timing_flag___read_waveform___only_includes_timing_data(
     di_single_line_timing_task: nidaqmx.Task,
 ) -> None:
@@ -495,7 +482,6 @@ def test___digital_single_line_reader_with_timing_flag___read_waveform___only_in
     assert waveform.channel_name == ""
 
 
-@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
 def test___digital_single_line_reader_with_extended_properties_flag___read_waveform___only_includes_extended_properties(
     di_single_line_timing_task: nidaqmx.Task,
 ) -> None:
@@ -512,7 +498,6 @@ def test___digital_single_line_reader_with_extended_properties_flag___read_wavef
     assert waveform.channel_name == di_single_line_timing_task.di_channels[0].name
 
 
-@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
 def test___digital_single_line_reader_with_both_flags___read_waveform___includes_both_timing_and_extended_properties(
     di_single_line_timing_task: nidaqmx.Task,
 ) -> None:
@@ -533,7 +518,6 @@ def test___digital_single_line_reader_with_both_flags___read_waveform___includes
     assert waveform.channel_name == di_single_line_timing_task.di_channels[0].name
 
 
-@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
 def test___digital_single_line_reader_with_none_flag___read_waveform___minimal_waveform_data(
     di_single_line_timing_task: nidaqmx.Task,
 ) -> None:
@@ -550,7 +534,6 @@ def test___digital_single_line_reader_with_none_flag___read_waveform___minimal_w
     assert waveform.channel_name == ""
 
 
-@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
 def test___digital_single_channel_port_uint32_reader___read_waveform___returns_valid_waveform(
     di_single_channel_port_uint32_timing_task: nidaqmx.Task,
 ) -> None:
@@ -571,7 +554,6 @@ def test___digital_single_channel_port_uint32_reader___read_waveform___returns_v
     assert waveform.channel_name == di_single_channel_port_uint32_timing_task.di_channels[0].name
 
 
-@pytest.mark.grpc_skip(reason="read_digital_waveforms not implemented in GRPC")
 def test___digital_single_channel_lines_and_port___read_waveform___returns_valid_waveform(
     di_single_chan_lines_and_port_task: nidaqmx.Task,
     sim_6363_device: nidaqmx.system.Device,
@@ -604,7 +586,6 @@ def test___digital_single_channel_lines_and_port___read_waveform___returns_valid
     ]
 
 
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
 @pytest.mark.parametrize(
     "dtype",
     [

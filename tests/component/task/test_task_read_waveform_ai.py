@@ -11,7 +11,6 @@ from tests.component._analog_utils import (
 )
 
 
-@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
 def test___analog_single_channel___read_waveform___returns_valid_waveform(
     ai_single_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
@@ -23,7 +22,6 @@ def test___analog_single_channel___read_waveform___returns_valid_waveform(
     assert waveform.raw_data[0] == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
 
 
-@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
 def test___analog_single_channel___read_waveform_one_sample___returns_waveform_with_one_sample(
     ai_single_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
@@ -35,7 +33,6 @@ def test___analog_single_channel___read_waveform_one_sample___returns_waveform_w
     assert waveform.raw_data[0] == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
 
 
-@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
 def test___analog_single_channel___read_waveform_many_sample___returns_waveform_with_many_samples(
     ai_single_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
@@ -49,7 +46,6 @@ def test___analog_single_channel___read_waveform_many_sample___returns_waveform_
     assert waveform.raw_data[0] == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
 
 
-@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
 def test___analog_single_channel_finite___read_waveform_too_many_samples___returns_waveform_with_correct_number_of_samples(
     ai_single_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
@@ -64,7 +60,6 @@ def test___analog_single_channel_finite___read_waveform_too_many_samples___retur
     assert waveform.raw_data[0] == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
 
 
-@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
 def test___analog_multi_channel___read_waveform___returns_valid_waveforms(
     ai_multi_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
@@ -81,7 +76,6 @@ def test___analog_multi_channel___read_waveform___returns_valid_waveforms(
         assert waveform.raw_data[0] == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
 
 
-@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
 def test___analog_multi_channel___read_waveform_one_sample___returns_waveforms_with_single_sample(
     ai_multi_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
@@ -98,7 +92,6 @@ def test___analog_multi_channel___read_waveform_one_sample___returns_waveforms_w
         assert waveform.raw_data[0] == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
 
 
-@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
 def test___analog_multi_channel___read_waveform_many_samples___returns_waveforms_with_many_samples(
     ai_multi_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
@@ -116,7 +109,6 @@ def test___analog_multi_channel___read_waveform_many_samples___returns_waveforms
         assert waveform.raw_data[0] == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
 
 
-@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
 def test___analog_multi_channel_finite___read_waveform_too_many_samples___returns_waveforms_with_correct_number_of_samples(
     ai_multi_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
