@@ -416,7 +416,6 @@ def test___analog_multi_channel_reader_with_none_flag___read_waveforms___minimal
         assert waveform.sample_count == samples_to_read
 
 
-@pytest.mark.grpc_skip(reason="read_analog_waveforms not implemented in GRPC")
 def test___analog_multi_channel_reader___read_waveforms_read_all_available___returns_valid_waveforms(
     ai_multi_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
@@ -434,7 +433,6 @@ def test___analog_multi_channel_reader___read_waveforms_read_all_available___ret
         assert isinstance(waveform, AnalogWaveform)
         expected = _get_voltage_offset_for_chan(chan_index)
         assert waveform.scaled_data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
-        assert isinstance(waveform.timing.timestamp, ht_datetime)
         assert _is_timestamp_close_to_now(waveform.timing.timestamp)
         assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
         assert (

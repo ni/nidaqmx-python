@@ -226,7 +226,6 @@ def test___digital_multi_channel___read_waveform_lines_and_port___returns_valid_
     ]
 
 
-@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
 def test___digital_single_channel___read_waveform_read_all_available___returns_valid_waveform(
     di_single_channel_timing_task: nidaqmx.Task,
 ) -> None:
@@ -237,7 +236,6 @@ def test___digital_single_channel___read_waveform_read_all_available___returns_v
     assert _get_waveform_data(waveform) == _get_expected_data_for_line(waveform.sample_count, 0)
 
 
-@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
 def test___digital_multi_channel___read_waveform_read_all_available___returns_valid_waveforms(
     di_multi_channel_timing_task: nidaqmx.Task,
 ) -> None:

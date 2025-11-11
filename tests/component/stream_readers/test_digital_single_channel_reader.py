@@ -609,7 +609,6 @@ def test___digital_single_channel_multi_line_reader___read_waveform_all_dtypes__
     assert _get_waveform_data(waveform) == _get_digital_data(num_lines, num_samples)
 
 
-@pytest.mark.grpc_skip(reason="read_digital_waveform not implemented in GRPC")
 def test___digital_single_line_reader___read_waveform_read_all_available___returns_valid_waveform(
     di_single_line_timing_task: nidaqmx.Task,
 ) -> None:

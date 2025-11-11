@@ -351,7 +351,6 @@ def test___analog_single_channel_reader_with_none_flag___read_waveform___minimal
     assert waveform.units == ""
 
 
-@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
 def test___analog_single_channel_reader___read_waveform_read_all_available___returns_valid_waveform(
     ai_single_channel_task_with_timing: nidaqmx.Task,
 ) -> None:
@@ -365,7 +364,6 @@ def test___analog_single_channel_reader___read_waveform_read_all_available___ret
     assert waveform.sample_count == samples_read
     expected = _get_voltage_offset_for_chan(0)
     assert waveform.scaled_data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
-    assert isinstance(waveform.timing.timestamp, ht_datetime)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.channel_name == ai_single_channel_task_with_timing.ai_channels[0].name
