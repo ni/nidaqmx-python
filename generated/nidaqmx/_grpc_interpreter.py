@@ -21,6 +21,7 @@ from nidaqmx._stubs import nidaqmx_pb2 as grpc_types
 from nidaqmx._stubs import nidaqmx_pb2_grpc as nidaqmx_grpc
 from nidaqmx.constants import WaveformAttributeMode
 from nidaqmx.error_codes import DAQmxErrors
+from nidaqmx.types import DriverVersion
 from nidaqmx._grpc_time import convert_time_to_timestamp, convert_timestamp_to_time
 
 _logger = logging.getLogger(__name__)
@@ -93,10 +94,14 @@ class GrpcStubInterpreter(BaseInterpreter):
     def __init__(self, grpc_options):
         self._grpc_options = grpc_options
         self._client = nidaqmx_grpc.NiDAQmxStub(grpc_options.grpc_channel)
-        DriverVersion = collections.namedtuple('DriverVersion', ['major_version', 'minor_version', 'update_version'])
-        major_version = self.get_system_info_attribute_uint32(0x1272)
-        minor_version = self.get_system_info_attribute_uint32(0x1923)
-        update_version = self.get_system_info_attribute_uint32(0x2f22)
+        try:
+            major_version = self.get_system_info_attribute_uint32(0x1272)
+            minor_version = self.get_system_info_attribute_uint32(0x1923)
+            update_version = self.get_system_info_attribute_uint32(0x2f22)
+        except Exception:
+            major_version = 0
+            minor_version = 0
+            update_version = 0
         self._driver_version = DriverVersion(major_version, minor_version, update_version)
 
     def _invoke(self, func, request, metadata=None):

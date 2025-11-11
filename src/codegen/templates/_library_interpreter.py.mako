@@ -37,6 +37,7 @@ from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpoin
 from nidaqmx.constants import FillMode, WaveformAttributeMode
 from nidaqmx.error_codes import DAQmxErrors, DAQmxWarnings
 from nidaqmx.errors import DaqError, DaqFunctionNotSupportedError, DaqReadError, DaqWarning, DaqWriteError
+from nidaqmx.types import DriverVersion
 from nidaqmx._lib_time import AbsoluteTime
 from nitypes.waveform.typing import ExtendedPropertyValue
 from nitypes.waveform import AnalogWaveform, DigitalWaveform, SampleIntervalMode, Timing, ExtendedPropertyDictionary
@@ -110,7 +111,6 @@ class LibraryInterpreter(BaseInterpreter):
             finally:
                 _was_runtime_environment_set = True
 
-        DriverVersion = collections.namedtuple('DriverVersion', ['major_version', 'minor_version', 'update_version'])
         major_version = self.get_system_info_attribute_uint32(0x1272)
         minor_version = self.get_system_info_attribute_uint32(0x1923)
         update_version = self.get_system_info_attribute_uint32(0x2f22)
