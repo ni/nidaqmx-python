@@ -9,7 +9,7 @@ from datetime import timezone
 from hightime import datetime as ht_datetime, timedelta as ht_timedelta
 from nitypes import bintime
 from nitypes.waveform import AnalogWaveform, DigitalWaveform, SampleIntervalMode, Timing
-from typing import Any, Callable, Generic, Optional, Sequence, TypeVar
+from typing import Any, Callable, Generic, Sequence, TypeVar
 
 import google.protobuf.message
 import grpc
@@ -3659,7 +3659,13 @@ class GrpcStubInterpreter(BaseInterpreter):
             raise ValueError(f"Expected {len(waveforms)} waveforms but received {len(response.waveforms)} from server")
 
         for i, grpc_waveform in enumerate(response.waveforms):
-            _copy_protobuf_waveform_to_analog_waveform(grpc_waveform, waveforms[i])
+            temp_waveform = float64_analog_waveform_from_protobuf(grpc_waveform)
+            waveforms[i].load_data(temp_waveform.scaled_data)
+
+            waveforms[i].scale_mode = temp_waveform.scale_mode
+            waveforms[i].timing = temp_waveform.timing
+            waveforms[i].extended_properties.clear()
+            waveforms[i].extended_properties.update(temp_waveform.extended_properties)
 
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
         return response.samps_per_chan_read
@@ -3706,9 +3712,15 @@ class GrpcStubInterpreter(BaseInterpreter):
             raise ValueError(f"Expected {len(waveforms)} waveforms but received {len(response.waveforms)} from server")
 
         for i, grpc_waveform in enumerate(response.waveforms):
-            if waveforms[i].data.shape[1] != grpc_waveform.signal_count:
-                raise ValueError(f"waveforms[{i}].data has {waveforms[i].data.shape[1]} signals, but expected {grpc_waveform.signal_count}")
-            _copy_protobuf_waveform_to_digital_waveform(grpc_waveform, waveforms[i])
+            temp_waveform = digital_waveform_from_protobuf(grpc_waveform)
+            data = temp_waveform.data
+            if data.dtype != waveforms[i].dtype:
+                data = data.view(waveforms[i].dtype)
+            waveforms[i].load_data(data)
+
+            waveforms[i].timing = temp_waveform.timing
+            waveforms[i].extended_properties.clear()
+            waveforms[i].extended_properties.update(temp_waveform.extended_properties)
 
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
         return response.samps_per_chan_read
@@ -3810,28 +3822,6 @@ class GrpcStubInterpreter(BaseInterpreter):
 
         self._check_for_error_from_response(response.status, samps_per_chan_written=response.samps_per_chan_written)
         return response.samps_per_chan_written
-
-
-def _copy_timing_and_properties_from_temp_waveform(temp_waveform, target_waveform):
-    target_waveform.timing = temp_waveform.timing
-    target_waveform.extended_properties.clear()
-    target_waveform.extended_properties.update(temp_waveform.extended_properties)
-
-
-def _copy_protobuf_waveform_to_analog_waveform(grpc_waveform, target_waveform):
-    temp_waveform = float64_analog_waveform_from_protobuf(grpc_waveform)
-    target_waveform.load_data(temp_waveform.scaled_data)
-    _copy_timing_and_properties_from_temp_waveform(temp_waveform, target_waveform)
-
-def _copy_protobuf_waveform_to_digital_waveform(grpc_waveform, target_waveform):
-    temp_waveform = digital_waveform_from_protobuf(grpc_waveform)
-
-    data = temp_waveform.data
-    if data.dtype != target_waveform.dtype:
-        data = data.view(target_waveform.dtype)
-    target_waveform.load_data(data)
-
-    _copy_timing_and_properties_from_temp_waveform(temp_waveform, target_waveform)
 
 def _copy_analog_waveform_to_protobuf_waveform(waveform, grpc_waveform):
     scaled_data = waveform.scaled_data
