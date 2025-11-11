@@ -35,7 +35,7 @@ from . import errors as errors
 from nidaqmx._base_interpreter import BaseEventHandler, BaseInterpreter
 from nidaqmx._stubs import nidaqmx_pb2 as grpc_types
 from nidaqmx._stubs import nidaqmx_pb2_grpc as nidaqmx_grpc
-from nidaqmx._stubs.ni.protobuf.types import waveform_pb2
+from ni.protobuf.types import waveform_pb2
 from nidaqmx.constants import WaveformAttributeMode
 from nidaqmx.errors import DaqError
 from nidaqmx.error_codes import DAQmxErrors
