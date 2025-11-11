@@ -42,6 +42,7 @@ def generate_python_files(
     arguments = [
         "protoc",
         f"--proto_path={str(proto_path)}",
+        f"--proto_path={str(NI_APIS_PATH)}",  # ni-apis root path for ni.protobuf.types import resolution
         f"--proto_path={str(NI_APIS_PATH / 'ni' / 'grpcdevice' / 'v1')}",  # ni-apis session.proto location for import resolution
         f"--proto_path={pkg_resources.resource_filename('grpc_tools', '_proto')}",
         f"--python_out={str(stubs_path)}",

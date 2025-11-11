@@ -16,6 +16,7 @@ package nidaqmx_grpc;
 
 import "session.proto";
 import "data_moniker.proto";
+import "ni/protobuf/types/waveform.proto";
 import "google/protobuf/timestamp.proto";
 
 service NiDAQmx {
@@ -465,6 +466,10 @@ service NiDAQmx {
   rpc BeginWriteRaw(BeginWriteRawRequest) returns (BeginWriteRawResponse);
   rpc WriteToTEDSFromArray(WriteToTEDSFromArrayRequest) returns (WriteToTEDSFromArrayResponse);
   rpc WriteToTEDSFromFile(WriteToTEDSFromFileRequest) returns (WriteToTEDSFromFileResponse);
+  rpc ReadAnalogWaveforms(ReadAnalogWaveformsRequest) returns (ReadAnalogWaveformsResponse);
+  rpc ReadDigitalWaveforms(ReadDigitalWaveformsRequest) returns (ReadDigitalWaveformsResponse);
+  rpc WriteAnalogWaveforms(WriteAnalogWaveformsRequest) returns (WriteAnalogWaveformsResponse);
+  rpc WriteDigitalWaveforms(WriteDigitalWaveformsRequest) returns (WriteDigitalWaveformsResponse);
 }
 
 enum BufferUInt32Attribute {
@@ -3556,6 +3561,12 @@ enum WriteBasicTEDSOptions {
   WRITE_BASIC_TEDS_OPTIONS_WRITE_TO_EEPROM = 12538;
   WRITE_BASIC_TEDS_OPTIONS_WRITE_TO_PROM = 12539;
   WRITE_BASIC_TEDS_OPTIONS_DO_NOT_WRITE = 12540;
+}
+
+enum WaveformAttributeMode {
+  WAVEFORM_ATTRIBUTE_MODE_NONE = 0;
+  WAVEFORM_ATTRIBUTE_MODE_TIMING = 1;
+  WAVEFORM_ATTRIBUTE_MODE_EXTENDED_PROPERTIES = 2;
 }
 
 enum ChannelInt32AttributeValues {
@@ -11511,3 +11522,58 @@ message WriteToTEDSFromFileResponse {
   int32 status = 1;
 }
 
+message ReadAnalogWaveformsRequest {
+  nidevice_grpc.Session task = 1;
+  int32 num_samps_per_chan = 2;
+  double timeout = 3;
+  oneof waveform_attribute_mode_enum {
+    WaveformAttributeMode waveform_attribute_mode = 4;
+    int32 waveform_attribute_mode_raw = 5;
+  }
+}
+
+message ReadAnalogWaveformsResponse {
+  int32 status = 1;
+  repeated ni.protobuf.types.DoubleAnalogWaveform waveforms = 2;
+  int32 samps_per_chan_read = 3;
+}
+
+message ReadDigitalWaveformsRequest {
+  nidevice_grpc.Session task = 1;
+  int32 num_samps_per_chan = 2;
+  double timeout = 3;
+  oneof waveform_attribute_mode_enum {
+    WaveformAttributeMode waveform_attribute_mode = 4;
+    int32 waveform_attribute_mode_raw = 5;
+  }
+}
+
+message ReadDigitalWaveformsResponse {
+  int32 status = 1;
+  repeated ni.protobuf.types.DigitalWaveform waveforms = 2;
+  int32 samps_per_chan_read = 3;
+}
+
+message WriteAnalogWaveformsRequest {
+  nidevice_grpc.Session task = 1;
+  bool auto_start = 2;
+  double timeout = 3;
+  repeated ni.protobuf.types.DoubleAnalogWaveform waveforms = 4;
+}
+
+message WriteAnalogWaveformsResponse {
+  int32 status = 1;
+  int32 samps_per_chan_written = 2;
+}
+
+message WriteDigitalWaveformsRequest {
+  nidevice_grpc.Session task = 1;
+  bool auto_start = 2;
+  double timeout = 3;
+  repeated ni.protobuf.types.DigitalWaveform waveforms = 4;
+}
+
+message WriteDigitalWaveformsResponse {
+  int32 status = 1;
+  int32 samps_per_chan_written = 2;
+}

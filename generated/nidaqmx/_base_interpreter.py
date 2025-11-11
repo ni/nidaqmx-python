@@ -1879,7 +1879,7 @@ class BaseInterpreter(abc.ABC):
         waveform_attribute_mode: WaveformAttributeMode
     ) -> int:
         raise NotImplementedError
-        
+
     @abc.abstractmethod
     def read_digital_waveform(
         self,
@@ -1935,7 +1935,7 @@ class BaseInterpreter(abc.ABC):
         timeout: float
     ) -> int:
         raise NotImplementedError
-        
+
     @abc.abstractmethod
     def write_digital_waveform(
         self,
@@ -1945,7 +1945,7 @@ class BaseInterpreter(abc.ABC):
         timeout: float,
     ) -> int:
         raise NotImplementedError
-        
+
     def write_digital_waveforms(
         self,
         task_handle: object,
