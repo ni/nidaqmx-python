@@ -298,7 +298,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             raise ValueError(f"Expected {len(waveforms)} waveforms but received {len(response.waveforms)} from server")
 
         for i, grpc_waveform in enumerate(response.waveforms):
-            _copy_protobuf_waveform_to_analog_waveform(grpc_waveform, waveforms[i], waveform_attribute_mode)
+            _copy_protobuf_waveform_to_analog_waveform(grpc_waveform, waveforms[i])
 
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
         return response.samps_per_chan_read
@@ -347,7 +347,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         for i, grpc_waveform in enumerate(response.waveforms):
             if waveforms[i].data.shape[1] != grpc_waveform.signal_count:
                 raise ValueError(f"waveforms[{i}].data has {waveforms[i].data.shape[1]} signals, but expected {grpc_waveform.signal_count}")
-            _copy_protobuf_waveform_to_digital_waveform(grpc_waveform, waveforms[i], waveform_attribute_mode)
+            _copy_protobuf_waveform_to_digital_waveform(grpc_waveform, waveforms[i])
 
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
         return response.samps_per_chan_read
@@ -455,14 +455,13 @@ def _copy_timing_and_properties_from_temp_waveform(temp_waveform, target_wavefor
     try:
         timestamp_raw = temp_waveform.timing.timestamp
         if isinstance(timestamp_raw, bintime.DateTime):
-            converted_timestamp = ht_datetime(
+            timestamp = ht_datetime(
                 timestamp_raw.year, timestamp_raw.month, timestamp_raw.day,
                 timestamp_raw.hour, timestamp_raw.minute, timestamp_raw.second,
                 timestamp_raw.microsecond, timestamp_raw.femtosecond,
                 tzinfo=timestamp_raw.tzinfo
             )
-            timestamp: Optional[ht_datetime] = converted_timestamp
-        elif isinstance(timestamp_raw, ht_datetime):
+        else:
             timestamp = timestamp_raw
     except RuntimeError:
         timestamp = None
@@ -485,17 +484,17 @@ def _copy_timing_and_properties_from_temp_waveform(temp_waveform, target_wavefor
     target_waveform.extended_properties.update(temp_waveform.extended_properties)
 
 
-def _copy_protobuf_waveform_to_analog_waveform(grpc_waveform, target_waveform, waveform_attribute_mode):
+def _copy_protobuf_waveform_to_analog_waveform(grpc_waveform, target_waveform):
     temp_waveform = float64_analog_waveform_from_protobuf(grpc_waveform)
     target_waveform.load_data(temp_waveform.scaled_data)
     _copy_timing_and_properties_from_temp_waveform(temp_waveform, target_waveform)
 
-def _copy_protobuf_waveform_to_digital_waveform(grpc_waveform, target_waveform, waveform_attribute_mode):
+def _copy_protobuf_waveform_to_digital_waveform(grpc_waveform, target_waveform):
     temp_waveform = digital_waveform_from_protobuf(grpc_waveform)
 
     data = temp_waveform.data
     if data.dtype != target_waveform.dtype:
-        data = data.astype(target_waveform.dtype)
+        data = data.view(target_waveform.dtype)
     target_waveform.load_data(data)
 
     _copy_timing_and_properties_from_temp_waveform(temp_waveform, target_waveform)
