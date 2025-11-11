@@ -135,11 +135,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 'This operation is not supported by the NI gRPC Device Server being used. Upgrade NI gRPC Device Server.'
             )
         if error_code is None:
-            # Convert certain gRPC validation errors to DaqError for consistency with library version
-            if grpc_error == grpc.StatusCode.INVALID_ARGUMENT:
-                raise DaqError(error_message, DAQmxErrors.UNKNOWN) from None
-            else:
-                raise errors.RpcError(grpc_error, error_message) from None
+            raise errors.RpcError(grpc_error, error_message) from None
         else:
             self._raise_error(error_code, error_message, samps_per_chan_written, samps_per_chan_read)
 
