@@ -23,7 +23,9 @@ import threading
 import typing
 import warnings
 from nitypes.waveform import AnalogWaveform, DigitalWaveform
-from typing import Any, Callable, Generic, Sequence, TypeVar
+from typing import Any, Generic, TypeVar
+
+from collections.abc import Callable, Sequence
 
 import google.protobuf.message
 import grpc
@@ -40,7 +42,6 @@ from ni.protobuf.types.waveform_conversion import (
     float64_analog_waveform_to_protobuf
 )
 from nidaqmx.constants import WaveformAttributeMode
-from nidaqmx.errors import DaqError
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx._grpc_time import convert_time_to_timestamp, convert_timestamp_to_time
 from nidaqmx._waveform_utils import get_num_samps_per_chan
