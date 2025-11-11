@@ -2,13 +2,14 @@
 
 import numpy as np
 
-import nidaqmx as ni
+import nidaqmx
+import nidaqmx.system
 from nidaqmx.constants import WAIT_INFINITELY
 
 
 def query_devices():
     """Queries all the device information connected to the local system."""
-    local = ni.system.System.local()
+    local = nidaqmx.system.System.local()
     for device in local.devices:
         print(f"Device Name: {device.name}, Product Type: {device.product_type}")
         print("Input channels:", [chan.name for chan in device.ai_physical_chans])
@@ -35,11 +36,11 @@ def playrec(data, samplerate, input_mapping, output_mapping):
       Recorded data
 
     """
-    devices = ni.system.System.local().devices
+    devices = nidaqmx.system.System.local().devices
     data = np.asarray(data).T
     nsamples = data.shape[1]
 
-    with ni.Task() as read_task, ni.Task() as write_task:
+    with nidaqmx.Task() as read_task, nidaqmx.Task() as write_task:
         for i, o in enumerate(output_mapping):
             aochan = write_task.ao_channels.add_ao_voltage_chan(
                 o,
