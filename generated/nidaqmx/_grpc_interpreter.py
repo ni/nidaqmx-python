@@ -5,10 +5,7 @@ import logging
 import threading
 import typing
 import warnings
-from datetime import timezone
-from hightime import datetime as ht_datetime, timedelta as ht_timedelta
-from nitypes import bintime
-from nitypes.waveform import AnalogWaveform, DigitalWaveform, SampleIntervalMode, Timing
+from nitypes.waveform import AnalogWaveform, DigitalWaveform
 from typing import Any, Callable, Generic, Sequence, TypeVar
 
 import google.protobuf.message
