@@ -423,7 +423,7 @@ def test___digital_multi_channel_writer___write_waveforms_with_non_contiguous_da
         assert actual_value == _get_digital_data(num_lines, num_samples)[-1]
 
 
-def test___digital_multi_channel_writer___write_waveforms_with_different_sample_counts___raises_daq_error(
+def test___digital_multi_channel_writer___write_waveforms_with_different_sample_counts___raises_error(
     do_multi_channel_port_task: nidaqmx.Task,
 ) -> None:
     writer = DigitalMultiChannelWriter(do_multi_channel_port_task.out_stream)
@@ -433,7 +433,7 @@ def test___digital_multi_channel_writer___write_waveforms_with_different_sample_
         _create_digital_waveform_uint8(11, num_lines),
     ]
 
-    with pytest.raises(DaqError) as exc_info:
+    with pytest.raises(ValueError) as exc_info:
         writer.write_waveforms(waveforms)
 
     error_message = exc_info.value.args[0]

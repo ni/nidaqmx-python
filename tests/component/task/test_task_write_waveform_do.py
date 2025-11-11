@@ -469,7 +469,7 @@ def test___task___write_waveforms_with_non_contiguous_data___outputs_match_final
         assert actual_value == _get_digital_data(num_lines, num_samples)[-1]
 
 
-def test___task___write_waveforms_with_different_sample_counts___raises_daq_error(
+def test___task___write_waveforms_with_different_sample_counts___raises_error(
     do_multi_channel_port_task: nidaqmx.Task,
 ) -> None:
     num_lines = 8
@@ -478,7 +478,7 @@ def test___task___write_waveforms_with_different_sample_counts___raises_daq_erro
         _create_digital_waveform_uint8(11, num_lines),
     ]
 
-    with pytest.raises(DaqError) as exc_info:
+    with pytest.raises(ValueError) as exc_info:
         do_multi_channel_port_task.write_waveform(waveforms)
 
     error_message = exc_info.value.args[0]

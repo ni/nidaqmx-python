@@ -19,10 +19,11 @@ from . import errors as errors
 from nidaqmx._base_interpreter import BaseEventHandler, BaseInterpreter
 from nidaqmx._stubs import nidaqmx_pb2 as grpc_types
 from nidaqmx._stubs import nidaqmx_pb2_grpc as nidaqmx_grpc
-from ni.protobuf.types import waveform_pb2
 from ni.protobuf.types.waveform_conversion import (
     digital_waveform_from_protobuf,
-    float64_analog_waveform_from_protobuf
+    digital_waveform_to_protobuf,
+    float64_analog_waveform_from_protobuf,
+    float64_analog_waveform_to_protobuf
 )
 from nidaqmx.constants import WaveformAttributeMode
 from nidaqmx.errors import DaqError
@@ -3768,11 +3769,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         assert isinstance(task_handle, Session)
         num_samps_per_chan = get_num_samps_per_chan(waveforms)
 
-        grpc_waveforms = []
-        for waveform in waveforms:
-            grpc_waveform = waveform_pb2.DoubleAnalogWaveform()
-            _copy_analog_waveform_to_protobuf_waveform(waveform, grpc_waveform)
-            grpc_waveforms.append(grpc_waveform)
+        grpc_waveforms = [float64_analog_waveform_to_protobuf(waveform) for waveform in waveforms]
 
         response = self._invoke(
             self._client.WriteAnalogWaveforms,
@@ -3805,11 +3802,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         assert isinstance(task_handle, Session)
         num_samps_per_chan = get_num_samps_per_chan(waveforms)
 
-        grpc_waveforms = []
-        for waveform in waveforms:
-            grpc_waveform = waveform_pb2.DigitalWaveform()
-            _copy_digital_waveform_to_protobuf_waveform(waveform, grpc_waveform)
-            grpc_waveforms.append(grpc_waveform)
+        grpc_waveforms = [digital_waveform_to_protobuf(waveform) for waveform in waveforms]
 
         response = self._invoke(
             self._client.WriteDigitalWaveforms,
@@ -3822,21 +3815,6 @@ class GrpcStubInterpreter(BaseInterpreter):
 
         self._check_for_error_from_response(response.status, samps_per_chan_written=response.samps_per_chan_written)
         return response.samps_per_chan_written
-
-def _copy_analog_waveform_to_protobuf_waveform(waveform, grpc_waveform):
-    scaled_data = waveform.scaled_data
-    if not scaled_data.flags.c_contiguous:
-        scaled_data = scaled_data.copy(order="C")
-    grpc_waveform.y_data[:] = scaled_data
-
-def _copy_digital_waveform_to_protobuf_waveform(waveform, grpc_waveform):
-    grpc_waveform.signal_count = waveform.signal_count
-    data = waveform.data
-    if data.dtype != numpy.uint8:
-        data = data.view(numpy.uint8)
-    if not data.flags.c_contiguous:
-        data = data.copy(order="C")
-    grpc_waveform.y_data = data.tobytes()
 
 def _assign_numpy_array(numpy_array, grpc_array):
     """

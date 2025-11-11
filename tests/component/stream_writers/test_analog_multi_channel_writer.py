@@ -182,7 +182,7 @@ def test___analog_multi_channel_writer___write_waveforms_with_non_contiguous_dat
         assert read_data[i] == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
 
 
-def test___analog_multi_channel_writer___write_waveforms_with_different_lengths___raises_daq_error(
+def test___analog_multi_channel_writer___write_waveforms_with_different_lengths___raises_error(
     ao_multi_channel_task: nidaqmx.Task,
 ) -> None:
     writer = AnalogMultiChannelWriter(ao_multi_channel_task.out_stream)
@@ -191,7 +191,7 @@ def test___analog_multi_channel_writer___write_waveforms_with_different_lengths_
         _create_constant_waveform(20),
     ]
 
-    with pytest.raises(nidaqmx.DaqError) as exc_info:
+    with pytest.raises(ValueError) as exc_info:
         writer.write_waveforms(waveforms)
 
     error_message = exc_info.value.args[0]

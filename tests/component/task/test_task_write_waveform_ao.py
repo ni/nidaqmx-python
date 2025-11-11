@@ -272,12 +272,12 @@ def test___task___write_waveform_and_array___raises_value_error(
     )
 
 
-def test___task___write_waveforms_with_different_lengths___raises_daq_error(
+def test___task___write_waveforms_with_different_lengths___raises_error(
     ao_multi_channel_task: nidaqmx.Task,
 ) -> None:
     waveforms_different_lengths = [_create_constant_waveform(10), _create_constant_waveform(20)]
 
-    with pytest.raises((nidaqmx.errors.DaqError, AssertionError)) as exc_info:
+    with pytest.raises(ValueError) as exc_info:
         ao_multi_channel_task.write_waveform(waveforms_different_lengths)
 
     error_message = exc_info.value.args[0]
