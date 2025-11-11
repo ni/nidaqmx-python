@@ -34,7 +34,8 @@ All notable changes to this project will be documented in this file.
 
 * ### Major Changes
     * Removed support for Python 3.9.
-    * Add support for create calculated power channel API.
+    * Add support for calculated power channels
+    * Add support for A and C-type Thermocouples
 
 * ### Known Issues
     * ...
