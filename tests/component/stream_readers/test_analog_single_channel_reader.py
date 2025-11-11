@@ -6,7 +6,7 @@ from collections.abc import Callable
 
 import numpy
 import pytest
-from hightime import datetime as ht_datetime, timedelta as ht_timedelta
+from hightime import timedelta as ht_timedelta
 from nitypes.waveform import AnalogWaveform, SampleIntervalMode
 
 import nidaqmx
@@ -88,7 +88,6 @@ def test___analog_single_channel_reader___read_waveform___returns_valid_waveform
     assert isinstance(waveform, AnalogWaveform)
     expected = _get_voltage_offset_for_chan(0)
     assert waveform.scaled_data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
-    assert isinstance(waveform.timing.timestamp, ht_datetime)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.channel_name == ai_single_channel_task_with_timing.ai_channels[0].name
@@ -108,7 +107,6 @@ def test___analog_single_channel_reader___read_waveform_no_args___returns_valid_
     assert isinstance(waveform, AnalogWaveform)
     expected = _get_voltage_offset_for_chan(0)
     assert waveform.scaled_data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
-    assert isinstance(waveform.timing.timestamp, ht_datetime)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.channel_name == ai_single_channel_task_with_timing.ai_channels[0].name
@@ -129,7 +127,6 @@ def test___analog_single_channel_reader___read_waveform_in_place___populates_val
     assert isinstance(waveform, AnalogWaveform)
     expected = _get_voltage_offset_for_chan(0)
     assert waveform.scaled_data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
-    assert isinstance(waveform.timing.timestamp, ht_datetime)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.channel_name == ai_single_channel_task_with_timing.ai_channels[0].name
@@ -196,7 +193,6 @@ def test___analog_single_channel_reader___read_into_undersized_waveform___return
     assert isinstance(waveform, AnalogWaveform)
     expected = _get_voltage_offset_for_chan(0)
     assert waveform.scaled_data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
-    assert isinstance(waveform.timing.timestamp, ht_datetime)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.channel_name == ai_single_channel_task_with_timing.ai_channels[0].name
@@ -253,7 +249,6 @@ def test___analog_single_channel_reader___read_waveform_high_sample_rate___retur
     assert isinstance(waveform, AnalogWaveform)
     expected = _get_voltage_offset_for_chan(0)
     assert waveform.scaled_data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
-    assert isinstance(waveform.timing.timestamp, ht_datetime)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 10_000_000)
     assert waveform.channel_name == ai_single_channel_task_with_high_rate.ai_channels[0].name
@@ -277,7 +272,6 @@ def test___analog_single_channel_reader_with_timing_flag___read_waveform___only_
     assert waveform.sample_count == samples_to_read
     expected = _get_voltage_offset_for_chan(0)
     assert waveform.scaled_data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
-    assert isinstance(waveform.timing.timestamp, ht_datetime)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
@@ -324,7 +318,6 @@ def test___analog_single_channel_reader_with_both_flags___read_waveform___includ
     assert waveform.sample_count == samples_to_read
     expected = _get_voltage_offset_for_chan(0)
     assert waveform.scaled_data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
-    assert isinstance(waveform.timing.timestamp, ht_datetime)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)

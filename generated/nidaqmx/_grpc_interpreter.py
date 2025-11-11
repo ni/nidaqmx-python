@@ -3813,34 +3813,7 @@ class GrpcStubInterpreter(BaseInterpreter):
 
 
 def _copy_timing_and_properties_from_temp_waveform(temp_waveform, target_waveform):
-    try:
-        timestamp_raw = temp_waveform.timing.timestamp
-        if isinstance(timestamp_raw, bintime.DateTime):
-            timestamp = ht_datetime(
-                timestamp_raw.year, timestamp_raw.month, timestamp_raw.day,
-                timestamp_raw.hour, timestamp_raw.minute, timestamp_raw.second,
-                timestamp_raw.microsecond, timestamp_raw.femtosecond,
-                tzinfo=timestamp_raw.tzinfo
-            )
-        else:
-            timestamp = timestamp_raw
-    except RuntimeError:
-        timestamp = None
-
-    try:
-        sample_interval = temp_waveform.timing.sample_interval
-    except RuntimeError:
-        sample_interval = None
-
-    if timestamp is not None or sample_interval is not None:
-        target_waveform.timing = Timing(
-            temp_waveform.timing.sample_interval_mode,
-            timestamp=timestamp,
-            sample_interval=sample_interval
-        )
-    else:
-        target_waveform.timing = temp_waveform.timing
-
+    target_waveform.timing = temp_waveform.timing
     target_waveform.extended_properties.clear()
     target_waveform.extended_properties.update(temp_waveform.extended_properties)
 
