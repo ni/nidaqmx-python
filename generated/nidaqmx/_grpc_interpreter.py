@@ -23,6 +23,7 @@ from nidaqmx.constants import WaveformAttributeMode
 from nidaqmx.errors import DaqError
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx._grpc_time import convert_time_to_timestamp, convert_timestamp_to_time
+from nidaqmx._waveform_utils import get_num_samps_per_chan
 
 _logger = logging.getLogger(__name__)
 
@@ -3745,7 +3746,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         auto_start: bool,
         timeout: float
     ) -> int:
-        num_samps_per_chan = self._get_num_samps_per_chan(waveforms)
+        num_samps_per_chan = get_num_samps_per_chan(waveforms)
 
         grpc_waveforms = []
         for waveform in waveforms:
@@ -3781,7 +3782,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         auto_start: bool,
         timeout: float,
     ) -> int:
-        num_samps_per_chan = self._get_num_samps_per_chan(waveforms)
+        num_samps_per_chan = get_num_samps_per_chan(waveforms)
 
         grpc_waveforms = []
         for waveform in waveforms:

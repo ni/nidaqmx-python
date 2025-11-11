@@ -37,6 +37,7 @@ from nidaqmx.constants import FillMode, WaveformAttributeMode
 from nidaqmx.error_codes import DAQmxErrors, DAQmxWarnings
 from nidaqmx.errors import DaqError, DaqFunctionNotSupportedError, DaqReadError, DaqWarning, DaqWriteError
 from nidaqmx._lib_time import AbsoluteTime
+from nidaqmx._waveform_utils import get_num_samps_per_chan
 from nitypes.waveform.typing import ExtendedPropertyValue
 from nitypes.waveform import AnalogWaveform, DigitalWaveform, SampleIntervalMode, Timing, ExtendedPropertyDictionary
 
@@ -824,7 +825,7 @@ class LibraryInterpreter(BaseInterpreter):
         timeout: float
     ) -> int:
         """Write analog waveforms."""
-        num_samps_per_chan = self._get_num_samps_per_chan(waveforms)
+        num_samps_per_chan = get_num_samps_per_chan(waveforms)
 
         write_arrays = [self._get_analog_write_array(waveform) for waveform in waveforms]
 
@@ -935,7 +936,7 @@ class LibraryInterpreter(BaseInterpreter):
     ) -> int:
         """Write digital waveforms."""
         channel_count = len(waveforms)
-        sample_count = self._get_num_samps_per_chan(waveforms)
+        sample_count = get_num_samps_per_chan(waveforms)
                 
         bytes_per_chan_array = numpy.array([wf.signal_count for wf in waveforms], dtype=numpy.uint32)
 
