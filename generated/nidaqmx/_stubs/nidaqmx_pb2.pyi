@@ -3719,6 +3719,7 @@ class _ReadUInt32AttributeEnumTypeWrapper(google.protobuf.internal.enum_type_wra
     READ_ATTRIBUTE_NUM_CHANS: _ReadUInt32Attribute.ValueType  # 8571
     READ_ATTRIBUTE_DIGITAL_LINES_BYTES_PER_CHAN: _ReadUInt32Attribute.ValueType  # 8572
     READ_ATTRIBUTE_LOGGING_FILE_WRITE_SIZE: _ReadUInt32Attribute.ValueType  # 12227
+    READ_ATTRIBUTE_DEFAULT_NUMBER_OF_SAMPLES_TO_READ: _ReadUInt32Attribute.ValueType  # 12776
 
 class ReadUInt32Attribute(_ReadUInt32Attribute, metaclass=_ReadUInt32AttributeEnumTypeWrapper): ...
 
@@ -3728,6 +3729,7 @@ READ_ATTRIBUTE_RAW_DATA_WIDTH: ReadUInt32Attribute.ValueType  # 8570
 READ_ATTRIBUTE_NUM_CHANS: ReadUInt32Attribute.ValueType  # 8571
 READ_ATTRIBUTE_DIGITAL_LINES_BYTES_PER_CHAN: ReadUInt32Attribute.ValueType  # 8572
 READ_ATTRIBUTE_LOGGING_FILE_WRITE_SIZE: ReadUInt32Attribute.ValueType  # 12227
+READ_ATTRIBUTE_DEFAULT_NUMBER_OF_SAMPLES_TO_READ: ReadUInt32Attribute.ValueType  # 12776
 global___ReadUInt32Attribute = ReadUInt32Attribute
 
 class _ReadStringAttribute:
