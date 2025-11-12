@@ -106,7 +106,6 @@ def test___analog_multi_channel_writer___write_waveforms_feature_disabled___rais
     assert "NIDAQMX_ENABLE_WAVEFORM_SUPPORT" in error_message
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")
 def test___analog_multi_channel_writer___write_waveforms___output_matches_final_values(
     ao_multi_channel_task: nidaqmx.Task,
     ai_multi_channel_loopback_task: nidaqmx.Task,
@@ -126,7 +125,6 @@ def test___analog_multi_channel_writer___write_waveforms___output_matches_final_
         assert read_data[i] == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")
 def test___analog_multi_channel_writer___write_waveforms_with_float32_dtype___output_matches_final_values(
     ao_multi_channel_task: nidaqmx.Task,
     ai_multi_channel_loopback_task: nidaqmx.Task,
@@ -146,7 +144,6 @@ def test___analog_multi_channel_writer___write_waveforms_with_float32_dtype___ou
         assert read_data[i] == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")
 def test___analog_multi_channel_writer___write_waveforms_with_scaling___output_matches_final_values(
     ao_multi_channel_task: nidaqmx.Task,
     ai_multi_channel_loopback_task: nidaqmx.Task,
@@ -166,7 +163,6 @@ def test___analog_multi_channel_writer___write_waveforms_with_scaling___output_m
         assert read_data[i] == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")
 def test___analog_multi_channel_writer___write_waveforms_with_non_contiguous_data___output_matches_final_values(
     ao_multi_channel_task: nidaqmx.Task,
     ai_multi_channel_loopback_task: nidaqmx.Task,
@@ -186,8 +182,7 @@ def test___analog_multi_channel_writer___write_waveforms_with_non_contiguous_dat
         assert read_data[i] == _get_approx_final_value(waveform, AO_VOLTAGE_EPSILON)
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")
-def test___analog_multi_channel_writer___write_waveforms_with_different_lengths___raises_daq_error(
+def test___analog_multi_channel_writer___write_waveforms_with_different_lengths___raises_error(
     ao_multi_channel_task: nidaqmx.Task,
 ) -> None:
     writer = AnalogMultiChannelWriter(ao_multi_channel_task.out_stream)
@@ -196,14 +191,13 @@ def test___analog_multi_channel_writer___write_waveforms_with_different_lengths_
         _create_constant_waveform(20),
     ]
 
-    with pytest.raises(nidaqmx.DaqError) as exc_info:
+    with pytest.raises(ValueError) as exc_info:
         writer.write_waveforms(waveforms)
 
     error_message = exc_info.value.args[0]
     assert "The waveforms must all have the same sample count" in error_message
 
 
-@pytest.mark.grpc_skip(reason="write_analog_waveforms not implemented in GRPC")
 def test___analog_multi_channel_writer___write_waveforms_with_wrong_number_of_channels___raises_daq_error(
     ao_multi_channel_task: nidaqmx.Task,
 ) -> None:

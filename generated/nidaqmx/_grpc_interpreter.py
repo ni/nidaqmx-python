@@ -18,9 +18,17 @@ from . import errors as errors
 from nidaqmx._base_interpreter import BaseEventHandler, BaseInterpreter
 from nidaqmx._stubs import nidaqmx_pb2 as grpc_types
 from nidaqmx._stubs import nidaqmx_pb2_grpc as nidaqmx_grpc
+from ni.protobuf.types.waveform_conversion import (
+    digital_waveform_from_protobuf,
+    digital_waveform_to_protobuf,
+    float64_analog_waveform_from_protobuf,
+    float64_analog_waveform_to_protobuf
+)
 from nidaqmx.constants import WaveformAttributeMode
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx._grpc_time import convert_time_to_timestamp, convert_timestamp_to_time
+from nidaqmx._waveform_utils import get_num_samps_per_chan
+from session_pb2 import Session
 
 _logger = logging.getLogger(__name__)
 
@@ -3636,7 +3644,13 @@ class GrpcStubInterpreter(BaseInterpreter):
         waveform: AnalogWaveform[numpy.float64],
         waveform_attribute_mode: WaveformAttributeMode
     ) -> int:
-        raise NotImplementedError
+        return self.read_analog_waveforms(
+            task_handle,
+            number_of_samples_per_channel,
+            timeout,
+            [waveform],
+            waveform_attribute_mode
+        )
 
     def read_analog_waveforms(
         self,
@@ -3646,7 +3660,30 @@ class GrpcStubInterpreter(BaseInterpreter):
         waveforms: Sequence[AnalogWaveform[numpy.float64]],
         waveform_attribute_mode: WaveformAttributeMode
     ) -> int:
-        raise NotImplementedError
+        assert isinstance(task_handle, Session)
+        response = self._invoke(
+            self._client.ReadAnalogWaveforms,
+            grpc_types.ReadAnalogWaveformsRequest(
+                task=task_handle,
+                num_samps_per_chan=number_of_samples_per_channel,
+                timeout=timeout,
+                waveform_attribute_mode_raw=waveform_attribute_mode.value
+            ))
+
+        if len(response.waveforms) != len(waveforms):
+            raise ValueError(f"Expected {len(waveforms)} waveforms but received {len(response.waveforms)} from server")
+
+        for i, grpc_waveform in enumerate(response.waveforms):
+            temp_waveform = float64_analog_waveform_from_protobuf(grpc_waveform)
+            waveforms[i].load_data(temp_waveform.scaled_data)
+
+            waveforms[i].scale_mode = temp_waveform.scale_mode
+            waveforms[i].timing = temp_waveform.timing
+            waveforms[i].extended_properties.clear()
+            waveforms[i].extended_properties.update(temp_waveform.extended_properties)
+
+        self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
+        return response.samps_per_chan_read
 
     def read_digital_waveform(
         self,
@@ -3656,7 +3693,15 @@ class GrpcStubInterpreter(BaseInterpreter):
         waveform: DigitalWaveform[Any],
         waveform_attribute_mode: WaveformAttributeMode
     ) -> int:
-        raise NotImplementedError
+        return self.read_digital_waveforms(
+            task_handle,
+            1,  # channel_count
+            number_of_samples_per_channel,
+            waveform.signal_count,  # number_of_signals_per_sample
+            timeout,
+            [waveform],
+            waveform_attribute_mode
+        )
 
     def read_digital_waveforms(
         self,
@@ -3668,7 +3713,32 @@ class GrpcStubInterpreter(BaseInterpreter):
         waveforms: Sequence[DigitalWaveform[Any]],
         waveform_attribute_mode: WaveformAttributeMode,
     ) -> int:
-        raise NotImplementedError
+        assert isinstance(task_handle, Session)
+        response = self._invoke(
+            self._client.ReadDigitalWaveforms,
+            grpc_types.ReadDigitalWaveformsRequest(
+                task=task_handle,
+                num_samps_per_chan=number_of_samples_per_channel,
+                timeout=timeout,
+                waveform_attribute_mode_raw=waveform_attribute_mode.value
+            ))
+
+        if len(response.waveforms) != len(waveforms):
+            raise ValueError(f"Expected {len(waveforms)} waveforms but received {len(response.waveforms)} from server")
+
+        for i, grpc_waveform in enumerate(response.waveforms):
+            temp_waveform = digital_waveform_from_protobuf(grpc_waveform)
+            data = temp_waveform.data
+            if data.dtype != waveforms[i].dtype:
+                data = data.view(waveforms[i].dtype)
+            waveforms[i].load_data(data)
+
+            waveforms[i].timing = temp_waveform.timing
+            waveforms[i].extended_properties.clear()
+            waveforms[i].extended_properties.update(temp_waveform.extended_properties)
+
+        self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
+        return response.samps_per_chan_read
 
     def read_new_digital_waveforms(
         self,
@@ -3679,7 +3749,20 @@ class GrpcStubInterpreter(BaseInterpreter):
         timeout: float,
         waveform_attribute_mode: WaveformAttributeMode,
     ) -> Sequence[DigitalWaveform[numpy.uint8]]:
-        raise NotImplementedError
+        assert isinstance(task_handle, Session)
+        response = self._invoke(
+            self._client.ReadDigitalWaveforms,
+            grpc_types.ReadDigitalWaveformsRequest(
+                task=task_handle,
+                num_samps_per_chan=number_of_samples_per_channel,
+                timeout=timeout,
+                waveform_attribute_mode_raw=waveform_attribute_mode.value
+            ))
+
+        waveforms = [digital_waveform_from_protobuf(grpc_waveform) for grpc_waveform in response.waveforms]
+
+        self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
+        return waveforms
 
     def write_analog_waveform(
         self,
@@ -3688,7 +3771,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         auto_start: bool,
         timeout: float
     ) -> int:
-        raise NotImplementedError
+        return self.write_analog_waveforms(task_handle, [waveform], auto_start, timeout)
 
     def write_analog_waveforms(
         self,
@@ -3697,7 +3780,22 @@ class GrpcStubInterpreter(BaseInterpreter):
         auto_start: bool,
         timeout: float
     ) -> int:
-        raise NotImplementedError
+        assert isinstance(task_handle, Session)
+        num_samps_per_chan = get_num_samps_per_chan(waveforms)
+
+        grpc_waveforms = [float64_analog_waveform_to_protobuf(waveform) for waveform in waveforms]
+
+        response = self._invoke(
+            self._client.WriteAnalogWaveforms,
+            grpc_types.WriteAnalogWaveformsRequest(
+                task=task_handle,
+                auto_start=auto_start,
+                timeout=timeout,
+                waveforms=grpc_waveforms
+            ))
+
+        self._check_for_error_from_response(response.status, samps_per_chan_written=response.samps_per_chan_written)
+        return response.samps_per_chan_written
 
     def write_digital_waveform(
         self,
@@ -3706,16 +3804,31 @@ class GrpcStubInterpreter(BaseInterpreter):
         auto_start: bool,
         timeout: float,
     ) -> int:
-        raise NotImplementedError
+        return self.write_digital_waveforms(task_handle, [waveform], auto_start, timeout)
 
     def write_digital_waveforms(
         self,
         task_handle: object,
-        waveform: Sequence[DigitalWaveform[Any]],
+        waveforms: Sequence[DigitalWaveform[Any]],
         auto_start: bool,
         timeout: float,
     ) -> int:
-        raise NotImplementedError
+        assert isinstance(task_handle, Session)
+        num_samps_per_chan = get_num_samps_per_chan(waveforms)
+
+        grpc_waveforms = [digital_waveform_to_protobuf(waveform) for waveform in waveforms]
+
+        response = self._invoke(
+            self._client.WriteDigitalWaveforms,
+            grpc_types.WriteDigitalWaveformsRequest(
+                task=task_handle,
+                auto_start=auto_start,
+                timeout=timeout,
+                waveforms=grpc_waveforms
+            ))
+
+        self._check_for_error_from_response(response.status, samps_per_chan_written=response.samps_per_chan_written)
+        return response.samps_per_chan_written
 
 def _assign_numpy_array(numpy_array, grpc_array):
     """

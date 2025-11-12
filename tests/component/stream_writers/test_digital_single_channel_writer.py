@@ -206,7 +206,6 @@ def test___digital_single_channel_writer___write_waveform_feature_disabled___rai
     assert "NIDAQMX_ENABLE_WAVEFORM_SUPPORT" in error_message
 
 
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
 def test___digital_single_channel_writer___write_waveform_single_line___outputs_match_final_values(
     do_single_line_task: nidaqmx.Task,
     di_single_line_loopback_task: nidaqmx.Task,
@@ -225,7 +224,6 @@ def test___digital_single_channel_writer___write_waveform_single_line___outputs_
         assert di_single_line_loopback_task.read() == _get_waveform_data(waveform)[i - 1]
 
 
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
 def test___digital_single_channel_writer___write_waveform_single_line_with_auto_start___output_matches_final_value(
     do_single_line_task_with_timing: nidaqmx.Task,
     di_single_line_loopback_task: nidaqmx.Task,
@@ -242,7 +240,6 @@ def test___digital_single_channel_writer___write_waveform_single_line_with_auto_
     assert actual_value == _get_waveform_data(waveform)[-1]
 
 
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
 def test___digital_single_channel_writer___write_waveform_single_line_with_non_contiguous_data___outputs_match_final_values(
     do_single_line_task: nidaqmx.Task,
     di_single_line_loopback_task: nidaqmx.Task,
@@ -261,7 +258,6 @@ def test___digital_single_channel_writer___write_waveform_single_line_with_non_c
         assert di_single_line_loopback_task.read() == _get_waveform_data(waveform)[i - 1]
 
 
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
 def test___digital_single_channel_writer___write_waveform_single_line_signal_count_mismatch___raises_daq_error(
     do_single_line_task: nidaqmx.Task,
 ) -> None:
@@ -280,7 +276,6 @@ def test___digital_single_channel_writer___write_waveform_single_line_signal_cou
     )
 
 
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
 @pytest.mark.parametrize(
     "dtype",
     [
@@ -308,7 +303,6 @@ def test___digital_single_channel_writer___write_waveform_single_line_all_dtypes
         assert di_single_line_loopback_task.read() == _get_waveform_data(waveform)[i - 1]
 
 
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
 def test___digital_single_channel_writer___write_waveform_multi_line___outputs_match_final_values(
     do_single_channel_multi_line_task: nidaqmx.Task,
     di_multi_line_loopback_task: nidaqmx.Task,
@@ -328,7 +322,6 @@ def test___digital_single_channel_writer___write_waveform_multi_line___outputs_m
         assert di_multi_line_loopback_task.read() == _get_waveform_data(waveform)[i - 1]
 
 
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
 def test___digital_single_channel_writer___write_waveform_multi_line_with_auto_start___output_matches_final_value(
     do_single_channel_multi_line_task_with_timing: nidaqmx.Task,
     di_multi_line_loopback_task: nidaqmx.Task,
@@ -348,7 +341,6 @@ def test___digital_single_channel_writer___write_waveform_multi_line_with_auto_s
     assert actual_value == _get_waveform_data(waveform)[-1]
 
 
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
 def test___digital_single_channel_writer___write_waveform_multi_line_with_non_contiguous_data___outputs_match_final_values(
     do_single_channel_multi_line_task: nidaqmx.Task,
     di_multi_line_loopback_task: nidaqmx.Task,
@@ -369,7 +361,6 @@ def test___digital_single_channel_writer___write_waveform_multi_line_with_non_co
         assert actual_value == _get_waveform_data(waveform)[i - 1]
 
 
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
 @pytest.mark.parametrize(
     "dtype",
     [
@@ -398,7 +389,6 @@ def test___digital_single_channel_writer___write_waveform_multi_line_all_dtypes_
         assert di_multi_line_loopback_task.read() == _get_waveform_data(waveform)[i - 1]
 
 
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
 def test___digital_single_channel_writer___write_waveform_multi_line_signal_count_mismatch___raises_daq_error(
     do_single_channel_multi_line_task: nidaqmx.Task,
 ) -> None:
@@ -417,7 +407,6 @@ def test___digital_single_channel_writer___write_waveform_multi_line_signal_coun
     )
 
 
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
 def test___digital_single_channel_writer___write_waveform_port_uint8___outputs_match_final_values(
     do_port1_task: nidaqmx.Task,
     di_port1_loopback_task: nidaqmx.Task,
@@ -442,7 +431,6 @@ def test___digital_single_channel_writer___write_waveform_port_uint8___outputs_m
         )  # TODO: AB#3178052 - change to _get_waveform_data()
 
 
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
 def test___digital_single_channel_writer___write_waveform_port_uint32___outputs_match_final_values(
     do_port0_task: nidaqmx.Task,
     di_port0_loopback_task: nidaqmx.Task,

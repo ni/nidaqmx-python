@@ -8,7 +8,7 @@ from nitypes.waveform import AnalogWaveform
 from pytest_benchmark.fixture import BenchmarkFixture
 
 from nidaqmx import Task
-from nidaqmx.constants import WaveformAttributeMode
+from nidaqmx.constants import READ_ALL_AVAILABLE, WaveformAttributeMode
 from nidaqmx.stream_readers._analog_multi_channel_reader import AnalogMultiChannelReader
 from nidaqmx.stream_readers._analog_single_channel_reader import (
     AnalogSingleChannelReader,
@@ -41,10 +41,21 @@ def test___analog_single_channel_reader___read_many_sample(
 
 @pytest.mark.benchmark(group="analog_readers")
 @pytest.mark.parametrize("num_samples", [1, 1000])
+def test___analog_single_channel_reader___read_all_available(
+    benchmark: BenchmarkFixture, ai_benchmark_task: Task, num_samples: int
+) -> None:
+    reader = AnalogSingleChannelReader(ai_benchmark_task.in_stream)
+    # This test reads the whole buffer, which is 2x num_samples.
+    data = numpy.full(num_samples * 2, math.inf, dtype=numpy.float64)
+
+    benchmark(reader.read_many_sample, data, READ_ALL_AVAILABLE)
+
+
+@pytest.mark.benchmark(group="analog_readers")
+@pytest.mark.parametrize("num_samples", [1, 1000])
 @pytest.mark.parametrize(
     "waveform_attribute_mode", _WAVEFORM_BENCHMARK_MODES, ids=_WAVEFORM_BENCHMARK_MODE_IDS
 )
-@pytest.mark.grpc_skip(reason="read_analog_waveform not implemented in GRPC")
 def test___analog_single_channel_reader___read_waveform(
     benchmark: BenchmarkFixture,
     ai_benchmark_task: Task,
@@ -84,10 +95,22 @@ def test___analog_multi_channel_reader___read_many_sample(
 @pytest.mark.benchmark(group="analog_readers")
 @pytest.mark.parametrize("num_channels", [1, 2, 8])
 @pytest.mark.parametrize("num_samples", [1, 1000])
+def test___analog_multi_channel_reader___read_all_available(
+    benchmark: BenchmarkFixture, ai_benchmark_task: Task, num_channels: int, num_samples: int
+) -> None:
+    reader = AnalogMultiChannelReader(ai_benchmark_task.in_stream)
+    # This test reads the whole buffer, which is 2x num_samples.
+    data = numpy.full((num_channels, num_samples * 2), math.inf, dtype=numpy.float64)
+
+    benchmark(reader.read_many_sample, data, READ_ALL_AVAILABLE)
+
+
+@pytest.mark.benchmark(group="analog_readers")
+@pytest.mark.parametrize("num_channels", [1, 2, 8])
+@pytest.mark.parametrize("num_samples", [1, 1000])
 @pytest.mark.parametrize(
     "waveform_attribute_mode", _WAVEFORM_BENCHMARK_MODES, ids=_WAVEFORM_BENCHMARK_MODE_IDS
 )
-@pytest.mark.grpc_skip(reason="read_analog_waveforms not implemented in GRPC")
 def test___analog_multi_channel_reader___read_waveform(
     benchmark: BenchmarkFixture,
     ai_benchmark_task: Task,

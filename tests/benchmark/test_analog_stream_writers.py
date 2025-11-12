@@ -37,7 +37,6 @@ def test___analog_single_channel_writer___write_many_sample(
 
 @pytest.mark.benchmark(group="analog_writers")
 @pytest.mark.parametrize("num_samples", [1, 1000])
-@pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
 def test___analog_single_channel_writer___write_waveform(
     benchmark: BenchmarkFixture,
     ao_benchmark_task: nidaqmx.Task,
@@ -80,7 +79,6 @@ def test___analog_multi_channel_writer___write_many_sample(
 @pytest.mark.benchmark(group="analog_writers")
 @pytest.mark.parametrize("num_channels", [1, 2])
 @pytest.mark.parametrize("num_samples", [1, 1000])
-@pytest.mark.grpc_skip(reason="write_analog_waveform not implemented in GRPC")
 def test___analog_multi_channel_writer___write_waveform(
     benchmark: BenchmarkFixture,
     ao_benchmark_task: nidaqmx.Task,

@@ -288,7 +288,6 @@ def test___digital_multi_channel_writer___write_waveforms_feature_disabled___rai
     assert "NIDAQMX_ENABLE_WAVEFORM_SUPPORT" in error_message
 
 
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
 def test___digital_multi_channel_writer___write_waveforms_single_lines___outputs_match_final_values(
     do_multi_channel_multi_line_task: nidaqmx.Task,
     di_multi_line_loopback_task: nidaqmx.Task,
@@ -310,7 +309,6 @@ def test___digital_multi_channel_writer___write_waveforms_single_lines___outputs
         assert actual_value == _get_digital_data(num_channels, num_samples)[i - 1]
 
 
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
 def test___digital_multi_channel_writer___write_waveforms_mixed_lines___outputs_match_final_values(
     do_multi_channel_mixed_line_task: nidaqmx.Task,
     di_multi_line_loopback_task: nidaqmx.Task,
@@ -331,7 +329,6 @@ def test___digital_multi_channel_writer___write_waveforms_mixed_lines___outputs_
         assert actual_value == _get_digital_data(num_channels, num_samples)[i - 1]
 
 
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
 def test___digital_multi_channel_writer___write_waveforms_with_auto_start___output_matches_final_value(
     do_multi_channel_multi_line_task_with_timing: nidaqmx.Task,
     di_multi_line_loopback_task: nidaqmx.Task,
@@ -350,7 +347,6 @@ def test___digital_multi_channel_writer___write_waveforms_with_auto_start___outp
     assert actual_value == _get_digital_data(num_channels, num_samples)[-1]
 
 
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
 def test___digital_multi_channel_writer___write_waveforms_ports___outputs_match_final_values(
     do_multi_channel_port_task: nidaqmx.Task,
     di_multi_channel_port_loopback_task: nidaqmx.Task,
@@ -378,7 +374,6 @@ def test___digital_multi_channel_writer___write_waveforms_ports___outputs_match_
         ]  # TODO: AB#3178052 - change to _get_waveform_data()
 
 
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
 def test___digital_multi_channel_writer___write_waveforms_port_and_lines___outputs_match_final_values(
     do_multi_channel_port_and_lines_task: nidaqmx.Task,
     di_multi_channel_port_and_lines_loopback_task: nidaqmx.Task,
@@ -405,7 +400,6 @@ def test___digital_multi_channel_writer___write_waveforms_port_and_lines___outpu
         ]  # TODO: AB#3178052 - change to _get_waveform_data()
 
 
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
 def test___digital_multi_channel_writer___write_waveforms_with_non_contiguous_data___outputs_match_final_values(
     do_multi_channel_multi_line_task: nidaqmx.Task,
     di_multi_line_loopback_task: nidaqmx.Task,
@@ -429,8 +423,7 @@ def test___digital_multi_channel_writer___write_waveforms_with_non_contiguous_da
         assert actual_value == _get_digital_data(num_lines, num_samples)[-1]
 
 
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
-def test___digital_multi_channel_writer___write_waveforms_with_different_sample_counts___raises_daq_error(
+def test___digital_multi_channel_writer___write_waveforms_with_different_sample_counts___raises_error(
     do_multi_channel_port_task: nidaqmx.Task,
 ) -> None:
     writer = DigitalMultiChannelWriter(do_multi_channel_port_task.out_stream)
@@ -440,14 +433,13 @@ def test___digital_multi_channel_writer___write_waveforms_with_different_sample_
         _create_digital_waveform_uint8(11, num_lines),
     ]
 
-    with pytest.raises(DaqError) as exc_info:
+    with pytest.raises(ValueError) as exc_info:
         writer.write_waveforms(waveforms)
 
     error_message = exc_info.value.args[0]
     assert "The waveforms must all have the same sample count." in error_message
 
 
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
 def test___digital_multi_channel_writer___write_waveforms_with_too_many___raises_daq_error(
     do_multi_channel_port_task: nidaqmx.Task,
 ) -> None:
@@ -466,7 +458,6 @@ def test___digital_multi_channel_writer___write_waveforms_with_too_many___raises
     assert "Write cannot be performed, because the number of channels" in error_message
 
 
-@pytest.mark.grpc_skip(reason="write_digital_waveform not implemented in GRPC")
 def test___digital_multi_channel_writer___write_waveforms_with_too_many_signals___raises_daq_error(
     do_multi_channel_port_task: nidaqmx.Task,
 ) -> None:
