@@ -15621,16 +15621,14 @@ enums = {
         'values': [
             {
                 'documentation': {
-                    'description': 'xx No memory is connected to ID Pin.',
-                    'python_description': 'No memory is connected to ID Pin.'
+                    'description': 'No memory is connected to ID Pin.'
                 },
                 'name': 'MEMORY_NOT_PRESENT',
                 'value': 16205
             },
             {
                 'documentation': {
-                    'description': 'xx The memory is connected to ID Pin.',
-                    'python_description': 'The memory is connected to ID Pin.'
+                    'description': 'The memory is connected to ID Pin.'
                 },
                 'name': 'MEMORY_PRESENT',
                 'value': 16206
@@ -16392,6 +16390,24 @@ enums = {
                 },
                 'name': 'OUTPUT_DISABLED',
                 'value': 15503
+            }
+        ]
+    },
+    'PowerUnits': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Watts.'
+                },
+                'name': 'WATTS',
+                'value': 16203
+            },
+            {
+                'documentation': {
+                    'description': ' Units a custom scale specifies. If you select this value, you must specify a  custom scale name.'
+                },
+                'name': 'FROM_CUSTOM_SCALE',
+                'value': 10065
             }
         ]
     },
@@ -18030,6 +18046,22 @@ enums = {
                 'name': 'E_TYPE_TC',
                 'python_name': 'E',
                 'value': 10055
+            },
+            {
+                'documentation': {
+                    'description': 'A-type thermocouple.'
+                },
+                'name': 'A_TYPE_TC',
+                'python_name': 'A',
+                'value': 16208
+            },
+            {
+                'documentation': {
+                    'description': 'C-type thermocouple.'
+                },
+                'name': 'C_TYPE_TC',
+                'python_name': 'C',
+                'value': 16209
             }
         ]
     },

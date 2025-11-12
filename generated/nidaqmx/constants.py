@@ -479,6 +479,11 @@ class PowerOutputState(Enum):
     OUTPUT_DISABLED = 15503  #: Power output is disabled.
 
 
+class PowerUnits(Enum):
+    WATTS = 16203  #: Watts.
+    FROM_CUSTOM_SCALE = 10065  #: Units a custom scale specifies. If you select this value, you must specify a custom scale name.
+
+
 class PowerUpChannelType(Enum):
     CHANNEL_VOLTAGE = 0  #: Voltage Channel
     CHANNEL_CURRENT = 1  #: Current Channel
@@ -773,6 +778,8 @@ class ThermocoupleType(Enum):
     T = 10086  #: T-type thermocouple.
     B = 10047  #: B-type thermocouple.
     E = 10055  #: E-type thermocouple.
+    A = 16208  #: A-type thermocouple.
+    C = 16209  #: C-type thermocouple.
 
 
 class TimeUnits(Enum):

@@ -2514,6 +2514,168 @@ functions = {
         'python_description': 'Creates channel(s) that measure voltage ratios from a Wheatstone bridge. Use this instance with bridge-based sensors that measure phenomena other than strain, force, pressure, or torque, or that scale data to physical units NI-DAQmx does not support.',
         'returns': 'int32'
     },
+    'CreateAICalculatedPowerChan': {
+        'adaptor_parameter': {
+            'description': 'Indicates the newly created channel object.',
+            'direction': 'output',
+            'python_adaptor': 'self._create_chan(voltage_physical_channel, name_to_assign_to_channel)',
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
+        },
+        'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
+        'parameters': [
+            {
+                'ctypes_data_type': 'ctypes.TaskHandle',
+                'direction': 'in',
+                'is_optional_in_python': False,
+                'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
+                'type': 'TaskHandle'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'direction': 'in',
+                'is_optional_in_python': False,
+                'name': 'voltagePhysicalChannel',
+                'python_data_type': 'str',
+                'python_description': 'Specifies the names of the voltage physical channels to use to create virtual power channels. The DAQmx physical channel constant lists all physical channels on devices and modules installed in the system.',
+                'python_type_annotation': 'str',
+                'type': 'const char[]'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'direction': 'in',
+                'is_optional_in_python': False,
+                'name': 'currentPhysicalChannel',
+                'python_data_type': 'str',
+                'python_description': 'Specifies the names of the current physical channels to use to create virtual power channels. The DAQmx physical channel constant lists all physical channels on devices and modules installed in the system.',
+                'python_type_annotation': 'str',
+                'type': 'const char[]'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'nameToAssignToChannel',
+                'python_data_type': 'str',
+                'python_default_value': '""',
+                'python_description': 'Specifies a name to assign to the virtual channel this function creates. If you do not specify a value for this input, NI-DAQmx uses the physical channel name as the virtual channel name.',
+                'python_type_annotation': 'Optional[str]',
+                'type': 'const char[]'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_int',
+                'direction': 'in',
+                'enum': 'InputTermCfgWithDefault',
+                'is_optional_in_python': True,
+                'name': 'terminalConfig',
+                'python_data_type': 'TerminalConfiguration',
+                'python_default_value': 'TerminalConfiguration.DEFAULT',
+                'python_description': 'Specifies the input terminal configuration for the channel.',
+                'python_type_annotation': 'Optional[nidaqmx.constants.TerminalConfiguration]',
+                'type': 'int32'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_double',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'voltageMinVal',
+                'python_data_type': 'float',
+                'python_default_value': '-5.0',
+                'python_description': 'Specifies in **units** the minimum value you expect to measure.',
+                'python_type_annotation': 'Optional[float]',
+                'type': 'float64'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_double',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'voltageMaxVal',
+                'python_data_type': 'float',
+                'python_default_value': '5.0',
+                'python_description': 'Specifies in **units** the maximum value you expect to measure.',
+                'python_type_annotation': 'Optional[float]',
+                'type': 'float64'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_double',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'currentMinVal',
+                'python_data_type': 'float',
+                'python_default_value': '-0.01',
+                'python_description': 'Specifies in **units** the minimum value you expect to measure.',
+                'python_type_annotation': 'Optional[float]',
+                'type': 'float64'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_double',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'currentMaxVal',
+                'python_data_type': 'float',
+                'python_default_value': '0.01',
+                'python_description': 'Specifies in **units** the maximum value you expect to measure.',
+                'python_type_annotation': 'Optional[float]',
+                'type': 'float64'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_int',
+                'direction': 'in',
+                'enum': 'PowerUnits',
+                'is_optional_in_python': True,
+                'name': 'units',
+                'python_data_type': 'PowerUnits',
+                'python_default_value': 'PowerUnits.WATTS',
+                'python_description': 'Specifies the units to use to return calculated power measurements.',
+                'python_type_annotation': 'Optional[nidaqmx.constants.PowerUnits]',
+                'type': 'int32'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_int',
+                'direction': 'in',
+                'enum': 'CurrentShuntResistorLocationWithDefault',
+                'is_optional_in_python': True,
+                'name': 'shuntResistorLoc',
+                'python_data_type': 'CurrentShuntResistorLocation',
+                'python_default_value': 'CurrentShuntResistorLocation.LET_DRIVER_CHOOSE',
+                'python_description': 'Specifies the location of the shunt resistor. For devices with built-in shunt resistors, specify the location as **INTERNAL**. For devices that do not have built-in shunt resistors, you must attach an external one, set this input to **EXTERNAL** and use the **ext_shunt_resistor_val** input to specify the value of the resistor.',
+                'python_type_annotation': 'Optional[nidaqmx.constants.CurrentShuntResistorLocation]',
+                'type': 'int32'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_double',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'extShuntResistorVal',
+                'python_data_type': 'float',
+                'python_default_value': '249.0',
+                'python_description': 'Specifies in ohms the resistance of an external shunt resistor.',
+                'python_type_annotation': 'Optional[float]',
+                'type': 'float64'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'customScaleName',
+                'python_data_type': 'str',
+                'python_default_value': '""',
+                'python_description': 'Specifies the name of a custom scale for the channel. If you want the channel to use a custom scale, specify the name of the custom scale to this input and set **units** to **FROM_CUSTOM_SCALE**.',
+                'python_type_annotation': 'Optional[str]',
+                'type': 'const char[]'
+            }
+        ],
+        'python_class_name': 'AIChannelCollection',
+        'python_description': 'Creates channel(s) to measure calculated power.',
+        'returns': 'int32'
+    },
     'CreateAIChargeChan': {
         'adaptor_parameter': {
             'description': 'Indicates the newly created channel object.',

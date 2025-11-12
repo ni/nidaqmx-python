@@ -13,7 +13,7 @@ from nidaqmx.constants import (
     CurrentShuntResistorLocation, CurrentUnits,
     EddyCurrentProxProbeSensitivityUnits, ExcitationSource,
     ForceIEPESensorSensitivityUnits, ForceUnits, FrequencyUnits,
-    LVDTSensitivityUnits, LengthUnits, PressureUnits, RTDType,
+    LVDTSensitivityUnits, LengthUnits, PowerUnits, PressureUnits, RTDType,
     RVDTSensitivityUnits, ResistanceConfiguration, ResistanceUnits,
     SoundPressureUnits, StrainGageBridgeType,
     StrainGageRosetteMeasurementType, StrainGageRosetteType, StrainUnits,
@@ -312,6 +312,77 @@ class AIChannelCollection(ChannelCollection):
             nominal_bridge_resistance, custom_scale_name)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
+
+    def add_ai_calculated_power_chan(
+            self, voltage_physical_channel, current_physical_channel,
+            name_to_assign_to_channel="",
+            terminal_config=TerminalConfiguration.DEFAULT,
+            voltage_min_val=-5.0, voltage_max_val=5.0, current_min_val=-0.01,
+            current_max_val=0.01, units=PowerUnits.WATTS,
+            shunt_resistor_loc=CurrentShuntResistorLocation.LET_DRIVER_CHOOSE,
+            ext_shunt_resistor_val=249.0, custom_scale_name=""):
+        """
+        Creates channel(s) to measure calculated power.
+
+        Args:
+            voltage_physical_channel (str): Specifies the names of the
+                voltage physical channels to use to create virtual power
+                channels. The DAQmx physical channel constant lists all
+                physical channels on devices and modules installed in
+                the system.
+            current_physical_channel (str): Specifies the names of the
+                current physical channels to use to create virtual power
+                channels. The DAQmx physical channel constant lists all
+                physical channels on devices and modules installed in
+                the system.
+            name_to_assign_to_channel (Optional[str]): Specifies a name
+                to assign to the virtual channel this function creates.
+                If you do not specify a value for this input, NI-DAQmx
+                uses the physical channel name as the virtual channel
+                name.
+            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]): 
+                Specifies the input terminal configuration for the
+                channel.
+            voltage_min_val (Optional[float]): Specifies in **units**
+                the minimum value you expect to measure.
+            voltage_max_val (Optional[float]): Specifies in **units**
+                the maximum value you expect to measure.
+            current_min_val (Optional[float]): Specifies in **units**
+                the minimum value you expect to measure.
+            current_max_val (Optional[float]): Specifies in **units**
+                the maximum value you expect to measure.
+            units (Optional[nidaqmx.constants.PowerUnits]): Specifies
+                the units to use to return calculated power
+                measurements.
+            shunt_resistor_loc (Optional[nidaqmx.constants.CurrentShuntResistorLocation]): 
+                Specifies the location of the shunt resistor. For
+                devices with built-in shunt resistors, specify the
+                location as **INTERNAL**. For devices that do not have
+                built-in shunt resistors, you must attach an external
+                one, set this input to **EXTERNAL** and use the
+                **ext_shunt_resistor_val** input to specify the value of
+                the resistor.
+            ext_shunt_resistor_val (Optional[float]): Specifies in ohms
+                the resistance of an external shunt resistor.
+            custom_scale_name (Optional[str]): Specifies the name of a
+                custom scale for the channel. If you want the channel to
+                use a custom scale, specify the name of the custom scale
+                to this input and set **units** to
+                **FROM_CUSTOM_SCALE**.
+        Returns:
+            nidaqmx.task.channels.AIChannel:
+
+            Indicates the newly created channel object.
+        """
+
+        self._interpreter.create_ai_calculated_power_chan(
+            self._handle, voltage_physical_channel, current_physical_channel,
+            name_to_assign_to_channel, terminal_config.value, voltage_min_val,
+            voltage_max_val, current_min_val, current_max_val, units.value,
+            shunt_resistor_loc.value, ext_shunt_resistor_val,
+            custom_scale_name)
+
+        return self._create_chan(voltage_physical_channel, name_to_assign_to_channel)
 
     def add_ai_charge_chan(
             self, physical_channel, name_to_assign_to_channel="",
