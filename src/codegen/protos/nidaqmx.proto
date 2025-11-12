@@ -11629,3 +11629,4 @@ message WriteDigitalWaveformsResponse {
   int32 status = 1;
   int32 samps_per_chan_written = 2;
 }
+
