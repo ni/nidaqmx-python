@@ -5,7 +5,6 @@ from typing import Any
 import numpy
 from nitypes.waveform import DigitalWaveform
 
-from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, requires_feature
 from nidaqmx.constants import FillMode
 from nidaqmx.stream_writers._channel_writer_base import (
     AUTO_START_UNSET,
@@ -285,7 +284,6 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
 
         return self._interpreter.write_digital_scalar_u32(self._handle, auto_start, timeout, data)
 
-    @requires_feature(WAVEFORM_SUPPORT)
     def write_waveform(self, waveform: DigitalWaveform[Any], timeout: float = 10.0) -> int:
         """Writes a waveform to a single digital output channel in a task.
 

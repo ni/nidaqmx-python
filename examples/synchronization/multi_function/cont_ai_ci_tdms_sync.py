@@ -25,8 +25,6 @@ from nidaqmx.constants import (
 )
 from nidaqmx.stream_readers import AnalogMultiChannelReader, CounterReader
 
-os.environ["NIDAQMX_ENABLE_WAVEFORM_SUPPORT"] = "1"
-
 # Configuration
 SAMPLE_RATE = 1000
 SAMPLES_PER_CHANNEL = 1000

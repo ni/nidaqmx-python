@@ -5,7 +5,6 @@ from typing import Any
 from nitypes.waveform import DigitalWaveform
 
 from nidaqmx import DaqError
-from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, requires_feature
 from nidaqmx.constants import READ_ALL_AVAILABLE, FillMode, ReallocationPolicy
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.stream_readers._channel_reader_base import ChannelReaderBase
@@ -486,7 +485,6 @@ class DigitalMultiChannelReader(ChannelReaderBase):
             self._handle, 1, timeout, FillMode.GROUP_BY_CHANNEL.value, data
         )
 
-    @requires_feature(WAVEFORM_SUPPORT)
     def read_waveforms(
         self,
         waveforms: list[DigitalWaveform[Any]],

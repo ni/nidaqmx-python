@@ -10,7 +10,6 @@ import numpy
 from nitypes.waveform import AnalogWaveform, DigitalWaveform
 
 from nidaqmx import utils
-from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, requires_feature
 from nidaqmx.constants import (
     READ_ALL_AVAILABLE,
     AcquisitionType,
@@ -806,7 +805,6 @@ class Task:
                     :samples_read
                 ]
 
-    @requires_feature(WAVEFORM_SUPPORT)
     def read_waveform(self, number_of_samples_per_channel=READ_ALL_AVAILABLE, timeout=10.0):
         """Reads samples from the task or virtual channels you specify, and returns them as waveforms.
 
@@ -1588,7 +1586,6 @@ class Task:
             isinstance(wf, DigitalWaveform) for wf in data
         )
 
-    @requires_feature(WAVEFORM_SUPPORT)
     def write_waveform(
         self,
         waveforms: (

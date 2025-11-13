@@ -4,7 +4,6 @@ import numpy
 import pytest
 
 import nidaqmx
-from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
 from nidaqmx.errors import DaqError
 from tests.component._digital_utils import (
     _create_digital_waveform,
@@ -16,20 +15,6 @@ from tests.component._digital_utils import (
     _get_waveform_data,
     _get_waveform_data_msb,
 )
-
-
-@pytest.mark.disable_feature_toggle(WAVEFORM_SUPPORT)
-def test___task___write_waveform_feature_disabled___raises_feature_not_supported_error(
-    do_single_line_task: nidaqmx.Task,
-) -> None:
-    waveform = _create_digital_waveform_uint8(10)
-
-    with pytest.raises(FeatureNotSupportedError) as exc_info:
-        do_single_line_task.write_waveform(waveform)
-
-    error_message = exc_info.value.args[0]
-    assert "WAVEFORM_SUPPORT feature is not supported" in error_message
-    assert "NIDAQMX_ENABLE_WAVEFORM_SUPPORT" in error_message
 
 
 def test___task___write_waveform_single_line___outputs_match_final_values(
@@ -303,20 +288,6 @@ def test___task___write_waveform_port_uint32___outputs_match_final_values(
         assert (
             actual_value == _get_waveform_data_msb(waveform)[i - 1]
         )  # TODO: AB#3178052 - change to _get_waveform_data()
-
-
-@pytest.mark.disable_feature_toggle(WAVEFORM_SUPPORT)
-def test___task___write_waveforms_feature_disabled___raises_feature_not_supported_error(
-    do_multi_channel_multi_line_task: nidaqmx.Task,
-) -> None:
-    waveforms = [_create_digital_waveform_uint8(20), _create_digital_waveform_uint8(20)]
-
-    with pytest.raises(FeatureNotSupportedError) as exc_info:
-        do_multi_channel_multi_line_task.write_waveform(waveforms)
-
-    error_message = exc_info.value.args[0]
-    assert "WAVEFORM_SUPPORT feature is not supported" in error_message
-    assert "NIDAQMX_ENABLE_WAVEFORM_SUPPORT" in error_message
 
 
 def test___task___write_waveforms_single_lines___outputs_match_final_values(

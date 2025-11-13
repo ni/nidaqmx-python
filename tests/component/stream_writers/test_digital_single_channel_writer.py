@@ -7,7 +7,6 @@ import numpy
 import pytest
 
 import nidaqmx
-from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
 from nidaqmx.errors import DaqError
 from nidaqmx.stream_writers import DigitalSingleChannelWriter
 from tests.component._digital_utils import (
@@ -189,21 +188,6 @@ def test___digital_single_channel_writer___write_many_sample_port_uint32_with_wr
         writer.write_many_sample_port_uint32(data)
 
     assert "uint32" in exc_info.value.args[0]
-
-
-@pytest.mark.disable_feature_toggle(WAVEFORM_SUPPORT)
-def test___digital_single_channel_writer___write_waveform_feature_disabled___raises_feature_not_supported_error(
-    do_single_line_task: nidaqmx.Task,
-) -> None:
-    writer = DigitalSingleChannelWriter(do_single_line_task.out_stream)
-    waveform = _create_digital_waveform_uint8(20)
-
-    with pytest.raises(FeatureNotSupportedError) as exc_info:
-        writer.write_waveform(waveform)
-
-    error_message = exc_info.value.args[0]
-    assert "WAVEFORM_SUPPORT feature is not supported" in error_message
-    assert "NIDAQMX_ENABLE_WAVEFORM_SUPPORT" in error_message
 
 
 def test___digital_single_channel_writer___write_waveform_single_line___outputs_match_final_values(

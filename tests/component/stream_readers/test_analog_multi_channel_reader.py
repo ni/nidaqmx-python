@@ -11,7 +11,6 @@ from nitypes.waveform import AnalogWaveform, SampleIntervalMode
 
 import nidaqmx
 import nidaqmx.system
-from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
 from nidaqmx.constants import AcquisitionType, ReallocationPolicy, WaveformAttributeMode
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.stream_readers import AnalogMultiChannelReader, DaqError
@@ -75,23 +74,6 @@ def test___analog_multi_channel_reader___read_many_sample_with_wrong_dtype___rai
         _ = reader.read_many_sample(data, samples_to_read)
 
     assert "float64" in exc_info.value.args[0]
-
-
-@pytest.mark.disable_feature_toggle(WAVEFORM_SUPPORT)
-def test___analog_multi_channel_reader___read_waveforms_feature_disabled___raises_feature_not_supported_error(
-    ai_multi_channel_task_with_timing: nidaqmx.Task,
-) -> None:
-    reader = AnalogMultiChannelReader(ai_multi_channel_task_with_timing.in_stream)
-    num_channels = ai_multi_channel_task_with_timing.number_of_channels
-    samples_to_read = 10
-    waveforms = [AnalogWaveform(samples_to_read) for _ in range(num_channels)]
-
-    with pytest.raises(FeatureNotSupportedError) as exc_info:
-        reader.read_waveforms(waveforms)
-
-    error_message = exc_info.value.args[0]
-    assert "WAVEFORM_SUPPORT feature is not supported" in error_message
-    assert "NIDAQMX_ENABLE_WAVEFORM_SUPPORT" in error_message
 
 
 def test___analog_multi_channel_reader___read_waveforms___returns_valid_waveforms(

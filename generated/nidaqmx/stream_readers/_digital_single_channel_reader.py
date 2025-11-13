@@ -6,7 +6,6 @@ import numpy
 from nitypes.waveform import DigitalWaveform
 
 from nidaqmx import DaqError
-from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, requires_feature
 from nidaqmx.constants import READ_ALL_AVAILABLE, FillMode, ReallocationPolicy
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.stream_readers._channel_reader_base import ChannelReaderBase
@@ -393,7 +392,6 @@ class DigitalSingleChannelReader(ChannelReaderBase):
         """  # noqa: W505 - doc line too long (103 > 100 characters) (auto-generated noqa)
         return self._interpreter.read_digital_scalar_u32(self._handle, timeout)
 
-    @requires_feature(WAVEFORM_SUPPORT)
     def read_waveform(
         self,
         waveform: DigitalWaveform[Any],

@@ -156,5 +156,3 @@ def requires_feature(
 # --------------------------------------
 # Define feature toggle constants here:
 # --------------------------------------
-
-WAVEFORM_SUPPORT = FeatureToggle("WAVEFORM_SUPPORT", CodeReadiness.INCOMPLETE)

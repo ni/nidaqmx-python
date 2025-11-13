@@ -4,14 +4,10 @@ This example demonstrates how to output a continuous digital
 pattern using the DAQ device's clock.
 """
 
-import os
+from nitypes.waveform import DigitalWaveform
 
-os.environ["NIDAQMX_ENABLE_WAVEFORM_SUPPORT"] = "1"
-
-from nitypes.waveform import DigitalWaveform  # noqa: E402
-
-import nidaqmx  # noqa: E402 # Must import after setting environment variable
-from nidaqmx.constants import AcquisitionType, LineGrouping  # noqa: E402
+import nidaqmx
+from nidaqmx.constants import AcquisitionType, LineGrouping
 
 with nidaqmx.Task() as task:
     waveform = DigitalWaveform(sample_count=100, signal_count=16)

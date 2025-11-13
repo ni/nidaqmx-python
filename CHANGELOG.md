@@ -34,7 +34,8 @@ All notable changes to this project will be documented in this file.
 
 * ### Major Changes
     * Removed support for Python 3.9.
-    * (IN PROGRESS behind "WAVEFORM_SUPPORT" feature toggle) Added support for reading and writing Waveform data through gRPC using [NI gRPC Device Server](https://github.com/ni/grpc-device).
+    * Completed support for reading and writing Waveforms, and removed the WAVEFORM_SUPPORT feature toggle.
+        * Added support for reading and writing Waveform data through gRPC using [NI gRPC Device Server](https://github.com/ni/grpc-device).
 
 * ### Known Issues
     * ...

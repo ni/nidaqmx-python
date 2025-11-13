@@ -5,7 +5,6 @@ from typing import Any
 
 from nitypes.waveform import AnalogWaveform
 
-from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, requires_feature
 from nidaqmx.constants import FillMode
 from nidaqmx.stream_writers._channel_writer_base import (
     AUTO_START_UNSET,
@@ -91,7 +90,6 @@ class AnalogMultiChannelWriter(ChannelWriterBase):
             self._handle, 1, auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data
         )
 
-    @requires_feature(WAVEFORM_SUPPORT)
     def write_waveforms(
         self, waveforms: Sequence[AnalogWaveform[Any]], timeout: float = 10.0
     ) -> int:

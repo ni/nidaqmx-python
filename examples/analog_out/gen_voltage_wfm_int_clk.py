@@ -5,14 +5,10 @@ voltage samples to an Analog Output Channel using an internal
 sample clock.
 """
 
-import os
+from nitypes.waveform import AnalogWaveform
 
-os.environ["NIDAQMX_ENABLE_WAVEFORM_SUPPORT"] = "1"
-
-from nitypes.waveform import AnalogWaveform  # noqa: E402
-
-import nidaqmx  # noqa: E402 # Must import after setting environment variable
-from nidaqmx.constants import AcquisitionType  # noqa: E402
+import nidaqmx
+from nidaqmx.constants import AcquisitionType
 
 with nidaqmx.Task() as task:
     total_samples = 1000

@@ -4,7 +4,6 @@ from typing import Any
 
 from nitypes.waveform import AnalogWaveform
 
-from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, requires_feature
 from nidaqmx.constants import FillMode
 from nidaqmx.stream_writers._channel_writer_base import (
     AUTO_START_UNSET,
@@ -82,7 +81,6 @@ class AnalogSingleChannelWriter(ChannelWriterBase):
 
         return self._interpreter.write_analog_scalar_f64(self._handle, auto_start, timeout, data)
 
-    @requires_feature(WAVEFORM_SUPPORT)
     def write_waveform(self, waveform: AnalogWaveform[Any], timeout: float = 10.0) -> int:
         """Writes a waveform to a single analog output channel in a task.
 

@@ -6,7 +6,6 @@ import numpy
 import pytest
 
 import nidaqmx
-from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
 from nidaqmx.stream_writers import AnalogMultiChannelWriter
 from tests.component._analog_utils import (
     AO_VOLTAGE_EPSILON,
@@ -85,25 +84,6 @@ def test___analog_multi_channel_writer___write_many_sample_with_wrong_dtype___ra
         _ = writer.write_many_sample(data)
 
     assert "float64" in exc_info.value.args[0]
-
-
-@pytest.mark.disable_feature_toggle(WAVEFORM_SUPPORT)
-def test___analog_multi_channel_writer___write_waveforms_feature_disabled___raises_feature_not_supported_error(
-    ao_multi_channel_task: nidaqmx.Task,
-) -> None:
-    writer = AnalogMultiChannelWriter(ao_multi_channel_task.out_stream)
-    num_samples = 10
-    waveforms = [
-        _create_constant_waveform(num_samples),
-        _create_constant_waveform(num_samples),
-    ]
-
-    with pytest.raises(FeatureNotSupportedError) as exc_info:
-        writer.write_waveforms(waveforms)
-
-    error_message = exc_info.value.args[0]
-    assert "WAVEFORM_SUPPORT feature is not supported" in error_message
-    assert "NIDAQMX_ENABLE_WAVEFORM_SUPPORT" in error_message
 
 
 def test___analog_multi_channel_writer___write_waveforms___output_matches_final_values(

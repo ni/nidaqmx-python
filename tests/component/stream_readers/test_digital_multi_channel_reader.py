@@ -11,7 +11,6 @@ from nitypes.waveform import DigitalWaveform, SampleIntervalMode
 
 import nidaqmx
 import nidaqmx.system
-from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
 from nidaqmx.constants import (
     AcquisitionType,
     LineGrouping,
@@ -310,21 +309,6 @@ def test___digital_multi_channel_reader___read_many_sample_port_uint32_with_wron
         _ = reader.read_many_sample_port_uint32(data, number_of_samples_per_channel=samples_to_read)
 
     assert "uint32" in exc_info.value.args[0]
-
-
-@pytest.mark.disable_feature_toggle(WAVEFORM_SUPPORT)
-def test___digital_multi_channel_multi_line_reader___read_waveforms_feature_disabled___raises_feature_not_supported_error(
-    di_multi_chan_multi_line_timing_task: nidaqmx.Task,
-) -> None:
-    reader = DigitalMultiChannelReader(di_multi_chan_multi_line_timing_task.in_stream)
-    waveforms = [DigitalWaveform(50) for _ in range(8)]
-
-    with pytest.raises(FeatureNotSupportedError) as exc_info:
-        reader.read_waveforms(waveforms)
-
-    error_message = exc_info.value.args[0]
-    assert "WAVEFORM_SUPPORT feature is not supported" in error_message
-    assert "NIDAQMX_ENABLE_WAVEFORM_SUPPORT" in error_message
 
 
 def test___digital_multi_channel_multi_line_reader___read_waveforms___returns_valid_waveforms(

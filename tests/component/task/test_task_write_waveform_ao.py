@@ -4,7 +4,6 @@ import numpy as np
 import pytest
 
 import nidaqmx
-from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
 from tests.component._analog_utils import (
     AO_VOLTAGE_EPSILON,
     _create_constant_waveform,
@@ -16,20 +15,6 @@ from tests.component._analog_utils import (
     _setup_synchronized_multi_channel_waveform_tasks,
     _setup_synchronized_waveform_tasks,
 )
-
-
-@pytest.mark.disable_feature_toggle(WAVEFORM_SUPPORT)
-def test___task___write_waveform_feature_disabled___raises_feature_not_supported_error(
-    ao_single_channel_task: nidaqmx.Task,
-) -> None:
-    waveform = _create_constant_waveform(10)
-
-    with pytest.raises(FeatureNotSupportedError) as exc_info:
-        ao_single_channel_task.write_waveform(waveform)
-
-    error_message = exc_info.value.args[0]
-    assert "WAVEFORM_SUPPORT feature is not supported" in error_message
-    assert "NIDAQMX_ENABLE_WAVEFORM_SUPPORT" in error_message
 
 
 def test___task___write_linear_ramp_waveform___output_matches_final_value(
@@ -165,23 +150,6 @@ def test___task___write_waveform_with_timing___all_samples_match_waveform_data(
     sample_clk_task.start()
     actual_values = ai_task.read(number_of_samples_per_channel=num_samples, timeout=2.0)
     np.testing.assert_allclose(actual_values, waveform.scaled_data, atol=AO_VOLTAGE_EPSILON)
-
-
-@pytest.mark.disable_feature_toggle(WAVEFORM_SUPPORT)
-def test___task___write_waveforms_feature_disabled___raises_feature_not_supported_error(
-    ao_multi_channel_task: nidaqmx.Task,
-) -> None:
-    num_samples = 10
-    waveforms = [
-        _create_constant_waveform(num_samples),
-        _create_constant_waveform(num_samples),
-    ]
-
-    with pytest.raises(FeatureNotSupportedError) as exc_info:
-        ao_multi_channel_task.write_waveform(waveforms)
-
-    error_message = exc_info.value.args[0]
-    assert "WAVEFORM_SUPPORT feature is not supported" in error_message
 
 
 def test___task___write_waveforms___output_matches_final_values(
