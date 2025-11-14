@@ -53,6 +53,10 @@ DOResistorPowerUpState = collections.namedtuple(
 
 CDAQSyncConnection = collections.namedtuple("CDAQSyncConnection", ["output_port", "input_port"])
 
+DriverVersion = collections.namedtuple(
+    "DriverVersion", ["major_version", "minor_version", "update_version"]
+)
+
 # endregion
 
 # region ID Pin namedtuples

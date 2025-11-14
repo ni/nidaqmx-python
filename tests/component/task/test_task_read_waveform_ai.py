@@ -4,6 +4,7 @@ import pytest
 from nitypes.waveform import AnalogWaveform
 
 import nidaqmx
+from nidaqmx.constants import READ_ALL_AVAILABLE
 from tests.component._analog_utils import (
     AI_VOLTAGE_EPSILON,
     _get_voltage_offset_for_chan,
@@ -122,4 +123,29 @@ def test___analog_multi_channel_finite___read_waveform_too_many_samples___return
     for chan_index, waveform in enumerate(waveforms):
         expected = _get_voltage_offset_for_chan(chan_index)
         assert waveform.sample_count == samples_available
+        assert waveform.raw_data[0] == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
+
+
+def test___analog_single_channel___read_waveform_read_all_available___returns_valid_waveform(
+    ai_single_channel_task_with_timing: nidaqmx.Task,
+) -> None:
+    waveform = ai_single_channel_task_with_timing.read_waveform(READ_ALL_AVAILABLE)
+
+    assert isinstance(waveform, AnalogWaveform)
+    expected = _get_voltage_offset_for_chan(0)
+    assert waveform.sample_count == 50
+    assert waveform.raw_data[0] == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
+
+
+def test___analog_multi_channel___read_waveform_read_all_available___returns_valid_waveforms(
+    ai_multi_channel_task_with_timing: nidaqmx.Task,
+) -> None:
+    waveforms = ai_multi_channel_task_with_timing.read_waveform(READ_ALL_AVAILABLE)
+
+    assert isinstance(waveforms, list)
+    assert len(waveforms) == ai_multi_channel_task_with_timing.number_of_channels
+    assert all(isinstance(waveform, AnalogWaveform) for waveform in waveforms)
+    for chan_index, waveform in enumerate(waveforms):
+        expected = _get_voltage_offset_for_chan(chan_index)
+        assert waveform.sample_count == 50
         assert waveform.raw_data[0] == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)

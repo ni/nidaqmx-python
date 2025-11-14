@@ -15,6 +15,7 @@ from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
 from nidaqmx.constants import (
     AcquisitionType,
     LineGrouping,
+    READ_ALL_AVAILABLE,
     ReallocationPolicy,
     WaveformAttributeMode,
 )
@@ -808,3 +809,26 @@ def test___digital_multi_channel_multi_line_reader___read_waveform_all_dtypes___
     assert len(waveforms) == num_channels
     for chan, waveform in enumerate(waveforms):
         assert _get_waveform_data(waveform) == _get_expected_data_for_line(num_samples, chan)
+
+
+def test___digital_multi_channel_multi_line_reader___read_waveforms_read_all_available___returns_valid_waveforms(
+    di_multi_chan_multi_line_timing_task: nidaqmx.Task,
+) -> None:
+    reader = DigitalMultiChannelReader(di_multi_chan_multi_line_timing_task.in_stream)
+    num_channels = di_multi_chan_multi_line_timing_task.number_of_channels
+    num_lines = _get_num_di_lines_in_task(di_multi_chan_multi_line_timing_task)
+    waveforms = [DigitalWaveform(100) for _ in range(num_channels)]
+
+    samples_read = reader.read_waveforms(waveforms, READ_ALL_AVAILABLE)
+
+    assert samples_read == 50
+    assert num_channels == 8
+    assert num_lines == 8
+    assert isinstance(waveforms, list)
+    assert len(waveforms) == num_channels
+    for chan, waveform in enumerate(waveforms):
+        assert _get_waveform_data(waveform) == _get_expected_data_for_line(samples_read, chan)
+        assert _is_timestamp_close_to_now(waveform.timing.timestamp)
+        assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
+        assert waveform.channel_name == di_multi_chan_multi_line_timing_task.di_channels[chan].name
+        assert waveform.sample_count == samples_read

@@ -4,6 +4,7 @@ import collections
 import ctypes
 import deprecation
 import numpy
+import typing
 
 from nidaqmx import utils
 from nidaqmx.system._collections.device_collection import DeviceCollection
@@ -19,6 +20,7 @@ from nidaqmx.constants import (
     SignalModifiers, WAIT_INFINITELY)
 from nidaqmx.types import (
     AOPowerUpState, CDAQSyncConnection, DOPowerUpState, DOResistorPowerUpState)
+import nidaqmx.types
 from nidaqmx.system.device import _DeviceAlternateConstructor
 
 __all__ = ['System']
@@ -70,9 +72,7 @@ class System:
         return DeviceCollection(self._interpreter)
 
 
-    DriverVersion = collections.namedtuple(
-            'DriverVersion', ['major_version', 'minor_version',
-                              'update_version'])
+    DriverVersion: typing.TypeAlias = nidaqmx.types.DriverVersion
 
     @property
     def driver_version(self):
@@ -87,8 +87,8 @@ class System:
             - update_version (int): Indicates the update portion of the
               installed version of NI-DAQmx, such as 1 for version 9.0.1.
         """
-        return System.DriverVersion(self._major_version, self._minor_version,
-                                    self._update_version)
+        return nidaqmx.types.DriverVersion(self._major_version, self._minor_version,
+                                           self._update_version)
 
     @property
     def global_channels(self):

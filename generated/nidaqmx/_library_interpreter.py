@@ -19,6 +19,7 @@ from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpoin
 from nidaqmx.constants import FillMode, WaveformAttributeMode
 from nidaqmx.error_codes import DAQmxErrors, DAQmxWarnings
 from nidaqmx.errors import DaqError, DaqFunctionNotSupportedError, DaqReadError, DaqWarning, DaqWriteError
+from nidaqmx.types import DriverVersion
 from nidaqmx._lib_time import AbsoluteTime
 from nidaqmx._waveform_utils import get_num_samps_per_chan
 from nitypes.waveform.typing import ExtendedPropertyValue
@@ -74,7 +75,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     """
     # Do not add per-task state to the interpreter class.
-    __slots__ = ()
+    __slots__ = ('_driver_version',)
 
     def __init__(self):
         global _was_runtime_environment_set
@@ -92,6 +93,15 @@ class LibraryInterpreter(BaseInterpreter):
                 pass
             finally:
                 _was_runtime_environment_set = True
+
+        major_version = self.get_system_info_attribute_uint32(0x1272)
+        minor_version = self.get_system_info_attribute_uint32(0x1923)
+        update_version = self.get_system_info_attribute_uint32(0x2f22)
+        self._driver_version = DriverVersion(major_version, minor_version, update_version)
+
+    @property
+    def driver_version(self):
+        return self._driver_version
 
 
     def add_cdaq_sync_connection(self, port_list):

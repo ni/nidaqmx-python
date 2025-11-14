@@ -1858,6 +1858,11 @@ class BaseInterpreter(abc.ABC):
     def hash_task_handle(self, task_handle):
         raise NotImplementedError
 
+    @property
+    @abc.abstractmethod
+    def driver_version(self):
+        raise NotImplementedError
+
     @abc.abstractmethod
     def read_analog_waveform(
         self,

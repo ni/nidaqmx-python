@@ -493,7 +493,7 @@ class DigitalMultiChannelReader(ChannelReaderBase):
         number_of_samples_per_channel: int = READ_ALL_AVAILABLE,
         reallocation_policy: ReallocationPolicy = ReallocationPolicy.TO_GROW,
         timeout: float = 10.0,
-    ) -> list[DigitalWaveform[Any]]:
+    ) -> int:
         """Reads one or more samples from one or more digital input channels into a list of waveforms.
 
         Args:
@@ -568,7 +568,7 @@ class DigitalMultiChannelReader(ChannelReaderBase):
                         task_name=self._task.name,
                     )
 
-        waveforms = self._interpreter.read_digital_waveforms(
+        return self._interpreter.read_digital_waveforms(
             self._handle,
             number_of_channels,
             number_of_samples_per_channel,
@@ -577,5 +577,3 @@ class DigitalMultiChannelReader(ChannelReaderBase):
             waveforms,
             self._in_stream.waveform_attribute_mode,
         )
-
-        return waveforms

@@ -26,6 +26,7 @@ from ni.protobuf.types.waveform_conversion import (
 )
 from nidaqmx.constants import WaveformAttributeMode
 from nidaqmx.error_codes import DAQmxErrors
+from nidaqmx.types import DriverVersion
 from nidaqmx._grpc_time import convert_time_to_timestamp, convert_timestamp_to_time
 from nidaqmx._waveform_utils import get_num_samps_per_chan
 from session_pb2 import Session
@@ -94,11 +95,21 @@ class GrpcStubInterpreter(BaseInterpreter):
     __slots__ = [
         '_grpc_options',
         '_client',
+        '_driver_version',
     ]
 
     def __init__(self, grpc_options):
         self._grpc_options = grpc_options
         self._client = nidaqmx_grpc.NiDAQmxStub(grpc_options.grpc_channel)
+        try:
+            major_version = self.get_system_info_attribute_uint32(0x1272)
+            minor_version = self.get_system_info_attribute_uint32(0x1923)
+            update_version = self.get_system_info_attribute_uint32(0x2f22)
+        except Exception:
+            major_version = 0
+            minor_version = 0
+            update_version = 0
+        self._driver_version = DriverVersion(major_version, minor_version, update_version)
 
     def _invoke(self, func, request, metadata=None):
         try:
@@ -176,6 +187,10 @@ class GrpcStubInterpreter(BaseInterpreter):
                 raise event_stream.exception()
         except grpc.RpcError as rpc_error:
             self._handle_rpc_error(rpc_error)
+
+    @property
+    def driver_version(self):
+        return self._driver_version
 
     def add_cdaq_sync_connection(self, port_list):
         response = self._invoke(
