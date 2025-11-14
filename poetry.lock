@@ -1790,14 +1790,14 @@ toml = ">=0.10.1"
 
 [[package]]
 name = "nitypes"
-version = "1.1.0.dev0"
+version = "1.0.0"
 description = "Data types for NI Python APIs"
 optional = false
 python-versions = "<4.0,>=3.9"
 groups = ["main"]
 files = [
-    {file = "nitypes-1.1.0.dev0-py3-none-any.whl", hash = "sha256:1dd0d15bb741294672ea7d61d98e951c5802eec0130d0162f4f19008dd74c0f6"},
-    {file = "nitypes-1.1.0.dev0.tar.gz", hash = "sha256:a82d2f518f514a24bfb3b9c4e023db23097a786ca40155693610d09578d86f10"},
+    {file = "nitypes-1.0.0-py3-none-any.whl", hash = "sha256:545dff978040fd92a68876023b8b6ff666c1d861ead1b3e7771108754bd57345"},
+    {file = "nitypes-1.0.0.tar.gz", hash = "sha256:dc5ecb8b5f52570c2311daaa60ce6dca9712d7151236ef1f5314ad6ac02e0bdc"},
 ]
 
 [package.dependencies]
