@@ -17,10 +17,6 @@ jobs:
       # Fail-fast skews the pass/fail ratio and seems to make pytest produce
       # incomplete JUnit XML results.
       fail-fast: false
-    env:
-      # Work around https://github.com/ni/nidaqmx-python/issues/862 - docs tox
-      # env fails on rdss-nidaqmxbot-win-10-py32
-      tox-args: ${{ matrix.configuration == 'win-10-py32' && '--skip-env docs' || '' }}
     timeout-minutes: 90
     steps:
       - name: Check out repo
@@ -41,7 +37,7 @@ jobs:
       - name: Install dependencies
         run: poetry install
       - name: Run system tests
-        run: poetry run tox ${{ env.tox-args }}
+        run: poetry run tox
       - name: Rename test results
         # TODO: Add Git Bash to the path on self-hosted Windows runners
         run: Get-ChildItem test_results/*.xml | Rename-Item -NewName { $_.Name -replace '.xml','-${{ matrix.configuration }}.xml' }
