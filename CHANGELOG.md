@@ -31,6 +31,7 @@ All notable changes to this project will be documented in this file.
 
 * ### Resolved Issues
     * [820: Create a synchronization example for TDMS logging](https://github.com/ni/nidaqmx-python/issues/820)
+    * [862: docs tox env fails on rdss-nidaqmxbot-win-10-py32](https://github.com/ni/nidaqmx-python/issues/862)
 
 * ### Major Changes
     * Removed support for Python 3.9.
