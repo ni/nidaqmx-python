@@ -12,7 +12,12 @@ from nitypes.waveform import AnalogWaveform, SampleIntervalMode
 import nidaqmx
 import nidaqmx.system
 from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
-from nidaqmx.constants import AcquisitionType, ReallocationPolicy, WaveformAttributeMode
+from nidaqmx.constants import (
+    READ_ALL_AVAILABLE,
+    AcquisitionType,
+    ReallocationPolicy,
+    WaveformAttributeMode,
+)
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.stream_readers import AnalogSingleChannelReader, DaqError
 from tests.component._analog_utils import (
@@ -344,3 +349,22 @@ def test___analog_single_channel_reader_with_none_flag___read_waveform___minimal
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.NONE
     assert waveform.channel_name == ""
     assert waveform.units == ""
+
+
+def test___analog_single_channel_reader___read_waveform_read_all_available___returns_valid_waveform(
+    ai_single_channel_task_with_timing: nidaqmx.Task,
+) -> None:
+    reader = AnalogSingleChannelReader(ai_single_channel_task_with_timing.in_stream)
+    waveform = AnalogWaveform(100)
+
+    samples_read = reader.read_waveform(waveform, READ_ALL_AVAILABLE)
+
+    assert samples_read == 50
+    assert isinstance(waveform, AnalogWaveform)
+    assert waveform.sample_count == samples_read
+    expected = _get_voltage_offset_for_chan(0)
+    assert waveform.scaled_data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
+    assert _is_timestamp_close_to_now(waveform.timing.timestamp)
+    assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
+    assert waveform.channel_name == ai_single_channel_task_with_timing.ai_channels[0].name
+    assert waveform.units == "Volts"

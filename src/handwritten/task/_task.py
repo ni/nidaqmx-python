@@ -294,12 +294,16 @@ class Task:
         if num_samps_per_chan is NUM_SAMPLES_UNSET:
             return 1
         elif num_samps_per_chan == READ_ALL_AVAILABLE:
-            acq_type = self.timing.samp_quant_samp_mode
-
-            if acq_type == AcquisitionType.FINITE and not self.in_stream.read_all_avail_samp:
-                return self.timing.samp_quant_samp_per_chan
+            if self._interpreter.driver_version >= (24, 5):
+                # DAQmx_DefaultNumberOfSamplesToRead is 0x31E8
+                return self._interpreter.get_read_attribute_uint32(self._handle, 0x31E8)
             else:
-                return self.in_stream.avail_samp_per_chan
+                acq_type = self.timing.samp_quant_samp_mode
+
+                if acq_type == AcquisitionType.FINITE and not self.in_stream.read_all_avail_samp:
+                    return self.timing.samp_quant_samp_per_chan
+                else:
+                    return self.in_stream.avail_samp_per_chan
         else:
             return num_samps_per_chan
 
