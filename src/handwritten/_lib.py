@@ -17,7 +17,7 @@ from nidaqmx.errors import (
 )
 
 if TYPE_CHECKING:
-    from typing import TypeAlias
+    from typing_extensions import TypeAlias
 
 
 _DAQ_NOT_FOUND_MESSAGE = (

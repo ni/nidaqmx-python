@@ -6,6 +6,8 @@ This example demonstrates how to:
 3. Log data from multiple tasks to a single TDMS file
 """
 
+from __future__ import annotations
+
 import os
 import queue
 import threading

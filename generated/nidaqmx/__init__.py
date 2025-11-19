@@ -1,5 +1,7 @@
 """The NI-DAQmx API for Python."""
 
+from importlib.metadata import version
+
 from nidaqmx.errors import (
     DaqError,
     DaqReadError,
@@ -11,11 +13,6 @@ from nidaqmx.grpc_session_options import *  # noqa: F403 - 'from nidaqmx.grpc_se
 from nidaqmx.scale import Scale
 from nidaqmx.task import Task
 from nidaqmx.types import CtrFreq, CtrTick, CtrTime
-
-try:
-    from importlib.metadata import version
-except ImportError:
-    from importlib_metadata import version  # type: ignore[no-redef]
 
 __version__ = version(__name__)
 

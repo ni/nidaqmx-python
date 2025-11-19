@@ -55,7 +55,7 @@ system.
 Python Version Support
 ----------------------
 
-**nidaqmx** supports CPython 3.10+.
+**nidaqmx** supports CPython 3.9+.
 
 **nidaqmx** supports PyPy3 for non-gRPC use cases. For the status of PyPy support for gRPC,
 see `PyPy support (grpc/grpc#4221) <https://github.com/grpc/grpc/issues/4221>`_.
