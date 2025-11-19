@@ -12,6 +12,8 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
         python-version: ["3.9", "3.14"] # oldest supported and latest tested
+    env:
+      codegen-python-version: "3.9"
     steps:
       - name: Check out repo
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
@@ -31,9 +33,10 @@ jobs:
       - name: Run Bandit security checks
         run: poetry run bandit -c pyproject.toml -r generated/nidaqmx
       - name: Generate ni-daqmx files
-        if: ${{ matrix.python-version == '3.9' }} # oldest supported
+        if: ${{ runner.os == 'Linux' && matrix.python-version == env.codegen-python-version }}
         run: |
           rm -fr generated/nidaqmx
           poetry run python src/codegen --dest generated/nidaqmx
       - name: Check for files dirtied by codegen
+        if: ${{ runner.os == 'Linux' && matrix.python-version == env.codegen-python-version }}
         run: git diff --exit-code
