@@ -26,7 +26,7 @@ from nitypes.waveform.typing import ExtendedPropertyValue
 from nitypes.waveform import AnalogWaveform, DigitalWaveform, SampleIntervalMode, Timing, ExtendedPropertyDictionary
 
 if TYPE_CHECKING:
-    from typing import TypeAlias
+    from typing_extensions import TypeAlias
 
 _logger = logging.getLogger(__name__)
 _was_runtime_environment_set = None

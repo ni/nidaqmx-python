@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import functools
-import sys
 from collections.abc import Callable
 from enum import Enum
 from typing import TYPE_CHECKING, TypeVar
@@ -14,12 +13,7 @@ from nidaqmx._dotenvpath import get_dotenv_search_path
 from nidaqmx.errors import FeatureNotSupportedError
 
 if TYPE_CHECKING:
-    from typing import ParamSpec
-
-    if sys.version_info >= (3, 11):
-        from typing import Self
-    else:
-        from typing_extensions import Self
+    from typing_extensions import ParamSpec, Self
 
     _P = ParamSpec("_P")
     _T = TypeVar("_T")
