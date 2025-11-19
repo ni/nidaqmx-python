@@ -696,6 +696,29 @@ class LibraryInterpreter(BaseInterpreter):
             voltage_excit_val, nominal_bridge_resistance, custom_scale_name)
         self.check_for_error(error_code)
 
+    def create_ai_calculated_power_chan(
+            self, task, voltage_physical_channel, current_physical_channel,
+            name_to_assign_to_channel, terminal_config, voltage_min_val,
+            voltage_max_val, current_min_val, current_max_val, units,
+            shunt_resistor_loc, ext_shunt_resistor_val, custom_scale_name):
+        cfunc = lib_importer.windll.DAQmxCreateAICalculatedPowerChan
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes_byte_str]
+
+        error_code = cfunc(
+            task, voltage_physical_channel, current_physical_channel,
+            name_to_assign_to_channel, terminal_config, voltage_min_val,
+            voltage_max_val, current_min_val, current_max_val, units,
+            shunt_resistor_loc, ext_shunt_resistor_val, custom_scale_name)
+        self.check_for_error(error_code)
+
     def create_ai_charge_chan(
             self, task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, custom_scale_name):

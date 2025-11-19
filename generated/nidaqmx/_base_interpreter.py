@@ -230,6 +230,14 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
+    def create_ai_calculated_power_chan(
+            self, task, voltage_physical_channel, current_physical_channel,
+            name_to_assign_to_channel, terminal_config, voltage_min_val,
+            voltage_max_val, current_min_val, current_max_val, units,
+            shunt_resistor_loc, ext_shunt_resistor_val, custom_scale_name):
+        raise NotImplementedError
+
+    @abc.abstractmethod
     def create_ai_charge_chan(
             self, task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, custom_scale_name):

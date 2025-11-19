@@ -539,6 +539,26 @@ class GrpcStubInterpreter(BaseInterpreter):
                 nominal_bridge_resistance=nominal_bridge_resistance,
                 custom_scale_name=custom_scale_name))
 
+    def create_ai_calculated_power_chan(
+            self, task, voltage_physical_channel, current_physical_channel,
+            name_to_assign_to_channel, terminal_config, voltage_min_val,
+            voltage_max_val, current_min_val, current_max_val, units,
+            shunt_resistor_loc, ext_shunt_resistor_val, custom_scale_name):
+        response = self._invoke(
+            self._client.CreateAICalculatedPowerChan,
+            grpc_types.CreateAICalculatedPowerChanRequest(
+                task=task, voltage_physical_channel=voltage_physical_channel,
+                current_physical_channel=current_physical_channel,
+                name_to_assign_to_channel=name_to_assign_to_channel,
+                terminal_config_raw=terminal_config,
+                voltage_min_val=voltage_min_val,
+                voltage_max_val=voltage_max_val,
+                current_min_val=current_min_val,
+                current_max_val=current_max_val, units_raw=units,
+                shunt_resistor_loc_raw=shunt_resistor_loc,
+                ext_shunt_resistor_val=ext_shunt_resistor_val,
+                custom_scale_name=custom_scale_name))
+
     def create_ai_charge_chan(
             self, task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, custom_scale_name):
