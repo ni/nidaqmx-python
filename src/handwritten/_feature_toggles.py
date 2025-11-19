@@ -1,5 +1,6 @@
 """nidaqmx feature toggles."""
 
+# mypy: no-warn-unreachable
 from __future__ import annotations
 
 import functools
@@ -20,8 +21,6 @@ if TYPE_CHECKING:
 
 _PREFIX = "NIDAQMX"
 
-_config = AutoConfig(str(get_dotenv_search_path()))
-
 if TYPE_CHECKING:
     # Work around decouple's lack of type hints.
     def _config(
@@ -29,6 +28,9 @@ if TYPE_CHECKING:
         default: _T | Undefined = undefined,
         cast: Callable[[str], _T] | Undefined = undefined,
     ) -> _T: ...
+
+else:
+    _config = AutoConfig(str(get_dotenv_search_path()))
 
 
 # Based on the recipe at https://docs.python.org/3/howto/enum.html
