@@ -3,7 +3,7 @@ name = "nidaqmx"
 description = "NI-DAQmx Python API"
 license = "MIT"
 keywords = ["nidaqmx", "nidaq", "daqmx", "daq"]
-version = "1.4.0.dev1"
+version = "1.4.0.dev2"
 classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Intended Audience :: Developers",
