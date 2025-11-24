@@ -7,6 +7,7 @@ import nidaqmx.system
 from nidaqmx.constants import READ_ALL_AVAILABLE
 from tests.component._digital_utils import (
     _get_expected_data_for_line,
+    _get_waveform_bitstrings,
     _get_waveform_data,
 )
 
@@ -61,15 +62,24 @@ def test___digital_single_channel___read_waveform_lines_and_port___returns_valid
 
     waveform = di_single_chan_lines_and_port_task.read_waveform(samples_to_read)
 
-    # Note, the data on the port's waveform is MSB instead of LSB because of bug AB#3178052
-    # When that bug is fixed, these asserts should be updated
-    assert _get_waveform_data(waveform) == [0, 1025, 514, 1539, 260, 1285, 774, 1799, 128, 1153]
+    assert _get_waveform_bitstrings(waveform) == [
+        "00000000000",
+        "00100000001",
+        "01000000010",
+        "01100000011",
+        "10000000100",
+        "10100000101",
+        "11000000110",
+        "11100000111",
+        "00000001000",
+        "00100001001",
+    ]
     assert waveform.sample_count == samples_to_read
     assert waveform.channel_name == di_single_chan_lines_and_port_task.di_channels[0].name
     assert waveform._get_signal_names() == [
-        sim_6363_device.di_lines[0].name,
-        sim_6363_device.di_lines[1].name,
         sim_6363_device.di_lines[2].name,
+        sim_6363_device.di_lines[1].name,
+        sim_6363_device.di_lines[0].name,
         sim_6363_device.di_lines[39].name,
         sim_6363_device.di_lines[38].name,
         sim_6363_device.di_lines[37].name,
@@ -162,16 +172,16 @@ def test___digital_multi_channel___read_waveform_different_lines___returns_valid
     assert _get_waveform_data(waveforms[1]) == [0, 0, 1, 1, 2, 2, 3, 3, 0, 0]
     assert waveforms[1].channel_name == di_multi_chan_diff_lines_timing_task.di_channels[1].name
     assert waveforms[1]._get_signal_names() == [
-        sim_6363_device.di_lines[1].name,
         sim_6363_device.di_lines[2].name,
+        sim_6363_device.di_lines[1].name,
     ]
     assert _get_waveform_data(waveforms[2]) == [0, 0, 0, 0, 0, 0, 0, 0, 1, 1]
     assert waveforms[2].channel_name == di_multi_chan_diff_lines_timing_task.di_channels[2].name
     assert waveforms[2]._get_signal_names() == [
-        sim_6363_device.di_lines[3].name,
-        sim_6363_device.di_lines[4].name,
-        sim_6363_device.di_lines[5].name,
         sim_6363_device.di_lines[6].name,
+        sim_6363_device.di_lines[5].name,
+        sim_6363_device.di_lines[4].name,
+        sim_6363_device.di_lines[3].name,
     ]
 
 
@@ -197,21 +207,19 @@ def test___digital_multi_channel___read_waveform_lines_and_port___returns_valid_
     assert waveforms[1].sample_count == samples_to_read
     assert waveforms[1].channel_name == di_multi_chan_lines_and_port_task.di_channels[1].name
     assert waveforms[1]._get_signal_names() == [
-        sim_6363_device.di_lines[1].name,
         sim_6363_device.di_lines[2].name,
+        sim_6363_device.di_lines[1].name,
     ]
     assert _get_waveform_data(waveforms[2]) == [0, 0, 0, 0, 0, 0, 0, 0, 1, 1]
     assert waveforms[2].sample_count == samples_to_read
     assert waveforms[2].channel_name == di_multi_chan_lines_and_port_task.di_channels[2].name
     assert waveforms[2]._get_signal_names() == [
-        sim_6363_device.di_lines[3].name,
-        sim_6363_device.di_lines[4].name,
-        sim_6363_device.di_lines[5].name,
         sim_6363_device.di_lines[6].name,
+        sim_6363_device.di_lines[5].name,
+        sim_6363_device.di_lines[4].name,
+        sim_6363_device.di_lines[3].name,
     ]
-    # Note, the data on the port's waveform is MSB instead of LSB because of bug AB#3178052
-    # When that bug is fixed, these asserts should be updated
-    assert _get_waveform_data(waveforms[3]) == [0, 128, 64, 192, 32, 160, 96, 224, 16, 144]
+    assert _get_waveform_data(waveforms[3]) == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     assert waveforms[3].sample_count == samples_to_read
     assert waveforms[3].channel_name == di_multi_chan_lines_and_port_task.di_channels[3].name
     assert waveforms[3]._get_signal_names() == [

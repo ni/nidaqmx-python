@@ -23,7 +23,7 @@ from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.stream_readers import DaqError, DigitalMultiChannelReader
 from nidaqmx.utils import flatten_channel_string
 from tests.component._digital_utils import (
-    _bool_array_to_int,
+    _bool_array_to_int_lsb,
     _get_expected_data_for_line,
     _get_digital_data,
     _get_expected_digital_port_data_port_major,
@@ -45,7 +45,7 @@ def test___digital_multi_channel_reader___read_one_sample_one_line___returns_val
 
     data = [_read_and_copy(reader.read_one_sample_one_line, sample) for _ in range(samples_to_read)]
 
-    assert [_bool_array_to_int(sample) for sample in data] == _get_digital_data(
+    assert [_bool_array_to_int_lsb(sample) for sample in data] == _get_digital_data(
         num_lines, samples_to_read
     )
 
@@ -75,7 +75,7 @@ def test___digital_multi_channel_reader___read_one_sample_multi_line___returns_v
         _read_and_copy(reader.read_one_sample_multi_line, sample) for _ in range(samples_to_read)
     ]
 
-    assert [_bool_array_to_int(sample[:, 0]) for sample in data] == _get_digital_data(
+    assert [_bool_array_to_int_lsb(sample[:, 0]) for sample in data] == _get_digital_data(
         num_channels, samples_to_read
     )
 
@@ -93,7 +93,7 @@ def test___digital_multi_channel_reader___read_one_sample_multi_line_jagged___re
     ]
 
     assert [
-        [_bool_array_to_int(sample[chan, :]) for chan in range(num_channels)] for sample in data
+        [_bool_array_to_int_lsb(sample[chan, :]) for chan in range(num_channels)] for sample in data
     ] == _get_expected_digital_port_data_sample_major(
         di_multi_channel_port_uint32_task, samples_to_read
     )
@@ -387,8 +387,8 @@ def test___digital_multi_channel_different_lines_reader___read_waveforms___retur
     assert waveforms[1].timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveforms[1].channel_name == di_multi_chan_diff_lines_timing_task.di_channels[1].name
     assert waveforms[1]._get_signal_names() == [
-        sim_6363_device.di_lines[1].name,
         sim_6363_device.di_lines[2].name,
+        sim_6363_device.di_lines[1].name,
     ]
     assert _get_waveform_data(waveforms[2]) == [0, 0, 0, 0, 0, 0, 0, 0, 1, 1]
     assert _is_timestamp_close_to_now(waveforms[2].timing.timestamp)
@@ -396,10 +396,10 @@ def test___digital_multi_channel_different_lines_reader___read_waveforms___retur
     assert waveforms[2].timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveforms[2].channel_name == di_multi_chan_diff_lines_timing_task.di_channels[2].name
     assert waveforms[2]._get_signal_names() == [
-        sim_6363_device.di_lines[3].name,
-        sim_6363_device.di_lines[4].name,
-        sim_6363_device.di_lines[5].name,
         sim_6363_device.di_lines[6].name,
+        sim_6363_device.di_lines[5].name,
+        sim_6363_device.di_lines[4].name,
+        sim_6363_device.di_lines[3].name,
     ]
 
 
@@ -437,22 +437,20 @@ def test___digital_multi_channel_lines_and_port_reader___read_waveforms___return
     assert waveforms[1].sample_count == samples_to_read
     assert waveforms[1].channel_name == di_multi_chan_lines_and_port_task.di_channels[1].name
     assert waveforms[1]._get_signal_names() == [
-        sim_6363_device.di_lines[1].name,
         sim_6363_device.di_lines[2].name,
+        sim_6363_device.di_lines[1].name,
     ]
     assert _get_waveform_data(waveforms[2]) == [0, 0, 0, 0, 0, 0, 0, 0, 1, 1]
     assert _is_timestamp_close_to_now(waveforms[2].timing.timestamp)
     assert waveforms[2].sample_count == samples_to_read
     assert waveforms[2].channel_name == di_multi_chan_lines_and_port_task.di_channels[2].name
     assert waveforms[2]._get_signal_names() == [
-        sim_6363_device.di_lines[3].name,
-        sim_6363_device.di_lines[4].name,
-        sim_6363_device.di_lines[5].name,
         sim_6363_device.di_lines[6].name,
+        sim_6363_device.di_lines[5].name,
+        sim_6363_device.di_lines[4].name,
+        sim_6363_device.di_lines[3].name,
     ]
-    # Note, the data on the port's waveform is MSB instead of LSB because of bug AB#3178052
-    # When that bug is fixed, these asserts should be updated
-    assert _get_waveform_data(waveforms[3]) == [0, 128, 64, 192, 32, 160, 96, 224, 16, 144]
+    assert _get_waveform_data(waveforms[3]) == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     assert _is_timestamp_close_to_now(waveforms[3].timing.timestamp)
     assert waveforms[3].sample_count == samples_to_read
     assert waveforms[3].channel_name == di_multi_chan_lines_and_port_task.di_channels[3].name

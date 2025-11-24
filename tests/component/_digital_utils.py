@@ -119,9 +119,9 @@ def _get_digital_port_data_sample_major(task: nidaqmx.Task, num_samples: int) ->
     return numpy.transpose(result).tolist()
 
 
-def _bool_array_to_int(bool_array: numpy.typing.NDArray[numpy.bool_]) -> int:
+def _bool_array_to_int_lsb(bool_array: numpy.typing.NDArray[numpy.bool_]) -> int:
     result = 0
-    # Simulated data is little-endian
+    # Interpret data as little-endian
     for bit in bool_array[::-1]:
         result = (result << 1) | int(bit)
     return result
@@ -129,7 +129,7 @@ def _bool_array_to_int(bool_array: numpy.typing.NDArray[numpy.bool_]) -> int:
 
 def _bool_array_to_int_msb(bool_array: numpy.typing.NDArray[numpy.bool_]) -> int:
     result = 0
-    # Data from ports is big-endian (see AB#3178052)
+    # Interpret data as big-endian
     for bit in bool_array:
         result = (result << 1) | int(bit)
     return result
@@ -144,12 +144,12 @@ def _int_to_bool_array(num_lines: int, input: int) -> numpy.typing.NDArray[numpy
 
 def _get_waveform_data(waveform: DigitalWaveform[Any]) -> list[int]:
     assert isinstance(waveform, DigitalWaveform)
-    return [_bool_array_to_int(sample) for sample in waveform.data]
-
-
-def _get_waveform_data_msb(waveform: DigitalWaveform[Any]) -> list[int]:
-    assert isinstance(waveform, DigitalWaveform)
     return [_bool_array_to_int_msb(sample) for sample in waveform.data]
+
+
+def _get_waveform_bitstrings(waveform: DigitalWaveform[Any]) -> list[str]:
+    assert isinstance(waveform, DigitalWaveform)
+    return ["".join("1" if bit else "0" for bit in sample) for sample in waveform.data]
 
 
 def _create_digital_waveform_uint8(

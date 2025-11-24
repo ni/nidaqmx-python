@@ -13,9 +13,9 @@ import nidaqmx
 import nidaqmx.system
 from nidaqmx._feature_toggles import WAVEFORM_SUPPORT, FeatureNotSupportedError
 from nidaqmx.constants import (
+    READ_ALL_AVAILABLE,
     AcquisitionType,
     LineGrouping,
-    READ_ALL_AVAILABLE,
     ReallocationPolicy,
     WaveformAttributeMode,
 )
@@ -23,12 +23,12 @@ from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.stream_readers import DaqError, DigitalSingleChannelReader
 from nidaqmx.utils import flatten_channel_string
 from tests.component._digital_utils import (
-    _bool_array_to_int,
+    _bool_array_to_int_msb,
     _get_digital_data,
     _get_expected_data_for_line,
     _get_num_di_lines_in_task,
+    _get_waveform_bitstrings,
     _get_waveform_data,
-    _get_waveform_data_msb,
     _read_and_copy,
 )
 from tests.component._utils import _is_timestamp_close_to_now
@@ -58,7 +58,7 @@ def test___digital_single_channel_reader___read_one_sample_multi_line___returns_
         _read_and_copy(reader.read_one_sample_multi_line, sample) for _ in range(samples_to_read)
     ]
 
-    assert [_bool_array_to_int(sample) for sample in data] == _get_digital_data(
+    assert [_bool_array_to_int_msb(sample) for sample in data] == _get_digital_data(
         num_lines, samples_to_read
     )
 
@@ -352,7 +352,7 @@ def test___digital_single_channel_multi_line_reader___reuse_waveform_in_place___
         task = generate_task()
         task.di_channels.add_di_chan(
             flatten_channel_string(
-                sim_6363_device.di_lines.channel_names[lines_start : lines_start + 4]
+                sim_6363_device.di_lines.channel_names[lines_start : lines_start + 4][::-1]
             ),
             line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
         )
@@ -369,13 +369,13 @@ def test___digital_single_channel_multi_line_reader___reuse_waveform_in_place___
     timestamp0 = waveform.timing.timestamp
     assert _get_waveform_data(waveform) == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
-    assert waveform.channel_name == f"{sim_6363_device.di_lines[0].name}..."
+    assert waveform.channel_name == f"{sim_6363_device.di_lines[3].name}..."
 
     reader1.read_waveform(waveform, sample_count)
     timestamp1 = waveform.timing.timestamp
     assert _get_waveform_data(waveform) == [0, 0, 1, 1, 2, 2, 3, 3, 4, 4]
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 2000)
-    assert waveform.channel_name == f"{sim_6363_device.di_lines[1].name}..."
+    assert waveform.channel_name == f"{sim_6363_device.di_lines[4].name}..."
 
     assert timestamp1 > timestamp0
 
@@ -545,9 +545,7 @@ def test___digital_single_channel_port_uint32_reader___read_waveform___returns_v
     samples_read = reader.read_waveform(waveform, num_samples)
 
     assert samples_read == num_samples
-    assert _get_waveform_data_msb(waveform) == _get_digital_data(
-        num_lines, num_samples
-    )  # TODO: AB#3178052 - change to _get_waveform_data()
+    assert _get_waveform_data(waveform) == _get_digital_data(num_lines, num_samples)
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
@@ -566,15 +564,24 @@ def test___digital_single_channel_lines_and_port___read_waveform___returns_valid
     samples_read = reader.read_waveform(waveform, samples_to_read)
 
     assert samples_read == samples_to_read
-    # Note, the data on the port's waveform is MSB instead of LSB because of bug AB#3178052
-    # When that bug is fixed, these asserts should be updated
-    assert _get_waveform_data(waveform) == [0, 1025, 514, 1539, 260, 1285, 774, 1799, 128, 1153]
+    assert _get_waveform_bitstrings(waveform) == [
+        "00000000000",
+        "00100000001",
+        "01000000010",
+        "01100000011",
+        "10000000100",
+        "10100000101",
+        "11000000110",
+        "11100000111",
+        "00000001000",
+        "00100001001",
+    ]
     assert waveform.sample_count == samples_to_read
     assert waveform.channel_name == di_single_chan_lines_and_port_task.di_channels[0].name
     assert waveform._get_signal_names() == [
-        sim_6363_device.di_lines[0].name,
-        sim_6363_device.di_lines[1].name,
         sim_6363_device.di_lines[2].name,
+        sim_6363_device.di_lines[1].name,
+        sim_6363_device.di_lines[0].name,
         sim_6363_device.di_lines[39].name,
         sim_6363_device.di_lines[38].name,
         sim_6363_device.di_lines[37].name,
