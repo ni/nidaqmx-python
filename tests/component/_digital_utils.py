@@ -233,3 +233,22 @@ def _read_and_copy(
 ) -> numpy.typing.NDArray[_D]:
     read_func(array)
     return array.copy()
+
+
+def _validate_waveform_signals(
+    device: nidaqmx.system.device.Device,
+    waveform: DigitalWaveform[Any],
+    lines: list[int] | range,  # signal index to line index mapping
+) -> None:
+    lines_list = list(
+        lines[::-1]
+    )  # TODO: AB#3178052 - remove reversal when signal/line ordering is fixed
+    signal_count = waveform.signal_count
+    sample_count = waveform.sample_count
+    assert signal_count == len(lines_list)
+    for signal_index in range(signal_count):
+        line_index = lines_list[signal_index]
+        signal = waveform.signals[signal_index]
+        assert signal.signal_index == signal_index
+        assert signal.name == device.di_lines[line_index].name
+        assert signal.data.tolist() == _get_expected_data_for_line(sample_count, line_index)

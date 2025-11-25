@@ -30,6 +30,7 @@ from tests.component._digital_utils import (
     _get_waveform_bitstrings,
     _get_waveform_data,
     _read_and_copy,
+    _validate_waveform_signals,
 )
 from tests.component._utils import _is_timestamp_close_to_now
 
@@ -216,6 +217,7 @@ def test___digital_single_line_reader___read_waveform_feature_disabled___raises_
 
 def test___digital_single_line_reader___read_waveform___returns_valid_waveform(
     di_single_line_timing_task: nidaqmx.Task,
+    sim_6363_device: nidaqmx.system.Device,
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_line_timing_task.in_stream)
     samples_to_read = 10
@@ -229,10 +231,12 @@ def test___digital_single_line_reader___read_waveform___returns_valid_waveform(
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
     assert waveform.channel_name == di_single_line_timing_task.di_channels[0].name
+    _validate_waveform_signals(sim_6363_device, waveform, [0])
 
 
 def test___digital_single_channel_multi_line_reader___read_waveform___returns_valid_waveform(
     di_single_channel_multi_line_timing_task: nidaqmx.Task,
+    sim_6363_device: nidaqmx.system.Device,
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_channel_multi_line_timing_task.in_stream)
     samples_to_read = 10
@@ -247,10 +251,12 @@ def test___digital_single_channel_multi_line_reader___read_waveform___returns_va
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
     assert waveform.channel_name == di_single_channel_multi_line_timing_task.di_channels[0].name
+    _validate_waveform_signals(sim_6363_device, waveform, range(num_lines))
 
 
 def test___digital_single_line_reader___read_waveform_no_args___returns_valid_waveform(
     di_single_line_timing_task: nidaqmx.Task,
+    sim_6363_device: nidaqmx.system.Device,
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_line_timing_task.in_stream)
     waveform = DigitalWaveform(50)
@@ -263,10 +269,12 @@ def test___digital_single_line_reader___read_waveform_no_args___returns_valid_wa
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
     assert waveform.channel_name == di_single_line_timing_task.di_channels[0].name
+    _validate_waveform_signals(sim_6363_device, waveform, [0])
 
 
 def test___digital_single_channel_multi_line_reader___read_waveform_no_args___returns_valid_waveform(
     di_single_channel_multi_line_timing_task: nidaqmx.Task,
+    sim_6363_device: nidaqmx.system.Device,
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_channel_multi_line_timing_task.in_stream)
     num_lines = _get_num_di_lines_in_task(di_single_channel_multi_line_timing_task)
@@ -280,10 +288,12 @@ def test___digital_single_channel_multi_line_reader___read_waveform_no_args___re
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
     assert waveform.channel_name == di_single_channel_multi_line_timing_task.di_channels[0].name
+    _validate_waveform_signals(sim_6363_device, waveform, range(num_lines))
 
 
 def test___digital_single_line_reader___read_waveform_in_place___returns_valid_waveform(
     di_single_line_timing_task: nidaqmx.Task,
+    sim_6363_device: nidaqmx.system.Device,
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_line_timing_task.in_stream)
     waveform = DigitalWaveform(50)
@@ -295,10 +305,12 @@ def test___digital_single_line_reader___read_waveform_in_place___returns_valid_w
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.channel_name == di_single_line_timing_task.di_channels[0].name
+    _validate_waveform_signals(sim_6363_device, waveform, [0])
 
 
 def test___digital_single_channel_multi_line_reader___read_waveform_in_place___returns_valid_waveform(
     di_single_channel_multi_line_timing_task: nidaqmx.Task,
+    sim_6363_device: nidaqmx.system.Device,
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_channel_multi_line_timing_task.in_stream)
     num_lines = _get_num_di_lines_in_task(di_single_channel_multi_line_timing_task)
@@ -311,6 +323,7 @@ def test___digital_single_channel_multi_line_reader___read_waveform_in_place___r
     assert _is_timestamp_close_to_now(waveform.timing.timestamp)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.channel_name == di_single_channel_multi_line_timing_task.di_channels[0].name
+    _validate_waveform_signals(sim_6363_device, waveform, range(num_lines))
 
 
 def test___digital_single_line_reader___reuse_waveform_in_place___overwrites_data_timing_and_attributes(
@@ -335,12 +348,15 @@ def test___digital_single_line_reader___reuse_waveform_in_place___overwrites_dat
     assert _get_waveform_data(waveform) == _get_expected_data_for_line(sample_count, 0)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.channel_name == sim_6363_device.di_lines[0].name
+    _validate_waveform_signals(sim_6363_device, waveform, [0])
 
     reader1.read_waveform(waveform, sample_count)
     timestamp1 = waveform.timing.timestamp
     assert _get_waveform_data(waveform) == _get_expected_data_for_line(sample_count, 1)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 2000)
     assert waveform.channel_name == sim_6363_device.di_lines[1].name
+    # TODO: AB#3178052 - enable this check when the signal name caching issue is fixed
+    # _validate_waveform_signals(sim_6363_device, waveform, [1])
 
     assert timestamp1 > timestamp0
 
@@ -370,12 +386,15 @@ def test___digital_single_channel_multi_line_reader___reuse_waveform_in_place___
     assert _get_waveform_data(waveform) == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.channel_name == f"{sim_6363_device.di_lines[3].name}..."
+    _validate_waveform_signals(sim_6363_device, waveform, range(0, 4))
 
     reader1.read_waveform(waveform, sample_count)
     timestamp1 = waveform.timing.timestamp
     assert _get_waveform_data(waveform) == [0, 0, 1, 1, 2, 2, 3, 3, 4, 4]
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 2000)
     assert waveform.channel_name == f"{sim_6363_device.di_lines[4].name}..."
+    # TODO: AB#3178052 - enable this check when the signal name caching issue is fixed
+    # _validate_waveform_signals(sim_6363_device, waveform, range(1, 5))
 
     assert timestamp1 > timestamp0
 
@@ -398,6 +417,7 @@ def test___digital_single_line_reader___read_into_undersized_waveform_without_re
 
 def test___digital_single_line_reader___read_into_undersized_waveform___returns_valid_waveform(
     di_single_line_timing_task: nidaqmx.Task,
+    sim_6363_device: nidaqmx.system.Device,
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_line_timing_task.in_stream)
     samples_to_read = 10
@@ -411,6 +431,7 @@ def test___digital_single_line_reader___read_into_undersized_waveform___returns_
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
     assert waveform.channel_name == di_single_line_timing_task.di_channels[0].name
+    _validate_waveform_signals(sim_6363_device, waveform, [0])
 
 
 def test___digital_single_channel_reader___reuse_waveform_in_place_with_different_sample_counts___populates_valid_waveforms(
@@ -435,20 +456,25 @@ def test___digital_single_channel_reader___reuse_waveform_in_place_with_differen
     assert waveform.sample_count == 5
     assert _get_waveform_data(waveform) == _get_expected_data_for_line(5, 0)
     assert waveform.channel_name == f"{sim_6363_device.name}/port0/line0"
+    _validate_waveform_signals(sim_6363_device, waveform, [0])
 
     reader1.read_waveform(waveform, 10)
     assert waveform.sample_count == 10
     assert _get_waveform_data(waveform) == _get_expected_data_for_line(10, 1)
     assert waveform.channel_name == f"{sim_6363_device.name}/port0/line1"
+    # TODO: AB#3178052 - enable this check when the signal name caching issue is fixed
+    # _validate_waveform_signals(sim_6363_device, waveform, [1])
 
     reader2.read_waveform(waveform, 15)
     assert waveform.sample_count == 15
     assert _get_waveform_data(waveform) == _get_expected_data_for_line(15, 2)
     assert waveform.channel_name == f"{sim_6363_device.name}/port0/line2"
+    # TODO: AB#3178052 - enable this check when the signal name caching issue is fixed
+    # _validate_waveform_signals(sim_6363_device, waveform, [2])
 
 
 def test___digital_single_line_reader___read_waveform_high_sample_rate___returns_correct_sample_interval(
-    di_single_line_high_rate_task: nidaqmx.Task,
+    di_single_line_high_rate_task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_line_high_rate_task.in_stream)
     samples_to_read = 50
@@ -462,6 +488,7 @@ def test___digital_single_line_reader___read_waveform_high_sample_rate___returns
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 10_000_000)
     assert waveform.sample_count == samples_to_read
     assert waveform.channel_name == di_single_line_high_rate_task.di_channels[0].name
+    _validate_waveform_signals(sim_6363_device, waveform, [0])
 
 
 def test___digital_single_line_reader_with_timing_flag___read_waveform___only_includes_timing_data(
@@ -483,7 +510,7 @@ def test___digital_single_line_reader_with_timing_flag___read_waveform___only_in
 
 
 def test___digital_single_line_reader_with_extended_properties_flag___read_waveform___only_includes_extended_properties(
-    di_single_line_timing_task: nidaqmx.Task,
+    di_single_line_timing_task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
 ) -> None:
     in_stream = di_single_line_timing_task.in_stream
     in_stream.waveform_attribute_mode = WaveformAttributeMode.EXTENDED_PROPERTIES
@@ -496,10 +523,11 @@ def test___digital_single_line_reader_with_extended_properties_flag___read_wavef
     assert _get_waveform_data(waveform) == _get_digital_data(1, 50)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.NONE
     assert waveform.channel_name == di_single_line_timing_task.di_channels[0].name
+    _validate_waveform_signals(sim_6363_device, waveform, [0])
 
 
 def test___digital_single_line_reader_with_both_flags___read_waveform___includes_both_timing_and_extended_properties(
-    di_single_line_timing_task: nidaqmx.Task,
+    di_single_line_timing_task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
 ) -> None:
     in_stream = di_single_line_timing_task.in_stream
     in_stream.waveform_attribute_mode = (
@@ -516,6 +544,7 @@ def test___digital_single_line_reader_with_both_flags___read_waveform___includes
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.channel_name == di_single_line_timing_task.di_channels[0].name
+    _validate_waveform_signals(sim_6363_device, waveform, [0])
 
 
 def test___digital_single_line_reader_with_none_flag___read_waveform___minimal_waveform_data(
@@ -535,7 +564,7 @@ def test___digital_single_line_reader_with_none_flag___read_waveform___minimal_w
 
 
 def test___digital_single_channel_port_uint32_reader___read_waveform___returns_valid_waveform(
-    di_single_channel_port_uint32_timing_task: nidaqmx.Task,
+    di_single_channel_port_uint32_timing_task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_channel_port_uint32_timing_task.in_stream)
     num_lines = 32
@@ -550,6 +579,7 @@ def test___digital_single_channel_port_uint32_reader___read_waveform___returns_v
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
     assert waveform.channel_name == di_single_channel_port_uint32_timing_task.di_channels[0].name
+    _validate_waveform_signals(sim_6363_device, waveform, range(num_lines))
 
 
 def test___digital_single_channel_lines_and_port___read_waveform___returns_valid_waveform(
@@ -578,19 +608,7 @@ def test___digital_single_channel_lines_and_port___read_waveform___returns_valid
     ]
     assert waveform.sample_count == samples_to_read
     assert waveform.channel_name == di_single_chan_lines_and_port_task.di_channels[0].name
-    assert waveform._get_signal_names() == [
-        sim_6363_device.di_lines[2].name,
-        sim_6363_device.di_lines[1].name,
-        sim_6363_device.di_lines[0].name,
-        sim_6363_device.di_lines[39].name,
-        sim_6363_device.di_lines[38].name,
-        sim_6363_device.di_lines[37].name,
-        sim_6363_device.di_lines[36].name,
-        sim_6363_device.di_lines[35].name,
-        sim_6363_device.di_lines[34].name,
-        sim_6363_device.di_lines[33].name,
-        sim_6363_device.di_lines[32].name,
-    ]
+    _validate_waveform_signals(sim_6363_device, waveform, [32, 33, 34, 35, 36, 37, 38, 39, 0, 1, 2])
 
 
 @pytest.mark.parametrize(
@@ -603,6 +621,7 @@ def test___digital_single_channel_lines_and_port___read_waveform___returns_valid
 )
 def test___digital_single_channel_multi_line_reader___read_waveform_all_dtypes___returns_valid_waveform(
     di_single_channel_multi_line_timing_task: nidaqmx.Task,
+    sim_6363_device: nidaqmx.system.Device,
     dtype,
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_channel_multi_line_timing_task.in_stream)
@@ -614,10 +633,12 @@ def test___digital_single_channel_multi_line_reader___read_waveform_all_dtypes__
 
     assert samples_read == num_samples
     assert _get_waveform_data(waveform) == _get_digital_data(num_lines, num_samples)
+    _validate_waveform_signals(sim_6363_device, waveform, range(num_lines))
 
 
 def test___digital_single_line_reader___read_waveform_read_all_available___returns_valid_waveform(
     di_single_line_timing_task: nidaqmx.Task,
+    sim_6363_device: nidaqmx.system.Device,
 ) -> None:
     reader = DigitalSingleChannelReader(di_single_line_timing_task.in_stream)
     waveform = DigitalWaveform(100)
@@ -630,3 +651,4 @@ def test___digital_single_line_reader___read_waveform_read_all_available___retur
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveform.timing.sample_interval_mode == SampleIntervalMode.REGULAR
     assert waveform.channel_name == di_single_line_timing_task.di_channels[0].name
+    _validate_waveform_signals(sim_6363_device, waveform, [0])
