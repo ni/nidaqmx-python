@@ -78,8 +78,9 @@ def _get_expected_data_for_lines(num_samples: int, first_line: int, num_lines: i
             line_index = line_num % 8
             bit_value = (sample_num >> line_index) & 1
             # Set the bit at position (line_num - first_line) in the result
+            # (Note that we reverse the order to match line numbering, so the ints are MSB first)
             if bit_value:
-                result |= 1 << (line_num - first_line)
+                result |= 1 << (first_line + num_lines - 1 - line_num)
         data.append(result)
     return data
 
