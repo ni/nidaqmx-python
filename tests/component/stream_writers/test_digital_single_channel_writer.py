@@ -17,7 +17,6 @@ from tests.component._digital_utils import (
     _get_digital_data,
     _get_num_do_lines_in_task,
     _get_waveform_data,
-    _get_waveform_data_msb,
     _int_to_bool_array,
 )
 
@@ -426,9 +425,7 @@ def test___digital_single_channel_writer___write_waveform_port_uint8___outputs_m
         actual_value = di_port1_loopback_task.read()
         assert samples_written == num_samples
         assert waveform.signal_count == num_lines
-        assert (
-            actual_value == _get_waveform_data_msb(waveform)[i - 1]
-        )  # TODO: AB#3178052 - change to _get_waveform_data()
+        assert actual_value == _get_waveform_data(waveform)[i - 1]
 
 
 def test___digital_single_channel_writer___write_waveform_port_uint32___outputs_match_final_values(
@@ -450,6 +447,4 @@ def test___digital_single_channel_writer___write_waveform_port_uint32___outputs_
         actual_value = di_port0_loopback_task.read()
         assert samples_written == num_samples
         assert waveform.signal_count == num_lines
-        assert (
-            actual_value == _get_waveform_data_msb(waveform)[i - 1]
-        )  # TODO: AB#3178052 - change to _get_waveform_data()
+        assert actual_value == _get_waveform_data(waveform)[i - 1]
