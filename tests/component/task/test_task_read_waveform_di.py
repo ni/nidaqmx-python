@@ -99,9 +99,9 @@ def test___digital_multi_channel___read_waveform___returns_valid_waveforms(
     assert isinstance(waveforms, list)
     assert len(waveforms) == num_channels
     assert all(isinstance(waveform, DigitalWaveform) for waveform in waveforms)
-    for chan_index, waveform in enumerate(waveforms):
-        assert _get_waveform_data(waveform) == _get_expected_data_for_line(50, chan_index)
-        _validate_waveform_signals(sim_6363_device, waveform, [chan_index])
+    for chan, waveform in enumerate(waveforms):
+        assert _get_waveform_data(waveform) == _get_expected_data_for_line(50, chan)
+        _validate_waveform_signals(sim_6363_device, waveform, [chan])
 
 
 def test___digital_multi_channel___read_waveform_one_sample___returns_waveforms_with_single_sample(
@@ -115,9 +115,9 @@ def test___digital_multi_channel___read_waveform_one_sample___returns_waveforms_
     assert isinstance(waveforms, list)
     assert len(waveforms) == num_channels
     assert all(isinstance(waveform, DigitalWaveform) for waveform in waveforms)
-    for chan_index, waveform in enumerate(waveforms):
-        assert _get_waveform_data(waveform) == _get_expected_data_for_line(1, chan_index)
-        _validate_waveform_signals(sim_6363_device, waveform, [chan_index])
+    for chan, waveform in enumerate(waveforms):
+        assert _get_waveform_data(waveform) == _get_expected_data_for_line(1, chan)
+        _validate_waveform_signals(sim_6363_device, waveform, [chan])
 
 
 def test___digital_multi_channel___read_waveform_many_samples___returns_waveforms_with_many_samples(
@@ -132,9 +132,9 @@ def test___digital_multi_channel___read_waveform_many_samples___returns_waveform
     assert isinstance(waveforms, list)
     assert len(waveforms) == num_channels
     assert all(isinstance(waveform, DigitalWaveform) for waveform in waveforms)
-    for chan_index, waveform in enumerate(waveforms):
-        assert _get_waveform_data(waveform) == _get_expected_data_for_line(10, chan_index)
-        _validate_waveform_signals(sim_6363_device, waveform, [chan_index])
+    for chan, waveform in enumerate(waveforms):
+        assert _get_waveform_data(waveform) == _get_expected_data_for_line(10, chan)
+        _validate_waveform_signals(sim_6363_device, waveform, [chan])
 
 
 def test___digital_multi_channel___read_waveform_too_many_samples___returns_waveforms_with_correct_number_of_samples(
@@ -177,7 +177,7 @@ def test___digital_multi_channel___read_waveform_different_lines___returns_valid
     _validate_waveform_signals(sim_6363_device, waveforms[1], [1, 2])
     assert _get_waveform_data(waveforms[2]) == [0, 0, 0, 0, 0, 0, 0, 0, 1, 1]
     assert waveforms[2].channel_name == di_multi_chan_diff_lines_timing_task.di_channels[2].name
-    _validate_waveform_signals(sim_6363_device, waveforms[2], [3, 4, 5, 6])
+    _validate_waveform_signals(sim_6363_device, waveforms[2], range(3, 7))
 
 
 def test___digital_multi_channel___read_waveform_lines_and_port___returns_valid_waveforms(
@@ -203,11 +203,11 @@ def test___digital_multi_channel___read_waveform_lines_and_port___returns_valid_
     assert _get_waveform_data(waveforms[2]) == [0, 0, 0, 0, 0, 0, 0, 0, 1, 1]
     assert waveforms[2].sample_count == samples_to_read
     assert waveforms[2].channel_name == di_multi_chan_lines_and_port_task.di_channels[2].name
-    _validate_waveform_signals(sim_6363_device, waveforms[2], [3, 4, 5, 6])
+    _validate_waveform_signals(sim_6363_device, waveforms[2], range(3, 7))
     assert _get_waveform_data(waveforms[3]) == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     assert waveforms[3].sample_count == samples_to_read
     assert waveforms[3].channel_name == di_multi_chan_lines_and_port_task.di_channels[3].name
-    _validate_waveform_signals(sim_6363_device, waveforms[3], [32, 33, 34, 35, 36, 37, 38, 39])
+    _validate_waveform_signals(sim_6363_device, waveforms[3], range(32, 40))
 
 
 def test___digital_single_channel___read_waveform_read_all_available___returns_valid_waveform(
@@ -231,9 +231,9 @@ def test___digital_multi_channel___read_waveform_read_all_available___returns_va
     assert isinstance(waveforms, list)
     assert len(waveforms) == di_multi_channel_timing_task.number_of_channels
     assert all(isinstance(waveform, DigitalWaveform) for waveform in waveforms)
-    for chan_index, waveform in enumerate(waveforms):
+    for chan, waveform in enumerate(waveforms):
         assert waveform.sample_count == 50
         assert _get_waveform_data(waveform) == _get_expected_data_for_line(
-            waveform.sample_count, chan_index
+            waveform.sample_count, chan
         )
-        _validate_waveform_signals(sim_6363_device, waveform, [chan_index])
+        _validate_waveform_signals(sim_6363_device, waveform, [chan])

@@ -393,7 +393,7 @@ def test___digital_multi_channel_different_lines_reader___read_waveforms___retur
     assert waveforms[2].sample_count == samples_to_read
     assert waveforms[2].timing.sample_interval == ht_timedelta(seconds=1 / 1000)
     assert waveforms[2].channel_name == di_multi_chan_diff_lines_timing_task.di_channels[2].name
-    _validate_waveform_signals(sim_6363_device, waveforms[2], [3, 4, 5, 6])
+    _validate_waveform_signals(sim_6363_device, waveforms[2], range(3, 7))
 
 
 def test___digital_multi_channel_lines_and_port_reader___read_waveforms___returns_valid_waveforms(
@@ -432,12 +432,12 @@ def test___digital_multi_channel_lines_and_port_reader___read_waveforms___return
     assert _is_timestamp_close_to_now(waveforms[2].timing.timestamp)
     assert waveforms[2].sample_count == samples_to_read
     assert waveforms[2].channel_name == di_multi_chan_lines_and_port_task.di_channels[2].name
-    _validate_waveform_signals(sim_6363_device, waveforms[2], [3, 4, 5, 6])
+    _validate_waveform_signals(sim_6363_device, waveforms[2], range(3, 7))
     assert _get_waveform_data(waveforms[3]) == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     assert _is_timestamp_close_to_now(waveforms[3].timing.timestamp)
     assert waveforms[3].sample_count == samples_to_read
     assert waveforms[3].channel_name == di_multi_chan_lines_and_port_task.di_channels[3].name
-    _validate_waveform_signals(sim_6363_device, waveforms[3], list(range(32, 40)))
+    _validate_waveform_signals(sim_6363_device, waveforms[3], range(32, 40))
 
 
 def test___digital_multi_channel_different_lines_reader___read_mismatched_waveforms___throws_exception(
