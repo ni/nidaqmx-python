@@ -101,7 +101,7 @@ nptdms = ">=1.9.0"
 [tool.poetry.group.lint.dependencies]
 bandit = { version = ">=1.7", extras = ["toml"] }
 ni-python-styleguide = ">=0.4.1"
-mypy = ">=1.0"
+mypy = { version = ">=1.0", markers = "implementation_name != 'pypy'" }
 types-protobuf = ">=4.21"
 types-requests = ">=2.25.0"
 types-grpcio = ">=1.0"
