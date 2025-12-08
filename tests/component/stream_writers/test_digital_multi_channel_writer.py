@@ -24,6 +24,7 @@ from tests.component._digital_utils import (
     _get_digital_port_data_sample_major,
     _get_num_do_lines_in_task,
     _get_waveform_data,
+    _get_waveform_port_data,
     _int_to_bool_array,
     _start_do_task,
 )
@@ -368,8 +369,8 @@ def test___digital_multi_channel_writer___write_waveforms_ports___outputs_match_
         actual_value = di_multi_channel_port_loopback_task.read()
         assert actual_value[0] != actual_value[1]
         assert actual_value == [
-            _get_waveform_data(waveforms[0])[-1],
-            _get_waveform_data(waveforms[1])[-1],
+            _get_waveform_port_data(waveforms[0])[-1],
+            _get_waveform_port_data(waveforms[1])[-1],
         ]
 
 
@@ -394,7 +395,7 @@ def test___digital_multi_channel_writer___write_waveforms_port_and_lines___outpu
         assert samples_written == num_samples
         actual_value = di_multi_channel_port_and_lines_loopback_task.read()
         assert actual_value == [
-            _get_waveform_data(waveforms[0])[-1],
+            _get_waveform_port_data(waveforms[0])[-1],
             _get_waveform_data(waveforms[1])[-1],
         ]
 
