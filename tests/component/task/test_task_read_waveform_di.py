@@ -7,8 +7,8 @@ import nidaqmx.system
 from nidaqmx.constants import READ_ALL_AVAILABLE
 from tests.component._digital_utils import (
     _get_expected_data_for_line,
-    _get_waveform_bitstrings,
     _get_waveform_data,
+    _get_waveform_port_data,
     _validate_waveform_signals,
 )
 
@@ -71,21 +71,21 @@ def test___digital_single_channel___read_waveform_lines_and_port___returns_valid
 
     waveform = di_single_chan_lines_and_port_task.read_waveform(samples_to_read)
 
-    assert _get_waveform_bitstrings(waveform) == [
-        "00000000000",
-        "00100000001",
-        "01000000010",
-        "01100000011",
-        "10000000100",
-        "10100000101",
-        "11000000110",
-        "11100000111",
-        "00000001000",
-        "00100001001",
+    assert _get_waveform_port_data(waveform) == [
+        0b00000000000,
+        0b10000000001,
+        0b01000000010,
+        0b11000000011,
+        0b00100000100,
+        0b10100000101,
+        0b01100000110,
+        0b11100000111,
+        0b00000001000,
+        0b10000001001,
     ]
     assert waveform.sample_count == samples_to_read
     assert waveform.channel_name == di_single_chan_lines_and_port_task.di_channels[0].name
-    _validate_waveform_signals(sim_6363_device, waveform, [32, 33, 34, 35, 36, 37, 38, 39, 0, 1, 2])
+    _validate_waveform_signals(sim_6363_device, waveform, [32, 33, 34, 35, 36, 37, 38, 39, 2, 1, 0])
 
 
 def test___digital_multi_channel___read_waveform___returns_valid_waveforms(
@@ -174,10 +174,10 @@ def test___digital_multi_channel___read_waveform_different_lines___returns_valid
     _validate_waveform_signals(sim_6363_device, waveforms[0], [0])
     assert _get_waveform_data(waveforms[1]) == [0, 0, 1, 1, 2, 2, 3, 3, 0, 0]
     assert waveforms[1].channel_name == di_multi_chan_diff_lines_timing_task.di_channels[1].name
-    _validate_waveform_signals(sim_6363_device, waveforms[1], [1, 2])
+    _validate_waveform_signals(sim_6363_device, waveforms[1], [2, 1])
     assert _get_waveform_data(waveforms[2]) == [0, 0, 0, 0, 0, 0, 0, 0, 1, 1]
     assert waveforms[2].channel_name == di_multi_chan_diff_lines_timing_task.di_channels[2].name
-    _validate_waveform_signals(sim_6363_device, waveforms[2], range(3, 7))
+    _validate_waveform_signals(sim_6363_device, waveforms[2], [6, 5, 4, 3])
 
 
 def test___digital_multi_channel___read_waveform_lines_and_port___returns_valid_waveforms(
@@ -199,12 +199,12 @@ def test___digital_multi_channel___read_waveform_lines_and_port___returns_valid_
     assert _get_waveform_data(waveforms[1]) == [0, 0, 1, 1, 2, 2, 3, 3, 0, 0]
     assert waveforms[1].sample_count == samples_to_read
     assert waveforms[1].channel_name == di_multi_chan_lines_and_port_task.di_channels[1].name
-    _validate_waveform_signals(sim_6363_device, waveforms[1], [1, 2])
+    _validate_waveform_signals(sim_6363_device, waveforms[1], [2, 1])
     assert _get_waveform_data(waveforms[2]) == [0, 0, 0, 0, 0, 0, 0, 0, 1, 1]
     assert waveforms[2].sample_count == samples_to_read
     assert waveforms[2].channel_name == di_multi_chan_lines_and_port_task.di_channels[2].name
-    _validate_waveform_signals(sim_6363_device, waveforms[2], range(3, 7))
-    assert _get_waveform_data(waveforms[3]) == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    _validate_waveform_signals(sim_6363_device, waveforms[2], [6, 5, 4, 3])
+    assert _get_waveform_port_data(waveforms[3]) == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     assert waveforms[3].sample_count == samples_to_read
     assert waveforms[3].channel_name == di_multi_chan_lines_and_port_task.di_channels[3].name
     _validate_waveform_signals(sim_6363_device, waveforms[3], range(32, 40))

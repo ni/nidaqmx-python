@@ -78,9 +78,8 @@ def _get_expected_data_for_lines(num_samples: int, first_line: int, num_lines: i
             line_index = line_num % 8
             bit_value = (sample_num >> line_index) & 1
             # Set the bit at position (line_num - first_line) in the result
-            # (Note that we reverse the order to match line numbering, so the ints are MSB first)
             if bit_value:
-                result |= 1 << (first_line + num_lines - 1 - line_num)
+                result |= 1 << (line_num - first_line)
         data.append(result)
     return data
 
@@ -145,12 +144,12 @@ def _int_to_bool_array(num_lines: int, input: int) -> numpy.typing.NDArray[numpy
 
 def _get_waveform_data(waveform: DigitalWaveform[Any]) -> list[int]:
     assert isinstance(waveform, DigitalWaveform)
-    return [_bool_array_to_int_msb(sample) for sample in waveform.data]
+    return [_bool_array_to_int_lsb(sample) for sample in waveform.data]
 
 
-def _get_waveform_bitstrings(waveform: DigitalWaveform[Any]) -> list[str]:
+def _get_waveform_port_data(waveform: DigitalWaveform[Any]) -> list[int]:
     assert isinstance(waveform, DigitalWaveform)
-    return ["".join("1" if bit else "0" for bit in sample) for sample in waveform.data]
+    return [_bool_array_to_int_msb(sample) for sample in waveform.data]
 
 
 def _create_digital_waveform_uint8(

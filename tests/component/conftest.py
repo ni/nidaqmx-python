@@ -156,7 +156,7 @@ def di_single_channel_multi_line_task(
 ) -> nidaqmx.Task:
     """Configure a single-channel multi-line digital input task."""
     task.di_channels.add_di_chan(
-        flatten_channel_string(sim_6363_device.di_lines.channel_names[:8][::-1]),
+        flatten_channel_string(sim_6363_device.di_lines.channel_names[:8]),
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
     )
     return task
@@ -192,7 +192,7 @@ def di_single_chan_lines_and_port_task(
     """Configure a single-channel multi-line digital input task."""
     task.di_channels.add_di_chan(
         flatten_channel_string(
-            sim_6363_device.di_lines.channel_names[0:3][::-1] + [sim_6363_device.di_ports[1].name]
+            sim_6363_device.di_lines.channel_names[0:3] + [sim_6363_device.di_ports[1].name]
         ),
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
     )
@@ -231,15 +231,15 @@ def di_multi_chan_diff_lines_timing_task(
     This task has three channels made up of different numbers of lines.
     """
     task.di_channels.add_di_chan(
-        flatten_channel_string(sim_6363_device.di_lines.channel_names[0:1][::-1]),
+        flatten_channel_string(sim_6363_device.di_lines.channel_names[0:1]),
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
     )
     task.di_channels.add_di_chan(
-        flatten_channel_string(sim_6363_device.di_lines.channel_names[1:3][::-1]),
+        flatten_channel_string(sim_6363_device.di_lines.channel_names[1:3]),
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
     )
     task.di_channels.add_di_chan(
-        flatten_channel_string(sim_6363_device.di_lines.channel_names[3:7][::-1]),
+        flatten_channel_string(sim_6363_device.di_lines.channel_names[3:7]),
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
     )
     task.timing.cfg_samp_clk_timing(
@@ -257,15 +257,15 @@ def di_multi_chan_lines_and_port_task(
     This task has three channels made up of lines and one channel made up of a port.
     """
     task.di_channels.add_di_chan(
-        flatten_channel_string(sim_6363_device.di_lines.channel_names[0:1][::-1]),
+        flatten_channel_string(sim_6363_device.di_lines.channel_names[0:1]),
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
     )
     task.di_channels.add_di_chan(
-        flatten_channel_string(sim_6363_device.di_lines.channel_names[1:3][::-1]),
+        flatten_channel_string(sim_6363_device.di_lines.channel_names[1:3]),
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
     )
     task.di_channels.add_di_chan(
-        flatten_channel_string(sim_6363_device.di_lines.channel_names[3:7][::-1]),
+        flatten_channel_string(sim_6363_device.di_lines.channel_names[3:7]),
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
     )
     task.di_channels.add_di_chan(
@@ -575,7 +575,7 @@ def do_single_channel_multi_line_task(
     """Configure a single-channel DO task."""
     task = generate_task()
     chan = task.do_channels.add_do_chan(
-        flatten_channel_string(real_x_series_device.do_lines.channel_names[:8][::-1]),
+        flatten_channel_string(real_x_series_device.do_lines.channel_names[:8]),
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
     )
     _start_do_task(task, num_chans=chan.do_num_lines)
@@ -589,7 +589,7 @@ def do_single_channel_multi_line_task_with_timing(
     """Configure a single-channel multi-line DO task with timing for waveform testing."""
     task = generate_task()
     task.do_channels.add_do_chan(
-        flatten_channel_string(real_x_series_multiplexed_device.do_lines.channel_names[:8][::-1]),
+        flatten_channel_string(real_x_series_multiplexed_device.do_lines.channel_names[:8]),
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
     )
     task.timing.cfg_samp_clk_timing(
@@ -635,15 +635,15 @@ def do_multi_channel_mixed_line_task(
     """Configure a multi-channel DO task with a mix of lines."""
     task = generate_task()
     task.do_channels.add_do_chan(
-        flatten_channel_string(real_x_series_device.do_lines.channel_names[2:5][::-1]),
+        flatten_channel_string(real_x_series_device.do_lines.channel_names[2:5]),
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
     )
     task.do_channels.add_do_chan(
-        flatten_channel_string(real_x_series_device.do_lines.channel_names[0:2][::-1]),
+        flatten_channel_string(real_x_series_device.do_lines.channel_names[0:2]),
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
     )
     task.do_channels.add_do_chan(
-        flatten_channel_string(real_x_series_device.do_lines.channel_names[5:8][::-1]),
+        flatten_channel_string(real_x_series_device.do_lines.channel_names[5:8]),
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
     )
     _start_do_task(task, num_chans=task.number_of_channels)
@@ -713,7 +713,7 @@ def do_multi_channel_port_and_lines_task(
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
     )
     task.do_channels.add_do_chan(
-        flatten_channel_string(real_x_series_device.do_lines.channel_names[:8][::-1]),
+        flatten_channel_string(real_x_series_device.do_lines.channel_names[:8]),
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
     )
     _start_do_task(task, is_port=True, num_chans=task.number_of_channels)
@@ -741,7 +741,7 @@ def di_multi_line_loopback_task(
     """Configure a multi-line DI loopback task."""
     task = generate_task()
     task.di_channels.add_di_chan(
-        flatten_channel_string(real_x_series_device.di_lines.channel_names[:8][::-1]),
+        flatten_channel_string(real_x_series_device.di_lines.channel_names[:8]),
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
     )
     _start_di_task(task)
@@ -861,7 +861,7 @@ def di_multi_channel_port_and_lines_loopback_task(
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
     )
     task.di_channels.add_di_chan(
-        flatten_channel_string(real_x_series_device.di_lines.channel_names[:8][::-1]),
+        flatten_channel_string(real_x_series_device.di_lines.channel_names[:8]),
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
     )
     _start_di_task(task)
