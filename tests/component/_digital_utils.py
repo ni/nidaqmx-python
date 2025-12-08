@@ -10,6 +10,7 @@ from nitypes.waveform import DigitalWaveform
 from nitypes.waveform.typing import AnyDigitalState, TDigitalState
 
 import nidaqmx
+import nidaqmx.system
 
 _D = TypeVar("_D", bound=numpy.generic)
 
