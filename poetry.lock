@@ -2389,6 +2389,7 @@ description = "Generate mypy stub files from protobuf specs"
 optional = false
 python-versions = ">=3.8"
 groups = ["codegen"]
+markers = "python_version >= \"3.10\""
 files = [
     {file = "mypy-protobuf-3.6.0.tar.gz", hash = "sha256:02f242eb3409f66889f2b1a3aa58356ec4d909cdd0f93115622e9e70366eca3c"},
     {file = "mypy_protobuf-3.6.0-py3-none-any.whl", hash = "sha256:56176e4d569070e7350ea620262478b49b7efceba4103d468448f1d21492fd6c"},
@@ -3994,6 +3995,7 @@ files = [
     {file = "types_protobuf-6.32.1.20251105-py3-none-any.whl", hash = "sha256:a15109d38f7cfefd2539ef86d3f93a6a41c7cad53924f8aa1a51eaddbb72a660"},
     {file = "types_protobuf-6.32.1.20251105.tar.gz", hash = "sha256:641002611ff87dd9fedc38a39a29cacb9907ae5ce61489b53e99ca2074bef764"},
 ]
+markers = {codegen = "python_version >= \"3.10\""}
 
 [[package]]
 name = "types-requests"
@@ -4121,4 +4123,4 @@ grpc = ["grpcio", "ni-grpcdevice-v1-proto", "ni-protobuf-types", "protobuf"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.9,<4.0"
-content-hash = "3597a298003d0ad183a815aabcdea5868848992210fbbf13e80842388ddd7005"
+content-hash = "6dfcec1ea4f8f4381d2aeb6089350f85bb26cec627ad1307509b7d3f484db08d"
