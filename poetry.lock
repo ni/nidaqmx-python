@@ -4121,4 +4121,4 @@ grpc = ["grpcio", "ni-grpcdevice-v1-proto", "ni-protobuf-types", "protobuf"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.9,<4.0"
-content-hash = "3597a298003d0ad183a815aabcdea5868848992210fbbf13e80842388ddd7005"
+content-hash = "f7d53512dc12a25658f1a2bb319e6f2c4fe1c2c037b19f7b6de53646f9f72ed8"
