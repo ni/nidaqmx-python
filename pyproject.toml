@@ -79,7 +79,7 @@ grpcio-tools = [
 # mypy-protobuf 3.6 is the last version that supports protobuf v4.
 mypy-protobuf = [
   # requires protobuf v4 or later
-  {version = ">=3.4,<3.7", python = ">=3.10,<3.14"},
+  {version = ">=3.4,<3.7", python = ">=3.9,<3.14"},
   # requires protobuf v6 or later
   {version = ">=3.4", python = "^3.14"}
 ]
