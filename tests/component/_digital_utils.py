@@ -240,9 +240,7 @@ def _validate_waveform_signals(
     waveform: DigitalWaveform[Any],
     lines: list[int] | range,  # signal index to line index mapping
 ) -> None:
-    lines_list = list(
-        lines[::-1]
-    )  # TODO: AB#3178052 - remove reversal when signal/line ordering is fixed
+    lines_list = list(lines)
     signal_count = waveform.signal_count
     sample_count = waveform.sample_count
     assert signal_count == len(lines_list)

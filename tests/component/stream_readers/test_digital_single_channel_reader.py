@@ -355,8 +355,7 @@ def test___digital_single_line_reader___reuse_waveform_in_place___overwrites_dat
     assert _get_waveform_data(waveform) == _get_expected_data_for_line(sample_count, 1)
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 2000)
     assert waveform.channel_name == sim_6363_device.di_lines[1].name
-    # TODO: AB#3178052 - enable this check when the signal name caching issue is fixed
-    # _validate_waveform_signals(sim_6363_device, waveform, [1])
+    _validate_waveform_signals(sim_6363_device, waveform, [1])
 
     assert timestamp1 > timestamp0
 
@@ -393,8 +392,7 @@ def test___digital_single_channel_multi_line_reader___reuse_waveform_in_place___
     assert _get_waveform_data(waveform) == [0, 0, 1, 1, 2, 2, 3, 3, 4, 4]
     assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 2000)
     assert waveform.channel_name == f"{sim_6363_device.di_lines[1].name}..."
-    # TODO: AB#3178052 - enable this check when the signal name caching issue is fixed
-    # _validate_waveform_signals(sim_6363_device, waveform, [4, 3, 2, 1])
+    _validate_waveform_signals(sim_6363_device, waveform, [4, 3, 2, 1])
 
     assert timestamp1 > timestamp0
 
@@ -462,15 +460,13 @@ def test___digital_single_channel_reader___reuse_waveform_in_place_with_differen
     assert waveform.sample_count == 10
     assert _get_waveform_data(waveform) == _get_expected_data_for_line(10, 1)
     assert waveform.channel_name == f"{sim_6363_device.name}/port0/line1"
-    # TODO: AB#3178052 - enable this check when the signal name caching issue is fixed
-    # _validate_waveform_signals(sim_6363_device, waveform, [1])
+    _validate_waveform_signals(sim_6363_device, waveform, [1])
 
     reader2.read_waveform(waveform, 15)
     assert waveform.sample_count == 15
     assert _get_waveform_data(waveform) == _get_expected_data_for_line(15, 2)
     assert waveform.channel_name == f"{sim_6363_device.name}/port0/line2"
-    # TODO: AB#3178052 - enable this check when the signal name caching issue is fixed
-    # _validate_waveform_signals(sim_6363_device, waveform, [2])
+    _validate_waveform_signals(sim_6363_device, waveform, [2])
 
 
 def test___digital_single_line_reader___read_waveform_high_sample_rate___returns_correct_sample_interval(

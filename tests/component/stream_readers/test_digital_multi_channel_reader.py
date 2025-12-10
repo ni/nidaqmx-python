@@ -546,8 +546,7 @@ def test___digital_multi_channel_multi_line_reader___reuse_waveform_in_place___o
         assert _get_waveform_data(waveform) == _get_expected_data_for_line(sample_count, chan + 1)
         assert waveform.timing.sample_interval == ht_timedelta(seconds=1 / 2000)
         assert waveform.channel_name == sim_6363_device.di_lines[chan + 1].name
-        # TODO: AB#3178052 - enable this check when the signal name caching issue is fixed
-        # _validate_waveform_signals(sim_6363_device, waveform, [chan + 1])
+        _validate_waveform_signals(sim_6363_device, waveform, [chan + 1])
 
     for ts0, ts1 in zip(timestamps0, timestamps1):
         assert ts1 > ts0
@@ -633,25 +632,21 @@ def test___digital_multi_channel_reader___reuse_waveform_in_place_with_different
     reader1.read_waveforms(waveforms, 10)
     assert waveforms[0].sample_count == 10
     assert _get_waveform_data(waveforms[0]) == _get_expected_data_for_line(10, 2)
-    # TODO: AB#3178052 - enable this check when the signal name caching issue is fixed
-    # _validate_waveform_signals(sim_6363_device, waveforms[0], [2])
+    _validate_waveform_signals(sim_6363_device, waveforms[0], [2])
     assert waveforms[0].channel_name == f"{sim_6363_device.name}/port0/line2"
     assert waveforms[1].sample_count == 10
     assert _get_waveform_data(waveforms[1]) == _get_expected_data_for_line(10, 3)
-    # TODO: AB#3178052 - enable this check when the signal name caching issue is fixed
-    # _validate_waveform_signals(sim_6363_device, waveforms[1], [3])
+    _validate_waveform_signals(sim_6363_device, waveforms[1], [3])
     assert waveforms[1].channel_name == f"{sim_6363_device.name}/port0/line3"
 
     reader2.read_waveforms(waveforms, 15)
     assert waveforms[0].sample_count == 15
     assert _get_waveform_data(waveforms[0]) == _get_expected_data_for_line(15, 4)
-    # TODO: AB#3178052 - enable this check when the signal name caching issue is fixed
-    # _validate_waveform_signals(sim_6363_device, waveforms[0], [4])
+    _validate_waveform_signals(sim_6363_device, waveforms[0], [4])
     assert waveforms[0].channel_name == f"{sim_6363_device.name}/port0/line4"
     assert waveforms[1].sample_count == 15
     assert _get_waveform_data(waveforms[1]) == _get_expected_data_for_line(15, 5)
-    # TODO: AB#3178052 - enable this check when the signal name caching issue is fixed
-    # _validate_waveform_signals(sim_6363_device, waveforms[1], [5])
+    _validate_waveform_signals(sim_6363_device, waveforms[1], [5])
     assert waveforms[1].channel_name == f"{sim_6363_device.name}/port0/line5"
 
 
