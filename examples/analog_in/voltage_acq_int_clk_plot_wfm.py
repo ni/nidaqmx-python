@@ -5,14 +5,10 @@ This example requires the matplotlib module.
 Run 'pip install matplotlib' to install the matplotlib module.
 """
 
-import os
+import matplotlib.pyplot as plot
 
-os.environ["NIDAQMX_ENABLE_WAVEFORM_SUPPORT"] = "1"
-
-import matplotlib.pyplot as plot  # noqa: E402 # Must import after setting environment variable
-
-import nidaqmx  # noqa: E402
-from nidaqmx.constants import READ_ALL_AVAILABLE, AcquisitionType  # noqa: E402
+import nidaqmx
+from nidaqmx.constants import READ_ALL_AVAILABLE, AcquisitionType
 
 with nidaqmx.Task() as task:
     task.ai_channels.add_ai_voltage_chan("Dev1/ai0")

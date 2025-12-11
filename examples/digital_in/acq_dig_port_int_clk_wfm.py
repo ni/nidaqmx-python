@@ -4,12 +4,8 @@ This example demonstrates how to input a finite digital pattern
 using the DAQ device's internal clock.
 """
 
-import os
-
-os.environ["NIDAQMX_ENABLE_WAVEFORM_SUPPORT"] = "1"
-
-import nidaqmx  # noqa: E402 # Must import after setting environment variable
-from nidaqmx.constants import (  # noqa: E402
+import nidaqmx
+from nidaqmx.constants import (
     READ_ALL_AVAILABLE,
     AcquisitionType,
     LineGrouping,
