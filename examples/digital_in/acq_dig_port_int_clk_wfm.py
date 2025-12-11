@@ -4,12 +4,16 @@ This example demonstrates how to input a finite digital pattern
 using the DAQ device's internal clock.
 """
 
+import numpy as np
+
 import nidaqmx
 from nidaqmx.constants import (
     READ_ALL_AVAILABLE,
     AcquisitionType,
     LineGrouping,
 )
+
+np.set_printoptions(linewidth=120)
 
 with nidaqmx.Task() as task:
     task.di_channels.add_di_chan(
@@ -19,7 +23,8 @@ with nidaqmx.Task() as task:
 
     waveform = task.read_waveform(READ_ALL_AVAILABLE)
     print("Acquired data:")
-    print(waveform.data)
+    for signal in waveform.signals:
+        print(f"{signal.name}: {signal.data}")
     print(f"Channel name: {waveform.channel_name}")
     print(f"t0: {waveform.timing.start_time}")
     print(f"dt: {waveform.timing.sample_interval}")
