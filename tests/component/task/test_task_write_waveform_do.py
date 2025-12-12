@@ -14,7 +14,7 @@ from tests.component._digital_utils import (
     _create_waveforms_for_mixed_lines,
     _get_digital_data,
     _get_waveform_data,
-    _get_waveform_data_msb,
+    _get_waveform_port_data,
 )
 
 
@@ -279,9 +279,7 @@ def test___task___write_waveform_port_uint8___outputs_match_final_values(
 
         assert samples_written == num_samples
         actual_value = di_port1_loopback_task.read()
-        assert (
-            actual_value == _get_waveform_data_msb(waveform)[i - 1]
-        )  # TODO: AB#3178052 - change to _get_waveform_data()
+        assert actual_value == _get_waveform_port_data(waveform)[i - 1]
 
 
 def test___task___write_waveform_port_uint32___outputs_match_final_values(
@@ -300,9 +298,7 @@ def test___task___write_waveform_port_uint32___outputs_match_final_values(
 
         assert samples_written == num_samples
         actual_value = di_port0_loopback_task.read()
-        assert (
-            actual_value == _get_waveform_data_msb(waveform)[i - 1]
-        )  # TODO: AB#3178052 - change to _get_waveform_data()
+        assert actual_value == _get_waveform_port_data(waveform)[i - 1]
 
 
 @pytest.mark.disable_feature_toggle(WAVEFORM_SUPPORT)
@@ -417,9 +413,9 @@ def test___task___write_waveforms_ports___outputs_match_final_values(
         actual_value = di_multi_channel_port_loopback_task.read()
         assert actual_value[0] != actual_value[1]
         assert actual_value == [
-            _get_waveform_data_msb(waveforms[0])[-1],
-            _get_waveform_data_msb(waveforms[1])[-1],
-        ]  # TODO: AB#3178052 - change to _get_waveform_data()
+            _get_waveform_port_data(waveforms[0])[-1],
+            _get_waveform_port_data(waveforms[1])[-1],
+        ]
 
 
 def test___task___write_waveforms_port_and_lines___outputs_match_final_values(
@@ -442,9 +438,9 @@ def test___task___write_waveforms_port_and_lines___outputs_match_final_values(
         assert samples_written == num_samples
         actual_value = di_multi_channel_port_and_lines_loopback_task.read()
         assert actual_value == [
-            _get_waveform_data_msb(waveforms[0])[-1],
+            _get_waveform_port_data(waveforms[0])[-1],
             _get_waveform_data(waveforms[1])[-1],
-        ]  # TODO: AB#3178052 - change to _get_waveform_data()
+        ]
 
 
 def test___task___write_waveforms_with_non_contiguous_data___outputs_match_final_values(
