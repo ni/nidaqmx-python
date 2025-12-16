@@ -10,6 +10,7 @@ from nitypes.waveform import DigitalWaveform
 from nitypes.waveform.typing import AnyDigitalState, TDigitalState
 
 import nidaqmx
+import nidaqmx.system
 
 _D = TypeVar("_D", bound=numpy.generic)
 
@@ -119,9 +120,9 @@ def _get_digital_port_data_sample_major(task: nidaqmx.Task, num_samples: int) ->
     return numpy.transpose(result).tolist()
 
 
-def _bool_array_to_int(bool_array: numpy.typing.NDArray[numpy.bool_]) -> int:
+def _bool_array_to_int_lsb(bool_array: numpy.typing.NDArray[numpy.bool_]) -> int:
     result = 0
-    # Simulated data is little-endian
+    # Interpret data as little-endian
     for bit in bool_array[::-1]:
         result = (result << 1) | int(bit)
     return result
@@ -129,7 +130,7 @@ def _bool_array_to_int(bool_array: numpy.typing.NDArray[numpy.bool_]) -> int:
 
 def _bool_array_to_int_msb(bool_array: numpy.typing.NDArray[numpy.bool_]) -> int:
     result = 0
-    # Data from ports is big-endian (see AB#3178052)
+    # Interpret data as big-endian
     for bit in bool_array:
         result = (result << 1) | int(bit)
     return result
@@ -144,10 +145,10 @@ def _int_to_bool_array(num_lines: int, input: int) -> numpy.typing.NDArray[numpy
 
 def _get_waveform_data(waveform: DigitalWaveform[Any]) -> list[int]:
     assert isinstance(waveform, DigitalWaveform)
-    return [_bool_array_to_int(sample) for sample in waveform.data]
+    return [_bool_array_to_int_lsb(sample) for sample in waveform.data]
 
 
-def _get_waveform_data_msb(waveform: DigitalWaveform[Any]) -> list[int]:
+def _get_waveform_port_data(waveform: DigitalWaveform[Any]) -> list[int]:
     assert isinstance(waveform, DigitalWaveform)
     return [_bool_array_to_int_msb(sample) for sample in waveform.data]
 
@@ -232,3 +233,20 @@ def _read_and_copy(
 ) -> numpy.typing.NDArray[_D]:
     read_func(array)
     return array.copy()
+
+
+def _validate_waveform_signals(
+    device: nidaqmx.system.device.Device,
+    waveform: DigitalWaveform[Any],
+    lines: list[int] | range,  # signal index to line index mapping
+) -> None:
+    lines_list = list(lines)
+    signal_count = waveform.signal_count
+    sample_count = waveform.sample_count
+    assert signal_count == len(lines_list)
+    for signal_index in range(signal_count):
+        line_index = lines_list[signal_index]
+        signal = waveform.signals[signal_index]
+        assert signal.signal_index == signal_index
+        assert signal.name == device.di_lines[line_index].name
+        assert signal.data.tolist() == _get_expected_data_for_line(sample_count, line_index)
