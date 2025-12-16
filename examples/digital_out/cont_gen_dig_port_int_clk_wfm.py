@@ -10,7 +10,7 @@ from nitypes.waveform import DigitalWaveform
 import nidaqmx
 from nidaqmx.constants import AcquisitionType, LineGrouping
 
-np.set_printoptions(linewidth=220)
+np.set_printoptions(linewidth=220) # ensure signal.data prints on a single line
 
 with nidaqmx.Task() as task:
     task.do_channels.add_do_chan("Dev1/port0", line_grouping=LineGrouping.CHAN_FOR_ALL_LINES)
