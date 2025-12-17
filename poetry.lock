@@ -2465,14 +2465,14 @@ toml = ">=0.10.1"
 
 [[package]]
 name = "nitypes"
-version = "1.0.1.dev0"
+version = "1.0.1"
 description = "Data types for NI Python APIs"
 optional = false
 python-versions = "<4.0,>=3.9"
 groups = ["main"]
 files = [
-    {file = "nitypes-1.0.1.dev0-py3-none-any.whl", hash = "sha256:f2574a6f43f813b240f0be24f6bf52af4ee2be1486c5b40ac032a4e846c49571"},
-    {file = "nitypes-1.0.1.dev0.tar.gz", hash = "sha256:f872847c720cdca7002d6c16073c8dfe62275676ded73e36ab285302a7fa1d7c"},
+    {file = "nitypes-1.0.1-py3-none-any.whl", hash = "sha256:8a0ab0cce139144850e580c9eee9e8f783dd60d530986e6478d7319bdb4a0f60"},
+    {file = "nitypes-1.0.1.tar.gz", hash = "sha256:dc20a98c009651adf9f2769ec15cdbe939375bad2f2546765abbc23982301a8b"},
 ]
 
 [package.dependencies]
@@ -4121,4 +4121,4 @@ grpc = ["grpcio", "ni-grpcdevice-v1-proto", "ni-protobuf-types", "protobuf"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.9,<4.0"
-content-hash = "d4e74aca180b6366a9dc5597c089f17d2143ce78a6c2ab14de8d8f7a2fad40e2"
+content-hash = "37345c5a039da001b927e4df3967f6e40b7789fae867146c87fb1f95ddae117d"
