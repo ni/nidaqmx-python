@@ -34,7 +34,7 @@ All notable changes to this project will be documented in this file.
     * [862: docs tox env fails on rdss-nidaqmxbot-win-10-py32](https://github.com/ni/nidaqmx-python/issues/862)
 
 * ### Major Changes
-    * (IN PROGRESS behind "WAVEFORM_SUPPORT" feature toggle) Added support for reading and writing Waveform data through gRPC using [NI gRPC Device Server](https://github.com/ni/grpc-device).
+    * Added support for reading and writing Waveform data, including through gRPC using [NI gRPC Device Server](https://github.com/ni/grpc-device).
     * Add support for calculated power channels
     * Add support for A and C-type Thermocouples
 
