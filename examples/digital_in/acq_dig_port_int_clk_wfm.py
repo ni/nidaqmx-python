@@ -13,7 +13,7 @@ from nidaqmx.constants import (
     LineGrouping,
 )
 
-np.set_printoptions(linewidth=120)
+np.set_printoptions(linewidth=120)  # ensure signal.data prints on a single line
 
 with nidaqmx.Task() as task:
     task.di_channels.add_di_chan(
