@@ -4,10 +4,11 @@ This example demonstrates how to output a continuous digital
 pattern using the DAQ device's clock.
 """
 
-import nidaqmx
 import numpy as np
-from nidaqmx.constants import AcquisitionType, LineGrouping
 from nitypes.waveform import DigitalWaveform
+
+import nidaqmx
+from nidaqmx.constants import AcquisitionType, LineGrouping
 
 np.set_printoptions(linewidth=120)  # ensure signal.data prints on a single line
 
