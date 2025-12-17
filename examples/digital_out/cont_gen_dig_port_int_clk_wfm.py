@@ -14,7 +14,7 @@ np.set_printoptions(linewidth=220)
 
 with nidaqmx.Task() as task:
     task.do_channels.add_do_chan("Dev1/port0", line_grouping=LineGrouping.CHAN_FOR_ALL_LINES)
-    task.timing.cfg_samp_clk_timing(1000.0, sample_mode=AcquisitionType.CONTINUOUS)
+    task.timing.cfg_samp_clk_timing(10.0, sample_mode=AcquisitionType.CONTINUOUS)
 
     sample_count = 50
     signal_count = task.do_channels[0].do_num_lines
