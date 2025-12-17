@@ -20,13 +20,13 @@ jobs:
     timeout-minutes: 90
     steps:
       - name: Check out repo
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - name: Import DAQmx config
         run: C:\nidaqmxconfig\targets\win64U\x64\msvc-14.0\release\nidaqmxconfig.exe --eraseconfig --import tests\max_config\nidaqmxMaxConfig.ini
       - name: Set up Python
-        uses: ni/python-actions/setup-python@9768589f3e50672173dad75a6fc181e4a85d33fa # v0.7.0
+        uses: ni/python-actions/setup-python@aa64e60612cb078b0c2ada666becbd70d4817d55 # v0.7.1
       - name: Set up Poetry
-        uses: ni/python-actions/setup-poetry@9768589f3e50672173dad75a6fc181e4a85d33fa # v0.7.0
+        uses: ni/python-actions/setup-poetry@aa64e60612cb078b0c2ada666becbd70d4817d55 # v0.7.1
       - name: Cache virtualenvs
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
