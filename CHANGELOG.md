@@ -30,6 +30,7 @@ All notable changes to this project will be documented in this file.
     * [Full changelog: 1.3.0...1.4.0](https://github.com/ni/nidaqmx-python/compare/1.3.0...1.4.0)
 
 * ### Resolved Issues
+    * [24: Support Waveform Reads/Writes](https://github.com/ni/nidaqmx-python/issues/24)
     * [820: Create a synchronization example for TDMS logging](https://github.com/ni/nidaqmx-python/issues/820)
     * [862: docs tox env fails on rdss-nidaqmxbot-win-10-py32](https://github.com/ni/nidaqmx-python/issues/862)
 
