@@ -28,7 +28,7 @@ jobs:
       - name: Set up Poetry
         uses: ni/python-actions/setup-poetry@aa64e60612cb078b0c2ada666becbd70d4817d55 # v0.7.1
       - name: Cache virtualenvs
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb # v5.0.1
         with:
           path: |
             .venv
@@ -49,7 +49,7 @@ jobs:
           done
         if: always() && runner.os != 'Windows'
       - name: Upload test results
-        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           name: test_results_system_${{ matrix.configuration }}
           path: test_results/*.xml
