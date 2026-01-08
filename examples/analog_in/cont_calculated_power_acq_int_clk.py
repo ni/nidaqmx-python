@@ -1,6 +1,6 @@
 ﻿"""Example of analog input voltage acquisition.
 
-This example demonstrates how to acquire a continuous amount of 
+This example demonstrates how to acquire a continuous amount of
 calculated power data using the DAQ device's internal clock.
 """
 

@@ -5,7 +5,7 @@ of calculated power data using the DAQ device's internal clock.
 """
 
 import nidaqmx
-from nidaqmx.constants import AcquisitionType, READ_ALL_AVAILABLE
+from nidaqmx.constants import READ_ALL_AVAILABLE, AcquisitionType
 
 with nidaqmx.Task() as task:
     task.ai_channels.add_ai_calculated_power_chan(
