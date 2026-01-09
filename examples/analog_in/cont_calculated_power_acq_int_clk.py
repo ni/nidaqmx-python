@@ -1,7 +1,10 @@
-﻿"""Example of analog input voltage acquisition.
+﻿"""Example of analog input calculated power acquisition.
 
 This example demonstrates how to acquire a continuous amount of
 calculated power data using the DAQ device's internal clock.
+
+Supported Devices:
+    - PXIe-4311 (DAQmx 26.3.0 or later)
 """
 
 import nidaqmx
