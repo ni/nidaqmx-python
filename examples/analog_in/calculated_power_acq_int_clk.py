@@ -4,7 +4,8 @@ This example demonstrates how to acquire a finite amount
 of calculated power data using the DAQ device's internal clock.
 
 Supported Devices:
-    - PXIe-4311 (DAQmx 26.3.0 or later)
+
+- PXIe-4311 (DAQmx 26.3.0 or later)
 """
 
 import nidaqmx
