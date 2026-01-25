@@ -995,15 +995,15 @@ files = [
 
 [[package]]
 name = "filelock"
-version = "3.20.1"
+version = "3.20.3"
 description = "A platform independent file lock."
 optional = false
 python-versions = ">=3.10"
 groups = ["test"]
 markers = "python_version >= \"3.10\""
 files = [
-    {file = "filelock-3.20.1-py3-none-any.whl", hash = "sha256:15d9e9a67306188a44baa72f569d2bfd803076269365fdea0934385da4dc361a"},
-    {file = "filelock-3.20.1.tar.gz", hash = "sha256:b8360948b351b80f420878d8516519a2204b07aefcdcfd24912a5d33127f188c"},
+    {file = "filelock-3.20.3-py3-none-any.whl", hash = "sha256:4b0dda527ee31078689fc205ec4f1c1bf7d56cf88b6dc9426c4f230e46c2dce1"},
+    {file = "filelock-3.20.3.tar.gz", hash = "sha256:18c57ee915c7ec61cff0ecf7f0f869936c7c30191bb0cf406f1341778d0834e1"},
 ]
 
 [[package]]
@@ -2557,10 +2557,27 @@ description = "Protobuf generated code for the nidevice_grpc gRPC API"
 optional = true
 python-versions = "<4.0,>=3.9"
 groups = ["main"]
-markers = "extra == \"grpc\""
+markers = "python_version == \"3.9\" and extra == \"grpc\""
 files = [
     {file = "ni_grpcdevice_v1_proto-1.0.0-py3-none-any.whl", hash = "sha256:36dfe9484cc40e8e1c97fb9720555f06563b0180e4837177d1cbf000c3d8988e"},
     {file = "ni_grpcdevice_v1_proto-1.0.0.tar.gz", hash = "sha256:62f087f85d390c2932e45ad03d365c750bd55e147b81b66ef853e13ff8538b19"},
+]
+
+[package.dependencies]
+grpcio = ">=1.49.0,<2.0"
+protobuf = ">=4.21"
+
+[[package]]
+name = "ni-grpcdevice-v1-proto"
+version = "1.1.0"
+description = "Protobuf generated code for the nidevice_grpc gRPC API"
+optional = true
+python-versions = "<4.0,>=3.10"
+groups = ["main"]
+markers = "python_version >= \"3.10\" and extra == \"grpc\""
+files = [
+    {file = "ni_grpcdevice_v1_proto-1.1.0-py3-none-any.whl", hash = "sha256:2784c4b3e64a9c1e6b743d26847b7a44bf781ab46a9e19b02b379c1e0bc6dcfb"},
+    {file = "ni_grpcdevice_v1_proto-1.1.0.tar.gz", hash = "sha256:ad14ab44e456a67d50a8fc38329e01dccae1732eab22a529c96eb3d5cb46370c"},
 ]
 
 [package.dependencies]
@@ -2574,7 +2591,7 @@ description = "Protobuf data types for NI gRPC APIs"
 optional = true
 python-versions = "<4.0,>=3.9"
 groups = ["main"]
-markers = "extra == \"grpc\""
+markers = "python_version == \"3.9\" and extra == \"grpc\""
 files = [
     {file = "ni_protobuf_types-1.0.0-py3-none-any.whl", hash = "sha256:a88d5e517ef825ef70734aab00e6fb44f78ceb7d40b5c1592af450b87e3745ae"},
     {file = "ni_protobuf_types-1.0.0.tar.gz", hash = "sha256:d2b6dfbd57729e80a7f9fa23a446635eee5ad771dbb70045b88412d163e7d732"},
@@ -2582,6 +2599,23 @@ files = [
 
 [package.dependencies]
 nitypes = ">=0.1.0dev8"
+protobuf = ">=4.21"
+
+[[package]]
+name = "ni-protobuf-types"
+version = "1.1.0"
+description = "Protobuf data types for NI gRPC APIs"
+optional = true
+python-versions = "<4.0,>=3.10"
+groups = ["main"]
+markers = "python_version >= \"3.10\" and extra == \"grpc\""
+files = [
+    {file = "ni_protobuf_types-1.1.0-py3-none-any.whl", hash = "sha256:0c21c096cf8577483dade081c571305fe8d4cc759ce2c780e7437129a375942c"},
+    {file = "ni_protobuf_types-1.1.0.tar.gz", hash = "sha256:98f0583405e219f6e128133c2f6c033f03cd83ebd3ce8098ad74ab99b8a253c1"},
+]
+
+[package.dependencies]
+nitypes = ">=1.1.0dev1"
 protobuf = ">=4.21"
 
 [[package]]
@@ -2622,9 +2656,28 @@ description = "Data types for NI Python APIs"
 optional = false
 python-versions = "<4.0,>=3.9"
 groups = ["main"]
+markers = "python_version == \"3.9\""
 files = [
     {file = "nitypes-1.0.1-py3-none-any.whl", hash = "sha256:8a0ab0cce139144850e580c9eee9e8f783dd60d530986e6478d7319bdb4a0f60"},
     {file = "nitypes-1.0.1.tar.gz", hash = "sha256:dc20a98c009651adf9f2769ec15cdbe939375bad2f2546765abbc23982301a8b"},
+]
+
+[package.dependencies]
+hightime = ">=0.2.2"
+numpy = {version = ">=1.22", markers = "python_version >= \"3.9\" and python_version < \"3.13\""}
+typing-extensions = ">=4.13.2"
+
+[[package]]
+name = "nitypes"
+version = "1.1.0.dev1"
+description = "Data types for NI Python APIs"
+optional = false
+python-versions = "<4.0,>=3.9"
+groups = ["main"]
+markers = "python_version >= \"3.10\""
+files = [
+    {file = "nitypes-1.1.0.dev1-py3-none-any.whl", hash = "sha256:d98ad6e3f8b92db76b5c1c584431fa27d3e74cce6e20464e43ee0117b02fe089"},
+    {file = "nitypes-1.1.0.dev1.tar.gz", hash = "sha256:50b23e00cc6960996656c4c9ef0ca71dd267fc5c9ca481077b682c29190aa2d3"},
 ]
 
 [package.dependencies]
@@ -3366,15 +3419,15 @@ typing-extensions = {version = ">=4.0.0", markers = "python_version < \"3.10\""}
 
 [[package]]
 name = "pykka"
-version = "4.4.0"
+version = "4.4.1"
 description = "Pykka is a Python implementation of the actor model"
 optional = false
 python-versions = ">=3.10"
 groups = ["test"]
 markers = "python_version >= \"3.10\""
 files = [
-    {file = "pykka-4.4.0-py3-none-any.whl", hash = "sha256:8a9195ade64af6ab51e35b871e4b43d7449422bc17f47708bba170b660bc2318"},
-    {file = "pykka-4.4.0.tar.gz", hash = "sha256:415d66abb7565812634eb6462c418733ad79d45910bac60f245a23199b305545"},
+    {file = "pykka-4.4.1-py3-none-any.whl", hash = "sha256:7faade94a424f47a3de025e85ac6671f6131009b5b0e7c3a0d2ac8a0ceeda124"},
+    {file = "pykka-4.4.1.tar.gz", hash = "sha256:e4ccac930765be9b8cc4466162a0e99bfc6568e70076e74bb5c9ecf2cebc009b"},
 ]
 
 [[package]]
@@ -4149,29 +4202,29 @@ virtualenv = ">=20.31.2"
 
 [[package]]
 name = "tox"
-version = "4.32.0"
+version = "4.34.1"
 description = "tox is a generic virtualenv management and test command line tool"
 optional = false
 python-versions = ">=3.10"
 groups = ["test"]
 markers = "python_version >= \"3.10\""
 files = [
-    {file = "tox-4.32.0-py3-none-any.whl", hash = "sha256:451e81dc02ba8d1ed20efd52ee409641ae4b5d5830e008af10fe8823ef1bd551"},
-    {file = "tox-4.32.0.tar.gz", hash = "sha256:1ad476b5f4d3679455b89a992849ffc3367560bbc7e9495ee8a3963542e7c8ff"},
+    {file = "tox-4.34.1-py3-none-any.whl", hash = "sha256:5610d69708bab578d618959b023f8d7d5d3386ed14a2392aeebf9c583615af60"},
+    {file = "tox-4.34.1.tar.gz", hash = "sha256:ef1e82974c2f5ea02954d590ee0b967fad500c3879b264ea19efb9a554f3cc60"},
 ]
 
 [package.dependencies]
-cachetools = ">=6.2"
+cachetools = ">=6.2.4"
 chardet = ">=5.2"
 colorama = ">=0.4.6"
-filelock = ">=3.20"
+filelock = ">=3.20.2"
 packaging = ">=25"
-platformdirs = ">=4.5"
+platformdirs = ">=4.5.1"
 pluggy = ">=1.6"
-pyproject-api = ">=1.9.1"
+pyproject-api = ">=1.10"
 tomli = {version = ">=2.3", markers = "python_version < \"3.11\""}
 typing-extensions = {version = ">=4.15", markers = "python_version < \"3.11\""}
-virtualenv = ">=20.34"
+virtualenv = ">=20.35.4"
 
 [[package]]
 name = "types-grpcio"
@@ -4199,14 +4252,14 @@ files = [
 
 [[package]]
 name = "types-requests"
-version = "2.32.4.20250913"
+version = "2.32.4.20260107"
 description = "Typing stubs for requests"
 optional = false
 python-versions = ">=3.9"
 groups = ["lint"]
 files = [
-    {file = "types_requests-2.32.4.20250913-py3-none-any.whl", hash = "sha256:78c9c1fffebbe0fa487a418e0fa5252017e9c60d1a2da394077f1780f655d7e1"},
-    {file = "types_requests-2.32.4.20250913.tar.gz", hash = "sha256:abd6d4f9ce3a9383f269775a9835a4c24e5cd6b9f647d64f88aa4613c33def5d"},
+    {file = "types_requests-2.32.4.20260107-py3-none-any.whl", hash = "sha256:b703fe72f8ce5b31ef031264fe9395cac8f46a04661a79f7ed31a80fb308730d"},
+    {file = "types_requests-2.32.4.20260107.tar.gz", hash = "sha256:018a11ac158f801bfa84857ddec1650750e393df8a004a8a9ae2a9bec6fcb24f"},
 ]
 
 [package.dependencies]
