@@ -2620,18 +2620,18 @@ protobuf = ">=4.21"
 
 [[package]]
 name = "ni-python-styleguide"
-version = "0.4.7"
+version = "0.4.8"
 description = "NI's internal and external Python linter rules and plugins"
 optional = false
 python-versions = "<4.0,>=3.7"
 groups = ["lint"]
 files = [
-    {file = "ni_python_styleguide-0.4.7-py3-none-any.whl", hash = "sha256:4b1ae36315a53d1ef0f996cf868cfca997e3a80b431808e46c632467eacd2d09"},
-    {file = "ni_python_styleguide-0.4.7.tar.gz", hash = "sha256:b510bb6974bdb907d0d10f14e985e90304d5f02590f5bafab333ebbaa663ef81"},
+    {file = "ni_python_styleguide-0.4.8-py3-none-any.whl", hash = "sha256:dbbf0fc3692f7d71008ae9cd0d01c93dbf21085e0de2f0068dcd16addb573546"},
+    {file = "ni_python_styleguide-0.4.8.tar.gz", hash = "sha256:f3434d14cc9838613171fe26faccc396a4a8b2f960e139fc92de9bf636f8ba51"},
 ]
 
 [package.dependencies]
-black = ">=23.1"
+black = ">=23.1,<26.0"
 click = ">=7.1.2"
 flake8 = [
     {version = ">=5.0,<6.0", markers = "python_version >= \"3.7\" and python_version < \"3.12\""},
