@@ -1,32 +1,30 @@
 {
     "Windows": [
         {
-            "Version": "25.8.0",
-            "Release": "2025Q4",
-            "Location": "https://download.ni.com/support/nipkg/products/ni-d/ni-daqmx/25.8/online/ni-daqmx_25.8_online.exe",
+            "Version": "26.0.0",
+            "Release": "2026Q1",
+            "Location": "https://download.ni.com/support/nipkg/products/ni-d/ni-daqmx/26.0/online/ni-daqmx_26.0_online.exe",
             "supportedOS": [
                 "Windows 11",
+                "Windows Server 2025",
                 "Windows Server 2022 64-bit",
-                "Windows 10 64-bit",
-                "Windows Server 2016 64-bit",
-                "Windows Server 2019 64-bit"
+                "Windows 10 IoT Enterprise 2021"
             ]
         }
     ],
     "Linux": [
         {
-            "Version": "25.8.0",
-            "Release": "2025Q4",
+            "Version": "26.0.0",
+            "Release": "2026Q1",
             "_comment": "Location url must be of the format 'https://download.ni.com/support/softlib/MasterRepository/LinuxDrivers<Release>/NILinux<Release>DeviceDrivers.zip'. Any change to the format will require a change in the code.",
-            "Location": "https://download.ni.com/support/softlib/MasterRepository/LinuxDrivers2025Q4/NILinux2025Q4DeviceDrivers.zip",
+            "Location": "https://download.ni.com/support/softlib/MasterRepository/LinuxDrivers2026Q1/NILinux2026Q1DeviceDrivers.zip",
             "supportedOS": [
-                "ubuntu 20.04",
                 "ubuntu 22.04",
                 "ubuntu 24.04",
                 "rhel 8",
                 "rhel 9",
-                "opensuse 15.4",
-                "opensuse 15.5"
+                "opensuse 15.5",
+                "opensuse 15.6"
             ]
         }
     ]
