@@ -1,4 +1,5 @@
 # Changelog
+* [1.4.1](#141)
 * [1.4.0](#140)
 * [1.3.0](#130)
 * [1.2.0](#120)
@@ -25,6 +26,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.4.1
+* ### Merged Pull Requests
+   * [Full changelog: 1.4.0...1.4.1](https://github.com/ni/nidaqmx-python/compare/1.4.0...1.4.1)
+
+* ### Resolved Issues
+    * ...
+
+* ### Major Changes
+   * Update installer metadata using DAQmx version 26.0.0
+
+
+* ### Known Issues
+   * ...
+   
 ## 1.4.0
 * ### Merged Pull Requests
     * [Full changelog: 1.3.0...1.4.0](https://github.com/ni/nidaqmx-python/compare/1.3.0...1.4.0)
