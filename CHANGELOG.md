@@ -28,7 +28,7 @@ All notable changes to this project will be documented in this file.
 
 ## 1.4.1
 * ### Merged Pull Requests
-   * [Full changelog: 1.4.0...1.4.1](https://github.com/ni/nidaqmx-python/compare/1.3.0...1.4.1)
+   * [Full changelog: 1.4.0...1.4.1](https://github.com/ni/nidaqmx-python/compare/1.4.0...1.4.1)
 
 * ### Resolved Issues
     * ...
