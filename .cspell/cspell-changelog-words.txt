@@ -1,0 +1,21 @@
+# Words specific to CHANGELOG.md
+# DAQmx abbreviation constants (historical enum names split in v0.5.2)
+AIADC
+AIDC
+AILVDT
+AIRVDT
+CITC
+# Tool/package/project names
+styleguide
+pyproject
+grpcdevice
+virtualenvs
+pynidaqmx
+readinto
+conv
+libtime
+# CI bot/username fragments
+rdss
+nidaqmxbot
+# Historical broken enum name (renamed to A_AND_B in v1.0.0)
+AAND

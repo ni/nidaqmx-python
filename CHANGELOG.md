@@ -339,7 +339,7 @@ All notable changes to this project will be documented in this file.
 * Update setup.py description and fix issues 2, 3, 5, and 6 raised by Ed Page.
     * Splitting joined acronyms AIADC, AIDC, AILVDT, AIRVDT and CITC.
     * Adding link to LICENSE file.
-    * Updating README.rst file in source directory to eliminate Sphinx domaindirectives and add link to documentation on
+    * Updating README.rst file in source directory to eliminate Sphinx domain directives and add link to documentation on
     readthedocs.
 
 ## 0.5.0

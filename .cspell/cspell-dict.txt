@@ -6,6 +6,7 @@ yoctoseconds
 unflatten
 timebase
 bitfield
+bitfields
 DAQmx
 cDAQ
 LVDT
@@ -37,8 +38,10 @@ subseconds
 EEPROM
 docstrings
 cdecl
+HWCU
 
 # numpy
+numpy
 allclose
 ascontiguousarray
 dtype
@@ -63,6 +66,7 @@ bnptdms
 nptdms
 
 # ctypes (stdlib)
+ctypes
 argtype
 argtypes
 byref
@@ -70,6 +74,7 @@ ctypeslib
 varargs
 
 # pytest
+pytest
 addoption
 callspec
 caplog
@@ -88,6 +93,8 @@ dotenv
 localzone
 
 # matplotlib
+matplotlib
+pyplot
 xlabel
 ylabel
 
@@ -122,6 +129,7 @@ typeshed
 
 # nidaqmx public API (compat-breaking names)
 DAQError
+NIDAQ
 pretrig
 aognd
 zidx

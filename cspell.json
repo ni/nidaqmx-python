@@ -4,7 +4,9 @@
     { "name": "cspell-dict", "path": "./.cspell/cspell-dict.txt", "noSuggest": true },
     { "name": "cspell-daqmx-abbreviations", "path": "./.cspell/cspell-daqmx-abbreviations.txt", "noSuggest": true },
     { "name": "cspell-mako-keywords", "path": "./.cspell/cspell-mako-keywords.txt", "noSuggest": true },
-    { "name": "cspell-sphinx-directives", "path": "./.cspell/cspell-sphinx-directives.txt", "noSuggest": true }
+    { "name": "cspell-sphinx-directives", "path": "./.cspell/cspell-sphinx-directives.txt", "noSuggest": true },
+    { "name": "cspell-contributing-words", "path": "./.cspell/cspell-contributing-words.txt", "noSuggest": true },
+    { "name": "cspell-changelog-words", "path": "./.cspell/cspell-changelog-words.txt", "noSuggest": true }
   ],
   "dictionaries": ["cspell-dict", "cspell-daqmx-abbreviations"],
   "useGitignore": true,
@@ -26,8 +28,7 @@
     "docs/conf.py",
     "docs/make.bat",
     "docs/Makefile",
-    // Configuration and data file types
-    "*.md",
+    // Configuration and data file types (not prose)
     "*.toml",
     "*.ini",
     "*.lock",
@@ -38,12 +39,8 @@
     "*.cfg",
     "*.sample",
     // Files without standard extensions
-    "LICENSE",
-    "CODEOWNERS",
     ".gitignore",
-    ".gitmodules",
-    // Root-level .rst (not in docs/)
-    "README.rst"
+    ".gitmodules"
   ],
   "overrides": [
     {
@@ -52,9 +49,19 @@
       "dictionaries": ["cspell-dict", "python", "cspell-mako-keywords", "cspell-daqmx-abbreviations"]
     },
     {
-      // RST docs: add Sphinx directive vocabulary.
+      // RST docs: add Sphinx directive vocabulary and Python identifiers for code examples.
       "filename": "**/*.rst",
-      "dictionaries": ["cspell-dict", "cspell-daqmx-abbreviations", "cspell-sphinx-directives"]
+      "dictionaries": ["cspell-dict", "python", "cspell-daqmx-abbreviations", "cspell-sphinx-directives"]
+    },
+    {
+      // CONTRIBUTING.md: add contribution workflow terminology.
+      "filename": "**/CONTRIBUTING.md",
+      "dictionaries": ["cspell-dict", "cspell-contributing-words"]
+    },
+    {
+      // CHANGELOG.md: add historical identifiers and project-specific terms.
+      "filename": "**/CHANGELOG.md",
+      "dictionaries": ["cspell-dict", "cspell-daqmx-abbreviations", "cspell-changelog-words"]
     }
   ]
 }

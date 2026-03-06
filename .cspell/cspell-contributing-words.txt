@@ -1,0 +1,6 @@
+# Words specific to CONTRIBUTING.md
+styleguide
+mypy
+pypi
+pyproject
+developercertificate
