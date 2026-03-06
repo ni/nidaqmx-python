@@ -1,7 +1,4 @@
-# cspell:ignore Gerät
-# cspell:ignore appareil
-# cspell:ignore prüfende Daten
-# cspell:ignore Données
+# cspell:ignore appareil Daten Données Gerät prüfende
 from __future__ import annotations
 
 import pathlib
