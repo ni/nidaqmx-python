@@ -36,22 +36,18 @@
   ],
   "overrides": [
     {
-      // Mako templates: activate the Python dictionary so Python identifiers in templates aren't flagged.
       "filename": "**/*.mako",
       "dictionaries": ["cspell-dict", "python", "cspell-mako-keywords", "cspell-daqmx-abbreviations"]
     },
     {
-      // RST docs: add Sphinx directive vocabulary and Python identifiers for code examples.
       "filename": "**/*.rst",
       "dictionaries": ["cspell-dict", "python", "cspell-daqmx-abbreviations", "cspell-sphinx-directives"]
     },
     {
-      // CONTRIBUTING.md: add contribution workflow terminology.
       "filename": "**/CONTRIBUTING.md",
       "dictionaries": ["cspell-dict", "cspell-contributing-words"]
     },
     {
-      // CHANGELOG.md: add historical identifiers and project-specific terms.
       "filename": "**/CHANGELOG.md",
       "dictionaries": ["cspell-dict", "cspell-daqmx-abbreviations", "cspell-changelog-words"]
     }
