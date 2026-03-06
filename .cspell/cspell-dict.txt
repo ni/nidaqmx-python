@@ -38,3 +38,130 @@ subseconds
 EEPROM
 docstrings
 cdecl
+
+# numpy
+allclose
+ascontiguousarray
+dtype
+frombuffer
+iinfo
+nbytes
+ndarray
+ndpointer
+printoptions
+tobytes
+tolist
+rtol
+
+# nitypes
+nitypes
+
+# hightime
+hightime
+
+# nptdms
+bnptdms
+nptdms
+
+# ctypes (stdlib)
+argtype
+argtypes
+byref
+ctypeslib
+varargs
+
+# pytest
+addoption
+callspec
+caplog
+fixturenames
+getfixturevalue
+metafunc
+modifyitems
+parametrizing
+unraisable
+unraisablehook
+
+# python-decouple / dotenv
+dotenv
+
+# tzlocal
+localzone
+
+# matplotlib
+xlabel
+ylabel
+
+# pykka
+pykka
+
+# nidaqmx abbreviations
+chan
+chans
+samp
+samps
+
+# codegen internals
+codegen
+scrapigen
+
+# nidaqmx C library / header filenames (external)
+nicaiu
+nicai
+
+# NI-DAQmx C API identifier fragments (surface in tests/examples but defined in excluded metadata)
+outp
+rngs
+srcs
+xfer
+lvls
+cfgs
+nums
+CAPI
+descr
+
+# Linux system tool names (external)
+autoinstall
+dpkg
+insserv
+chkconfig
+NISHAREDDIR
+typeshed
+
+# nidaqmx public API (compat-breaking names)
+expir
+excit
+fltr
+thrmcpl
+thrmstr
+anlg
+DAQError
+pretrig
+aognd
+zidx
+APFI
+hwteds
+installdriver
+AHIGH
+TEDSAIRTD
+CIGPS
+TEDSAI
+AIRTD
+MIOAI
+tedshwteds
+MeasurementLink
+forcelb
+BHIGH
+aignd
+BBULK
+acceld
+voltaged
+
+# NI CVI calling convention macro (C interop comment)
+CVICALLBACK
+
+# NI-DAQmx C API constant fragment
+VERIF
+
+# Deprecated public property name in backward-compat rename map
+sensord
