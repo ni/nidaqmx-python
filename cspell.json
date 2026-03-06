@@ -11,35 +11,30 @@
   "dictionaries": ["cspell-dict", "cspell-daqmx-abbreviations"],
   "useGitignore": true,
   "ignorePaths": [
-    // Entire trees - not spell-checked
-    "third_party/**",
-    "generated/**",
     ".cspell/**",
     ".github/**",
     "docs/img/**",
-    "tests/test_assets/**",
-    // src/codegen - only utilities/ and templates/ are spell-checked
-    "src/codegen/metadata/**",
-    "src/codegen/properties/**",
-    "src/codegen/functions/**",
-    "src/codegen/protos/**",
-    "src/codegen/*.py",
-    // docs - only .rst files are spell-checked
     "docs/conf.py",
     "docs/make.bat",
     "docs/Makefile",
-    // Configuration and data files (not prose)
-    "cspell.json",
-    "tox.ini",
+    "generated/**",
+    "src/codegen/functions/**",
+    "src/codegen/metadata/**",
+    "src/codegen/protos/**",
+    "src/codegen/properties/**",
+    "src/codegen/*.py",
     "tests/max_config/**",
+    "tests/test_assets/**",
+    "third_party/**",
     ".env.sample",
+    ".gitignore",
+    ".gitmodules",
     ".readthedocs.yml",
+    "cspell.json",
     "poetry.lock",
     "poetry.toml",
     "pyproject.toml",
-    // Files without standard extensions
-    ".gitignore",
-    ".gitmodules"
+    "tox.ini"
   ],
   "overrides": [
     {
