@@ -34,7 +34,8 @@ pass.
 conventions. If this reports errors, first run `poetry run ni-python-styleguide fix` in order to sort
 imports and format the code with Black, then manually fix any remaining errors.
 10. Run `poetry run mypy` to statically type-check the updated code.
-11. Send a GitHub Pull Request to the main repository's master branch. GitHub Pull Requests are the
+11. Run `npx cspell "**" --no-progress` to check for spelling errors. This requires [Node.js](https://nodejs.org/) to be installed.
+12. Send a GitHub Pull Request to the main repository's master branch. GitHub Pull Requests are the
 expected method of code collaboration on this project.
 
 # Testing
