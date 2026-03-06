@@ -26,7 +26,6 @@
     "tests/max_config/**",
     "tests/test_assets/**",
     "third_party/**",
-    ".env.sample",
     ".gitignore",
     ".gitmodules",
     ".readthedocs.yml",

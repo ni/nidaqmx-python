@@ -39,6 +39,8 @@ EEPROM
 docstrings
 cdecl
 HWCU
+MBCS
+multibyte
 
 # numpy
 numpy
