@@ -7,7 +7,6 @@ from collections.abc import Sequence
 import grpc_tools.protoc
 import pkg_resources
 
-
 STUBS_NAMESPACE = "nidaqmx._stubs"
 PROTO_PARENT_NAMESPACES = ["src.codegen", "protos"]
 STUBS_PATH = (
@@ -67,18 +66,16 @@ def fix_import_paths(
     grpc_codegened_file_paths.extend(stubs_path.rglob("*pb2*pyi"))
     for path in grpc_codegened_file_paths:
         print(f"Processing {path}")
-        data = path.read_bytes()
+        data = path.read_text()
         for name in imports_to_fix:
-            data = data.replace(
-                f"import {name}".encode(), f"from {stubs_namespace} import {name}".encode()
-            )
+            data = data.replace(f"import {name}", f"from {stubs_namespace} import {name}")
 
         for namespace in proto_parent_namespaces:
             data = data.replace(
-                f"from {namespace}".encode(),
-                f"from {stubs_namespace}.{namespace}".encode(),
+                f"from {namespace}",
+                f"from {stubs_namespace}.{namespace}",
             )
-        path.write_bytes(data)
+        path.write_text(data)
 
 
 def add_init_files(stubs_path: pathlib.Path, proto_path: pathlib.Path):
@@ -89,4 +86,4 @@ def add_init_files(stubs_path: pathlib.Path, proto_path: pathlib.Path):
             if python_files:
                 init_path = dir / "__init__.py"
                 print(f"Creating {init_path}")
-                init_path.write_bytes(b'"""Auto generated gRPC files."""\n')
+                init_path.write_text('"""Auto generated gRPC files."""\n')
