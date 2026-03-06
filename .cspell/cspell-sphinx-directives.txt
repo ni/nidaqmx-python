@@ -1,0 +1,8 @@
+# Sphinx RST directives and options
+automodule
+toctree
+currentmodule
+genindex
+modindex
+undoc
+bysource

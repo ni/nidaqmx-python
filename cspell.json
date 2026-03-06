@@ -3,28 +3,58 @@
   "dictionaryDefinitions": [
     { "name": "cspell-dict", "path": "./.cspell/cspell-dict.txt", "noSuggest": true },
     { "name": "cspell-daqmx-abbreviations", "path": "./.cspell/cspell-daqmx-abbreviations.txt", "noSuggest": true },
-    { "name": "cspell-mako-keywords", "path": "./.cspell/cspell-mako-keywords.txt", "noSuggest": true }
+    { "name": "cspell-mako-keywords", "path": "./.cspell/cspell-mako-keywords.txt", "noSuggest": true },
+    { "name": "cspell-sphinx-directives", "path": "./.cspell/cspell-sphinx-directives.txt", "noSuggest": true }
   ],
   "dictionaries": ["cspell-dict", "cspell-daqmx-abbreviations"],
-  "files": [
-    "src/handwritten/**/*.py",
-    "src/codegen/utilities/**/*.py",
-    "src/codegen/templates/**/*.mako",
-    "tests/**/*.py",
-    "examples/**/*.py"
-  ],
+  "useGitignore": true,
   "ignorePaths": [
+    // Entire trees - not spell-checked
+    "third_party/**",
+    "generated/**",
+    ".cspell/**",
+    ".github/**",
+    "docs/img/**",
+    "tests/test_assets/**",
+    // src/codegen - only utilities/ and templates/ are spell-checked
     "src/codegen/metadata/**",
     "src/codegen/properties/**",
     "src/codegen/functions/**",
     "src/codegen/protos/**",
-    "generated/**"
+    "src/codegen/*.py",
+    // docs - only .rst files are spell-checked
+    "docs/conf.py",
+    "docs/make.bat",
+    "docs/Makefile",
+    // Configuration and data file types
+    "*.md",
+    "*.toml",
+    "*.ini",
+    "*.lock",
+    "*.yml",
+    "*.yaml",
+    "*.json",
+    "*.txt",
+    "*.cfg",
+    "*.sample",
+    // Files without standard extensions
+    "LICENSE",
+    "CODEOWNERS",
+    ".gitignore",
+    ".gitmodules",
+    // Root-level .rst (not in docs/)
+    "README.rst"
   ],
   "overrides": [
     {
       // Mako templates: activate the Python dictionary so Python identifiers in templates aren't flagged.
       "filename": "**/*.mako",
       "dictionaries": ["cspell-dict", "python", "cspell-mako-keywords", "cspell-daqmx-abbreviations"]
+    },
+    {
+      // RST docs: add Sphinx directive vocabulary.
+      "filename": "**/*.rst",
+      "dictionaries": ["cspell-dict", "cspell-daqmx-abbreviations", "cspell-sphinx-directives"]
     }
   ]
 }
