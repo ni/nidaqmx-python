@@ -32,6 +32,8 @@ jobs:
           install-args: "--all-extras --with examples"
       - name: Run Bandit security checks
         run: poetry run bandit -c pyproject.toml -r generated/nidaqmx
+      - name: Run cspell
+        run: npx cspell "**" --no-progress --quiet
       - name: Generate ni-daqmx files
         if: ${{ runner.os == 'Linux' && matrix.python-version == env.codegen-python-version }}
         run: |
