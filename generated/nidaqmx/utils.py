@@ -10,7 +10,8 @@ from nidaqmx.errors import DaqError
 from nidaqmx.grpc_session_options import GrpcSessionOptions
 
 # Method logic adapted from
-# //Measurements/Infrastructure/dmxf/trunk/2.5/source/nimuck/parseUtilities.cpp  # cspell:disable-line
+# cspell:disable-next-line
+# //Measurements/Infrastructure/dmxf/trunk/2.5/source/nimuck/parseUtilities.cpp
 
 _invalid_range_syntax_message = (
     "Syntax for a range of objects in the input string is invalid.\n\n"
