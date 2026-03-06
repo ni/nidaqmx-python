@@ -75,6 +75,11 @@ byref
 ctypeslib
 varargs
 
+# Python tooling (directory/artifact names, not real words)
+pycache
+htmlcov
+venv
+
 # pytest
 pytest
 addoption
