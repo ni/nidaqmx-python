@@ -103,10 +103,10 @@ class DaqFunctionImporter:
     ):
         try:
             cfunc = getattr(self._library, function)
-            if not hasattr(cfunc, "arglock"):
+            if not hasattr(cfunc, "arg_lock"):
                 with self._lib_lock:
-                    if not hasattr(cfunc, "arglock"):
-                        cfunc.arglock = threading.Lock()
+                    if not hasattr(cfunc, "arg_lock"):
+                        cfunc.arg_lock = threading.Lock()
             return cfunc
         except AttributeError:
             raise DaqFunctionNotSupportedError(_FUNCTION_NOT_SUPPORTED_MESSAGE.format(function))
@@ -188,9 +188,9 @@ class DaqLibImporter:
 
         if sys.platform.startswith("win"):
 
-            def _load_lib(libname: str):
-                windll = ctypes.windll.LoadLibrary(libname)
-                cdll = ctypes.cdll.LoadLibrary(libname)
+            def _load_lib(library_name: str):
+                windll = ctypes.windll.LoadLibrary(library_name)
+                cdll = ctypes.cdll.LoadLibrary(library_name)
                 return windll, cdll
 
             # Feature Toggle to load nicaiu.dll or nicai_utf8.dll
