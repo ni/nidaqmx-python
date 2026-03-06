@@ -1,9 +1,9 @@
 {
   "version": "0.2",
   "dictionaryDefinitions": [
-    { "name": "cspell-dict", "path": "./cspell-dict.txt", "addWords": true },
-    { "name": "cspell-ignore-words", "path": "./cspell-ignore-words.txt", "noSuggest": true },
-    { "name": "cspell-mako-keywords", "path": "./cspell-mako-keywords.txt", "noSuggest": true }
+    { "name": "cspell-dict", "path": "./.cspell/cspell-dict.txt", "addWords": true },
+    { "name": "cspell-ignore-words", "path": "./.cspell/cspell-ignore-words.txt", "noSuggest": true },
+    { "name": "cspell-mako-keywords", "path": "./.cspell/cspell-mako-keywords.txt", "noSuggest": true }
   ],
   "dictionaries": ["cspell-dict", "cspell-ignore-words"],
   "files": [
