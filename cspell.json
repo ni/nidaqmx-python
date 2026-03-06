@@ -1,7 +1,7 @@
 {
   "version": "0.2",
   "dictionaryDefinitions": [
-    { "name": "cspell-dict", "path": "./.cspell/cspell-dict.txt", "addWords": true },
+    { "name": "cspell-dict", "path": "./.cspell/cspell-dict.txt", "noSuggest": true },
     { "name": "cspell-daqmx-abbreviations", "path": "./.cspell/cspell-daqmx-abbreviations.txt", "noSuggest": true },
     { "name": "cspell-mako-keywords", "path": "./.cspell/cspell-mako-keywords.txt", "noSuggest": true }
   ],
@@ -24,7 +24,7 @@
     {
       // Mako templates: activate the Python dictionary so Python identifiers in templates aren't flagged.
       "filename": "**/*.mako",
-      "dictionaries": ["python", "cspell-mako-keywords"]
+      "dictionaries": ["cspell-dict", "python", "cspell-mako-keywords", "cspell-daqmx-abbreviations"]
     }
   ]
 }

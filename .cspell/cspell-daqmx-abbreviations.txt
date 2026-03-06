@@ -3,13 +3,11 @@ Accur            # Accuracy
 Ack              # Acknowledge
 Adv              # Advance
 Alt              # Altitude
-Amp              # Ampere
-Amp              # Amplifier
+Amp              # Ampere / Amplifier
 AI               # Analog Input
 AO               # Analog Output
 Anlg             # Analog
-Ang              # Angle
-Ang              # Angular
+Ang              # Angle / Angular
 Ant              # Antenna
 Atten            # Attenuation
 Attr             # Attribute
@@ -26,19 +24,13 @@ Cap              # Capacitor
 Chan             # Channel
 Chans            # Channels
 Clk              # Clock
-Comm             # Communicating
-Comm             # Communicator
-Compen           # Compensated
-Compen           # Compensation
+Comm             # Communicating / Communicator
+Compen           # Compensated / Compensation
 Cmplt            # Complete
 Cond             # Condition
-Cfg              # Configuration
+Cfg              # Configuration / Configure
 Cfgs             # Configurations
-Cfg              # Configure
-Conn             # Connect
-Conn             # Connected
-Conn             # Connecting
-Conn             # Connector
+Conn             # Connect / Connected / Connecting / Connector
 Const            # Constant
 ContPulseTrain   # Continuous Pulse Train
 Cont             # Continuous
@@ -61,8 +53,7 @@ Dig              # Digital
 Dir              # Direction
 Disp             # Display
 Dist             # Distance
-Div              # Divide
-Div              # Divisor
+Div              # Divide / Divisor
 Dyn              # Dynamic
 Eng              # Engineering
 Excit            # Excitation
@@ -72,9 +63,7 @@ Ext              # External
 Fltr             # Filter
 FinitePulseTrain # Finite Pulse Train
 Freq             # Frequency
-Gen              # General
-Gen              # Generate
-Gen              # Generator
+Gen              # General / Generate / Generator
 Gnf              # Ground
 HW               # Hardware
 HAE              # Height Above Ellipsoid
@@ -83,8 +72,7 @@ Incr             # Increment
 Init             # Initialize
 Int              # Internal
 TAI              # International Atomic Time
-Interp           # Interpolation
-Interp           # Interpretation
+Interp           # Interpolation / Interpretation
 Inv              # Invert
 Latch            # Latching
 Lat              # Latitude
@@ -95,8 +83,7 @@ Long             # Longitude
 Map              # Mapping
 Max              # Maximum
 MSL              # Mean Sea Level
-Meas             # Measurable
-Meas             # Measurement
+Meas             # Measurable / Measurement
 Mech             # Mechanism
 Mem              # Memory
 Msg              # Message
@@ -115,8 +102,7 @@ Pos              # Position
 Pot              # Potentiometer
 Pwr              # Power
 Pwrln            # Powerline
-Prog             # Programmed
-Prog             # Progress
+Prog             # Programmed / Progress
 Props            # Properties
 Quant            # Quantity
 RangeVals        # RangeValues
