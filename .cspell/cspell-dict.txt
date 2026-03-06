@@ -18,12 +18,10 @@ coeff
 coeffs
 RVDT
 overtemperature
-NRSE
 retriggerable
 readall
 RTSI
 PICO
-regen
 ACRMS
 SCXI
 forcebridge
@@ -96,9 +94,6 @@ ylabel
 pykka
 
 # nidaqmx abbreviations
-chan
-chans
-samp
 samps
 
 # codegen internals
@@ -111,11 +106,7 @@ nicai
 
 # NI-DAQmx C API identifier fragments (surface in tests/examples but defined in excluded metadata)
 outp
-rngs
-srcs
-xfer
 lvls
-cfgs
 nums
 CAPI
 descr
@@ -129,12 +120,6 @@ NISHAREDDIR
 typeshed
 
 # nidaqmx public API (compat-breaking names)
-expir
-excit
-fltr
-thrmcpl
-thrmstr
-anlg
 DAQError
 pretrig
 aognd

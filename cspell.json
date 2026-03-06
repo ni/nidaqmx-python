@@ -2,9 +2,10 @@
   "version": "0.2",
   "dictionaryDefinitions": [
     { "name": "cspell-dict", "path": "./.cspell/cspell-dict.txt", "addWords": true },
+    { "name": "cspell-daqmx-abbreviations", "path": "./.cspell/cspell-daqmx-abbreviations.txt", "noSuggest": true },
     { "name": "cspell-mako-keywords", "path": "./.cspell/cspell-mako-keywords.txt", "noSuggest": true }
   ],
-  "dictionaries": ["cspell-dict"],
+  "dictionaries": ["cspell-dict", "cspell-daqmx-abbreviations"],
   "files": [
     "src/handwritten/**/*.py",
     "src/codegen/utilities/**/*.py",
