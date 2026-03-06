@@ -37,11 +37,11 @@
   "overrides": [
     {
       "filename": "**/*.mako",
-      "dictionaries": ["cspell-dict", "python", "cspell-mako-keywords", "cspell-daqmx-abbreviations"]
+      "dictionaries": ["cspell-dict", "cspell-daqmx-abbreviations", "python", "cspell-mako-keywords"]
     },
     {
       "filename": "**/*.rst",
-      "dictionaries": ["cspell-dict", "python", "cspell-daqmx-abbreviations", "cspell-sphinx-directives"]
+      "dictionaries": ["cspell-dict", "cspell-daqmx-abbreviations", "python", "cspell-sphinx-directives"]
     },
     {
       "filename": "**/CONTRIBUTING.md",
