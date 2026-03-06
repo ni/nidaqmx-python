@@ -28,16 +28,15 @@
     "docs/conf.py",
     "docs/make.bat",
     "docs/Makefile",
-    // Configuration and data file types (not prose)
-    "*.toml",
-    "*.ini",
-    "*.lock",
-    "*.yml",
-    "*.yaml",
-    "*.json",
-    "*.txt",
-    "*.cfg",
-    "*.sample",
+    // Configuration and data files (not prose)
+    "cspell.json",
+    "tox.ini",
+    "tests/max_config/**",
+    ".env.sample",
+    ".readthedocs.yml",
+    "poetry.lock",
+    "poetry.toml",
+    "pyproject.toml",
     // Files without standard extensions
     ".gitignore",
     ".gitmodules"
