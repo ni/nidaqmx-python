@@ -87,7 +87,7 @@ def get_enums_used(functions):
 
 
 def order_function_parameters_by_optional(function_parameters):
-    """Sorts optional parameters and non optional parameters for function defintion."""
+    """Sorts optional parameters and non optional parameters for function definition."""
     optional_params = []
     non_optional_params = []
     for param in function_parameters:
@@ -100,7 +100,7 @@ def order_function_parameters_by_optional(function_parameters):
 
 
 def get_parameter_signature(is_python_factory, sorted_params):
-    """Gets parameter signature for function defintion."""
+    """Gets parameter signature for function definition."""
     params_with_defaults = []
     if not is_python_factory:
         params_with_defaults.append("self")

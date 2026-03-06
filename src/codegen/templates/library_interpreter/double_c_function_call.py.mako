@@ -13,17 +13,17 @@
     function_call_args = generate_interpreter_function_call_args(function)
     explicit_output_param = get_output_param_with_ivi_dance_mechanism(function)
 %>\
-        cfunc = lib_importer.${'windll' if function.calling_convention == 'StdCall' else 'cdll'}.DAQmx${function.c_function_name}
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
+        c_func = lib_importer.${'windll' if function.calling_convention == 'StdCall' else 'cdll'}.DAQmx${function.c_function_name}
+        if c_func.argtypes is None:
+            with c_func.arg_lock:
+                if c_func.argtypes is None:
+                    c_func.argtypes = [
                         ${', '.join(get_argument_types(function)) | wrap(24, 24)}]
 
         temp_size = ${'size_hint' if function.function_name in INCLUDE_SIZE_HINT_FUNCTIONS else '0'}
         while True:
             ${instantiate_explicit_output_param(explicit_output_param)}
-            size_or_code = cfunc(
+            size_or_code = c_func(
                 ${', '.join(function_call_args) | wrap(16, 16)})
 %if explicit_output_param.ctypes_data_type == 'ctypes.c_char_p':
             if is_string_buffer_too_small(size_or_code):

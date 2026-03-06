@@ -1,1 +1,1 @@
-"""Component tests for nidaqmx.system.storage._collecitons.*."""
+"""Component tests for nidaqmx.system.storage._collections.*."""

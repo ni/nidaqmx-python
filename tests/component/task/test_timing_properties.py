@@ -462,7 +462,7 @@ def test___timing___reset_uint64_property_with_device_context___throws_daqerror(
     assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
 
 
-def test___timing___set_unint64_property_out_of_range_value___throws_daqerror(
+def test___timing___set_uint64_property_out_of_range_value___throws_daqerror(
     task, sim_6363_device
 ):
     task.ai_channels.add_ai_voltage_chan(sim_6363_device.ai_physical_chans[0].name)

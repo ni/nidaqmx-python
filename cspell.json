@@ -1,0 +1,30 @@
+{
+  "version": "0.2",
+  "dictionaryDefinitions": [
+    { "name": "cspell-dict", "path": "./cspell-dict.txt", "addWords": true },
+    { "name": "cspell-ignore-words", "path": "./cspell-ignore-words.txt", "noSuggest": true },
+    { "name": "cspell-mako-keywords", "path": "./cspell-mako-keywords.txt", "noSuggest": true }
+  ],
+  "dictionaries": ["cspell-dict", "cspell-ignore-words"],
+  "files": [
+    "src/handwritten/**/*.py",
+    "src/codegen/utilities/**/*.py",
+    "src/codegen/templates/**/*.mako",
+    "tests/**/*.py",
+    "examples/**/*.py"
+  ],
+  "ignorePaths": [
+    "src/codegen/metadata/**",
+    "src/codegen/properties/**",
+    "src/codegen/functions/**",
+    "src/codegen/protos/**",
+    "generated/**"
+  ],
+  "overrides": [
+    {
+      // Mako templates: activate the Python dictionary so Python identifiers in templates aren't flagged.
+      "filename": "**/*.mako",
+      "dictionaries": ["python", "cspell-mako-keywords"]
+    }
+  ]
+}

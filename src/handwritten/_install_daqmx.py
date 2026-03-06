@@ -302,7 +302,7 @@ def _install_daqmx_driver_linux_core(download_url: str, release: str) -> None:
 
 
 def _validate_download_url(download_url: str) -> None:
-    """Velidate that the download URL uses https and points to a trusted site."""
+    """Validate that the download URL uses https and points to a trusted site."""
     parsed_url = urlparse(download_url)
     if parsed_url.scheme != "https" or parsed_url.netloc != "download.ni.com":
         raise click.ClickException(f"Unsupported download URL: {download_url}")

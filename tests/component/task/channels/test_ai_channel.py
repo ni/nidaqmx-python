@@ -902,7 +902,7 @@ def test___task___add_teds_ai_rtd_chan___sets_channel_attributes(
         assert chan.ai_meas_type == UsageTypeAI.TEMPERATURE_RTD
         assert chan.ai_resistance_cfg == resistance_config
         assert chan.ai_teds_is_teds
-        # rtd type and coeffeicients come from the TEDS file
+        # rtd type and coefficients come from the TEDS file
         assert chan.ai_rtd_type == RTDType.CUSTOM
         assert chan.ai_rtd_a == pytest.approx(3.81e-3, abs=1e-5)
         assert chan.ai_rtd_b == pytest.approx(-6.02e-7, abs=1e-9)

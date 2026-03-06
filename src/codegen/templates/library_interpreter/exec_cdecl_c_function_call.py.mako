@@ -30,8 +30,8 @@
         args.append(None)
         argtypes.append(ctypes.c_void_p)
 
-        cfunc = lib_importer.${'windll' if function.calling_convention == 'StdCall' else 'cdll'}.DAQmx${function.c_function_name}
-        with cfunc.arglock:
-            cfunc.argtypes = argtypes
-            error_code = cfunc(*args)
+        c_func = lib_importer.${'windll' if function.calling_convention == 'StdCall' else 'cdll'}.DAQmx${function.c_function_name}
+        with c_func.arg_lock:
+            c_func.argtypes = argtypes
+            error_code = c_func(*args)
         self.check_for_error(error_code)

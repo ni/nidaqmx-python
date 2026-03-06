@@ -62,7 +62,7 @@ def test___persisted_task___load_twice___raises_duplicate_task(persisted_task: P
 @pytest.mark.task_name("VoltageTesterTask")
 @pytest.mark.grpc_only(reason="Default gRPC initialization behavior is auto (create or attach)")
 @pytest.mark.grpc_session_initialization_behavior(SessionInitializationBehavior.AUTO)
-def test___grpc_session_initializaton_behavior_auto___load_twice___returns_multiple_task_proxies(
+def test___grpc_session_initialization_behavior_auto___load_twice___returns_multiple_task_proxies(
     persisted_task: PersistedTask,
 ):
     with persisted_task.load() as task1:

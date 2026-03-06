@@ -557,7 +557,7 @@ def get_input_arguments_for_compound_params(func):
 
 
 def create_compound_parameter_request(func):
-    """Gets the input parameters for createing the compound type parameter."""
+    """Gets the input parameters for creating the compound type parameter."""
     parameters = []
     compound_parameter_type = ""
     for parameter in func.base_parameters:

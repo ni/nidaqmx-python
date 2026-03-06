@@ -469,7 +469,7 @@ def _assign_numpy_array(numpy_array, grpc_array):
     Assigns grpc array to numpy array maintaining the original shape.
 
     Checks for the instance of grpc_array with bytes, if validated to True,
-    the numpy array is assigned to a 1D array of the grpc arrray.
+    the numpy array is assigned to a 1D array of the grpc array.
     """
     grpc_array_size = len(grpc_array)
     if isinstance(grpc_array, bytes):

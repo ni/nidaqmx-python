@@ -46,15 +46,15 @@
     %>\
     ## When the length of the function name is too long, it will be wrapped to the next line
     %if len(attribute.c_function_name) < 33:
-        cfunc = lib_importer.${attribute.get_lib_importer_type()}.DAQmxSet${attribute.c_function_name}
+        c_func = lib_importer.${attribute.get_lib_importer_type()}.DAQmxSet${attribute.c_function_name}
     %else:
-        cfunc = (lib_importer.${attribute.get_lib_importer_type()}.
+        c_func = (lib_importer.${attribute.get_lib_importer_type()}.
                  DAQmxSet${attribute.c_function_name})
     %endif
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
+        if c_func.argtypes is None:
+            with c_func.arg_lock:
+                if c_func.argtypes is None:
+                    c_func.argtypes = [
                         ${', '.join(argtypes) | wrap(initial_indent=24)}]
 \
 ## Script function call.
@@ -66,7 +66,7 @@
         if attribute.has_explicit_write_buffer_size:
             function_call_args.append('len(val)')
     %>\
-        error_code = cfunc(
+        error_code = c_func(
             ${', '.join(function_call_args) | wrap(initial_indent=12)})
         self._interpreter.check_for_error(error_code)
 </%def>
