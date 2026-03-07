@@ -1,5 +1,6 @@
 ﻿"""This contains the helpers methods for wrapping texts."""
 
+import os
 import textwrap
 
 """
@@ -28,7 +29,7 @@ def wrap(initial_indent, subsequent_indent=None):
             wrapper.subsequent_indent = " " * initial_indent
         else:
             wrapper.subsequent_indent = " " * subsequent_indent
-        return wrapper.fill(text).lstrip()
+        return wrapper.fill(text).lstrip().replace("\n", os.linesep)
 
     return text_wrap
 
@@ -46,6 +47,6 @@ def docstring_wrap(initial_indent, subsequent_indent=None):
             docstring_wrapper.subsequent_indent = " " * initial_indent
         else:
             docstring_wrapper.subsequent_indent = " " * subsequent_indent
-        return docstring_wrapper.fill(text).lstrip()
+        return docstring_wrapper.fill(text).lstrip().replace("\n", os.linesep)
 
     return doc_string_wrap

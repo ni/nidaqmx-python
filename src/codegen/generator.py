@@ -24,22 +24,24 @@ def _get_template(template_file_name):
     template_directory = current_dir / "templates"
     template_file_path = template_directory / template_file_name
     template_lookup = TemplateLookup(directories=str(template_directory))
-    return Template(filename=str(template_file_path), lookup=template_lookup)
+    return Template(
+        filename=str(template_file_path), lookup=template_lookup, output_encoding="utf-8"
+    )
 
 
 def _generate_file(metadata, template_file_name, output_path):
     _logger.info(f"{os.path.basename(output_path)} <-- {template_file_name}")
     template = _get_template(template_file_name)
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, "w+", newline="") as f:
+    with open(output_path, "wb") as f:
         try:
-            output_text = template.render(data=metadata)
+            output_bytes = template.render(data=metadata)
         except Exception:
             _logger.error(text_error_template().render())
             raise RuntimeError(
                 f'An error occurred while rendering template "{template_file_name}"'
             ) from None
-        f.write(output_text)
+        f.write(output_bytes)
 
 
 def _copy_handwritten_files(dest):

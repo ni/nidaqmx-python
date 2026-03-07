@@ -1,5 +1,6 @@
 """This contains the helper methods used in functions generation."""
 
+import os
 from copy import deepcopy
 
 from codegen.functions.function import Function
@@ -254,8 +255,8 @@ def get_explicit_output_param(output_parameters):
             "buffer size. This cannot be handled by this template because it "
             'calls the C function once with "buffer_size = 0" to get the '
             "buffer size from the returned integer, which is normally an "
-            "error code.\n\n"
-            "Output parameters with explicit buffer sizes: {}".format(explicit_output_params)
+            "error code.{0}{0}".format(os.linesep)
+            + "Output parameters with explicit buffer sizes: {}".format(explicit_output_params)
         )
     if len(explicit_output_params) == 1:
         return explicit_output_params[0]
