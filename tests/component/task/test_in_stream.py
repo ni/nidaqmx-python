@@ -15,8 +15,8 @@ SINE_VOLTAGE_MAX = 2.5
 SINE_VOLTAGE_MIN = -2.5
 SINE_RAW_MAX = 16383
 SINE_RAW_MIN = -16384
-FULLSCALE_RAW_MAX = 32767
-FULLSCALE_RAW_MIN = -32768
+FULL_SCALE_RAW_MAX = 32767
+FULL_SCALE_RAW_MIN = -32768
 
 
 @pytest.fixture()
@@ -107,7 +107,7 @@ def test___valid_array___readinto___returns_valid_samples(
 ) -> None:
     # Initialize the array to full-scale readings to ensure it is overwritten.
     data = numpy.full(
-        ai_sine_task.number_of_channels * samples_to_read, FULLSCALE_RAW_MAX, dtype=numpy.int16
+        ai_sine_task.number_of_channels * samples_to_read, FULL_SCALE_RAW_MAX, dtype=numpy.int16
     )
 
     with pytest.deprecated_call():
@@ -122,14 +122,14 @@ def test___odd_sized_array___readinto___returns_whole_samples_and_clears_padding
 ) -> None:
     _create_ai_sine_channels(task, sim_6363_device, number_of_channels=2)
     # Initialize the array to full-scale readings to ensure it is overwritten.
-    data = numpy.full(19, FULLSCALE_RAW_MIN, dtype=numpy.int16)
+    data = numpy.full(19, FULL_SCALE_RAW_MIN, dtype=numpy.int16)
 
     with pytest.deprecated_call():
         samples_read = task.in_stream.readinto(data)
 
     assert samples_read == 9
     assert (SINE_RAW_MIN <= data[:-1]).all() and (data[:-1] <= SINE_RAW_MAX).all()
-    assert data[-1] == 0  # not FULLSCALE_RAW_MIN
+    assert data[-1] == 0  # not FULL_SCALE_RAW_MIN
 
 
 def test___ai_finite_task___read_all___returns_valid_samples_shape_and_dtype(
@@ -172,7 +172,7 @@ def test___valid_array___read_into___returns_valid_samples(
 ) -> None:
     # Initialize the array to full-scale readings to ensure it is overwritten.
     data = numpy.full(
-        ai_sine_task.number_of_channels * samples_to_read, FULLSCALE_RAW_MAX, dtype=numpy.int16
+        ai_sine_task.number_of_channels * samples_to_read, FULL_SCALE_RAW_MAX, dtype=numpy.int16
     )
 
     samples_read = ai_sine_task.in_stream.read_into(data)
@@ -186,13 +186,13 @@ def test___odd_sized_array___read_into___returns_whole_samples_and_clears_paddin
 ) -> None:
     _create_ai_sine_channels(task, sim_6363_device, number_of_channels=2)
     # Initialize the array to full-scale readings to ensure it is overwritten.
-    data = numpy.full(19, FULLSCALE_RAW_MIN, dtype=numpy.int16)
+    data = numpy.full(19, FULL_SCALE_RAW_MIN, dtype=numpy.int16)
 
     samples_read = task.in_stream.read_into(data)
 
     assert samples_read == 9
     assert (SINE_RAW_MIN <= data[:-1]).all() and (data[:-1] <= SINE_RAW_MAX).all()
-    assert data[-1] == 0  # not FULLSCALE_RAW_MIN
+    assert data[-1] == 0  # not FULL_SCALE_RAW_MIN
 
 
 def test___valid_path___configure_logging___returns_assigned_values(ai_task: nidaqmx.Task):
