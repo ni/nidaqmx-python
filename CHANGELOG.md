@@ -32,6 +32,7 @@ All notable changes to this project will be documented in this file.
 * ### Resolved Issues
     * [24: Support Waveform Reads/Writes](https://github.com/ni/nidaqmx-python/issues/24)
     * [820: Create a synchronization example for TDMS logging](https://github.com/ni/nidaqmx-python/issues/820)
+    <!-- cspell:ignore rdss nidaqmxbot -->
     * [862: docs tox env fails on rdss-nidaqmxbot-win-10-py32](https://github.com/ni/nidaqmx-python/issues/862)
 
 * ### Major Changes
@@ -64,10 +65,12 @@ All notable changes to this project will be documented in this file.
           one for Python 3.9-3.12 (numpy>=1.22) and one for Python 3.13+ (numpy>=2.1).
         * The `nidaqmx` distribution package now specifies only a lower bound for `click`.
     * Clarify PyPy support and enable unit testing with PyPy.
+    <!-- cspell:ignore styleguide -->
     * Adopt ni-python-styleguide for hand-written code.
     * Upgrade to Poetry 2.x and migrate `pyproject.toml` format.
     * Add support for Python 3.14.
     * Add https://github.com/ni/ni-apis as a submodule of nidaqmx-python.
+    <!-- cspell:ignore grpcdevice -->
     * Add an optional dependency on `ni.grpcdevice.v1.proto`.
         * The internal `session_pb2` submodule has been moved to the shared package `ni.grpcdevice.v1.proto`. Installing the `nidaqmx` package's `grpc` extra will automatically install this package.
         * If you get `ModuleNotFoundError: No module named 'session_pb2'`, make sure you are installing the `nidaqmx` package's `grpc` extra.
@@ -148,8 +151,10 @@ All notable changes to this project will be documented in this file.
     * Add support for DAQmx calibration info properties
     * Add support for WaitForValidTimestamp
     * Fix naming issues:
+        <!-- cspell:ignore AAND -->
         * Rename `ShuntCalSelect.AAND_B` to `A_AND_B`.
     * Automate Driver Install Experience within nidaqmx Module
+    <!-- cspell:ignore libtime -->
     * Update libtime to accept time before 1970
 
 * ### Known Issues
@@ -253,6 +258,7 @@ All notable changes to this project will be documented in this file.
 * ### Resolved Issues
     * [37: ai_raw example is bad](https://github.com/ni/nidaqmx-python/issues/37)
     * [54: Linux supported?](https://github.com/ni/nidaqmx-python/issues/54)
+    <!-- cspell:ignore pynidaqmx -->
     * [64: nidaqmx-python and pynidaqmx projects use the same package name](https://github.com/ni/nidaqmx-python/issues/64)
     * [65: ci_count_edges.py REQUIRES A START COMMAND](https://github.com/ni/nidaqmx-python/issues/65)
     * [100: How to clear task and create a new task with same name?](https://github.com/ni/nidaqmx-python/issues/100)
@@ -337,6 +343,7 @@ All notable changes to this project will be documented in this file.
 ## 0.5.2
 * Initial public release of nidaqmx
 * Update setup.py description and fix issues 2, 3, 5, and 6 raised by Ed Page.
+    <!-- cspell:ignore AIADC AIDC AILVDT AIRVDT CITC -->
     * Splitting joined acronyms AIADC, AIDC, AILVDT, AIRVDT and CITC.
     * Adding link to LICENSE file.
     * Updating README.rst file in source directory to eliminate Sphinx domain directives and add link to documentation on

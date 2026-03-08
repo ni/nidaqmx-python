@@ -1,5 +1,11 @@
 # Contributing to nidaqmx
 
+<!-- cspell:ignore developercertificate -->
+<!-- cspell:ignore mypy -->
+<!-- cspell:ignore pypi -->
+<!-- cspell:ignore pyproject -->
+<!-- cspell:ignore styleguide -->
+
 Contributions to **nidaqmx** are welcome from all!
 
 **nidaqmx** is managed via [git](https://git-scm.com), with the canonical upstream repository hosted
