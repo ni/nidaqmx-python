@@ -1,21 +1,13 @@
 # Words specific to CHANGELOG.md
-# DAQmx abbreviation constants (historical enum names split in v0.5.2)
-AIADC
-AIDC
-AILVDT
-AIRVDT
-CITC
-# Tool/package/project names
-styleguide
-pyproject
-grpcdevice
-virtualenvs
-pynidaqmx
-readinto
-conv
-libtime
-# CI bot/username fragments
-rdss
-nidaqmxbot
-# Historical broken enum name (renamed to A_AND_B in v1.0.0)
-AAND
+AAND        # NI-DAQmx discontinued enum constant
+AIADC       # NI-DAQmx discontinued enum constant
+AIDC        # NI-DAQmx discontinued enum constant
+AILVDT      # NI-DAQmx discontinued enum constant
+AIRVDT      # NI-DAQmx discontinued enum constant
+CITC        # NI-DAQmx discontinued enum constant
+grpcdevice  # ni.grpcdevice.v1.proto package name
+libtime     # NI-DAQmx project component name (lib_time module)
+nidaqmxbot  # CI bot username (rdss-nidaqmxbot)
+pynidaqmx   # former package name (conflicted with nidaqmx-python)
+rdss        # CI bot username prefix (rdss-nidaqmxbot)
+styleguide  # ni-python-styleguide linting tool

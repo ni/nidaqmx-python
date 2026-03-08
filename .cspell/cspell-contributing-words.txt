@@ -1,6 +1,6 @@
 # Words specific to CONTRIBUTING.md
-styleguide
-mypy
-pypi
-pyproject
-developercertificate
+developercertificate  # Developer Certificate of Origin website
+mypy                  # Python static type checker
+pypi                  # Python Package Index
+pyproject             # pyproject.toml configuration filename
+styleguide            # ni-python-styleguide linting tool

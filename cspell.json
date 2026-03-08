@@ -49,7 +49,7 @@
     },
     {
       "filename": "**/CHANGELOG.md",
-      "dictionaries": ["cspell-dict", "cspell-daqmx-abbreviations", "cspell-changelog-words"]
+      "dictionaries": ["cspell-dict", "cspell-daqmx-abbreviations", "python", "cspell-changelog-words"]
     }
   ]
 }
