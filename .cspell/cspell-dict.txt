@@ -64,7 +64,6 @@ nitypes
 hightime
 
 # nptdms
-bnptdms
 nptdms
 
 # ctypes (stdlib)
