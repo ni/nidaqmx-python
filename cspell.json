@@ -16,25 +16,23 @@
   // Explorer (directories in alphabetical order, followed by top-level files
   // in alphabetical order).
   "ignorePaths": [
-    ".cspell/**",
-    ".github/**",
-    "docs/img/**",
-    "docs/conf.py",
-    "docs/make.bat",
-    "docs/Makefile",
-    "generated/nidaqmx/_stubs/**",
-    "tests/max_config/**",
-    "tests/test_assets/**",
-    "third_party/**",
-    ".gitmodules",
-    ".readthedocs.yml",
-    "cspell.json",
-    "cspell-output.txt",
-    "poetry.lock",
-    "poetry.toml",
-    "pyproject.toml",
-    "spell-check-findings.md",
-    "tox.ini"
+    ".cspell/**",              // dictionary source files; words here are not prose
+    ".github/**",              // GitHub Actions workflows and issue templates
+    "docs/img/**",             // binary image files
+    "docs/conf.py",            // Sphinx config; extension names and config keys
+    "docs/make.bat",           // Sphinx build script; not prose
+    "docs/Makefile",           // Sphinx build script; not prose
+    "generated/nidaqmx/_stubs/**", // protobuf-generated stubs; too noisy to check
+    "tests/max_config/**",     // NI MAX config files; NI-specific identifiers
+    "tests/test_assets/**",    // test fixture files; not prose
+    "third_party/**",          // third-party code we don't own or control
+    ".gitmodules",             // git submodule config
+    ".readthedocs.yml",        // ReadTheDocs config
+    "cspell.json",             // this file; dictionary names would be flagged
+    "poetry.lock",             // auto-generated lock file; hashes and package URLs
+    "poetry.toml",             // Poetry config
+    "pyproject.toml",          // project config; classifier strings and tool config
+    "tox.ini"                  // tox config
   ],
   "overrides": [
     {
