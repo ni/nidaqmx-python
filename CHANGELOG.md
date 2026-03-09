@@ -65,12 +65,10 @@ All notable changes to this project will be documented in this file.
           one for Python 3.9-3.12 (numpy>=1.22) and one for Python 3.13+ (numpy>=2.1).
         * The `nidaqmx` distribution package now specifies only a lower bound for `click`.
     * Clarify PyPy support and enable unit testing with PyPy.
-    <!-- cspell:ignore styleguide -->
     * Adopt ni-python-styleguide for hand-written code.
     * Upgrade to Poetry 2.x and migrate `pyproject.toml` format.
     * Add support for Python 3.14.
     * Add https://github.com/ni/ni-apis as a submodule of nidaqmx-python.
-    <!-- cspell:ignore grpcdevice -->
     * Add an optional dependency on `ni.grpcdevice.v1.proto`.
         * The internal `session_pb2` submodule has been moved to the shared package `ni.grpcdevice.v1.proto`. Installing the `nidaqmx` package's `grpc` extra will automatically install this package.
         * If you get `ModuleNotFoundError: No module named 'session_pb2'`, make sure you are installing the `nidaqmx` package's `grpc` extra.

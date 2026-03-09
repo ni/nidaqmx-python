@@ -17,7 +17,6 @@
   // in alphabetical order).
   "ignorePaths": [
     ".cspell/**",              // dictionary source files; words here are not prose
-    ".github/**",              // GitHub Actions workflows and issue templates
     "docs/img/**",             // binary image files
     "docs/conf.py",            // Sphinx config; extension names and config keys
     "docs/make.bat",           // Sphinx build script; not prose
@@ -26,12 +25,9 @@
     "tests/max_config/**",     // NI MAX config files; NI-specific identifiers
     "tests/test_assets/**",    // test fixture files; not prose
     "third_party/**",          // third-party code we don't own or control
-    ".gitmodules",             // git submodule config
     ".readthedocs.yml",        // ReadTheDocs config
-    "cspell.json",             // this file; dictionary names would be flagged
     "poetry.lock",             // auto-generated lock file; hashes and package URLs
     "poetry.toml",             // Poetry config
-    "pyproject.toml",          // project config; classifier strings and tool config
     "tox.ini"                  // tox config
   ],
   "overrides": [
@@ -54,6 +50,10 @@
     {
       "filename": ["src/codegen/**", "generated/**"],
       "dictionaries": ["cspell-dict", "cspell-daqmx-abbreviations", "python", "cspell-codegen-dict"]
+    },
+    {
+      "filename": "pyproject.toml", // cspell:disable-line
+      "dictionaries": ["cspell-dict", "cspell-daqmx-abbreviations", "python"]
     }
   ]
 }

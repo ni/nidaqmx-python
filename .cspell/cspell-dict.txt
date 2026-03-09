@@ -45,6 +45,7 @@ forcebridge       # NI-DAQmx bridge sensor type names (used in TEDS asset filena
 forcelb           # NI-DAQmx public API (compatibility breaking name)
 frombuffer        # Dependency: numpy
 getfixturevalue   # Dependency: pytest
+grpcdevice        # NI package name; ni-grpcdevice
 hightime          # Dependency: hightime
 htmlcov           # Python tooling (directory/artifact names, not real words)
 HWCU              # Initialism: Hardware Configuration Utility
@@ -100,6 +101,7 @@ SCXI              # Initialism: Signal Conditioning eXtensions for Instrumentati
 sensord           # Deprecated public property name in backward-compat rename map
 subsecond         # Real word
 subseconds        # Real word
+styleguide        # ni-python-styleguide linting tool
 TDMS              # Initialism: Technical Data Management Streaming
 TEDSAI            # NI-DAQmx public API (compatibility breaking name)
 TEDSAIRTD         # NI-DAQmx public API (compatibility breaking name)

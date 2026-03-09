@@ -4,7 +4,6 @@
 <!-- cspell:ignore mypy -->
 <!-- cspell:ignore pypi -->
 <!-- cspell:ignore pyproject -->
-<!-- cspell:ignore styleguide -->
 
 Contributions to **nidaqmx** are welcome from all!
 
@@ -57,7 +56,7 @@ requirements:
   - You can still run the tests without a physical X Series DAQ device, but some tests will be skipped.
 
 Before running the regression tests, import the appropriate NI MAX configuration files:
-- ``tests\max_config\nidaqmxMaxConfig.ini``: Contains custom scales, global channels, simulated devices, 
+- ``tests\max_config\nidaqmxMaxConfig.ini``: Contains custom scales, global channels, simulated devices,
   and tasks used by many regression tests.
    - **Note:** On Linux, use ``tests\max_config\linux\nidaqmxMaxConfig.ini`` to avoid importing an unsupported device.
 - ``tests\max_config\examplesMaxConfig.ini``: Contains simulated devices used by the example programs.
@@ -79,7 +78,7 @@ commands in the root of the distribution:
 ```sh
 $ poetry run tox
 ```
-  
+
 This requires you to have all the Python interpreters supported by **nidaqmx** installed on your
 machine.
 
@@ -116,7 +115,7 @@ $ poetry run sphinx-build -b html docs docs\_build
 
 # Branching Policy
 
-Active development for the next release occurs on the `master` branch. 
+Active development for the next release occurs on the `master` branch.
 
 During finalization, we create a release branch (e.g. `releases/1.2`) in order to control which changes target the imminent
 release vs. the next release after that. Changes that are intended for both the imminent release and subsequent releases

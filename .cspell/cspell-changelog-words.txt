@@ -5,9 +5,7 @@ AIDC        # NI-DAQmx discontinued enum constant
 AILVDT      # NI-DAQmx discontinued enum constant
 AIRVDT      # NI-DAQmx discontinued enum constant
 CITC        # NI-DAQmx discontinued enum constant
-grpcdevice  # ni.grpcdevice.v1.proto package name
 libtime     # NI-DAQmx project component name (lib_time module)
 nidaqmxbot  # CI bot username (rdss-nidaqmxbot)
 pynidaqmx   # former package name (conflicted with nidaqmx-python)
 rdss        # CI bot username prefix (rdss-nidaqmxbot)
-styleguide  # ni-python-styleguide linting tool
