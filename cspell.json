@@ -1,15 +1,20 @@
 {
   "version": "0.2",
+  // Keep the following list of items in alphabetical order.
   "dictionaryDefinitions": [
-    { "name": "cspell-dict", "path": "./.cspell/cspell-dict.txt", "noSuggest": true },
-    { "name": "cspell-daqmx-abbreviations", "path": "./.cspell/cspell-daqmx-abbreviations.txt", "noSuggest": true },
-    { "name": "cspell-mako-keywords", "path": "./.cspell/cspell-mako-keywords.txt", "noSuggest": true },
-    { "name": "cspell-sphinx-directives", "path": "./.cspell/cspell-sphinx-directives.txt", "noSuggest": true },
+    { "name": "cspell-changelog-words", "path": "./.cspell/cspell-changelog-words.txt", "noSuggest": true },
+    { "name": "cspell-codegen-dict", "path": "./.cspell/cspell-codegen-dict.txt", "noSuggest": true },
     { "name": "cspell-contributing-words", "path": "./.cspell/cspell-contributing-words.txt", "noSuggest": true },
-    { "name": "cspell-changelog-words", "path": "./.cspell/cspell-changelog-words.txt", "noSuggest": true }
+    { "name": "cspell-daqmx-abbreviations", "path": "./.cspell/cspell-daqmx-abbreviations.txt", "noSuggest": true },
+    { "name": "cspell-dict", "path": "./.cspell/cspell-dict.txt", "noSuggest": true },
+    { "name": "cspell-mako-keywords", "path": "./.cspell/cspell-mako-keywords.txt", "noSuggest": true },
+    { "name": "cspell-sphinx-directives", "path": "./.cspell/cspell-sphinx-directives.txt", "noSuggest": true }
   ],
   "dictionaries": ["cspell-dict", "cspell-daqmx-abbreviations"],
   "useGitignore": true,
+  // Keep the following list of items in the order that they appear in VSCode
+  // Explorer (directories in alphabetical order, followed by top-level files
+  // in alphabetical order).
   "ignorePaths": [
     ".cspell/**",
     ".github/**",
@@ -17,21 +22,18 @@
     "docs/conf.py",
     "docs/make.bat",
     "docs/Makefile",
-    "generated/**",
-    "src/codegen/functions/**",
-    "src/codegen/metadata/**",
-    "src/codegen/protos/**",
-    "src/codegen/properties/**",
-    "src/codegen/*.py",
+    "generated/nidaqmx/_stubs/**",
     "tests/max_config/**",
     "tests/test_assets/**",
     "third_party/**",
     ".gitmodules",
     ".readthedocs.yml",
     "cspell.json",
+    "cspell-output.txt",
     "poetry.lock",
     "poetry.toml",
     "pyproject.toml",
+    "spell-check-findings.md",
     "tox.ini"
   ],
   "overrides": [
@@ -50,6 +52,10 @@
     {
       "filename": "**/CHANGELOG.md",
       "dictionaries": ["cspell-dict", "cspell-daqmx-abbreviations", "python", "cspell-changelog-words"]
+    },
+    {
+      "filename": ["src/codegen/**", "generated/**"],
+      "dictionaries": ["cspell-dict", "cspell-daqmx-abbreviations", "python", "cspell-codegen-dict"]
     }
   ]
 }

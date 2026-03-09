@@ -18,7 +18,7 @@ bitfields         # Real word
 bitstream         # Real word
 byref             # Standard library: ctypes
 callspec          # Dependency: pytest
-CAPI              # NI-DAQmx C API identifier fragments (surface in tests/examples but defined in excluded metadata)
+CAPI              # NI-DAQmx C API identifier fragment
 caplog            # Dependency: pytest
 cDAQ              # Initialism: CompactDAQ (NI hardware platform)
 chkconfig         # Linux system tool names (external)
