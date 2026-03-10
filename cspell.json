@@ -16,19 +16,19 @@
   // Explorer (directories in alphabetical order, followed by top-level files
   // in alphabetical order).
   "ignorePaths": [
-    ".cspell/**",              // dictionary source files; words here are not prose
-    "docs/img/**",             // binary image files
-    "docs/conf.py",            // Sphinx config; extension names and config keys
-    "docs/make.bat",           // Sphinx build script; not prose
-    "docs/Makefile",           // Sphinx build script; not prose
+    ".cspell/**",                  // dictionary source files; words here are not prose
+    "docs/img/**",                 // binary image files
+    "docs/conf.py",                // Sphinx config; extension names and config keys
+    "docs/make.bat",               // Sphinx build script; not prose
+    "docs/Makefile",               // Sphinx build script; not prose
     "generated/nidaqmx/_stubs/**", // protobuf-generated stubs; too noisy to check
-    "tests/max_config/**",     // NI MAX config files; NI-specific identifiers
-    "tests/test_assets/**",    // test fixture files; not prose
-    "third_party/**",          // third-party code we don't own or control
-    ".readthedocs.yml",        // ReadTheDocs config
-    "poetry.lock",             // auto-generated lock file; hashes and package URLs
-    "poetry.toml",             // Poetry config
-    "tox.ini"                  // tox config
+    "tests/max_config/**",         // NI MAX config files; NI-specific identifiers
+    "tests/test_assets/**",        // test fixture files; not prose
+    "third_party/**",              // third-party code we don't own or control
+    ".readthedocs.yml",            // ReadTheDocs config
+    "poetry.lock",                 // auto-generated lock file; hashes and package URLs
+    "poetry.toml",                 // Poetry config
+    "tox.ini"                      // tox config
   ],
   "overrides": [
     {
