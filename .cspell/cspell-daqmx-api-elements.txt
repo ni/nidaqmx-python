@@ -94,7 +94,7 @@ samps                 # abbreviation; samples
 scanList              # unseparated words
 sensord               # Deprecated; see attribute_helpers.py
 sensitivit            # Typo; should be: sensitivity
-SMIO                  # initialism; Serial Memory I/O
+SMIO                  # initialism; Simultaneously-sampling Multifunction I/O
 specd                 # abbreviation; specified
 srcs                  # abbreviation; sources
 subsytem              # Typo; should be: subsystem

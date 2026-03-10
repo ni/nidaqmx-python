@@ -1,76 +1,76 @@
-autozero            # Real word: Electronic instrumentation term
-backplane           # Real word: Digital electronics and computer engineering term
-bandpass            # Real word: Filter term
-bitfield            # Real word
-bitfields           # Real word
-bitstream           # Real word
-brickwall           # Real word: Filter term
-Butterworth         # Real word: Scientist name; Butterworth filter
-cDAQ                # Initialism: CompactDAQ (NI hardware platform)
-Callendar           # Real word: Physicist name; Callendar-Van Dusen equation
-CPLD                # Initialism: Complex Programmable Logic Device
-DAQmx               # Initialism: Data Acquisition Measurement Extensions
-deassert            # Real word: Digital electronics and computer engineering term
-deasserting         # Real word: Digital electronics and computer engineering term
-deasserts           # Real word: Digital electronics and computer engineering term
-deleters            # Real word: Software term
-DKMS                # Initialism: Dynamic Kernel Module Support
-Dusen               # Real word: Physicist name; Van Dusen of Callendar-Van Dusen equation
-EEPROM              # Initialism: Electrically Erasable Programmable Read-Only Memory
-HDOP                # GPS initialism; Horizontal Dilution of Precision
-highpass            # Real word: Filter term
-HWCU                # Initialism: Hardware Configuration Utility
-IEPE                # Initialism: Integrated Electronics Piezo-Electric
-IRIG                # Initialism: Inter-Range Instrumentation Group
-JUMPERED            # Real word: Electronics term
-lowpass             # Real word: Filter term
-LVDT                # Initialism: Linear Variable Differential Transformer
-LVTTL               # Initialism: Low Voltage Transistor-Transistor Logic
-MBCS                # Initialism: Multi-Byte Character Set
-MDNS                # Initialism: Multicast DNS
+autozero            # Electronic instrumentation term
+backplane           # Digital electronics and computer engineering term
+bandpass            # Filter term
+bitfield            # Computing term; contiguous range of bits in a value
+bitfields           # Computing term; contiguous range of bits in a value
+bitstream           # Computing term; sequence of bits transmitted serially
+brickwall           # Filter term
+Butterworth         # Scientist name; Butterworth filter
+cDAQ                # CompactDAQ (NI hardware platform)
+Callendar           # Physicist name; Callendar-Van Dusen equation
+CPLD                # Complex Programmable Logic Device
+DAQmx               # Data Acquisition Measurement Extensions
+deassert            # Digital electronics and computer engineering term
+deasserting         # Digital electronics and computer engineering term
+deasserts           # Digital electronics and computer engineering term
+deleters            # Software term
+DKMS                # Dynamic Kernel Module Support
+Dusen               # Physicist name; Van Dusen of Callendar-Van Dusen equation
+EEPROM              # Electrically Erasable Programmable Read-Only Memory
+HDOP                # Horizontal Dilution of Precision (GPS)
+highpass            # Filter term
+HWCU                # Hardware Configuration Utility
+IEPE                # Integrated Electronics Piezo-Electric
+IRIG                # Inter-Range Instrumentation Group
+jumpered            # Electronics term
+lowpass             # Filter term
+LVDT                # Linear Variable Differential Transformer
+LVTTL               # Low Voltage Transistor-Transistor Logic
+MBCS                # Multi-Byte Character Set
+MDNS                # Multicast DNS
 MeasurementLink     # NI product name
-micropascals        # Real word: Unit of pressure
+micropascals        # Unit of pressure
 mioDAQ              # NI product category
-MILLI               # Real word
-multibyte           # Real word
+milli               # SI prefix
+multibyte           # Computing term; character encoding using multiple bytes
 NIELVIS             # NI product name; NI ELVIS
-NONPRINTABLE        # Real word: Computing term
-overcurrent         # Real word: Electrical engineering term
-overrange           # Real word
-OVERREAD            # Real word: Data acquisition term
-overtemperature     # Real word
-overvoltage         # Real word: Electrical engineering term
-PDOP                # GPS initialism; Position Dilution of Precision
-PICO                # Real word
-powerline           # Real word: Electrical engineering term
-POWERUP             # Real word: Electronics term
-pseudodifferential  # Real word: Electronics measurement term
-PXIe                # Initialism: PCI eXtensions for Instrumentation, Express variant
-ratiometric         # Real word: Electronics measurement term
-RDMA                # Initialism: Remote Direct Memory Access
-readall             # Real word
-reglitch            # Real word: Electronics DAC term
-reglitching         # Real word: Electronics DAC term (gerund)
-REPLUG              # Real word: Hardware term
-retriggerable       # Real word
-RTSI                # Initialism: Real-Time System Integration
-RVDT                # Initialism: Rotary Variable Differential Transformer
-SCXI                # Initialism: Signal Conditioning eXtensions for Instrumentation
-Steinhart           # Real word: Physicist name; Steinhart-Hart thermistor equation
-stopband            # Real word: Filter term
-subsecond           # Real word
-subseconds          # Real word
-TDMS                # Initialism: Technical Data Management Streaming
-timebase            # Real word
-timebases           # Real word: Electronics term
-tristated           # Real word: Electronics term
-tristates           # Real word: Electronics term (verb/noun)
-unflatten           # Real word
-UNLOADABLE          # Real word: Computing term
-unreserve           # Real word
-unreserves          # Real word
-VCXO                # Initialism: Voltage-Controlled Crystal Oscillator
-VDOP                # GPS initialism; Vertical Dilution of Precision
-yoctosecond         # Real word
-yoctoseconds        # Real word
+nonprintable        # Computing term
+overcurrent         # Electrical engineering term
+overrange           # Measurement term; signal exceeding the measurable range
+overread            # Data acquisition term
+overtemperature     # Electrical/safety term; exceeding a temperature limit
+overvoltage         # Electrical engineering term
+PDOP                # Position Dilution of Precision (GPS)
+pico                # SI prefix
+powerline           # Electrical engineering term
+powerup             # Electronics term
+pseudodifferential  # Electronics measurement term
+PXIe                # PCI eXtensions for Instrumentation, Express variant
+ratiometric         # Electronics measurement term
+RDMA                # Remote Direct Memory Access
+readall             # Software term; read all available data
+reglitch            # Electronics DAC term
+reglitching         # Electronics DAC term (gerund)
+replug              # Hardware term
+retriggerable       # Electronics term; able to be triggered again before previous cycle ends
+RTSI                # Real-Time System Integration
+RVDT                # Rotary Variable Differential Transformer
+SCXI                # Signal Conditioning eXtensions for Instrumentation
+Steinhart           # Physicist name; Steinhart-Hart thermistor equation
+stopband            # Filter term
+subsecond           # Time measurement term; less than one second
+subseconds          # Time measurement term; less than one second
+TDMS                # Technical Data Management Streaming
+timebase            # Electronics term; reference clock signal
+timebases           # Electronics term
+tristated           # Electronics term
+tristates           # Electronics term (verb/noun)
+unflatten           # Software term; deserialize/reconstruct nested data
+unloadable          # Computing term
+unreserve           # Software term; release a reserved resource
+unreserves          # Software term; release a reserved resource
+VCXO                # Voltage-Controlled Crystal Oscillator
+VDOP                # Vertical Dilution of Precision (GPS)
+yoctosecond         # Unit of time; SI prefix
+yoctoseconds        # Unit of time; SI prefix
 
