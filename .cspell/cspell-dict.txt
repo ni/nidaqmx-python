@@ -37,6 +37,7 @@ descr             # NI-DAQmx C API identifier fragments (surface in tests/exampl
 DKMS              # Initialism: Dynamic Kernel Module Support
 docstrings        # Python terminology
 dotenv            # Dependency: python-decouple / dotenv
+dotenvpath        # Typo - TODO - rename the files and make related changes
 dpkg              # Linux system tool names (external)
 dtype             # Dependency: numpy
 EEPROM            # Initialism: Electrically Erasable Programmable Read-Only Memory
