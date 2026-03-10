@@ -1,147 +1,18 @@
-Accel            # Accelerometer
-Accur            # Accuracy
-Ack              # Acknowledge
-Adv              # Advance
-Alt              # Altitude
-Amp              # Ampere / Amplifier
-AI               # Analog Input
-AO               # Analog Output
 Anlg             # Analog
-Ang              # Angle / Angular
-Ant              # Antenna
 Atten            # Attenuation
-Attr             # Attribute
-Attrs            # Attributes
-Avail            # Available
-Avg              # Average
-Avgs             # Averages
-Bal              # Balance
-Bin              # Binary
-Brd              # Board
-Btm              # Bottom
-Cal              # Calibration
-Cap              # Capacitor
-Chan             # Channel
 Chans            # Channels
-Clk              # Clock
-Comm             # Communicating / Communicator
-Compen           # Compensated / Compensation
-Cmplt            # Complete
-Cond             # Condition
-Cfg              # Configuration / Configure
 Cfgs             # Configurations
-Conn             # Connect / Connected / Connecting / Connector
-Const            # Constant
-ContPulseTrain   # Continuous Pulse Train
-Cont             # Continuous
-UTC              # Coordinated Universal Time
-Cnt              # Count
-CI               # Counter Input
-CtrOut           # Counter Output
-CO               # Counter Output
-Ctr              # Counter
-Iex              # Current Excitation
-Curr             # Current
-Cyc              # Cycle
-Detect           # Detection
-Dev              # Device
-Devs             # Devices
-Diff             # Differential
-DI               # Digital Input
-DO               # Digital Output
-Dig              # Digital
-Dir              # Direction
-Disp             # Display
-Dist             # Distance
-Div              # Divide / Divisor
-Dyn              # Dynamic
-Eng              # Engineering
+Cmplt            # Complete
+Compen           # Compensated / Compensation
 Excit            # Excitation
 Expir            # Expiration
-Exp              # Exponential
-Ext              # External
 Fltr             # Filter
-FinitePulseTrain # Finite Pulse Train
-Freq             # Frequency
-Gen              # General / Generate / Generator
-Gnf              # Ground
-HW               # Hardware
-HAE              # Height Above Ellipsoid
 Hyst             # Hysteresis
-Incr             # Increment
-Init             # Initialize
-Int              # Internal
-TAI              # International Atomic Time
-Interp           # Interpolation / Interpretation
-Inv              # Invert
-Latch            # Latching
-Lat              # Latitude
-Lvl              # Level
-Lin              # Linear
-Loc              # Location
-Long             # Longitude
-Map              # Mapping
-Max              # Maximum
-MSL              # Mean Sea Level
-Meas             # Measurable / Measurement
-Mech             # Mechanism
-Mem              # Memory
-Msg              # Message
-Meth             # Method
-Mic              # Microphone
-Min              # Minimum
-Multi            # Multiple
-Nav              # Navigation
-Nom              # Nominal
 NRSE             # Non-Referenced Single-Ended
-Num              # Number
-Op               # Operation
-outClk           # Output Clock
-Periph           # Peripheral
-Pos              # Position
-Pot              # Potentiometer
-Pwr              # Power
-Pwrln            # Powerline
-Prog             # Programmed / Progress
-Props            # Properties
-Quant            # Quantity
-RangeVals        # RangeValues
-Rng              # Range
-Rngs             # Ranges
-Rdy              # Ready
-Rec              # Record
-RefClk           # Reference Clock
-Ref              # Reference
-RSE              # Referenced Single-Ended
 Regen            # Regeneration
-Req              # Request
-Rev              # Revolution
+Rngs             # Ranges
 Samp             # Sample
-Sat              # Satellite
-Sep              # Separation
-Seq              # Sequence
-Sig              # Signal
-SW               # Software
-Src              # Source
 Srcs             # Sources
-Spec             # Specification
-Specs            # Specifications
-Sq               # Square
-Sync             # Synchronization
-Temp             # Temperature
-Term             # Terminal
-Terms            # Terminals
-Thrmstr          # Thermistor
 Thrmcpl          # Thermocouple
-Thresh           # Threshold
+Thrmstr          # Thermistor
 Xfer             # Transfer
-Trans            # Transition
-Tri              # Triangle
-Trig             # Trigger
-Val              # Value
-Vals             # Values
-Vert             # Vertical
-Vibr             # Vibration
-Vex              # Voltage Excitation
-Wfm              # Waveform
-Win              # Window
