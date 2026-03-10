@@ -1,13 +1,9 @@
 # Contributing to nidaqmx
 
-<!-- cspell:ignore developercertificate -->
-<!-- cspell:ignore mypy -->
-<!-- cspell:ignore pypi -->
-<!-- cspell:ignore pyproject -->
-
 Contributions to **nidaqmx** are welcome from all!
 
 **nidaqmx** is managed via [git](https://git-scm.com), with the canonical upstream repository hosted
+<!-- cspell:ignore developercertificate -->
 on [GitHub](http://developercertificate.org/).
 
 **nidaqmx** follows a pull-request model for development.  If you wish to contribute, you will need
@@ -38,6 +34,7 @@ pass.
 9. Run `poetry run ni-python-styleguide lint` to check that the updated code follows NI's Python coding
 conventions. If this reports errors, first run `poetry run ni-python-styleguide fix` in order to sort
 imports and format the code with Black, then manually fix any remaining errors.
+<!-- cspell:ignore mypy -->
 10. Run `poetry run mypy` to statically type-check the updated code.
 11. Run `npx cspell "**" --no-progress` to check for spelling errors. This requires [Node.js](https://nodejs.org/) to be installed.
 12. Send a GitHub Pull Request to the main repository's master branch. GitHub Pull Requests are the
@@ -140,9 +137,11 @@ can be verified once that has been completed.
    * **Description:** Contents of the `CHANGELOG.md` for the version being released.
 
    Publishing a release automatically triggers the [publish.yml](./.github/workflows/publish.yml)
+<!-- cspell:ignore pypi -->
    workflow, which checks and builds the package, requests approval to publish it using the `pypi`
    deployment environment, publishes the package to PyPI using [Trusted
    Publishing](https://docs.pypi.org/trusted-publishers/), and creates a PR to update the version of
+<!-- cspell:ignore pyproject -->
    **nidaqmx** in `pyproject.toml`.
 6. GitHub contacts the approvers for the `pypi` deployment environment, who are currently the repo
    admins. One of them must approve the deployment for the publishing to proceed.

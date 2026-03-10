@@ -2,8 +2,6 @@
   "version": "0.2",
   // Keep the following list of items in alphabetical order.
   "dictionaryDefinitions": [
-    { "name": "cspell-changelog-words", "path": "./.cspell/cspell-changelog-words.txt", "noSuggest": true },
-    { "name": "cspell-contributing-words", "path": "./.cspell/cspell-contributing-words.txt", "noSuggest": true },
     { "name": "cspell-daqmx-api-elements", "path": "./.cspell/cspell-daqmx-api-elements.txt", "noSuggest": true },
     { "name": "cspell-real-words", "path": "./.cspell/cspell-real-words.txt", "noSuggest": true },
     { "name": "cspell-mako-keywords", "path": "./.cspell/cspell-mako-keywords.txt", "noSuggest": true },
@@ -41,11 +39,11 @@
     },
     {
       "filename": "**/CONTRIBUTING.md",
-      "dictionaries": ["cspell-real-words", "cspell-contributing-words"]
+      "dictionaries": ["cspell-real-words"]
     },
     {
       "filename": "**/CHANGELOG.md",
-      "dictionaries": ["cspell-real-words", "cspell-daqmx-api-elements", "python", "cspell-changelog-words"]
+      "dictionaries": ["cspell-real-words", "cspell-daqmx-api-elements", "python"]
     },
     {
       "filename": ["src/codegen/**", "generated/**"],
