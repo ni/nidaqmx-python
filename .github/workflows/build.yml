@@ -33,7 +33,10 @@ jobs:
       - name: Run Bandit security checks
         run: poetry run bandit -c pyproject.toml -r generated/nidaqmx
       - name: Run cspell
-        run: npx cspell "**" --no-progress --quiet
+        uses: streetsidesoftware/cspell-action@v8
+        with:
+          incremental_files_only: false
+          check_dot_files: explicit
       - name: Generate ni-daqmx files
         if: ${{ runner.os == 'Linux' && matrix.python-version == env.codegen-python-version }}
         run: |
