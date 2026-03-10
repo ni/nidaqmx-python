@@ -1,112 +1,46 @@
-AIAC                  # NI-DAQmx initialism; Analog Input Alternating Current
-AIADC                 # NI-DAQmx initialism; Analog Input Analog-to-Digital Converter
-AIDC                  # NI-DAQmx initialism; Analog Input Direct Current
-AILVDT                # NI-DAQmx initialism; Analog Input Linear Variable Differential Transformer
-AIRTDA                # NI-DAQmx initialism; Analog Input Resistance Temperature Detector, Class A
-AIRTDB                # NI-DAQmx initialism; Analog Input Resistance Temperature Detector, Class B
-AIRTDC                # NI-DAQmx initialism; Analog Input Resistance Temperature Detector, Class C
-AIRTDR0               # NI-DAQmx initialism; Analog Input Resistance Temperature Detector R0 (nominal resistance at 0 degrees C)
-AIRVDT                # NI-DAQmx initialism; Analog Input Rotary Variable Differential Transformer
-AITEDS                # NI-DAQmx initialism; Analog Input Transducer Electronic Data Sheet
-AODAC                 # NI-DAQmx initialism; Analog Output Digital-to-Analog Converter
-AOHW                  # NI-DAQmx initialism; Analog Output Hardware
-ATTENTUATION          # Typo; NI-DAQmx public API (compatibility breaking name)
 autozero              # Real word: Electronic instrumentation term
 backplane             # Real word: Digital electronics and computer engineering term
 bandpass              # Real word: Filter term
 brickwall             # Real word: Filter term
 Butterworth           # Real word: Scientist name; Butterworth filter
-CALIBRATIONINFO       # Typo; NI-DAQmx public API (compatibility breaking name)
 Callendar             # Real word: Physicist name; Callendar-Van Dusen equation
-CERTITICATES          # Typo; NI-DAQmx public API (compatibility breaking name)
-CFGD                  # NI-DAQmx abbreviation; configured
-CIHW                  # NI-DAQmx initialism; Counter Input Hardware
-CITC                  # NI-DAQmx initialism; Counter Input Terminal Count
-CIUTC                 # NI-DAQmx initialism; Counter Input Coordinated Universal Time
-CLKS                  # NI-DAQmx abbreviation; clocks
-COHW                  # NI-DAQmx initialism; Counter Output Hardware
-COHWTSP               # NI-DAQmx initialism; Counter Output Hardware Timed Single Point
-CONV                  # NI-DAQmx abbreviation; convert
-COULDNT               # NI-DAQmx public API (compatibility breaking name)
-CTRS                  # NI-DAQmx abbreviation; counters
 deassert              # Real word: Digital electronics and computer engineering term
 deasserting           # Real word: Digital electronics and computer engineering term
 deasserts             # Real word: Digital electronics and computer engineering term
 deleters              # Real word: Software term
-DIFFT                 # NI-DAQmx abbreviation; different
-DOESNT                # NI-DAQmx public API (compatibility breaking name)
 highpass              # Real word: Filter term
-hysts                 # NI-DAQmx abbreviation; hysteresis
-IMMED                 # NI-DAQmx abbreviation; immediate
 IRIG                  # Initialism: Inter-Range Instrumentation Group
-IRIGB                 # NI-DAQmx initialism; IRIG-B
 lowpass               # Real word: Filter term
 overcurrent           # Real word: Electrical engineering term
 overvoltage           # Real word: Electrical engineering term
 stopband              # Real word: Filter term
-ASYN                  # NI-DAQmx abbreviation; asynchronous
-DSTAR                 # NI-DAQmx signal type; D* bus
 Dusen                 # Real word: Physicist name; Van Dusen of Callendar-Van Dusen equation
-ELEC                  # NI-DAQmx abbreviation; electrical
-EXPORTSIGNAL          # NI-DAQmx compound identifier
-FREQOUT               # NI-DAQmx abbreviation; frequency output
-FREQUENCYWITH         # NI-DAQmx compound identifier
-globalvirtualchannels # NI-DAQmx compound identifier; global virtual channels
 grpcdevice            # NI package name; ni-grpcdevice
 HDOP                  # GPS initialism; Horizontal Dilution of Precision
-hshk                  # NI-DAQmx abbreviation; handshake
-HWTSP                 # NI-DAQmx initialism; Hardware Timed Single Point
-INVALIDC              # Typo; NI-DAQmx public API (compatibility breaking name)
-ISOC                  # NI-DAQmx abbreviation; isochronous
 JUMPERED              # Real word: Electronics term
 LVTTL                 # Initialism: Low Voltage Transistor-Transistor Logic
 MDNS                  # Initialism: Multicast DNS
 micropascals          # Real word: Unit of pressure
-MIODAQ                # NI-DAQmx product category; Multifunction I/O DAQ
-MULT                  # NI-DAQmx abbreviation; multiple
-MULTIDEVICE           # NI-DAQmx compound identifier
 nidevice              # NI package name; ni-device-grpc
 NIELVIS               # NI product name; NI ELVIS
-NONBUFFERED           # NI-DAQmx compound identifier
 NONPRINTABLE          # Real word: Computing term
-NOTKNOWN              # NI-DAQmx public API (compatibility breaking name)
-onbrd                 # NI-DAQmx abbreviation; onboard
 OVERREAD              # Real word: Data acquisition term
 PDOP                  # GPS initialism; Position Dilution of Precision
-PERSISTEDCHANNEL      # NI-DAQmx compound identifier
-PERSISTEDSCALE        # NI-DAQmx compound identifier
-PERSISTEDTASK         # NI-DAQmx compound identifier
-PHYSICALCHANNEL       # NI-DAQmx compound identifier
-POSSSIBLE             # Typo; NI-DAQmx public API (compatibility breaking name)
 powerline             # Real word: Electrical engineering term
 POWERUP               # Real word: Electronics term
 protoc                # Tool name: protobuf compiler
-PRPTY                 # NI-DAQmx abbreviation; property
 pseudodifferential    # Real word: Electronics measurement term
-RANGEWITH             # NI-DAQmx compound identifier
 ratiometric           # Real word: Electronics measurement term
 RDMA                  # Initialism: Remote Direct Memory Access
 reglitch              # Real word: Electronics DAC term
 reglitching           # Real word: Electronics DAC term (gerund)
 REPLUG                # Real word: Hardware term
-RQST                  # NI-DAQmx abbreviation; request
-SCANLIST              # NI-DAQmx compound identifier
-SENSITIVIT            # Typo; NI-DAQmx public API (compatibility breaking name)
 sint                  # Protobuf type; signed integer
-SMIO                  # NI-DAQmx initialism; Serial Memory I/O
-SPECD                 # NI-DAQmx abbreviation; specified
 Steinhart             # Real word: Physicist name; Steinhart-Hart thermistor equation
-SUBSYTEM              # Typo; NI-DAQmx public API (compatibility breaking name)
-tasktocopy            # NI-DAQmx compound identifier; task to copy
-tcpip                 # NI-DAQmx initialism; TCP/IP
 timebases             # Real word: Electronics term
-TIMETRIGGERS          # NI-DAQmx compound identifier
-trigs                 # NI-DAQmx abbreviation; triggers
 tristated             # Real word: Electronics term
 tristates             # Real word: Electronics term (verb/noun)
 ulonglong             # C type: unsigned long long
-UNAVAIL               # NI-DAQmx abbreviation; unavailable
 UNLOADABLE            # Real word: Computing term
-USBDAQ                # NI-DAQmx compound identifier; USB DAQ
 VCXO                  # Initialism: Voltage-Controlled Crystal Oscillator
 VDOP                  # GPS initialism; Vertical Dilution of Precision

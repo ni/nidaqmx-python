@@ -1,39 +1,24 @@
-acceld            # NI-DAQmx public API (compatibility breaking name)
-ACRMS             # NI-DAQmx measurement type abbreviation (AC RMS)
 addoption         # Dependency: pytest
-AHIGH             # NI-DAQmx public API (compatibility breaking name)
-aignd             # NI-DAQmx public API (compatibility breaking name)
-AIRTD             # NI-DAQmx public API (compatibility breaking name)
 allclose          # Dependency: numpy
-aognd             # NI-DAQmx public API (compatibility breaking name)
-APFI              # NI-DAQmx public API (compatibility breaking name)
 argtype           # Standard library: ctypes
 argtypes          # Standard library: ctypes
 ascontiguousarray # Dependency: numpy
 autoinstall       # Linux system tool names (external)
-BBULK             # NI-DAQmx public API (compatibility breaking name)
-BHIGH             # NI-DAQmx public API (compatibility breaking name)
 bitfield          # Real word
 bitfields         # Real word
 bitstream         # Real word
 byref             # Standard library: ctypes
 callspec          # Dependency: pytest
-CAPI              # NI-DAQmx C API identifier fragment
 caplog            # Dependency: pytest
 cDAQ              # Initialism: CompactDAQ (NI hardware platform)
 chkconfig         # Linux system tool names (external)
-CIGPS             # NI-DAQmx public API (compatibility breaking name)
 codegen           # codegen internals
 CPLD              # Initialism: Complex Programmable Logic Device
 ctypes            # Standard library: ctypes
 ctypeslib         # Standard library: ctypes
 cdecl             # C calling convention name (used in codegen)
-coeff             # NI-DAQmx public API (compatibility breaking name)
-coeffs            # NI-DAQmx public API (compatibility breaking name)
 CVICALLBACK       # NI CVI calling convention macro (C interop comment)
-DAQError          # NI-DAQmx public API (compatibility breaking name)
 DAQmx             # Initialism: Data Acquisition Measurement Extensions
-descr             # NI-DAQmx C API identifier fragments (surface in tests/examples but defined in excluded metadata)
 DKMS              # Initialism: Dynamic Kernel Module Support
 docstrings        # Python terminology
 dotenv            # Dependency: python-decouple / dotenv
@@ -42,49 +27,35 @@ dpkg              # Linux system tool names (external)
 dtype             # Dependency: numpy
 EEPROM            # Initialism: Electrically Erasable Programmable Read-Only Memory
 fixturenames      # Dependency: pytest
-forcebridge       # NI-DAQmx bridge sensor type names (used in TEDS asset filenames)
-forcelb           # NI-DAQmx public API (compatibility breaking name)
 frombuffer        # Dependency: numpy
 getfixturevalue   # Dependency: pytest
 grpcdevice        # NI package name; ni-grpcdevice
 hightime          # Dependency: hightime
 htmlcov           # Python tooling (directory/artifact names, not real words)
 HWCU              # Initialism: Hardware Configuration Utility
-hwteds            # NI-DAQmx public API (compatibility breaking name)
 IEPE              # Initialism: Integrated Electronics Piezo-Electric
 iinfo             # Dependency: numpy
 insserv           # Linux system tool names (external)
-installdriver     # NI-DAQmx public API (compatibility breaking name)
 localzone         # Dependency: tzlocal
 LVDT              # Initialism: Linear Variable Differential Transformer
-lvls              # NI-DAQmx C API identifier fragments (surface in tests/examples but defined in excluded metadata)
 matplotlib        # Dependency: matplotlib
 MBCS              # Initialism: Multi-Byte Character Set
 MeasurementLink   # NI product name
 metafunc          # Dependency: pytest
 MILLI             # Real word
-MIOAI             # NI-DAQmx public API (compatibility breaking name)
 modifyitems       # Dependency: pytest
 multibyte         # Real word
 nbytes            # Dependency: numpy
 ndarray           # Dependency: numpy
 ndpointer         # Dependency: numpy
-nicai             # NI-DAQmx C library / header filenames (external)
-nicaiu            # NI-DAQmx C library / header filenames (external)
-NIDAQ             # NI-DAQmx public API (compatibility breaking name)
-nidaqmx           # NI-DAQmx package name
 NISHAREDDIR       # NI Linux install directory environment variable
 nitypes           # Dependency: nitypes
 nptdms            # Dependency: nptdms
 numpy             # Dependency: numpy
-nums              # NI-DAQmx C API identifier fragments (surface in tests/examples but defined in excluded metadata)
-outp              # NI-DAQmx C API identifier fragments (surface in tests/examples but defined in excluded metadata)
 overrange         # Real word
 overtemperature   # Real word
 parametrizing     # Dependency: pytest
 PICO              # Real word
-pressurebridge    # NI-DAQmx bridge sensor type names (used in TEDS asset filenames)
-pretrig           # NI-DAQmx public API (compatibility breaking name)
 printoptions      # Dependency: numpy
 PXIe              # Initialism: PCI eXtensions for Instrumentation, Express variant
 pycache           # Python tooling (directory/artifact names, not real words)
@@ -96,7 +67,6 @@ retriggerable     # Real word
 rtol              # Dependency: numpy
 RTSI              # Initialism: Real-Time System Integration
 RVDT              # Initialism: Rotary Variable Differential Transformer
-samps             # NI-DAQmx public API (compatibility breaking name)
 scrapigen         # codegen internals
 SCXI              # Initialism: Signal Conditioning eXtensions for Instrumentation
 sensord           # Deprecated public property name in backward-compat rename map
@@ -104,13 +74,9 @@ subsecond         # Real word
 subseconds        # Real word
 styleguide        # ni-python-styleguide linting tool
 TDMS              # Initialism: Technical Data Management Streaming
-TEDSAI            # NI-DAQmx public API (compatibility breaking name)
-TEDSAIRTD         # NI-DAQmx public API (compatibility breaking name)
-tedshwteds        # NI-DAQmx public API (compatibility breaking name)
 timebase          # Real word
 tobytes           # Dependency: numpy
 tolist            # Dependency: numpy
-torquebridge      # NI-DAQmx bridge sensor type names (used in TEDS asset filenames)
 typeshed          # Python type stubs repository (mypy/pyright tooling)
 unflatten         # Real word
 unraisable        # Dependency: pytest
@@ -119,10 +85,7 @@ unreserve         # Real word
 unreserves        # Real word
 varargs           # Standard library: ctypes
 venv              # Python tooling (directory/artifact names, not real words)
-VERIF             # NI-DAQmx public API (compatibility breaking name)
-voltaged          # NI-DAQmx public API (compatibility breaking name)
 xlabel            # Dependency: matplotlib
 ylabel            # Dependency: matplotlib
 yoctosecond       # Real word
 yoctoseconds      # Real word
-zidx              # NI-DAQmx public API (compatibility breaking name)

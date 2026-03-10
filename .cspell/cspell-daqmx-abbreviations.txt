@@ -1,18 +1,121 @@
-Anlg             # Analog
-Atten            # Attenuation
-Chans            # Channels
-Cfgs             # Configurations
-Cmplt            # Complete
-Compen           # Compensated / Compensation
-Excit            # Excitation
-Expir            # Expiration
-Fltr             # Filter
-Hyst             # Hysteresis
-NRSE             # Non-Referenced Single-Ended
-Regen            # Regeneration
-Rngs             # Ranges
-Samp             # Sample
-Srcs             # Sources
-Thrmcpl          # Thermocouple
-Thrmstr          # Thermistor
-Xfer             # Transfer
+acceld                # NI-DAQmx public API (compatibility breaking name)
+ACRMS                 # NI-DAQmx measurement type abbreviation (AC RMS)
+AHIGH                 # NI-DAQmx public API (compatibility breaking name)
+AIAC                  # NI-DAQmx initialism; Analog Input Alternating Current
+AIADC                 # NI-DAQmx initialism; Analog Input Analog-to-Digital Converter
+AIDC                  # NI-DAQmx initialism; Analog Input Direct Current
+aignd                 # NI-DAQmx public API (compatibility breaking name)
+AILVDT                # NI-DAQmx initialism; Analog Input Linear Variable Differential Transformer
+AIRTD                 # NI-DAQmx public API (compatibility breaking name)
+AIRTDA                # NI-DAQmx initialism; Analog Input Resistance Temperature Detector, Class A
+AIRTDB                # NI-DAQmx initialism; Analog Input Resistance Temperature Detector, Class B
+AIRTDC                # NI-DAQmx initialism; Analog Input Resistance Temperature Detector, Class C
+AIRTDR0               # NI-DAQmx initialism; Analog Input Resistance Temperature Detector R0 (nominal resistance at 0 degrees C)
+AIRVDT                # NI-DAQmx initialism; Analog Input Rotary Variable Differential Transformer
+AITEDS                # NI-DAQmx initialism; Analog Input Transducer Electronic Data Sheet
+Anlg                  # Analog
+AODAC                 # NI-DAQmx initialism; Analog Output Digital-to-Analog Converter
+aognd                 # NI-DAQmx public API (compatibility breaking name)
+AOHW                  # NI-DAQmx initialism; Analog Output Hardware
+APFI                  # NI-DAQmx public API (compatibility breaking name)
+ASYN                  # NI-DAQmx abbreviation; asynchronous
+Atten                 # Attenuation
+ATTENTUATION          # Typo; NI-DAQmx public API (compatibility breaking name)
+BBULK                 # NI-DAQmx public API (compatibility breaking name)
+BHIGH                 # NI-DAQmx public API (compatibility breaking name)
+CALIBRATIONINFO       # Typo; NI-DAQmx public API (compatibility breaking name)
+CAPI                  # NI-DAQmx C API identifier fragment
+CERTITICATES          # Typo; NI-DAQmx public API (compatibility breaking name)
+CFGD                  # NI-DAQmx abbreviation; configured
+Cfgs                  # Configurations
+Chans                 # Channels
+CIGPS                 # NI-DAQmx public API (compatibility breaking name)
+CIHW                  # NI-DAQmx initialism; Counter Input Hardware
+CITC                  # NI-DAQmx initialism; Counter Input Terminal Count
+CIUTC                 # NI-DAQmx initialism; Counter Input Coordinated Universal Time
+CLKS                  # NI-DAQmx abbreviation; clocks
+Cmplt                 # Complete
+coeff                 # NI-DAQmx public API (compatibility breaking name)
+coeffs                # NI-DAQmx public API (compatibility breaking name)
+COHW                  # NI-DAQmx initialism; Counter Output Hardware
+COHWTSP               # NI-DAQmx initialism; Counter Output Hardware Timed Single Point
+Compen                # Compensated / Compensation
+CONV                  # NI-DAQmx abbreviation; convert
+COULDNT               # NI-DAQmx public API (compatibility breaking name)
+CTRS                  # NI-DAQmx abbreviation; counters
+DAQError              # NI-DAQmx public API (compatibility breaking name)
+descr                 # NI-DAQmx C API identifier fragments (surface in tests/examples but defined in excluded metadata)
+DIFFT                 # NI-DAQmx abbreviation; different
+DOESNT                # NI-DAQmx public API (compatibility breaking name)
+DSTAR                 # NI-DAQmx signal type; D* bus
+ELEC                  # NI-DAQmx abbreviation; electrical
+Excit                 # Excitation
+Expir                 # Expiration
+EXPORTSIGNAL          # NI-DAQmx compound identifier
+Fltr                  # Filter
+forcebridge           # NI-DAQmx bridge sensor type names (used in TEDS asset filenames)
+forcelb               # NI-DAQmx public API (compatibility breaking name)
+FREQOUT               # NI-DAQmx abbreviation; frequency output
+FREQUENCYWITH         # NI-DAQmx compound identifier
+globalvirtualchannels # NI-DAQmx compound identifier; global virtual channels
+hshk                  # NI-DAQmx abbreviation; handshake
+hwteds                # NI-DAQmx public API (compatibility breaking name)
+HWTSP                 # NI-DAQmx initialism; Hardware Timed Single Point
+Hyst                  # Hysteresis
+hysts                 # NI-DAQmx abbreviation; hysteresis
+IMMED                 # NI-DAQmx abbreviation; immediate
+installdriver         # NI-DAQmx public API (compatibility breaking name)
+INVALIDC              # Typo; NI-DAQmx public API (compatibility breaking name)
+IRIGB                 # NI-DAQmx initialism; IRIG-B
+ISOC                  # NI-DAQmx abbreviation; isochronous
+lvls                  # NI-DAQmx C API identifier fragments (surface in tests/examples but defined in excluded metadata)
+MIOAI                 # NI-DAQmx public API (compatibility breaking name)
+MIODAQ                # NI-DAQmx product category; Multifunction I/O DAQ
+MULT                  # NI-DAQmx abbreviation; multiple
+MULTIDEVICE           # NI-DAQmx compound identifier
+nicai                 # NI-DAQmx C library / header filenames (external)
+nicaiu                # NI-DAQmx C library / header filenames (external)
+NIDAQ                 # NI-DAQmx public API (compatibility breaking name)
+nidaqmx               # NI-DAQmx package name
+NONBUFFERED           # NI-DAQmx compound identifier
+NOTKNOWN              # NI-DAQmx public API (compatibility breaking name)
+NRSE                  # Non-Referenced Single-Ended
+nums                  # NI-DAQmx C API identifier fragments (surface in tests/examples but defined in excluded metadata)
+onbrd                 # NI-DAQmx abbreviation; onboard
+outp                  # NI-DAQmx C API identifier fragments (surface in tests/examples but defined in excluded metadata)
+PERSISTEDCHANNEL      # NI-DAQmx compound identifier
+PERSISTEDSCALE        # NI-DAQmx compound identifier
+PERSISTEDTASK         # NI-DAQmx compound identifier
+PHYSICALCHANNEL       # NI-DAQmx compound identifier
+POSSSIBLE             # Typo; NI-DAQmx public API (compatibility breaking name)
+pressurebridge        # NI-DAQmx bridge sensor type names (used in TEDS asset filenames)
+pretrig               # NI-DAQmx public API (compatibility breaking name)
+PRPTY                 # NI-DAQmx abbreviation; property
+RANGEWITH             # NI-DAQmx compound identifier
+Regen                 # Regeneration
+Rngs                  # Ranges
+RQST                  # NI-DAQmx abbreviation; request
+Samp                  # Sample
+samps                 # NI-DAQmx public API (compatibility breaking name)
+SCANLIST              # NI-DAQmx compound identifier
+SENSITIVIT            # Typo; NI-DAQmx public API (compatibility breaking name)
+SMIO                  # NI-DAQmx initialism; Serial Memory I/O
+SPECD                 # NI-DAQmx abbreviation; specified
+Srcs                  # Sources
+SUBSYTEM              # Typo; NI-DAQmx public API (compatibility breaking name)
+tasktocopy            # NI-DAQmx compound identifier; task to copy
+tcpip                 # NI-DAQmx initialism; TCP/IP
+TEDSAI                # NI-DAQmx public API (compatibility breaking name)
+TEDSAIRTD             # NI-DAQmx public API (compatibility breaking name)
+tedshwteds            # NI-DAQmx public API (compatibility breaking name)
+Thrmcpl               # Thermocouple
+Thrmstr               # Thermistor
+TIMETRIGGERS          # NI-DAQmx compound identifier
+torquebridge          # NI-DAQmx bridge sensor type names (used in TEDS asset filenames)
+trigs                 # NI-DAQmx abbreviation; triggers
+UNAVAIL               # NI-DAQmx abbreviation; unavailable
+USBDAQ                # NI-DAQmx compound identifier; USB DAQ
+VERIF                 # NI-DAQmx public API (compatibility breaking name)
+voltaged              # NI-DAQmx public API (compatibility breaking name)
+Xfer                  # Transfer
+zidx                  # NI-DAQmx public API (compatibility breaking name)
