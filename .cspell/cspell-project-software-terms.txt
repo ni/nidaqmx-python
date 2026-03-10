@@ -19,7 +19,6 @@ dotenvpath        # Typo - TODO - rename the files and make related changes
 dpkg              # Linux system tool names (external)
 dtype             # Dependency: numpy
 fixturenames      # Dependency: pytest
-forcebridge       # Typo; filename should be PascalCase (ForceBridge) for consistency
 frombuffer        # Dependency: numpy
 getfixturevalue   # Dependency: pytest
 grpcdevice        # NI package name; ni-grpcdevice
@@ -44,7 +43,6 @@ nptdms            # Dependency: nptdms
 numpy             # Dependency: numpy
 parametrizing     # Dependency: pytest
 printoptions      # Dependency: numpy
-pressurebridge    # Typo; filename should be PascalCase (PressureBridge) for consistency
 protoc            # Tool name: protobuf compiler
 pycache           # Python tooling (directory/artifact names, not real words)
 pykka             # Dependency: pykka
@@ -55,7 +53,6 @@ scrapigen         # codegen internals
 styleguide        # ni-python-styleguide linting tool
 sint              # Protobuf type; signed integer
 tobytes           # Dependency: numpy
-torquebridge      # Typo; filename should be PascalCase (TorqueBridge) for consistency
 tolist            # Dependency: numpy
 typeshed          # Python type stubs repository (mypy/pyright tooling)
 unraisable        # Dependency: pytest
