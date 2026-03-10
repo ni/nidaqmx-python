@@ -19,6 +19,7 @@ dotenvpath        # Typo - TODO - rename the files and make related changes
 dpkg              # Linux system tool names (external)
 dtype             # Dependency: numpy
 fixturenames      # Dependency: pytest
+forcebridge       # Typo; filename should be PascalCase (ForceBridge) for consistency
 frombuffer        # Dependency: numpy
 getfixturevalue   # Dependency: pytest
 grpcdevice        # NI package name; ni-grpcdevice
@@ -26,6 +27,7 @@ hightime          # Dependency: hightime
 htmlcov           # Python tooling (directory/artifact names, not real words)
 iinfo             # Dependency: numpy
 insserv           # Linux system tool names (external)
+installdriver     # CLI command name and corresponding function
 localzone         # Dependency: tzlocal
 matplotlib        # Dependency: matplotlib
 metafunc          # Dependency: pytest
@@ -34,12 +36,15 @@ nbytes            # Dependency: numpy
 ndarray           # Dependency: numpy
 ndpointer         # Dependency: numpy
 NISHAREDDIR       # NI Linux install directory environment variable
+nicai             # NI-DAQmx C library filename (Windows DLL)
+nicaiu            # NI-DAQmx C library filename (Windows DLL, Unicode)
 nidevice          # NI package name; ni-device-grpc
 nitypes           # Dependency: nitypes
 nptdms            # Dependency: nptdms
 numpy             # Dependency: numpy
 parametrizing     # Dependency: pytest
 printoptions      # Dependency: numpy
+pressurebridge    # Typo; filename should be PascalCase (PressureBridge) for consistency
 protoc            # Tool name: protobuf compiler
 pycache           # Python tooling (directory/artifact names, not real words)
 pykka             # Dependency: pykka
@@ -50,6 +55,7 @@ scrapigen         # codegen internals
 styleguide        # ni-python-styleguide linting tool
 sint              # Protobuf type; signed integer
 tobytes           # Dependency: numpy
+torquebridge      # Typo; filename should be PascalCase (TorqueBridge) for consistency
 tolist            # Dependency: numpy
 typeshed          # Python type stubs repository (mypy/pyright tooling)
 unraisable        # Dependency: pytest

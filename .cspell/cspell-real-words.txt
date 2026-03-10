@@ -30,6 +30,7 @@ MBCS                # Initialism: Multi-Byte Character Set
 MDNS                # Initialism: Multicast DNS
 MeasurementLink     # NI product name
 micropascals        # Real word: Unit of pressure
+mioDAQ              # NI product category
 MILLI               # Real word
 multibyte           # Real word
 NIELVIS             # NI product name; NI ELVIS

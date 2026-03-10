@@ -1,122 +1,115 @@
-acceld                # NI-DAQmx public API (compatibility breaking name)
-ACRMS                 # NI-DAQmx measurement type abbreviation (AC RMS)
-AHIGH                 # NI-DAQmx public API (compatibility breaking name)
-AIAC                  # NI-DAQmx initialism; Analog Input Alternating Current
-AIADC                 # NI-DAQmx initialism; Analog Input Analog-to-Digital Converter
-AIDC                  # NI-DAQmx initialism; Analog Input Direct Current
-aignd                 # NI-DAQmx public API (compatibility breaking name)
-AILVDT                # NI-DAQmx initialism; Analog Input Linear Variable Differential Transformer
-AIRTD                 # NI-DAQmx public API (compatibility breaking name)
-AIRTDA                # NI-DAQmx initialism; Analog Input Resistance Temperature Detector, Class A
-AIRTDB                # NI-DAQmx initialism; Analog Input Resistance Temperature Detector, Class B
-AIRTDC                # NI-DAQmx initialism; Analog Input Resistance Temperature Detector, Class C
-AIRTDR0               # NI-DAQmx initialism; Analog Input Resistance Temperature Detector R0 (nominal resistance at 0 degrees C)
-AIRVDT                # NI-DAQmx initialism; Analog Input Rotary Variable Differential Transformer
-AITEDS                # NI-DAQmx initialism; Analog Input Transducer Electronic Data Sheet
-Anlg                  # Analog
-AODAC                 # NI-DAQmx initialism; Analog Output Digital-to-Analog Converter
-aognd                 # NI-DAQmx public API (compatibility breaking name)
-AOHW                  # NI-DAQmx initialism; Analog Output Hardware
-APFI                  # NI-DAQmx public API (compatibility breaking name)
-ASYN                  # NI-DAQmx abbreviation; asynchronous
-Atten                 # Attenuation
-ATTENTUATION          # Typo; NI-DAQmx public API (compatibility breaking name)
-BBULK                 # NI-DAQmx public API (compatibility breaking name)
-BHIGH                 # NI-DAQmx public API (compatibility breaking name)
-CALIBRATIONINFO       # Typo; NI-DAQmx public API (compatibility breaking name)
-CAPI                  # NI-DAQmx C API identifier fragment
-CERTITICATES          # Typo; NI-DAQmx public API (compatibility breaking name)
-CFGD                  # NI-DAQmx abbreviation; configured
-Cfgs                  # Configurations
-Chans                 # Channels
-CIGPS                 # NI-DAQmx public API (compatibility breaking name)
-CIHW                  # NI-DAQmx initialism; Counter Input Hardware
-CITC                  # NI-DAQmx initialism; Counter Input Terminal Count
-CIUTC                 # NI-DAQmx initialism; Counter Input Coordinated Universal Time
-CLKS                  # NI-DAQmx abbreviation; clocks
-Cmplt                 # Complete
-coeff                 # NI-DAQmx public API (compatibility breaking name)
-coeffs                # NI-DAQmx public API (compatibility breaking name)
-COHW                  # NI-DAQmx initialism; Counter Output Hardware
-COHWTSP               # NI-DAQmx initialism; Counter Output Hardware Timed Single Point
-Compen                # Compensated / Compensation
-CONV                  # NI-DAQmx abbreviation; convert
-COULDNT               # NI-DAQmx public API (compatibility breaking name)
-CTRS                  # NI-DAQmx abbreviation; counters
-DAQError              # NI-DAQmx public API (compatibility breaking name)
-descr                 # NI-DAQmx C API identifier fragments (surface in tests/examples but defined in excluded metadata)
-DIFFT                 # NI-DAQmx abbreviation; different
-DOESNT                # NI-DAQmx public API (compatibility breaking name)
-DSTAR                 # NI-DAQmx signal type; D* bus
-ELEC                  # NI-DAQmx abbreviation; electrical
-Excit                 # Excitation
-Expir                 # Expiration
-EXPORTSIGNAL          # NI-DAQmx compound identifier
-Fltr                  # Filter
-forcebridge           # NI-DAQmx bridge sensor type names (used in TEDS asset filenames)
-forcelb               # NI-DAQmx public API (compatibility breaking name)
-FREQOUT               # NI-DAQmx abbreviation; frequency output
-FREQUENCYWITH         # NI-DAQmx compound identifier
-globalvirtualchannels # NI-DAQmx compound identifier; global virtual channels
-hshk                  # NI-DAQmx abbreviation; handshake
-hwteds                # NI-DAQmx public API (compatibility breaking name)
-HWTSP                 # NI-DAQmx initialism; Hardware Timed Single Point
-Hyst                  # Hysteresis
-hysts                 # NI-DAQmx abbreviation; hysteresis
-IMMED                 # NI-DAQmx abbreviation; immediate
-installdriver         # NI-DAQmx public API (compatibility breaking name)
-INVALIDC              # Typo; NI-DAQmx public API (compatibility breaking name)
-IRIGB                 # NI-DAQmx initialism; IRIG-B
-ISOC                  # NI-DAQmx abbreviation; isochronous
-lvls                  # NI-DAQmx C API identifier fragments (surface in tests/examples but defined in excluded metadata)
-MIOAI                 # NI-DAQmx public API (compatibility breaking name)
-MIODAQ                # NI-DAQmx product category; Multifunction I/O DAQ
-MULT                  # NI-DAQmx abbreviation; multiple
-MULTIDEVICE           # NI-DAQmx compound identifier
-nicai                 # NI-DAQmx C library / header filenames (external)
-nicaiu                # NI-DAQmx C library / header filenames (external)
-NIDAQ                 # NI-DAQmx public API (compatibility breaking name)
+acceld                # Deprecated; see attribute_helpers.py
+ACRMS                 # unseparated initialisms; AC RMS
+AHigh                 # unseparated words; A high
+AIAC                  # unseparated initialisms; AI AC
+AIADC                 # unseparated initialisms; AI ADC
+AIDC                  # unseparated initialisms; AI DC
+AIGnd                 # unseparated words; AI ground
+AILVDT                # unseparated initialisms; AI LVDT
+AIRTD                 # unseparated initialisms; AI RTD
+AIRTDA                # unseparated initialisms; AI RTD A
+AIRTDB                # unseparated initialisms; AI RTD B
+AIRTDC                # unseparated initialisms; AI RTD C
+AIRTDR0               # unseparated initialisms; AI RTD R0
+AIRVDT                # unseparated initialisms; AI RVDT
+AITEDS                # unseparated initialisms; AI TEDS
+anlg                  # abbreviation; analog
+AODAC                 # unseparated initialisms; AO DAC
+AOGnd                 # unseparated words; AO ground
+AOHW                  # unseparated initialisms; AO HW
+APFI                  # initialism; Analog Programmable Function Interface
+asyn                  # abbreviation; asynchronous
+atten                 # abbreviation; attenuation
+attentuation          # Typo; should be: attenuation
+BBULK                 # Typo; should be USB_BULK instead of US_BBULK
+BHigh                 # unseparated words; B high
+calibrationInfo       # unseparated words
+CAPI                  # unseparated words; C API
+certiticates          # Typo; should be: certificates
+cfgd                  # abbreviation; configured
+cfgs                  # abbreviation; configurations
+chans                 # abbreviation; channels
+CIGPS                 # unseparated initialisms; CI GPS
+CIHW                  # unseparated initialisms; CI HW
+CITC                  # unseparated initialisms; CI TC
+CIUTC                 # unseparated initialisms; CI UTC
+clks                  # abbreviation; clocks
+cmplt                 # abbreviation; complete
+coeff                 # abbreviation; coefficient
+coeffs                # abbreviation; coefficients
+COHW                  # unseparated initialisms; CO HW
+COHWTSP               # unseparated initialisms; CO HWTSP
+compen                # abbreviation; compensated / compensation
+conv                  # abbreviation; convert
+couldnt               # abbreviation; couldn't
+ctrs                  # abbreviation; counters
+DAQError              # unseparated words
+descr                 # abbreviation; description
+difft                 # abbreviation; different
+doesnt                # abbreviation; doesn't
+DSTAR                 # for further research; stands for differential star (PXIe trigger), but we also use D_STAR
+elec                  # abbreviation; electrical
+excit                 # abbreviation; excitation
+expir                 # abbreviation; expiration
+exportSignal          # unseparated words
+fltr                  # abbreviation; filter
+forceLb               # unseparated words; force in pounds
+freqOut               # abbreviation; frequency output
+frequencyWith         # unseparated words
+globalVirtualChannels # unseparated words; global virtual channels
+hshk                  # abbreviation; handshake
+HWTEDS                # unseparated initialisms; HW TEDS
+HWTSP                 # initialism; Hardware-Timed Single Point
+hyst                  # abbreviation; hysteresis
+hysts                 # abbreviation; hysteresis
+immed                 # abbreviation; immediate
+invalidc              # Typo; should be: INVALID_CDAQ_SYNC_PORT_CONNECTION_FORMAT
+IRIGB                 # initialism; IRIG-B
+isoc                  # abbreviation; isochronous
+lvls                  # abbreviation; levels
+MIOAI                 # unseparated initialisms; MIO AI
+mult                  # abbreviation; multiple
+multiDevice           # unseparated words
+NIDAQ                 # initialism; NI-DAQ (legacy product name)
 nidaqmx               # NI-DAQmx package name
-NONBUFFERED           # NI-DAQmx compound identifier
-NOTKNOWN              # NI-DAQmx public API (compatibility breaking name)
-NRSE                  # Non-Referenced Single-Ended
-nums                  # NI-DAQmx C API identifier fragments (surface in tests/examples but defined in excluded metadata)
-onbrd                 # NI-DAQmx abbreviation; onboard
-outp                  # NI-DAQmx C API identifier fragments (surface in tests/examples but defined in excluded metadata)
-PERSISTEDCHANNEL      # NI-DAQmx compound identifier
-PERSISTEDSCALE        # NI-DAQmx compound identifier
-PERSISTEDTASK         # NI-DAQmx compound identifier
-PHYSICALCHANNEL       # NI-DAQmx compound identifier
-POSSSIBLE             # Typo; NI-DAQmx public API (compatibility breaking name)
-pressurebridge        # NI-DAQmx bridge sensor type names (used in TEDS asset filenames)
-pretrig               # NI-DAQmx public API (compatibility breaking name)
-PRPTY                 # NI-DAQmx abbreviation; property
-RANGEWITH             # NI-DAQmx compound identifier
-Regen                 # Regeneration
-Rngs                  # Ranges
-RQST                  # NI-DAQmx abbreviation; request
-Samp                  # Sample
-samps                 # NI-DAQmx public API (compatibility breaking name)
-SCANLIST              # NI-DAQmx compound identifier
-sensord               # Deprecated public property name in backward-compat rename map
-SENSITIVIT            # Typo; NI-DAQmx public API (compatibility breaking name)
-SMIO                  # NI-DAQmx initialism; Serial Memory I/O
-SPECD                 # NI-DAQmx abbreviation; specified
-Srcs                  # Sources
-SUBSYTEM              # Typo; NI-DAQmx public API (compatibility breaking name)
-tasktocopy            # NI-DAQmx compound identifier; task to copy
-tcpip                 # NI-DAQmx initialism; TCP/IP
-TEDSAI                # NI-DAQmx public API (compatibility breaking name)
-TEDSAIRTD             # NI-DAQmx public API (compatibility breaking name)
-tedshwteds            # NI-DAQmx public API (compatibility breaking name)
-Thrmcpl               # Thermocouple
-Thrmstr               # Thermistor
-TIMETRIGGERS          # NI-DAQmx compound identifier
-torquebridge          # NI-DAQmx bridge sensor type names (used in TEDS asset filenames)
-trigs                 # NI-DAQmx abbreviation; triggers
-UNAVAIL               # NI-DAQmx abbreviation; unavailable
-USBDAQ                # NI-DAQmx compound identifier; USB DAQ
-VERIF                 # NI-DAQmx public API (compatibility breaking name)
-voltaged              # NI-DAQmx public API (compatibility breaking name)
-Xfer                  # Transfer
-zidx                  # NI-DAQmx public API (compatibility breaking name)
+nonBuffered           # unseparated words
+notKnown              # unseparated words
+NRSE                  # initialism; Non-Referenced Single-Ended
+nums                  # abbreviation; numbers
+onbrd                 # abbreviation; onboard
+outp                  # abbreviation; output
+persistedChannel      # unseparated words
+persistedScale        # unseparated words
+persistedTask         # unseparated words
+physicalChannel       # unseparated words
+posssible             # Typo; should be: possible
+pretrig               # abbreviation; pre-trigger
+prpty                 # abbreviation; property
+rangeWith             # unseparated words
+regen                 # abbreviation; regeneration
+rngs                  # abbreviation; ranges
+rqst                  # abbreviation; request
+samp                  # abbreviation; sample
+samps                 # abbreviation; samples
+scanList              # unseparated words
+sensord               # Deprecated; see attribute_helpers.py
+sensitivit            # Typo; should be: sensitivity
+SMIO                  # initialism; Serial Memory I/O
+specd                 # abbreviation; specified
+srcs                  # abbreviation; sources
+subsytem              # Typo; should be: subsystem
+taskToCopy            # unseparated words; task to copy
+tcpip                 # initialism; TCP/IP
+TEDSAI                # unseparated initialisms; TEDS AI
+TEDSAIRTD             # unseparated initialisms; TEDS AI RTD
+TEDSHWTEDS            # unseparated initialisms; TEDS HWTEDS
+thrmcpl               # abbreviation; thermocouple
+thrmstr               # abbreviation; thermistor
+timeTriggers          # unseparated words
+trigs                 # abbreviation; triggers
+unavail               # abbreviation; unavailable
+USBDAQ                # unseparated initialisms; USB DAQ
+verif                 # abbreviation; verification
+voltaged              # Deprecated; see attribute_helpers.py
+xfer                  # abbreviation; transfer
+ZIdx                  # abbreviation; Z index
