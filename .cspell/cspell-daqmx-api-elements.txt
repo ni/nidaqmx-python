@@ -98,6 +98,7 @@ RQST                  # NI-DAQmx abbreviation; request
 Samp                  # Sample
 samps                 # NI-DAQmx public API (compatibility breaking name)
 SCANLIST              # NI-DAQmx compound identifier
+sensord               # Deprecated public property name in backward-compat rename map
 SENSITIVIT            # Typo; NI-DAQmx public API (compatibility breaking name)
 SMIO                  # NI-DAQmx initialism; Serial Memory I/O
 SPECD                 # NI-DAQmx abbreviation; specified

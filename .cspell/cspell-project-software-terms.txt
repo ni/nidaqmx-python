@@ -4,88 +4,58 @@ argtype           # Standard library: ctypes
 argtypes          # Standard library: ctypes
 ascontiguousarray # Dependency: numpy
 autoinstall       # Linux system tool names (external)
-bitfield          # Real word
-bitfields         # Real word
-bitstream         # Real word
 byref             # Standard library: ctypes
 callspec          # Dependency: pytest
 caplog            # Dependency: pytest
-cDAQ              # Initialism: CompactDAQ (NI hardware platform)
+cdecl             # C calling convention name (used in codegen)
 chkconfig         # Linux system tool names (external)
 codegen           # codegen internals
-CPLD              # Initialism: Complex Programmable Logic Device
 ctypes            # Standard library: ctypes
 ctypeslib         # Standard library: ctypes
-cdecl             # C calling convention name (used in codegen)
 CVICALLBACK       # NI CVI calling convention macro (C interop comment)
-DAQmx             # Initialism: Data Acquisition Measurement Extensions
-DKMS              # Initialism: Dynamic Kernel Module Support
 docstrings        # Python terminology
 dotenv            # Dependency: python-decouple / dotenv
 dotenvpath        # Typo - TODO - rename the files and make related changes
 dpkg              # Linux system tool names (external)
 dtype             # Dependency: numpy
-EEPROM            # Initialism: Electrically Erasable Programmable Read-Only Memory
 fixturenames      # Dependency: pytest
 frombuffer        # Dependency: numpy
 getfixturevalue   # Dependency: pytest
 grpcdevice        # NI package name; ni-grpcdevice
 hightime          # Dependency: hightime
 htmlcov           # Python tooling (directory/artifact names, not real words)
-HWCU              # Initialism: Hardware Configuration Utility
-IEPE              # Initialism: Integrated Electronics Piezo-Electric
 iinfo             # Dependency: numpy
 insserv           # Linux system tool names (external)
 localzone         # Dependency: tzlocal
-LVDT              # Initialism: Linear Variable Differential Transformer
 matplotlib        # Dependency: matplotlib
-MBCS              # Initialism: Multi-Byte Character Set
-MeasurementLink   # NI product name
 metafunc          # Dependency: pytest
-MILLI             # Real word
 modifyitems       # Dependency: pytest
-multibyte         # Real word
 nbytes            # Dependency: numpy
 ndarray           # Dependency: numpy
 ndpointer         # Dependency: numpy
 NISHAREDDIR       # NI Linux install directory environment variable
+nidevice          # NI package name; ni-device-grpc
 nitypes           # Dependency: nitypes
 nptdms            # Dependency: nptdms
 numpy             # Dependency: numpy
-overrange         # Real word
-overtemperature   # Real word
 parametrizing     # Dependency: pytest
-PICO              # Real word
 printoptions      # Dependency: numpy
-PXIe              # Initialism: PCI eXtensions for Instrumentation, Express variant
+protoc            # Tool name: protobuf compiler
 pycache           # Python tooling (directory/artifact names, not real words)
 pykka             # Dependency: pykka
 pyplot            # Dependency: matplotlib
 pytest            # Dependency: pytest
-readall           # Real word
-retriggerable     # Real word
 rtol              # Dependency: numpy
-RTSI              # Initialism: Real-Time System Integration
-RVDT              # Initialism: Rotary Variable Differential Transformer
 scrapigen         # codegen internals
-SCXI              # Initialism: Signal Conditioning eXtensions for Instrumentation
-sensord           # Deprecated public property name in backward-compat rename map
-subsecond         # Real word
-subseconds        # Real word
 styleguide        # ni-python-styleguide linting tool
-TDMS              # Initialism: Technical Data Management Streaming
-timebase          # Real word
+sint              # Protobuf type; signed integer
 tobytes           # Dependency: numpy
 tolist            # Dependency: numpy
 typeshed          # Python type stubs repository (mypy/pyright tooling)
-unflatten         # Real word
 unraisable        # Dependency: pytest
 unraisablehook    # Dependency: pytest
-unreserve         # Real word
-unreserves        # Real word
+ulonglong         # C type: unsigned long long
 varargs           # Standard library: ctypes
 venv              # Python tooling (directory/artifact names, not real words)
 xlabel            # Dependency: matplotlib
 ylabel            # Dependency: matplotlib
-yoctosecond       # Real word
-yoctoseconds      # Real word
