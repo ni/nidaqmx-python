@@ -102,12 +102,12 @@ class DaqFunctionImporter:
         self, function
     ):
         try:
-            cfunc = getattr(self._library, function)
-            if not hasattr(cfunc, "arg_lock"):
+            c_func = getattr(self._library, function)
+            if not hasattr(c_func, "arg_lock"):
                 with self._lib_lock:
-                    if not hasattr(cfunc, "arg_lock"):
-                        cfunc.arg_lock = threading.Lock()
-            return cfunc
+                    if not hasattr(c_func, "arg_lock"):
+                        c_func.arg_lock = threading.Lock()
+            return c_func
         except AttributeError:
             raise DaqFunctionNotSupportedError(_FUNCTION_NOT_SUPPORTED_MESSAGE.format(function))
 
