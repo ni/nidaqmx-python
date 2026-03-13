@@ -20,7 +20,9 @@ def plot_analog_waveform(waveform, min_start_time=None):
     if min_start_time is not None:
         time_offset = (waveform.timing.start_time - min_start_time).total_seconds()
     duration = waveform.sample_count * waveform.timing.sample_interval.total_seconds()
-    time_data = np.linspace(time_offset, time_offset + duration, waveform.sample_count)
+    time_data = np.linspace(
+        time_offset, time_offset + duration, waveform.sample_count, endpoint=False
+    )
     plot.plot(time_data, waveform.scaled_data, label=waveform.channel_name)
 
 
