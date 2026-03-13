@@ -32,7 +32,7 @@ All notable changes to this project will be documented in this file.
    * [Full changelog: 1.4.1...1.5.0](https://github.com/ni/nidaqmx-python/compare/1.4.1...1.5.0)
 
 * ### Resolved Issues
-    * ...
+    * [936: New example voltage_acq_int_clk_plot_wfm.py does not behave as expected](https://github.com/ni/nidaqmx-python/issues/936)
 
 * ### Major Changes
    * ...
