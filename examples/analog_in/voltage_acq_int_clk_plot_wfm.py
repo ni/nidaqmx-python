@@ -6,11 +6,12 @@ Run 'pip install matplotlib' to install the matplotlib module.
 """
 
 import matplotlib.pyplot as plot
-import nidaqmx
 import numpy as np
-from nidaqmx.constants import READ_ALL_AVAILABLE, AcquisitionType
 from nitypes.time.typing import AnyDateTime
 from nitypes.waveform import AnalogWaveform
+
+import nidaqmx
+from nidaqmx.constants import READ_ALL_AVAILABLE, AcquisitionType
 
 
 def plot_analog_waveform(
