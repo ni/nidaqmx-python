@@ -7,16 +7,12 @@ Run 'pip install matplotlib' to install the matplotlib module.
 
 import matplotlib.pyplot as plot
 import numpy as np
-from nitypes.time.typing import AnyDateTime
-from nitypes.waveform import AnalogWaveform
 
 import nidaqmx
 from nidaqmx.constants import READ_ALL_AVAILABLE, AcquisitionType
 
 
-def plot_analog_waveform(
-    waveform: AnalogWaveform[float], min_start_time: AnyDateTime | None = None
-) -> None:
+def plot_analog_waveform(waveform, min_start_time=None):
     """Plot a single analog waveform."""
     # For multiplexed devices, each channel has a different time offset, based on the AI Convert
     # Clock rate. Calculate the time offset for this channel by subtracting the minimum start time.
