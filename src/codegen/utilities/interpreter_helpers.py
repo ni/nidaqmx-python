@@ -1,5 +1,6 @@
 """This contains the helper methods used in interpreter generation."""
 
+import os
 import re
 from copy import deepcopy
 
@@ -383,8 +384,8 @@ def get_output_param_with_ivi_dance_mechanism(func):
             "This cannot be handled by this template because it "
             'calls the C function once with "buffer_size = 0" to get the '
             "buffer size from the returned integer, which is normally an "
-            "error code.\n\n"
-            "Output parameters with explicit buffer sizes: {}".format(
+            "error code.{0}{0}".format(os.linesep)
+            + "Output parameters with explicit buffer sizes: {}".format(
                 params_with_ivi_dance_mechanism
             )
         )
