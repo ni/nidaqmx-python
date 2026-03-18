@@ -1,5 +1,6 @@
 # Changelog
 * [1.5.0](#150)
+* [1.4.1](#141)
 * [1.4.0](#140)
 * [1.3.0](#130)
 * [1.2.0](#120)
@@ -28,13 +29,26 @@ All notable changes to this project will be documented in this file.
 
 ## 1.5.0
 * ### Merged Pull Requests
-    * [Full changelog: 1.4.0...1.5.0](https://github.com/ni/nidaqmx-python/compare/1.4.0...1.5.0)
+    * [Full changelog: 1.4.1...1.5.0](https://github.com/ni/nidaqmx-python/compare/1.4.1...1.5.0)
+
+* ### Resolved Issues
+    * [936: New example voltage_acq_int_clk_plot_wfm.py does not behave as expected](https://github.com/ni/nidaqmx-python/issues/936)
+
+* ### Major Changes
+    * [cspell](https://cspell.org/) is now used for spell checking.
+
+* ### Known Issues
+    * ...
+
+## 1.4.1
+* ### Merged Pull Requests
+    * [Full changelog: 1.4.0...1.4.1](https://github.com/ni/nidaqmx-python/compare/1.4.0...1.4.1)
 
 * ### Resolved Issues
     * ...
 
 * ### Major Changes
-    * [cspell](https://cspell.org/) is now used for spell checking.
+    * Update installer metadata using DAQmx version 26.0.0
 
 * ### Known Issues
     * ...
