@@ -10,7 +10,7 @@ from typing import TYPE_CHECKING, TypeVar
 
 from decouple import AutoConfig, Undefined, undefined
 
-from nidaqmx._dotenvpath import get_dotenv_search_path
+from nidaqmx._dotenv_path import get_dotenv_search_path
 from nidaqmx.errors import FeatureNotSupportedError
 
 if TYPE_CHECKING:

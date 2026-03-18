@@ -15,7 +15,6 @@ ctypeslib         # Standard library: ctypes
 CVICALLBACK       # NI CVI calling convention macro (C interop comment)
 docstrings        # Python terminology
 dotenv            # Dependency: python-decouple / dotenv
-dotenvpath        # Typo - TODO - rename the files and make related changes
 dpkg              # Linux system tool names (external)
 dtype             # Dependency: numpy
 fixturenames      # Dependency: pytest
