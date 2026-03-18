@@ -92,13 +92,13 @@ class PhysicalChannel:
         from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
-        cfunc = lib_importer.windll.DAQmxSetPhysicalChanAIPowerControlEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
+        c_func = lib_importer.windll.DAQmxSetPhysicalChanAIPowerControlEnable
+        if c_func.argtypes is None:
+            with c_func.arg_lock:
+                if c_func.argtypes is None:
+                    c_func.argtypes = [
                         ctypes_byte_str, c_bool32]
-        error_code = cfunc(
+        error_code = c_func(
             self._name, val)
         self._interpreter.check_for_error(error_code)
 
@@ -108,13 +108,13 @@ class PhysicalChannel:
         from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
-        cfunc = lib_importer.windll.DAQmxResetPhysicalChanAIPowerControlEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
+        c_func = lib_importer.windll.DAQmxResetPhysicalChanAIPowerControlEnable
+        if c_func.argtypes is None:
+            with c_func.arg_lock:
+                if c_func.argtypes is None:
+                    c_func.argtypes = [
                         ctypes_byte_str]
-        error_code = cfunc(
+        error_code = c_func(
             self._name)
         self._interpreter.check_for_error(error_code)
 
@@ -135,13 +135,13 @@ class PhysicalChannel:
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
         val = val.value
-        cfunc = lib_importer.windll.DAQmxSetPhysicalChanAIPowerControlType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
+        c_func = lib_importer.windll.DAQmxSetPhysicalChanAIPowerControlType
+        if c_func.argtypes is None:
+            with c_func.arg_lock:
+                if c_func.argtypes is None:
+                    c_func.argtypes = [
                         ctypes_byte_str, ctypes.c_int]
-        error_code = cfunc(
+        error_code = c_func(
             self._name, val)
         self._interpreter.check_for_error(error_code)
 
@@ -151,13 +151,13 @@ class PhysicalChannel:
         from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
-        cfunc = lib_importer.windll.DAQmxResetPhysicalChanAIPowerControlType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
+        c_func = lib_importer.windll.DAQmxResetPhysicalChanAIPowerControlType
+        if c_func.argtypes is None:
+            with c_func.arg_lock:
+                if c_func.argtypes is None:
+                    c_func.argtypes = [
                         ctypes_byte_str]
-        error_code = cfunc(
+        error_code = c_func(
             self._name)
         self._interpreter.check_for_error(error_code)
 
@@ -177,14 +177,14 @@ class PhysicalChannel:
         from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
-        cfunc = (lib_importer.windll.
+        c_func = (lib_importer.windll.
                  DAQmxSetPhysicalChanAIPowerControlVoltage)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
+        if c_func.argtypes is None:
+            with c_func.arg_lock:
+                if c_func.argtypes is None:
+                    c_func.argtypes = [
                         ctypes_byte_str, ctypes.c_double]
-        error_code = cfunc(
+        error_code = c_func(
             self._name, val)
         self._interpreter.check_for_error(error_code)
 
@@ -194,14 +194,14 @@ class PhysicalChannel:
         from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
-        cfunc = (lib_importer.windll.
+        c_func = (lib_importer.windll.
                  DAQmxResetPhysicalChanAIPowerControlVoltage)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
+        if c_func.argtypes is None:
+            with c_func.arg_lock:
+                if c_func.argtypes is None:
+                    c_func.argtypes = [
                         ctypes_byte_str]
-        error_code = cfunc(
+        error_code = c_func(
             self._name)
         self._interpreter.check_for_error(error_code)
 
@@ -287,14 +287,14 @@ class PhysicalChannel:
         from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
-        cfunc = (lib_importer.windll.
+        c_func = (lib_importer.windll.
                  DAQmxSetPhysicalChanAOManualControlEnable)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
+        if c_func.argtypes is None:
+            with c_func.arg_lock:
+                if c_func.argtypes is None:
+                    c_func.argtypes = [
                         ctypes_byte_str, c_bool32]
-        error_code = cfunc(
+        error_code = c_func(
             self._name, val)
         self._interpreter.check_for_error(error_code)
 
@@ -304,14 +304,14 @@ class PhysicalChannel:
         from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
-        cfunc = (lib_importer.windll.
+        c_func = (lib_importer.windll.
                  DAQmxResetPhysicalChanAOManualControlEnable)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
+        if c_func.argtypes is None:
+            with c_func.arg_lock:
+                if c_func.argtypes is None:
+                    c_func.argtypes = [
                         ctypes_byte_str]
-        error_code = cfunc(
+        error_code = c_func(
             self._name)
         self._interpreter.check_for_error(error_code)
 
@@ -362,13 +362,13 @@ class PhysicalChannel:
         from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
-        cfunc = lib_importer.windll.DAQmxSetAOPowerAmpChannelEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
+        c_func = lib_importer.windll.DAQmxSetAOPowerAmpChannelEnable
+        if c_func.argtypes is None:
+            with c_func.arg_lock:
+                if c_func.argtypes is None:
+                    c_func.argtypes = [
                         ctypes_byte_str, c_bool32]
-        error_code = cfunc(
+        error_code = c_func(
             self._name, val)
         self._interpreter.check_for_error(error_code)
 
@@ -378,13 +378,13 @@ class PhysicalChannel:
         from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
-        cfunc = lib_importer.windll.DAQmxResetAOPowerAmpChannelEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
+        c_func = lib_importer.windll.DAQmxResetAOPowerAmpChannelEnable
+        if c_func.argtypes is None:
+            with c_func.arg_lock:
+                if c_func.argtypes is None:
+                    c_func.argtypes = [
                         ctypes_byte_str]
-        error_code = cfunc(
+        error_code = c_func(
             self._name)
         self._interpreter.check_for_error(error_code)
 
@@ -530,13 +530,13 @@ class PhysicalChannel:
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
         val = val.value
-        cfunc = lib_importer.windll.DAQmxSetPhysicalChanDigPortLogicFamily
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
+        c_func = lib_importer.windll.DAQmxSetPhysicalChanDigPortLogicFamily
+        if c_func.argtypes is None:
+            with c_func.arg_lock:
+                if c_func.argtypes is None:
+                    c_func.argtypes = [
                         ctypes_byte_str, ctypes.c_int]
-        error_code = cfunc(
+        error_code = c_func(
             self._name, val)
         self._interpreter.check_for_error(error_code)
 
@@ -546,13 +546,13 @@ class PhysicalChannel:
         from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
-        cfunc = lib_importer.windll.DAQmxResetPhysicalChanDigPortLogicFamily
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
+        c_func = lib_importer.windll.DAQmxResetPhysicalChanDigPortLogicFamily
+        if c_func.argtypes is None:
+            with c_func.arg_lock:
+                if c_func.argtypes is None:
+                    c_func.argtypes = [
                         ctypes_byte_str]
-        error_code = cfunc(
+        error_code = c_func(
             self._name)
         self._interpreter.check_for_error(error_code)
 

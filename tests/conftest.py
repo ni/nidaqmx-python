@@ -642,13 +642,13 @@ def bridge_teds_file_path(teds_assets_directory: pathlib.Path) -> pathlib.Path:
     """Returns a TEDS file path."""
     # Our normal bridge sensor TEDS file is incompatible with most devices. It
     # has a 1ohm bridge resistance.
-    return teds_assets_directory / "forcebridge.ted"
+    return teds_assets_directory / "ForceBridge.ted"
 
 
 @pytest.fixture
 def force_bridge_teds_file_path(teds_assets_directory: pathlib.Path) -> pathlib.Path:
     """Returns a TEDS file path."""
-    return teds_assets_directory / "forcebridge.ted"
+    return teds_assets_directory / "ForceBridge.ted"
 
 
 @pytest.fixture
@@ -684,13 +684,13 @@ def rvdt_teds_file_path(teds_assets_directory: pathlib.Path) -> pathlib.Path:
 @pytest.fixture
 def pressure_bridge_teds_file_path(teds_assets_directory: pathlib.Path) -> pathlib.Path:
     """Returns a TEDS file path."""
-    return teds_assets_directory / "pressurebridge.ted"
+    return teds_assets_directory / "PressureBridge.ted"
 
 
 @pytest.fixture
 def torque_bridge_teds_file_path(teds_assets_directory: pathlib.Path) -> pathlib.Path:
     """Returns a TEDS file path."""
-    return teds_assets_directory / "torquebridge.ted"
+    return teds_assets_directory / "TorqueBridge.ted"
 
 
 @pytest.fixture

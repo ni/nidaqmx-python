@@ -1,0 +1,64 @@
+addoption         # Dependency: pytest
+allclose          # Dependency: numpy
+argtype           # Standard library: ctypes
+argtypes          # Standard library: ctypes
+ascontiguousarray # Dependency: numpy
+autoinstall       # Linux system tool names (external)
+byref             # Standard library: ctypes
+callspec          # Dependency: pytest
+caplog            # Dependency: pytest
+cdecl             # C calling convention name (used in codegen)
+chkconfig         # Linux system tool names (external)
+codegen           # codegen internals
+ctypes            # Standard library: ctypes
+ctypeslib         # Standard library: ctypes
+CVICALLBACK       # NI CVI calling convention macro (C interop comment)
+docstrings        # Python terminology
+dotenv            # Dependency: python-decouple / dotenv
+dotenvpath        # Typo - TODO - rename the files and make related changes
+dpkg              # Linux system tool names (external)
+dtype             # Dependency: numpy
+fixturenames      # Dependency: pytest
+frombuffer        # Dependency: numpy
+getfixturevalue   # Dependency: pytest
+grpcdevice        # NI package name; ni-grpcdevice
+hightime          # Dependency: hightime
+htmlcov           # Python tooling (directory/artifact names, not real words)
+iinfo             # Dependency: numpy
+insserv           # Linux system tool names (external)
+installdriver     # CLI command name and corresponding function
+localzone         # Dependency: tzlocal
+matplotlib        # Dependency: matplotlib
+metafunc          # Dependency: pytest
+modifyitems       # Dependency: pytest
+nbytes            # Dependency: numpy
+ndarray           # Dependency: numpy
+ndpointer         # Dependency: numpy
+NISHAREDDIR       # NI Linux install directory environment variable
+nicai             # NI-DAQmx C library filename (Windows DLL)
+nicaiu            # NI-DAQmx C library filename (Windows DLL, Unicode)
+nidevice          # NI package name; ni-device-grpc
+nitypes           # Dependency: nitypes
+nptdms            # Dependency: nptdms
+numpy             # Dependency: numpy
+parametrizing     # Dependency: pytest
+printoptions      # Dependency: numpy
+protoc            # Tool name: protobuf compiler
+pycache           # Python tooling (directory/artifact names, not real words)
+pykka             # Dependency: pykka
+pyplot            # Dependency: matplotlib
+pytest            # Dependency: pytest
+rtol              # Dependency: numpy
+scrapigen         # codegen internals
+styleguide        # ni-python-styleguide linting tool
+sint              # Protobuf type; signed integer
+tobytes           # Dependency: numpy
+tolist            # Dependency: numpy
+typeshed          # Python type stubs repository (mypy/pyright tooling)
+unraisable        # Dependency: pytest
+unraisablehook    # Dependency: pytest
+ulonglong         # C type: unsigned long long
+varargs           # Standard library: ctypes
+venv              # Python tooling (directory/artifact names, not real words)
+xlabel            # Dependency: matplotlib
+ylabel            # Dependency: matplotlib

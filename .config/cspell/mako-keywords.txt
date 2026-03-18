@@ -1,0 +1,10 @@
+# Mako template closing keywords for control structures (% endXXX markers).
+# Mako closes each % control block with a matching % end<keyword> line.
+# All seven closing keywords are included; they are all used in src/codegen/templates/.
+endblock
+enddef
+endfor
+endif
+endtry
+endwhile
+endwith

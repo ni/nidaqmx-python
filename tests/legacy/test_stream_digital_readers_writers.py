@@ -290,7 +290,7 @@ class TestDigitalMultiChannelReaderWriter(TestDAQmxIOBase):
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
     def test_one_sample_one_line(self, task, real_x_series_device, seed):
-        """Test to validate digital mutichannel read and write operation with sample data."""
+        """Test to validate digital multichannel read and write operation with sample data."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -320,7 +320,7 @@ class TestDigitalMultiChannelReaderWriter(TestDAQmxIOBase):
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
     def test_one_sample_multi_line(self, task, real_x_series_device, seed):
-        """Test to validate digital mutichannel read and write operation with sample data."""
+        """Test to validate digital multichannel read and write operation with sample data."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -360,7 +360,7 @@ class TestDigitalMultiChannelReaderWriter(TestDAQmxIOBase):
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
     def test_one_sample_port_byte(self, task, real_x_series_device, seed):
-        """Test to validate digital mutichannel read and write operation with sample bytes."""
+        """Test to validate digital multichannel read and write operation with sample bytes."""
         if len([d.do_port_width <= 8 for d in real_x_series_device.do_ports]) < 2:
             pytest.skip("Requires 2 digital ports with at most 8 lines.")
 
@@ -394,7 +394,7 @@ class TestDigitalMultiChannelReaderWriter(TestDAQmxIOBase):
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
     def test_one_sample_port_uint16(self, task, real_x_series_device, seed):
-        """Test to validate digital mutichannel read and write operation with uint16."""
+        """Test to validate digital multichannel read and write operation with uint16."""
         if len([d.do_port_width <= 16 for d in real_x_series_device.do_ports]) < 2:
             pytest.skip("Requires 2 digital ports with at most 16 lines.")
 
@@ -428,7 +428,7 @@ class TestDigitalMultiChannelReaderWriter(TestDAQmxIOBase):
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
     def test_one_sample_port_uint32(self, task, real_x_series_device, seed):
-        """Test to validate digital mutichannel read and write operation with uint32."""
+        """Test to validate digital multichannel read and write operation with uint32."""
         if len([d.do_port_width <= 32 for d in real_x_series_device.do_ports]) < 2:
             pytest.skip("Requires 2 digital ports with at most 32 lines.")
 
@@ -462,7 +462,7 @@ class TestDigitalMultiChannelReaderWriter(TestDAQmxIOBase):
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
     def test_many_sample_port_byte(self, task, real_x_series_device, seed):
-        """Test to validate digital mutichannel read and write operation with sample bytes."""
+        """Test to validate digital multichannel read and write operation with sample bytes."""
         if len([d.do_port_width <= 8 for d in real_x_series_device.do_ports]) < 2:
             pytest.skip("Requires 2 digital ports with at most 8 lines.")
 
@@ -514,7 +514,7 @@ class TestDigitalMultiChannelReaderWriter(TestDAQmxIOBase):
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
     def test_many_sample_port_uint16(self, task, real_x_series_device, seed):
-        """Test to validate digital mutichannel read and write operation with uint16."""
+        """Test to validate digital multichannel read and write operation with uint16."""
         if len([d.do_port_width <= 16 for d in real_x_series_device.do_ports]) < 2:
             pytest.skip("Requires 2 digital ports with at most 16 lines.")
 
@@ -566,7 +566,7 @@ class TestDigitalMultiChannelReaderWriter(TestDAQmxIOBase):
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
     def test_many_sample_port_uint32(self, task, real_x_series_device, seed):
-        """Test to validate digital mutichannel read and write operation with uint32."""
+        """Test to validate digital multichannel read and write operation with uint32."""
         if len([d.do_port_width <= 32 for d in real_x_series_device.do_ports]) < 2:
             pytest.skip("Requires 2 digital ports with at most 32 lines.")
 

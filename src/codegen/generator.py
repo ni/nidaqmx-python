@@ -1,4 +1,4 @@
-"""Codegenerator for generating DAQmx functions."""
+"""Code generator for generating DAQmx functions."""
 
 import logging
 import os

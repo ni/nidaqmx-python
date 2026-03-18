@@ -24,11 +24,11 @@
         ${callback_func_param.type} = ctypes.CFUNCTYPE(
             ${', '.join(callback_param_types) | wrap(12)})
 
-        cfunc = lib_importer.${'windll' if function.calling_convention == 'StdCall' else 'cdll'}.DAQmx${function.c_function_name}
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
+        c_func = lib_importer.${'windll' if function.calling_convention == 'StdCall' else 'cdll'}.DAQmx${function.c_function_name}
+        if c_func.argtypes is None:
+            with c_func.arg_lock:
+                if c_func.argtypes is None:
+                    c_func.argtypes = [
                         ${', '.join(argument_types) | wrap(24)}]
 
 %if is_event_register_function(function):
@@ -43,7 +43,7 @@
         callback_data = None
 %endif
 
-        error_code = cfunc(
+        error_code = c_func(
             ${', '.join(function_call_args) | wrap(12)})
         self.check_for_error(error_code)
 %if is_event_register_function(function):

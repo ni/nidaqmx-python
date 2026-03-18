@@ -64,7 +64,7 @@ class ReferenceTrigger:
     @property
     def anlg_edge_dig_fltr_min_pulse_width(self):
         """
-        float: Specifies in seconds the minimum pulse width thefilter
+        float: Specifies in seconds the minimum pulse width the filter
             recognizes.
         """
 

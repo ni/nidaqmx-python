@@ -10,6 +10,7 @@ from nidaqmx.errors import DaqError
 from nidaqmx.grpc_session_options import GrpcSessionOptions
 
 # Method logic adapted from
+# cspell:disable-next-line
 # //Measurements/Infrastructure/dmxf/trunk/2.5/source/nimuck/parseUtilities.cpp
 
 _invalid_range_syntax_message = (
@@ -184,7 +185,7 @@ def unflatten_channel_string(channel_names: str) -> list[str]:
             for i in range(number_of_channels):
                 current_number = num_min + i
                 if num_min_width > 0:
-                    # Using fstrings to create format strings. Braces for days!
+                    # Using f-strings to create format strings. Braces for days!
                     zero_padded_format_specifier = f"{{:0{num_min_width}d}}"
                     current_number_str = zero_padded_format_specifier.format(current_number)
                 else:

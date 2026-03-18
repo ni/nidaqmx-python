@@ -13,14 +13,14 @@
     # or samps_per_chan_written=)
     samps_per_chan_param = get_samps_per_chan_read_or_write_param(function.base_parameters)
 %>\
-        cfunc = lib_importer.${'windll' if function.calling_convention == 'StdCall' else 'cdll'}.DAQmx${function.c_function_name}
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
+        c_func = lib_importer.${'windll' if function.calling_convention == 'StdCall' else 'cdll'}.DAQmx${function.c_function_name}
+        if c_func.argtypes is None:
+            with c_func.arg_lock:
+                if c_func.argtypes is None:
+                    c_func.argtypes = [
                         ${', '.join(get_argument_types(function)) | wrap(24, 24)}]
 
-        error_code = cfunc(
+        error_code = c_func(
             ${', '.join(function_call_args) | wrap(12, 12)})
 %if samps_per_chan_param is None:
         self.check_for_error(error_code)

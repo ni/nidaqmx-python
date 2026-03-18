@@ -1,0 +1,11 @@
+# Sphinx directive names and option values flagged by cspell in this project's .rst files.
+# This is not an exhaustive list of Sphinx directives — only words that cspell does not
+# recognize from its built-in dictionaries and that appear in docs/ are included here.
+automodule
+backlinks
+bysource
+currentmodule
+genindex
+modindex
+toctree
+undoc

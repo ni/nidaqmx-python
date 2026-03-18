@@ -621,7 +621,7 @@ class InStream:
         """
         List[str]: Indicates a list of names of any virtual channels in
             the task for which the device(s) detected an open
-            thermcouple. You must read **open_thrmcpl_chans_exist**
+            thermocouple. You must read **open_thrmcpl_chans_exist**
             before you read this property. Otherwise, you will receive
             an error.
         """

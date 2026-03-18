@@ -16,15 +16,15 @@ def query_devices():
         print("Output channels:", [chan.name for chan in device.ao_physical_chans])
 
 
-def playrec(data, samplerate, input_mapping, output_mapping):
+def play_record(data, sample_rate, input_mapping, output_mapping):
     """Simultaneous playback and recording though NI device.
 
     Parameters:
     -----------
-    data: array_like, shape (nsamples, len(output_mapping))
+    data: array_like, shape (num_samples, len(output_mapping))
       Data to be send to output channels.
-    samplerate: int
-      Samplerate
+    sample_rate: int
+      Sample rate
     input_mapping: list of str
       Input device channels
     output_mapping: list of str
@@ -32,33 +32,33 @@ def playrec(data, samplerate, input_mapping, output_mapping):
 
     Returns
     -------
-    ndarray, shape (nsamples, len(input_mapping))
+    ndarray, shape (num_samples, len(input_mapping))
       Recorded data
 
     """
     devices = nidaqmx.system.System.local().devices
     data = np.asarray(data).T
-    nsamples = data.shape[1]
+    num_samples = data.shape[1]
 
     with nidaqmx.Task() as read_task, nidaqmx.Task() as write_task:
         for i, o in enumerate(output_mapping):
-            aochan = write_task.ao_channels.add_ao_voltage_chan(
+            ao_channel = write_task.ao_channels.add_ao_voltage_chan(
                 o,
                 min_val=devices[o].ao_voltage_rngs[0],
                 max_val=devices[o].ao_voltage_rngs[1],
             )
             min_data, max_data = np.min(data[i]), np.max(data[i])
-            if ((max_data > aochan.ao_max) | (min_data < aochan.ao_min)).any():
+            if ((max_data > ao_channel.ao_max) | (min_data < ao_channel.ao_min)).any():
                 raise ValueError(
                     f"Data range ({min_data:.2f}, {max_data:.2f}) exceeds output range of "
-                    f"{o} ({aochan.ao_min:.2f}, {aochan.ao_max:.2f})."
+                    f"{o} ({ao_channel.ao_min:.2f}, {ao_channel.ao_max:.2f})."
                 )
         for i in input_mapping:
             read_task.ai_channels.add_ai_voltage_chan(i)
 
         for task in (read_task, write_task):
             task.timing.cfg_samp_clk_timing(
-                rate=samplerate, source="OnboardClock", samps_per_chan=nsamples
+                rate=sample_rate, source="OnboardClock", samps_per_chan=num_samples
             )
 
         # trigger write_task as soon as read_task starts
@@ -70,9 +70,9 @@ def playrec(data, samplerate, input_mapping, output_mapping):
         # write_task doesn't start at read_task's start_trigger without this
         write_task.start()
         # do not time out for long inputs
-        indata = read_task.read(nsamples, timeout=WAIT_INFINITELY)
+        input_data = read_task.read(num_samples, timeout=WAIT_INFINITELY)
 
-    return np.asarray(indata).T
+    return np.asarray(input_data).T
 
 
 if __name__ == "__main__":
@@ -84,9 +84,9 @@ if __name__ == "__main__":
 
     # excite through one output and record at three inputs
     outdata = np.random.normal(size=(5000, 1)) * 0.01
-    indata = playrec(
+    input_data = play_record(
         outdata,
-        samplerate=96000,
+        sample_rate=96000,
         input_mapping=["Dev2/ai0", "Dev2/ai1", "Dev2/ai2"],
         output_mapping=["Dev2/ao0"],
     )

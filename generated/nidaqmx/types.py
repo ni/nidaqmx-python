@@ -3,7 +3,7 @@
 import collections
 import typing
 
-# region Task Counter IO namedtuples
+# region Task Counter IO named tuples
 
 CtrFreq = collections.namedtuple("CtrFreq", ["freq", "duty_cycle"])
 
@@ -13,13 +13,13 @@ CtrTime = collections.namedtuple("CtrTime", ["high_time", "low_time"])
 
 # endregion
 
-# region Power IO namedtuples
+# region Power IO named tuples
 
 PowerMeasurement = collections.namedtuple("PowerMeasurement", ["voltage", "current"])
 
 # endregion
 
-# region Watchdog namedtuples
+# region Watchdog named tuples
 
 AOExpirationState = collections.namedtuple(
     "AOExpirationState", ["physical_channel", "expiration_state", "output_type"]
@@ -35,7 +35,7 @@ DOExpirationState = collections.namedtuple(
 
 # endregion
 
-# region Power Up States namedtuples
+# region Power Up States named tuples
 
 AOPowerUpState = collections.namedtuple(
     "AOPowerUpState", ["physical_channel", "power_up_state", "channel_type"]
@@ -49,7 +49,7 @@ DOResistorPowerUpState = collections.namedtuple(
 
 # endregion
 
-# region System namedtuples
+# region System named tuples
 
 CDAQSyncConnection = collections.namedtuple("CDAQSyncConnection", ["output_port", "input_port"])
 
@@ -59,7 +59,7 @@ DriverVersion = collections.namedtuple(
 
 # endregion
 
-# region ID Pin namedtuples
+# region ID Pin named tuples
 
 
 class IDPinContents(typing.NamedTuple):

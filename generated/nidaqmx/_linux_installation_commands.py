@@ -66,7 +66,7 @@ class DistroInfo:  # noqa: D101 - Missing docstring in public class (auto-genera
     install_commands: list[list[str]]
 
 
-# Mapping of distros to their command templates and version handlers
+# Mapping of Linux distributions to their command templates and version handlers
 LINUX_COMMANDS = {
     "ubuntu": DistroInfo(_get_version_ubuntu, _DEBIAN_DAQMX_VERSION_COMMAND, _APT_INSTALL_COMMANDS),
     "opensuse": DistroInfo(

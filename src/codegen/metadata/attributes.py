@@ -23038,7 +23038,7 @@ attributes = {
             ],
             'name': 'AI_CONV_CLK_PULSE_WIDTH',
             'python_data_type': 'float',
-            'python_description': 'Specifies the width of an exported AI Convert Clock pulse, in units specfied with **ai_conv_clk_pulse_width_units**.',
+            'python_description': 'Specifies the width of an exported AI Convert Clock pulse, in units specified with **ai_conv_clk_pulse_width_units**.',
             'resettable': False,
             'type': 'float64'
         },
@@ -26055,7 +26055,7 @@ attributes = {
             'name': 'OPEN_THRMCPL_CHANS',
             'python_class_name': 'InStream',
             'python_data_type': 'str',
-            'python_description': 'Indicates a list of names of any virtual channels in the task for which the device(s) detected an open thermcouple. You must read **open_thrmcpl_chans_exist** before you read this property. Otherwise, you will receive an error.',
+            'python_description': 'Indicates a list of names of any virtual channels in the task for which the device(s) detected an open thermocouple. You must read **open_thrmcpl_chans_exist** before you read this property. Otherwise, you will receive an error.',
             'resettable': False,
             'type': 'char[]'
         },
@@ -31891,7 +31891,7 @@ attributes = {
             'name': 'ANLG_EDGE_REF_TRIG_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
-            'python_description': 'Specifies in seconds the minimum pulse width thefilter recognizes.',
+            'python_description': 'Specifies in seconds the minimum pulse width the filter recognizes.',
             'python_name': 'anlg_edge_dig_fltr_min_pulse_width',
             'resettable': True,
             'type': 'float64'

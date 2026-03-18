@@ -1,0 +1,115 @@
+acceld                # Deprecated; see attribute_helpers.py
+ACRMS                 # unseparated initialisms; AC RMS
+AHigh                 # unseparated words; A high
+AIAC                  # unseparated initialisms; AI AC
+AIADC                 # unseparated initialisms; AI ADC
+AIDC                  # unseparated initialisms; AI DC
+AIGnd                 # unseparated words; AI ground
+AILVDT                # unseparated initialisms; AI LVDT
+AIRTD                 # unseparated initialisms; AI RTD
+AIRTDA                # unseparated initialisms; AI RTD A
+AIRTDB                # unseparated initialisms; AI RTD B
+AIRTDC                # unseparated initialisms; AI RTD C
+AIRTDR0               # unseparated initialisms; AI RTD R0
+AIRVDT                # unseparated initialisms; AI RVDT
+AITEDS                # unseparated initialisms; AI TEDS
+anlg                  # abbreviation; analog
+AODAC                 # unseparated initialisms; AO DAC
+AOGnd                 # unseparated words; AO ground
+AOHW                  # unseparated initialisms; AO HW
+APFI                  # initialism; Analog Programmable Function Interface
+asyn                  # abbreviation; asynchronous
+atten                 # abbreviation; attenuation
+attentuation          # Typo; should be: attenuation
+BBULK                 # Typo; should be USB_BULK instead of US_BBULK
+BHigh                 # unseparated words; B high
+calibrationInfo       # unseparated words
+CAPI                  # unseparated words; C API
+certiticates          # Typo; should be: certificates
+cfgd                  # abbreviation; configured
+cfgs                  # abbreviation; configurations
+chans                 # abbreviation; channels
+CIGPS                 # unseparated initialisms; CI GPS
+CIHW                  # unseparated initialisms; CI HW
+CITC                  # unseparated initialisms; CI TC
+CIUTC                 # unseparated initialisms; CI UTC
+clks                  # abbreviation; clocks
+cmplt                 # abbreviation; complete
+coeff                 # abbreviation; coefficient
+coeffs                # abbreviation; coefficients
+COHW                  # unseparated initialisms; CO HW
+COHWTSP               # unseparated initialisms; CO HWTSP
+compen                # abbreviation; compensated / compensation
+conv                  # abbreviation; convert
+couldnt               # abbreviation; couldn't
+ctrs                  # abbreviation; counters
+DAQError              # unseparated words
+descr                 # abbreviation; description
+difft                 # abbreviation; different
+doesnt                # abbreviation; doesn't
+DSTAR                 # for further research; stands for differential star (PXIe trigger), but we also use D_STAR
+elec                  # abbreviation; electrical
+excit                 # abbreviation; excitation
+expir                 # abbreviation; expiration
+exportSignal          # unseparated words
+fltr                  # abbreviation; filter
+forceLb               # unseparated words; force in pounds
+freqOut               # abbreviation; frequency output
+frequencyWith         # unseparated words
+globalVirtualChannels # unseparated words; global virtual channels
+hshk                  # abbreviation; handshake
+HWTEDS                # unseparated initialisms; HW TEDS
+HWTSP                 # initialism; Hardware-Timed Single Point
+hyst                  # abbreviation; hysteresis
+hysts                 # abbreviation; hysteresis
+immed                 # abbreviation; immediate
+invalidc              # Typo; should be: INVALID_CDAQ_SYNC_PORT_CONNECTION_FORMAT
+IRIGB                 # initialism; IRIG-B
+isoc                  # abbreviation; isochronous
+lvls                  # abbreviation; levels
+MIOAI                 # unseparated initialisms; MIO AI
+mult                  # abbreviation; multiple
+multiDevice           # unseparated words
+NIDAQ                 # initialism; NI-DAQ (legacy product name)
+nidaqmx               # NI-DAQmx package name
+nonBuffered           # unseparated words
+notKnown              # unseparated words
+NRSE                  # initialism; Non-Referenced Single-Ended
+nums                  # abbreviation; numbers
+onbrd                 # abbreviation; onboard
+outp                  # abbreviation; output
+persistedChannel      # unseparated words
+persistedScale        # unseparated words
+persistedTask         # unseparated words
+physicalChannel       # unseparated words
+posssible             # Typo; should be: possible
+pretrig               # abbreviation; pre-trigger
+prpty                 # abbreviation; property
+rangeWith             # unseparated words
+regen                 # abbreviation; regeneration
+rngs                  # abbreviation; ranges
+rqst                  # abbreviation; request
+samp                  # abbreviation; sample
+samps                 # abbreviation; samples
+scanList              # unseparated words
+sensord               # Deprecated; see attribute_helpers.py
+sensitivit            # Typo; should be: sensitivity
+SMIO                  # initialism; Simultaneously-sampling Multifunction I/O
+specd                 # abbreviation; specified
+srcs                  # abbreviation; sources
+subsytem              # Typo; should be: subsystem
+taskToCopy            # unseparated words; task to copy
+tcpip                 # initialism; TCP/IP
+TEDSAI                # unseparated initialisms; TEDS AI
+TEDSAIRTD             # unseparated initialisms; TEDS AI RTD
+TEDSHWTEDS            # unseparated initialisms; TEDS HWTEDS
+thrmcpl               # abbreviation; thermocouple
+thrmstr               # abbreviation; thermistor
+timeTriggers          # unseparated words
+trigs                 # abbreviation; triggers
+unavail               # abbreviation; unavailable
+USBDAQ                # unseparated initialisms; USB DAQ
+verif                 # abbreviation; verification
+voltaged              # Deprecated; see attribute_helpers.py
+xfer                  # abbreviation; transfer
+ZIdx                  # abbreviation; Z index

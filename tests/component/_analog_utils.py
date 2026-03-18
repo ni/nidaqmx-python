@@ -12,7 +12,7 @@ import nidaqmx
 import nidaqmx.system
 
 
-# Simulated DAQ voltage data is a noisy sinewave within the range of the minimum and maximum values
+# Simulated DAQ voltage data is a noisy sine wave within the range of the minimum and maximum values
 # of the virtual channel. We can leverage this behavior to validate we get the correct data from
 # the Python bindings.
 def _get_voltage_offset_for_chan(chan_index: int) -> float:

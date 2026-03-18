@@ -1,0 +1,46 @@
+{
+  "version": "0.2",
+  "globRoot": "${cwd}",
+  // Keep the following list of items in alphabetical order.
+  "dictionaryDefinitions": [
+    { "name": "daqmx-api-elements", "path": "./cspell/daqmx-api-elements.txt", "noSuggest": true },
+    { "name": "real-words", "path": "./cspell/real-words.txt", "noSuggest": false },
+    { "name": "mako-keywords", "path": "./cspell/mako-keywords.txt", "noSuggest": true },
+    { "name": "project-software-terms", "path": "./cspell/project-software-terms.txt", "noSuggest": true },
+    { "name": "sphinx-directives", "path": "./cspell/sphinx-directives.txt", "noSuggest": true }
+  ],
+  "dictionaries": ["real-words", "daqmx-api-elements", "project-software-terms", "python"],
+  "useGitignore": true,
+  // Keep the following list of items in the order that they appear in VSCode
+  // Explorer (directories in alphabetical order, followed by top-level files
+  // in alphabetical order).
+  "ignorePaths": [
+    ".config/cspell/**",           // dictionary source files; words here are not prose
+    "docs/img/**",                 // binary image files
+    "docs/conf.py",                // Sphinx config; extension names and config keys
+    "docs/make.bat",               // Sphinx build script; not prose
+    "docs/Makefile",               // Sphinx build script; not prose
+    "generated/nidaqmx/_stubs/**", // protobuf-generated stubs; too noisy to check
+    "tests/max_config/**",         // NI MAX config files; NI-specific identifiers
+    "tests/test_assets/**",        // test fixture files; not prose
+    "third_party/**",              // third-party code we don't own or control
+    ".readthedocs.yml",            // ReadTheDocs config
+    "poetry.lock",                 // auto-generated lock file; hashes and package URLs
+    "poetry.toml",                 // Poetry config
+    "tox.ini"                      // tox config
+  ],
+  "overrides": [
+    {
+      "filename": "**/*.mako",
+      "dictionaries": ["real-words", "daqmx-api-elements", "python", "mako-keywords"]
+    },
+    {
+      "filename": "**/*.rst",
+      "dictionaries": ["real-words", "daqmx-api-elements", "python", "sphinx-directives"]
+    },
+    {
+      "filename": "**/CONTRIBUTING.md",
+      "dictionaries": ["real-words"]
+    }
+  ]
+}

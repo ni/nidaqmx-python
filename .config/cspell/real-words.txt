@@ -1,0 +1,76 @@
+autozero            # Electronic instrumentation term
+backplane           # Digital electronics and computer engineering term
+bandpass            # Filter term
+bitfield            # Computing term; contiguous range of bits in a value
+bitfields           # Computing term; contiguous range of bits in a value
+bitstream           # Computing term; sequence of bits transmitted serially
+brickwall           # Filter term
+Butterworth         # Scientist name; Butterworth filter
+cDAQ                # CompactDAQ (NI hardware platform)
+Callendar           # Physicist name; Callendar-Van Dusen equation
+CPLD                # Complex Programmable Logic Device
+DAQmx               # Data Acquisition Measurement Extensions
+deassert            # Digital electronics and computer engineering term
+deasserting         # Digital electronics and computer engineering term
+deasserts           # Digital electronics and computer engineering term
+deleters            # Software term
+DKMS                # Dynamic Kernel Module Support
+Dusen               # Physicist name; Van Dusen of Callendar-Van Dusen equation
+EEPROM              # Electrically Erasable Programmable Read-Only Memory
+HDOP                # Horizontal Dilution of Precision (GPS)
+highpass            # Filter term
+HWCU                # Hardware Configuration Utility
+IEPE                # Integrated Electronics Piezo-Electric
+IRIG                # Inter-Range Instrumentation Group
+jumpered            # Electronics term
+lowpass             # Filter term
+LVDT                # Linear Variable Differential Transformer
+LVTTL               # Low Voltage Transistor-Transistor Logic
+MBCS                # Multi-Byte Character Set
+MDNS                # Multicast DNS
+MeasurementLink     # NI product name
+micropascals        # Unit of pressure
+mioDAQ              # NI product category
+milli               # SI prefix
+multibyte           # Computing term; character encoding using multiple bytes
+NIELVIS             # NI product name; NI ELVIS
+nonprintable        # Computing term
+overcurrent         # Electrical engineering term
+overrange           # Measurement term; signal exceeding the measurable range
+overread            # Data acquisition term
+overtemperature     # Electrical/safety term; exceeding a temperature limit
+overvoltage         # Electrical engineering term
+PDOP                # Position Dilution of Precision (GPS)
+pico                # SI prefix
+powerline           # Electrical engineering term
+powerup             # Electronics term
+pseudodifferential  # Electronics measurement term
+PXIe                # PCI eXtensions for Instrumentation, Express variant
+ratiometric         # Electronics measurement term
+RDMA                # Remote Direct Memory Access
+readall             # Software term; read all available data
+reglitch            # Electronics DAC term
+reglitching         # Electronics DAC term (gerund)
+replug              # Hardware term
+retriggerable       # Electronics term; able to be triggered again before previous cycle ends
+RTSI                # Real-Time System Integration
+RVDT                # Rotary Variable Differential Transformer
+SCXI                # Signal Conditioning eXtensions for Instrumentation
+Steinhart           # Physicist name; Steinhart-Hart thermistor equation
+stopband            # Filter term
+subsecond           # Time measurement term; less than one second
+subseconds          # Time measurement term; less than one second
+TDMS                # Technical Data Management Streaming
+timebase            # Electronics term; reference clock signal
+timebases           # Electronics term
+tristated           # Electronics term
+tristates           # Electronics term (verb/noun)
+unflatten           # Software term; deserialize/reconstruct nested data
+unloadable          # Computing term
+unreserve           # Software term; release a reserved resource
+unreserves          # Software term; release a reserved resource
+VCXO                # Voltage-Controlled Crystal Oscillator
+VDOP                # Vertical Dilution of Precision (GPS)
+yoctosecond         # Unit of time; SI prefix
+yoctoseconds        # Unit of time; SI prefix
+

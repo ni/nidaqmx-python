@@ -3,6 +3,7 @@
 Contributions to **nidaqmx** are welcome from all!
 
 **nidaqmx** is managed via [git](https://git-scm.com), with the canonical upstream repository hosted
+<!-- cspell:ignore developercertificate -->
 on [GitHub](http://developercertificate.org/).
 
 **nidaqmx** follows a pull-request model for development.  If you wish to contribute, you will need
@@ -33,8 +34,10 @@ pass.
 9. Run `poetry run ni-python-styleguide lint` to check that the updated code follows NI's Python coding
 conventions. If this reports errors, first run `poetry run ni-python-styleguide fix` in order to sort
 imports and format the code with Black, then manually fix any remaining errors.
+<!-- cspell:ignore mypy -->
 10. Run `poetry run mypy` to statically type-check the updated code.
-11. Send a GitHub Pull Request to the main repository's master branch. GitHub Pull Requests are the
+11. Run `npx cspell "**" --no-progress` to check for spelling errors. This requires [Node.js](https://nodejs.org/) to be installed.
+12. Send a GitHub Pull Request to the main repository's master branch. GitHub Pull Requests are the
 expected method of code collaboration on this project.
 
 # Testing
@@ -50,7 +53,7 @@ requirements:
   - You can still run the tests without a physical X Series DAQ device, but some tests will be skipped.
 
 Before running the regression tests, import the appropriate NI MAX configuration files:
-- ``tests\max_config\nidaqmxMaxConfig.ini``: Contains custom scales, global channels, simulated devices, 
+- ``tests\max_config\nidaqmxMaxConfig.ini``: Contains custom scales, global channels, simulated devices,
   and tasks used by many regression tests.
    - **Note:** On Linux, use ``tests\max_config\linux\nidaqmxMaxConfig.ini`` to avoid importing an unsupported device.
 - ``tests\max_config\examplesMaxConfig.ini``: Contains simulated devices used by the example programs.
@@ -72,7 +75,7 @@ commands in the root of the distribution:
 ```sh
 $ poetry run tox
 ```
-  
+
 This requires you to have all the Python interpreters supported by **nidaqmx** installed on your
 machine.
 
@@ -109,7 +112,7 @@ $ poetry run sphinx-build -b html docs docs\_build
 
 # Branching Policy
 
-Active development for the next release occurs on the `master` branch. 
+Active development for the next release occurs on the `master` branch.
 
 During finalization, we create a release branch (e.g. `releases/1.2`) in order to control which changes target the imminent
 release vs. the next release after that. Changes that are intended for both the imminent release and subsequent releases
@@ -134,9 +137,11 @@ can be verified once that has been completed.
    * **Description:** Contents of the `CHANGELOG.md` for the version being released.
 
    Publishing a release automatically triggers the [publish.yml](./.github/workflows/publish.yml)
+<!-- cspell:ignore pypi -->
    workflow, which checks and builds the package, requests approval to publish it using the `pypi`
    deployment environment, publishes the package to PyPI using [Trusted
    Publishing](https://docs.pypi.org/trusted-publishers/), and creates a PR to update the version of
+<!-- cspell:ignore pyproject -->
    **nidaqmx** in `pyproject.toml`.
 6. GitHub contacts the approvers for the `pypi` deployment environment, who are currently the repo
    admins. One of them must approve the deployment for the publishing to proceed.
