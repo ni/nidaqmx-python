@@ -3411,15 +3411,15 @@ typing-extensions = {version = ">=4.0.0", markers = "python_version < \"3.10\""}
 
 [[package]]
 name = "pykka"
-version = "4.4.1"
+version = "4.4.2"
 description = "Pykka is a Python implementation of the actor model"
 optional = false
 python-versions = ">=3.10"
 groups = ["test"]
 markers = "python_version >= \"3.10\""
 files = [
-    {file = "pykka-4.4.1-py3-none-any.whl", hash = "sha256:7faade94a424f47a3de025e85ac6671f6131009b5b0e7c3a0d2ac8a0ceeda124"},
-    {file = "pykka-4.4.1.tar.gz", hash = "sha256:e4ccac930765be9b8cc4466162a0e99bfc6568e70076e74bb5c9ecf2cebc009b"},
+    {file = "pykka-4.4.2-py3-none-any.whl", hash = "sha256:6eed37f34daac6649d84545d4cd53e7e1cb9fccc08f6a945dac39d8212b09e6d"},
+    {file = "pykka-4.4.2.tar.gz", hash = "sha256:54fcfb9ed5ef92eb98bf9961cfdefbc73ddfbf24060e319d50fde6ec66d00d8a"},
 ]
 
 [[package]]
