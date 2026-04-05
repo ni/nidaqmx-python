@@ -2763,7 +2763,7 @@ description = "Protobuf data types for NI gRPC APIs"
 optional = true
 python-versions = "<4.0,>=3.9"
 groups = ["main"]
-markers = "extra == \"grpc\""
+markers = "python_version == \"3.9\" and extra == \"grpc\""
 files = [
     {file = "ni_protobuf_types-1.0.0-py3-none-any.whl", hash = "sha256:a88d5e517ef825ef70734aab00e6fb44f78ceb7d40b5c1592af450b87e3745ae"},
     {file = "ni_protobuf_types-1.0.0.tar.gz", hash = "sha256:d2b6dfbd57729e80a7f9fa23a446635eee5ad771dbb70045b88412d163e7d732"},
@@ -2771,6 +2771,23 @@ files = [
 
 [package.dependencies]
 nitypes = ">=0.1.0dev8"
+protobuf = ">=4.21"
+
+[[package]]
+name = "ni-protobuf-types"
+version = "1.1.0"
+description = "Protobuf data types for NI gRPC APIs"
+optional = true
+python-versions = "<4.0,>=3.10"
+groups = ["main"]
+markers = "python_version >= \"3.10\" and extra == \"grpc\""
+files = [
+    {file = "ni_protobuf_types-1.1.0-py3-none-any.whl", hash = "sha256:0c21c096cf8577483dade081c571305fe8d4cc759ce2c780e7437129a375942c"},
+    {file = "ni_protobuf_types-1.1.0.tar.gz", hash = "sha256:98f0583405e219f6e128133c2f6c033f03cd83ebd3ce8098ad74ab99b8a253c1"},
+]
+
+[package.dependencies]
+nitypes = ">=1.1.0dev1"
 protobuf = ">=4.21"
 
 [[package]]
@@ -2812,9 +2829,28 @@ description = "Data types for NI Python APIs"
 optional = false
 python-versions = "<4.0,>=3.9"
 groups = ["main"]
+markers = "python_version == \"3.9\""
 files = [
     {file = "nitypes-1.0.1-py3-none-any.whl", hash = "sha256:8a0ab0cce139144850e580c9eee9e8f783dd60d530986e6478d7319bdb4a0f60"},
     {file = "nitypes-1.0.1.tar.gz", hash = "sha256:dc20a98c009651adf9f2769ec15cdbe939375bad2f2546765abbc23982301a8b"},
+]
+
+[package.dependencies]
+hightime = ">=0.2.2"
+numpy = {version = ">=1.22", markers = "python_version >= \"3.9\" and python_version < \"3.13\""}
+typing-extensions = ">=4.13.2"
+
+[[package]]
+name = "nitypes"
+version = "1.1.0.dev2"
+description = "Data types for NI Python APIs"
+optional = false
+python-versions = "<4.0,>=3.9"
+groups = ["main"]
+markers = "python_version >= \"3.10\""
+files = [
+    {file = "nitypes-1.1.0.dev2-py3-none-any.whl", hash = "sha256:0753519c1dbee5a2ab12bf76dc3fa3024e356d2bf29e7538387dcca702113e9c"},
+    {file = "nitypes-1.1.0.dev2.tar.gz", hash = "sha256:5958538bdff3f38a4d0a576792419ce6eb9f9ffa4b16292d3938afbd3361b43b"},
 ]
 
 [package.dependencies]
