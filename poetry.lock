@@ -2824,30 +2824,11 @@ toml = ">=0.10.1"
 
 [[package]]
 name = "nitypes"
-version = "1.0.1"
-description = "Data types for NI Python APIs"
-optional = false
-python-versions = "<4.0,>=3.9"
-groups = ["main"]
-markers = "python_version == \"3.9\""
-files = [
-    {file = "nitypes-1.0.1-py3-none-any.whl", hash = "sha256:8a0ab0cce139144850e580c9eee9e8f783dd60d530986e6478d7319bdb4a0f60"},
-    {file = "nitypes-1.0.1.tar.gz", hash = "sha256:dc20a98c009651adf9f2769ec15cdbe939375bad2f2546765abbc23982301a8b"},
-]
-
-[package.dependencies]
-hightime = ">=0.2.2"
-numpy = {version = ">=1.22", markers = "python_version >= \"3.9\" and python_version < \"3.13\""}
-typing-extensions = ">=4.13.2"
-
-[[package]]
-name = "nitypes"
 version = "1.1.0.dev2"
 description = "Data types for NI Python APIs"
 optional = false
 python-versions = "<4.0,>=3.9"
 groups = ["main"]
-markers = "python_version >= \"3.10\""
 files = [
     {file = "nitypes-1.1.0.dev2-py3-none-any.whl", hash = "sha256:0753519c1dbee5a2ab12bf76dc3fa3024e356d2bf29e7538387dcca702113e9c"},
     {file = "nitypes-1.1.0.dev2.tar.gz", hash = "sha256:5958538bdff3f38a4d0a576792419ce6eb9f9ffa4b16292d3938afbd3361b43b"},
