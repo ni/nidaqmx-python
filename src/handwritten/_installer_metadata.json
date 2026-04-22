@@ -21,10 +21,10 @@
             "supportedOS": [
                 "ubuntu 22.04",
                 "ubuntu 24.04",
-                "rhel 8",
                 "rhel 9",
-                "opensuse 15.5",
-                "opensuse 15.6"
+                "rhel 10",
+                "opensuse 15.6",
+                "opensuse 16.0"
             ]
         }
     ]
