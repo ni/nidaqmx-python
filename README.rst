@@ -68,6 +68,11 @@ You can use `pip <http://pypi.python.org/pypi/pip>`_ to download **nidaqmx** fro
 
   $ python -m pip install nidaqmx
 
+To use **nidaqmx** with gRPC, install it with the ``grpc`` extra to include the
+required dependencies::
+
+  $ python -m pip install nidaqmx[grpc]
+
 Automatic Driver Installation
 -----------------------------
 
