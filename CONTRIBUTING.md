@@ -110,6 +110,81 @@ $ poetry install --with docs
 $ poetry run sphinx-build -b html docs docs\_build
 ```
 
+# Fixing API Typos
+
+Public API names may contain typos. If you identify a typo in such names, the remediation path
+depends on the type of API name. Subsections below cover some API name categories. If you
+encounter a typo that does not fit any documented category, follow the general spirit of the
+existing subsections and document the new approach in a new subsection below.
+
+## Typos in Python Property Names
+
+Python property names are defined in
+[`src/codegen/utilities/attribute_helpers.py`](src/codegen/utilities/attribute_helpers.py) and
+generated from metadata. Because renaming a public property is a breaking change, typos are fixed
+using a deprecation process rather than being corrected immediately.
+
+To fix a typo in a generated property:
+
+1. Add an entry to `DEPRECATED_ATTRIBUTES` in
+   [`src/codegen/utilities/attribute_helpers.py`](src/codegen/utilities/attribute_helpers.py):
+   ```python
+   "old_typo_name": {"new_name": "correct_name", "deprecated_in": "<current version>"},
+   ```
+   The code generator will automatically emit a shim property for the old name that delegates to
+   the new name and raises `DeprecationWarning` on access.
+
+2. Regenerate the code:
+   ```sh
+   $ poetry run python src/codegen --dest generated/nidaqmx
+   ```
+
+3. Update the cspell dictionary in
+   [`.config/cspell/daqmx-api-elements.txt`](.config/cspell/daqmx-api-elements.txt):
+   - If the typo word is already present, update its comment to
+     `# Deprecated; see attribute_helpers.py`. Otherwise, add it with that comment.
+   - The entry must remain in the dictionary for as long as the deprecated shim property exists in
+     the generated code.
+   - Add the correct name if it is not already known to cspell.
+
+4. Add a bullet point to the `CHANGELOG.md` section for the current version describing the rename
+   and deprecation.
+
+For typos in handwritten functions or constants, apply the `@deprecation.deprecated` decorator
+directly and add a correctly named alias. See
+[`src/handwritten/errors.py`](src/handwritten/errors.py) for examples.
+
+## Typos in Error Code Names
+
+Error code names are derived from the NI-DAQmx C API metadata in
+[`src/codegen/metadata/enums.py`](src/codegen/metadata/enums.py) and historically were used
+verbatim as the Python names. This means typos in the C API shipped as-is in the Python API, and
+renaming them requires preserving the old names as aliases for backward compatibility.
+
+To fix a typo in an error code name:
+
+1. Add an entry to `ERROR_CODE_NAME_SUBSTITUTIONS` in
+   [`src/codegen/utilities/enum_helpers.py`](src/codegen/utilities/enum_helpers.py):
+   ```python
+   "C_API_NAME_WITH_TYPO": "CORRECTED_NAME",
+   ```
+   The code generator will emit the corrected name as the primary member and keep the old typo
+   name as an alias pointing to it, annotated with a comment noting it is kept for backward
+   compatibility.
+
+2. Regenerate the code:
+   ```sh
+   $ poetry run python src/codegen --dest generated/nidaqmx
+   ```
+
+3. Update the cspell dictionary in
+   [`.config/cspell/daqmx-api-elements.txt`](.config/cspell/daqmx-api-elements.txt):
+   - If the typo word is already present, update its comment to
+     `# Typo in C API; remapped via enum_helpers.py`. Otherwise, add it with that comment.
+
+4. Add a bullet point to `CHANGELOG.md` for the current version noting the rename and that the
+   old name is preserved as an alias for backward compatibility.
+
 # Branching Policy
 
 Active development for the next release occurs on the `master` branch.
@@ -152,7 +227,7 @@ can be verified once that has been completed.
    - If the new version number is incorrect, update it by posting and committing a suggestion.
 8. Create a PR adding a section to `CHANGELOG.md` for the new version with empty subsections.
 
-# Updating gRPC stubs when the .proto file is modified
+# Updating gRPC Stubs When the .proto File Is Modified
 
 The `generated\nidaqmx\_stubs` directory contains the auto-generated Python files based on the NI-DAQmx protobuf (`.proto`) file.
 

@@ -20,12 +20,12 @@ AOHW                  # unseparated initialisms; AO HW
 APFI                  # initialism; Analog Programmable Function Interface
 asyn                  # abbreviation; asynchronous
 atten                 # abbreviation; attenuation
-attentuation          # Typo; should be: attenuation
-BBULK                 # Typo; should be USB_BULK instead of US_BBULK
+attentuation          # Typo in C API; remapped via enum_helpers.py
+BBULK                 # Typo in C API; remapped via enum_helpers.py
 BHigh                 # unseparated words; B high
 calibrationInfo       # unseparated words
 CAPI                  # unseparated words; C API
-certiticates          # Typo; should be: certificates
+certiticates          # Typo in C API; remapped via enum_helpers.py
 cfgd                  # abbreviation; configured
 cfgs                  # abbreviation; configurations
 chans                 # abbreviation; channels
@@ -63,7 +63,7 @@ HWTSP                 # initialism; Hardware-Timed Single Point
 hyst                  # abbreviation; hysteresis
 hysts                 # abbreviation; hysteresis
 immed                 # abbreviation; immediate
-invalidc              # Typo; should be: INVALID_CDAQ_SYNC_PORT_CONNECTION_FORMAT
+invalidc              # Typo in C API; remapped via enum_helpers.py
 IRIGB                 # initialism; IRIG-B
 isoc                  # abbreviation; isochronous
 lvls                  # abbreviation; levels
@@ -82,7 +82,7 @@ persistedChannel      # unseparated words
 persistedScale        # unseparated words
 persistedTask         # unseparated words
 physicalChannel       # unseparated words
-posssible             # Typo; should be: possible
+posssible             # Typo in C API; remapped via enum_helpers.py
 pretrig               # abbreviation; pre-trigger
 prpty                 # abbreviation; property
 rangeWith             # unseparated words
@@ -93,11 +93,11 @@ samp                  # abbreviation; sample
 samps                 # abbreviation; samples
 scanList              # unseparated words
 sensord               # Deprecated; see attribute_helpers.py
-sensitivit            # Typo; should be: sensitivity
+sensitivit            # Typo in C API; remapped via enum_helpers.py
 SMIO                  # initialism; Simultaneously-sampling Multifunction I/O
 specd                 # abbreviation; specified
 srcs                  # abbreviation; sources
-subsytem              # Typo; should be: subsystem
+subsytem              # Typo in C API; remapped via enum_helpers.py
 taskToCopy            # unseparated words; task to copy
 tcpip                 # initialism; TCP/IP
 TEDSAI                # unseparated initialisms; TEDS AI
