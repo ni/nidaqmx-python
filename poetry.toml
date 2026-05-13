@@ -1,2 +1,6 @@
 [virtualenvs]
 in-project = true
+
+[solver]
+# Set min-release-age to 2 weeks, same as in https://github.com/ni/python-renovate-config
+min-release-age = 14
