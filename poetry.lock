@@ -3964,15 +3964,15 @@ use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
 
 [[package]]
 name = "requests"
-version = "2.33.1"
+version = "2.34.0"
 description = "Python HTTP for Humans."
 optional = false
 python-versions = ">=3.10"
 groups = ["main", "docs"]
 markers = "python_version >= \"3.10\""
 files = [
-    {file = "requests-2.33.1-py3-none-any.whl", hash = "sha256:4e6d1ef462f3626a1f0a0a9c42dd93c63bad33f9f1c1937509b8c5c8718ab56a"},
-    {file = "requests-2.33.1.tar.gz", hash = "sha256:18817f8c57c6263968bc123d237e3b8b08ac046f5456bd1e307ee8f4250d3517"},
+    {file = "requests-2.34.0-py3-none-any.whl", hash = "sha256:917520a21b767485ce7c588f4ebb917c436b24a31231b44228715eaeb5a52c60"},
+    {file = "requests-2.34.0.tar.gz", hash = "sha256:7d62fe92f50eb82c529b0916bb445afa1531a566fc8f35ffdc64446e771b856a"},
 ]
 
 [package.dependencies]
@@ -4516,15 +4516,15 @@ files = [
 
 [[package]]
 name = "types-grpcio"
-version = "1.0.0.20260408"
+version = "1.0.0.20260508"
 description = "Typing stubs for grpcio"
 optional = false
 python-versions = ">=3.10"
 groups = ["lint"]
 markers = "python_version >= \"3.10\""
 files = [
-    {file = "types_grpcio-1.0.0.20260408-py3-none-any.whl", hash = "sha256:256f2738a4a3eb2ebabd6d027f4fc7eace024822afb3b629e82811e0b661fc35"},
-    {file = "types_grpcio-1.0.0.20260408.tar.gz", hash = "sha256:c8ebe07f91492a32e0f3a3810669d236828d5a2a1e540ab16cca8b5a46f8ee5d"},
+    {file = "types_grpcio-1.0.0.20260508-py3-none-any.whl", hash = "sha256:dae7df0e16f29bde2d99ab69ef89ca0b7dd69e720e9c51976d9f70bf8805a076"},
+    {file = "types_grpcio-1.0.0.20260508.tar.gz", hash = "sha256:3551dfa991dab68e1d6cd8e73b93eb34ab32c1832bdb4054d28f75ecda8702d4"},
 ]
 
 [[package]]
@@ -4542,15 +4542,15 @@ files = [
 
 [[package]]
 name = "types-protobuf"
-version = "7.34.1.20260503"
+version = "7.34.1.20260508"
 description = "Typing stubs for protobuf"
 optional = false
 python-versions = ">=3.10"
 groups = ["codegen", "lint"]
 markers = "python_version >= \"3.10\""
 files = [
-    {file = "types_protobuf-7.34.1.20260503-py3-none-any.whl", hash = "sha256:75fd66121d56785c91828b8bf7b511f39ba847f11e682573e41847f01e9cd1de"},
-    {file = "types_protobuf-7.34.1.20260503.tar.gz", hash = "sha256:effbc819aa17e02448dde99f089c6794662d66f4b2797e922f185ffe0b24e766"},
+    {file = "types_protobuf-7.34.1.20260508-py3-none-any.whl", hash = "sha256:a5d647381f8651bd505304ed1148b8a7b342781796e0f80e0284c774c2262a09"},
+    {file = "types_protobuf-7.34.1.20260508.tar.gz", hash = "sha256:1c93e8c294281b76a5255fc21c747db0004694463ac6ea9866ee06da969fa555"},
 ]
 
 [[package]]
@@ -4571,15 +4571,15 @@ urllib3 = ">=2"
 
 [[package]]
 name = "types-requests"
-version = "2.33.0.20260503"
+version = "2.33.0.20260508"
 description = "Typing stubs for requests"
 optional = false
 python-versions = ">=3.10"
 groups = ["lint"]
 markers = "python_version >= \"3.10\""
 files = [
-    {file = "types_requests-2.33.0.20260503-py3-none-any.whl", hash = "sha256:02aaa7e3577a13471715bb1bddb693cc985ea514f754b503bf033e6a09a3e528"},
-    {file = "types_requests-2.33.0.20260503.tar.gz", hash = "sha256:9721b2d9dbee7131f2fb39f20f0ebb1999c18cef4b512c9a7932f3722de7c5f4"},
+    {file = "types_requests-2.33.0.20260508-py3-none-any.whl", hash = "sha256:fa01459cca184229713df03709db46a905325906d27e042cd4fd7ea3d15d3400"},
+    {file = "types_requests-2.33.0.20260508.tar.gz", hash = "sha256:81b2ae5f0d20967714a6aa5ef9284c05570d7cb06b7de8f2a77b918b63ddd411"},
 ]
 
 [package.dependencies]
