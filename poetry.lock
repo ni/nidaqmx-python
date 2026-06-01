@@ -96,6 +96,18 @@ toml = ["tomli (>=1.1.0) ; python_version < \"3.11\""]
 yaml = ["PyYAML"]
 
 [[package]]
+name = "better-diff"
+version = "0.1.4"
+description = "A simple library for printing better diffs based on the stdlib unified_diff format."
+optional = false
+python-versions = "<4.0,>=3.8"
+groups = ["lint"]
+files = [
+    {file = "better_diff-0.1.4-py3-none-any.whl", hash = "sha256:06e63358b2047ae2695abd96316f47c6d3c38b9e641f53012279878d66d8792e"},
+    {file = "better_diff-0.1.4.tar.gz", hash = "sha256:920ca76bdbcd2f0c361fa5d9a2d4727624a3545d6cb467b1b6616cad8a634de7"},
+]
+
+[[package]]
 name = "black"
 version = "25.11.0"
 description = "The uncompromising code formatter."
@@ -1152,6 +1164,21 @@ files = [
 [package.dependencies]
 pycodestyle = "*"
 setuptools = "*"
+
+[[package]]
+name = "flake8-tidy-imports"
+version = "4.12.0"
+description = "A flake8 plugin that helps you write tidier imports."
+optional = false
+python-versions = ">=3.9"
+groups = ["lint"]
+files = [
+    {file = "flake8_tidy_imports-4.12.0-py3-none-any.whl", hash = "sha256:ab1e31a5ce07518a31c0a34cd92551f4c27639ae2c35a21364680a0318da312e"},
+    {file = "flake8_tidy_imports-4.12.0.tar.gz", hash = "sha256:9254788c3b6862c2fcec0250d2dc9af089afebff9c5b8a8ac8b9525b059b06db"},
+]
+
+[package.dependencies]
+flake8 = ">=3.8"
 
 [[package]]
 name = "fonttools"
@@ -2795,32 +2822,34 @@ protobuf = ">=4.21"
 
 [[package]]
 name = "ni-python-styleguide"
-version = "0.4.9"
+version = "0.5.0"
 description = "NI's internal and external Python linter rules and plugins"
 optional = false
-python-versions = "<4.0,>=3.7"
+python-versions = "<4.0,>=3.9"
 groups = ["lint"]
 files = [
-    {file = "ni_python_styleguide-0.4.9-py3-none-any.whl", hash = "sha256:3a33735fbb52231bda00ec970d7c7aebe2b15aed2ccbd07da5c52b8e04730918"},
-    {file = "ni_python_styleguide-0.4.9.tar.gz", hash = "sha256:64a65da646fc8c2f0e68970e0a3190534add9380ee78782fa809fee5321f9e45"},
+    {file = "ni_python_styleguide-0.5.0-py3-none-any.whl", hash = "sha256:66784d97bc2898552386ca8e0667a11fa5f712820130585df7709d08836f6bc0"},
+    {file = "ni_python_styleguide-0.5.0.tar.gz", hash = "sha256:66bd05f7d9fc98a87e5e85319faa752efd54549c979938ed1bb64e2d1f412630"},
 ]
 
 [package.dependencies]
+better-diff = ">=0.1.3,<0.2.0"
 black = ">=23.1,<26.0"
 click = ">=7.1.2"
 flake8 = [
     {version = ">=6.1,<7.0", markers = "python_version >= \"3.12\" and python_version < \"4.0\""},
-    {version = ">=5.0,<6.0", markers = "python_version >= \"3.7\" and python_version < \"3.12\""},
+    {version = ">=5.0,<6.0", markers = "python_version >= \"3.8\" and python_version < \"3.12\""},
 ]
 flake8-black = ">=0.2.1"
 flake8-docstrings = ">=1.5.0"
 flake8-import-order = ">=0.18.1,<0.19.0"
+flake8-tidy-imports = ">=4.11.0"
 isort = ">=5.10"
 pathspec = ">=0.11.1"
 pep8-naming = ">=0.11.1"
 pycodestyle = [
     {version = ">=2.11,<3.0", markers = "python_version >= \"3.12\" and python_version < \"4.0\""},
-    {version = ">=2.9,<3.0", markers = "python_version >= \"3.7\" and python_version < \"3.12\""},
+    {version = ">=2.9,<3.0", markers = "python_version >= \"3.8\" and python_version < \"3.12\""},
 ]
 setuptools = "<82"
 toml = ">=0.10.1"

@@ -106,7 +106,7 @@ def _setup_synchronized_waveform_tasks(
     Returns:
         tuple: (ao_task, ai_task, sample_clk_task, sample_clk_terminal)
     """
-    import nidaqmx.constants as constants
+    from nidaqmx import constants
 
     ao_task = generate_task()
     ai_task = generate_task()
@@ -163,7 +163,7 @@ def _setup_synchronized_multi_channel_waveform_tasks(
     Returns:
         tuple: (ao_task, ai_task, sample_clk_task, sample_clk_terminal)
     """
-    import nidaqmx.constants as constants
+    from nidaqmx import constants
 
     ao_task = generate_task()
     ai_task = generate_task()

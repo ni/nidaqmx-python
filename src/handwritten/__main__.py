@@ -6,7 +6,7 @@ import logging
 
 import click
 
-from . import _install_daqmx
+from nidaqmx import _install_daqmx
 
 
 @click.group("nidaqmx")

@@ -15,7 +15,7 @@ from tests.unit._time_utils import (
 
 try:
     import nidaqmx._grpc_time as grpc_time
-    import nidaqmx._stubs.nidaqmx_pb2 as nidaqmx_pb2
+    from nidaqmx._stubs import nidaqmx_pb2
 except ImportError:
     pass
 
