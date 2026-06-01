@@ -13,7 +13,7 @@ with nidaqmx.Task() as task:
 
     task.timing.cfg_samp_clk_timing(1000, sample_mode=AcquisitionType.CONTINUOUS)
 
-    samples = []
+    samples: list[float] = []
 
     def callback(task_handle, every_n_samples_event_type, number_of_samples, callback_data):
         """Callback function for reading signals."""
