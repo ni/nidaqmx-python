@@ -22,6 +22,11 @@ jobs:
     name: Generate docs
     uses: ./.github/workflows/generate_docs.yml
     needs: [build]
+  check_workflows:
+    name: Check workflows
+    uses: ./.github/workflows/check_workflows.yml
+    permissions:
+      security-events: write
   run_system_tests:
     name: Run system tests
     uses: ./.github/workflows/run_system_tests.yml
