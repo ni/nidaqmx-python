@@ -40,9 +40,9 @@ jobs:
           path: .venv
           key: nidaqmx-with-test-${{ runner.os }}-py${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('poetry.lock') }}
       - name: Install test dependencies
-        run: poetry install --only main,test ${{ env.install-opts }}
+        run: poetry install --only main,test ${install-opts}
       - name: Run unit tests
-        run: poetry run pytest -v --cov=generated/nidaqmx --junitxml=test_results/unit-${{ matrix.os }}-py${{ matrix.python-version }}.xml tests/unit ${{ env.pytest-opts }}
+        run: poetry run pytest -v --cov=generated/nidaqmx --junitxml=test_results/unit-${{ matrix.os }}-py${{ matrix.python-version }}.xml tests/unit ${pytest-opts}
       - name: Upload test results
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
