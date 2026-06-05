@@ -3,6 +3,9 @@ name: Run unit tests
 on:
   workflow_call:
   workflow_dispatch:
+    
+permissions: {}
+
 jobs:
   run_unit_tests:
     name: Run unit tests

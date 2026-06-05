@@ -3,6 +3,9 @@ name: Build
 on:
   workflow_call:
   workflow_dispatch:
+
+permissions: {}
+
 jobs:
   build:
     name: Build

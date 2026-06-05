@@ -30,6 +30,8 @@ env:
       }
     }
 
+permissions: {}
+
 jobs:
   check_nidaqmx:
     name: Check nidaqmx

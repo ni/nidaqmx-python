@@ -3,6 +3,9 @@ name: Generate docs
 on:
   workflow_call:
   workflow_dispatch:
+
+permissions: {}
+
 jobs:
   generate_docs:
     name: Generate docs
