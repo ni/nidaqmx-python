@@ -61,3 +61,4 @@ varargs           # Standard library: ctypes
 venv              # Python tooling (directory/artifact names, not real words)
 xlabel            # Dependency: matplotlib
 ylabel            # Dependency: matplotlib
+zizmor            # Dependency: zizmor
