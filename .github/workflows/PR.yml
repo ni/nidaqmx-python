@@ -22,3 +22,4 @@ jobs:
       contents: read
       checks: write
       pull-requests: write
+      security-events: write
