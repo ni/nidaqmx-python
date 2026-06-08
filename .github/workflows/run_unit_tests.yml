@@ -3,6 +3,9 @@ name: Run unit tests
 on:
   workflow_call:
   workflow_dispatch:
+    
+permissions: {}
+
 jobs:
   run_unit_tests:
     name: Run unit tests
@@ -17,11 +20,16 @@ jobs:
       fail-fast: false
     env:
       # grpcio does not have binary wheels for pypy or free-threading, as of version 1.75.1.
-      install-opts: ${{ !(startsWith(matrix.python-version, 'pypy') || matrix.python-version == '3.14t') && '--extras grpc' || '' }}
-      pytest-opts: ${{ (startsWith(matrix.python-version, 'pypy') || matrix.python-version == '3.14t') && '-k "not grpc"' || '' }}
+      GRPC_SUPPORTED: ${{ case(
+                            startsWith(matrix.python-version, 'pypy'), 'false',
+                            endsWith(matrix.python-version, 't'), 'false',
+                            'true'
+                          ) }}
     steps:
       - name: Check out repo
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
       - name: Set up Python ${{ matrix.python-version }}
         uses: ni/python-actions/setup-python@a2894c635a2cba635a1086c1f89796fec2c52f74 # v0.7.2
         id: setup-python
@@ -35,9 +43,9 @@ jobs:
           path: .venv
           key: nidaqmx-with-test-${{ runner.os }}-py${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('poetry.lock') }}
       - name: Install test dependencies
-        run: poetry install --only main,test ${{ env.install-opts }}
+        run: poetry install --only main,test ${{ case(env.GRPC_SUPPORTED == 'true', '--extras grpc', '') }}
       - name: Run unit tests
-        run: poetry run pytest -v --cov=generated/nidaqmx --junitxml=test_results/unit-${{ matrix.os }}-py${{ matrix.python-version }}.xml tests/unit ${{ env.pytest-opts }}
+        run: poetry run pytest -v --cov=generated/nidaqmx --junitxml=test_results/unit-${{ matrix.os }}-py${{ matrix.python-version }}.xml tests/unit ${{ case(env.GRPC_SUPPORTED == 'true', '', '-k "not grpc"') }}
       - name: Upload test results
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
@@ -55,6 +63,8 @@ jobs:
     steps:
       - name: Check out repo
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
       - name: Set up Python ${{ matrix.python-version }}
         uses: ni/python-actions/setup-python@a2894c635a2cba635a1086c1f89796fec2c52f74 # v0.7.2
         id: setup-python
