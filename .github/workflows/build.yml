@@ -24,14 +24,14 @@ jobs:
           submodules: true
           persist-credentials: false
       - name: Set up Python
-        uses: ni/python-actions/setup-python@a2894c635a2cba635a1086c1f89796fec2c52f74 # v0.7.2
+        uses: ni/python-actions/setup-python@a2554c7e5680982d3355677b2290e48b60678744 # v0.8.0
         id: setup-python
         with:
           python-version: ${{ matrix.python-version }}
       - name: Set up Poetry
-        uses: ni/python-actions/setup-poetry@a2894c635a2cba635a1086c1f89796fec2c52f74 # v0.7.2
+        uses: ni/python-actions/setup-poetry@a2554c7e5680982d3355677b2290e48b60678744 # v0.8.0
       - name: Run linters and type checkers
-        uses: ni/python-actions/analyze-project@a2894c635a2cba635a1086c1f89796fec2c52f74 # v0.7.2
+        uses: ni/python-actions/analyze-project@a2554c7e5680982d3355677b2290e48b60678744 # v0.8.0
         with:
           install-args: "--all-extras --with examples"
       - name: Run Bandit security checks
