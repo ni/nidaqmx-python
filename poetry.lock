@@ -4614,15 +4614,15 @@ virtualenv = ">=20.31.2"
 
 [[package]]
 name = "tox"
-version = "4.55.0"
+version = "4.55.1"
 description = "tox is a generic virtualenv management and test command line tool"
 optional = false
 python-versions = ">=3.10"
 groups = ["test"]
 markers = "python_version >= \"3.10\""
 files = [
-    {file = "tox-4.55.0-py3-none-any.whl", hash = "sha256:83603a222e7e2ffbeb9e92ed6516e31a0ce355b37aea13c82a2c5344274a9391"},
-    {file = "tox-4.55.0.tar.gz", hash = "sha256:7ede1e1e70f8fe984f7985d7ca58a1e1c15fe9f8715897e38accc607c8de9f70"},
+    {file = "tox-4.55.1-py3-none-any.whl", hash = "sha256:e2084be6dfdef96ba1bed4948e6a1f73613d6952e1477be5dca45653d4c053c8"},
+    {file = "tox-4.55.1.tar.gz", hash = "sha256:0678fbf26dd5b559b1ef128fa4388325920219322ebc8cc5f3497627c00f4472"},
 ]
 
 [package.dependencies]
@@ -4658,15 +4658,15 @@ files = [
 
 [[package]]
 name = "types-grpcio"
-version = "1.0.0.20260518"
+version = "1.0.0.20260607"
 description = "Typing stubs for grpcio"
 optional = false
 python-versions = ">=3.10"
 groups = ["lint"]
 markers = "python_version >= \"3.10\""
 files = [
-    {file = "types_grpcio-1.0.0.20260518-py3-none-any.whl", hash = "sha256:61c8d4ffcc0b99b1cec647808b6132805671daaa8ad2081673453874914a5347"},
-    {file = "types_grpcio-1.0.0.20260518.tar.gz", hash = "sha256:cd18473dd0819f0b193874e1035de4a6a58e8bacdb128139280a03f4f1a87d37"},
+    {file = "types_grpcio-1.0.0.20260607-py3-none-any.whl", hash = "sha256:8d84cbf42768a5bae66f62d9a3313ff94fa25ed8616c07396d66d4dde69f8949"},
+    {file = "types_grpcio-1.0.0.20260607.tar.gz", hash = "sha256:01b6a63a7a566892ab85dec80b081150f6569766fd0d151f991ef3a1011f40ba"},
 ]
 
 [[package]]
