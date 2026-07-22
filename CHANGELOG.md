@@ -50,6 +50,15 @@ All notable changes to this project will be documented in this file.
 
 * ### Major Changes
     * [cspell](https://cspell.org/) is now used for spell checking.
+    * The following `DAQmxErrors` enum members were renamed to fix typos inherited from the C API:
+        * `FILTER_DELAY_REMOVAL_NOT_POSSSIBLE_WITH_ANALOG_TRIGGER` → `FILTER_DELAY_REMOVAL_NOT_POSSIBLE_WITH_ANALOG_TRIGGER`
+        * `INVALID_ATTENTUATION_BASED_ON_MIN_MAX` → `INVALID_ATTENUATION_BASED_ON_MIN_MAX`
+        * `INVALIDC_DAQ_SYNC_PORT_CONNECTION_FORMAT` → `INVALID_CDAQ_SYNC_PORT_CONNECTION_FORMAT`
+        * `MAX_SOUND_PRESSURE_MIC_SENSITIVIT_RELATED_AI_PROPERTIES_NOT_SUPPORTED_BY_DEV` → `MAX_SOUND_PRESSURE_MIC_SENSITIVITY_RELATED_AI_PROPERTIES_NOT_SUPPORTED_BY_DEV`
+        * `MULTIPLE_SUBSYTEM_CALIBRATION` → `MULTIPLE_SUBSYSTEM_CALIBRATION`
+        * `ONLY_PEM_OR_DER_CERTITICATES_ACCEPTED` → `ONLY_PEM_OR_DER_CERTIFICATES_ACCEPTED`
+
+      The old names are preserved as aliases for backward compatibility.
 
 * ### Known Issues
     * ...
