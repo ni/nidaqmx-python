@@ -665,6 +665,19 @@ def do_port0_task(
     _start_do_task(task, is_port=True)
     return task
 
+@pytest.fixture
+def do_port0_task_dio32(
+    generate_task: Callable[[], nidaqmx.Task], real_x_series_device_32dio: nidaqmx.system.Device
+) -> nidaqmx.Task:
+    """Configure a single-channel DO task."""
+    task = generate_task()
+    # Select X Series port 0 32 lines
+    task.do_channels.add_do_chan(
+        real_x_series_device_32dio.do_ports[0].name,
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    _start_do_task(task, is_port=True)
+    return task
 
 @pytest.fixture
 def do_port1_task(
