@@ -665,6 +665,7 @@ def do_port0_task(
     _start_do_task(task, is_port=True)
     return task
 
+
 @pytest.fixture
 def do_port0_task_dio32(
     generate_task: Callable[[], nidaqmx.Task], real_x_series_device_32dio: nidaqmx.system.Device
@@ -678,6 +679,7 @@ def do_port0_task_dio32(
     )
     _start_do_task(task, is_port=True)
     return task
+
 
 @pytest.fixture
 def do_port1_task(

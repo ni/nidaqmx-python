@@ -431,7 +431,7 @@ def test___digital_single_channel_writer___write_waveform_port_uint8___outputs_m
 
 def test___digital_single_channel_writer___write_waveform_port_uint32___outputs_match_final_values(
     do_port0_task_dio32: nidaqmx.Task,
-    di_port0_loopback_task: nidaqmx.Task,
+    di_port0_loopback_task_32dio: nidaqmx.Task,
 ) -> None:
     writer = DigitalSingleChannelWriter(do_port0_task_dio32.out_stream)
     # Since digital outputs don't have built-in loopback channels like analog outputs,
@@ -445,7 +445,7 @@ def test___digital_single_channel_writer___write_waveform_port_uint32___outputs_
 
         samples_written = writer.write_waveform(waveform)
 
-        actual_value = di_port0_loopback_task.read()
+        actual_value = di_port0_loopback_task_32dio.read()
         assert samples_written == num_samples
         assert waveform.signal_count == num_lines
         assert actual_value == _get_waveform_port_data(waveform)[i - 1]
