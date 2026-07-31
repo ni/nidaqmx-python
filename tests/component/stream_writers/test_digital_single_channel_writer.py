@@ -430,17 +430,17 @@ def test___digital_single_channel_writer___write_waveform_port_uint8___outputs_m
 
 
 def test___digital_single_channel_writer___write_waveform_port_uint32___outputs_match_final_values(
-    do_port0_task_dio32: nidaqmx.Task,
+    do_port0_task_32dio: nidaqmx.Task,
     di_port0_loopback_task_32dio: nidaqmx.Task,
 ) -> None:
-    writer = DigitalSingleChannelWriter(do_port0_task_dio32.out_stream)
+    writer = DigitalSingleChannelWriter(do_port0_task_32dio.out_stream)
     # Since digital outputs don't have built-in loopback channels like analog outputs,
     # we can only read back the last value. So to verify the whole signal, we must
     # write waveforms of increasing length and verify the final value each time.
     for i in range(1, 10):
         num_samples = i
         num_lines = 32
-        assert num_lines == _get_num_do_lines_in_task(do_port0_task_dio32)
+        assert num_lines == _get_num_do_lines_in_task(do_port0_task_32dio)
         waveform = _create_digital_waveform_uint8(num_samples, num_lines)
 
         samples_written = writer.write_waveform(waveform)

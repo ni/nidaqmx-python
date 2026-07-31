@@ -667,7 +667,7 @@ def do_port0_task(
 
 
 @pytest.fixture
-def do_port0_task_dio32(
+def do_port0_task_32dio(
     generate_task: Callable[[], nidaqmx.Task], real_x_series_device_32dio: nidaqmx.system.Device
 ) -> nidaqmx.Task:
     """Configure a single-channel DO task."""

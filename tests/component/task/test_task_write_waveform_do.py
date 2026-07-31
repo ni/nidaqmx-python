@@ -283,7 +283,7 @@ def test___task___write_waveform_port_uint8___outputs_match_final_values(
 
 
 def test___task___write_waveform_port_uint32___outputs_match_final_values(
-    do_port0_task_dio32: nidaqmx.Task,
+    do_port0_task_32dio: nidaqmx.Task,
     di_port0_loopback_task_32dio: nidaqmx.Task,
 ) -> None:
     # Since digital outputs don't have built-in loopback channels like analog outputs,
@@ -294,7 +294,7 @@ def test___task___write_waveform_port_uint32___outputs_match_final_values(
         num_lines = 32
         waveform = _create_digital_waveform_uint8(num_samples, num_lines)
 
-        samples_written = do_port0_task_dio32.write_waveform(waveform)
+        samples_written = do_port0_task_32dio.write_waveform(waveform)
 
         assert samples_written == num_samples
         actual_value = di_port0_loopback_task_32dio.read()
