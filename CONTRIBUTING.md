@@ -55,6 +55,7 @@ requirements:
 Before running the regression tests, import the appropriate NI MAX configuration files:
 - ``tests\max_config\nidaqmxMaxConfig.ini``: Contains custom scales, global channels, simulated devices,
   and tasks used by many regression tests.
+   - **Note:** If you have DAQmx 26Q1 or later, also import ``tests\max_config\nidaqmxMaxConfig26Q1.ini`` to validate new features.
    - **Note:** On Linux, use ``tests\max_config\linux\nidaqmxMaxConfig.ini`` to avoid importing an unsupported device.
 - ``tests\max_config\examplesMaxConfig.ini``: Contains simulated devices used by the example programs.
   Importing this file is optional. It is used to run a subset of the example programs as test cases.

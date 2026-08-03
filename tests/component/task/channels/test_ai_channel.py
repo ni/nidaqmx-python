@@ -1347,6 +1347,9 @@ def test___task___add_ai_chans_with_name___sets_channel_name(
         (CurrentShuntResistorLocation.EXTERNAL, CurrentShuntResistorLocation.EXTERNAL),
     ],
 )
+@pytest.mark.library_only(
+    reason="AB#4000847: calculated power channel doesn't work over grpc in Python since it requires internal_get_last_created_chan"
+)
 def test___task___add_ai_calculated_power_chan___sets_channel_attributes(
     task: Task,
     sim_4311_device: Device,
