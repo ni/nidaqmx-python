@@ -322,7 +322,7 @@ class Task:
 
         self._interpreter.add_global_chans_to_task(self._handle, channels)
 
-    def close(self):
+    def clear(self):
         """Clears the task.
 
         Before clearing, this method aborts the task, if necessary,
@@ -360,6 +360,12 @@ class Task:
 
         if first_exception:
             raise first_exception
+
+    close = clear
+    """Clears the task.
+
+    :meth:`close` is an alias for :meth:`clear`.
+    """
 
     def control(self, action):
         """Alters the state of a task according to the action you specify.
