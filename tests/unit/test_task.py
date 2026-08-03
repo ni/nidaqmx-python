@@ -111,6 +111,20 @@ def test___call_alternate_constructor___create_task_not_called(
 
 
 @pytest.mark.parametrize("close_on_exit", [False, True])
+def test___varying_close_on_exit___clear___clear_task_called(
+    interpreter: Mock, close_on_exit: bool
+):
+    expect_create_task(interpreter, "MyTaskHandle", close_on_exit)
+    expect_get_task_name(interpreter, "MyTask")
+    task = Task("MyTask")
+    task_handle = task._handle
+
+    task.clear()
+
+    interpreter.clear_task.assert_called_with(task_handle)
+
+
+@pytest.mark.parametrize("close_on_exit", [False, True])
 def test___varying_close_on_exit___close___clear_task_called(
     interpreter: Mock, close_on_exit: bool
 ):
@@ -119,6 +133,7 @@ def test___varying_close_on_exit___close___clear_task_called(
     task = Task("MyTask")
     task_handle = task._handle
 
+    # close is an alias for clear
     task.close()
 
     interpreter.clear_task.assert_called_with(task_handle)

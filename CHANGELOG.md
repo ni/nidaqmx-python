@@ -37,6 +37,7 @@ All notable changes to this project will be documented in this file.
 
 * ### Major Changes
     * [zizmor](https://zizmor.sh/) is now used for GitHub Actions static analysis.
+    * [1000: add clear task method and made close an alias](https://github.com/ni/nidaqmx-python/pull/1000)
 
 * ### Known Issues
     * ...
