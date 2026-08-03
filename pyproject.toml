@@ -1,6 +1,6 @@
 [project]
 name = "nidaqmx"
-description = "NI-DAQmx Python API"
+description = "Official NI-DAQmx Python API"
 license = "MIT"
 keywords = ["nidaqmx", "nidaq", "daqmx", "daq"]
 version = "1.6.0.dev0"
