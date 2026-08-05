@@ -1,4 +1,5 @@
 # Changelog
+* [1.7.0](#170)
 * [1.6.0](#160)
 * [1.5.0](#150)
 * [1.4.1](#141)
@@ -27,6 +28,19 @@
 * [0.5.0](#050)
 
 All notable changes to this project will be documented in this file.
+
+## 1.7.0
+* ### Merged Pull Requests
+    * [Full changelog: 1.6.0...1.7.0](https://github.com/ni/nidaqmx-python/compare/1.6.0...1.7.0)
+
+* ### Resolved Issues
+    * ...
+
+* ### Major Changes
+    * ...
+
+* ### Known Issues
+    * ...
 
 ## 1.6.0
 * ### Merged Pull Requests
