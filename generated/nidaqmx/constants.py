@@ -839,6 +839,7 @@ class UnderflowBehavior(Enum):
 class UnitsPreScaled(Enum):
     VOLTS = 10348  #: Volts.
     AMPS = 10342  #: Amperes.
+    WATTS = 16203  #: Watts.
     DEG_F = 10144  #: Degrees Fahrenheit.
     DEG_C = 10143  #: Degrees Celsius.
     DEG_R = 10145  #: Degrees Rankine.

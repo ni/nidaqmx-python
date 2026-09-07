@@ -44,6 +44,11 @@ INTERPRETER_IGNORED_FUNCTIONS = [
     "SetRealTimeAttributeInt32",
     "SetRealTimeAttributeUInt32",
     "WaitForNextSampleClock",
+    # Internal functions used by the handwritten waveform implementation.
+    "InternalReadAnalogWaveformPerChan",
+    "InternalReadDigitalWaveform",
+    "InternalWriteAnalogWaveformPerChan",
+    "InternalWriteDigitalWaveform",
     # Time triggers
     # Single-attribute get/set functions are not used
     # Generic Get/SetTimingAttribute{Type} functions are used instead

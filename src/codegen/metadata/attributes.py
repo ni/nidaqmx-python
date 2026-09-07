@@ -18905,6 +18905,100 @@ attributes = {
             'python_description': 'Specifies the current minimum value you expect to measure. This value is in the units you specify with a units property. When you query this property, it returns the coerced current minimum value that the device can measure with the current settings.',
             'resettable': True,
             'type': 'float64'
+        },
+        12790: {
+            'access': 'read-write',
+            'c_function_name': 'AIRemoveAnalogPathDelay',
+            'calling_convention': 'StdCall',
+            'ctypes_data_type': 'c_bool32',
+            'handle_parameters': {
+                'channelHandle': {
+                    'accessor': 'self._name',
+                    'ctypes_data_type': 'ctypes.c_char_p',
+                    'cvi_name': 'channel'
+                },
+                'taskHandle': {
+                    'accessor': 'self._handle',
+                    'ctypes_data_type': 'lib_importer.task_handle',
+                    'cvi_name': 'taskHandle'
+                }
+            },
+            'has_explicit_read_buffer_size': False,
+            'has_explicit_write_buffer_size': False,
+            'is_list': False,
+            'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
+            'name': 'AI_REMOVE_ANALOG_PATH_DELAY',
+            'python_class_name': 'AIChannel',
+            'python_data_type': 'bool',
+            'python_description': 'Specifies whether to remove the analog path delay from the timing path on the device.',
+            'resettable': True,
+            'type': 'bool32'
+        },
+        12791: {
+            'access': 'read',
+            'c_function_name': 'AIAnalogPathDelay',
+            'calling_convention': 'StdCall',
+            'ctypes_data_type': 'ctypes.c_double',
+            'handle_parameters': {
+                'channelHandle': {
+                    'accessor': 'self._name',
+                    'ctypes_data_type': 'ctypes.c_char_p',
+                    'cvi_name': 'channel'
+                },
+                'taskHandle': {
+                    'accessor': 'self._handle',
+                    'ctypes_data_type': 'lib_importer.task_handle',
+                    'cvi_name': 'taskHandle'
+                }
+            },
+            'has_explicit_read_buffer_size': False,
+            'has_explicit_write_buffer_size': False,
+            'is_list': False,
+            'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
+            'name': 'AI_ANALOG_PATH_DELAY',
+            'python_class_name': 'AIChannel',
+            'python_data_type': 'float',
+            'python_description': "Indicates the analog path delay for the channel's configuration. This value is in the units you specify with **ai_analog_path_delay_units**.",
+            'resettable': False,
+            'type': 'float64'
+        },
+        12792: {
+            'access': 'read-write',
+            'c_function_name': 'AIAnalogPathDelayUnits',
+            'calling_convention': 'StdCall',
+            'ctypes_data_type': 'ctypes.c_int',
+            'enum': 'DigitalWidthUnits4',
+            'handle_parameters': {
+                'channelHandle': {
+                    'accessor': 'self._name',
+                    'ctypes_data_type': 'ctypes.c_char_p',
+                    'cvi_name': 'channel'
+                },
+                'taskHandle': {
+                    'accessor': 'self._handle',
+                    'ctypes_data_type': 'lib_importer.task_handle',
+                    'cvi_name': 'taskHandle'
+                }
+            },
+            'has_explicit_read_buffer_size': False,
+            'has_explicit_write_buffer_size': False,
+            'is_list': False,
+            'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
+            'name': 'AI_ANALOG_PATH_DELAY_UNITS',
+            'python_class_name': 'AIChannel',
+            'python_data_type': 'DigitalWidthUnits4',
+            'python_description': 'Specifies the units for **ai_analog_path_delay**.',
+            'resettable': True,
+            'type': 'int32'
         }
     },
     'Device': {

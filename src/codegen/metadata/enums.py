@@ -18596,6 +18596,13 @@ enums = {
             },
             {
                 'documentation': {
+                    'description': 'Watts.'
+                },
+                'name': 'WATTS',
+                'value': 16203
+            },
+            {
+                'documentation': {
                     'description': 'Degrees Fahrenheit.'
                 },
                 'name': 'DEG_F',

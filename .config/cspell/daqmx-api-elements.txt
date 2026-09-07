@@ -85,6 +85,7 @@ physicalChannel       # unseparated words
 posssible             # Typo; should be: possible
 pretrig               # abbreviation; pre-trigger
 prpty                 # abbreviation; property
+Ptrs                  # abbreviation; pointers
 rangeWith             # unseparated words
 regen                 # abbreviation; regeneration
 rngs                  # abbreviation; ranges
