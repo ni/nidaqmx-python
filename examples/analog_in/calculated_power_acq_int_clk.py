@@ -13,8 +13,8 @@ from nidaqmx.constants import READ_ALL_AVAILABLE, AcquisitionType
 
 with nidaqmx.Task() as task:
     task.ai_channels.add_ai_calculated_power_chan(
-        voltage_physical_channel="Dev1/ai0",
-        current_physical_channel="Dev1/ai1",
+        voltage_physical_channel="PXI1Slot4/ai0",
+        current_physical_channel="PXI1Slot4/ai1",
         voltage_min_val=0.0,
         voltage_max_val=5.0,
         current_min_val=0.0,
