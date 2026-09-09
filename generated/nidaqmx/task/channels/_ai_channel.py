@@ -298,6 +298,36 @@ class AIChannel(Channel):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x29f9)
 
     @property
+    def ai_analog_path_delay(self):
+        """
+        float: Indicates the analog path delay for the channel's
+            configuration. This value is in the units you specify with
+            **ai_analog_path_delay_units**.
+        """
+
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31f7)
+        return val
+
+    @property
+    def ai_analog_path_delay_units(self):
+        """
+        :class:`nidaqmx.constants.DigitalWidthUnits`: Specifies the
+            units for **ai_analog_path_delay**.
+        """
+
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x31f8)
+        return DigitalWidthUnits(val)
+
+    @ai_analog_path_delay_units.setter
+    def ai_analog_path_delay_units(self, val):
+        val = val.value
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x31f8, val)
+
+    @ai_analog_path_delay_units.deleter
+    def ai_analog_path_delay_units(self):
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x31f8)
+
+    @property
     def ai_atten(self):
         """
         float: Specifies the amount of attenuation to use.
@@ -2590,6 +2620,24 @@ class AIChannel(Channel):
 
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x22da)
         return val
+
+    @property
+    def ai_remove_analog_path_delay(self):
+        """
+        bool: Specifies whether to remove the analog path delay from the
+            timing path on the device.
+        """
+
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x31f6)
+        return val
+
+    @ai_remove_analog_path_delay.setter
+    def ai_remove_analog_path_delay(self, val):
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x31f6, val)
+
+    @ai_remove_analog_path_delay.deleter
+    def ai_remove_analog_path_delay(self):
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x31f6)
 
     @property
     def ai_remove_filter_delay(self):
