@@ -12,6 +12,7 @@ from collections.abc import Callable, Sequence
 
 import google.protobuf.message
 import grpc
+import nitlsconfig
 import numpy
 
 from . import errors as errors
@@ -101,14 +102,20 @@ class GrpcStubInterpreter(BaseInterpreter):
     def __init__(self, grpc_options):
         self._grpc_options = grpc_options
         self._client = nidaqmx_grpc.NiDAQmxStub(grpc_options.grpc_channel)
+        # Querying the driver version is the first contact with the server, so it decides
+        # whether this interpreter connected.
+        connected = False
         try:
             major_version = self.get_system_info_attribute_uint32(0x1272)
             minor_version = self.get_system_info_attribute_uint32(0x1923)
             update_version = self.get_system_info_attribute_uint32(0x2f22)
+            connected = True
         except Exception:
             major_version = 0
             minor_version = 0
             update_version = 0
+        finally:
+            nitlsconfig.audit_session_connect('NI-DAQmx', grpc_options.grpc_channel, connected)
         self._driver_version = DriverVersion(major_version, minor_version, update_version)
 
     def _invoke(self, func, request, metadata=None):
@@ -141,7 +148,11 @@ class GrpcStubInterpreter(BaseInterpreter):
                     error_message += f'\nSamples per channel written: {entry.value}'
         grpc_error = rpc_error.code()
         if grpc_error == grpc.StatusCode.UNAVAILABLE:
-            error_message = 'Failed to connect to server'
+            # gRPC reports a rejected TLS handshake and an unreachable server with the
+            # same code, so ask NI-TLS whether it built this channel and can say more.
+            error_message = nitlsconfig.get_tls_connection_error_elaboration(
+                self._grpc_options.grpc_channel
+            ) or 'Failed to connect to server'
         elif grpc_error == grpc.StatusCode.UNIMPLEMENTED:
             error_message = (
                 'This operation is not supported by the NI gRPC Device Server being used. Upgrade NI gRPC Device Server.'
@@ -2427,7 +2438,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
-    
+
         _assign_numpy_array(read_array, response.read_array)
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
         return read_array, response.samps_per_chan_read
@@ -2447,7 +2458,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
-    
+
         _assign_numpy_array(read_array, response.read_array)
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
         return read_array, response.samps_per_chan_read
@@ -2461,7 +2472,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
-    
+
         _assign_numpy_array(read_array, response.read_array)
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
         return read_array, response.samps_per_chan_read
@@ -2475,7 +2486,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
-    
+
         _assign_numpy_array(read_array, response.read_array)
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
         return read_array, response.samps_per_chan_read
@@ -2489,7 +2500,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
-    
+
         _assign_numpy_array(read_array, response.read_array)
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
         return read_array, response.samps_per_chan_read
@@ -2501,7 +2512,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.ReadCounterF64Request(
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, array_size_in_samps=read_array.size))
-    
+
         _assign_numpy_array(read_array, response.read_array)
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
         return read_array, response.samps_per_chan_read
@@ -2515,7 +2526,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
-    
+
         _assign_numpy_array(read_array, response.read_array)
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
         return read_array, response.samps_per_chan_read
@@ -2539,7 +2550,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.ReadCounterU32Request(
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, array_size_in_samps=read_array.size))
-    
+
         _assign_numpy_array(read_array, response.read_array)
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
         return read_array, response.samps_per_chan_read
@@ -2553,7 +2564,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
-    
+
         _assign_numpy_array(read_array, response.read_array)
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
         return read_array, response.samps_per_chan_read
@@ -2569,7 +2580,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, interleaved_raw=interleaved,
                 array_size_in_samps=read_array_frequency.size))
-    
+
         _assign_numpy_array(read_array_frequency, response.read_array_frequency)
         _assign_numpy_array(read_array_duty_cycle, response.read_array_duty_cycle)
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
@@ -2592,7 +2603,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, interleaved_raw=interleaved,
                 array_size_in_samps=read_array_high_ticks.size))
-    
+
         _assign_numpy_array(read_array_high_ticks, response.read_array_high_ticks)
         _assign_numpy_array(read_array_low_ticks, response.read_array_low_ticks)
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
@@ -2615,7 +2626,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, interleaved_raw=interleaved,
                 array_size_in_samps=read_array_high_time.size))
-    
+
         _assign_numpy_array(read_array_high_time, response.read_array_high_time)
         _assign_numpy_array(read_array_low_time, response.read_array_low_time)
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
@@ -2636,7 +2647,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_bytes=read_array.nbytes))
-    
+
         _assign_numpy_array(read_array, response.read_array)
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
         return read_array, response.samps_per_chan_read, response.num_bytes_per_samp
@@ -2656,7 +2667,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
-    
+
         _assign_numpy_array(read_array, response.read_array)
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
         return read_array, response.samps_per_chan_read
@@ -2670,7 +2681,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
-    
+
         _assign_numpy_array(read_array, response.read_array)
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
         return read_array, response.samps_per_chan_read
@@ -2684,7 +2695,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.nbytes))
-    
+
         _assign_numpy_array(read_array, response.read_array)
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
         return read_array, response.samps_per_chan_read
@@ -2700,7 +2711,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array_voltage.size))
-    
+
         _assign_numpy_array(read_array_voltage, response.read_array_voltage)
         _assign_numpy_array(read_array_current, response.read_array_current)
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
@@ -2717,7 +2728,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array_voltage.size))
-    
+
         _assign_numpy_array(read_array_voltage, response.read_array_voltage)
         _assign_numpy_array(read_array_current, response.read_array_current)
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_per_chan_read)
@@ -2736,7 +2747,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.ReadRawRequest(
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, array_size_in_bytes=read_array.nbytes))
-    
+
         _assign_numpy_array(read_array, response.read_array)
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.samps_read)
         return read_array, response.samps_read, response.num_bytes_per_samp
