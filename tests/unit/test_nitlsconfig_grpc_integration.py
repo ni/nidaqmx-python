@@ -10,42 +10,43 @@ from nidaqmx import Task
 from tests.unit._grpc_utils import create_grpc_options
 from tests.unit._task_utils import expect_create_task, expect_get_task_name
 
+# _FakeRpcError subclasses grpc.RpcError, so it must be defined here or importing this
+# module raises NameError when the grpc extra isn't installed.
 try:
     import grpc
     import nitlsconfig
 
     from nidaqmx._grpc_interpreter import GrpcStubInterpreter
+
+    class _FakeRpcError(grpc.RpcError):
+        def __init__(self, code):
+            self._code = code
+
+        def code(self):
+            return self._code
+
+        def details(self):
+            return "original details"
+
+        def trailing_metadata(self):
+            return []
+
 except ImportError:
-    pass
-
-
-class _FakeRpcError(grpc.RpcError):
-    def __init__(self, code):
-        self._code = code
-
-    def code(self):
-        return self._code
-
-    def details(self):
-        return "original details"
-
-    def trailing_metadata(self):
-        return []
+    grpc = None  # type: ignore
 
 
 @pytest.fixture
 def nitls_tagged_channel():
-    """A real gRPC channel tagged the way nitlsconfig.create_grpc_device_channel tags one.
+    """A gRPC channel tagged the way nitlsconfig.create_grpc_device_channel tags one.
 
     create_grpc_device_channel needs the nitlsconfig CLI installed on the system, so tagging a
-    plain channel is the closest we can get to one in a unit test. Nothing connects over it.
+    plain channel is the closest we can get to one here. Nothing connects over it.
     """
+    if grpc is None:
+        pytest.skip("The grpc module is not available.")
     target = "localhost:31763"
     with grpc.insecure_channel(target) as channel:
         nitlsconfig.channel_tag.tag_channel_target(channel, target)
-        assert nitlsconfig.channel_tag.is_nitls_channel(
-            channel
-        ), "nitlsconfig no longer recognizes a channel it tagged"
         yield channel
 
 
@@ -75,7 +76,7 @@ def test___untagged_channel___handle_unavailable___raises_failed_to_connect(
 def test___nitls_tagged_channel___handle_unavailable___raises_tls_elaboration(
     mocker: MockerFixture, nitls_tagged_channel
 ):
-    # The real elaboration, so this fails if nitlsconfig stops recognizing our channel.
+    # Derived from nitlsconfig itself, so this fails if it stops recognizing our channel.
     expected_message = nitlsconfig.get_tls_connection_error_elaboration(nitls_tagged_channel)
     assert expected_message is not None
     assert expected_message != "Failed to connect to server"
@@ -87,6 +88,20 @@ def test___nitls_tagged_channel___handle_unavailable___raises_tls_elaboration(
 
     assert exc_info.value.rpc_code == grpc.StatusCode.UNAVAILABLE
     assert exc_info.value.description == expected_message
+
+
+def test___nitls_tagged_channel___handle_other_status_code___preserves_original_details(
+    mocker: MockerFixture, nitls_tagged_channel
+):
+    # Tagged, so an elaboration is available: this fails if we stop limiting it to UNAVAILABLE.
+    grpc_options = nidaqmx.GrpcSessionOptions(nitls_tagged_channel, "")
+    interpreter = _create_interpreter(mocker, grpc_options)
+
+    with pytest.raises(nidaqmx.errors.RpcError) as exc_info:
+        interpreter._handle_rpc_error(_FakeRpcError(grpc.StatusCode.INTERNAL))
+
+    assert exc_info.value.rpc_code == grpc.StatusCode.INTERNAL
+    assert exc_info.value.description == "original details"
 
 
 def test___server_reachable___create_interpreter___audits_connected(mocker: MockerFixture):
@@ -107,9 +122,7 @@ def test___server_unreachable___create_interpreter___audits_not_connected(mocker
     patched_audit.assert_called_once_with("NI-DAQmx", grpc_options.grpc_channel, False)
 
 
-def test___no_grpc_options___create_task___does_not_audit(
-    interpreter: Mock, mocker: MockerFixture
-):
+def test___no_grpc_options___create_task___does_not_audit(interpreter: Mock, mocker: MockerFixture):
     patched_audit = mocker.patch("nitlsconfig.audit_session_connect", autospec=True)
     expect_create_task(interpreter)
     expect_get_task_name(interpreter, "MyTask")
