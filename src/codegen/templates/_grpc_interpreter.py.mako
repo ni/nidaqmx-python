@@ -29,6 +29,7 @@ from collections.abc import Callable, Sequence
 
 import google.protobuf.message
 import grpc
+import nitlsconfig
 import numpy
 
 from . import errors as errors
@@ -118,14 +119,21 @@ class GrpcStubInterpreter(BaseInterpreter):
     def __init__(self, grpc_options):
         self._grpc_options = grpc_options
         self._client = nidaqmx_grpc.NiDAQmxStub(grpc_options.grpc_channel)
+        # Querying the driver version is the first contact with the server, so it decides
+        # whether this interpreter connected.
+        connected = False
         try:
             major_version = self.get_system_info_attribute_uint32(0x1272)
             minor_version = self.get_system_info_attribute_uint32(0x1923)
             update_version = self.get_system_info_attribute_uint32(0x2f22)
+            connected = True
         except Exception:
             major_version = 0
             minor_version = 0
             update_version = 0
+        finally:
+            # Record the outcome of a driver's gRPC session initialize RPC.
+            nitlsconfig.audit_session_connect('NI-DAQmx', grpc_options.grpc_channel, connected)
         self._driver_version = DriverVersion(major_version, minor_version, update_version)
 
     def _invoke(self, func, request, metadata=None):
@@ -158,7 +166,11 @@ class GrpcStubInterpreter(BaseInterpreter):
                     error_message += f'\nSamples per channel written: {entry.value}'
         grpc_error = rpc_error.code()
         if grpc_error == grpc.StatusCode.UNAVAILABLE:
-            error_message = 'Failed to connect to server'
+            # gRPC reports a rejected TLS handshake and an unreachable server with the
+            # same code, so ask nitlsconfig whether it built this channel and can say more.
+            error_message = nitlsconfig.get_tls_connection_error_elaboration(
+                self._grpc_options.grpc_channel
+            ) or 'Failed to connect to server'
         elif grpc_error == grpc.StatusCode.UNIMPLEMENTED:
             error_message = (
                 'This operation is not supported by the NI gRPC Device Server being used. Upgrade NI gRPC Device Server.'
