@@ -132,6 +132,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             minor_version = 0
             update_version = 0
         finally:
+            # Record the outcome of a driver's gRPC session initialize RPC.
             nitlsconfig.audit_session_connect('NI-DAQmx', grpc_options.grpc_channel, connected)
         self._driver_version = DriverVersion(major_version, minor_version, update_version)
 
