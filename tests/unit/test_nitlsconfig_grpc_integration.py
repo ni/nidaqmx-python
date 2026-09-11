@@ -36,7 +36,7 @@ except ImportError:
 
 
 @pytest.fixture
-def nitls_tagged_channel():
+def nitlsconfig_tagged_channel():
     """A gRPC channel tagged the way nitlsconfig.create_grpc_device_channel tags one.
 
     create_grpc_device_channel needs the nitlsconfig CLI installed on the system, so tagging a
@@ -73,14 +73,14 @@ def test___untagged_channel___handle_unavailable___raises_failed_to_connect(
     assert exc_info.value.description == "Failed to connect to server"
 
 
-def test___nitls_tagged_channel___handle_unavailable___raises_tls_elaboration(
-    mocker: MockerFixture, nitls_tagged_channel
+def test___nitlsconfig_tagged_channel___handle_unavailable___raises_tls_elaboration(
+    mocker: MockerFixture, nitlsconfig_tagged_channel
 ):
     # Derived from nitlsconfig itself, so this fails if it stops recognizing our channel.
-    expected_message = nitlsconfig.get_tls_connection_error_elaboration(nitls_tagged_channel)
+    expected_message = nitlsconfig.get_tls_connection_error_elaboration(nitlsconfig_tagged_channel)
     assert expected_message is not None
     assert expected_message != "Failed to connect to server"
-    grpc_options = nidaqmx.GrpcSessionOptions(nitls_tagged_channel, "")
+    grpc_options = nidaqmx.GrpcSessionOptions(nitlsconfig_tagged_channel, "")
     interpreter = _create_interpreter(mocker, grpc_options)
 
     with pytest.raises(nidaqmx.errors.RpcError) as exc_info:
@@ -90,11 +90,11 @@ def test___nitls_tagged_channel___handle_unavailable___raises_tls_elaboration(
     assert exc_info.value.description == expected_message
 
 
-def test___nitls_tagged_channel___handle_other_status_code___preserves_original_details(
-    mocker: MockerFixture, nitls_tagged_channel
+def test___nitlsconfig_tagged_channel___handle_other_status_code___preserves_original_details(
+    mocker: MockerFixture, nitlsconfig_tagged_channel
 ):
     # Tagged, so an elaboration is available: this fails if we stop limiting it to UNAVAILABLE.
-    grpc_options = nidaqmx.GrpcSessionOptions(nitls_tagged_channel, "")
+    grpc_options = nidaqmx.GrpcSessionOptions(nitlsconfig_tagged_channel, "")
     interpreter = _create_interpreter(mocker, grpc_options)
 
     with pytest.raises(nidaqmx.errors.RpcError) as exc_info:

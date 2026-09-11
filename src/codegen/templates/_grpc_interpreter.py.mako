@@ -166,7 +166,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         grpc_error = rpc_error.code()
         if grpc_error == grpc.StatusCode.UNAVAILABLE:
             # gRPC reports a rejected TLS handshake and an unreachable server with the
-            # same code, so ask NI-TLS whether it built this channel and can say more.
+            # same code, so ask nitlsconfig whether it built this channel and can say more.
             error_message = nitlsconfig.get_tls_connection_error_elaboration(
                 self._grpc_options.grpc_channel
             ) or 'Failed to connect to server'

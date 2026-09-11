@@ -38,7 +38,7 @@ All notable changes to this project will be documented in this file.
 
 * ### Major Changes
     * Add support for Analog Path Delay
-    * Added `nitlsconfig[grpc]>=1.0.0a4` to the optional gRPC dependencies.
+    * Added `nitlsconfig[grpc]` to the `grpc` extra to enable using NI TLS to create TLS-encrypted gRPC channels.
 
 * ### Known Issues
     * ...

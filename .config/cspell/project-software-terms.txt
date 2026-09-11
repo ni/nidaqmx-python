@@ -37,6 +37,7 @@ NISHAREDDIR       # NI Linux install directory environment variable
 nicai             # NI-DAQmx C library filename (Windows DLL)
 nicaiu            # NI-DAQmx C library filename (Windows DLL, Unicode)
 nidevice          # NI package name; ni-device-grpc
+nitlsconfig       # Dependency: nitlsconfig
 nitypes           # Dependency: nitypes
 nptdms            # Dependency: nptdms
 numpy             # Dependency: numpy
