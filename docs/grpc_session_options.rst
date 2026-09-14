@@ -7,6 +7,56 @@ Support for using NI-DAQmx over gRPC
 
 .. py:currentmodule:: nidaqmx
 
+Creating a gRPC channel
+-----------------------
+
+Using NI-DAQmx over gRPC requires the ``grpc`` extra::
+
+  $ python -m pip install nidaqmx[grpc]
+
+Every NI-DAQmx gRPC object is created from a ``grpc.Channel`` that you build and pass to
+:py:class:`nidaqmx.GrpcSessionOptions`. The constructors for :py:class:`nidaqmx.Task`,
+:py:class:`nidaqmx.Scale`, and other classes accept a ``grpc_options`` parameter, and
+:py:meth:`nidaqmx.system.System.remote` accepts one to access the remote DAQmx system. You own the
+channel, not the objects created from it, so you must close the gRPC channel only after every
+NI-DAQmx gRPC object using it is closed.
+
+The recommended way to create a gRPC channel to a remote system running NI gRPC Device Server is
+:py:func:`nitlsconfig.create_grpc_device_channel() <nitlsconfig.grpc_channel.create_grpc_device_channel>`
+from the `nitlsconfig <https://nitlsconfig-python.readthedocs.io/en/latest/>`_ package, which the
+``grpc`` extra installs for you. It reads the nitlsconfig client configuration installed with the
+NI-DAQmx runtime and by default will attempt to build an encrypted gRPC channel using mTLS.
+
+Before ``create_grpc_device_channel`` can succeed, you must use NI Hardware Manager to perform a
+certificate exchange with the remote system.
+See `Managing mTLS <https://www.ni.com/docs/en-US/bundle/hardwaremanager/page/mtls-manage.html>`_ for
+additional information.
+
+For example::
+
+  import nidaqmx
+  import nitlsconfig
+
+  with nitlsconfig.create_grpc_device_channel('remote_grpc_device', 31763) as channel:
+      options = nidaqmx.GrpcSessionOptions(channel, '')
+      with nidaqmx.Task(grpc_options=options) as task:
+          ...  # Calls to task over the encrypted channel
+
+.. note:: From NI Hardware Manager, you can disable TLS to make ``create_grpc_device_channel``
+    produce an insecure channel.
+
+.. note:: ``create_grpc_device_channel`` also accepts an ``options`` parameter for gRPC channel
+    arguments such as ``grpc.ssl_target_name_override``, and a ``retry_policy`` parameter. Channel
+    arguments cannot be changed after the channel is built, so they must be supplied here.
+
+.. note:: NI gRPC Device Server must be configured to accept remote connections and to take its
+    TLS settings from nitlsconfig. See
+    `Bind Address Support <https://github.com/ni/grpc-device#bind-address-support>`_ and
+    `NI TLS Config Integration <https://github.com/ni/grpc-device#ni-tls-config-integration>`_ for details.
+
+You can also build the gRPC channel yourself with ``grpc.insecure_channel`` or ``grpc.secure_channel``
+if you need full control over how credentials are supplied.
+
 .. py:class:: SessionInitializationBehavior
     :canonical: nidaqmx.grpc_session_options.SessionInitializationBehavior
 
