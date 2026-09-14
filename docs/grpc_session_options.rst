@@ -21,15 +21,19 @@ Every NI-DAQmx gRPC object is created from a ``grpc.Channel`` that you build and
 channel, not the objects created from it, so you must close the gRPC channel only after every
 NI-DAQmx gRPC object using it is closed.
 
-The recommended way to create a gRPC channel to a remote system running NI gRPC Device Server is
+Which approach you use depends on where NI gRPC Device Server runs.
+
+Remote systems
+~~~~~~~~~~~~~~
+
+For a remote system, the recommended way is
 :py:func:`nitlsconfig.create_grpc_device_channel() <nitlsconfig.grpc_channel.create_grpc_device_channel>`
 from the `nitlsconfig <https://nitlsconfig-python.readthedocs.io/en/latest/>`_ package, which the
 ``grpc`` extra installs for you. It reads the nitlsconfig client configuration installed with the
-NI-DAQmx runtime and by default will attempt to build an encrypted gRPC channel using mTLS.
-
-Before ``create_grpc_device_channel`` can succeed, you must use NI Hardware Manager to perform a
-certificate exchange with the remote system.
-See `Managing mTLS <https://www.ni.com/docs/en-US/bundle/hardwaremanager/page/mtls-manage.html>`_ for
+NI-DAQmx runtime and by default will attempt to build an encrypted gRPC channel using mTLS. Before
+it can reach a remote system, you must use NI Hardware Manager to perform a certificate exchange
+with that system. See
+`Managing mTLS <https://www.ni.com/docs/en-US/bundle/hardwaremanager/page/mtls-manage.html>`_ for
 additional information.
 
 For example::
@@ -54,8 +58,32 @@ For example::
     `Bind Address Support <https://github.com/ni/grpc-device#bind-address-support>`_ and
     `NI TLS Config Integration <https://github.com/ni/grpc-device#ni-tls-config-integration>`_ for details.
 
-You can also build the gRPC channel yourself with ``grpc.insecure_channel`` or ``grpc.secure_channel``
-if you need full control over how credentials are supplied.
+You can also build an insecure channel yourself with ``grpc.insecure_channel``, or use
+``grpc.secure_channel`` to build a secure channel with full control over how credentials are supplied.
+
+The local system
+~~~~~~~~~~~~~~~~
+
+For a simple local system setup, build the channel yourself with ``grpc.insecure_channel``.
+
+For a more complex but secure local system setup, create the channel with
+:py:func:`nitlsconfig.create_grpc_device_channel() <nitlsconfig.grpc_channel.create_grpc_device_channel>`
+and use the Manage client certificates and Manage server certificates dialog boxes in NI Hardware
+Manager to add the certificates for the local system connection. See
+`Managing mTLS <https://www.ni.com/docs/en-US/bundle/hardwaremanager/page/mtls-manage.html>`_ for
+additional information. You can also build the secure channel yourself with ``grpc.secure_channel``.
+
+If you are writing a
+`measurement plug-in <https://www.ni.com/docs/en-US/bundle/measurementplugins/page/measurement-plugins.html>`_,
+you do not create the channel at all. The
+`session manager <https://www.ni.com/docs/en-US/bundle/measurementplugins/page/session-manager-src.html>`_
+creates it for you and hands you a :py:class:`nidaqmx.Task`, so you do not create
+:py:class:`nidaqmx.GrpcSessionOptions` yourself. For working measurements that use NI-DAQmx this
+way, see the
+`measurement plug-in examples <https://github.com/ni/measurement-plugin-python/tree/main/examples>`_.
+
+SessionInitializationBehavior
+-----------------------------
 
 .. py:class:: SessionInitializationBehavior
     :canonical: nidaqmx.grpc_session_options.SessionInitializationBehavior
@@ -83,6 +111,9 @@ if you need full control over how credentials are supplied.
         .. note:: When using a :class:`~nidaqmx.task.Task` as a context manager and the context exits, it will detach from the server session
             and leave it open.
 
+
+GrpcSessionOptions
+------------------
 
 .. py:class:: GrpcSessionOptions(self, grpc_channel, session_name, initialization_behavior=SessionInitializationBehavior.AUTO)
     :canonical: nidaqmx.grpc_session_options.GrpcSessionOptions
