@@ -21,7 +21,10 @@ Every NI-DAQmx gRPC object is created from a ``grpc.Channel`` that you build and
 channel, not the objects created from it, so you must close the gRPC channel only after every
 NI-DAQmx gRPC object using it is closed.
 
-Which approach you use depends on where NI gRPC Device Server runs.
+The recommended way to create the channel depends on where NI gRPC Device Server runs. The sections
+below cover a remote system and the local system. In either case you can instead build the channel
+yourself, with ``grpc.insecure_channel`` for an insecure channel or ``grpc.secure_channel`` when you
+need full control over how credentials are supplied.
 
 Remote systems
 ~~~~~~~~~~~~~~
@@ -58,9 +61,6 @@ For example::
     `Bind Address Support <https://github.com/ni/grpc-device#bind-address-support>`_ and
     `NI TLS Config Integration <https://github.com/ni/grpc-device#ni-tls-config-integration>`_ for details.
 
-You can also build an insecure channel yourself with ``grpc.insecure_channel``, or use
-``grpc.secure_channel`` to build a secure channel with full control over how credentials are supplied.
-
 The local system
 ~~~~~~~~~~~~~~~~
 
@@ -71,7 +71,12 @@ For a more complex but secure local system setup, create the channel with
 and use the Manage client certificates and Manage server certificates dialog boxes in NI Hardware
 Manager to add the certificates for the local system connection. See
 `Managing mTLS <https://www.ni.com/docs/en-US/bundle/hardwaremanager/page/mtls-manage.html>`_ for
-additional information. You can also build the secure channel yourself with ``grpc.secure_channel``.
+additional information.
+
+.. note:: This requires NI gRPC Device Server to be configured to take its TLS settings from
+    nitlsconfig. If it is not configured this way, do not use ``create_grpc_device_channel`` for
+    the local system. See
+    `NI TLS Config Integration <https://github.com/ni/grpc-device#ni-tls-config-integration>`_ for details.
 
 If you are writing a
 `measurement plug-in <https://www.ni.com/docs/en-US/bundle/measurementplugins/page/measurement-plugins.html>`_,
