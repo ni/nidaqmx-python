@@ -81,8 +81,7 @@ additional information.
 If you are writing a
 `measurement plug-in <https://www.ni.com/docs/en-US/bundle/measurementplugins/page/measurement-plugins.html>`_,
 you do not create the channel at all. The
-`session manager <https://www.ni.com/docs/en-US/bundle/measurementplugins/page/session-manager-src.html>`_
-creates it for you and hands you a :py:class:`nidaqmx.Task`, so you do not create
+`session management service <https://www.ni.com/docs/en-US/bundle/measurementplugins/page/session-manager-src.html>`_ tracks the lifetimes of NI-DAQmx tasks on the NI gRPC Device Server and the `session management client <https://nimeasurementlinksessionmanagementclient.readthedocs.io/en/latest/autoapi/ni/measurementlink/sessionmanagement/v1/client/index.html#ni.measurementlink.sessionmanagement.v1.client.BaseReservation.create_nidaqmx_task>`_ creates a :py:class:`nidaqmx.Task` for you, so you do not create
 :py:class:`nidaqmx.GrpcSessionOptions` yourself. For working measurements that use NI-DAQmx this
 way, see the
 `NI-DAQmx measurement plug-in example <https://github.com/ni/measurement-plugin-python/tree/main/examples/nidaqmx_analog_input>`_.
