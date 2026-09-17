@@ -85,7 +85,7 @@ you do not create the channel at all. The
 creates it for you and hands you a :py:class:`nidaqmx.Task`, so you do not create
 :py:class:`nidaqmx.GrpcSessionOptions` yourself. For working measurements that use NI-DAQmx this
 way, see the
-`measurement plug-in examples <https://github.com/ni/measurement-plugin-python/tree/main/examples>`_.
+`NI-DAQmx measurement plug-in example <https://github.com/ni/measurement-plugin-python/tree/main/examples/nidaqmx_analog_input>`_.
 
 SessionInitializationBehavior
 -----------------------------
