@@ -23,7 +23,7 @@ NI-DAQmx gRPC object using it is closed.
 
 The recommended way to create the channel depends on where NI gRPC Device Server runs. The sections
 below cover a remote system and the local system. In either case you can instead build the channel
-yourself, with ``grpc.insecure_channel`` for an insecure channel or ``grpc.secure_channel`` when you
+yourself, with :py:class:`grpc.insecure_channel` for an insecure channel or :py:class:`grpc.secure_channel` when you
 need full control over how credentials are supplied.
 
 Remote systems
