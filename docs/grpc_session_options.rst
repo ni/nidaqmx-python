@@ -14,7 +14,7 @@ Using NI-DAQmx over gRPC requires the ``grpc`` extra::
 
   $ python -m pip install nidaqmx[grpc]
 
-Every NI-DAQmx gRPC object is created from a ``grpc.Channel`` that you build and pass to
+Every NI-DAQmx gRPC object is created from a :py:class:`grpc.Channel` that you build and pass to
 :py:class:`nidaqmx.GrpcSessionOptions`. The constructors for :py:class:`nidaqmx.Task`,
 :py:class:`nidaqmx.Scale`, and other classes accept a ``grpc_options`` parameter, and
 :py:meth:`nidaqmx.system.System.remote` accepts one to access the remote DAQmx system. You own the
