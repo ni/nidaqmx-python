@@ -15,16 +15,16 @@ Using NI-DAQmx over gRPC requires the ``grpc`` extra::
   $ python -m pip install nidaqmx[grpc]
 
 Every NI-DAQmx gRPC object is created from a :py:class:`grpc.Channel` that you build and pass to
-:py:class:`nidaqmx.GrpcSessionOptions`. The constructors for :py:class:`nidaqmx.Task`,
-:py:class:`nidaqmx.Scale`, and other classes accept a ``grpc_options`` parameter, and
+:py:class:`nidaqmx.GrpcSessionOptions`. The constructors for :py:class:`nidaqmx.Task <nidaqmx.task.Task>`,
+:py:class:`nidaqmx.Scale <nidaqmx.scale.Scale>`, and other classes accept a ``grpc_options`` parameter, and
 :py:meth:`nidaqmx.system.System.remote` accepts one to access the remote DAQmx system. You own the
 channel, not the objects created from it, so you must close the gRPC channel only after every
 NI-DAQmx gRPC object using it is closed.
 
 The recommended way to create the channel depends on where NI gRPC Device Server runs. The sections
 below cover a remote system and the local system. In either case you can instead build the channel
-yourself, with :py:class:`grpc.insecure_channel` for an insecure channel or :py:class:`grpc.secure_channel` when you
-need full control over how credentials are supplied.
+yourself, with :py:func:`grpc.insecure_channel` for an insecure channel or
+:py:func:`grpc.secure_channel` when you need full control over how credentials are supplied.
 
 Remote systems
 ~~~~~~~~~~~~~~
@@ -81,7 +81,10 @@ additional information.
 If you are writing a
 `measurement plug-in <https://www.ni.com/docs/en-US/bundle/measurementplugins/page/measurement-plugins.html>`_,
 you do not create the channel at all. The
-`session management service <https://www.ni.com/docs/en-US/bundle/measurementplugins/page/session-manager-src.html>`_ tracks the lifetimes of NI-DAQmx tasks on the NI gRPC Device Server and the `session management client <https://nimeasurementlinksessionmanagementclient.readthedocs.io/en/latest/autoapi/ni/measurementlink/sessionmanagement/v1/client/index.html#ni.measurementlink.sessionmanagement.v1.client.BaseReservation.create_nidaqmx_task>`_ creates a :py:class:`nidaqmx.Task` for you, so you do not create
+`session management service <https://www.ni.com/docs/en-US/bundle/measurementplugins/page/session-manager-src.html>`_
+tracks the lifetimes of NI-DAQmx tasks on the NI gRPC Device Server, and the
+`session management client <https://nimeasurementlinksessionmanagementclient.readthedocs.io/en/latest/autoapi/ni/measurementlink/sessionmanagement/v1/client/index.html#ni.measurementlink.sessionmanagement.v1.client.BaseReservation.create_nidaqmx_task>`_
+creates a :py:class:`nidaqmx.Task <nidaqmx.task.Task>` for you, so you do not create
 :py:class:`nidaqmx.GrpcSessionOptions` yourself. For working measurements that use NI-DAQmx this
 way, see the
 `NI-DAQmx measurement plug-in example <https://github.com/ni/measurement-plugin-python/tree/main/examples/nidaqmx_analog_input>`_.
