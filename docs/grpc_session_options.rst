@@ -64,7 +64,7 @@ For example::
 The local system
 ~~~~~~~~~~~~~~~~
 
-For a simple local system setup, build the channel yourself with ``grpc.insecure_channel``.
+For a simple local system setup, build the channel yourself with :py:func:`grpc.insecure_channel`.
 
 For a more complex but secure local system setup, create the channel with
 :py:func:`nitlsconfig.create_grpc_device_channel() <nitlsconfig.grpc_channel.create_grpc_device_channel>`
