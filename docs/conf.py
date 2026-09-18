@@ -47,6 +47,8 @@ todo_include_todos = False
 
 intersphinx_mapping = {
     "grpc": ("https://grpc.github.io/grpc/python/", None),
+    # Read the Docs project slug differs from the module name.
+    "nitlsconfig": ("https://nitlsconfig-python.readthedocs.io/en/latest/", None),
     "nitypes": ("https://nitypes.readthedocs.io/en/latest/", None),
     "numpy": ("https://numpy.org/doc/stable/", None),
     "protobuf": ("https://googleapis.dev/python/protobuf/latest/", None),
