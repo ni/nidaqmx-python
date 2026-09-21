@@ -1,0 +1,9 @@
+{
+    "address": "[::1]",
+    "port": 31763,
+    "security" : {
+        "server_cert": "",
+        "server_key": "",
+        "root_cert": ""
+    }
+}
