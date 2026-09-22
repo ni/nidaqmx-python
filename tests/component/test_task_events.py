@@ -40,6 +40,7 @@ def ao_task(task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device) -> nidaq
     return task
 
 
+@pytest.mark.grpc_tls
 def test___done_event_registered___run_finite_acquisition___callback_invoked_once_with_success_status(
     ai_task: nidaqmx.Task,
 ) -> None:

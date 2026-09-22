@@ -32,6 +32,7 @@ def test___analog_single_channel___read_one_sample___returns_valid_1d_samples(
     assert data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
 
 
+@pytest.mark.grpc_tls
 def test___analog_single_channel___read_many_sample___returns_valid_1d_samples(
     ai_single_channel_task: nidaqmx.Task,
 ) -> None:
