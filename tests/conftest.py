@@ -20,6 +20,7 @@ from nidaqmx._feature_toggles import (
 )
 from nidaqmx.constants import ProductCategory, UsageTypeAI
 from tests.helpers import (
+    UnsupportedEnvironmentError,
     configure_tls_modes_insecure,
     configure_tls_modes_secure,
     exchange_certificates,
@@ -512,8 +513,10 @@ def grpc_secured_tls_init_kwargs(
     try:
         configure_tls_modes_secure("ni-grpc-device", "localhost")
         exchange_certificates("localhost")
-    except FileNotFoundError:
-        pytest.skip("nitlsconfigtest is not available.")
+    except UnsupportedEnvironmentError as e:
+        pytest.skip(str(e))
+    except FileNotFoundError as e:
+        pytest.skip(str(e))
 
     config_file_path = test_assets_directory / "grpc_server_config/grpc_server_config_tls.json"
     with GrpcServerProcess(config_file_path) as proc:
@@ -535,8 +538,10 @@ def grpc_unsecured_tls_init_kwargs(
         pytest.skip("The grpc module is not available.")
     try:
         configure_tls_modes_insecure("ni-grpc-device", "localhost")
-    except FileNotFoundError:
-        pytest.skip("nitlsconfigtest is not available.")
+    except UnsupportedEnvironmentError as e:
+        pytest.skip(str(e))
+    except FileNotFoundError as e:
+        pytest.skip(str(e))
 
     config_file_path = test_assets_directory / "grpc_server_config/grpc_server_config_tls.json"
     with GrpcServerProcess(config_file_path) as proc:

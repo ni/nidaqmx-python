@@ -15,6 +15,10 @@ from nidaqmx.system.physical_channel import PhysicalChannel
 POWER_ABS_EPSILON = 1e-3
 
 
+class UnsupportedEnvironmentError(RuntimeError):
+    """Raised when a test helper is invoked in an unsupported environment."""
+
+
 def generate_random_seed():
     """Creates a random integer."""
     # Randomizing the random seed makes the GitHub test reporting action
@@ -43,12 +47,14 @@ def exchange_certificates(
     verbosity: int = 2,
 ):
     """Exchanges certificates for the gRPC tests (Windows only)."""
-    if os.name != "nt":
-        return
+    if sys.maxsize <= 2**32:
+        raise UnsupportedEnvironmentError(
+            "nitlsconfigtest scripts are unsupported on 32-bit Python."
+        )
 
     script_path = r"C:/NITests/nitlsconfigtest/exchange_certificates.py"
     if not pathlib.Path(script_path).is_file():
-        raise FileNotFoundError(f"Certificate exchange script not found: {script_path}")
+        raise FileNotFoundError("nitlsconfigtest is not available")
 
     server_host_arg = f"--server-host={server_host}"
     server_user_arg = f"--server-user={server_user}" if server_user else "--local-server"
@@ -84,12 +90,14 @@ def configure_tls_modes(
     client_server_mode: str | None = None,
 ):
     """Configures ni-tls-config modes for the gRPC tests (Windows only)."""
-    if os.name != "nt":
-        return
+    if sys.maxsize <= 2**32:
+        raise UnsupportedEnvironmentError(
+            "nitlsconfigtest scripts are unsupported on 32-bit Python."
+        )
 
     script_path = r"C:/NITests/nitlsconfigtest/configure_tls_modes.py"
     if not pathlib.Path(script_path).is_file():
-        raise FileNotFoundError(f"Configure TLS modes script not found: {script_path}")
+        raise FileNotFoundError("nitlsconfigtest is not available")
 
     service_arg = f"--service={service}"
     server_host_arg = f"--server-host={server_host}"
