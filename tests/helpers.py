@@ -94,16 +94,26 @@ def configure_tls_modes(
     service_arg = f"--service={service}"
     server_host_arg = f"--server-host={server_host}"
     server_user_arg = "--local-server"
-    server_cert_mode_arg = f"--server-certificate-mode={server_cert_mode}" if server_cert_mode else None
+    server_cert_mode_arg = (
+        f"--server-certificate-mode={server_cert_mode}" if server_cert_mode else None
+    )
     server_client_mode_arg = (
         f"--server-client-mode={server_client_mode}" if server_client_mode else None
     )
-    client_cert_mode_arg = f"--client-certificate-mode={client_cert_mode}" if client_cert_mode else None
+    client_cert_mode_arg = (
+        f"--client-certificate-mode={client_cert_mode}" if client_cert_mode else None
+    )
     client_server_mode_arg = (
         f"--client-server-mode={client_server_mode}" if client_server_mode else None
     )
 
-    command = [sys.executable, str(pathlib.Path(script_path)), service_arg, server_host_arg, server_user_arg]
+    command = [
+        sys.executable,
+        str(pathlib.Path(script_path)),
+        service_arg,
+        server_host_arg,
+        server_user_arg,
+    ]
     command.extend(
         arg
         for arg in (

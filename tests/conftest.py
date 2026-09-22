@@ -490,8 +490,9 @@ def _get_kwargs(request: pytest.FixtureRequest, grpc_channel: grpc.Channel) -> d
 
 @pytest.fixture(scope="function")
 def grpc_init_kwargs(request: pytest.FixtureRequest, grpc_channel: grpc.Channel) -> dict:
-    """Gets the keyword arguments required for creating a plain gRPC interpreter
-    without ni-tls-config.
+    """Gets keyword arguments for a plain gRPC interpreter.
+
+    The interpreter does not use ni-tls-config.
     """
     return _get_kwargs(request, grpc_channel)
 
