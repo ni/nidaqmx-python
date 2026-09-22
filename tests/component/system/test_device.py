@@ -7,7 +7,6 @@ from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.system import Device
 
 
-@pytest.mark.grpc_tls
 def test___devices_with_same_name___compare___equal(init_kwargs):
     device1 = Device("bridgeTester", **init_kwargs)
     device2 = Device("bridgeTester", **init_kwargs)

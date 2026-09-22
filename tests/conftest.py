@@ -436,7 +436,7 @@ def test_assets_directory() -> pathlib.Path:
 
 @pytest.fixture(scope="session")
 def grpc_server_process(test_assets_directory: pathlib.Path) -> Generator[GrpcServerProcess]:
-    """Gets the grpc server process, running insecurely and without ni-tls-config."""
+    """Gets a grpc server process not secured by ni-tls-config."""
     if grpc is None:
         pytest.skip("The grpc module is not available.")
     with GrpcServerProcess(
@@ -509,8 +509,11 @@ def grpc_secured_tls_init_kwargs(
     """
     if grpc is None:
         pytest.skip("The grpc module is not available.")
-    configure_tls_modes_secure("ni-grpc-device", "localhost")
-    exchange_certificates("localhost")
+    try:
+        configure_tls_modes_secure("ni-grpc-device", "localhost")
+        exchange_certificates("localhost")
+    except FileNotFoundError:
+        pytest.skip("nitlsconfigtest is not available.")
 
     config_file_path = test_assets_directory / "grpc_server_config/grpc_server_config_tls.json"
     with GrpcServerProcess(config_file_path) as proc:
@@ -530,7 +533,10 @@ def grpc_unsecured_tls_init_kwargs(
     """
     if grpc is None:
         pytest.skip("The grpc module is not available.")
-    configure_tls_modes_insecure("ni-grpc-device", "localhost")
+    try:
+        configure_tls_modes_insecure("ni-grpc-device", "localhost")
+    except FileNotFoundError:
+        pytest.skip("nitlsconfigtest is not available.")
 
     config_file_path = test_assets_directory / "grpc_server_config/grpc_server_config_tls.json"
     with GrpcServerProcess(config_file_path) as proc:

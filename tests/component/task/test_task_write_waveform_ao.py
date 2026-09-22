@@ -32,7 +32,6 @@ def test___task___write_waveform_feature_disabled___raises_feature_not_supported
     assert "NIDAQMX_ENABLE_WAVEFORM_SUPPORT" in error_message
 
 
-@pytest.mark.grpc_tls
 def test___task___write_linear_ramp_waveform___output_matches_final_value(
     ao_single_channel_task: nidaqmx.Task,
     ai_single_channel_loopback_task: nidaqmx.Task,

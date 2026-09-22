@@ -8,7 +8,7 @@ from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.system import System
 from nidaqmx.types import AOPowerUpState
 
-
+@pytest.mark.grpc_tls
 def test___get_analog_power_up_states_with_output_type___returns_power_up_states(system):
     channel_names = ["aoTester/ao0", "aoTester/ao1"]
 
@@ -20,7 +20,7 @@ def test___get_analog_power_up_states_with_output_type___returns_power_up_states
         assert 0.0 == power_up_states[i].power_up_state
         assert PowerUpChannelType.CHANNEL_HIGH_IMPEDANCE == power_up_states[i].channel_type
 
-
+@pytest.mark.grpc_tls
 def test_valid_power_up_states___set_analog_power_up_states_with_output_type___sets_power_up_states_without_errors(
     system,
 ):
