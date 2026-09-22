@@ -19,7 +19,6 @@ from nidaqmx._feature_toggles import (
     FeatureToggle,
 )
 from nidaqmx.constants import ProductCategory, UsageTypeAI
-
 from tests.helpers import (
     configure_tls_modes_insecure,
     configure_tls_modes_secure,
@@ -440,7 +439,9 @@ def grpc_server_process(test_assets_directory: pathlib.Path) -> Generator[GrpcSe
     """Gets the grpc server process, running insecurely and without ni-tls-config."""
     if grpc is None:
         pytest.skip("The grpc module is not available.")
-    with GrpcServerProcess(test_assets_directory / "grpc_server_config/grpc_server_config_no_tls.json") as proc:
+    with GrpcServerProcess(
+        test_assets_directory / "grpc_server_config/grpc_server_config_no_tls.json"
+    ) as proc:
         yield proc
 
 
@@ -489,7 +490,9 @@ def _get_kwargs(request: pytest.FixtureRequest, grpc_channel: grpc.Channel) -> d
 
 @pytest.fixture(scope="function")
 def grpc_init_kwargs(request: pytest.FixtureRequest, grpc_channel: grpc.Channel) -> dict:
-    """Gets the keyword arguments required for creating a plain gRPC interpreter (no ni-tls-config)."""
+    """Gets the keyword arguments required for creating a plain gRPC interpreter
+    without ni-tls-config.
+    """
     return _get_kwargs(request, grpc_channel)
 
 
@@ -499,7 +502,7 @@ def grpc_secured_tls_init_kwargs(
     test_assets_directory: pathlib.Path,
 ) -> Generator[dict]:
     """Gets init kwargs for a gRPC session secured by ni-tls-config.
-    
+
     This server lives for the duration of the test function only. TLS modes are
     enabled and certificates are exchanged before it is created.
     """
@@ -507,7 +510,7 @@ def grpc_secured_tls_init_kwargs(
         pytest.skip("The grpc module is not available.")
     configure_tls_modes_secure("ni-grpc-device", "localhost")
     exchange_certificates("localhost")
-    
+
     config_file_path = test_assets_directory / "grpc_server_config/grpc_server_config_tls.json"
     with GrpcServerProcess(config_file_path) as proc:
         with nitlsconfig.create_grpc_device_channel("localhost", proc.server_port) as grpc_channel:
@@ -520,7 +523,7 @@ def grpc_unsecured_tls_init_kwargs(
     test_assets_directory: pathlib.Path,
 ) -> Generator[dict]:
     """Gets init kwargs for a gRPC session whose ni-tls-config modes are all disabled.
-    
+
     This server lives for the duration of the test function only. TLS modes are disabled
     before it is created.
     """
