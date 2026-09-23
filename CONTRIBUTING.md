@@ -51,6 +51,10 @@ requirements:
 - Machine has [poetry](https://python-poetry.org/) installed.
 - (recommended) Machine has an X Series DAQ device (e.g. PCIe-6363 or USB-6351) connected to it.
   - You can still run the tests without a physical X Series DAQ device, but some tests will be skipped.
+- (optional) Machine has `nitlsconfigtest` installed.
+  - This installation is only available to internal contributors. 
+  - You can still run the tests without this installation, but all TLS-configured gRPC tests will be skipped.
+    - Unencrypted runs of the same tests will still occur since the TLS-configured tests are purely supplementary.
 
 Before running the regression tests, import the appropriate NI MAX configuration files:
 - ``tests\max_config\nidaqmxMaxConfig.ini``: Contains custom scales, global channels, simulated devices,

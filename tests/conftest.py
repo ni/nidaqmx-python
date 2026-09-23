@@ -475,6 +475,43 @@ def temporary_grpc_channel(
         yield channel
 
 
+@pytest.fixture(scope="session")
+def grpc_secured_tls_server_process(test_assets_directory: pathlib.Path) -> Generator[GrpcServerProcess]:
+    """Get a grpc server process with enabled TLS."""
+    if grpc is None:
+        pytest.skip("The grpc module is not available.")
+    try:
+        configure_tls_modes_secure("ni-grpc-device", "localhost")
+        exchange_certificates("localhost")
+    except UnsupportedEnvironmentError as e:
+        pytest.skip(str(e))
+    except FileNotFoundError as e:
+        pytest.skip(str(e))
+
+    with GrpcServerProcess(
+        test_assets_directory / "grpc_server_config/grpc_server_config_secured_tls.json"
+    ) as proc:
+        yield proc
+
+
+@pytest.fixture(scope="session")
+def grpc_unsecured_tls_server_process(test_assets_directory: pathlib.Path) -> Generator[GrpcServerProcess]:
+    """Get a grpc server process with disabled TLS."""
+    if grpc is None:
+        pytest.skip("The grpc module is not available.")
+    try:
+        configure_tls_modes_insecure("ni-grpc-device", "localhost")
+    except UnsupportedEnvironmentError as e:
+        pytest.skip(str(e))
+    except FileNotFoundError as e:
+        pytest.skip(str(e))
+
+    with GrpcServerProcess(
+        test_assets_directory / "grpc_server_config/grpc_server_config_unsecured_tls.json"
+    ) as proc:
+        yield proc
+
+
 def _get_kwargs(request: pytest.FixtureRequest, grpc_channel: grpc.Channel) -> dict:
     """Shared code for getting keyword arguments for all types of gRPC sessions."""
     session_name = _get_marker_value(request, "grpc_session_name", "")
@@ -491,7 +528,7 @@ def _get_kwargs(request: pytest.FixtureRequest, grpc_channel: grpc.Channel) -> d
 
 @pytest.fixture(scope="function")
 def grpc_init_kwargs(request: pytest.FixtureRequest, grpc_channel: grpc.Channel) -> dict:
-    """Gets keyword arguments for a plain gRPC interpreter.
+    """Get keyword arguments for a plain gRPC interpreter.
 
     The interpreter does not use ni-tls-config.
     """
@@ -502,51 +539,30 @@ def grpc_init_kwargs(request: pytest.FixtureRequest, grpc_channel: grpc.Channel)
 def grpc_secured_tls_init_kwargs(
     request: pytest.FixtureRequest,
     test_assets_directory: pathlib.Path,
+    grpc_secured_tls_server_process: GrpcServerProcess
 ) -> Generator[dict]:
-    """Gets init kwargs for a gRPC session secured by ni-tls-config.
+    """Get init kwargs for a gRPC session with enabled TLS."""
+    # We need to reconfigure TLS modes as the state may have changed since the server fixture was run.
+    configure_tls_modes_secure("ni-grpc-device", "localhost")
 
-    This server lives for the duration of the test function only. TLS modes are
-    enabled and certificates are exchanged before it is created.
-    """
-    if grpc is None:
-        pytest.skip("The grpc module is not available.")
-    try:
-        configure_tls_modes_secure("ni-grpc-device", "localhost")
-        exchange_certificates("localhost")
-    except UnsupportedEnvironmentError as e:
-        pytest.skip(str(e))
-    except FileNotFoundError as e:
-        pytest.skip(str(e))
-
-    config_file_path = test_assets_directory / "grpc_server_config/grpc_server_config_tls.json"
-    with GrpcServerProcess(config_file_path) as proc:
-        with nitlsconfig.create_grpc_device_channel("localhost", proc.server_port) as grpc_channel:
-            yield _get_kwargs(request, grpc_channel)
+    proc = grpc_secured_tls_server_process
+    with nitlsconfig.create_grpc_device_channel("localhost", proc.server_port) as grpc_channel:
+        yield _get_kwargs(request, grpc_channel)
 
 
 @pytest.fixture(scope="function")
 def grpc_unsecured_tls_init_kwargs(
     request: pytest.FixtureRequest,
     test_assets_directory: pathlib.Path,
+    grpc_unsecured_tls_server_process: GrpcServerProcess,
 ) -> Generator[dict]:
-    """Gets init kwargs for a gRPC session whose ni-tls-config modes are all disabled.
+    """Get init kwargs for a gRPC session with disabled TLS."""
+    # We need to reconfigure TLS modes as the state may have changed since the server fixture was run.
+    configure_tls_modes_insecure("ni-grpc-device", "localhost")
 
-    This server lives for the duration of the test function only. TLS modes are disabled
-    before it is created.
-    """
-    if grpc is None:
-        pytest.skip("The grpc module is not available.")
-    try:
-        configure_tls_modes_insecure("ni-grpc-device", "localhost")
-    except UnsupportedEnvironmentError as e:
-        pytest.skip(str(e))
-    except FileNotFoundError as e:
-        pytest.skip(str(e))
-
-    config_file_path = test_assets_directory / "grpc_server_config/grpc_server_config_tls.json"
-    with GrpcServerProcess(config_file_path) as proc:
-        with nitlsconfig.create_grpc_device_channel("localhost", proc.server_port) as grpc_channel:
-            yield _get_kwargs(request, grpc_channel)
+    proc = grpc_unsecured_tls_server_process
+    with nitlsconfig.create_grpc_device_channel("localhost", proc.server_port) as grpc_channel:
+        yield _get_kwargs(request, grpc_channel)
 
 
 @pytest.fixture(scope="function")

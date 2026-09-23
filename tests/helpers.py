@@ -46,7 +46,7 @@ def exchange_certificates(
     client_user: str | None = None,
     verbosity: int = 2,
 ):
-    """Exchanges certificates for the gRPC tests (Windows only)."""
+    """Exchange certificates for the gRPC tests (Windows only)."""
     if sys.maxsize <= 2**32:
         raise UnsupportedEnvironmentError(
             "nitlsconfigtest scripts are unsupported on 32-bit Python."
@@ -89,7 +89,7 @@ def configure_tls_modes(
     client_cert_mode: str | None = None,
     client_server_mode: str | None = None,
 ):
-    """Configures ni-tls-config modes for the gRPC tests (Windows only)."""
+    """Configure ni-tls-config modes for the gRPC tests (Windows only)."""
     if sys.maxsize <= 2**32:
         raise UnsupportedEnvironmentError(
             "nitlsconfigtest scripts are unsupported on 32-bit Python."
@@ -144,7 +144,7 @@ def configure_tls_modes_secure(
     service: str,
     server_host: str,
 ):
-    """Configures secure ni-tls-config modes for the gRPC tests (Windows only)."""
+    """Configure secure ni-tls-config modes for the gRPC tests (Windows only)."""
     configure_tls_modes(
         service=service,
         server_host=server_host,
@@ -159,7 +159,7 @@ def configure_tls_modes_insecure(
     service: str,
     server_host: str,
 ):
-    """Configures insecure ni-tls-config modes for the gRPC tests (Windows only)."""
+    """Configure insecure ni-tls-config modes for the gRPC tests (Windows only)."""
     configure_tls_modes(
         service=service,
         server_host=server_host,
