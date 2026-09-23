@@ -39,6 +39,9 @@ class GrpcServerProcess:
 
             if self._proc.poll() is not None:
                 raise RuntimeError(f"Server exited with return code {self._proc.returncode}")
+            
+            assert self.server_port is not None
+            self.server_port: int = server_port
 
             self._stdout_thread = threading.Thread(
                 target=self._proc.communicate, args=(), daemon=True
