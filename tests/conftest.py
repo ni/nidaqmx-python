@@ -477,7 +477,7 @@ def temporary_grpc_channel(
 
 @pytest.fixture(scope="session")
 def grpc_secured_tls_server_process(
-    test_assets_directory: pathlib.Path
+    test_assets_directory: pathlib.Path,
 ) -> Generator[GrpcServerProcess]:
     """Get a grpc server process with enabled TLS."""
     if grpc is None:
@@ -498,7 +498,7 @@ def grpc_secured_tls_server_process(
 
 @pytest.fixture(scope="session")
 def grpc_unsecured_tls_server_process(
-    test_assets_directory: pathlib.Path
+    test_assets_directory: pathlib.Path,
 ) -> Generator[GrpcServerProcess]:
     """Get a grpc server process with disabled TLS."""
     if grpc is None:
