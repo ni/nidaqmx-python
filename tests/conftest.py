@@ -543,7 +543,7 @@ def grpc_init_kwargs(request: pytest.FixtureRequest, grpc_channel: grpc.Channel)
 def grpc_secured_tls_init_kwargs(
     request: pytest.FixtureRequest,
     test_assets_directory: pathlib.Path,
-    grpc_secured_tls_server_process: GrpcServerProcess
+    grpc_secured_tls_server_process: GrpcServerProcess,
 ) -> Generator[dict]:
     """Get init kwargs for a gRPC session with enabled TLS."""
     # We need to reconfigure TLS modes as the state may have changed since the server
