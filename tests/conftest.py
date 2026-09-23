@@ -476,7 +476,9 @@ def temporary_grpc_channel(
 
 
 @pytest.fixture(scope="session")
-def grpc_secured_tls_server_process(test_assets_directory: pathlib.Path) -> Generator[GrpcServerProcess]:
+def grpc_secured_tls_server_process(
+    test_assets_directory: pathlib.Path
+) -> Generator[GrpcServerProcess]:
     """Get a grpc server process with enabled TLS."""
     if grpc is None:
         pytest.skip("The grpc module is not available.")
@@ -495,7 +497,9 @@ def grpc_secured_tls_server_process(test_assets_directory: pathlib.Path) -> Gene
 
 
 @pytest.fixture(scope="session")
-def grpc_unsecured_tls_server_process(test_assets_directory: pathlib.Path) -> Generator[GrpcServerProcess]:
+def grpc_unsecured_tls_server_process(
+    test_assets_directory: pathlib.Path
+) -> Generator[GrpcServerProcess]:
     """Get a grpc server process with disabled TLS."""
     if grpc is None:
         pytest.skip("The grpc module is not available.")
@@ -542,7 +546,8 @@ def grpc_secured_tls_init_kwargs(
     grpc_secured_tls_server_process: GrpcServerProcess
 ) -> Generator[dict]:
     """Get init kwargs for a gRPC session with enabled TLS."""
-    # We need to reconfigure TLS modes as the state may have changed since the server fixture was run.
+    # We need to reconfigure TLS modes as the state may have changed since the server
+    # fixture was run.
     configure_tls_modes_secure("ni-grpc-device", "localhost")
 
     proc = grpc_secured_tls_server_process
@@ -557,7 +562,8 @@ def grpc_unsecured_tls_init_kwargs(
     grpc_unsecured_tls_server_process: GrpcServerProcess,
 ) -> Generator[dict]:
     """Get init kwargs for a gRPC session with disabled TLS."""
-    # We need to reconfigure TLS modes as the state may have changed since the server fixture was run.
+    # We need to reconfigure TLS modes as the state may have changed since the server
+    # fixture was run.
     configure_tls_modes_insecure("ni-grpc-device", "localhost")
 
     proc = grpc_unsecured_tls_server_process
