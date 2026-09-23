@@ -39,7 +39,7 @@ class GrpcServerProcess:
 
             if self._proc.poll() is not None:
                 raise RuntimeError(f"Server exited with return code {self._proc.returncode}")
-            
+
             assert temp_server_port is not None
             self.server_port: int = temp_server_port
 
