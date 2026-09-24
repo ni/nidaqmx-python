@@ -3,13 +3,20 @@
 from __future__ import annotations
 
 import contextlib
+import os
 import pathlib
+import subprocess
+import sys
 from collections.abc import Generator
 
 from nidaqmx.system.physical_channel import PhysicalChannel
 
 # Power uses fixed-point scaling, so we have a pretty wide epsilon.
 POWER_ABS_EPSILON = 1e-3
+
+
+class UnsupportedEnvironmentError(RuntimeError):
+    """Raised when a test helper is invoked in an unsupported environment."""
 
 
 def generate_random_seed():
@@ -30,3 +37,134 @@ def configure_teds(
         yield phys_chan
     finally:
         phys_chan.clear_teds()
+
+
+def exchange_certificates(
+    server_host: str,
+    server_user: str | None = None,
+    client_host: str | None = None,
+    client_user: str | None = None,
+    verbosity: int = 2,
+):
+    """Exchange certificates for the gRPC tests (Windows only)."""
+    if sys.maxsize <= 2**32:
+        raise UnsupportedEnvironmentError(
+            "nitlsconfigtest scripts are unsupported on 32-bit Python."
+        )
+
+    script_path = r"C:/NITests/nitlsconfigtest/exchange_certificates.py"
+    if not pathlib.Path(script_path).is_file():
+        raise FileNotFoundError("nitlsconfigtest is not available")
+
+    server_host_arg = f"--server-host={server_host}"
+    server_user_arg = f"--server-user={server_user}" if server_user else "--local-server"
+    client_host_arg = f"--client-host={client_host}" if client_host else None
+    client_user_arg = f"--client-user={client_user}" if client_user else None
+
+    verbosity = max(0, min(verbosity, 4))
+    verbosity_arg = {
+        0: "-qq",
+        1: "-q",
+        3: "-v",
+        4: "-vv",
+    }.get(verbosity)
+
+    command = [sys.executable, str(pathlib.Path(script_path)), server_host_arg, server_user_arg]
+    command.extend(
+        arg for arg in (client_host_arg, client_user_arg, verbosity_arg) if arg is not None
+    )
+
+    # The script expects this environment variable to be set
+    env = os.environ.copy()
+    env.setdefault("USERNAME", "Administrator")
+
+    subprocess.run(command, check=True, env=env)
+
+
+def configure_tls_modes(
+    service: str,
+    server_host: str,
+    server_cert_mode: str | None = None,
+    server_client_mode: str | None = None,
+    client_cert_mode: str | None = None,
+    client_server_mode: str | None = None,
+):
+    """Configure ni-tls-config modes for the gRPC tests (Windows only)."""
+    if sys.maxsize <= 2**32:
+        raise UnsupportedEnvironmentError(
+            "nitlsconfigtest scripts are unsupported on 32-bit Python."
+        )
+
+    script_path = r"C:/NITests/nitlsconfigtest/configure_tls_modes.py"
+    if not pathlib.Path(script_path).is_file():
+        raise FileNotFoundError("nitlsconfigtest is not available")
+
+    service_arg = f"--service={service}"
+    server_host_arg = f"--server-host={server_host}"
+    server_user_arg = "--local-server"
+    server_cert_mode_arg = (
+        f"--server-certificate-mode={server_cert_mode}" if server_cert_mode else None
+    )
+    server_client_mode_arg = (
+        f"--server-client-mode={server_client_mode}" if server_client_mode else None
+    )
+    client_cert_mode_arg = (
+        f"--client-certificate-mode={client_cert_mode}" if client_cert_mode else None
+    )
+    client_server_mode_arg = (
+        f"--client-server-mode={client_server_mode}" if client_server_mode else None
+    )
+
+    command = [
+        sys.executable,
+        str(pathlib.Path(script_path)),
+        service_arg,
+        server_host_arg,
+        server_user_arg,
+    ]
+    command.extend(
+        arg
+        for arg in (
+            server_cert_mode_arg,
+            server_client_mode_arg,
+            client_cert_mode_arg,
+            client_server_mode_arg,
+        )
+        if arg is not None
+    )
+
+    # The script expects this environment variable to be set
+    env = os.environ.copy()
+    env.setdefault("USERNAME", "Administrator")
+
+    subprocess.run(command, check=True, env=env)
+
+
+def configure_tls_modes_secure(
+    service: str,
+    server_host: str,
+):
+    """Configure secure ni-tls-config modes for the gRPC tests (Windows only)."""
+    configure_tls_modes(
+        service=service,
+        server_host=server_host,
+        server_cert_mode="ManagedSelfSigned",
+        server_client_mode="ManagedSelfSigned",
+        client_cert_mode="Managed",
+        client_server_mode="TrustedCertificates",
+    )
+
+
+def configure_tls_modes_insecure(
+    service: str,
+    server_host: str,
+):
+    """Configure insecure ni-tls-config modes for the gRPC tests (Windows only)."""
+    configure_tls_modes(
+        service=service,
+        server_host=server_host,
+        server_cert_mode="Disabled",
+        server_client_mode="Disabled",
+        client_cert_mode="Disabled",
+        client_server_mode="Disabled",
+    )

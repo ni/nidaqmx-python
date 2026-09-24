@@ -27,6 +27,7 @@ from tests.component._analog_utils import (
 from tests.component._utils import _is_timestamp_close_to_now
 
 
+@pytest.mark.grpc_tls
 def test___analog_single_channel_reader___read_one_sample___returns_valid_samples(
     ai_single_channel_task: nidaqmx.Task,
 ) -> None:
@@ -38,6 +39,7 @@ def test___analog_single_channel_reader___read_one_sample___returns_valid_sample
     assert data == pytest.approx(expected, abs=AI_VOLTAGE_EPSILON)
 
 
+@pytest.mark.grpc_tls
 def test___analog_single_channel_reader___read_many_sample___returns_valid_samples(
     ai_single_channel_task: nidaqmx.Task,
 ) -> None:

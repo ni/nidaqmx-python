@@ -159,6 +159,7 @@ markers = [
   "grpc_only(reason=...): run the test with only the gRPC interpreter implementation.",
   "grpc_skip(reason=...): skip the given test function with the gRPC interpreter implementation.",
   "grpc_xfail(condition, ..., *, reason=..., run=True, raises=None, strict=xfail_strict): mark the test function as an expected failure with the gRPC interpreter implementation.",
+  "grpc_tls(reason=...): additionally run the test against an ni-tls-config-configured gRPC server, once with TLS enabled and once with TLS disabled.",
   "new_task_name: name of the new task to be created.",
   "device_name: name of the device used for testing.",
   "task_name: the existing task name to be used for testing.",

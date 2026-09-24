@@ -38,6 +38,7 @@ nicai             # NI-DAQmx C library filename (Windows DLL)
 nicaiu            # NI-DAQmx C library filename (Windows DLL, Unicode)
 nidevice          # NI package name; ni-device-grpc
 nitlsconfig       # Dependency: nitlsconfig
+nitlsconfigtest   # Dependency: nitlsconfig
 nitypes           # Dependency: nitypes
 nptdms            # Dependency: nptdms
 numpy             # Dependency: numpy
