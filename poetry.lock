@@ -3007,15 +3007,15 @@ toml = ">=0.10.1"
 
 [[package]]
 name = "nitlsconfig"
-version = "1.0.0a4"
+version = "1.0.0"
 description = "Python API for reading nitlsconfig configurations and creating NI gRPC Device client channels from them"
 optional = true
 python-versions = ">=3.9"
 groups = ["main"]
 markers = "extra == \"grpc\""
 files = [
-    {file = "nitlsconfig-1.0.0a4-py3-none-any.whl", hash = "sha256:674aaa36ae47bf862d545e9b21486dc14184f75a157d8b25366976149e01e6f0"},
-    {file = "nitlsconfig-1.0.0a4.tar.gz", hash = "sha256:9fcd034424e3a80e3d0c560bcaf4eaae44b2a03a98bfc1af7892bf53b26d8fe9"},
+    {file = "nitlsconfig-1.0.0-py3-none-any.whl", hash = "sha256:3d197e1ec7223b45a18b6abc59e08c76b8859add35b5e33d0cf691ce5fa8dcb9"},
+    {file = "nitlsconfig-1.0.0.tar.gz", hash = "sha256:65d42dda0700a59abddcc5d521bd77b030dbfc980ecf47661d16d3006b092b3a"},
 ]
 
 [package.dependencies]
@@ -3981,9 +3981,29 @@ description = "Thin-wrapper around the mock package for easier use with pytest"
 optional = false
 python-versions = ">=3.9"
 groups = ["test"]
+markers = "python_version == \"3.9\""
 files = [
     {file = "pytest_mock-3.15.1-py3-none-any.whl", hash = "sha256:0a25e2eb88fe5168d535041d09a4529a188176ae608a6d249ee65abc0949630d"},
     {file = "pytest_mock-3.15.1.tar.gz", hash = "sha256:1849a238f6f396da19762269de72cb1814ab44416fa73a8686deac10b0d87a0f"},
+]
+
+[package.dependencies]
+pytest = ">=6.2.5"
+
+[package.extras]
+dev = ["pre-commit", "pytest-asyncio", "tox"]
+
+[[package]]
+name = "pytest-mock"
+version = "3.16.0"
+description = "Thin-wrapper around the mock package for easier use with pytest"
+optional = false
+python-versions = ">=3.10"
+groups = ["test"]
+markers = "python_version >= \"3.10\""
+files = [
+    {file = "pytest_mock-3.16.0-py3-none-any.whl", hash = "sha256:007cfeb257801d88d9c0b2a7b5a15a15e73b71968dfd72e7bf8c4a2f8393aec8"},
+    {file = "pytest_mock-3.16.0.tar.gz", hash = "sha256:5a8395528b8f498205f3718f575228d0edaed7425fff638f87d1a6c3e0383636"},
 ]
 
 [package.dependencies]
@@ -4743,15 +4763,15 @@ virtualenv = ">=20.31.2"
 
 [[package]]
 name = "tox"
-version = "4.63.0"
+version = "4.64.4"
 description = "tox is a generic virtualenv management and test command line tool"
 optional = false
 python-versions = ">=3.10"
 groups = ["test"]
 markers = "python_version >= \"3.10\""
 files = [
-    {file = "tox-4.63.0-py3-none-any.whl", hash = "sha256:e8c560a9124e127c5e0547912d2ae1ef948dbba2fdea0b8d506e609a126b2e47"},
-    {file = "tox-4.63.0.tar.gz", hash = "sha256:fb7105ef125b371e31797cfa615e5a160de3d8ef29b86dca7fcbd9048da3a9d8"},
+    {file = "tox-4.64.4-py3-none-any.whl", hash = "sha256:7158441d235d9e1b588f0e9f0547c07a45b3bd2f31530adb14ff5b3c1e84daeb"},
+    {file = "tox-4.64.4.tar.gz", hash = "sha256:99e2a36e75202bd468f68126be25f72b8d8483e4a27b65252d6f019e856e62fd"},
 ]
 
 [package.dependencies]
@@ -4787,15 +4807,15 @@ files = [
 
 [[package]]
 name = "types-grpcio"
-version = "1.83.0.20260730"
+version = "1.84.0.20260928"
 description = "Typing stubs for grpcio"
 optional = false
 python-versions = ">=3.10"
 groups = ["lint"]
 markers = "python_version >= \"3.10\""
 files = [
-    {file = "types_grpcio-1.83.0.20260730-py3-none-any.whl", hash = "sha256:400e0517d088e90ecfe302a96f09728cb9c72508d835fa0793fce552cd4e1477"},
-    {file = "types_grpcio-1.83.0.20260730.tar.gz", hash = "sha256:e2b0532526a563dbb39aa6ee39fe0961488116ac1afec3065607532c93299b64"},
+    {file = "types_grpcio-1.84.0.20260928-py3-none-any.whl", hash = "sha256:f0b54cbed12cf8fb0d8e6e7e699562da06515ca5a88014a209bf75780d6d1145"},
+    {file = "types_grpcio-1.84.0.20260928.tar.gz", hash = "sha256:eacb229deeb94e23a37c7ed0dd739dd2098ee63c7e432cc88340109ae3ad2fc1"},
 ]
 
 [[package]]
