@@ -6,7 +6,7 @@ Run 'pip install matplotlib' to install the matplotlib module.
 """
 
 # /// script
-# dependencies = ["nidaqmx", "matplotlib", "numpy"]
+# dependencies = ["nidaqmx", "matplotlib"]
 # ///
 
 import matplotlib.pyplot as plot

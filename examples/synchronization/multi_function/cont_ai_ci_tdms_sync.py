@@ -7,7 +7,7 @@ This example demonstrates how to:
 """
 
 # /// script
-# dependencies = ["nidaqmx", "nptdms", "nitypes", "numpy"]
+# dependencies = ["nidaqmx", "nptdms"]
 # ///
 
 from __future__ import annotations

@@ -5,7 +5,7 @@ generate data at the same time, synchronized with one another.
 """
 
 # /// script
-# dependencies = ["nidaqmx", "numpy"]
+# dependencies = ["nidaqmx"]
 # ///
 
 import numpy as np

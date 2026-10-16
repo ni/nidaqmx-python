@@ -7,7 +7,7 @@ the specified number of samples generation is complete.
 """
 
 # /// script
-# dependencies = ["nidaqmx", "numpy"]
+# dependencies = ["nidaqmx"]
 # ///
 
 import numpy as np

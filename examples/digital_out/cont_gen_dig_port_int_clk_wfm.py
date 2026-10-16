@@ -5,7 +5,7 @@ pattern using the DAQ device's clock.
 """
 
 # /// script
-# dependencies = ["nidaqmx", "nitypes", "numpy"]
+# dependencies = ["nidaqmx"]
 # ///
 
 import numpy as np
