@@ -1,3 +1,7 @@
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 """Examples for using system properties in DAQmx."""
 
 import nidaqmx.system

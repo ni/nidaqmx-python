@@ -1,3 +1,7 @@
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 """Examples for sw timed power operation."""
 
 import pprint

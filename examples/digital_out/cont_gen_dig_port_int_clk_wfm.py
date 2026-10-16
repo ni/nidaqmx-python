@@ -1,3 +1,7 @@
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 """Example for generating digital signals using the DigitalWaveform data type.
 
 This example demonstrates how to output a continuous digital

@@ -1,4 +1,8 @@
-﻿"""Example for reading a digital signal.
+﻿# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
+"""Example for reading a digital signal.
 
 This example demonstrates how to read values from a digital
 input port.

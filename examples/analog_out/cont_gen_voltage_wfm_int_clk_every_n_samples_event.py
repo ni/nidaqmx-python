@@ -1,3 +1,7 @@
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 """Example of analog output voltage generation with events.
 
 This example demonstrates how to use a Every N Samples events to output a

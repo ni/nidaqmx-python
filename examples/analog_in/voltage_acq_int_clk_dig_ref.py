@@ -1,3 +1,7 @@
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 """Example of analog input voltage acquisition with reference trigger.
 
 This example demonstrates how to acquire a finite amount of data

@@ -1,3 +1,7 @@
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 """Example for continuously generating digital pulse train with implicit timing.
 
 This example demonstrates how to generate a continuous buffered

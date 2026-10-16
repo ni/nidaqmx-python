@@ -1,3 +1,7 @@
+# /// script
+# dependencies = ["nidaqmx", "nptdms"]
+# ///
+
 """Example of logging multiple synchronized tasks to a single TDMS file using a queue.
 
 This example demonstrates how to:

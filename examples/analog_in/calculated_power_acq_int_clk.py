@@ -1,4 +1,8 @@
-﻿"""Example of analog input calculated power acquisition.
+﻿# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
+"""Example of analog input calculated power acquisition.
 
 This example demonstrates how to acquire a finite amount
 of calculated power data using the DAQ device's internal clock.

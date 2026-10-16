@@ -1,4 +1,8 @@
-﻿"""Example of analog input voltage acquisition with events.
+﻿# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
+"""Example of analog input voltage acquisition with events.
 
 This example demonstrates how to use Every N Samples events to
 acquire a continuous amount of data using the DAQ device's

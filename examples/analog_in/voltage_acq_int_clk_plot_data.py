@@ -1,4 +1,8 @@
-﻿"""Example of generating visualizations for acquired data.
+﻿# /// script
+# dependencies = ["nidaqmx", "matplotlib"]
+# ///
+
+"""Example of generating visualizations for acquired data.
 
 This example demonstrates how to plot the acquired data.
 This example requires the matplotlib module.

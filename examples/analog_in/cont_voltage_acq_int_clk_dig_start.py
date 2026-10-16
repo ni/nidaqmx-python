@@ -1,4 +1,8 @@
-﻿"""Example of analog input voltage acquisition with a digital start trigger.
+﻿# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
+"""Example of analog input voltage acquisition with a digital start trigger.
 
 This example demonstrates how to acquire a continuous amount of
 data using an external sample clock, started by a digital edge.

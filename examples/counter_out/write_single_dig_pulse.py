@@ -1,3 +1,7 @@
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 """Example for generating a single digital pulse.
 
 This example demonstrates how to generate a single digital pulse

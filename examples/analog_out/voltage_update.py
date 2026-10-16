@@ -1,3 +1,7 @@
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 """Example of analog output voltage generation.
 
 This example demonstrates how to output a single Voltage Update

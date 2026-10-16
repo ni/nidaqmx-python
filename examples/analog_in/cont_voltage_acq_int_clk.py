@@ -1,4 +1,8 @@
-﻿"""Example of analog input voltage acquisition.
+﻿# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
+"""Example of analog input voltage acquisition.
 
 This example demonstrates how to acquire a continuous amount of data
 using the DAQ device's internal clock.

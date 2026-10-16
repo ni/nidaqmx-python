@@ -1,3 +1,7 @@
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 """Example of analog input voltage waveform acquisition.
 
 This example demonstrates how to acquire a finite amount

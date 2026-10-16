@@ -1,4 +1,8 @@
-﻿"""Example of logging acquired data to TDMS file and read back.
+﻿# /// script
+# dependencies = ["nidaqmx", "nptdms"]
+# ///
+
+"""Example of logging acquired data to TDMS file and read back.
 
 This example demonstrates how to log the acquired data to a TDMS file
 and then read the data from the file.

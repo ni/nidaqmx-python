@@ -1,3 +1,7 @@
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 """Example of counter input frequency acquisition.
 
 This example demonstrates how to continuously measure buffered frequency

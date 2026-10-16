@@ -1,4 +1,8 @@
-﻿"""Example of analog input temperature acquisition.
+﻿# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
+"""Example of analog input temperature acquisition.
 
 This example demonstrates how to acquire thermocouple measurement using
 software timing.

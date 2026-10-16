@@ -1,3 +1,7 @@
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 """Example of CI pulse frequency operation.
 
 This example demonstrates how to configure a pulse measurement to acquire frequency and duty cycle.

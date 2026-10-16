@@ -1,4 +1,8 @@
-﻿"""Example of generating visualizations for acquired data using the AnalogWaveform data type.
+﻿# /// script
+# dependencies = ["nidaqmx", "matplotlib"]
+# ///
+
+"""Example of generating visualizations for acquired data using the AnalogWaveform data type.
 
 This example demonstrates how to plot the acquired waveform data.
 This example requires the matplotlib module.
