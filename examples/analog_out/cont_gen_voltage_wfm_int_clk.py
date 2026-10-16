@@ -5,7 +5,7 @@ waveform using an internal sample clock.
 """
 
 # /// script
-# dependencies = ["nidaqmx"]
+# dependencies = ["nidaqmx", "numpy"]
 # ///
 
 import numpy as np

@@ -6,7 +6,7 @@ sample clock.
 """
 
 # /// script
-# dependencies = ["nidaqmx"]
+# dependencies = ["nidaqmx", "nitypes"]
 # ///
 
 from nitypes.waveform import AnalogWaveform
