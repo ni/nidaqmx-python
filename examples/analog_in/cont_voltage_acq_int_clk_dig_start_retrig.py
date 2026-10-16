@@ -1,12 +1,12 @@
-﻿# /// script
-# dependencies = ["nidaqmx"]
-# ///
-
-"""Example of analog input voltage acquisition with retriggering.
+﻿"""Example of analog input voltage acquisition with retriggering.
 
 This example demonstrates how to acquire finite amounts of data
 on each digital trigger.
 """
+
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
 
 import nidaqmx
 from nidaqmx.constants import AcquisitionType

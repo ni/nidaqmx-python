@@ -1,12 +1,12 @@
-﻿# /// script
-# dependencies = ["nidaqmx"]
-# ///
-
-"""Example of continuous temperature acquisition.
+﻿"""Example of continuous temperature acquisition.
 
 This example demonstrates how to make continuous, hardware-timed
 temperature measurement using a thermocouple.
 """
+
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
 
 import nidaqmx
 from nidaqmx.constants import (

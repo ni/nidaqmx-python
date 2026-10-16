@@ -1,13 +1,13 @@
-﻿# /// script
-# dependencies = ["nidaqmx", "matplotlib"]
-# ///
-
-"""Example of generating visualizations for acquired data.
+﻿"""Example of generating visualizations for acquired data.
 
 This example demonstrates how to plot the acquired data.
 This example requires the matplotlib module.
 Run 'pip install matplotlib' to install the matplotlib module.
 """
+
+# /// script
+# dependencies = ["nidaqmx", "matplotlib"]
+# ///
 
 import matplotlib.pyplot as plot
 

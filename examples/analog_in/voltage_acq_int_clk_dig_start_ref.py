@@ -1,13 +1,13 @@
-﻿# /// script
-# dependencies = ["nidaqmx"]
-# ///
-
-"""Example of analog input voltage acquisition with digital start and reference trigger.
+﻿"""Example of analog input voltage acquisition with digital start and reference trigger.
 
 This example demonstrates how to acquire a finite amount of data
 using an internal clock and a digital start and reference
 trigger.
 """
+
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
 
 import nidaqmx
 from nidaqmx.constants import READ_ALL_AVAILABLE, AcquisitionType

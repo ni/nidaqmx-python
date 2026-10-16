@@ -1,8 +1,8 @@
+"""Example of AI raw operation."""
+
 # /// script
 # dependencies = ["nidaqmx"]
 # ///
-
-"""Example of AI raw operation."""
 
 import pprint
 

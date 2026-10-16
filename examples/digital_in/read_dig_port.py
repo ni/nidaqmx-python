@@ -1,12 +1,12 @@
-﻿# /// script
-# dependencies = ["nidaqmx"]
-# ///
-
-"""Example for reading a digital signal.
+﻿"""Example for reading a digital signal.
 
 This example demonstrates how to read values from a digital
 input port.
 """
+
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
 
 import nidaqmx
 from nidaqmx.constants import LineGrouping

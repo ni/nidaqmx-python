@@ -1,12 +1,12 @@
-# /// script
-# dependencies = ["nidaqmx"]
-# ///
-
 """Example for generating digital signals.
 
 This example demonstrates how to output a finite digital
 waveform using the DAQ device's internal clock.
 """
+
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
 
 import nidaqmx
 from nidaqmx.constants import AcquisitionType, LineGrouping

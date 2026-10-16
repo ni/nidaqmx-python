@@ -1,12 +1,12 @@
-# /// script
-# dependencies = ["nidaqmx"]
-# ///
-
 """Example of analog output voltage generation.
 
 This example demonstrates how to output a single Voltage Update
 (Sample) to an Analog Output Channel.
 """
+
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
 
 import nidaqmx
 

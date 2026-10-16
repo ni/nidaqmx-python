@@ -1,7 +1,3 @@
-# /// script
-# dependencies = ["nidaqmx", "nptdms"]
-# ///
-
 """Example of logging multiple synchronized tasks to a single TDMS file using a queue.
 
 This example demonstrates how to:
@@ -9,6 +5,10 @@ This example demonstrates how to:
 2. Use a producer-consumer pattern with a queue
 3. Log data from multiple tasks to a single TDMS file
 """
+
+# /// script
+# dependencies = ["nidaqmx", "nptdms"]
+# ///
 
 from __future__ import annotations
 

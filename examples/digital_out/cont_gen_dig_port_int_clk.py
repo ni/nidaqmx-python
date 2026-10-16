@@ -1,12 +1,12 @@
-# /// script
-# dependencies = ["nidaqmx"]
-# ///
-
 """Example for generating digital signals.
 
 This example demonstrates how to output a continuous digital
 pattern using the DAQ device's clock.
 """
+
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
 
 import nidaqmx
 from nidaqmx.constants import AcquisitionType, LineGrouping

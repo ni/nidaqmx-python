@@ -1,8 +1,8 @@
+"""Examples for hw timed power stream operation."""
+
 # /// script
 # dependencies = ["nidaqmx"]
 # ///
-
-"""Examples for hw timed power stream operation."""
 
 import pprint
 

@@ -1,8 +1,4 @@
-﻿# /// script
-# dependencies = ["nidaqmx"]
-# ///
-
-"""Example of analog input calculated power acquisition.
+﻿"""Example of analog input calculated power acquisition.
 
 This example demonstrates how to acquire a finite amount
 of calculated power data using the DAQ device's internal clock.
@@ -11,6 +7,10 @@ Supported Devices:
 
 - PXIe-4311 (DAQmx 26.3.0 or later)
 """
+
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
 
 import nidaqmx
 from nidaqmx.constants import READ_ALL_AVAILABLE, AcquisitionType

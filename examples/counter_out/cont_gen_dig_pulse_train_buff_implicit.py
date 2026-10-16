@@ -1,7 +1,3 @@
-# /// script
-# dependencies = ["nidaqmx"]
-# ///
-
 """Example for continuously generating digital pulse train with implicit timing.
 
 This example demonstrates how to generate a continuous buffered
@@ -12,6 +8,10 @@ fixed frequency but a duty cycle that varies based on the Duty
 Cycle Max/Min and the signal type. The duty cycle will update
 with each sample generated.
 """
+
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
 
 import nidaqmx
 from nidaqmx.constants import AcquisitionType, Level

@@ -1,8 +1,8 @@
+"""Example of AI multitask operation."""
+
 # /// script
 # dependencies = ["nidaqmx"]
 # ///
-
-"""Example of AI multitask operation."""
 
 import pprint
 

@@ -1,14 +1,14 @@
-﻿# /// script
-# dependencies = ["nidaqmx", "nptdms"]
-# ///
-
-"""Example of logging acquired data to TDMS file and read back.
+﻿"""Example of logging acquired data to TDMS file and read back.
 
 This example demonstrates how to log the acquired data to a TDMS file
 and then read the data from the file.
 This example requires the nptdms module.
 Run 'pip install nptdms' to install the nptdms module.
 """
+
+# /// script
+# dependencies = ["nidaqmx", "nptdms"]
+# ///
 
 import os
 

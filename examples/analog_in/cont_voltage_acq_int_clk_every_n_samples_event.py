@@ -1,14 +1,14 @@
-﻿# /// script
-# dependencies = ["nidaqmx"]
-# ///
-
-"""Example of analog input voltage acquisition with events.
+﻿"""Example of analog input voltage acquisition with events.
 
 This example demonstrates how to use Every N Samples events to
 acquire a continuous amount of data using the DAQ device's
 internal clock. The Every N Samples events indicate when data is
 available from DAQmx.
 """
+
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
 
 import nidaqmx
 from nidaqmx.constants import AcquisitionType

@@ -1,13 +1,13 @@
-# /// script
-# dependencies = ["nidaqmx"]
-# ///
-
 """Example for generating a single digital pulse.
 
 This example demonstrates how to generate a single digital pulse
 from a Counter Output Channel. The Initial Delay, High Time, Low
 Time, and Idle State are all configurable.
 """
+
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
 
 import nidaqmx
 from nidaqmx.constants import Level

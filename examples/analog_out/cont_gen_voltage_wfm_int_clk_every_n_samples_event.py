@@ -1,7 +1,3 @@
-# /// script
-# dependencies = ["nidaqmx"]
-# ///
-
 """Example of analog output voltage generation with events.
 
 This example demonstrates how to use a Every N Samples events to output a
@@ -9,6 +5,10 @@ continuous periodic waveform to an Analog Output Channel
 using an internal sample clock. The Every N Samples events indicate when
 the specified number of samples generation is complete.
 """
+
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
 
 import numpy as np
 import numpy.typing

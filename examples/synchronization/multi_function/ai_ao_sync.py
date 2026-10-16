@@ -1,12 +1,12 @@
-﻿# /// script
-# dependencies = ["nidaqmx"]
-# ///
-
-"""Example of analog input and output synchronization.
+﻿"""Example of analog input and output synchronization.
 
 This example demonstrates how to continuously acquire and
 generate data at the same time, synchronized with one another.
 """
+
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
 
 import numpy as np
 import numpy.typing

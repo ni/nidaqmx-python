@@ -1,13 +1,13 @@
-﻿# /// script
-# dependencies = ["nidaqmx"]
-# ///
-
-"""Example of counter input edge count operation.
+﻿"""Example of counter input edge count operation.
 
 This example demonstrates how to count digital events on a
 Counter Input Channel. The Initial Count, Count Direction, and
 Edge are all configurable.
 """
+
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
 
 import nidaqmx
 from nidaqmx.constants import CountDirection, Edge

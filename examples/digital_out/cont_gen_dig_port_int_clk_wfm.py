@@ -1,12 +1,12 @@
-# /// script
-# dependencies = ["nidaqmx"]
-# ///
-
 """Example for generating digital signals using the DigitalWaveform data type.
 
 This example demonstrates how to output a continuous digital
 pattern using the DAQ device's clock.
 """
+
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
 
 import numpy as np
 from nitypes.waveform import DigitalWaveform

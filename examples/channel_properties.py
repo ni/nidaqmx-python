@@ -1,8 +1,8 @@
+"""Example for using channel properties."""
+
 # /// script
 # dependencies = ["nidaqmx"]
 # ///
-
-"""Example for using channel properties."""
 
 import pprint
 

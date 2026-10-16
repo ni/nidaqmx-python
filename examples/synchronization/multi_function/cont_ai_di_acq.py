@@ -1,13 +1,13 @@
-﻿# /// script
-# dependencies = ["nidaqmx"]
-# ///
-
-"""Example of analog and digital data acquisition at the same time.
+﻿"""Example of analog and digital data acquisition at the same time.
 
 This example demonstrates how to continuously acquire analog and
 digital data at the same time, synchronized with one another on
 the same device.
 """
+
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
 
 import nidaqmx
 from nidaqmx.constants import AcquisitionType, LineGrouping, ProductCategory

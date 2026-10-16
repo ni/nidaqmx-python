@@ -1,7 +1,3 @@
-# /// script
-# dependencies = ["nidaqmx"]
-# ///
-
 """Example of analog output voltage generation.
 
 This example demonstrates how to continuously generate an
@@ -15,6 +11,10 @@ the default frequency value is 17.0 to demonstrate that non-regenerative output
 can be used to create a signal with a frequency that is not an even divide-down
 of your sample clock.
 """
+
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
 
 import numpy as np
 import numpy.typing

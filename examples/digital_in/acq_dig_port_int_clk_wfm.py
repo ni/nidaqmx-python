@@ -1,12 +1,12 @@
-﻿# /// script
-# dependencies = ["nidaqmx"]
-# ///
-
-"""Example for reading digital signals.
+﻿"""Example for reading digital signals.
 
 This example demonstrates how to input a finite digital pattern
 using the DAQ device's internal clock.
 """
+
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
 
 import numpy as np
 

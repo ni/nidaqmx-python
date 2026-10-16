@@ -1,12 +1,12 @@
-﻿# /// script
-# dependencies = ["nidaqmx"]
-# ///
-
-"""Example of analog input temperature acquisition.
+﻿"""Example of analog input temperature acquisition.
 
 This example demonstrates how to acquire thermocouple measurement using
 software timing.
 """
+
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
 
 import nidaqmx
 from nidaqmx.constants import ThermocoupleType, TemperatureUnits
