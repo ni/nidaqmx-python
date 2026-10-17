@@ -5,6 +5,10 @@ from a Counter Output Channel. The Initial Delay, High Time, Low
 Time, and Idle State are all configurable.
 """
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import nidaqmx
 from nidaqmx.constants import Level
 

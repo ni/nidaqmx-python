@@ -5,6 +5,10 @@ Counter Input Channel. The Initial Count, Count Direction, and
 Edge are all configurable.
 """
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import nidaqmx
 from nidaqmx.constants import CountDirection, Edge
 

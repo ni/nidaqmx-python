@@ -4,6 +4,10 @@ This example demonstrates how to acquire thermocouple measurement using
 software timing.
 """
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import nidaqmx
 from nidaqmx.constants import ThermocoupleType, TemperatureUnits
 

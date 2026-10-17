@@ -4,6 +4,10 @@ This example demonstrates how to output a single Voltage Update
 (Sample) to an Analog Output Channel.
 """
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import nidaqmx
 
 with nidaqmx.Task() as task:

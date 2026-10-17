@@ -1,5 +1,9 @@
 """Examples for hw timed power stream operation."""
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import pprint
 
 import numpy

@@ -4,6 +4,10 @@ This example demonstrates how to acquire a finite amount of data
 using a digital reference trigger.
 """
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import nidaqmx
 from nidaqmx.constants import READ_ALL_AVAILABLE, AcquisitionType
 

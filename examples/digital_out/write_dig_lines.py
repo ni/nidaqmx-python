@@ -4,6 +4,10 @@ This example demonstrates how to write values to a digital
 output channel.
 """
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import nidaqmx
 from nidaqmx.constants import LineGrouping
 

@@ -1,5 +1,9 @@
 """Example of AI multitask operation."""
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import pprint
 
 import nidaqmx

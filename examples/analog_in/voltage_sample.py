@@ -3,6 +3,10 @@
 This example demonstrates how to acquire a voltage measurement using software timing.
 """
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import nidaqmx
 
 with nidaqmx.Task() as task:

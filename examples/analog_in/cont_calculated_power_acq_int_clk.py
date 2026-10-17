@@ -8,6 +8,10 @@ Supported Devices:
 - PXIe-4311 (DAQmx 26.3.0 or later)
 """
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import nidaqmx
 from nidaqmx.constants import AcquisitionType
 

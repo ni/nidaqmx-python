@@ -6,6 +6,10 @@ internal clock. The Every N Samples events indicate when data is
 available from DAQmx.
 """
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import nidaqmx
 from nidaqmx.constants import AcquisitionType
 

@@ -4,6 +4,10 @@ This example demonstrates how to acquire a finite amount
 of data using the DAQ device's internal clock.
 """
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import nidaqmx
 from nidaqmx.constants import AcquisitionType, READ_ALL_AVAILABLE
 
