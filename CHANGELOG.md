@@ -39,7 +39,9 @@ All notable changes to this project will be documented in this file.
 * ### Major Changes
     * Add support for Analog Path Delay
     * Added `nitlsconfig[grpc]` to the `grpc` extra to enable using NI TLS to create TLS-encrypted gRPC channels. `nitlsconfig` is the Python API for reading the NI TLS configuration installed on the system and creating NI gRPC Device client channels from it.
-    * Added PEP 723 dependency metadata to example scripts so script runners can install their dependencies.
+    * Added PEP 723 dependency metadata to example programs.
+      * Now you can use tools such as `pipx` or `uv` to automatically install the required dependencies for an `nidaqmx` example program and run it.
+      * For example: `pipx run voltage_sample.py` or `uv run voltage_sample.py`
 
 * ### Known Issues
     * ...
