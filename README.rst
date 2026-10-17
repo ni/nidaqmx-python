@@ -131,6 +131,10 @@ check out the
 Newer examples may demonstrate features that are not available in older versions
 of **nidaqmx**.
 
+You can use tools such as ``pipx`` or ``uv`` to automatically install the
+required dependencies for an ``nidaqmx`` example program and run it. For
+example: ``pipx run voltage_sample.py`` or ``uv run voltage_sample.py``.
+
 Key Concepts in NI-DAQmx
 =========================
 
