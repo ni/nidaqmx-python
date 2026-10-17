@@ -84,6 +84,29 @@ $ poetry run tox
 This requires you to have all the Python interpreters supported by **nidaqmx** installed on your
 machine.
 
+# API Compatibility
+
+Pull requests run Griffe to check the generated public API against the pull request's base commit.
+The check covers the package and the modules in the API reference separately because package
+exports do not include every documented module. This includes documented classes in private
+implementation modules, such as device collections. It also checks error codes and gRPC session
+options. It runs without the NI-DAQmx driver or package dependencies.
+
+To investigate a compatibility failure locally, install the same Griffe version used in the workflow
+and check the affected module:
+
+```sh
+python -m pip install griffe==2.3.2
+git fetch origin master
+griffe check --search generated --against origin/master --verbose nidaqmx.utils
+```
+
+Replace `nidaqmx.utils` with the affected module and `origin/master` with the target branch or base
+commit when appropriate. Griffe reports potential breaks, including removed objects, changed
+parameters, and changed defaults. Review each report rather than suppressing whole categories;
+even a harmless-looking default change may affect callers. Intentional breaking changes or false
+positives require maintainer review before changing the compatibility check.
+
 # Benchmarks
 
 Benchmark tests are not run by default when you run pytest. To run the benchmarks, use this command:

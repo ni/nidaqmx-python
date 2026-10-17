@@ -15,6 +15,49 @@ concurrency:
 permissions: {}
 
 jobs:
+  check_api_compatibility:
+    name: Check API compatibility
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set up Python
+        uses: ni/python-actions/setup-python@dee640bba235ae28fdc6b7337c643bd06358ae90 # v0.9.0
+        with:
+          python-version: "3.11"
+      - name: Install Griffe
+        run: python -m pip install griffe==2.3.2
+      - name: Check API compatibility
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          status=0
+          for module in nidaqmx nidaqmx.constants nidaqmx.error_codes nidaqmx.errors \
+            nidaqmx.grpc_session_options nidaqmx.scale nidaqmx.stream_readers \
+            nidaqmx.stream_writers nidaqmx.system \
+            nidaqmx.system._collections.device_collection \
+            nidaqmx.system._collections.persisted_channel_collection \
+            nidaqmx.system._collections.persisted_scale_collection \
+            nidaqmx.system._collections.persisted_task_collection \
+            nidaqmx.system._collections.physical_channel_collection \
+            nidaqmx.system._watchdog_modules.expiration_state \
+            nidaqmx.system._watchdog_modules.expiration_states_collection \
+            nidaqmx.system.device nidaqmx.system.physical_channel \
+            nidaqmx.system.storage.persisted_channel nidaqmx.system.storage.persisted_scale \
+            nidaqmx.system.storage.persisted_task nidaqmx.system.system nidaqmx.system.watchdog \
+            nidaqmx.task nidaqmx.task.channels nidaqmx.task.collections nidaqmx.task.triggering \
+            nidaqmx.types nidaqmx.utils; do
+            if ! griffe check --search generated --against "$BASE_SHA" --format github "$module"; then
+              status=1
+            fi
+          done
+          exit "$status"
   run_ci:
     name: Run CI
     uses: ./.github/workflows/CI.yml
