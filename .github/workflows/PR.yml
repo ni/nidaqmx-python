@@ -40,7 +40,19 @@ jobs:
           status=0
           for module in nidaqmx nidaqmx.constants nidaqmx.error_codes nidaqmx.errors \
             nidaqmx.grpc_session_options nidaqmx.scale nidaqmx.stream_readers \
-            nidaqmx.stream_writers nidaqmx.system nidaqmx.task nidaqmx.types nidaqmx.utils; do
+            nidaqmx.stream_writers nidaqmx.system \
+            nidaqmx.system._collections.device_collection \
+            nidaqmx.system._collections.persisted_channel_collection \
+            nidaqmx.system._collections.persisted_scale_collection \
+            nidaqmx.system._collections.persisted_task_collection \
+            nidaqmx.system._collections.physical_channel_collection \
+            nidaqmx.system._watchdog_modules.expiration_state \
+            nidaqmx.system._watchdog_modules.expiration_states_collection \
+            nidaqmx.system.device nidaqmx.system.physical_channel \
+            nidaqmx.system.storage.persisted_channel nidaqmx.system.storage.persisted_scale \
+            nidaqmx.system.storage.persisted_task nidaqmx.system.system nidaqmx.system.watchdog \
+            nidaqmx.task nidaqmx.task.channels nidaqmx.task.collections nidaqmx.task.triggering \
+            nidaqmx.types nidaqmx.utils; do
             if ! griffe check --search generated --against "$BASE_SHA" --format github "$module"; then
               status=1
             fi

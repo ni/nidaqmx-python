@@ -87,8 +87,10 @@ machine.
 # API Compatibility
 
 Pull requests run Griffe to check the generated public API against the pull request's base commit.
-The check covers the package and its public modules separately because package exports do not
-include every documented module. It runs without the NI-DAQmx driver or package dependencies.
+The check covers the package and the modules in the API reference separately because package
+exports do not include every documented module. This includes documented classes in private
+implementation modules, such as device collections. It also checks error codes and gRPC session
+options. It runs without the NI-DAQmx driver or package dependencies.
 
 To investigate a compatibility failure locally, install the same Griffe version used in the workflow
 and check the affected module:
