@@ -4,6 +4,10 @@ This example demonstrates how to read values from a digital
 input port.
 """
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import nidaqmx
 from nidaqmx.constants import LineGrouping
 

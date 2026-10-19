@@ -5,6 +5,10 @@ using one counter on a Counter Input Channel. The Edge, Minimum Value
 and Maximum Value are all configurable.
 """
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import nidaqmx
 from nidaqmx.constants import AcquisitionType, Edge, FrequencyUnits
 

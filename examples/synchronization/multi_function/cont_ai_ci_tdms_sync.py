@@ -6,6 +6,10 @@ This example demonstrates how to:
 3. Log data from multiple tasks to a single TDMS file
 """
 
+# /// script
+# dependencies = ["nidaqmx", "nptdms"]
+# ///
+
 from __future__ import annotations
 
 import os

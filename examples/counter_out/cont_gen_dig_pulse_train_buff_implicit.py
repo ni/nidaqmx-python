@@ -9,6 +9,10 @@ Cycle Max/Min and the signal type. The duty cycle will update
 with each sample generated.
 """
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import nidaqmx
 from nidaqmx.constants import AcquisitionType, Level
 from nidaqmx.types import CtrFreq

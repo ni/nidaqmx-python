@@ -6,6 +6,10 @@ This example requires the nptdms module.
 Run 'pip install nptdms' to install the nptdms module.
 """
 
+# /// script
+# dependencies = ["nidaqmx", "nptdms"]
+# ///
+
 import os
 
 from nptdms import TdmsFile

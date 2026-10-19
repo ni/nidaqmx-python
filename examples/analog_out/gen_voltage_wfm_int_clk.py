@@ -5,6 +5,10 @@ voltage samples to an Analog Output Channel using an internal
 sample clock.
 """
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 from nitypes.waveform import AnalogWaveform
 
 import nidaqmx

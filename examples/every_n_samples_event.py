@@ -1,5 +1,9 @@
 """Example for reading signals for every n samples."""
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import pprint
 
 import nidaqmx

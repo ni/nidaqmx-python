@@ -5,6 +5,10 @@ using an internal clock and a digital start and reference
 trigger.
 """
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import nidaqmx
 from nidaqmx.constants import READ_ALL_AVAILABLE, AcquisitionType
 

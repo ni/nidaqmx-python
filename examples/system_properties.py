@@ -1,5 +1,9 @@
 """Examples for using system properties in DAQmx."""
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import nidaqmx.system
 
 local_system = nidaqmx.system.System.local()
