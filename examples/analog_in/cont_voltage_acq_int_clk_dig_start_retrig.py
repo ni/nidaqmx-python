@@ -4,6 +4,10 @@ This example demonstrates how to acquire finite amounts of data
 on each digital trigger.
 """
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import nidaqmx
 from nidaqmx.constants import AcquisitionType
 

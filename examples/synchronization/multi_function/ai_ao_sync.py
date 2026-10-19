@@ -4,6 +4,10 @@ This example demonstrates how to continuously acquire and
 generate data at the same time, synchronized with one another.
 """
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import numpy as np
 import numpy.typing
 

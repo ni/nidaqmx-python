@@ -1,5 +1,9 @@
 """Example for catching warnings in DAQmx."""
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import warnings
 
 import nidaqmx

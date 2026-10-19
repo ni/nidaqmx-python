@@ -6,6 +6,10 @@ using an internal sample clock. The Every N Samples events indicate when
 the specified number of samples generation is complete.
 """
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import numpy as np
 import numpy.typing
 

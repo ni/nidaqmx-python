@@ -1,5 +1,9 @@
 """Examples for sw timed power operation."""
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import pprint
 import time
 

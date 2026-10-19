@@ -5,6 +5,10 @@ digital data at the same time, synchronized with one another on
 the same device.
 """
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import nidaqmx
 from nidaqmx.constants import AcquisitionType, LineGrouping, ProductCategory
 

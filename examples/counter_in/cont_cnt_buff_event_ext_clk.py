@@ -5,6 +5,10 @@ on a Counter Input Channel. The Initial Count, Count Direction,
 Edge, and Sample Clock Source are all configurable.
 """
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import nidaqmx
 from nidaqmx.constants import AcquisitionType, CountDirection, Edge
 

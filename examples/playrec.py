@@ -1,5 +1,9 @@
 """Simultaneous read and write with NI USB-4431 or similar device."""
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import numpy as np
 
 import nidaqmx

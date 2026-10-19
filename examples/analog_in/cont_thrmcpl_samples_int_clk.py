@@ -4,6 +4,10 @@ This example demonstrates how to make continuous, hardware-timed
 temperature measurement using a thermocouple.
 """
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import nidaqmx
 from nidaqmx.constants import (
     AcquisitionType,

@@ -4,6 +4,10 @@ This example demonstrates how to input a finite digital pattern
 using the DAQ device's internal clock.
 """
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import numpy as np
 
 import nidaqmx

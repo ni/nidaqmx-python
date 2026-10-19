@@ -5,6 +5,10 @@ pulse train from a Counter Output Channel. The Frequency, Duty
 Cycle, and Idle State are all configurable.
 """
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import nidaqmx
 from nidaqmx.constants import AcquisitionType, Level
 

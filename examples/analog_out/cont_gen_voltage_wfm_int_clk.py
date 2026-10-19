@@ -4,6 +4,10 @@ This example demonstrates how to output a continuous periodic
 waveform using an internal sample clock.
 """
 
+# /// script
+# dependencies = ["nidaqmx"]
+# ///
+
 import numpy as np
 import numpy.typing
 
