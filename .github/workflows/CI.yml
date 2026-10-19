@@ -11,6 +11,13 @@ on:
 permissions: {}
 
 jobs:
+  check_api_compatibility:
+    name: Check API compatibility
+    uses: ./.github/workflows/check_api_compatibility.yml
+    permissions:
+      contents: read
+    with:
+      base: ${{ github.event_name == 'pull_request' && startsWith(github.base_ref, 'releases/') && github.event.pull_request.base.sha || '' }}
   build:
     name: Build
     uses: ./.github/workflows/build.yml

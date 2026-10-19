@@ -1,0 +1,50 @@
+name: Check API compatibility
+
+on:
+  workflow_call:
+    inputs:
+      base:
+        description: Git ref to compare against; empty uses the newest Git tag.
+        type: string
+        required: false
+        default: ''
+  workflow_dispatch:
+    inputs:
+      base:
+        description: Git ref to compare against; empty uses the newest Git tag.
+        type: string
+        required: false
+        default: ''
+
+concurrency:
+  group: api-compatibility-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions: {}
+
+jobs:
+  check_api_compatibility:
+    name: Check API compatibility
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set up Python
+        uses: ni/python-actions/setup-python@dee640bba235ae28fdc6b7337c643bd06358ae90 # v0.9.0
+      - name: Set up Poetry
+        uses: ni/python-actions/setup-poetry@dee640bba235ae28fdc6b7337c643bd06358ae90 # v0.9.0
+      - name: Install compatibility dependencies
+        run: poetry install --only compatibility --no-root
+      - name: Test compatibility checker
+        run: poetry run python -m unittest discover -s .github/scripts -v
+      - name: Check API compatibility
+        env:
+          BASE_REF: ${{ inputs.base }}
+          # Set by a maintainer after approving the findings reported for the latest commit.
+          BREAKING_CHANGE_APPROVED: ${{ contains(github.event.pull_request.labels.*.name, 'breaking-change') }}
+        run: poetry run python .github/scripts/check_api_compatibility.py --base "$BASE_REF"

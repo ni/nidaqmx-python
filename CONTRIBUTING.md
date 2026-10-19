@@ -86,26 +86,78 @@ machine.
 
 # API Compatibility
 
-Pull requests run Griffe to check the generated public API against the pull request's base commit.
-The check covers the package and the modules in the API reference separately because package
-exports do not include every documented module. This includes documented classes in private
-implementation modules, such as device collections. It also checks error codes and gRPC session
-options. It runs without the NI-DAQmx driver or package dependencies.
+CI runs [Griffe](https://mkdocstrings.github.io/griffe/guide/users/checking/) for pull requests and
+pushes to `master` and release branches. The reusable `.github/workflows/check_api_compatibility.yml`
+workflow accepts an optional `base` Git reference. By default it uses the most recently created Git
+tag, matching Griffe's default. For PRs targeting `releases/**`, CI passes the PR's base commit SHA
+instead.
+Label changes and PR edits rerun CI through the same caller; they do not bypass existing build or
+test jobs.
 
-To investigate a compatibility failure locally, install the same Griffe version used in the workflow
-and check the affected module:
+The checker loads each package snapshot once and compares the `nidaqmx` root once. Docutils parses
+the hand-written RST API declarations, including canonical object targets, rather than searching
+generated documentation with regular expressions. Each snapshot's own documentation defines extra
+visibility in Griffe's model, including documented APIs in private implementation modules and public
+aliases of documented objects. Removing documentation in a PR therefore cannot hide a previously
+documented API removal. There is no package list to maintain in the workflow.
+
+This policy changes only the analysis models, not Python exports. Cleaning up source-level exports
+is a separate public API decision requiring maintainer agreement, including effects on wildcard
+imports and supported import paths. Such a cleanup would not retroactively fix the exports in
+previous release snapshots, so it cannot replace the historical documentation policy.
+
+To reproduce the package checks locally, use the locked Poetry tooling group with Python 3.11 or
+later. For the default release comparison:
 
 ```sh
-python -m pip install griffe==2.3.2
-git fetch origin master
-griffe check --search generated --against origin/master --verbose nidaqmx.utils
+poetry install --only compatibility --no-root
+git fetch origin --tags
+poetry run python .github/scripts/check_api_compatibility.py
+poetry run python -m unittest discover -s .github/scripts -v
 ```
 
-Replace `nidaqmx.utils` with the affected module and `origin/master` with the target branch or base
-commit when appropriate. Griffe reports potential breaks, including removed objects, changed
-parameters, and changed defaults. Review each report rather than suppressing whole categories;
-even a harmless-looking default change may affect callers. Intentional breaking changes or false
-positives require maintainer review before changing the compatibility check.
+Run these commands from the repository root. To compare against a particular release, pass
+`--base 1.3.0`. For a release-target PR, fetch its target branch and pass `--base` with the exact PR
+base SHA. The workflow prints the selected
+reference and resolved SHA so a CI run can be reproduced without relying on a moving branch or tag.
+If no release tag exists, supply an explicit base reference instead. The checks compare your
+current generated source against that baseline.
+
+Once the workflow is available on the default branch, maintainers can also select **Actions > Check
+API compatibility > Run workflow**, choose `master` as the branch, and set `base` to a previous release
+tag. The equivalent GitHub CLI command is:
+
+```sh
+gh workflow run check_api_compatibility.yml --repo ni/nidaqmx-python --ref master -f base=1.3.0
+```
+
+Griffe reports potential breaks, including removed objects, changed parameters, and changed
+defaults. Prefer a backward-compatible change, such as a deprecation period; Griffe's
+[breakage documentation](https://mkdocstrings.github.io/griffe/guide/users/checking/#detected-breakages)
+suggests one for each kind of break.
+
+Griffe has no per-change suppression mechanism, such as a docstring or comment. Breaking changes
+are therefore approved for a whole pull request with the `breaking-change` label:
+
+1. Maintainers agree that the breaking change, or false positive, is acceptable.
+2. A maintainer reviews every finding reported by the latest compatibility check run, not just the
+   intended one, and confirms that all of them are expected.
+3. Only then does a maintainer apply the `breaking-change` label.
+
+With the label applied, the job still runs on every commit and reports all findings as annotations,
+but confirmed compatibility findings no longer fail the job. Installation, Git, package-loading,
+and analysis failures still fail: the workflow applies the label only after documentation parsing,
+target resolution, and the Griffe comparison have succeeded and all findings have been formatted.
+The label covers every
+compatibility finding in the pull request, including unintended breaks introduced by later commits,
+so reviewers must check the annotations again after
+each push. Removing the label makes findings fail the job again. Adding or removing the label starts
+a new run; re-running an earlier run reuses the labels it originally saw. Document user-facing
+breaking changes in `CHANGELOG.md`.
+
+The label approves findings only in PR runs. Branch CI and manually dispatched comparisons still
+fail on compatibility findings against their selected baseline, including intentional breaks
+previously approved in a PR.
 
 # Benchmarks
 
