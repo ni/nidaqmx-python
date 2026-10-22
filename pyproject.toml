@@ -86,6 +86,13 @@ mypy-protobuf = [
   {version = ">=3.4", python = "^3.14"}
 ]
 
+[tool.poetry.group.compatibility]
+optional = true
+
+[tool.poetry.group.compatibility.dependencies]
+docutils = { version = ">=0.21,<0.23", python = ">=3.11,<4.0" }
+griffe = { version = ">=2.0", python = ">=3.11,<4.0" }
+
 [tool.poetry.group.docs]
 optional = true
 
