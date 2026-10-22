@@ -11,16 +11,22 @@ on:
 permissions: {}
 
 jobs:
+  build:
+    name: Build
+    uses: ./.github/workflows/build.yml
   check_api_compatibility:
     name: Check API compatibility
+    needs: [build]
     uses: ./.github/workflows/check_api_compatibility.yml
     permissions:
       contents: read
     with:
-      base: ${{ github.event_name == 'pull_request' && startsWith(github.base_ref, 'releases/') && github.event.pull_request.base.sha || '' }}
-  build:
-    name: Build
-    uses: ./.github/workflows/build.yml
+      base: >-
+        ${{ case(
+          github.event_name == 'pull_request' && startsWith(github.base_ref, 'releases/'), github.event.pull_request.base.sha,
+          github.event_name == 'push' && github.event.before != '0000000000000000000000000000000000000000', github.event.before,
+          ''
+        ) }}
   run_unit_tests:
     name: Run unit tests
     uses: ./.github/workflows/run_unit_tests.yml
