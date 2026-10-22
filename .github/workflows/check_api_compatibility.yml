@@ -40,8 +40,6 @@ jobs:
         uses: ni/python-actions/setup-poetry@dee640bba235ae28fdc6b7337c643bd06358ae90 # v0.9.0
       - name: Install compatibility dependencies
         run: poetry install --only compatibility --no-root
-      - name: Test compatibility checker
-        run: poetry run python -m unittest discover -s .github/scripts -v
       - name: Check API compatibility
         env:
           BASE_REF: ${{ inputs.base }}

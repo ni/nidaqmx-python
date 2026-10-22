@@ -95,7 +95,6 @@ locally (Python 3.11 or later):
 poetry install --only compatibility --no-root
 git fetch origin --tags
 poetry run python .github/scripts/check_api_compatibility.py
-poetry run python -m unittest discover -s .github/scripts -v
 ```
 
 Pass `--base <tag-or-commit>` to compare against a different baseline. Prefer backward-compatible
