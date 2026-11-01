@@ -3115,14 +3115,14 @@ typing-extensions = ">=4.13.2"
 
 [[package]]
 name = "nptdms"
-version = "1.12.1"
+version = "1.13.0"
 description = "Cross-platform, NumPy based module for reading TDMS files produced by LabView"
 optional = false
 python-versions = ">=3.9"
 groups = ["examples"]
 files = [
-    {file = "nptdms-1.12.1-py3-none-any.whl", hash = "sha256:da83ad761eb10b734b1e1d9aa4c877d2caba83e8f25fb9f509af733d58976138"},
-    {file = "nptdms-1.12.1.tar.gz", hash = "sha256:ef0e7bdedda4f26c602c822e58e6254f067b9bc139efca572ccb15a4ecedef23"},
+    {file = "nptdms-1.13.0-py3-none-any.whl", hash = "sha256:b1001d832d18612c208177d1a76d4e63337444d0bbd4f4f3f5a096acc5b3b7d9"},
+    {file = "nptdms-1.13.0.tar.gz", hash = "sha256:d9209da06c21edc28c9a8620cf78466ace80d2e1d8a23cfea534b0938ed310cc"},
 ]
 
 [package.dependencies]
@@ -4076,15 +4076,15 @@ dev = ["pre-commit", "pytest-asyncio", "tox"]
 
 [[package]]
 name = "pytest-mock"
-version = "3.16.0"
+version = "3.17.0"
 description = "Thin-wrapper around the mock package for easier use with pytest"
 optional = false
 python-versions = ">=3.10"
 groups = ["test"]
 markers = "python_version >= \"3.10\""
 files = [
-    {file = "pytest_mock-3.16.0-py3-none-any.whl", hash = "sha256:007cfeb257801d88d9c0b2a7b5a15a15e73b71968dfd72e7bf8c4a2f8393aec8"},
-    {file = "pytest_mock-3.16.0.tar.gz", hash = "sha256:5a8395528b8f498205f3718f575228d0edaed7425fff638f87d1a6c3e0383636"},
+    {file = "pytest_mock-3.17.0-py3-none-any.whl", hash = "sha256:1b82aa4b37137248bd687055e109723debeb07b489de1565297dc9589c5f2d6b"},
+    {file = "pytest_mock-3.17.0.tar.gz", hash = "sha256:e36576e0985e01027e999891e7a966c67822d40c89ef1b4c8b6e22737e3590b4"},
 ]
 
 [package.dependencies]
@@ -4875,15 +4875,15 @@ testing = ["devpi-process (>=1.1.1)", "pytest (>=9.0.2)", "pytest-mock (>=3.15.1
 
 [[package]]
 name = "tox"
-version = "4.65.4"
+version = "4.67.1"
 description = "tox is a generic virtualenv management and test command line tool"
 optional = false
 python-versions = ">=3.11"
 groups = ["test"]
 markers = "python_version >= \"3.11\""
 files = [
-    {file = "tox-4.65.4-py3-none-any.whl", hash = "sha256:1c4f29c5886ad46228da8a023f8f82167db2ff3da7a6da060f9d4fc3dc2e2dd0"},
-    {file = "tox-4.65.4.tar.gz", hash = "sha256:e416fcfef86874001ba90787c282f4c6ecae6e2e167dbe65e7b8b53f9d43c931"},
+    {file = "tox-4.67.1-py3-none-any.whl", hash = "sha256:23d614cb703e1f7bd39e00c046d4c261b63fb9986e185134c6be2f93531d9726"},
+    {file = "tox-4.67.1.tar.gz", hash = "sha256:a68602f64421b199016127364ee47347b958391d19c2b2e53fe95673a8fe98e9"},
 ]
 
 [package.dependencies]
