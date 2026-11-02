@@ -31,6 +31,10 @@
   ],
   "overrides": [
     {
+      "filename": ".github/scripts/*.py",
+      "dictionaries": ["python", "sphinx-directives"]
+    },
+    {
       "filename": "**/*.mako",
       "dictionaries": ["real-words", "daqmx-api-elements", "python", "mako-keywords"]
     },

@@ -3,6 +3,7 @@ allclose          # Dependency: numpy
 argtype           # Standard library: ctypes
 argtypes          # Standard library: ctypes
 ascontiguousarray # Dependency: numpy
+astext            # Docutils node text conversion method
 autoinstall       # Linux system tool names (external)
 byref             # Standard library: ctypes
 callspec          # Dependency: pytest
@@ -10,10 +11,12 @@ caplog            # Dependency: pytest
 cdecl             # C calling convention name (used in codegen)
 chkconfig         # Linux system tool names (external)
 codegen           # codegen internals
+creatordate       # Git tag sorting field
 ctypes            # Standard library: ctypes
 ctypeslib         # Standard library: ctypes
 CVICALLBACK       # NI CVI calling convention macro (C interop comment)
 docstrings        # Python terminology
+doctree           # Docutils parsed document tree
 dotenv            # Dependency: python-decouple / dotenv
 dpkg              # Linux system tool names (external)
 dtype             # Dependency: numpy

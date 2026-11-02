@@ -84,6 +84,23 @@ $ poetry run tox
 This requires you to have all the Python interpreters supported by **nidaqmx** installed on your
 machine.
 
+# API Compatibility
+
+CI uses [Griffe](https://mkdocstrings.github.io/griffe/guide/users/checking/) to check API
+compatibility. Pull requests use the latest Git tag as the baseline, except release-target PRs, which
+use their base commit. Pushes compare against the previous commit on that branch. To run the check
+locally (Python 3.11 or later):
+
+```sh
+poetry install --only compatibility --no-root
+git fetch origin --tags
+poetry run python .github/scripts/check_api_compatibility.py
+```
+
+Pass `--base <tag-or-commit>` to compare against a different baseline. Prefer backward-compatible
+changes or deprecations. Discuss intentional breaks with maintainers and document them in
+`CHANGELOG.md`; maintainers apply the `breaking-change` label after reviewing all reported findings.
+
 # Benchmarks
 
 Benchmark tests are not run by default when you run pytest. To run the benchmarks, use this command:
