@@ -11,10 +11,8 @@ classifiers = [
   "Intended Audience :: Science/Research",
   "License :: OSI Approved :: MIT License",
   "Operating System :: Microsoft :: Windows",
-  "Operating System :: POSIX",
+  "Operating System :: POSIX :: Linux",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.9",
-  "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
@@ -33,7 +31,7 @@ maintainers = [
   {name = "Brad Keryan", email = "brad.keryan@ni.com"},
 ]
 # cspell:enable
-requires-python = '>=3.9,<4.0'
+requires-python = '>=3.11,<4.0'
 
 [project.urls]
 repository = "https://github.com/ni/nidaqmx-python"
@@ -52,9 +50,10 @@ packages = [{ include = "nidaqmx", from = "generated" }]
 requires-poetry = '>=2.1,<3.0'
 
 [tool.poetry.dependencies]
-# NumPy 2.0.x is the last version that supports Python 3.9, but it crashes with Python 3.13.
+# NumPy 1.23.2 is the first version with binary wheels for Python 3.11. NumPy
+# 1.22 crashes on Python 3.11 and NumPy 2.0.x crashes on Python 3.13.
 numpy = [
-  { version = ">=1.22", python = ">=3.9,<3.13" },
+  { version = ">=1.23.2", python = ">=3.11,<3.13" },
   { version = ">=2.1", python = "^3.13" }
 ]
 deprecation = ">=2.1"
@@ -71,7 +70,7 @@ nitypes = {version=">=1.0.1"}
 Mako = "^1.2"
 grpcio-tools = [
   # requires protobuf v4 or later
-  { version = "1.49.1", python = ">=3.9,<3.12" },
+  { version = "1.49.1", python = ">=3.11,<3.12" },
   { version = "1.59.0", python = ">=3.12,<3.13" },
   # requires protobuf v5 or later
   { version = "1.67.0", python = ">=3.13,<3.14" },
@@ -90,11 +89,7 @@ mypy-protobuf = [
 optional = true
 
 [tool.poetry.group.docs.dependencies]
-# The latest Sphinx requires a recent Python version.
-Sphinx = [
-  { version = ">=8.1", python = ">=3.10,<3.11" },
-  { version = ">=8.2", python = "^3.11" },
-]
+Sphinx = ">=8.2"
 sphinx-rtd-theme = ">=1.0.0"
 toml = ">=0.10.2"
 
@@ -103,10 +98,7 @@ toml = ">=0.10.2"
 optional = true
 
 [tool.poetry.group.examples.dependencies]
-matplotlib = [
-  { version = ">=3.9.0,<3.10.0", python = ">=3.9,<3.10" },
-  { version = ">=3.9.0", python = "^3.10" },
-]
+matplotlib = ">=3.9.0"
 nptdms = ">=1.9.0"
 
 [tool.poetry.group.lint.dependencies]
@@ -124,13 +116,10 @@ pytest-cov = ">=4.0"
 pytest-mock = ">=3.0"
 pykka = ">=3.0"
 tox = ">=3.24"
-click = [
-  { version = ">=8.0.0,<8.2.0", python = ">=3.9,<3.10" },
-  { version = ">=8.0.0", python = "^3.10" },
-]
+click = ">=8.0.0"
 # Specify additional NumPy version constraints to speed up locking and test with binary wheels that support PyPy.
 numpy = [
-  { version = ">=1.22", python = ">=3.9,<3.12", markers = "implementation_name != 'pypy'" },
+  { version = ">=1.23.2", python = ">=3.11,<3.12", markers = "implementation_name != 'pypy'" },
   { version = ">=1.26", python = ">=3.12,<3.13", markers = "implementation_name != 'pypy'" },
   { version = ">=2.1", python = "^3.13", markers = "implementation_name != 'pypy'" },
   { version = ">=2.1", python = ">=3.10,<3.11", markers = "implementation_name == 'pypy'" },
