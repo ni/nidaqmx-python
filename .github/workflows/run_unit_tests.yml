@@ -60,7 +60,8 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-        python-version: [3.11, 3.14, pypy3.11]
+        # PyPy testing is disabled to work around https://github.com/ni/nidaqmx-python/issues/1048 - PyPy tests fail after Poetry 2.4.x upgrade
+        python-version: [3.11, 3.14]
     steps:
       - name: Check out repo
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
