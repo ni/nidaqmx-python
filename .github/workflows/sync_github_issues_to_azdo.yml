@@ -15,7 +15,7 @@ jobs:
     if: ${{ !github.event.issue.pull_request && github.event.issue.title != 'Dependency Dashboard' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: danhellem/github-actions-issue-to-work-item@45eb3b46e684f2acd2954f02ef70350c835ee4bb # v2.4
+      - uses: danhellem/github-actions-issue-to-work-item@8d0ead9b49a65aa66dac6949b1ff149d7ef8b4de # v2.5
         env:
           ado_token: "${{ secrets.AZDO_WORK_ITEM_TOKEN }}"
           github_token: "${{ secrets.GH_REPO_TOKEN }}"
