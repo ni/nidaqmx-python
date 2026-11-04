@@ -1569,14 +1569,14 @@ files = [
 
 [[package]]
 name = "mako"
-version = "1.4.1"
+version = "1.4.3"
 description = "A super-fast templating language that borrows the best ideas from the existing templating languages."
 optional = false
 python-versions = ">=3.10"
 groups = ["codegen"]
 files = [
-    {file = "mako-1.4.1-py3-none-any.whl", hash = "sha256:a359d9a94a541213958742b2698d0a7757bb83551767bc468a74b9905aba9617"},
-    {file = "mako-1.4.1.tar.gz", hash = "sha256:d7904710b662996425a21627710c4777c45053146942cf8a7aebf757c92b8c27"},
+    {file = "mako-1.4.3-py3-none-any.whl", hash = "sha256:723296007c870bfd6b3f0c3230dba7198096e5269297ebf5e4eff9e7ffa39d4f"},
+    {file = "mako-1.4.3.tar.gz", hash = "sha256:cd6537fe88d5fec315c55c2f8529bc4ce7a9a352ad7db3eeaa6a66e2dd4ec37a"},
 ]
 
 [package.dependencies]
