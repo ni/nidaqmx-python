@@ -14,7 +14,8 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-        python-version: [3.11, 3.12, 3.13, 3.14, 3.14t, pypy3.11]
+        # PyPy testing is disabled to work around https://github.com/ni/nidaqmx-python/issues/1048 - PyPy tests fail after Poetry 2.4.x upgrade
+        python-version: [3.11, 3.12, 3.13, 3.14, 3.14t]
       # Fail-fast skews the pass/fail ratio and seems to make pytest produce
       # incomplete JUnit XML results.
       fail-fast: false
