@@ -8,7 +8,7 @@ build:
     python: "3.11"
   jobs:
     post_create_environment:
-      - pip install poetry==2.1.4
+      - pip install poetry==2.4.3
     post_install:
       - VIRTUAL_ENV=$READTHEDOCS_VIRTUALENV_PATH poetry install --only main,docs
 

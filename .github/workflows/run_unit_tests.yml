@@ -14,7 +14,8 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-        python-version: [3.11, 3.12, 3.13, 3.14, 3.14t, pypy3.11]
+        # PyPy testing is disabled to work around https://github.com/ni/nidaqmx-python/issues/1048 - PyPy tests fail after Poetry 2.4.x upgrade
+        python-version: [3.11, 3.12, 3.13, 3.14, 3.14t]
       # Fail-fast skews the pass/fail ratio and seems to make pytest produce
       # incomplete JUnit XML results.
       fail-fast: false
@@ -31,12 +32,12 @@ jobs:
         with:
           persist-credentials: false
       - name: Set up Python ${{ matrix.python-version }}
-        uses: ni/python-actions/setup-python@dee640bba235ae28fdc6b7337c643bd06358ae90 # v0.9.0
+        uses: ni/python-actions/setup-python@36d77b6a215e106c33e30638943d5bc5233bef2f # v0.10
         id: setup-python
         with:
           python-version: ${{ matrix.python-version }}
       - name: Set up Poetry
-        uses: ni/python-actions/setup-poetry@dee640bba235ae28fdc6b7337c643bd06358ae90 # v0.9.0
+        uses: ni/python-actions/setup-poetry@36d77b6a215e106c33e30638943d5bc5233bef2f # v0.10
       - name: Cache virtualenv (with test dependencies)
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
@@ -59,19 +60,20 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-        python-version: [3.11, 3.14, pypy3.11]
+        # PyPy testing is disabled to work around https://github.com/ni/nidaqmx-python/issues/1048 - PyPy tests fail after Poetry 2.4.x upgrade
+        python-version: [3.11, 3.14]
     steps:
       - name: Check out repo
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
       - name: Set up Python ${{ matrix.python-version }}
-        uses: ni/python-actions/setup-python@dee640bba235ae28fdc6b7337c643bd06358ae90 # v0.9.0
+        uses: ni/python-actions/setup-python@36d77b6a215e106c33e30638943d5bc5233bef2f # v0.10
         id: setup-python
         with:
           python-version: ${{ matrix.python-version }}
       - name: Set up Poetry
-        uses: ni/python-actions/setup-poetry@dee640bba235ae28fdc6b7337c643bd06358ae90 # v0.9.0
+        uses: ni/python-actions/setup-poetry@36d77b6a215e106c33e30638943d5bc5233bef2f # v0.10
       - name: Cache virtualenv (main only)
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         id: cache-nidaqmx-main-only
