@@ -34,7 +34,7 @@ All notable changes to this project will be documented in this file.
     * [Full changelog: 1.7.0...1.8.0](https://github.com/ni/nidaqmx-python/compare/1.7.0...1.8.0)
 
 * ### Resolved Issues
-    * ...
+    * [1042: Package breaks when importlib metadata isn't available (Pyinstaller)](https://github.com/ni/nidaqmx-python/issues/1042)
 
 * ### Major Changes
     * Removed support for Python 3.9 and 3.10.
