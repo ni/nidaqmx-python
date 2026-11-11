@@ -17,7 +17,7 @@ from nidaqmx.types import CtrFreq, CtrTick, CtrTime
 try:
     # Use a literal package name so PyInstaller automatically copies package metadata.
     __version__ = importlib.metadata.version("nidaqmx")
-    """nidaqmx version string."""
+    """nidaqmx package (not driver) version string."""
 except importlib.metadata.PackageNotFoundError:
     __version__ = "unknown"
 
