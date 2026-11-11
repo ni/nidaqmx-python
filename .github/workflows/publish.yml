@@ -49,14 +49,14 @@ jobs:
         with:
           persist-credentials: false
       - name: Set up Python
-        uses: ni/python-actions/setup-python@36d77b6a215e106c33e30638943d5bc5233bef2f # v0.10
+        uses: ni/python-actions/setup-python@edaf1454897cb4cd5f6fc0757cb62dee455e57fd # v0.10.1
       - name: Set up Poetry
-        uses: ni/python-actions/setup-poetry@36d77b6a215e106c33e30638943d5bc5233bef2f # v0.10
+        uses: ni/python-actions/setup-poetry@edaf1454897cb4cd5f6fc0757cb62dee455e57fd # v0.10.1
         with:
           use-cache: false
       - name: Check project version
         if: github.event_name == 'release'
-        uses: ni/python-actions/check-project-version@36d77b6a215e106c33e30638943d5bc5233bef2f # v0.10
+        uses: ni/python-actions/check-project-version@edaf1454897cb4cd5f6fc0757cb62dee455e57fd # v0.10.1
       - name: Build distribution packages
         run: poetry build
       - name: Upload build artifacts
@@ -99,10 +99,10 @@ jobs:
         with:
           persist-credentials: false
       - name: Set up Python
-        uses: ni/python-actions/setup-python@36d77b6a215e106c33e30638943d5bc5233bef2f # v0.10
+        uses: ni/python-actions/setup-python@edaf1454897cb4cd5f6fc0757cb62dee455e57fd # v0.10.1
       - name: Set up Poetry
-        uses: ni/python-actions/setup-poetry@36d77b6a215e106c33e30638943d5bc5233bef2f # v0.10
+        uses: ni/python-actions/setup-poetry@edaf1454897cb4cd5f6fc0757cb62dee455e57fd # v0.10.1
         with:
           use-cache: false
       - name: Update project version
-        uses: ni/python-actions/update-project-version@36d77b6a215e106c33e30638943d5bc5233bef2f # v0.10
+        uses: ni/python-actions/update-project-version@edaf1454897cb4cd5f6fc0757cb62dee455e57fd # v0.10.1
