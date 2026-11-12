@@ -1,6 +1,6 @@
 """The NI-DAQmx API for Python."""
 
-from importlib.metadata import version
+import importlib.metadata
 
 from nidaqmx.errors import (
     DaqError,
@@ -14,7 +14,12 @@ from nidaqmx.scale import Scale
 from nidaqmx.task import Task
 from nidaqmx.types import CtrFreq, CtrTick, CtrTime
 
-__version__ = version(__name__)
+try:
+    # Use a literal package name so PyInstaller automatically copies package metadata.
+    __version__ = importlib.metadata.version("nidaqmx")
+    """nidaqmx package (not driver) version string."""
+except importlib.metadata.PackageNotFoundError:
+    __version__ = "unknown"
 
 __all__ = [  # noqa: F405 - 'errors' may be undefined, or defined from star imports: nidaqmx.grpc_session_options (auto-generated noqa)
     "errors",
