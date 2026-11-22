@@ -348,14 +348,14 @@ files = [
 
 [[package]]
 name = "click"
-version = "8.5.0"
+version = "8.5.1"
 description = "Composable command line interface toolkit"
 optional = false
 python-versions = ">=3.10"
 groups = ["main", "lint", "test"]
 files = [
-    {file = "click-8.5.0-py3-none-any.whl", hash = "sha256:255bc9599cf7748b4b1a446ccc735421bd08a2ae529a8b88597d3de5664ee360"},
-    {file = "click-8.5.0.tar.gz", hash = "sha256:ba0d2089de75ea0310e2dde03160e6ca10009947fb95a182f9b54021bb272e34"},
+    {file = "click-8.5.1-py3-none-any.whl", hash = "sha256:8bb5376d2006950386f8c6427613334a2acadc5f559cb80e638d00b4df957e37"},
+    {file = "click-8.5.1.tar.gz", hash = "sha256:9bbfada76703fd1d784b83eea012e3e8c6a001a876543ef104fa56aaaeb072b4"},
 ]
 
 [[package]]
@@ -2043,14 +2043,14 @@ typing-extensions = ">=4.13.2"
 
 [[package]]
 name = "nptdms"
-version = "1.13.0"
+version = "1.14.0"
 description = "Cross-platform, NumPy based module for reading TDMS files produced by LabView"
 optional = false
-python-versions = ">=3.9"
+python-versions = ">=3.11"
 groups = ["examples"]
 files = [
-    {file = "nptdms-1.13.0-py3-none-any.whl", hash = "sha256:b1001d832d18612c208177d1a76d4e63337444d0bbd4f4f3f5a096acc5b3b7d9"},
-    {file = "nptdms-1.13.0.tar.gz", hash = "sha256:d9209da06c21edc28c9a8620cf78466ace80d2e1d8a23cfea534b0938ed310cc"},
+    {file = "nptdms-1.14.0-py3-none-any.whl", hash = "sha256:e0f618937ae28d63613f800764667b4af0e4cb0e7f81efd1d54c9d5ddfea843e"},
+    {file = "nptdms-1.14.0.tar.gz", hash = "sha256:32a24627da13d1c8c323df4fc1e5e001ba56c3da2f358b7b05175e3a6495c32b"},
 ]
 
 [package.dependencies]
@@ -2059,7 +2059,7 @@ numpy = "*"
 [package.extras]
 hdf = ["h5py (>=2.10.0)"]
 pandas = ["pandas", "pyarrow"]
-test = ["hypothesis", "pytest (>=3.1.0)", "pytest-benchmark", "scipy", "thermocouples_reference"]
+test = ["hypothesis", "pytest (>=3.1.0,<9.2)", "pytest-benchmark", "scipy", "thermocouples_reference"]
 
 [[package]]
 name = "numpy"
@@ -3199,14 +3199,14 @@ files = [
 
 [[package]]
 name = "tox"
-version = "4.67.5"
+version = "4.67.13"
 description = "tox is a generic virtualenv management and test command line tool"
 optional = false
 python-versions = ">=3.11"
 groups = ["test"]
 files = [
-    {file = "tox-4.67.5-py3-none-any.whl", hash = "sha256:2ce2844114ff4c50024d9bbdea19a2f3cabe66736d8cf6a3398ad9a3b3ce60fd"},
-    {file = "tox-4.67.5.tar.gz", hash = "sha256:f1872e30d89c8d18cbdf3b93c4c7dc04d4f3928c0af413e9ae5b71ba3f1c438d"},
+    {file = "tox-4.67.13-py3-none-any.whl", hash = "sha256:4d6fa08dbe5e841f2abfee1dd4f5cdf31af30d68a3d78b85a7bf57eced5f3c6c"},
+    {file = "tox-4.67.13.tar.gz", hash = "sha256:9f70b44ca2e31d91d8fe2e2917f505554950adc3961c0ee70bb42db16d903f62"},
 ]
 
 [package.dependencies]
